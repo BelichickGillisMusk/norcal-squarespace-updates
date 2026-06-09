@@ -3,7 +3,7 @@
 **Repo:** `BelicheckGillisMusk/norcal-squarespace-updates`  
 **Site:** [norcalcarbmobile.com](https://norcalcarbmobile.com)  
 **Squarespace Config Panel:** `https://aqua-alpaca-m37c.squarespace.com/config/`  
-**Owner:** Bryan Gillis | bgillis99@gmail.com  
+**Owner:** Bryan | fsu8813@gmail.com, bryan@norcalcarbmobile.com  
 **Deadline:** July 4th holiday window (~July 3–7, 2026) — site must be clean before handoff to Cloudflare migration
 
 ---
