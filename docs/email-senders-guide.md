@@ -53,6 +53,12 @@ Inbox shows: **Camila at NorCal CARB Mobile** `<reminders@mail.norcalcarbmobile.
 
 ---
 
+## Cold email social proof
+
+- **Reviews:** 4.9★ · 47+ verified fleet reviews — link in every cold email
+- **Config:** `config/cold-email-manifest.json` → Bryan pastes Google Maps review URL
+- **Aggressive pricing:** OBD $75, OVI $199, 50% off switch, beat-quote offer — see cold-outreach one-pager
+
 ## Rules
 
 - **One cold sender per day** — Camila OR Bryan, not both splitting 30 (pick Camila)

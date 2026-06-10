@@ -14,7 +14,8 @@
 |------|-----|
 | **Max 30/day** | Protects domain reputation + avoids spam flags |
 | **One-to-one** in Gmail compose | No BCC blasts, no mail-merge tools that spam |
-| **Plain, personal tone** | Signed Bryan — not “NorCal Marketing Team” |
+| **Plain, personal tone** | Signed Camila — not “NorCal Marketing Team” |
+| **Pricing + reviews in every cold #1** | Use pricing block + `{reviews_url}` from `config/cold-email-manifest.json` |
 | **Real subject + 3–5 short paragraphs** | Under ~120 words body |
 | **Include opt-out line** | CAN-SPAM: honor stops within 10 business days |
 | **Log every send** in Google Sheet | See `scripts/cold-outreach/daily-send-log-template.csv` |
@@ -51,46 +52,75 @@
 
 ---
 
+## Pricing + reviews block (include in every template)
+
+Copy from `config/cold-email-manifest.json`. Agent pastes this block into every cold #1:
+
+```
+OUR PRICING (mobile — we come to your yard):
+• OBD Clean Truck Check — $75/truck
+• OVI smoke opacity — $199/truck
+• Shops often charge $90–$300+ PLUS 1–3 hrs downtime — we test at your yard
+
+SWITCH OFFER: 50% off your first test — OBD $37.50 · OVI $99.50
+Or send your current quote — we'll try to BEAT IT.
+
+★ 4.9 stars · 47+ fleet operator reviews: {reviews_url}
+```
+
+**Bryan:** Paste your Google Maps review link in `config/cold-email-manifest.json` → `google_reviews_url`. Until then use `{reviews_url}` = `https://norcalcarbmobile.com`.
+
+---
+
 ## Approved templates (copy verbatim except `{braces}`)
 
 ### Template A — `deadline-hook` (default)
 
-**Subject:** `{company} — Clean Truck Check deadline`
+**Subject:** `{company} — CTC deadline + $75 mobile testing`
 
 ```
 Hi {first_name},
 
-I run mobile CARB Clean Truck Check testing in {city/area} — we come to your yard so trucks aren't off the road.
+Fleet operators in {city/area} are getting flagged in CTC-VIS when they miss the 90-day testing window. We do mobile Clean Truck Check at your yard — trucks stay working.
 
-A lot of operators miss the 90-day testing window and get flagged in CTC-VIS. We built a free deadline calculator on our site if you want to check yours: {tools_url}/when-is-my-test-due
+OUR PRICING (mobile — we come to your yard):
+• OBD — $75/truck · OVI — $199/truck
+• Shops: $90–$300+ plus downtime. We come to you.
 
-If you'd rather not deal with CARB at all, we do full setup + monitoring for the annual CTC-VIS fee plus $40/year per truck — mobile tests OBD $75 / OVI $199.
+SWITCHING TESTERS? 50% off first test (OBD $37.50 · OVI $99.50) or we'll beat your quote.
 
-Worth a 10-minute call this week?
+★ 4.9 stars · 47+ reviews from NorCal fleets: {reviews_url}
 
-Camila
-NorCal CARB Mobile
-norcalcarbmobile.com | {booking_url}
+Free deadline calculator: {tools_url}/when-is-my-test-due
+
+10-minute call this week? {booking_url} · 916-890-4427
+
+Camila · NorCal CARB Mobile
 camila@norcalcarbmobile.com
 
-Reply "remove" and I won't follow up.
+Reply "remove" — I won't follow up.
 ```
 
-### Template B — `fleet-switch`
+### Template B — `fleet-switch` (aggressive pricing lead)
 
-**Subject:** `mobile CTC testing at your yard — {company}`
+**Subject:** `$75 CTC at your yard — {company}`
 
 ```
 Hi {first_name},
 
-Quick note — we're NorCal CARB Mobile. We batch-test fleets on-site in Sacramento, Stockton, Fairfield, San Jose, and the Bay Area.
+NorCal CARB Mobile batch-tests fleets on-site — Sacramento, Stockton, Fairfield, San Jose, Bay Area. No shop wait. No drive time.
 
-OBD $75 · OVI $199 per truck. If you already have a tester, tell me your rate — we'll try to beat it or do half off your first truck when you switch.
+PRICING THAT BEATS MOST SHOPS:
+• OBD $75 · OVI $199 per truck (mobile at your yard)
+• Fleet visits — multiple trucks, one stop
+• Already have a tester? We BEAT your rate OR 50% off your first truck
 
-Free tools on your phone (deadlines, OBD vs OVI, fleet math): {tools_url}
+★ 4.9★ · 47+ verified reviews: {reviews_url}
+"Tested six trucks in under two hours." — fleet operator, Sacramento
 
-Camila
-NorCal CARB Mobile
+Book: {booking_url} · Call/text 916-890-4427
+
+Camila · NorCal CARB Mobile
 camila@norcalcarbmobile.com
 
 Reply "remove" to opt out.
@@ -98,24 +128,51 @@ Reply "remove" to opt out.
 
 ### Template C — `full-care`
 
-**Subject:** `never call CARB again — {company}`
+**Subject:** `skip CARB calls — Full Care $40/yr + {company}`
 
 ```
 Hi {first_name},
 
-Do you handle Clean Truck Check yourself or pay a shop to drive trucks in?
+Still logging into CTC-VIS and chasing deadlines yourself?
 
-We offer Full Care: we register vehicles in CTC-VIS, watch deadlines, send reminders, and perform mobile tests at your yard. Cost is CARB's annual compliance fee (through CTC-VIS) + $40/year per vehicle to us. Tests: OBD $75 / OVI $199.
+Full Care: we set up CTC-VIS, monitor deadlines, send reminders, and mobile-test at your yard.
+• CARB annual fee (CTC-VIS) + only $40/year to us
+• Tests: OBD $75 · OVI $199 — at your location
 
-Or use our free phone tools if you want DIY: {tools_url}
+DIY option free: {tools_url}
 
-Happy to send a one-page breakdown if useful.
+★ 4.9 stars · 47+ fleet reviews: {reviews_url}
 
-Camila
-NorCal CARB Mobile
+Want the one-pager? Reply yes or book: {booking_url}
+
+Camila · NorCal CARB Mobile
 camila@norcalcarbmobile.com
 
 Reply "remove" and I'll close your file.
+```
+
+### Template D — `pricing-reviews` (max aggression — use for cold shops/competitors)
+
+**Subject:** `$75 mobile CTC — see our 4.9★ reviews`
+
+```
+Hi {first_name},
+
+Quick comparison for {company}:
+
+NorCal CARB Mobile (we come to your yard):
+  OBD $75  ·  OVI $199  ·  50% off first test if you switch
+
+Typical shop:
+  $90–$300+ per test + 1–3 hours off the road per truck
+
+★ 4.9 stars · 47+ reviews: {reviews_url}
+
+Call 916-890-4427 or book: {booking_url}
+
+Camila · NorCal CARB Mobile
+
+Reply "remove" to opt out.
 ```
 
 **Template pick:**
@@ -125,6 +182,7 @@ Reply "remove" and I'll close your file.
 | Unknown deadline / compliance risk | A |
 | Multi-truck / fleet in name | B |
 | Mentioned CTC-VIS frustration or admin burden | C |
+| Price-shopping / uses a shop today | D |
 
 ---
 
@@ -137,6 +195,7 @@ Reply "remove" and I'll close your file.
 | `{city/area}` | NorCal city or “Northern California” |
 | `{tools_url}` | `https://norcalcarbmobile.com/tools` |
 | `{booking_url}` | `https://norcalcarbmobile.com/contact` |
+| `{reviews_url}` | `config/cold-email-manifest.json` → `google_reviews_url` (or homepage until Bryan pastes Maps link) |
 
 **Never:** fake familiarity, “Re: our call”, misleading subject lines, or urgency lies about CARB enforcement.
 
@@ -188,14 +247,17 @@ Max **3 touches total** per lead. Follow-ups count toward the **30/day** cap.
 
 ---
 
-## Pricing cheat sheet (do not drift)
+## Pricing cheat sheet (do not drift — lead with these in cold)
 
-| Offer | Price |
-|-------|-------|
-| OBD mobile test | **$75** |
-| OVI mobile test | **$199** |
-| Full Care (setup + monitoring) | CARB annual fee (CTC-VIS) + **$40/year** per vehicle |
-| Switch offer | Beat price or **50% off first test** |
+| Offer | Price | Cold line |
+|-------|-------|-----------|
+| OBD mobile test | **$75** | "OBD $75 at your yard" |
+| OVI mobile test | **$199** | "OVI $199 mobile" |
+| Switch — 50% off first test | OBD **$37.50** · OVI **$99.50** | Always mention on cold #1 |
+| Beat competitor quote | Case by case | "Send your quote — we'll try to beat it" |
+| vs shops | $90–$300+ + downtime | Use in every template |
+| Full Care | CARB fee + **$40/year** | Template C / upsell |
+| Reviews | **4.9★ · 47+** | Link `{reviews_url}` every cold #1 |
 
 ---
 

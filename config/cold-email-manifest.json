@@ -1,0 +1,29 @@
+{
+  "reviews": {
+    "headline": "4.9★ · 47+ verified fleet operator reviews",
+    "google_reviews_url": "PASTE_GOOGLE_MAPS_REVIEW_LINK_HERE",
+    "note_for_bryan": "Google Maps → your business → Share → Copy link. Paste above. Until set, cold emails use norcalcarbmobile.com homepage.",
+    "fallback_url": "https://norcalcarbmobile.com",
+    "sample_quotes": [
+      "Tested all six trucks in under two hours. Very professional.",
+      "Fair price, no upselling, no waiting.",
+      "Came out on a Saturday before our DMV deadline. Highly recommend."
+    ]
+  },
+  "aggressive_pricing": {
+    "obd": "$75",
+    "ovi": "$199",
+    "shop_comparison": "Most shops charge $90–$300+ plus 1–3 hours downtime per truck",
+    "switch_offer": "50% off your first test when you switch — OBD from $37.50 · OVI from $99.50",
+    "beat_price": "Send us your current tester’s quote — we’ll try to beat it",
+    "fleet": "Fleet yard visits — batch multiple trucks, one stop",
+    "full_care": "CARB annual fee (CTC-VIS) + only $40/year — we handle setup, monitoring & scheduling",
+    "phone": "916-890-4427",
+    "text_keyword": "Text NORCAL to 617-359-6953"
+  },
+  "urls": {
+    "booking": "https://norcalcarbmobile.com/contact",
+    "tools": "https://norcalcarbmobile.com/tools",
+    "reviews_page": "https://norcalcarbmobile.com"
+  }
+}
