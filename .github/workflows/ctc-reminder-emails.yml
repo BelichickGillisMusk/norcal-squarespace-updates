@@ -1,0 +1,88 @@
+# CTC Reminder Emails — daily sender
+# APPROVED FOR DEPLOYMENT
+# Agent: enable only after Bryan approves test email (see docs/email-reminders-agent-runbook.md)
+
+name: CTC Reminder Emails
+
+on:
+  schedule:
+    # 15:00 UTC = 8:00 AM PDT / 7:00 AM PST
+    - cron: '0 15 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run only (no emails sent)'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      test_email:
+        description: 'Optional: send one forced 30-day test to this address'
+        required: false
+        type: string
+
+jobs:
+  send-reminders:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: scripts/reminder-engine/package-lock.json
+
+      - name: Install dependencies
+        working-directory: scripts/reminder-engine
+        run: npm ci
+
+      - name: Dry run
+        if: (github.event_name == 'schedule' && secrets.REMINDERS_LIVE != 'true') || (github.event_name == 'workflow_dispatch' && inputs.dry_run == 'true')
+        working-directory: scripts/reminder-engine
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          GOOGLE_SHEET_NAME: ${{ secrets.GOOGLE_SHEET_NAME }}
+          REMINDER_FROM_EMAIL: ${{ secrets.REMINDER_FROM_EMAIL }}
+          REMINDER_FROM_NAME: ${{ secrets.REMINDER_FROM_NAME }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          BOOKING_URL: ${{ secrets.BOOKING_URL }}
+          SWITCH_URL: ${{ secrets.SWITCH_URL }}
+          APPS_SCRIPT_WEBAPP_URL: ${{ secrets.APPS_SCRIPT_WEBAPP_URL }}
+        run: npm run send -- --dry-run
+
+      - name: Send test email
+        if: inputs.test_email != ''
+        working-directory: scripts/reminder-engine
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          GOOGLE_SHEET_NAME: ${{ secrets.GOOGLE_SHEET_NAME }}
+          REMINDER_FROM_EMAIL: ${{ secrets.REMINDER_FROM_EMAIL }}
+          REMINDER_FROM_NAME: ${{ secrets.REMINDER_FROM_NAME }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          BOOKING_URL: ${{ secrets.BOOKING_URL }}
+          SWITCH_URL: ${{ secrets.SWITCH_URL }}
+          APPS_SCRIPT_WEBAPP_URL: ${{ secrets.APPS_SCRIPT_WEBAPP_URL }}
+        run: npm run send -- --test-email "${{ inputs.test_email }}" --force-template 30
+
+      - name: Send live reminders
+        if: (github.event_name == 'schedule' && secrets.REMINDERS_LIVE == 'true') || (github.event_name == 'workflow_dispatch' && inputs.dry_run == 'false' && inputs.test_email == '')
+        working-directory: scripts/reminder-engine
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          GOOGLE_SHEET_NAME: ${{ secrets.GOOGLE_SHEET_NAME }}
+          REMINDER_FROM_EMAIL: ${{ secrets.REMINDER_FROM_EMAIL }}
+          REMINDER_FROM_NAME: ${{ secrets.REMINDER_FROM_NAME }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          BOOKING_URL: ${{ secrets.BOOKING_URL }}
+          SWITCH_URL: ${{ secrets.SWITCH_URL }}
+          APPS_SCRIPT_WEBAPP_URL: ${{ secrets.APPS_SCRIPT_WEBAPP_URL }}
+        run: npm run send
