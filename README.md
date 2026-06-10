@@ -169,7 +169,9 @@ The agent should treat this as a **pre-flight checklist**, not a cosmetic pass.
 │   ├── tools-and-cta-strategy.md        # Tool ideas, pricing, Full Care $40/yr
 │   ├── AGENT_START_HERE_EMAILS.md       # Agent entry point for all email systems
 │   ├── email-reminders-agent-runbook.md # 90/60/30 deadline reminders
-│   └── subscriber-nurture-agent-runbook.md # Welcome, blasts, customer import
+│   ├── subscriber-nurture-agent-runbook.md # Welcome, blasts, customer import
+│   ├── email-deliverability-verification.md # SPF/DKIM/DMARC — avoid junk
+│   └── cold-outreach-agent-one-pager.md     # 30/day cold email from Bryan's Gmail
 ├── config/tools-manifest.json     # Tool list for welcome/blast emails
 ├── email/templates/               # Approved HTML email templates
 ├── scripts/

@@ -10,6 +10,11 @@
 
 > Deploy welcome emails + customer import + approved blasts per `docs/subscriber-nurture-agent-runbook.md`. New leads get "Come aboard the NorCal family" with free phone tools + Full Care ($40/year). Stop at Bryan's approval before `NURTURE_LIVE=true` or any blast with `BLAST_APPROVED=true`.
 
+## Cold outreach (30/day from Bryan’s Gmail)
+[`cold-outreach-agent-one-pager.md`](./cold-outreach-agent-one-pager.md)
+
+> One-to-one cold leads from `bryan@norcalcarbmobile.com` only. Max 30/day. Gmail — not Resend. Approved templates + send log sheet. Wait for Bryan **approved cold send** before day 1.
+
 ## Full deploy order for Manus / any agent
 
 1. Google Sheet + Apps Script (`WebApp.gs`) — **redeploy** if already live (schema expanded)
