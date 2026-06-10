@@ -2,20 +2,10 @@
 /**
  * NorCal CARB Mobile — CTC reminder email sender
  * APPROVED FOR DEPLOYMENT — do not edit without Bryan's approval.
- *
- * Usage:
- *   node send-reminders.js --dry-run
- *   node send-reminders.js --test-email you@example.com --force-template 30
- *   node send-reminders.js
  */
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { google } from 'googleapis';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const TEMPLATE_DIR = path.resolve(__dirname, '../../email/templates');
+import { loadTemplate, render, sendEmail, requireEnv } from './lib/email.js';
+import { getRows, updateCell } from './lib/sheets.js';
 
 const REMINDER_DAYS = [90, 60, 30];
 
@@ -29,16 +19,6 @@ function parseArgs(argv) {
   return args;
 }
 
-function requireEnv(name) {
-  const val = process.env[name];
-  if (!val) throw new Error(`Missing env: ${name}`);
-  return val;
-}
-
-function loadTemplate(name) {
-  return fs.readFileSync(path.join(TEMPLATE_DIR, name), 'utf8');
-}
-
 function formatDate(iso) {
   const d = new Date(iso + 'T12:00:00');
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -46,16 +26,7 @@ function formatDate(iso) {
 
 function daysBetween(a, b) {
   const ms = 24 * 60 * 60 * 1000;
-  const da = new Date(a + 'T12:00:00');
-  const db = new Date(b + 'T12:00:00');
-  return Math.round((db - da) / ms);
-}
-
-function render(html, vars) {
-  return Object.entries(vars).reduce(
-    (out, [key, val]) => out.replaceAll(`{{${key}}}`, String(val ?? '')),
-    html
-  );
+  return Math.round((new Date(b + 'T12:00:00') - new Date(a + 'T12:00:00')) / ms);
 }
 
 function testTypeDisplay(testType) {
@@ -63,74 +34,6 @@ function testTypeDisplay(testType) {
   if (t === 'OBD') return 'OBD — $75';
   if (t === 'OVI') return 'OVI — $199';
   return 'OBD $75 · OVI $199';
-}
-
-async function getSheetRows() {
-  const creds = JSON.parse(requireEnv('GOOGLE_SERVICE_ACCOUNT_JSON'));
-  const auth = new google.auth.GoogleAuth({
-    credentials: creds,
-    scopes: ['https://www.googleapis.com/auth/spreadsheets']
-  });
-  const sheets = google.sheets({ version: 'v4', auth });
-  const spreadsheetId = requireEnv('GOOGLE_SPREADSHEET_ID');
-  const range = `${process.env.GOOGLE_SHEET_NAME || 'Subscribers'}!A:L`;
-
-  const res = await sheets.spreadsheets.values.get({ spreadsheetId, range });
-  const rows = res.data.values || [];
-  if (rows.length < 2) return [];
-
-  const headers = rows[0];
-  return rows.slice(1).map((row, idx) => {
-    const obj = { _rowIndex: idx + 2 };
-    headers.forEach((h, i) => { obj[h] = row[i] ?? ''; });
-    return obj;
-  });
-}
-
-async function markSent(rowIndex, column) {
-  const creds = JSON.parse(requireEnv('GOOGLE_SERVICE_ACCOUNT_JSON'));
-  const auth = new google.auth.GoogleAuth({
-    credentials: creds,
-    scopes: ['https://www.googleapis.com/auth/spreadsheets']
-  });
-  const sheets = google.sheets({ version: 'v4', auth });
-  const spreadsheetId = requireEnv('GOOGLE_SPREADSHEET_ID');
-  const sheetName = process.env.GOOGLE_SHEET_NAME || 'Subscribers';
-  const colMap = { sent_90: 'J', sent_60: 'K', sent_30: 'L' };
-  const today = new Date().toISOString().slice(0, 10);
-
-  await sheets.spreadsheets.values.update({
-    spreadsheetId,
-    range: `${sheetName}!${colMap[column]}${rowIndex}`,
-    valueInputOption: 'RAW',
-    requestBody: { values: [[today]] }
-  });
-}
-
-async function sendEmail({ to, subject, html }) {
-  const apiKey = requireEnv('RESEND_API_KEY');
-  const fromEmail = requireEnv('REMINDER_FROM_EMAIL');
-  const fromName = process.env.REMINDER_FROM_NAME || 'NorCal CARB Mobile';
-
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      from: `${fromName} <${fromEmail}>`,
-      to: [to],
-      subject,
-      html
-    })
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Resend error ${res.status}: ${err}`);
-  }
-  return res.json();
 }
 
 function buildVars(row, daysBefore) {
@@ -172,7 +75,7 @@ async function main() {
     return;
   }
 
-  const rows = await getSheetRows();
+  const { rows } = await getRows();
   let sent = 0;
 
   for (const row of rows) {
@@ -197,7 +100,7 @@ async function main() {
       }
 
       await sendEmail({ to: row.email, subject, html });
-      await markSent(row._rowIndex, col);
+      await updateCell(row._rowIndex, col, today);
       console.log('Sent', template, 'to', row.email);
       sent++;
     }

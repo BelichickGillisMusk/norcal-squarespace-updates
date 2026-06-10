@@ -47,7 +47,7 @@ export SQUARESPACE_API_KEY=$SQUARESPACE_API_KEY_UPDATES
 When an LLM agent runs against this repo, it should:
 
 1. **Read this README completely** before taking any action
-2. **For CTC tool reminder emails:** follow `docs/email-reminders-agent-runbook.md` end-to-end — use only approved files in `email/templates/`, `scripts/`, and `squarespace/`. Do not enable live sends until Bryan approves the test email.
+2. **For CTC emails (reminders + welcome + blasts):** start at `docs/AGENT_START_HERE_EMAILS.md` — reminder runbook + subscriber nurture runbook. Use only approved files. Do not enable `REMINDERS_LIVE`, `NURTURE_LIVE`, or `BLAST_APPROVED` until Bryan approves test sends.
 3. **Check current site state** — screenshot or scrape each target page first, log what it finds
 4. **Execute tasks in order** (Forms → Layout/Font → Blogs)
 5. **Verify each change** before moving to the next task — do not assume a save succeeded
@@ -166,8 +166,11 @@ The agent should treat this as a **pre-flight checklist**, not a cosmetic pass.
 /
 ├── README.md                  # This file — agent instructions
 ├── docs/
-│   ├── tools-and-cta-strategy.md       # Tool ideas, pricing CTAs, switch offers
-│   └── email-reminders-agent-runbook.md # Agent deploy guide: Squarespace → emails
+│   ├── tools-and-cta-strategy.md        # Tool ideas, pricing, Full Care $40/yr
+│   ├── AGENT_START_HERE_EMAILS.md       # Agent entry point for all email systems
+│   ├── email-reminders-agent-runbook.md # 90/60/30 deadline reminders
+│   └── subscriber-nurture-agent-runbook.md # Welcome, blasts, customer import
+├── config/tools-manifest.json     # Tool list for welcome/blast emails
 ├── email/templates/               # Approved HTML email templates
 ├── scripts/
 │   ├── google-apps-script/        # Sheet webhook (subscribe + cancel)

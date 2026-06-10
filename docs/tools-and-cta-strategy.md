@@ -13,6 +13,20 @@ Reference for building lead-gen tools on norcalcarbmobile.com and promoting them
 
 Always show both prices when the tool identifies or asks about test type. Do not quote a single flat rate without context.
 
+### NorCal Family — Full Care (managed tier)
+
+| Component | Price |
+|-----------|-------|
+| CARB annual compliance fee | Per vehicle, paid through [CTC-VIS](https://cleantruckcheck.arb.ca.gov) (CARB sets amount) |
+| NorCal setup, monitoring & coordination | **$40/year** per vehicle |
+| Each mobile test visit | OBD **$75** · OVI **$199** |
+
+**Positioning:** *Never talk to CARB again* — we handle CTC-VIS registration, deadline monitoring, reminders, and scheduling your tests.
+
+**DIY alternative (free):** Tools hub on phone (Add to Home Screen) — deadline calculator, OBD vs OVI, fleet math, CTC-VIS checklist. See `config/tools-manifest.json`.
+
+**Email nurture:** New leads get `welcome-new-lead.html`; past customers get `welcome-existing-customer.html`; blasts when new tools ship. See `docs/subscriber-nurture-agent-runbook.md`.
+
 ---
 
 ## Universal CTA block

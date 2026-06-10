@@ -5,6 +5,10 @@
 
 **Do not invent new email copy or new scripts.** Use files listed in [Approved files](#approved-files) verbatim unless Bryan explicitly requests edits.
 
+**Also read:** [`subscriber-nurture-agent-runbook.md`](./subscriber-nurture-agent-runbook.md) for welcome emails, customer import, tool blasts, and NorCal Family Full Care ($40/year) positioning.
+
+**Sheet schema note:** If you deployed an older sheet with 12 columns, replace headers from `scripts/google-apps-script/subscribers-sheet-template.csv` or redeploy `WebApp.gs` on a fresh import tab.
+
 ---
 
 ## Architecture (what you are wiring up)
@@ -53,22 +57,20 @@ Squarespace handles the **signup UI**. Google Sheet is the **database**. GitHub 
    `https://docs.google.com/spreadsheets/d/`**`SPREADSHEET_ID`**`/edit`
 5. Share the sheet with the Google service account email (created in Phase 4) as **Editor**.
 
-**Sheet columns (do not rename):**
+**Sheet columns (do not rename):** full list in `subscribers-sheet-template.csv`. Key columns:
 
 | Column | Purpose |
 |--------|---------|
-| `id` | UUID per subscription |
 | `email` | Recipient |
-| `vehicle_label` | e.g. "Unit 12" or plate |
-| `registration_type` | `CA` or `OUT_OF_STATE` |
-| `next_deadline` | `YYYY-MM-DD` |
-| `test_type` | `OBD`, `OVI`, or `UNKNOWN` |
-| `subscribed_at` | ISO timestamp |
+| `first_name` | Optional personalization |
+| `audience_type` | `NEW_LEAD`, `EXISTING_CUSTOMER`, or `SUBSCRIBER` |
+| `marketing_opt_in` | `TRUE` = welcome + blasts |
+| `welcome_sent` | Date welcome delivered (empty = pending) |
+| `next_deadline` | `YYYY-MM-DD` (optional if no reminders) |
 | `reminders_enabled` | `TRUE` / `FALSE` |
-| `cancel_token` | UUID for one-click stop |
-| `sent_90` | Date sent or empty |
-| `sent_60` | Date sent or empty |
-| `sent_30` | Date sent or empty |
+| `cancel_token` | Unsubscribe + "I already tested" |
+| `sent_90` / `sent_60` / `sent_30` | Reminder dates sent |
+| `last_blast_campaign` | Prevents duplicate blasts |
 
 ---
 

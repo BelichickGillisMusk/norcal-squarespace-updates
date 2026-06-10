@@ -11,6 +11,9 @@
   <h3 style="margin-top: 0;">Email me deadline reminders</h3>
   <p style="font-size: 14px; color: #555;">We'll remind you at 90, 60, and 30 days before your next deadline. One click to stop if you already tested.</p>
 
+  <label style="display: block; margin-bottom: 8px; font-size: 14px;">First name (optional)</label>
+  <input id="norcal-reminder-first-name" type="text" placeholder="Bryan" style="width: 100%; padding: 10px; margin-bottom: 12px; box-sizing: border-box;">
+
   <label style="display: block; margin-bottom: 8px; font-size: 14px;">Email</label>
   <input id="norcal-reminder-email" type="email" required placeholder="you@company.com" style="width: 100%; padding: 10px; margin-bottom: 12px; box-sizing: border-box;">
 
@@ -53,10 +56,15 @@
 
     const payload = {
       email: document.getElementById('norcal-reminder-email').value.trim(),
+      first_name: document.getElementById('norcal-reminder-first-name')?.value?.trim() || '',
+      audience_type: 'NEW_LEAD',
+      source: 'tool_calculator',
+      marketing_opt_in: true,
       vehicle_label: document.getElementById('norcal-reminder-vehicle').value.trim() || 'Your vehicle',
       registration_type: deadline.registration_type || 'CA',
       next_deadline: deadline.next_deadline,
       test_type: document.getElementById('norcal-reminder-test-type').value,
+      reminders_enabled: true,
       ...overrides
     };
 
@@ -81,7 +89,7 @@
     try {
       await submitReminder();
       status.style.color = '#1a5f2a';
-      status.textContent = "You're set! Check your inbox — we'll remind you at 90, 60, and 30 days.";
+      status.textContent = "Welcome to the NorCal family! Check your inbox for free tools on your phone — plus deadline reminders at 90, 60, and 30 days.";
     } catch (err) {
       status.style.color = '#b45309';
       status.textContent = err.message || String(err);

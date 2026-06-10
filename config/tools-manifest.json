@@ -1,0 +1,60 @@
+{
+  "app_name": "NorCal CARB Mobile Tools",
+  "add_to_home_screen_hint": "Open any tool in Safari or Chrome → Share → Add to Home Screen. Works like an app on your phone.",
+  "tools_hub_url": "/tools",
+  "managed_service": {
+    "name": "NorCal Family — Full Care",
+    "price_label": "CARB annual compliance fee (CTC-VIS) + $40/year per vehicle",
+    "includes": [
+      "CTC-VIS account setup and vehicle registration",
+      "Deadline monitoring and 90/60/30-day reminders",
+      "We schedule and perform your tests (OBD $75 · OVI $199 per visit)",
+      "You never have to call CARB — we handle compliance paperwork"
+    ],
+    "cta_url": "/managed-care"
+  },
+  "tools": [
+    {
+      "id": "when-is-my-test-due",
+      "name": "When Is My Test Due?",
+      "description": "Free deadline calculator + email reminders",
+      "url": "/tools/when-is-my-test-due"
+    },
+    {
+      "id": "obd-vs-ovi",
+      "name": "OBD vs OVI — Which Test?",
+      "description": "Know your test type and price before you book",
+      "url": "/tools/obd-vs-ovi"
+    },
+    {
+      "id": "do-i-need-ctc",
+      "name": "Do I Need Clean Truck Check?",
+      "description": "Quick wizard — in or out of the program",
+      "url": "/tools/do-i-need-ctc"
+    },
+    {
+      "id": "service-area",
+      "name": "Service Area Checker",
+      "description": "See if we come to your yard",
+      "url": "/tools/service-area"
+    },
+    {
+      "id": "fleet-cost",
+      "name": "Fleet Cost Calculator",
+      "description": "Compare shop vs mobile — including 2028 quarterly cadence",
+      "url": "/tools/fleet-cost-calculator"
+    },
+    {
+      "id": "ctc-vis-checklist",
+      "name": "CTC-VIS Setup Checklist",
+      "description": "Step-by-step portal setup",
+      "url": "/tools/ctc-vis-checklist"
+    },
+    {
+      "id": "switch-and-save",
+      "name": "Switch & Save",
+      "description": "Beat your price or 50% off your first test",
+      "url": "/tools/switch-and-save"
+    }
+  ]
+}

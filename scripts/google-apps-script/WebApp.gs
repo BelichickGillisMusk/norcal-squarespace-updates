@@ -1,21 +1,22 @@
 /**
- * NorCal CARB Mobile — CTC Reminder subscribe + cancel webhook
+ * NorCal CARB Mobile — subscribe, cancel reminders, unsubscribe marketing
  * APPROVED FOR DEPLOYMENT — do not edit without Bryan's approval.
- *
- * Deploy: Extensions → Apps Script → Deploy → Web app
- *   Execute as: Me | Who has access: Anyone
  */
 
 var HEADERS = [
-  'id', 'email', 'vehicle_label', 'registration_type', 'next_deadline',
-  'test_type', 'subscribed_at', 'reminders_enabled', 'cancel_token',
-  'sent_90', 'sent_60', 'sent_30'
+  'id', 'email', 'first_name', 'audience_type', 'source', 'vehicle_label',
+  'registration_type', 'next_deadline', 'test_type', 'subscribed_at',
+  'reminders_enabled', 'marketing_opt_in', 'welcome_sent', 'cancel_token',
+  'sent_90', 'sent_60', 'sent_30', 'last_blast_campaign'
 ];
 
 function doGet(e) {
   var action = e && e.parameter && e.parameter.action;
   if (action === 'cancel') {
-    return jsonResponse(handleCancel(e.parameter.token));
+    return jsonResponse(handleCancelReminders(e.parameter.token));
+  }
+  if (action === 'unsubscribe') {
+    return jsonResponse(handleUnsubscribe(e.parameter.token));
   }
   return jsonResponse({ ok: false, error: 'Unknown action' });
 }
@@ -30,8 +31,15 @@ function doPost(e) {
 }
 
 function handleSubscribe(body) {
-  if (!body.email || !body.next_deadline) {
-    return { ok: false, error: 'email and next_deadline are required' };
+  if (!body.email) {
+    return { ok: false, error: 'email is required' };
+  }
+
+  var audienceType = (body.audience_type || 'NEW_LEAD').toUpperCase();
+  var wantsReminders = body.reminders_enabled !== false && body.next_deadline;
+
+  if (wantsReminders && !body.next_deadline) {
+    return { ok: false, error: 'next_deadline required for deadline reminders' };
   }
 
   var sheet = getSheet();
@@ -42,13 +50,19 @@ function handleSubscribe(body) {
   var row = [
     id,
     String(body.email).trim().toLowerCase(),
+    body.first_name || '',
+    audienceType,
+    body.source || 'tool_calculator',
     body.vehicle_label || 'Your vehicle',
     body.registration_type || 'CA',
-    body.next_deadline,
+    body.next_deadline || '',
     body.test_type || 'UNKNOWN',
     new Date().toISOString(),
-    'TRUE',
+    wantsReminders ? 'TRUE' : 'FALSE',
+    body.marketing_opt_in !== false ? 'TRUE' : 'FALSE',
+    '',
     cancelToken,
+    '',
     '',
     '',
     ''
@@ -58,7 +72,19 @@ function handleSubscribe(body) {
   return { ok: true, id: id, cancel_token: cancelToken };
 }
 
-function handleCancel(token) {
+function handleCancelReminders(token) {
+  return setFlagByToken(token, 'reminders_enabled', 'FALSE', 'cancelled_reminders');
+}
+
+function handleUnsubscribe(token) {
+  var result = setFlagByToken(token, 'marketing_opt_in', 'FALSE', 'unsubscribed');
+  if (result.ok) {
+    setFlagByToken(token, 'reminders_enabled', 'FALSE', 'unsubscribed');
+  }
+  return result;
+}
+
+function setFlagByToken(token, column, value, okKey) {
   if (!token) {
     return { ok: false, error: 'token required' };
   }
@@ -70,12 +96,14 @@ function handleCancel(token) {
   }
 
   var tokenCol = HEADERS.indexOf('cancel_token');
-  var enabledCol = HEADERS.indexOf('reminders_enabled');
+  var targetCol = HEADERS.indexOf(column);
 
   for (var i = 1; i < data.length; i++) {
     if (String(data[i][tokenCol]) === String(token)) {
-      sheet.getRange(i + 1, enabledCol + 1).setValue('FALSE');
-      return { ok: true, cancelled: true };
+      sheet.getRange(i + 1, targetCol + 1).setValue(value);
+      var out = { ok: true };
+      out[okKey] = true;
+      return out;
     }
   }
 

@@ -1,21 +1,21 @@
-# Agent: start here for reminder emails
+# Agent: start here for all email systems
 
-**One file to open:** [`email-reminders-agent-runbook.md`](./email-reminders-agent-runbook.md)
+## Reminder emails (90/60/30-day)
+[`email-reminders-agent-runbook.md`](./email-reminders-agent-runbook.md)
 
-**One-line task for Manus / Cursor / other agents:**
+> Deploy CTC deadline reminder emails per `docs/email-reminders-agent-runbook.md`. Stop at Bryan's test-email approval before `REMINDERS_LIVE=true`.
 
-> Deploy CTC deadline reminder emails per `docs/email-reminders-agent-runbook.md`. Use only approved scripts in this repo. Stop at Bryan's test-email approval before setting `REMINDERS_LIVE=true`.
+## Welcome, blasts & NorCal Family nurture
+[`subscriber-nurture-agent-runbook.md`](./subscriber-nurture-agent-runbook.md)
 
-## What Bryan must provide before you send anything
+> Deploy welcome emails + customer import + approved blasts per `docs/subscriber-nurture-agent-runbook.md`. New leads get "Come aboard the NorCal family" with free phone tools + Full Care ($40/year). Stop at Bryan's approval before `NURTURE_LIVE=true` or any blast with `BLAST_APPROVED=true`.
 
-- Resend API key + DNS verified on `norcalcarbmobile.com`
-- Google Sheet created from `scripts/google-apps-script/subscribers-sheet-template.csv`
-- Apps Script web app deployed from `scripts/google-apps-script/WebApp.gs`
-- GitHub secrets listed in the runbook
-- Squarespace Code block pasted from `squarespace/reminder-signup-snippet.html`
+## Full deploy order for Manus / any agent
 
-## Approval gate
-
-Send test to `bgillis99@gmail.com` via GitHub Actions → **CTC Reminder Emails** → `test_email: bgillis99@gmail.com` → Run.
-
-Wait for Bryan: **"approved to send"** → set secret `REMINDERS_LIVE=true`.
+1. Google Sheet + Apps Script (`WebApp.gs`) — **redeploy** if already live (schema expanded)
+2. Squarespace snippet (`reminder-signup-snippet.html`)
+3. Import past customers (`customer-import-template.csv`)
+4. GitHub secrets (both runbooks)
+5. Test welcome → Bryan approves → `NURTURE_LIVE=true`
+6. Test reminders → Bryan approves → `REMINDERS_LIVE=true`
+7. First blast `tools-launch-v1` → Bryan approves → `BLAST_APPROVED=true` → send → reset

@@ -1,0 +1,2 @@
+email,first_name,audience_type,source,vehicle_label,test_type,marketing_opt_in,reminders_enabled,next_deadline
+pastcustomer@example.com,Joe,EXISTING_CUSTOMER,customer_import,Unit 7,OBD,TRUE,FALSE,
