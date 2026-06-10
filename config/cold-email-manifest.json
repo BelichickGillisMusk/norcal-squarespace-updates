@@ -1,7 +1,8 @@
 {
   "reviews": {
     "headline": "4.9★ · 47+ verified fleet operator reviews",
-    "google_reviews_url": "https://share.google/CUg6TEK1p3eO34S9G",
+    "google_reviews_url": "https://www.google.com/search?q=NorCal+CARB+Mobile+reviews#lrd=0x4e7c7c20def2c42d:0xac8d2d40ef5c9451,1,,,,",
+    "google_reviews_url_short": "https://share.google/CUg6TEK1p3eO34S9G",
     "business_name": "NorCal CARB Mobile LLC — CARB Clean Truck Check J1667",
     "fallback_url": "https://norcalcarbmobile.com",
     "sample_quotes": [
@@ -24,6 +25,6 @@
   "urls": {
     "booking": "https://norcalcarbmobile.com/contact",
     "tools": "https://norcalcarbmobile.com/tools",
-    "reviews_page": "https://norcalcarbmobile.com"
+    "reviews_page": "https://share.google/CUg6TEK1p3eO34S9G"
   }
 }

@@ -68,7 +68,7 @@ Or send your current quote — we'll try to BEAT IT.
 ★ 4.9 stars · 47+ fleet operator reviews: {reviews_url}
 ```
 
-**Bryan:** Paste your Google Maps review link in `config/cold-email-manifest.json` → `google_reviews_url`. Until then use `{reviews_url}` = `https://norcalcarbmobile.com`.
+**Reviews link (set):** `{reviews_url}` opens Google reviews directly — see `config/cold-email-manifest.json` → `google_reviews_url`.
 
 ---
 
