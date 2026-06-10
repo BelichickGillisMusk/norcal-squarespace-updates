@@ -17,4 +17,4 @@ Agents append timestamped entries below.
 
 - Updated cold templates with aggressive pricing ($75/$199, 50% switch, beat-quote, shop comparison)
 - Added Template D `pricing-reviews` for price-shopping leads
-- Added `config/cold-email-manifest.json` — Bryan to paste Google Maps review link
+- Added `config/cold-email-manifest.json` — Google reviews link set: https://share.google/CUg6TEK1p3eO34S9G
