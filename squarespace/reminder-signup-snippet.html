@@ -1,0 +1,106 @@
+<!--
+  NorCal CARB Mobile — Reminder signup embed for Squarespace Code block
+  APPROVED FOR DEPLOYMENT
+
+  Agent instructions:
+  1. Replace PASTE_APPS_SCRIPT_WEBAPP_URL_HERE below with the deployed Apps Script URL.
+  2. Paste this entire block into a Squarespace Code block on the deadline tool page.
+  3. Wire calculator JS to call window.NorCalCTC.submitReminder({...}) on opt-in.
+-->
+<div id="norcal-ctc-reminder-signup" style="max-width: 480px; margin: 24px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; font-family: sans-serif;">
+  <h3 style="margin-top: 0;">Email me deadline reminders</h3>
+  <p style="font-size: 14px; color: #555;">We'll remind you at 90, 60, and 30 days before your next deadline. One click to stop if you already tested.</p>
+
+  <label style="display: block; margin-bottom: 8px; font-size: 14px;">First name (optional)</label>
+  <input id="norcal-reminder-first-name" type="text" placeholder="Bryan" style="width: 100%; padding: 10px; margin-bottom: 12px; box-sizing: border-box;">
+
+  <label style="display: block; margin-bottom: 8px; font-size: 14px;">Email</label>
+  <input id="norcal-reminder-email" type="email" required placeholder="you@company.com" style="width: 100%; padding: 10px; margin-bottom: 12px; box-sizing: border-box;">
+
+  <label style="display: block; margin-bottom: 8px; font-size: 14px;">Vehicle label (optional)</label>
+  <input id="norcal-reminder-vehicle" type="text" placeholder="Unit 12 / plate" style="width: 100%; padding: 10px; margin-bottom: 12px; box-sizing: border-box;">
+
+  <label style="display: block; margin-bottom: 8px; font-size: 14px;">Test type</label>
+  <select id="norcal-reminder-test-type" style="width: 100%; padding: 10px; margin-bottom: 16px;">
+    <option value="OBD">OBD — $75</option>
+    <option value="OVI">OVI — $199</option>
+    <option value="UNKNOWN">Not sure</option>
+  </select>
+
+  <button id="norcal-reminder-submit" type="button" style="width: 100%; padding: 12px; background: #1a5f2a; color: #fff; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
+    Send me reminders
+  </button>
+
+  <p id="norcal-reminder-status" style="font-size: 14px; margin-top: 12px; min-height: 20px;"></p>
+  <p style="font-size: 12px; color: #888;">OBD $75 · OVI $199 · <a href="/switch-and-save">Already have a tester? Ask us to beat your price</a></p>
+</div>
+
+<script>
+(function () {
+  const WEBAPP_URL = 'PASTE_APPS_SCRIPT_WEBAPP_URL_HERE';
+
+  function getDeadlineFromCalculator() {
+    // Calculator page should set these before user clicks subscribe:
+    // window.NorCalCTC_deadline = { next_deadline: '2026-09-15', registration_type: 'CA' }
+    if (window.NorCalCTC_deadline && window.NorCalCTC_deadline.next_deadline) {
+      return window.NorCalCTC_deadline;
+    }
+    return null;
+  }
+
+  async function submitReminder(overrides) {
+    const deadline = getDeadlineFromCalculator();
+    if (!deadline || !deadline.next_deadline) {
+      throw new Error('Run the deadline calculator first — we need your next deadline date.');
+    }
+
+    const payload = {
+      email: document.getElementById('norcal-reminder-email').value.trim(),
+      first_name: document.getElementById('norcal-reminder-first-name')?.value?.trim() || '',
+      audience_type: 'NEW_LEAD',
+      source: 'tool_calculator',
+      marketing_opt_in: true,
+      vehicle_label: document.getElementById('norcal-reminder-vehicle').value.trim() || 'Your vehicle',
+      registration_type: deadline.registration_type || 'CA',
+      next_deadline: deadline.next_deadline,
+      test_type: document.getElementById('norcal-reminder-test-type').value,
+      reminders_enabled: true,
+      ...overrides
+    };
+
+    if (!payload.email) throw new Error('Email is required.');
+
+    const res = await fetch(WEBAPP_URL, {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error || 'Signup failed');
+    return data;
+  }
+
+  document.getElementById('norcal-reminder-submit').addEventListener('click', async function () {
+    const status = document.getElementById('norcal-reminder-status');
+    status.style.color = '#333';
+    status.textContent = 'Saving…';
+    try {
+      await submitReminder();
+      status.style.color = '#1a5f2a';
+      status.textContent = "Welcome to the NorCal family! Check your inbox for free tools on your phone — plus deadline reminders at 90, 60, and 30 days.";
+    } catch (err) {
+      status.style.color = '#b45309';
+      status.textContent = err.message || String(err);
+    }
+  });
+
+  // Expose for calculator integration
+  window.NorCalCTC = window.NorCalCTC || {};
+  window.NorCalCTC.submitReminder = submitReminder;
+  window.NorCalCTC.setDeadline = function (next_deadline, registration_type) {
+    window.NorCalCTC_deadline = { next_deadline, registration_type: registration_type || 'CA' };
+  };
+})();
+</script>

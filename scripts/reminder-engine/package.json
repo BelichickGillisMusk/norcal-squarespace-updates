@@ -1,0 +1,15 @@
+{
+  "name": "norcal-ctc-reminder-engine",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Daily CTC deadline reminder sender — APPROVED FOR DEPLOYMENT",
+  "type": "module",
+  "scripts": {
+    "send": "node send-reminders.js",
+    "welcome": "node send-nurture.js --welcome",
+    "blast": "node send-nurture.js --blast"
+  },
+  "dependencies": {
+    "googleapis": "^144.0.0"
+  }
+}

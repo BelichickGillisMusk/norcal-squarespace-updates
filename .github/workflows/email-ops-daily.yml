@@ -1,0 +1,126 @@
+# Unified daily email ops — preflight → welcome → reminders
+# Schedule: 8:15 AM Pacific (15:15 UTC) — after preflight at 7 AM
+name: Email Ops Daily
+
+on:
+  schedule:
+    - cron: '15 15 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run all steps'
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      skip_preflight:
+        description: 'Skip DNS preflight (emergency only)'
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  preflight:
+    if: inputs.skip_preflight != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: DNS preflight
+        working-directory: scripts/email-deploy
+        run: node preflight.js
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          REMINDER_FROM_EMAIL: ${{ secrets.REMINDER_FROM_EMAIL }}
+          APPS_SCRIPT_WEBAPP_URL: ${{ secrets.APPS_SCRIPT_WEBAPP_URL }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+
+  nurture-and-reminders:
+    needs: preflight
+    if: always() && (needs.preflight.result == 'success' || inputs.skip_preflight == 'true')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: scripts/reminder-engine/package-lock.json
+
+      - name: Install dependencies
+        working-directory: scripts/reminder-engine
+        run: npm ci
+
+      - name: Welcome (dry run)
+        if: secrets.NURTURE_LIVE != 'true' || inputs.dry_run == 'true'
+        working-directory: scripts/reminder-engine
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          GOOGLE_SHEET_NAME: ${{ secrets.GOOGLE_SHEET_NAME }}
+          REMINDER_FROM_EMAIL: ${{ secrets.REMINDER_FROM_EMAIL }}
+          REMINDER_FROM_NAME: ${{ secrets.REMINDER_FROM_NAME }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          BOOKING_URL: ${{ secrets.BOOKING_URL }}
+          SWITCH_URL: ${{ secrets.SWITCH_URL }}
+          MANAGED_CARE_URL: ${{ secrets.MANAGED_CARE_URL }}
+          APPS_SCRIPT_WEBAPP_URL: ${{ secrets.APPS_SCRIPT_WEBAPP_URL }}
+        run: npm run welcome -- --dry-run
+
+      - name: Welcome (live)
+        if: secrets.NURTURE_LIVE == 'true' && (github.event_name == 'schedule' || inputs.dry_run == 'false')
+        working-directory: scripts/reminder-engine
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          GOOGLE_SHEET_NAME: ${{ secrets.GOOGLE_SHEET_NAME }}
+          REMINDER_FROM_EMAIL: ${{ secrets.REMINDER_FROM_EMAIL }}
+          REMINDER_FROM_NAME: ${{ secrets.REMINDER_FROM_NAME }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          BOOKING_URL: ${{ secrets.BOOKING_URL }}
+          SWITCH_URL: ${{ secrets.SWITCH_URL }}
+          MANAGED_CARE_URL: ${{ secrets.MANAGED_CARE_URL }}
+          APPS_SCRIPT_WEBAPP_URL: ${{ secrets.APPS_SCRIPT_WEBAPP_URL }}
+        run: npm run welcome
+
+      - name: Reminders (dry run)
+        if: secrets.REMINDERS_LIVE != 'true' || inputs.dry_run == 'true'
+        working-directory: scripts/reminder-engine
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          GOOGLE_SHEET_NAME: ${{ secrets.GOOGLE_SHEET_NAME }}
+          REMINDER_FROM_EMAIL: ${{ secrets.REMINDER_FROM_EMAIL }}
+          REMINDER_FROM_NAME: ${{ secrets.REMINDER_FROM_NAME }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          BOOKING_URL: ${{ secrets.BOOKING_URL }}
+          SWITCH_URL: ${{ secrets.SWITCH_URL }}
+          APPS_SCRIPT_WEBAPP_URL: ${{ secrets.APPS_SCRIPT_WEBAPP_URL }}
+        run: npm run send -- --dry-run
+
+      - name: Reminders (live)
+        if: secrets.REMINDERS_LIVE == 'true' && (github.event_name == 'schedule' || inputs.dry_run == 'false')
+        working-directory: scripts/reminder-engine
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          GOOGLE_SHEET_NAME: ${{ secrets.GOOGLE_SHEET_NAME }}
+          REMINDER_FROM_EMAIL: ${{ secrets.REMINDER_FROM_EMAIL }}
+          REMINDER_FROM_NAME: ${{ secrets.REMINDER_FROM_NAME }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          BOOKING_URL: ${{ secrets.BOOKING_URL }}
+          SWITCH_URL: ${{ secrets.SWITCH_URL }}
+          APPS_SCRIPT_WEBAPP_URL: ${{ secrets.APPS_SCRIPT_WEBAPP_URL }}
+        run: npm run send

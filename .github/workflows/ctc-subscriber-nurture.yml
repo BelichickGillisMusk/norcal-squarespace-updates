@@ -1,0 +1,121 @@
+# CTC Subscriber Welcome + Blasts
+# APPROVED FOR DEPLOYMENT — blast requires BLAST_APPROVED=true and Bryan sign-off
+
+name: CTC Subscriber Nurture
+
+on:
+  schedule:
+    - cron: '30 15 * * *'
+  workflow_dispatch:
+    inputs:
+      job:
+        description: 'Which job to run'
+        required: true
+        type: choice
+        options:
+          - welcome
+          - blast
+      dry_run:
+        description: 'Dry run only'
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      campaign_id:
+        description: 'Blast campaign-id (blast job only)'
+        required: false
+        type: choice
+        options:
+          - tools-launch-v1
+          - when-is-my-test-due-v1
+          - managed-care-v1
+      test_email:
+        description: 'Optional: send one welcome test by adding a sheet row for this email first'
+        required: false
+        type: string
+
+jobs:
+  nurture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: scripts/reminder-engine/package-lock.json
+
+      - name: Install dependencies
+        working-directory: scripts/reminder-engine
+        run: npm ci
+
+      - name: Welcome dry run
+        if: (github.event_name == 'schedule' && secrets.NURTURE_LIVE != 'true') || (inputs.job == 'welcome' && inputs.dry_run == 'true')
+        working-directory: scripts/reminder-engine
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          GOOGLE_SHEET_NAME: ${{ secrets.GOOGLE_SHEET_NAME }}
+          REMINDER_FROM_EMAIL: ${{ secrets.REMINDER_FROM_EMAIL }}
+          REMINDER_FROM_NAME: ${{ secrets.REMINDER_FROM_NAME }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          BOOKING_URL: ${{ secrets.BOOKING_URL }}
+          SWITCH_URL: ${{ secrets.SWITCH_URL }}
+          MANAGED_CARE_URL: ${{ secrets.MANAGED_CARE_URL }}
+          APPS_SCRIPT_WEBAPP_URL: ${{ secrets.APPS_SCRIPT_WEBAPP_URL }}
+        run: npm run welcome -- --dry-run
+
+      - name: Welcome live
+        if: (github.event_name == 'schedule' && secrets.NURTURE_LIVE == 'true') || (inputs.job == 'welcome' && inputs.dry_run == 'false')
+        working-directory: scripts/reminder-engine
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          GOOGLE_SHEET_NAME: ${{ secrets.GOOGLE_SHEET_NAME }}
+          REMINDER_FROM_EMAIL: ${{ secrets.REMINDER_FROM_EMAIL }}
+          REMINDER_FROM_NAME: ${{ secrets.REMINDER_FROM_NAME }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          BOOKING_URL: ${{ secrets.BOOKING_URL }}
+          SWITCH_URL: ${{ secrets.SWITCH_URL }}
+          MANAGED_CARE_URL: ${{ secrets.MANAGED_CARE_URL }}
+          APPS_SCRIPT_WEBAPP_URL: ${{ secrets.APPS_SCRIPT_WEBAPP_URL }}
+        run: npm run welcome
+
+      - name: Blast dry run
+        if: inputs.job == 'blast' && inputs.dry_run == 'true'
+        working-directory: scripts/reminder-engine
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          GOOGLE_SHEET_NAME: ${{ secrets.GOOGLE_SHEET_NAME }}
+          REMINDER_FROM_EMAIL: ${{ secrets.REMINDER_FROM_EMAIL }}
+          REMINDER_FROM_NAME: ${{ secrets.REMINDER_FROM_NAME }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          BOOKING_URL: ${{ secrets.BOOKING_URL }}
+          SWITCH_URL: ${{ secrets.SWITCH_URL }}
+          MANAGED_CARE_URL: ${{ secrets.MANAGED_CARE_URL }}
+          APPS_SCRIPT_WEBAPP_URL: ${{ secrets.APPS_SCRIPT_WEBAPP_URL }}
+        run: npm run blast -- --campaign-id "${{ inputs.campaign_id }}" --dry-run
+
+      - name: Blast live
+        if: inputs.job == 'blast' && inputs.dry_run == 'false'
+        working-directory: scripts/reminder-engine
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SPREADSHEET_ID: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          GOOGLE_SHEET_NAME: ${{ secrets.GOOGLE_SHEET_NAME }}
+          REMINDER_FROM_EMAIL: ${{ secrets.REMINDER_FROM_EMAIL }}
+          REMINDER_FROM_NAME: ${{ secrets.REMINDER_FROM_NAME }}
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
+          BOOKING_URL: ${{ secrets.BOOKING_URL }}
+          SWITCH_URL: ${{ secrets.SWITCH_URL }}
+          MANAGED_CARE_URL: ${{ secrets.MANAGED_CARE_URL }}
+          APPS_SCRIPT_WEBAPP_URL: ${{ secrets.APPS_SCRIPT_WEBAPP_URL }}
+          BLAST_APPROVED: ${{ secrets.BLAST_APPROVED }}
+        run: npm run blast -- --campaign-id "${{ inputs.campaign_id }}"

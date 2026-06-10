@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CTC reminders confirmed</title>
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif; line-height: 1.5; color: #222; max-width: 600px; margin: 0 auto; padding: 24px;">
+  <h1 style="font-size: 22px; margin-bottom: 8px;">You're set for Clean Truck Check reminders</h1>
+  <p>Hi there,</p>
+  <p>We'll email you <strong>90, 60, and 30 days</strong> before your next deadline for <strong>{{vehicle_label}}</strong>.</p>
+
+  <table style="width: 100%; border-collapse: collapse; margin: 20px 0; background: #f7f7f7;">
+    <tr>
+      <td style="padding: 12px; border: 1px solid #ddd;"><strong>Next deadline</strong></td>
+      <td style="padding: 12px; border: 1px solid #ddd;">{{next_deadline_display}}</td>
+    </tr>
+    <tr>
+      <td style="padding: 12px; border: 1px solid #ddd;"><strong>Test type</strong></td>
+      <td style="padding: 12px; border: 1px solid #ddd;">{{test_type_display}}</td>
+    </tr>
+  </table>
+
+  <p><strong>Always verify your official deadline in <a href="https://cleantruckcheck.arb.ca.gov">CTC-VIS</a> before relying on any date for compliance.</strong></p>
+
+  <h2 style="font-size: 18px;">Mobile testing — we come to your yard</h2>
+  <p>OBD <strong>$75</strong> · OVI <strong>$199</strong><br>
+  Sacramento · Stockton · Fairfield · San Jose · Bay Area</p>
+
+  <p style="margin: 24px 0;">
+    <a href="{{booking_url}}" style="display: inline-block; background: #1a5f2a; color: #fff; text-decoration: none; padding: 12px 20px; border-radius: 4px; font-weight: bold;">Book a test</a>
+  </p>
+
+  <p style="font-size: 14px; color: #555;">Already working with another tester? <a href="{{switch_url}}">Tell us what you pay</a> — we'll try to beat that price, or give you <strong>50% off your first test</strong> when you switch.</p>
+
+  <p style="font-size: 12px; color: #888; margin-top: 32px;">
+  <a href="{{cancel_url}}">Stop reminders for this cycle</a> · NorCal CARB Mobile · {{site_base_url}}
+  </p>
+</body>
+</html>
