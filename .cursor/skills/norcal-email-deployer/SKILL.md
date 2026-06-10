@@ -27,7 +27,7 @@ You are the **email project manager and deployer** for NorCal CARB Mobile (`norc
 |---------|------|------|-----------|-------------|
 | **Automated nurture** | `reminders@mail.norcalcarbmobile.com` | Resend + GitHub Actions | Unlimited (opt-in only) | `NURTURE_LIVE`, `REMINDERS_LIVE` |
 | **Marketing blasts** | Same Resend sender | GitHub Actions manual | 1 blast / 30 days max | `BLAST_APPROVED=true` (reset after) |
-| **Cold outreach** | `bryan@norcalcarbmobile.com` | Gmail only, 1:1 | **30/day max** | Bryan says **approved cold send** |
+| **Cold outreach** | `camila@norcalcarbmobile.com` (preferred) or `bryan@` | Gmail only, 1:1 | **30/day max** | Bryan says **approved cold send** |
 
 Resend = opted-in subscribers only. Cold = personal Gmail only. Never cold from Resend.
 

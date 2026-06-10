@@ -1,7 +1,8 @@
 # Cold outreach — agent one-pager (30/day from Bryan’s email)
 
-**Send from:** `bryan@norcalcarbmobile.com` (Google Workspace / Gmail only — **not** Resend)  
+**Send from:** `camila@norcalcarbmobile.com` (preferred) or `bryan@norcalcarbmobile.com` — Google Workspace / Gmail only — **not** Resend  
 **Volume cap:** **30 emails per day max** — never batch-bcc; one recipient per message  
+**Do not email the AI agent** — it cannot read your inbox. Use GitHub secrets + Gmail drafts Bryan/Camila approves.
 **Audience:** NorCal fleet operators, owner-operators, contractors with diesel 14k+ GVWR  
 **Approval:** Bryan must reply **“approved cold send”** before the agent sends day 1
 
@@ -26,10 +27,11 @@
 
 ## Before day 1 (one-time setup)
 
-1. **Gmail:** Send from `bryan@norcalcarbmobile.com` — DKIM already on domain (see `email-deliverability-verification.md`).
-2. **Sheet:** Import `scripts/cold-outreach/daily-send-log-template.csv` → name tab **`Cold Sends`**.
-3. **Lead list:** Bryan provides CSV or agent builds from public fleet/contractor sources — must have **business email + company name**; no purchased scraped lists without Bryan OK.
-4. **Warm-up (week 1):** Days 1–3 send **10/day**, days 4–5 **20/day**, day 6+ **30/day** unless Bryan says full 30 immediately.
+1. **Gmail:** Send from `camila@norcalcarbmobile.com` (recommended — dedicated outreach rep) or `bryan@` for owner follow-ups. Google DKIM on domain covers any `@norcalcarbmobile.com` mailbox (see `email-deliverability-verification.md`).
+2. **Create Camila mailbox** (one-time): Google Workspace Admin → Users → Add `camila@norcalcarbmobile.com` → Bryan retains admin; Camila or Bryan can send from that inbox.
+3. **Sheet:** Import `scripts/cold-outreach/daily-send-log-template.csv` → name tab **`Cold Sends`**.
+4. **Lead list:** Bryan provides CSV or agent builds from public fleet/contractor sources — must have **business email + company name**; no purchased scraped lists without Bryan OK.
+5. **Warm-up (week 1):** Days 1–3 send **10/day**, days 4–5 **20/day**, day 6+ **30/day** unless Bryan says full 30 immediately.
 
 ---
 
@@ -66,9 +68,10 @@ If you'd rather not deal with CARB at all, we do full setup + monitoring for the
 
 Worth a 10-minute call this week?
 
-Bryan Gillis
+Camila
 NorCal CARB Mobile
 norcalcarbmobile.com | {booking_url}
+camila@norcalcarbmobile.com
 
 Reply "remove" and I won't follow up.
 ```
@@ -86,8 +89,9 @@ OBD $75 · OVI $199 per truck. If you already have a tester, tell me your rate �
 
 Free tools on your phone (deadlines, OBD vs OVI, fleet math): {tools_url}
 
-Bryan Gillis
-bryan@norcalcarbmobile.com
+Camila
+NorCal CARB Mobile
+camila@norcalcarbmobile.com
 
 Reply "remove" to opt out.
 ```
@@ -107,8 +111,9 @@ Or use our free phone tools if you want DIY: {tools_url}
 
 Happy to send a one-page breakdown if useful.
 
-Bryan
+Camila
 NorCal CARB Mobile
+camila@norcalcarbmobile.com
 
 Reply "remove" and I'll close your file.
 ```
@@ -179,7 +184,7 @@ Max **3 touches total** per lead. Follow-ups count toward the **30/day** cap.
 
 ## Agent prompt (paste to Manus / any agent)
 
-> Cold outreach per `docs/cold-outreach-agent-one-pager.md`. Max 30/day from `bryan@norcalcarbmobile.com` via Gmail only. Use approved templates A/B/C. Log every send in Cold Sends sheet. Draft for Bryan approval until he says **approved cold send**. Never email opted_out or bounced addresses. Do not use Resend.
+> Cold outreach per `docs/cold-outreach-agent-one-pager.md`. Max 30/day from `camila@norcalcarbmobile.com` via Gmail only. Use approved templates A/B/C. Log every send in Cold Sends sheet. Draft for Bryan approval until he says **approved cold send**. Never email opted_out or bounced addresses. Do not use Resend.
 
 ---
 

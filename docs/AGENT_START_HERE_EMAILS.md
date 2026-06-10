@@ -16,6 +16,10 @@
 
 ---
 
+## Who sends from which address
+
+[`email-senders-guide.md`](./email-senders-guide.md) — Camila@ for cold, reminders@mail for automated. **Do not email the agent.**
+
 ## Channel runbooks
 
 | Channel | Doc |
