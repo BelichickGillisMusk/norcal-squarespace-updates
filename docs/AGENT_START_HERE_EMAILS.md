@@ -1,26 +1,47 @@
 # Agent: start here for all email systems
 
-## Reminder emails (90/60/30-day)
-[`email-reminders-agent-runbook.md`](./email-reminders-agent-runbook.md)
+## ⭐ Email PM skill (read first)
 
-> Deploy CTC deadline reminder emails per `docs/email-reminders-agent-runbook.md`. Stop at Bryan's test-email approval before `REMINDERS_LIVE=true`.
+**`.cursor/skills/norcal-email-deployer/SKILL.md`**
 
-## Welcome, blasts & NorCal Family nurture
-[`subscriber-nurture-agent-runbook.md`](./subscriber-nurture-agent-runbook.md)
+> You are the NorCal email deployer. Run preflight, execute DEPLOY_TODAY.md, fix DNS blockers, advance summer-2026 schedule. Stop at Bryan approval gates.
 
-> Deploy welcome emails + customer import + approved blasts per `docs/subscriber-nurture-agent-runbook.md`. New leads get "Come aboard the NorCal family" with free phone tools + Full Care ($40/year). Stop at Bryan's approval before `NURTURE_LIVE=true` or any blast with `BLAST_APPROVED=true`.
+## Deploy today
 
-## Cold outreach (30/day from Bryan’s Gmail)
-[`cold-outreach-agent-one-pager.md`](./cold-outreach-agent-one-pager.md)
+[`DEPLOY_TODAY.md`](./DEPLOY_TODAY.md) — June 9, 2026 task list
 
-> One-to-one cold leads from `bryan@norcalcarbmobile.com` only. Max 30/day. Gmail — not Resend. Approved templates + send log sheet. Wait for Bryan **approved cold send** before day 1.
+## Summer strategy
 
-## Full deploy order for Manus / any agent
+[`summer-2026-email-strategy.md`](./summer-2026-email-strategy.md)
 
-1. Google Sheet + Apps Script (`WebApp.gs`) — **redeploy** if already live (schema expanded)
-2. Squarespace snippet (`reminder-signup-snippet.html`)
-3. Import past customers (`customer-import-template.csv`)
-4. GitHub secrets (both runbooks)
-5. Test welcome → Bryan approves → `NURTURE_LIVE=true`
-6. Test reminders → Bryan approves → `REMINDERS_LIVE=true`
-7. First blast `tools-launch-v1` → Bryan approves → `BLAST_APPROVED=true` → send → reset
+---
+
+## Channel runbooks
+
+| Channel | Doc |
+|---------|-----|
+| Deliverability / not junk | [`email-deliverability-verification.md`](./email-deliverability-verification.md) |
+| 90/60/30 reminders | [`email-reminders-agent-runbook.md`](./email-reminders-agent-runbook.md) |
+| Welcome + blasts | [`subscriber-nurture-agent-runbook.md`](./subscriber-nurture-agent-runbook.md) |
+| Cold 30/day Gmail | [`cold-outreach-agent-one-pager.md`](./cold-outreach-agent-one-pager.md) |
+
+---
+
+## Bryan approval gates
+
+| Says | Agent sets |
+|------|------------|
+| approved test send | proceed with tests |
+| approved welcome | `NURTURE_LIVE=true` |
+| approved reminders | `REMINDERS_LIVE=true` |
+| approved blast [id] | `BLAST_APPROVED=true` → send → reset |
+| approved cold send | cold outreach day 1 |
+
+---
+
+## Scheduled automations
+
+| Workflow | Time (PT) |
+|----------|-----------|
+| Email Preflight | 7:00 AM daily |
+| Email Ops Daily | 8:15 AM daily (welcome + reminders) |

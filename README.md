@@ -47,7 +47,7 @@ export SQUARESPACE_API_KEY=$SQUARESPACE_API_KEY_UPDATES
 When an LLM agent runs against this repo, it should:
 
 1. **Read this README completely** before taking any action
-2. **For CTC emails (reminders + welcome + blasts):** start at `docs/AGENT_START_HERE_EMAILS.md` — reminder runbook + subscriber nurture runbook. Use only approved files. Do not enable `REMINDERS_LIVE`, `NURTURE_LIVE`, or `BLAST_APPROVED` until Bryan approves test sends.
+2. **For all email (deploy, PM, summer ops):** load skill `.cursor/skills/norcal-email-deployer/SKILL.md` → then `docs/DEPLOY_TODAY.md` + `docs/AGENT_START_HERE_EMAILS.md`. Run `scripts/email-deploy/preflight.js` before any live send. Do not enable `REMINDERS_LIVE`, `NURTURE_LIVE`, or `BLAST_APPROVED` until Bryan approves.
 3. **Check current site state** — screenshot or scrape each target page first, log what it finds
 4. **Execute tasks in order** (Forms → Layout/Font → Blogs)
 5. **Verify each change** before moving to the next task — do not assume a save succeeded
@@ -165,13 +165,17 @@ The agent should treat this as a **pre-flight checklist**, not a cosmetic pass.
 ```
 /
 ├── README.md                  # This file — agent instructions
+├── .cursor/skills/norcal-email-deployer/  # Email PM + deployer skill (agents read first)
 ├── docs/
+│   ├── DEPLOY_TODAY.md                  # Today's deploy checklist
+│   ├── summer-2026-email-strategy.md    # Jun–Sep email calendar
 │   ├── tools-and-cta-strategy.md        # Tool ideas, pricing, Full Care $40/yr
 │   ├── AGENT_START_HERE_EMAILS.md       # Agent entry point for all email systems
 │   ├── email-reminders-agent-runbook.md # 90/60/30 deadline reminders
 │   ├── subscriber-nurture-agent-runbook.md # Welcome, blasts, customer import
 │   ├── email-deliverability-verification.md # SPF/DKIM/DMARC — avoid junk
 │   └── cold-outreach-agent-one-pager.md     # 30/day cold email from Bryan's Gmail
+├── scripts/email-deploy/            # preflight.js — DNS blocker check
 ├── config/tools-manifest.json     # Tool list for welcome/blast emails
 ├── email/templates/               # Approved HTML email templates
 ├── scripts/

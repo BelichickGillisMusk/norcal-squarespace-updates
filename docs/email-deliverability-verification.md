@@ -19,6 +19,8 @@ This doc covers **Squarespace** emails (forms, campaigns) and **Resend** emails 
 
 **Bottom line:** Google + Squarespace transactional mail is in good shape. **Resend reminder/welcome emails will fail DMARC** until Resend DNS is added — with `p=reject`, Gmail may block them entirely.
 
+**Required fix (deploy today):** Use Resend subdomain **`mail.norcalcarbmobile.com`** — not root. Send from `reminders@mail.norcalcarbmobile.com`. Full steps: `.cursor/skills/norcal-email-deployer/references/dns-fix.md` or run `scripts/email-deploy/preflight.js`.
+
 ---
 
 ## Two email systems (don’t mix them up)
