@@ -17,7 +17,7 @@ Agents append timestamped entries below.
 
 - Bryan verified: **5 stars on 31 Google reviews** — use exact numbers only (was incorrectly 4.9 / 47+ in some docs)
 - Added `config/reviews.json` — single source of truth for rating, count, headlines, schema.org JSON-LD
-- Added `squarespace/schema-local-business.html` — paste in Squarespace header (AggregateRating 5.0 / 31)
+- Added `squarespace/schema-local-business.html` — paste in Squarespace header (AggregateRating 5 / 31)
 - Updated cold templates, manifests, Camila/Gmail skills to match
 
 ## 2026-06-09 — Cold email pricing + reviews
