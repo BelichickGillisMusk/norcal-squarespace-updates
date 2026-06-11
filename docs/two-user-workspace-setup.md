@@ -1,83 +1,91 @@
-# Two-user Google Workspace — Bryan + Camila
+# Bryan + Camila — human owner + AI agent
 
-You are **not tied** to a single sender. This is the recommended setup for growth with less of Bryan's time.
+**Camila is a Vertex AI agent**, not a human hire. She uses the mailbox `camila@norcalcarbmobile.com` via **Google Workspace APIs** (domain-wide delegation).
 
----
-
-## Users
-
-| Display name | Email | License | Purpose |
-|--------------|-------|---------|---------|
-| Bryan Gillis | `bryan@norcalcarbmobile.com` | Admin | Owner, approvals, customer escalations, form notifications |
-| Camila | `camila@norcalcarbmobile.com` | User | Cold outreach, follow-ups, scheduled Gmail sends |
-
-**Optional display name:** Use any first name for the outreach rep — update `config/cold-email-manifest.json` and templates if not "Camila".
+Full architecture: `docs/camila-vertex-agent-architecture.md`  
+Deploy phases: `docs/camila-deploy-phases.md`  
+Agent skill: `.cursor/skills/camila-vertex-agent/SKILL.md`
 
 ---
 
-## Setup steps (Bryan — ~20 min)
+## Identities
 
-### 1. Create Camila
+| Identity | Type | Email | Role |
+|----------|------|-------|------|
+| **Bryan Gillis** | Human | `bryan@norcalcarbmobile.com` | Owner, approvals, escalations, fleet deals |
+| **Camila** | **Vertex AI agent** | `camila@norcalcarbmobile.com` | Email, forms, GBP, GSC — executes after Bryan approves |
 
-Google Admin → [admin.google.com](https://admin.google.com) → Directory → Users → **Add new user**
+You are **not tied** to a single human sender. Camila is the always-on operator; Bryan spends minutes on approvals only.
 
-- Primary email: `camila@norcalcarbmobile.com`
-- Reset password → share securely with Camila (or Bryan holds login for agent draft-only mode)
+---
 
-### 2. Bryan keeps admin
+## Setup (Phase 1 — Bryan ~30 min)
 
-- Do not remove Bryan as super admin
-- Form notifications can stay on `bgillis99@gmail.com` + `bryan@`
+### 1. Create camila@ mailbox (agent identity)
 
-### 3. Shared Send Queue (Google Sheet)
+Google Admin → Users → **Add user**
 
-Create sheet: **NorCal Gmail Send Queue**
+- Email: `camila@norcalcarbmobile.com`
+- Name: Camila (NorCal CARB Mobile AI)
+- No human needs daily login — **service account impersonates** this user via API
 
-Import tabs:
-- `scripts/cold-outreach/gmail-send-queue-template.csv`
-- `scripts/cold-outreach/suppression-template.csv`
-- `scripts/cold-outreach/daily-send-log-template.csv`
+### 2. Google Cloud project
 
-Share with:
-- Bryan — Editor
-- Camila — Editor (can schedule sends)
-- Service account (if agent reads via API) — Editor
+- Project: `norcal-camila-agent` (or your choice)
+- Enable: Gmail, Sheets, Business Profile, Search Console APIs
+- Service account + domain-wide delegation → see `camila-deploy-phases.md`
 
-### 4. Optional: Bryan sends as Camila
+### 3. Route website forms to Camila
 
-Gmail → Settings → Accounts → **Send mail as** → Add `camila@norcalcarbmobile.com`
+Squarespace → form notifications:
 
-Use when Camila is not logging in but Bryan approves drafts.
+- **To:** `camila@norcalcarbmobile.com`
+- **CC:** `bryan@norcalcarbmobile.com`
 
-### 5. Resend display name (automated opt-in mail)
+Camila parses leads → auto-reply → escalates fleet/complex to Bryan.
 
-GitHub secret (optional warmer automated sends):
+### 4. Ops Google Sheet
 
-```txt
-REMINDER_FROM_NAME=Camila at NorCal CARB Mobile
-REMINDER_FROM_EMAIL=reminders@mail.norcalcarbmobile.com
-```
+**NorCal Camila Ops** — tabs:
 
-Automated mail still from `reminders@mail...` — not Camila's Gmail.
+- Send Queue (`gmail-send-queue-template.csv`)
+- Form Leads
+- Suppression
+- GBP Log
+- GSC Weekly
+
+Share: Bryan (Editor) + service account (Editor)
+
+### 5. Bryan approval column
+
+Cold sends: `bryan_approved` = `YES` or chat phrase **`approved batch YYYY-MM-DD`**
 
 ---
 
 ## Who does what
 
-| Task | Bryan | Camila | Agent |
-|------|-------|--------|-------|
-| Approve cold batch | ✅ YES in sheet | — | Builds queue |
-| Schedule Gmail sends | Optional | ✅ Preferred | Drafts + times |
-| Resend LIVE toggles | ✅ GitHub secrets | — | Proposes |
-| Reply to interested leads | Escalations | ✅ First line | — |
-| Form broken on Squarespace | ✅ | — | Fixes |
+| Task | Bryan | Camila (AI) |
+|------|-------|-------------|
+| Approve cold batch | ✅ | Builds queue, waits |
+| Schedule / send cold Gmail | — | ✅ After approval |
+| Form auto-reply | — | ✅ |
+| GBP review replies | Approves 1–3★ | ✅ 4–5★ auto |
+| GSC weekly report | Reads summary | ✅ Generates |
+| Resend nurture LIVE | ✅ Secret toggle | — (separate workflow) |
+| Pricing / fleet negotiation | ✅ | Drafts only |
 
 ---
 
-## Approval phrase
+## Optional: Bryan send-as Camila
 
-Bryan replies in chat or sheet note:
+If API not ready yet, Bryan can use Gmail **Send mail as** camila@ for manual bridge period. Goal: full Gmail API via Vertex agent.
 
-**`approved batch YYYY-MM-DD`**
+---
 
-Agent may then schedule Gmail sends for that batch only.
+## Approval phrases
+
+| Bryan says | Camila may |
+|------------|------------|
+| `approved batch YYYY-MM-DD` | Schedule that day's cold sends |
+| `approved gbp post` | Publish local post |
+| `hold camila` | Pause all outbound |

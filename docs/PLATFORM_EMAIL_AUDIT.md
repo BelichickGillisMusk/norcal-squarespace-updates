@@ -13,7 +13,7 @@
 | **Cloudflare Pages** | **Not built in repo** — docs only | Migration is a plan, not a project yet |
 | **Automated customer email (Resend)** | Code ready, **DNS blocked** | **Will bounce/fail DMARC** until `mail.` subdomain added |
 | **Cold email (Gmail)** | Docs + templates ready | No queue/approval automation until Gmail Send Approver agent runs |
-| **Two users (Bryan + Camila)** | Documented, **not verified live** | Create Camila in Google Workspace |
+| **Camila (Vertex AI agent)** | Architecture + skill in repo | Create camila@ + GCP delegation — `camila-deploy-phases.md` |
 | **Bounce prevention** | Partial | Add MX verify + suppression before every cold batch |
 
 **#1 blocker today:** Resend DNS on `mail.norcalcarbmobile.com` not in Squarespace DNS → automated emails will fail with `DMARC p=reject`.

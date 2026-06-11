@@ -25,3 +25,9 @@ Agents append timestamped entries below.
 - `.cursor/skills/gmail-send-approver/` — Bryan approval + Gmail schedule send, 7 min spacing, MX verify
 - `docs/two-user-workspace-setup.md` — Bryan + Camila (not tied to legacy single-user)
 - `scripts/cold-outreach/verify-emails.js` — bounce prevention before cold batch
+
+## 2026-06-09 — Camila reframed as Vertex AI agent
+
+- Camila = Vertex AI on Workspace APIs (not human hire)
+- Scope: camila@ email, Squarespace forms, GBP, GSC
+- `config/camila-agent-manifest.json` + deploy phases + camila-vertex-agent skill

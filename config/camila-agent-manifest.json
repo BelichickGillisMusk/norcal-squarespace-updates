@@ -1,0 +1,88 @@
+{
+  "agent_name": "Camila",
+  "display_name": "Camila — NorCal CARB Mobile",
+  "identity_email": "camila@norcalcarbmobile.com",
+  "owner_email": "bryan@norcalcarbmobile.com",
+  "owner_approvals_email": "bgillis99@gmail.com",
+  "platform": "vertex-ai-agent",
+  "description": "Vertex AI agent on Google Workspace APIs — emails, website forms, Google Business Profile, Search Console. Bryan approves outbound; Camila executes.",
+
+  "gcp": {
+    "project_id": "PASTE_GCP_PROJECT_ID",
+    "region": "us-west1",
+    "vertex_agent_id": "PASTE_AFTER_DEPLOY",
+    "service_account": "camila-agent@PASTE_GCP_PROJECT_ID.iam.gserviceaccount.com"
+  },
+
+  "workspace_domain_wide_delegation": {
+    "impersonate_user": "camila@norcalcarbmobile.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.compose",
+      "https://www.googleapis.com/auth/gmail.send",
+      "https://www.googleapis.com/auth/gmail.readonly",
+      "https://www.googleapis.com/auth/spreadsheets",
+      "https://www.googleapis.com/auth/drive.readonly",
+      "https://www.googleapis.com/auth/calendar.events"
+    ]
+  },
+
+  "google_business_profile": {
+    "location_name": "PASTE_GBP_LOCATION_RESOURCE_NAME",
+    "account_id": "PASTE_GBP_ACCOUNT_ID",
+    "place_id_hint": "ChIJ from norcal carb mobile search",
+    "scopes": [
+      "https://www.googleapis.com/auth/business.manage"
+    ],
+    "tasks": [
+      "reply_to_reviews",
+      "publish_local_posts",
+      "answer_q_and_a",
+      "sync_hours_and_services"
+    ]
+  },
+
+  "google_search_console": {
+    "site_url": "https://norcalcarbmobile.com/",
+    "scopes": [
+      "https://www.googleapis.com/auth/webmasters",
+      "https://www.googleapis.com/auth/webmasters.readonly"
+    ],
+    "tasks": [
+      "weekly_search_analytics_report",
+      "url_inspection_for_new_tools_pages",
+      "sitemap_submit_after_cloudflare_migration",
+      "flag_indexing_errors_to_bryan"
+    ]
+  },
+
+  "forms": {
+    "squarespace_notification_inbox": "camila@norcalcarbmobile.com",
+    "fallback_owner_inbox": "bryan@norcalcarbmobile.com",
+    "sheet_leads_tab": "Form Leads",
+    "auto_reply_within_minutes": 15,
+    "escalate_to_bryan_when": ["fleet_3plus_trucks", "pricing_negotiation", "complaint", "legal"]
+  },
+
+  "email_limits": {
+    "cold_max_per_day": 30,
+    "min_minutes_between_sends": 7,
+    "requires_bryan_approval": true,
+    "approval_phrase": "approved batch YYYY-MM-DD",
+    "approval_sheet_column": "bryan_approved",
+    "approval_sheet_id": "PASTE_GOOGLE_SHEET_ID"
+  },
+
+  "pricing": {
+    "obd": "$75",
+    "ovi": "$199",
+    "full_care": "CARB annual fee + $40/year",
+    "reviews_url": "https://www.google.com/search?q=NorCal+CARB+Mobile+reviews#lrd=0x4e7c7c20def2c42d:0xac8d2d40ef5c9451,1,,,,"
+  },
+
+  "repos_and_docs": {
+    "skill": ".cursor/skills/camila-vertex-agent/SKILL.md",
+    "architecture": "docs/camila-vertex-agent-architecture.md",
+    "deploy_phases": "docs/camila-deploy-phases.md",
+    "gmail_queue_skill": ".cursor/skills/gmail-send-approver/SKILL.md"
+  }
+}

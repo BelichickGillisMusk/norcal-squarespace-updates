@@ -1,6 +1,6 @@
 ---
 name: gmail-send-approver
-description: NorCal CARB Mobile Gmail cold-send approver and scheduler. Use when Bryan wants approval before cold emails go out, schedule sends in Gmail to avoid blacklisting, prevent bounces, manage Camila@ or Bryan@ outreach at 30/day max, or says schedule gmail, approve batch, don't get blacklisted, cold email queue. Works with Bryan + Camila two-user setup. Never send without bryan_approved=YES in the Send Queue sheet.
+description: NorCal CARB Mobile Gmail cold-send approver and scheduler — execution layer for Camila Vertex AI agent. Use when Bryan wants approval before cold emails go out, schedule sends via Gmail API to avoid blacklisting, prevent bounces, camila@ outreach at 30/day max. Pair with camila-vertex-agent skill. Never send without bryan_approved=YES in the Send Queue sheet.
 ---
 
 # Gmail Send Approver — NorCal CARB Mobile

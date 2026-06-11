@@ -1,66 +1,57 @@
 # Who sends what — email addresses
 
-**You do not need to email the AI agent.** It has no inbox. Deploy via GitHub secrets, Google Sheet, and Gmail drafts.
+**Camila = Vertex AI agent** on Workspace APIs — not a human. See `docs/camila-vertex-agent-architecture.md`.
 
 ---
 
 ## Approved senders
 
-| Address | Role | Channel | Notes |
-|---------|------|---------|-------|
-| `camila@norcalcarbmobile.com` | **Cold outreach rep** (preferred) | Gmail, 30/day | Warmer than owner cold email; same DKIM/SPF |
-| `bryan@norcalcarbmobile.com` | Owner, replies, escalations | Gmail | Use when lead asks for owner or after Camila intro |
-| `reminders@mail.norcalcarbmobile.com` | Automated nurture + reminders | Resend | Opt-in subscribers only |
-| `bgillis99@gmail.com` | Notifications only | Inbound | Form alerts, tests — **never** bulk send |
+| Address | Role | Channel | Operator |
+|---------|------|---------|----------|
+| `camila@norcalcarbmobile.com` | **AI outreach + form replies** | Gmail API | Vertex agent (Bryan approves batches) |
+| `bryan@norcalcarbmobile.com` | Owner, escalations | Gmail | Human |
+| `reminders@mail.norcalcarbmobile.com` | Opt-in nurture + reminders | Resend | GitHub Actions |
+| `bgillis99@gmail.com` | Owner notifications | Inbound | Never bulk send |
 
 ---
 
-## Setup Camila (15 min, Bryan)
+## Camila agent scope
 
-1. **Google Workspace Admin** → Directory → Users → **Add user**
-2. Email: `camila@norcalcarbmobile.com`
-3. Name: Camila (or your preferred display name)
-4. License: same as Bryan if required
-5. **Optional:** Bryan adds delegate access so Bryan can send-as Camila from his Gmail (Settings → Accounts → Send mail as)
+| System | Camila handles |
+|--------|----------------|
+| Cold email (30/day) | Draft + schedule after Bryan `approved batch` |
+| Squarespace forms | Auto-reply + Sheet CRM |
+| Google Business Profile | Reviews, posts, Q&A |
+| Google Search Console | Weekly analytics, indexing |
 
-No extra DNS needed — `google._domainkey` and root SPF already cover all Workspace mailboxes.
+**Skills:** `.cursor/skills/camila-vertex-agent/SKILL.md` + `gmail-send-approver`
 
 ---
 
-## Should Bryan email the agent?
+## Setup
 
-**No.** Instead:
+1. Create `camila@` in Workspace (agent mailbox)
+2. GCP service account + delegation — `docs/camila-deploy-phases.md`
+3. Fill `config/camila-agent-manifest.json`
+4. Route forms to camila@
+
+---
+
+## Do not email the Cursor/Vertex agent
 
 | Need | Do this |
 |------|---------|
-| API keys | GitHub repo → Settings → Secrets |
-| Approve sends | Reply in Cursor/chat: `approved cold send`, etc. |
-| Test deliverability | GitHub Actions → run test workflow to `bryan@` or `camila@` |
-| Lead list | CSV in repo or Google Sheet |
+| Approve cold batch | `approved batch YYYY-MM-DD` |
+| API keys | GitHub Secrets |
+| GBP/GSC IDs | `camila-agent-manifest.json` |
 
 ---
 
-## Automated emails — warmer from name (optional)
-
-GitHub secret:
+## Automated nurture (separate from Camila Gmail)
 
 ```txt
 REMINDER_FROM_NAME=Camila at NorCal CARB Mobile
 REMINDER_FROM_EMAIL=reminders@mail.norcalcarbmobile.com
 ```
 
-Inbox shows: **Camila at NorCal CARB Mobile** `<reminders@mail.norcalcarbmobile.com>`
-
----
-
-## Cold email social proof
-
-- **Reviews:** 4.9★ · 47+ verified fleet reviews — link in every cold email
-- **Config:** `config/cold-email-manifest.json` → Bryan pastes Google Maps review URL
-- **Aggressive pricing:** OBD $75, OVI $199, 50% off switch, beat-quote offer — see cold-outreach one-pager
-
-## Rules
-
-- **One cold sender per day** — Camila OR Bryan, not both splitting 30 (pick Camila)
-- Never cold from Resend or `reminders@`
-- Replies to Camila → Camila (or Bryan) responds within 1 business day
+Resend handles opt-in only — not cold prospects.

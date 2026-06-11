@@ -33,7 +33,8 @@
 | Welcome + blasts | [`subscriber-nurture-agent-runbook.md`](./subscriber-nurture-agent-runbook.md) |
 | Cold 30/day Gmail | [`cold-outreach-agent-one-pager.md`](./cold-outreach-agent-one-pager.md) |
 | **Gmail schedule + approval** | **`.cursor/skills/gmail-send-approver/SKILL.md`** |
-| Two users (Bryan + Camila) | [`two-user-workspace-setup.md`](./two-user-workspace-setup.md) |
+| Bryan + Camila AI identity | [`two-user-workspace-setup.md`](./two-user-workspace-setup.md) |
+| Camila Vertex deploy | [`camila-deploy-phases.md`](./camila-deploy-phases.md) |
 | Cloudflare + email DNS | [`cloudflare-migration-email-dns.md`](./cloudflare-migration-email-dns.md) |
 
 ---
