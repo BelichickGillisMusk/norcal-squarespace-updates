@@ -10,6 +10,6 @@
     "blast": "node send-nurture.js --blast"
   },
   "dependencies": {
-    "googleapis": "^144.0.0"
+    "googleapis": "^173.0.0"
   }
 }
