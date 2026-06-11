@@ -1,0 +1,36 @@
+{
+  "_accuracy": "Exactly 5 stars and 31 Google reviews. Never round, approximate, or inflate. Bryan verified 2026-06-09.",
+  "rating": 5,
+  "rating_display": "5",
+  "count": 31,
+  "count_display": "31",
+  "headline": "5 stars · 31 Google reviews",
+  "headline_star": "5★ · 31 Google reviews",
+  "headline_fleet": "5 stars · 31 Google reviews from NorCal fleets",
+  "headline_short": "5 stars · 31 reviews",
+  "email_copy_line": "★ 5 stars · 31 Google reviews",
+  "platform": "Google",
+  "last_verified": "2026-06-09",
+  "verified_by": "Bryan Gillis",
+  "google_reviews_url": "https://www.google.com/search?q=NorCal+CARB+Mobile+reviews#lrd=0x4e7c7c20def2c42d:0xac8d2d40ef5c9451,1,,,,",
+  "google_reviews_url_short": "https://share.google/CUg6TEK1p3eO34S9G",
+  "sample_quotes": [
+    "Tested all six trucks in under two hours. Very professional.",
+    "Fair price, no upselling, no waiting.",
+    "Came out on a Saturday before our DMV deadline. Highly recommend."
+  ],
+  "schema_org": {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "NorCal CARB Mobile LLC",
+    "url": "https://norcalcarbmobile.com",
+    "telephone": "+1-916-890-4427",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "31",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  }
+}

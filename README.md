@@ -165,8 +165,16 @@ The agent should treat this as a **pre-flight checklist**, not a cosmetic pass.
 ```
 /
 ├── README.md                  # This file — agent instructions
-├── .cursor/skills/norcal-email-deployer/  # Email PM + deployer skill (agents read first)
+├── .cursor/skills/
+│   ├── camila-vertex-agent/        # AI: email, forms, GBP, GSC
+│   ├── norcal-email-deployer/     # Resend nurture + DNS
+│   └── gmail-send-approver/        # Cold batch execution (Camila sends)
 ├── docs/
+│   ├── PLATFORM_EMAIL_AUDIT.md          # Squarespace + Cloudflare + email review
+│   ├── camila-vertex-agent-architecture.md  # Camila AI on Workspace APIs
+│   ├── camila-deploy-phases.md              # GCP + GBP + GSC rollout
+│   ├── two-user-workspace-setup.md          # Bryan + Camila AI mailbox
+│   ├── cloudflare-migration-email-dns.md
 │   ├── DEPLOY_TODAY.md                  # Today's deploy checklist
 │   ├── summer-2026-email-strategy.md    # Jun–Sep email calendar
 │   ├── tools-and-cta-strategy.md        # Tool ideas, pricing, Full Care $40/yr
