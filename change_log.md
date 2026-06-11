@@ -13,6 +13,13 @@ Agents append timestamped entries below.
 - **Blocker:** Resend DKIM on `mail.norcalcarbmobile.com` not yet in DNS — awaiting Bryan Squarespace DNS paste
 - **Next:** Bryan adds Resend subdomain records → preflight pass → test sends → approval gates
 
+## 2026-06-09 — Google reviews corrected to 5.0★ · 31
+
+- Bryan verified: **5.0 stars on 31 Google reviews** (was incorrectly 4.9 / 47+ in some docs)
+- Added `config/reviews.json` — single source of truth for rating, count, headlines, schema.org JSON-LD
+- Added `squarespace/schema-local-business.html` — paste in Squarespace header (AggregateRating 5.0 / 31)
+- Updated cold templates, manifests, Camila/Gmail skills to match
+
 ## 2026-06-09 — Cold email pricing + reviews
 
 - Updated cold templates with aggressive pricing ($75/$199, 50% switch, beat-quote, shop comparison)

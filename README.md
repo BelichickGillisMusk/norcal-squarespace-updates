@@ -171,7 +171,9 @@ The agent should treat this as a **pre-flight checklist**, not a cosmetic pass.
 │   └── gmail-send-approver/        # Cold batch execution (Camila sends)
 ├── docs/
 │   ├── PLATFORM_EMAIL_AUDIT.md          # Squarespace + Cloudflare + email review
-│   ├── two-user-workspace-setup.md      # Bryan + Camila Google Workspace
+│   ├── camila-vertex-agent-architecture.md  # Camila AI on Workspace APIs
+│   ├── camila-deploy-phases.md              # GCP + GBP + GSC rollout
+│   ├── two-user-workspace-setup.md          # Bryan + Camila AI mailbox
 │   ├── cloudflare-migration-email-dns.md
 │   ├── DEPLOY_TODAY.md                  # Today's deploy checklist
 │   ├── summer-2026-email-strategy.md    # Jun–Sep email calendar

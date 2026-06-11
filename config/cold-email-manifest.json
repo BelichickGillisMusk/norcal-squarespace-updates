@@ -1,10 +1,12 @@
 {
   "reviews": {
-    "headline": "4.9★ · 47+ verified fleet operator reviews",
+    "headline": "5.0★ · 31 Google reviews",
+    "headline_fleet": "5.0★ · 31 verified fleet operator reviews",
+    "rating": 5.0,
+    "count": 31,
     "google_reviews_url": "https://www.google.com/search?q=NorCal+CARB+Mobile+reviews#lrd=0x4e7c7c20def2c42d:0xac8d2d40ef5c9451,1,,,,",
     "google_reviews_url_short": "https://share.google/CUg6TEK1p3eO34S9G",
-    "business_name": "NorCal CARB Mobile LLC — CARB Clean Truck Check J1667",
-    "fallback_url": "https://norcalcarbmobile.com",
+    "source_of_truth": "config/reviews.json",
     "sample_quotes": [
       "Tested all six trucks in under two hours. Very professional.",
       "Fair price, no upselling, no waiting.",
@@ -16,7 +18,7 @@
     "ovi": "$199",
     "shop_comparison": "Most shops charge $90–$300+ plus 1–3 hours downtime per truck",
     "switch_offer": "50% off your first test when you switch — OBD from $37.50 · OVI from $99.50",
-    "beat_price": "Send us your current tester’s quote — we’ll try to beat it",
+    "beat_price": "Send us your current tester's quote — we'll try to beat it",
     "fleet": "Fleet yard visits — batch multiple trucks, one stop",
     "full_care": "CARB annual fee (CTC-VIS) + only $40/year — we handle setup, monitoring & scheduling",
     "phone": "916-890-4427",

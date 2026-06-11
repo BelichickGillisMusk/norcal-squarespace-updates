@@ -65,7 +65,7 @@ OUR PRICING (mobile — we come to your yard):
 SWITCH OFFER: 50% off your first test — OBD $37.50 · OVI $99.50
 Or send your current quote — we'll try to BEAT IT.
 
-★ 4.9 stars · 47+ fleet operator reviews: {reviews_url}
+★ 5.0 stars · 31 Google reviews: {reviews_url}
 ```
 
 **Reviews link (set):** `{reviews_url}` opens Google reviews directly — see `config/cold-email-manifest.json` → `google_reviews_url`.
@@ -89,7 +89,7 @@ OUR PRICING (mobile — we come to your yard):
 
 SWITCHING TESTERS? 50% off first test (OBD $37.50 · OVI $99.50) or we'll beat your quote.
 
-★ 4.9 stars · 47+ reviews from NorCal fleets: {reviews_url}
+★ 5.0 stars · 31 Google reviews from NorCal fleets: {reviews_url}
 
 Free deadline calculator: {tools_url}/when-is-my-test-due
 
@@ -115,7 +115,7 @@ PRICING THAT BEATS MOST SHOPS:
 • Fleet visits — multiple trucks, one stop
 • Already have a tester? We BEAT your rate OR 50% off your first truck
 
-★ 4.9★ · 47+ verified reviews: {reviews_url}
+★ 5.0★ · 31 verified Google reviews: {reviews_url}
 "Tested six trucks in under two hours." — fleet operator, Sacramento
 
 Book: {booking_url} · Call/text 916-890-4427
@@ -141,7 +141,7 @@ Full Care: we set up CTC-VIS, monitor deadlines, send reminders, and mobile-test
 
 DIY option free: {tools_url}
 
-★ 4.9 stars · 47+ fleet reviews: {reviews_url}
+★ 5.0 stars · 31 Google reviews: {reviews_url}
 
 Want the one-pager? Reply yes or book: {booking_url}
 
@@ -153,7 +153,7 @@ Reply "remove" and I'll close your file.
 
 ### Template D — `pricing-reviews` (max aggression — use for cold shops/competitors)
 
-**Subject:** `$75 mobile CTC — see our 4.9★ reviews`
+**Subject:** `$75 mobile CTC — see our 5.0★ reviews (31 on Google)`
 
 ```
 Hi {first_name},
@@ -166,7 +166,7 @@ NorCal CARB Mobile (we come to your yard):
 Typical shop:
   $90–$300+ per test + 1–3 hours off the road per truck
 
-★ 4.9 stars · 47+ reviews: {reviews_url}
+★ 5.0 stars · 31 Google reviews: {reviews_url}
 
 Call 916-890-4427 or book: {booking_url}
 
@@ -257,7 +257,7 @@ Max **3 touches total** per lead. Follow-ups count toward the **30/day** cap.
 | Beat competitor quote | Case by case | "Send your quote — we'll try to beat it" |
 | vs shops | $90–$300+ + downtime | Use in every template |
 | Full Care | CARB fee + **$40/year** | Template C / upsell |
-| Reviews | **4.9★ · 47+** | Link `{reviews_url}` every cold #1 |
+| Reviews | **5.0★ · 31 Google** | Link `{reviews_url}` every cold #1 — source: `config/reviews.json` |
 
 ---
 

@@ -7,9 +7,11 @@ description: NorCal CARB Mobile Gmail cold-send approver and scheduler — execu
 
 **Purpose:** Bryan approves every batch. Agent verifies addresses, drafts Gmail messages, **schedules sends** staggered across the day so you don't get blacklisted. Bryan's time minimized.
 
-**Pair with:** `.cursor/skills/norcal-email-deployer/SKILL.md` (DNS, Resend, preflight)
+**Pair with:**
+- `.cursor/skills/camila-vertex-agent/SKILL.md` (orchestration — forms, GBP, GSC)
+- `.cursor/skills/norcal-email-deployer/SKILL.md` (DNS, Resend, preflight)
 
-**Send from:** `camila@norcalcarbmobile.com` (default) or `bryan@norcalcarbmobile.com`
+**Send from:** `camila@norcalcarbmobile.com` via **Gmail API** (Vertex agent identity) — Bryan@ for escalations only
 
 ---
 
@@ -65,17 +67,18 @@ Message Bryan:
 
 **Do not proceed** without exact phrase or `bryan_approved=YES` on every row.
 
-### Step 5 — Schedule in Gmail (agent or Camila)
+### Step 5 — Schedule send (Gmail API preferred)
+
+**Vertex Camila agent:** use Gmail API `users.drafts.create` + scheduled send or `users.messages.send` at `scheduled_send_pt` via Cloud Scheduler.
+
+**Manual bridge (until API live):** Gmail UI as camila@ → Compose → Schedule send.
 
 For each approved row:
 
-1. Open Gmail as **camila@** (or Bryan send-as Camila)
-2. **Compose** — paste template from `docs/cold-outreach-agent-one-pager.md`
-3. Replace `{reviews_url}` from `config/cold-email-manifest.json`
-4. **Schedule send** → pick `scheduled_send_pt` from sheet
-5. Mark row `status=scheduled`
-
-**Gmail UI:** Compose → ⋮ → Schedule send → pick date/time
+1. Paste template from `docs/cold-outreach-agent-one-pager.md`
+2. Replace `{reviews_url}` from `config/cold-email-manifest.json`
+3. Schedule at `scheduled_send_pt` from sheet (7 min apart)
+4. Mark row `status=scheduled`
 
 ### Step 6 — End of day log
 
@@ -114,7 +117,7 @@ Copy from `docs/cold-outreach-agent-one-pager.md` templates A–D.
 Every email includes:
 - OBD **$75** · OVI **$199**
 - 50% off switch · beat quote
-- **4.9★ reviews:** `config/cold-email-manifest.json` → `google_reviews_url`
+- **5.0★ · 31 Google reviews:** `config/reviews.json` (source of truth) → `google_reviews_url` in `config/cold-email-manifest.json`
 
 ---
 
@@ -129,13 +132,13 @@ Every email includes:
 
 ---
 
-## Two-user setup
+## Bryan + Camila (AI)
 
-| Person | Action |
-|--------|--------|
-| Bryan | `bryan_approved=YES`, handles escalations |
-| Camila | Schedules sends in Gmail after approval |
-| Agent | Queue, verify, draft, log |
+| Identity | Action |
+|----------|--------|
+| Bryan | `bryan_approved=YES`, escalations, fleet deals |
+| Camila (Vertex AI) | Queue, verify, Gmail API schedule, forms, GBP, GSC |
+| Deploy agent | `.cursor/skills/camila-vertex-agent/SKILL.md` |
 
 See `docs/two-user-workspace-setup.md`
 

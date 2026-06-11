@@ -79,6 +79,13 @@
     "reviews_url": "https://www.google.com/search?q=NorCal+CARB+Mobile+reviews#lrd=0x4e7c7c20def2c42d:0xac8d2d40ef5c9451,1,,,,"
   },
 
+  "reviews": {
+    "source_of_truth": "config/reviews.json",
+    "rating": 5.0,
+    "count": 31,
+    "headline": "5.0★ · 31 Google reviews"
+  },
+
   "repos_and_docs": {
     "skill": ".cursor/skills/camila-vertex-agent/SKILL.md",
     "architecture": "docs/camila-vertex-agent-architecture.md",

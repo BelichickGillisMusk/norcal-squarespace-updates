@@ -4,7 +4,19 @@
 
 [`PLATFORM_EMAIL_AUDIT.md`](./PLATFORM_EMAIL_AUDIT.md) — Squarespace vs Cloudflare, email map, blockers
 
-## Email PM skill
+## Google reviews (always use these numbers)
+
+**5.0★ · 31 Google reviews** — source: [`config/reviews.json`](../config/reviews.json). Schema.org JSON-LD: [`squarespace/schema-local-business.html`](../squarespace/schema-local-business.html) (paste in Squarespace header).
+
+## Camila — Vertex AI agent (emails + forms + GBP + GSC)
+
+**`.cursor/skills/camila-vertex-agent/SKILL.md`**
+
+> Camila is AI on Workspace APIs — not a human. camila@ for email/forms; GBP + GSC. Bryan approves batches.
+
+Architecture: `docs/camila-vertex-agent-architecture.md` · Deploy: `docs/camila-deploy-phases.md`
+
+## Email PM skill (Resend nurture)
 
 **`.cursor/skills/norcal-email-deployer/SKILL.md`**
 
