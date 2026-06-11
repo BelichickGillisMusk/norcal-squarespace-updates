@@ -6,7 +6,7 @@
 
 ## Google reviews (always use these numbers)
 
-**5.0★ · 31 Google reviews** — source: [`config/reviews.json`](../config/reviews.json). Schema.org JSON-LD: [`squarespace/schema-local-business.html`](../squarespace/schema-local-business.html) (paste in Squarespace header).
+**5 stars · 31 Google reviews** — exact numbers only, never approximate. Source: [`config/reviews.json`](../config/reviews.json). Schema.org JSON-LD: [`squarespace/schema-local-business.html`](../squarespace/schema-local-business.html) (paste in Squarespace header).
 
 ## Camila — Vertex AI agent (emails + forms + GBP + GSC)
 

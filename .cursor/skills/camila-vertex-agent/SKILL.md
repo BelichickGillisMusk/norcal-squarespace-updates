@@ -81,7 +81,7 @@ Thanks for reaching out to NorCal CARB Mobile — I'm Camila, our scheduling coo
 
 Mobile Clean Truck Check at your yard:
 • OBD $75 · OVI $199
-• ★ 5.0 stars · 31 Google reviews: {reviews_url}
+• ★ 5 stars · 31 Google reviews: {reviews_url}
 
 Book: norcalcarbmobile.com/contact · 916-890-4427
 
@@ -108,7 +108,7 @@ NorCal CARB Mobile
 
 **Post template:**
 
-> Mobile CARB Clean Truck Check — we come to your yard. OBD $75 · OVI $199. ★ 5.0 on Google (31 reviews). Book norcalcarbmobile.com
+> Mobile CARB Clean Truck Check — we come to your yard. OBD $75 · OVI $199. ★ 5 stars · 31 Google reviews. Book norcalcarbmobile.com
 
 ---
 

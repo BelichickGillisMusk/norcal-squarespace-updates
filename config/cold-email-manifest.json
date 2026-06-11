@@ -1,8 +1,9 @@
 {
   "reviews": {
-    "headline": "5.0★ · 31 Google reviews",
-    "headline_fleet": "5.0★ · 31 verified fleet operator reviews",
-    "rating": 5.0,
+    "headline": "5 stars · 31 Google reviews",
+    "headline_fleet": "5 stars · 31 Google reviews from NorCal fleets",
+    "email_copy_line": "★ 5 stars · 31 Google reviews",
+    "rating": 5,
     "count": 31,
     "google_reviews_url": "https://www.google.com/search?q=NorCal+CARB+Mobile+reviews#lrd=0x4e7c7c20def2c42d:0xac8d2d40ef5c9451,1,,,,",
     "google_reviews_url_short": "https://share.google/CUg6TEK1p3eO34S9G",

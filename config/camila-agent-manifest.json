@@ -81,9 +81,9 @@
 
   "reviews": {
     "source_of_truth": "config/reviews.json",
-    "rating": 5.0,
+    "rating": 5,
     "count": 31,
-    "headline": "5.0★ · 31 Google reviews"
+    "headline": "5 stars · 31 Google reviews"
   },
 
   "repos_and_docs": {

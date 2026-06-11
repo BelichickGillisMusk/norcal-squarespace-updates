@@ -1,11 +1,14 @@
 {
-  "rating": 5.0,
-  "rating_display": "5.0",
+  "_accuracy": "Exactly 5 stars and 31 Google reviews. Never round, approximate, or inflate. Bryan verified 2026-06-09.",
+  "rating": 5,
+  "rating_display": "5",
   "count": 31,
   "count_display": "31",
-  "headline": "5.0★ · 31 Google reviews",
-  "headline_fleet": "5.0★ · 31 verified fleet operator reviews",
-  "headline_short": "5.0★ · 31 reviews",
+  "headline": "5 stars · 31 Google reviews",
+  "headline_star": "5★ · 31 Google reviews",
+  "headline_fleet": "5 stars · 31 Google reviews from NorCal fleets",
+  "headline_short": "5 stars · 31 reviews",
+  "email_copy_line": "★ 5 stars · 31 Google reviews",
   "platform": "Google",
   "last_verified": "2026-06-09",
   "verified_by": "Bryan Gillis",
@@ -24,7 +27,7 @@
     "telephone": "+1-916-890-4427",
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "5.0",
+      "ratingValue": "5",
       "reviewCount": "31",
       "bestRating": "5",
       "worstRating": "1"

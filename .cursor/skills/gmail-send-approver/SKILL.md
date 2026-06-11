@@ -117,7 +117,7 @@ Copy from `docs/cold-outreach-agent-one-pager.md` templates A–D.
 Every email includes:
 - OBD **$75** · OVI **$199**
 - 50% off switch · beat quote
-- **5.0★ · 31 Google reviews:** `config/reviews.json` (source of truth) → `google_reviews_url` in `config/cold-email-manifest.json`
+- **5 stars · 31 Google reviews** (exact — never approximate): `config/reviews.json` → `email_copy_line` + `google_reviews_url`
 
 ---
 
