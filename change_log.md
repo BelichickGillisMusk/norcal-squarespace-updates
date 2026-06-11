@@ -17,4 +17,11 @@ Agents append timestamped entries below.
 
 - Updated cold templates with aggressive pricing ($75/$199, 50% switch, beat-quote, shop comparison)
 - Added Template D `pricing-reviews` for price-shopping leads
-- Added `config/cold-email-manifest.json` — Google reviews link set: https://share.google/CUg6TEK1p3eO34S9G
+- Google reviews link: direct `#lrd=` URL (opens review panel) + share.google short link as backup
+
+## 2026-06-09 — Platform audit + Gmail Send Approver agent
+
+- `docs/PLATFORM_EMAIL_AUDIT.md` — Squarespace live, Cloudflare not in repo, Resend DNS still blocked
+- `.cursor/skills/gmail-send-approver/` — Bryan approval + Gmail schedule send, 7 min spacing, MX verify
+- `docs/two-user-workspace-setup.md` — Bryan + Camila (not tied to legacy single-user)
+- `scripts/cold-outreach/verify-emails.js` — bounce prevention before cold batch

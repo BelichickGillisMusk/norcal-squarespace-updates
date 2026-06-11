@@ -165,8 +165,13 @@ The agent should treat this as a **pre-flight checklist**, not a cosmetic pass.
 ```
 /
 ├── README.md                  # This file — agent instructions
-├── .cursor/skills/norcal-email-deployer/  # Email PM + deployer skill (agents read first)
+├── .cursor/skills/
+│   ├── norcal-email-deployer/     # Email PM + Resend + DNS
+│   └── gmail-send-approver/        # Bryan approves → Gmail schedule send
 ├── docs/
+│   ├── PLATFORM_EMAIL_AUDIT.md          # Squarespace + Cloudflare + email review
+│   ├── two-user-workspace-setup.md      # Bryan + Camila Google Workspace
+│   ├── cloudflare-migration-email-dns.md
 │   ├── DEPLOY_TODAY.md                  # Today's deploy checklist
 │   ├── summer-2026-email-strategy.md    # Jun–Sep email calendar
 │   ├── tools-and-cta-strategy.md        # Tool ideas, pricing, Full Care $40/yr

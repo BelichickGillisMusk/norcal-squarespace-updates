@@ -195,7 +195,7 @@ Reply "remove" to opt out.
 | `{city/area}` | NorCal city or “Northern California” |
 | `{tools_url}` | `https://norcalcarbmobile.com/tools` |
 | `{booking_url}` | `https://norcalcarbmobile.com/contact` |
-| `{reviews_url}` | `https://share.google/CUg6TEK1p3eO34S9G` |
+| `{reviews_url}` | Google reviews deep link in `config/cold-email-manifest.json` (`#lrd=...` — opens review panel) |
 
 **Never:** fake familiarity, “Re: our call”, misleading subject lines, or urgency lies about CARB enforcement.
 

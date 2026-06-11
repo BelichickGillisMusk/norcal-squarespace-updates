@@ -1,0 +1,2 @@
+email,company,first_name,city,template_id,scheduled_send_pt,bryan_approved,status,mx_ok,notes
+example@fleet.com,Example Hauling,Joe,Sacramento,B,8:05 AM,,"pending",,"Do not send until bryan_approved=YES"
