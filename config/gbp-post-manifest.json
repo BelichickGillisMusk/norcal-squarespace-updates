@@ -1,0 +1,34 @@
+{
+  "cron": "gbp-post",
+  "agent": {
+    "name": "Samantha",
+    "role": "GBP post queue monitor — surfaces approval + publish gaps for Camila",
+    "consumes": "actions_needed from SAMANTHA_STATUS_gbp-post_*.json"
+  },
+  "schedule": {
+    "description": "Tuesday 10 AM Pacific — weekly GBP post check (2×/week cadence)",
+    "cron_utc": "0 17 * * 2",
+    "timezone": "America/Los_Angeles"
+  },
+  "data_sources": {
+    "spreadsheet_id_env": "GBP_POST_SPREADSHEET_ID",
+    "service_account_env": "GOOGLE_SERVICE_ACCOUNT_JSON",
+    "tab": "GBP Posts",
+    "columns": [
+      "publish_date",
+      "status",
+      "post_title",
+      "post_body",
+      "cta_url",
+      "bryan_approved"
+    ]
+  },
+  "approval": {
+    "phrase": "approved gbp post",
+    "executor": "Camila (GBP API via camila-vertex-agent skill)"
+  },
+  "output": {
+    "schema": "config/gbp-post-output.schema.json",
+    "filename_pattern": "SAMANTHA_STATUS_gbp-post_YYYY-MM-DD.json"
+  }
+}
