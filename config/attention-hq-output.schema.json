@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://norcalcarbmobile.com/schemas/attention-hq-output.json",
+  "title": "Attention HQ daily report",
+  "description": "Output contract for the attention-hq cron job. Samantha consumes actions_needed.",
+  "type": "object",
+  "required": ["cron", "date", "status", "rating", "found", "actions_needed", "generated_at"],
+  "additionalProperties": false,
+  "properties": {
+    "cron": {
+      "type": "string",
+      "const": "attention-hq"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Run date (Pacific business day)"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["PASS", "PARTIAL", "FAIL"]
+    },
+    "rating": {
+      "type": "string",
+      "enum": ["A+", "A", "B", "C"]
+    },
+    "found": {
+      "type": "object",
+      "required": ["field_jobs", "invoices_sent_today", "invoice_gaps"],
+      "additionalProperties": false,
+      "properties": {
+        "field_jobs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Completed field jobs on run date"
+        },
+        "invoices_sent_today": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Invoices marked sent on run date"
+        },
+        "invoice_gaps": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Job or invoice IDs needing follow-up"
+        }
+      }
+    },
+    "actions_needed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["priority", "type", "id", "summary", "suggested_action"],
+        "additionalProperties": false,
+        "properties": {
+          "priority": { "type": "string", "enum": ["high", "medium", "low"] },
+          "type": {
+            "type": "string",
+            "enum": ["invoice_gap", "field_job_unbilled", "stale_invoice", "data_error"]
+          },
+          "id": { "type": "string" },
+          "summary": { "type": "string" },
+          "suggested_action": { "type": "string" }
+        }
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "steps": {
+      "type": "array",
+      "description": "Optional step log for debugging PARTIAL/FAIL runs",
+      "items": {
+        "type": "object",
+        "required": ["name", "ok"],
+        "properties": {
+          "name": { "type": "string" },
+          "ok": { "type": "boolean" },
+          "detail": { "type": "string" }
+        }
+      }
+    }
+  }
+}

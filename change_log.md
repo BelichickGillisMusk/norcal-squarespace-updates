@@ -4,6 +4,14 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-06-22 — Attention HQ daily cron
+
+- Added `scripts/attention-hq/` — field jobs vs invoices report for Samantha
+- Output contract: `config/attention-hq-output.schema.json` + `config/attention-hq-manifest.json`
+- Workflow: `.github/workflows/attention-hq-daily.yml` (6 PM Pacific)
+- Runbook: `docs/attention-hq-runbook.md`
+- **Next:** Set `GOOGLE_OPS_SPREADSHEET_ID` secret with Field Jobs + Invoices tabs
+
 ## 2026-06-09 — Email deployer skill + summer strategy
 
 - Added `.cursor/skills/norcal-email-deployer/` — PM + deployer skill for all email channels

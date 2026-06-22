@@ -1,0 +1,68 @@
+# Attention HQ — daily ops report (6 PM Pacific)
+# Pulls field jobs + invoices → JSON for Samantha
+name: Attention HQ Daily
+
+on:
+  schedule:
+    # 6:00 PM Pacific = 01:00 UTC (PDT) / 02:00 UTC (PST) — use 01:00 UTC
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+    inputs:
+      fixture:
+        description: 'Use fixture data (no Google Sheets)'
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      run_date:
+        description: 'Override run date (YYYY-MM-DD)'
+        required: false
+        type: string
+
+jobs:
+  attention-hq:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: scripts/attention-hq
+        run: npm install
+
+      - name: Run Attention HQ (fixture)
+        if: inputs.fixture == 'true' || (github.event_name == 'schedule' && secrets.GOOGLE_OPS_SPREADSHEET_ID == '')
+        working-directory: scripts/attention-hq
+        run: |
+          ARGS="--fixture --out attention-hq-report.json"
+          if [ -n "${{ inputs.run_date }}" ]; then ARGS="$ARGS --date ${{ inputs.run_date }}"; fi
+          node run.js $ARGS
+
+      - name: Run Attention HQ (live)
+        if: (inputs.fixture == 'false' || github.event_name == 'schedule') && secrets.GOOGLE_OPS_SPREADSHEET_ID != ''
+        working-directory: scripts/attention-hq
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_OPS_SPREADSHEET_ID: ${{ secrets.GOOGLE_OPS_SPREADSHEET_ID }}
+        run: |
+          ARGS="--out attention-hq-report.json"
+          if [ -n "${{ inputs.run_date }}" ]; then ARGS="$ARGS --date ${{ inputs.run_date }}"; fi
+          node run.js $ARGS
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: attention-hq-report
+          path: scripts/attention-hq/attention-hq-report.json
+          retention-days: 30
+
+      - name: Summary
+        run: |
+          echo '### Attention HQ report' >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          cat scripts/attention-hq/attention-hq-report.json >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"

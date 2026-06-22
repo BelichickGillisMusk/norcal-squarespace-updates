@@ -1,0 +1,51 @@
+{
+  "cron": "attention-hq",
+  "agent": {
+    "name": "Samantha",
+    "role": "Ops HQ — field jobs, invoicing, same-day billing follow-up",
+    "consumes": "actions_needed from daily report JSON"
+  },
+  "schedule": {
+    "description": "After field day ends — 6:00 PM Pacific",
+    "cron_utc": "0 1 * * *",
+    "timezone": "America/Los_Angeles"
+  },
+  "data_sources": {
+    "spreadsheet_id_env": "GOOGLE_OPS_SPREADSHEET_ID",
+    "service_account_env": "GOOGLE_SERVICE_ACCOUNT_JSON",
+    "tabs": {
+      "field_jobs": "Field Jobs",
+      "invoices": "Invoices"
+    },
+    "field_jobs_columns": [
+      "job_id",
+      "job_date",
+      "status",
+      "customer",
+      "invoice_id",
+      "invoiced"
+    ],
+    "invoices_columns": [
+      "invoice_id",
+      "job_id",
+      "sent_date",
+      "status",
+      "amount"
+    ]
+  },
+  "rating_rules": {
+    "A+": "status PASS, zero invoice_gaps, every completed field job has invoice sent same day",
+    "A": "status PASS, at most 1 invoice_gap OR all gaps are low-priority stale drafts",
+    "B": "status PARTIAL OR 2–3 invoice_gaps",
+    "C": "status FAIL OR 4+ invoice_gaps"
+  },
+  "status_rules": {
+    "PASS": "All pull steps succeeded and invoice_gaps length is 0",
+    "PARTIAL": "Data pulled but invoice_gaps non-empty OR a non-critical step failed",
+    "FAIL": "Could not read ops sheet or a critical step failed"
+  },
+  "output": {
+    "schema": "config/attention-hq-output.schema.json",
+    "artifact_name": "attention-hq-report.json"
+  }
+}

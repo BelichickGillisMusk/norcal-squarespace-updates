@@ -1,0 +1,13 @@
+{
+  "name": "norcal-attention-hq",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Daily Attention HQ report — field jobs vs invoices for Samantha",
+  "type": "module",
+  "scripts": {
+    "run": "node run.js"
+  },
+  "dependencies": {
+    "googleapis": "^173.0.0"
+  }
+}
