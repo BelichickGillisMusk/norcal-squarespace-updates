@@ -4,6 +4,15 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-06-22 — Samantha GBP post status cron
+
+- Added `scripts/gbp-post/` — weekly GBP post queue report for Samantha
+- Output artifact: `SAMANTHA_STATUS_gbp-post_YYYY-MM-DD.json`
+- Schema: `config/gbp-post-output.schema.json` + `config/gbp-post-manifest.json`
+- Workflow: `.github/workflows/gbp-post.yml` (Tuesday 10 AM Pacific)
+- Runbook: `docs/gbp-post-runbook.md`
+- **Next:** Add `GBP Posts` tab to NorCal Camila Ops sheet; set `GBP_POST_LIVE=true` when ready
+
 ## 2026-06-09 — Email deployer skill + summer strategy
 
 - Added `.cursor/skills/norcal-email-deployer/` — PM + deployer skill for all email channels
