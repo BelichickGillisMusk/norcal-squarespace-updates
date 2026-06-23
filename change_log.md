@@ -4,6 +4,15 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-06-22 — Samantha GBP post status cron
+
+- Added `scripts/gbp-post/` — weekly GBP post queue report for Samantha
+- Output artifact: `SAMANTHA_STATUS_gbp-post_YYYY-MM-DD.json`
+- Schema: `config/gbp-post-output.schema.json` + `config/gbp-post-manifest.json`
+- Workflow: `.github/workflows/gbp-post.yml` (Tuesday 10 AM Pacific)
+- Runbook: `docs/gbp-post-runbook.md`
+- **Next:** Add `GBP Posts` tab to NorCal Camila Ops sheet; set `GBP_POST_LIVE=true` when ready
+
 ## 2026-06-22 — attention-hq daily ops scorecard cron
 
 - New cron `attention-hq`: reads ops Google Sheet (`Jobs` + `Invoices` tabs), counts today's field jobs and invoices sent today, detects invoice-number gaps per prefix series, and emits a JSON document with PASS/PARTIAL/FAIL status, A+/A/B/C rating, and tagged `actions_needed[]` for Samantha.

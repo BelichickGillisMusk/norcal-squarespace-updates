@@ -1,0 +1,22 @@
+{
+  "posts": [
+    {
+      "publish_date": "2026-06-17",
+      "status": "published",
+      "post_title": "July 4 deadline — book mobile CARB test",
+      "bryan_approved": "YES"
+    },
+    {
+      "publish_date": "2026-06-20",
+      "status": "draft",
+      "post_title": "Tools hub — when is my test due?",
+      "bryan_approved": ""
+    },
+    {
+      "publish_date": "2026-06-27",
+      "status": "draft",
+      "post_title": "Fleet pricing — 2+ trucks OBD $60",
+      "bryan_approved": ""
+    }
+  ]
+}
