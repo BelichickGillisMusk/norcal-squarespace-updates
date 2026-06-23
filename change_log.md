@@ -4,6 +4,14 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-06-23 — Blog pipeline scaffolding (migrate old + schedule new)
+
+- Added `blog_drafts/` drop-zone + format spec (Markdown + YAML front-matter; **slug preserved** for link/SEO continuity)
+- Added `docs/blog-pipeline-runbook.md` — import (slug-preserving) → new layout → weekly schedule → go-live gate
+- Plan: weekly blog scheduler `scripts/blog-schedule/` modeled on `gbp-post` (dry-run default; live behind `BLOG_PUBLISH_LIVE=true`)
+- **Blockers (need Bryan):** (1) Squarespace `.xml`/WXR blog export — not in repo, not in Drive, live site not scrapable from CI (egress allowlist); (2) `Blog Page Options.html` pending `/design-login`; (3) new written posts not found in Drive
+- **Next:** Bryan drops the `.xml` export in Drive or `blog_drafts/_import/` → build `scripts/blog-import/` to the real export shape → import all old posts with original slugs → wire scheduler → review → go live
+
 ## 2026-06-22 — Samantha GBP post status cron
 
 - Added `scripts/gbp-post/` — weekly GBP post queue report for Samantha
