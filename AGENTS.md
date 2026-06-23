@@ -22,6 +22,7 @@ Content-URL env vars are required **even for `--dry-run`** of welcome/blast and 
 export SITE_BASE_URL=https://norcalcarbmobile.com \
        BOOKING_URL=https://norcalcarbmobile.com/book \
        SWITCH_URL=https://norcalcarbmobile.com/switch \
+       MANAGED_CARE_URL=https://norcalcarbmobile.com/managed-care \
        APPS_SCRIPT_WEBAPP_URL=https://script.google.com/macros/s/EXAMPLE/exec
 ```
 From `scripts/reminder-engine/`:
