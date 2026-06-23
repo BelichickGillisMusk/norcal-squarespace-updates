@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://norcalcarbmobile.com/schemas/gbp-post-status.json",
+  "title": "Samantha GBP post status",
+  "description": "Output contract for gbp-post cron. Artifact: SAMANTHA_STATUS_gbp-post_YYYY-MM-DD.json",
+  "type": "object",
+  "required": ["agent", "cron", "date", "status", "rating", "found", "actions_needed", "generated_at"],
+  "additionalProperties": false,
+  "properties": {
+    "agent": { "type": "string", "const": "Samantha" },
+    "cron": { "type": "string", "const": "gbp-post" },
+    "date": { "type": "string", "format": "date" },
+    "status": { "type": "string", "enum": ["PASS", "PARTIAL", "FAIL"] },
+    "rating": { "type": "string", "enum": ["A+", "A", "B", "C"] },
+    "found": {
+      "type": "object",
+      "required": [
+        "posts_scheduled_this_week",
+        "posts_published_this_week",
+        "posts_pending_approval",
+        "posts_approved_unpublished",
+        "next_scheduled_date"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "posts_scheduled_this_week": { "type": "integer", "minimum": 0 },
+        "posts_published_this_week": { "type": "integer", "minimum": 0 },
+        "posts_pending_approval": { "type": "integer", "minimum": 0 },
+        "posts_approved_unpublished": { "type": "integer", "minimum": 0 },
+        "next_scheduled_date": { "type": ["string", "null"] }
+      }
+    },
+    "actions_needed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind", "priority", "message"],
+        "properties": {
+          "kind": { "type": "string" },
+          "priority": { "type": "string", "enum": ["high", "medium", "low"] },
+          "message": { "type": "string" },
+          "publish_date": { "type": "string" },
+          "post_title": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "generated_at": { "type": "string", "format": "date-time" }
+  }
+}
