@@ -1,0 +1,31 @@
+{
+  "_comment": "Sample input shaped exactly like the Google Sheet tabs. Date in run.js is forced via --date 2026-06-20 to match the published spec example.",
+  "jobs": [
+    {
+      "job_id": "J-2026-0612",
+      "customer": "Valley Hauling LLC",
+      "scheduled_for": "2026-06-20",
+      "status": "completed",
+      "test_type": "OVI",
+      "invoice_number": "TU1UWTES-0007"
+    },
+    {
+      "job_id": "J-2026-0613",
+      "customer": "Bay Diesel Fleet",
+      "scheduled_for": "2026-06-20",
+      "status": "completed",
+      "test_type": "OBD",
+      "invoice_number": "INV3032"
+    }
+  ],
+  "invoices": [
+    { "invoice_number": "TU1UWTES-0001", "customer": "Old Job A", "issued_at": "2026-05-30", "amount": 75 },
+    { "invoice_number": "TU1UWTES-0002", "customer": "Old Job B", "issued_at": "2026-06-02", "amount": 199 },
+    { "invoice_number": "TU1UWTES-0003", "customer": "Old Job C", "issued_at": "2026-06-05", "amount": 75 },
+    { "invoice_number": "TU1UWTES-0004", "customer": "Old Job D", "issued_at": "2026-06-10", "amount": 75 },
+    { "invoice_number": "TU1UWTES-0006", "customer": "Old Job F", "issued_at": "2026-06-15", "amount": 199 },
+    { "invoice_number": "TU1UWTES-0007", "customer": "Valley Hauling LLC", "issued_at": "2026-06-20", "amount": 199 },
+    { "invoice_number": "INV3029",       "customer": "Side Job 1",         "issued_at": "2026-06-18", "amount": 75 },
+    { "invoice_number": "INV3032",       "customer": "Bay Diesel Fleet",   "issued_at": "2026-06-19", "amount": 75 }
+  ]
+}

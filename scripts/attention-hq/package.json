@@ -1,0 +1,14 @@
+{
+  "name": "norcal-attention-hq",
+  "version": "1.0.0",
+  "private": true,
+  "description": "attention-hq daily ops scorecard — field jobs + invoice gaps for Samantha. APPROVED FOR DEPLOYMENT.",
+  "type": "module",
+  "scripts": {
+    "run": "node run.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "googleapis": "^173.0.0"
+  }
+}
