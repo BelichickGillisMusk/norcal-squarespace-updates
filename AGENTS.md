@@ -35,7 +35,7 @@ npm run blast -- --campaign-id tools-launch-v1 --dry-run         # approved ids:
 Note: the full `send`/`welcome`/`blast` dry-runs still read the subscriber list from Google Sheets, so they need `GOOGLE_SERVICE_ACCOUNT_JSON` + `GOOGLE_SPREADSHEET_ID`. Only the `--test-email --force-template` path renders a template without touching Sheets.
 
 ### preflight.js gotcha
-`scripts/email-deploy/preflight.js` currently **exits with code 1** because the Resend DKIM/SPF DNS records for `mail.norcalcarbmobile.com` are not live yet — this is a known production DNS blocker (see `change_log.md`), **not an environment problem**. The script itself is working correctly (it performs real `dig` lookups).
+`scripts/email-deploy/preflight.js` may **exit with code 1** when required DNS records (notably Resend DKIM/SPF for `mail.norcalcarbmobile.com`) are missing — this is a known production DNS blocker at the time of writing (see `change_log.md`), **not an environment problem**. The script itself is working correctly (it performs real `dig` lookups).
 
 ### Secrets used at runtime (set as env vars when going live)
 `RESEND_API_KEY`, `GOOGLE_SERVICE_ACCOUNT_JSON`, `GOOGLE_SPREADSHEET_ID`, `REMINDER_FROM_EMAIL` (should be `@mail.norcalcarbmobile.com`), `APPS_SCRIPT_WEBAPP_URL`, plus the content URLs above. The subscriber datastore is a Google Sheet named `Subscribers` (not a SQL/NoSQL DB).
