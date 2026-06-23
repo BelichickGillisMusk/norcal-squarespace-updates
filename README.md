@@ -168,7 +168,8 @@ The agent should treat this as a **pre-flight checklist**, not a cosmetic pass.
 ├── .cursor/skills/
 │   ├── camila-vertex-agent/        # AI: email, forms, GBP, GSC
 │   ├── norcal-email-deployer/     # Resend nurture + DNS
-│   └── gmail-send-approver/        # Cold batch execution (Camila sends)
+│   ├── gmail-send-approver/        # Cold batch execution (Camila sends)
+│   └── attention-hq/               # Daily ops scorecard (Samantha)
 ├── docs/
 │   ├── PLATFORM_EMAIL_AUDIT.md          # Squarespace + Cloudflare + email review
 │   ├── camila-vertex-agent-architecture.md  # Camila AI on Workspace APIs
@@ -182,8 +183,10 @@ The agent should treat this as a **pre-flight checklist**, not a cosmetic pass.
 │   ├── email-reminders-agent-runbook.md # 90/60/30 deadline reminders
 │   ├── subscriber-nurture-agent-runbook.md # Welcome, blasts, customer import
 │   ├── email-deliverability-verification.md # SPF/DKIM/DMARC — avoid junk
-│   └── cold-outreach-agent-one-pager.md     # 30/day cold email from Bryan's Gmail
+│   ├── cold-outreach-agent-one-pager.md     # 30/day cold email from Bryan's Gmail
+│   └── attention-hq-runbook.md              # Daily ops scorecard (jobs + invoice gaps)
 ├── scripts/email-deploy/            # preflight.js — DNS blocker check
+├── scripts/attention-hq/            # Daily ops scorecard cron (Samantha)
 ├── config/tools-manifest.json     # Tool list for welcome/blast emails
 ├── email/templates/               # Approved HTML email templates
 ├── scripts/
