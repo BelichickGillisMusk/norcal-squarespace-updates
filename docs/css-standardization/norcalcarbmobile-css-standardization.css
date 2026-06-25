@@ -1,0 +1,623 @@
+/* ============================================================
+   NORCAL CARB MOBILE - COMPREHENSIVE SITE STANDARDIZATION
+   ============================================================
+   Purpose: Ensure uniform appearance across ALL pages
+   - Homepage
+   - Service pages
+   - Blog posts
+   - FAQ pages
+   - Terms & legal pages
+   - Contact/Store pages
+   ============================================================ */
+
+/* ============================================================
+   1. GLOBAL RESETS & CONSISTENCY
+   ============================================================ */
+
+/* Ensure consistent box-sizing */
+* {
+  box-sizing: border-box;
+}
+
+/* Reset body margins and set consistent font */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ============================================================
+   2. HEADER STANDARDIZATION (ALL PAGES)
+   ============================================================ */
+
+/* Main site header - consistent across all pages */
+#header {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  border-bottom: 2px solid #e5e5e5;
+  padding: 15px 0;
+  z-index: 1000;
+}
+
+/* Header inner container */
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo standardization */
+.header-title-logo a {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Navigation menu standardization */
+.header-nav {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.header-nav-item a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.header-nav-item a:hover {
+  color: #0066cc;
+}
+
+/* Mobile hamburger menu */
+.header-burger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .header-burger {
+    display: block;
+  }
+  
+  .header-nav {
+    display: none;
+  }
+  
+  .header-nav.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+}
+
+/* ============================================================
+   3. FOOTER STANDARDIZATION (ALL PAGES)
+   ============================================================ */
+
+#footer {
+  width: 100%;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 40px 0 20px;
+  margin-top: 60px;
+}
+
+.footer-blocks {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.footer-block h4 {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer-block p,
+.footer-block a {
+  color: #b3b3b3;
+  font-size: 14px;
+  line-height: 1.8;
+  text-decoration: none;
+}
+
+.footer-block a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Footer bottom bar */
+.footer-bottom {
+  border-top: 1px solid #333;
+  margin-top: 30px;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+}
+
+/* ============================================================
+   4. PAGE CONTENT STANDARDIZATION
+   ============================================================ */
+
+/* Main content wrapper - consistent width across all pages */
+.page-section,
+.blog-item-content,
+.main-content,
+article,
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Ensure blog posts don't override this */
+.blog-item-wrapper .content-wrapper {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 40px 20px !important;
+}
+
+/* ============================================================
+   5. TYPOGRAPHY STANDARDIZATION
+   ============================================================ */
+
+/* Page Titles - H1 */
+h1,
+.page-title,
+.blog-item-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.5px;
+}
+
+/* Section Headings - H2 */
+h2,
+.section-heading {
+  font-size: 32px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.3;
+  margin: 40px 0 20px 0;
+  letter-spacing: -0.3px;
+}
+
+/* Sub-section Headings - H3 */
+h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+  margin: 30px 0 15px 0;
+}
+
+/* Sub-headings - H4 */
+h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+  margin: 25px 0 12px 0;
+}
+
+/* Body text - Paragraphs */
+p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #444;
+  margin: 0 0 20px 0;
+}
+
+/* Lists */
+ul, ol {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #444;
+  margin: 0 0 20px 0;
+  padding-left: 30px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+/* Links in body content */
+.main-content a,
+article a,
+.blog-item-content a {
+  color: #0066cc;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.main-content a:hover,
+article a:hover,
+.blog-item-content a:hover {
+  color: #004c99;
+}
+
+/* ============================================================
+   6. BUTTON STANDARDIZATION
+   ============================================================ */
+
+/* Primary CTA buttons */
+.sqs-block-button-element,
+.button,
+.cta-button,
+a.button {
+  display: inline-block;
+  background: #0066cc;
+  color: #fff !important;
+  padding: 14px 32px;
+  border-radius: 6px;
+  text-decoration: none !important;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.sqs-block-button-element:hover,
+.button:hover,
+.cta-button:hover,
+a.button:hover {
+  background: #0052a3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,102,204,0.3);
+}
+
+/* Secondary buttons */
+.button-secondary {
+  background: transparent;
+  color: #0066cc !important;
+  border: 2px solid #0066cc;
+}
+
+.button-secondary:hover {
+  background: #0066cc;
+  color: #fff !important;
+}
+
+/* ============================================================
+   7. IMAGE & MEDIA STANDARDIZATION
+   ============================================================ */
+
+/* All images should be responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Blog post images */
+.blog-item-content img,
+.sqs-block-image img {
+  border-radius: 8px;
+  margin: 30px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Image captions */
+.image-caption,
+figcaption {
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* ============================================================
+   8. BLOG POST SPECIFIC STANDARDIZATION
+   ============================================================ */
+
+/* Blog list page */
+.blog-list article {
+  margin-bottom: 60px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.blog-list article:last-child {
+  border-bottom: none;
+}
+
+/* Blog post meta information */
+.blog-meta {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.blog-meta time,
+.blog-meta .author {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+/* Blog post content spacing */
+.blog-item-content > * {
+  margin-bottom: 20px;
+}
+
+.blog-item-content > *:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   9. SPECIAL SECTIONS & COMPONENTS
+   ============================================================ */
+
+/* Callout boxes / Important notices */
+.callout,
+.notice-box {
+  background: #f0f7ff;
+  border-left: 4px solid #0066cc;
+  padding: 20px 25px;
+  margin: 30px 0;
+  border-radius: 4px;
+}
+
+.callout h3,
+.notice-box h3 {
+  margin-top: 0;
+  color: #0066cc;
+}
+
+/* Quote blocks */
+blockquote {
+  border-left: 4px solid #e5e5e5;
+  padding-left: 25px;
+  margin: 30px 0;
+  font-style: italic;
+  color: #666;
+  font-size: 18px;
+}
+
+/* Code blocks (for technical pages) */
+code {
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: #c7254e;
+}
+
+pre code {
+  display: block;
+  padding: 15px;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   10. TABLES STANDARDIZATION
+   ============================================================ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 30px 0;
+  font-size: 15px;
+}
+
+th {
+  background: #f5f5f5;
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 2px solid #ddd;
+}
+
+td {
+  padding: 10px 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover {
+  background: #f9f9f9;
+}
+
+/* ============================================================
+   11. FORMS STANDARDIZATION
+   ============================================================ */
+
+/* Form inputs */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0,102,204,0.1);
+}
+
+/* Form labels */
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 25px;
+}
+
+/* ============================================================
+   12. SPACING & RHYTHM STANDARDIZATION
+   ============================================================ */
+
+/* Section spacing */
+section {
+  padding: 60px 0;
+}
+
+section + section {
+  border-top: 1px solid #f0f0f0;
+}
+
+/* Content blocks spacing */
+.content-block {
+  margin-bottom: 40px;
+}
+
+.content-block:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   13. RESPONSIVE ADJUSTMENTS
+   ============================================================ */
+
+@media (max-width: 768px) {
+  /* Reduce heading sizes on mobile */
+  h1, .page-title, .blog-item-title {
+    font-size: 32px;
+  }
+  
+  h2, .section-heading {
+    font-size: 26px;
+  }
+  
+  h3 {
+    font-size: 22px;
+  }
+  
+  h4 {
+    font-size: 18px;
+  }
+  
+  /* Adjust padding */
+  .page-section,
+  .blog-item-content,
+  .main-content {
+    padding: 30px 15px;
+  }
+  
+  section {
+    padding: 40px 0;
+  }
+  
+  /* Button adjustments */
+  .sqs-block-button-element,
+  .button,
+  .cta-button {
+    width: 100%;
+    padding: 16px 20px;
+  }
+  
+  /* Table responsiveness */
+  table {
+    font-size: 14px;
+  }
+  
+  th, td {
+    padding: 8px 10px;
+  }
+}
+
+/* ============================================================
+   14. SQUARESPACE-SPECIFIC OVERRIDES
+   ============================================================ */
+
+/* Remove default Squarespace spacing issues */
+.sqs-block {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.sqs-block + .sqs-block {
+  margin-top: 20px;
+}
+
+/* Fix Squarespace image blocks */
+.sqs-block-image .sqs-block-content {
+  height: auto !important;
+}
+
+/* Fix Squarespace button alignment */
+.sqs-block-button {
+  text-align: center;
+}
+
+/* Remove Squarespace's default summary block styling inconsistencies */
+.summary-item {
+  margin-bottom: 30px !important;
+}
+
+/* ============================================================
+   15. UTILITY CLASSES
+   ============================================================ */
+
+/* Text alignment */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* Spacing utilities */
+.mt-0 { margin-top: 0 !important; }
+.mt-20 { margin-top: 20px !important; }
+.mt-40 { margin-top: 40px !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.mb-20 { margin-bottom: 20px !important; }
+.mb-40 { margin-bottom: 40px !important; }
+
+/* Display utilities */
+.hidden { display: none !important; }
+.block { display: block !important; }
+.inline-block { display: inline-block !important; }
+
+/* ============================================================
+   END OF STANDARDIZATION CSS
+   ============================================================ */
