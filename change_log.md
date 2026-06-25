@@ -4,6 +4,23 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-06-25 — Site export + CSS standardization files from Google Drive
+
+- Added `site-export/` — full static HTML/CSS/JS export of norcalcarbmobile.com (Squarespace 7.1)
+  - `index.html` (239 KB) — homepage with LocalBusiness schema, OfferCatalog, 32 areaServed locations
+  - `css/custom.css` — **broken** on live site: `SyntaxError` at line 100 (unexpected `}` closing brace, references `--patriots-blue` CSS variable)
+- Added `docs/css-standardization/` — 4 files downloaded from Google Drive:
+  - `norcalcarbmobile-css-standardization.css` — comprehensive standardized CSS (15 sections, primary color #0066cc, typography: Helvetica Neue/Arial)
+  - `css-implementation-guide.md` — step-by-step Squarespace Custom CSS implementation + page audit checklists
+  - `css-quick-reference.md` — Bryan-facing one-pager with standardized elements, 15-minute action plan
+  - `page-by-page-analysis.md` — 7-page audit with 47 issues identified, 42 fixable by CSS (89%), dated Oct 2025
+- **Key findings:**
+  - Live site custom CSS is syntactically broken (will not parse)
+  - Font discrepancy: README says Montserrat/Source Sans Pro, CSS standardization uses Helvetica Neue/Arial, live site loads Manrope/Poppins
+  - OVI pricing discrepancy: README says $199, site-export schema says $250
+  - LocalBusiness schema already present in export (contradicts earlier audit assumption it was missing)
+- **Next:** Resolve font/pricing discrepancies with Bryan, fix broken custom.css, apply CSS standardization for Cloudflare migration
+
 ## 2026-06-23 — Blog pipeline scaffolding (migrate old + schedule new)
 
 - Added `blog_drafts/` drop-zone + format spec (Markdown + YAML front-matter; **slug preserved** for link/SEO continuity)

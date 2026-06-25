@@ -1,0 +1,22 @@
+
+
+ _______  _______  _______  _______  __
+|       ||       ||       ||       ||  |
+|   _   ||   _   ||    _  ||  _____||  | 
+|  | |  ||  | |  ||   |_| || |_____ |  |
+|  |_|  ||  |_|  ||    ___||_____  ||__|
+|       ||       ||   |     _____| | __
+|_______||_______||___|    |_______||__| 
+
+
+Line  Statement
+---------------
+  96       background-color: var(--patriots-blue) !important;
+  97       color: var(--white) !important;
+  98       border-color: var(--patriots-blue) !important;
+  99   }
+ 100   }
+       ^
+
+
+SyntaxError GENERAL unexpected '}' closing brace
