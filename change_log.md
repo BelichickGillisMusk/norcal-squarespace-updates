@@ -4,13 +4,19 @@ Agents append timestamped entries below.
 
 ---
 
-## 2026-06-23 — Blog pipeline scaffolding (migrate old + schedule new)
+## 2026-06-26 — Cloudflare Pages site (home + contact) + blog pipeline scaffolding
 
-- Added `blog_drafts/` drop-zone + format spec (Markdown + YAML front-matter; **slug preserved** for link/SEO continuity)
-- Added `docs/blog-pipeline-runbook.md` — import (slug-preserving) → new layout → weekly schedule → go-live gate
-- Plan: weekly blog scheduler `scripts/blog-schedule/` modeled on `gbp-post` (dry-run default; live behind `BLOG_PUBLISH_LIVE=true`)
-- **Blockers (need Bryan):** (1) Squarespace `.xml`/WXR blog export — not in repo, not in Drive, live site not scrapable from CI (egress allowlist); (2) `Blog Page Options.html` pending `/design-login`; (3) new written posts not found in Drive
-- **Next:** Bryan drops the `.xml` export in Drive or `blog_drafts/_import/` → build `scripts/blog-import/` to the real export shape → import all old posts with original slugs → wire scheduler → review → go live
+Site — Squarespace → Cloudflare migration target (`site/`):
+- Added static Cloudflare Pages build: `index.html` (home), `contact.html` (served at `/contact`), `assets/styles.css`, `_headers`, `README.md`
+- Contact form → `site/functions/api/contact.js` (Resend → `bgillis99@gmail.com`); needs `RESEND_API_KEY` Pages env var to deliver (tap-to-call + mailto work regardless)
+- Brand: OBD **$75** · OVI **$199**; areas Sacramento/Stockton/Fairfield/San Jose/Bay Area; LocalBusiness JSON-LD
+- Reviews updated **31 → 33** (Bryan verified 2026-06-26) in `config/reviews.json` + site pages
+- Footer social links (FB / X / YouTube) added — **awaiting real page URLs**; Google reviews link wired
+- **Pending:** GBP photos (egress-blocked — need upload or domain allowlist); connect Cloudflare Pages; propagate 33 → email templates + `squarespace/schema-local-business.html`
+
+Blog pipeline:
+- Added `blog_drafts/` drop-zone + `docs/blog-pipeline-runbook.md` (import slug-preserving → new layout → weekly schedule → go-live gate)
+- **Blockers (need Bryan):** `.xml`/WXR blog export (not in repo/Drive; live site unscrapable); `Blog Page Options.html` pending `/design-login`
 
 ## 2026-06-22 — Samantha GBP post status cron
 
