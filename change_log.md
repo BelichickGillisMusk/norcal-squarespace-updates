@@ -12,6 +12,7 @@ Site — Squarespace → Cloudflare migration target (`site/`):
 - Brand: OBD **$75** · OVI **$199**; areas Sacramento/Stockton/Fairfield/San Jose/Bay Area; LocalBusiness JSON-LD
 - Reviews updated **31 → 33** (Bryan verified 2026-06-26) in `config/reviews.json` + site pages
 - Footer social links (FB / X / YouTube) added — **awaiting real page URLs**; Google reviews link wired
+- Added Cloudflare **Worker** deploy path: `wrangler.jsonc` + `worker/index.js` (serves `site/` static assets + `/api/contact`), `site/.assetsignore` — targets existing `norcalcarbmobile.silverbackai.workers.dev` worker
 - **Pending:** GBP photos (egress-blocked — need upload or domain allowlist); connect Cloudflare Pages; propagate 33 → email templates + `squarespace/schema-local-business.html`
 
 Blog pipeline:

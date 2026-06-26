@@ -1,0 +1,5 @@
+# Files in site/ that should NOT be uploaded as public static assets (Workers).
+# The Pages-style function source and the repo README must not be web-served.
+functions/
+README.md
+.assetsignore

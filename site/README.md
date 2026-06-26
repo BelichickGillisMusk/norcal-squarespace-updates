@@ -13,19 +13,34 @@ site/
 └── assets/img/             # Photos (add Google Business Profile pics here)
 ```
 
-## Deploy (Cloudflare Pages)
+## Deploy
 
-1. Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git**.
-2. Pick this repo + branch. Build settings:
-   - **Framework preset:** None
-   - **Build command:** *(empty)*
-   - **Build output directory:** `site`
-3. **Settings → Environment variables** → add `RESEND_API_KEY` (so the contact form can send).
-   Optional: `CONTACT_TO` (default `bgillis99@gmail.com`), `CONTACT_FROM` (default
-   `noreply@mail.norcalcarbmobile.com` — must be a verified Resend sender).
-4. Deploy. You get a `*.pages.dev` URL immediately for preview.
-5. Custom domain `norcalcarbmobile.com` is added under **Custom domains** — but only point
-   DNS here at the planned July cutover (see `../docs/` migration notes), not before.
+### Option A — Cloudflare Worker (matches the live `norcalcarbmobile` worker)
+
+Config: `../wrangler.jsonc` (worker name `norcalcarbmobile`, serves this `site/` as static
+assets + routes `/api/contact` to `../worker/index.js`).
+
+```bash
+# from repo root
+npx wrangler secret put RESEND_API_KEY      # so the contact form can send
+npx wrangler deploy                          # → norcalcarbmobile.silverbackai.workers.dev
+```
+
+Optional plain vars (dashboard or `wrangler.jsonc` "vars"): `CONTACT_TO`
+(default `bgillis99@gmail.com`), `CONTACT_FROM` (default `noreply@mail.norcalcarbmobile.com`,
+must be a verified Resend sender). `site/.assetsignore` keeps `functions/` and `README.md`
+from being web-served.
+
+### Option B — Cloudflare Pages
+
+1. **Workers & Pages → Create → Pages → Connect to Git** → this repo + branch.
+2. Build: preset **None**, build command *(empty)*, output dir `site`.
+3. **Settings → Environment variables** → add `RESEND_API_KEY` (+ optional `CONTACT_TO`/`CONTACT_FROM`).
+   The Pages form handler is `functions/api/contact.js`.
+4. Deploy → instant `*.pages.dev` preview URL.
+
+> Custom domain `norcalcarbmobile.com` only gets pointed here at the planned July cutover
+> (see `../docs/` migration notes), not before.
 
 ## Editing content
 - Text/pricing/areas: edit `index.html` / `contact.html` directly.
