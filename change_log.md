@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-06-27 — Cloudflare site buildout (5 pages + 42 redirects)
+
+- **New pages:** `/services` (4 service cards + pricing table), `/areas` (17 service area cards with anchor IDs), `/faq` (10 Q&A + FAQPage JSON-LD schema)
+- **Updated pages:** `/` (homepage — motorhome pricing card, San Diego note, disclaimer, hasOfferCatalog schema, review count 31→33 in meta), `/contact` (motorhome form options, pricing footer)
+- **Nav standardized:** all 5 pages now link Home · Services · Areas · FAQ · Contact in header and footer
+- **42 old Squarespace URL redirects** added to `worker/index.js` — 301 permanent redirects to preserve SEO equity during migration
+- **CSS:** added grid-4, service-card, area-card, faq-item, pricing-table styles
+- **Ready to deploy:** `npx wrangler deploy` from repo root (needs `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID`)
+- **Blocker:** No Cloudflare credentials in CI environment — Bryan must deploy locally or add secrets
+- **Next:** Bryan deploys, verify all pages + redirects + contact form at `norcalcarbmobile.silverbackai.workers.dev`
+
 ## 2026-06-27 — Pricing standardization across all files
 
 - **Canonical pricing established** (source of truth: `config/pricing.json`):
