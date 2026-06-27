@@ -119,7 +119,7 @@ async function handleContact(request, env) {
   if (!name || !phone) return respond(request, false, 'Please include your name and a phone number.', 422);
 
   const apiKey = env.RESEND_API_KEY;
-  if (!apiKey) return respond(request, false, ‘Please call us directly at (916) 890-4427 to book your test.’, 503);
+  if (!apiKey) return respond(request, false, 'Please call us directly at (916) 890-4427 to book your test.', 503);
 
   const lead = {
     name,
@@ -155,9 +155,9 @@ async function handleContact(request, env) {
       headers: { Authorization: `Bearer ${apiKey}`, 'content-type': 'application/json' },
       body: JSON.stringify(payload),
     });
-    if (!r.ok) return respond(request, false, ‘Got it! We\’ll call you shortly, or reach us at (916) 890-4427.’, 502);
+    if (!r.ok) return respond(request, false, "Got it! We’ll call you shortly, or reach us at (916) 890-4427.", 502);
   } catch {
-    return respond(request, false, ‘Got it! We\’ll call you shortly, or reach us at (916) 890-4427.’, 502);
+    return respond(request, false, "Got it! We’ll call you shortly, or reach us at (916) 890-4427.", 502);
   }
 
   return respond(request, true);
