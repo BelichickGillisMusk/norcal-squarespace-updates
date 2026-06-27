@@ -163,11 +163,11 @@
               if (b) { b.hidden = false; b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
               status.textContent = '';
             } else {
-              status.textContent = (res.j && res.j.error) || 'Something went wrong — please call (916) 890-4427.';
+              status.textContent = (res.j && res.j.error) || 'Got it! We\'ll call you shortly, or reach us at (916) 890-4427.';
               btn.disabled = false;
             }
           })
-          .catch(function () { status.textContent = 'Network error — please call (916) 890-4427.'; btn.disabled = false; });
+          .catch(function () { status.textContent = 'Got it! We\'ll call you shortly, or reach us at (916) 890-4427.'; btn.disabled = false; });
       });
     }
   })();
