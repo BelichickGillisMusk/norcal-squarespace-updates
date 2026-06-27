@@ -4,6 +4,16 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-06-27 — City sites (stock layout) + owner prefs + Stripe/schema audit
+
+- Added `CLAUDE.md` — owner standing rule: **one repo per URL**; deploy model (repo = source of truth, never hand-edit workers in dashboard); business facts
+- Added `cities/` — self-contained stock-layout landing pages for **Fairfield, Hayward, Lodi, Roseville** (each own index.html + styles.css); generator `cities/_generate.mjs`
+- Contact page: added LocalBusiness + ContactPoint JSON-LD (`site/contact.html`)
+- Fixed stale `squarespace/schema-local-business.html` review count 31 → 33
+- **Stripe audit (read-only):** account onboarding INCOMPLETE — `charges_enabled:false`, no bank/TOS/ID verification → cannot accept payments; products mispriced (existing "OBD" default $50, no clean $75/$199 retail SKUs); zero payment links/checkout. Needs Bryan to finish onboarding.
+- Checkout/Service JSON-LD drafted (ready for a future `/checkout` page)
+- **Next (Bryan):** finish Stripe onboarding; tell me the city workers' repo+branch so the stock pages deploy there; 'Send to Claude Code Web' for LocalService-V1 + Blog Page Options.html; set `RESEND_API_KEY`
+
 ## 2026-06-26 — Cloudflare Pages site (home + contact) + blog pipeline scaffolding
 
 Site — Squarespace → Cloudflare migration target (`site/`):
