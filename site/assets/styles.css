@@ -211,6 +211,7 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
     flex-direction: column; padding: 0 20px 16px;
     border-bottom: 1px solid var(--line); box-shadow: 0 8px 24px rgba(0,0,0,.4);
   }
+  .nav.open .menu-toggle { position: absolute; top: -54px; right: 20px; z-index: 10; }
   .nav.open .header-cta { width: 100%; display: flex; flex-direction: column; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line); }
   .nav.open .header-cta .btn { text-align: center; }
   .hero { padding: 48px 0 40px; }
