@@ -191,6 +191,11 @@ section.soft { background: var(--navy-light); }
 .pricing-table tr:nth-child(even) { background: var(--navy-light); }
 .pricing-table .price-cell { font-weight: 700; color: var(--green-bright); }
 
+/* ---------- Focus states (accessibility) ---------- */
+a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--green-bright); outline-offset: 2px;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
   .grid-3, .grid-4, .grid-2, .contact-grid, .foot-grid { grid-template-columns: 1fr; }
@@ -198,7 +203,7 @@ section.soft { background: var(--navy-light); }
   .nav .navlink { display: none; }
   .site-header .wrap { flex-wrap: wrap; }
   .nav.open .navlink {
-    display: block; width: 100%; padding: 12px 0; font-size: 1.1rem;
+    display: block; width: 100%; padding: 14px 0; font-size: 1.1rem;
     border-top: 1px solid var(--line);
   }
   .nav.open {
@@ -206,16 +211,27 @@ section.soft { background: var(--navy-light); }
     flex-direction: column; padding: 0 20px 16px;
     border-bottom: 1px solid var(--line); box-shadow: 0 8px 24px rgba(0,0,0,.4);
   }
+  .nav.open .header-cta { width: 100%; display: flex; flex-direction: column; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .nav.open .header-cta .btn { text-align: center; }
+  .hero { padding: 48px 0 40px; }
+  .hero-cta { flex-direction: column; }
+  .hero-cta .btn { text-align: center; }
+  .btn-lg { padding: 16px 24px; }
+  .price-card .price { font-size: 2.2rem; }
 }
 @media (max-width: 560px) {
   body { font-size: 17px; }
   .header-cta .btn-book { display: none; }
   section { padding: 44px 0; }
+  .hero { padding: 36px 0 32px; }
+  h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+  .card { padding: 22px; }
+  .service-detail .price, .price-card .price { font-size: 2rem; }
 }
 
 /* ---------- Footer social ---------- */
 .social { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 2px 0 24px; }
-.social a { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 9px; background: var(--line); color: #fff; text-decoration: none; transition: background .15s ease; }
+.social a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 9px; background: var(--line); color: #fff; text-decoration: none; transition: background .15s ease; }
 .social a:hover { background: var(--green); }
 .social svg { width: 20px; height: 20px; fill: currentColor; }
 .social .reviews-pill { width: auto; padding: 0 16px; gap: 8px; font-family: Montserrat, sans-serif; font-weight: 700; font-size: .9rem; color: #fff; }
