@@ -4,6 +4,22 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-06-27 — Pricing standardization across all files
+
+- **Canonical pricing established** (source of truth: `config/pricing.json`):
+  - Standard: OBD **$75** · OVI **$199**
+  - Motorhome: OBD **$99** · OVI **$229** (was $250/$300 on live site)
+  - San Diego: OBD **$119** · OVI **$219**
+- Added disclaimer everywhere: *"Pricing is always subject to change due to matters out of our control."*
+- **New files:**
+  - `config/pricing.json` — single source of truth for all pricing
+  - `squarespace/footer-pricing.html` — Squarespace footer code injection with all tiers
+  - `squarespace/price-comparison-mobile.html` — mobile-only competitor comparison table
+- **Updated schema:** `squarespace/schema-local-business.html` — added `hasOfferCatalog` with all 6 service tiers, priceRange updated to `$75–$229`
+- **Updated 30+ files:** config manifests, email templates, docs, skills, scripts, squarespace snippets
+- **Resolved:** OVI pricing discrepancy ($250 on site vs $199 in docs) — canonical is $199
+- **Next:** Bryan to verify San Diego pricing and approve motorhome rates for live site
+
 ## 2026-06-25 — Site export + CSS standardization files from Google Drive
 
 - Added `site-export/` — full static HTML/CSS/JS export of norcalcarbmobile.com (Squarespace 7.1)
