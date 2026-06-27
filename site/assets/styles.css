@@ -1,5 +1,5 @@
-/* NorCal CARB Mobile — Cloudflare Pages site styles
-   Brand: green #1a5f2a · headings Montserrat · body Source Sans 3 (repo §2 standards) */
+/* NorCal CARB Mobile — Cloudflare Workers site styles
+   Brand: navy #0d1a2e · green #3cb82a · headings Montserrat · body Source Sans 3 */
 
 :root {
   --navy: #0d1a2e;
@@ -195,15 +195,17 @@ section.soft { background: var(--navy-light); }
 @media (max-width: 860px) {
   .grid-3, .grid-4, .grid-2, .contact-grid, .foot-grid { grid-template-columns: 1fr; }
   .menu-toggle { display: block; }
-  .nav { position: relative; }
   .nav .navlink { display: none; }
+  .site-header .wrap { flex-wrap: wrap; }
   .nav.open .navlink {
-    display: block; position: absolute; top: 100%; right: 0; background: var(--navy-card);
-    border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 20px;
-    box-shadow: 0 8px 24px rgba(0,0,0,.4); white-space: nowrap; z-index: 200;
+    display: block; width: 100%; padding: 12px 0; font-size: 1.1rem;
+    border-top: 1px solid var(--line);
   }
-  .nav.open { flex-wrap: wrap; }
-  .nav.open .navlink + .navlink { border-top: 1px solid var(--line); }
+  .nav.open {
+    position: absolute; top: 68px; left: 0; right: 0; background: var(--navy-card);
+    flex-direction: column; padding: 0 20px 16px;
+    border-bottom: 1px solid var(--line); box-shadow: 0 8px 24px rgba(0,0,0,.4);
+  }
 }
 @media (max-width: 560px) {
   body { font-size: 17px; }
