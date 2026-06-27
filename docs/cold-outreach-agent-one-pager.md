@@ -60,6 +60,7 @@ Copy from `config/cold-email-manifest.json`. Agent pastes this block into every 
 OUR PRICING (mobile — we come to your yard):
 • OBD Clean Truck Check — $75/truck
 • OVI smoke opacity — $199/truck
+• Motorhome OBD — $99 · Motorhome OVI — $229
 • Shops often charge $90–$300+ PLUS 1–3 hrs downtime — we test at your yard
 
 SWITCH OFFER: 50% off your first test — OBD $37.50 · OVI $99.50
@@ -85,6 +86,7 @@ Fleet operators in {city/area} are getting flagged in CTC-VIS when they miss the
 
 OUR PRICING (mobile — we come to your yard):
 • OBD — $75/truck · OVI — $199/truck
+• Motorhome OBD — $99 · Motorhome OVI — $229
 • Shops: $90–$300+ plus downtime. We come to you.
 
 SWITCHING TESTERS? 50% off first test (OBD $37.50 · OVI $99.50) or we'll beat your quote.
@@ -112,6 +114,7 @@ NorCal CARB Mobile batch-tests fleets on-site — Sacramento, Stockton, Fairfiel
 
 PRICING THAT BEATS MOST SHOPS:
 • OBD $75 · OVI $199 per truck (mobile at your yard)
+• Motorhome OBD $99 · Motorhome OVI $229
 • Fleet visits — multiple trucks, one stop
 • Already have a tester? We BEAT your rate OR 50% off your first truck
 
@@ -137,7 +140,7 @@ Still logging into CTC-VIS and chasing deadlines yourself?
 
 Full Care: we set up CTC-VIS, monitor deadlines, send reminders, and mobile-test at your yard.
 • CARB annual fee (CTC-VIS) + only $40/year to us
-• Tests: OBD $75 · OVI $199 — at your location
+• Tests: OBD $75 · OVI $199 · Motorhome OBD $99 · Motorhome OVI $229 — at your location
 
 DIY option free: {tools_url}
 
@@ -161,7 +164,8 @@ Hi {first_name},
 Quick comparison for {company}:
 
 NorCal CARB Mobile (we come to your yard):
-  OBD $75  ·  OVI $199  ·  50% off first test if you switch
+  OBD $75  ·  OVI $199  ·  Motorhome OBD $99  ·  Motorhome OVI $229
+  50% off first test if you switch
 
 Typical shop:
   $90–$300+ per test + 1–3 hours off the road per truck
@@ -253,11 +257,17 @@ Max **3 touches total** per lead. Follow-ups count toward the **30/day** cap.
 |-------|-------|-----------|
 | OBD mobile test | **$75** | "OBD $75 at your yard" |
 | OVI mobile test | **$199** | "OVI $199 mobile" |
+| Motorhome OBD mobile test | **$99** | "Motorhome OBD $99 at your yard" |
+| Motorhome OVI mobile test | **$229** | "Motorhome OVI $229 mobile" |
 | Switch — 50% off first test | OBD **$37.50** · OVI **$99.50** | Always mention on cold #1 |
 | Beat competitor quote | Case by case | "Send your quote — we'll try to beat it" |
 | vs shops | $90–$300+ + downtime | Use in every template |
 | Full Care | CARB fee + **$40/year** | Template C / upsell |
 | Reviews | **5 stars · 31 Google** | Link `{reviews_url}` every cold #1 — source: `config/reviews.json` |
+
+**San Diego pricing:** OBD **$119** · OVI **$219** (extended service area surcharge).
+
+Pricing is always subject to change due to matters out of our control.
 
 ---
 

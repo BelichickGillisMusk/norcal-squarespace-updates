@@ -40,7 +40,7 @@
 
 - [ ] Form submit tests logged in `change_log.md`
 - [ ] Reminder signup snippet deployed (`squarespace/reminder-signup-snippet.html` still has placeholder URL)
-- [ ] OVI price on site ($250) vs approved email price ($199) — **align before growth push**
+- [x] OVI price on site ($250) vs approved email price ($199) — **resolved**. Canonical pricing: OBD $75 · OVI $199 · Motorhome OBD $99 · Motorhome OVI $229
 - [ ] `/managed-care`, `/tools/*` pages may not exist yet on Squarespace
 
 ### Agent responsible

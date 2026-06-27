@@ -32,7 +32,7 @@ All welcomes include:
 ### Path B — NorCal Family Full Care
 - **Price:** CARB's annual compliance fee per vehicle (paid through CTC-VIS) + **$40/year** to NorCal CARB Mobile
 - **Includes:** CTC-VIS setup, vehicle registration, deadline monitoring, 90/60/30 reminders, scheduled mobile tests
-- **Per-test fees still apply:** OBD **$75** · OVI **$199** per visit
+- **Per-test fees still apply:** OBD **$75** · OVI **$199** · Motorhome OBD **$99** · Motorhome OVI **$229** per visit
 - **CTA:** `MANAGED_CARE_URL` → `/managed-care` on Squarespace
 
 ---
@@ -172,7 +172,7 @@ Key nurture columns:
 
 - [ ] Imported customer CSV → rows in sheet, `welcome_sent` empty
 - [ ] New lead signup → `NEW_LEAD` row → welcome dry-run picks it up
-- [ ] Welcome email shows tool list + Full Care $40/year + OBD $75 / OVI $199
+- [ ] Welcome email shows tool list + Full Care $40/year + OBD $75 / OVI $199 / Motorhome OBD $99 / Motorhome OVI $229
 - [ ] Unsubscribe link sets `marketing_opt_in=FALSE`
 - [ ] Blast dry-run shows correct count for `tools-launch-v1`
 - [ ] Bryan approved welcome + first blast before live secrets set
