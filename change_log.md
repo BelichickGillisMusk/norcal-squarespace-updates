@@ -4,6 +4,35 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-06-27 — Cloudflare site buildout (5 pages + 42 redirects)
+
+- **New pages:** `/services` (4 service cards + pricing table), `/areas` (17 service area cards with anchor IDs), `/faq` (10 Q&A + FAQPage JSON-LD schema)
+- **Updated pages:** `/` (homepage — motorhome pricing card, San Diego note, disclaimer, hasOfferCatalog schema, review count 31→33 in meta), `/contact` (motorhome form options, pricing footer)
+- **Nav standardized:** all 5 pages now link Home · Services · Areas · FAQ · Contact in header and footer
+- **42 old Squarespace URL redirects** added to `worker/index.js` — 301 permanent redirects to preserve SEO equity during migration
+- **CSS:** added grid-4, service-card, area-card, faq-item, pricing-table styles
+- **Ready to deploy:** `npx wrangler deploy` from repo root (needs `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID`)
+- **Blocker:** No Cloudflare credentials in CI environment — Bryan must deploy locally or add secrets
+- **Next:** Bryan deploys, verify all pages + redirects + contact form at `norcalcarbmobile.silverbackai.workers.dev`
+
+## 2026-06-27 — Pricing standardization across all files
+
+- **Canonical pricing established** (source of truth: `config/pricing.json`):
+  - Standard: OBD **$75** · OVI **$199**
+  - Motorhome: OBD **$99** · OVI **$229** (was $250/$300 on live site)
+  - San Diego: OBD **$119** · OVI **$219**
+- Added disclaimer everywhere: *"Pricing is always subject to change due to matters out of our control."*
+- **New files:**
+  - `config/pricing.json` — single source of truth for all pricing
+  - `squarespace/footer-pricing.html` — Squarespace footer code injection with all tiers
+  - `squarespace/price-comparison-mobile.html` — mobile-only competitor comparison table
+- **Updated schema:** `squarespace/schema-local-business.html` — added `hasOfferCatalog` with all 6 service tiers, priceRange updated to `$75–$229`
+- **Updated 30+ files:** config manifests, email templates, docs, skills, scripts, squarespace snippets
+- **Resolved:** OVI pricing discrepancy ($250 on site vs $199 in docs) — canonical is $199
+- **Next:** Bryan to verify San Diego pricing and approve motorhome rates for live site
+
+## 2026-06-26 — Cloudflare Pages site (home + contact) + blog pipeline scaffolding
+
 ## 2026-06-25 — Site export + CSS standardization files from Google Drive
 
 - Added `site-export/` — full static HTML/CSS/JS export of norcalcarbmobile.com (Squarespace 7.1)
@@ -23,11 +52,18 @@ Agents append timestamped entries below.
 
 ## 2026-06-23 — Blog pipeline scaffolding (migrate old + schedule new)
 
-- Added `blog_drafts/` drop-zone + format spec (Markdown + YAML front-matter; **slug preserved** for link/SEO continuity)
-- Added `docs/blog-pipeline-runbook.md` — import (slug-preserving) → new layout → weekly schedule → go-live gate
-- Plan: weekly blog scheduler `scripts/blog-schedule/` modeled on `gbp-post` (dry-run default; live behind `BLOG_PUBLISH_LIVE=true`)
-- **Blockers (need Bryan):** (1) Squarespace `.xml`/WXR blog export — not in repo, not in Drive, live site not scrapable from CI (egress allowlist); (2) `Blog Page Options.html` pending `/design-login`; (3) new written posts not found in Drive
-- **Next:** Bryan drops the `.xml` export in Drive or `blog_drafts/_import/` → build `scripts/blog-import/` to the real export shape → import all old posts with original slugs → wire scheduler → review → go live
+Site — Squarespace → Cloudflare migration target (`site/`):
+- Added static Cloudflare Pages build: `index.html` (home), `contact.html` (served at `/contact`), `assets/styles.css`, `_headers`, `README.md`
+- Contact form → `site/functions/api/contact.js` (Resend → `bgillis99@gmail.com`); needs `RESEND_API_KEY` Pages env var to deliver (tap-to-call + mailto work regardless)
+- Brand: OBD **$75** · OVI **$199**; areas Sacramento/Stockton/Fairfield/San Jose/Bay Area; LocalBusiness JSON-LD
+- Reviews updated **31 → 33** (Bryan verified 2026-06-26) in `config/reviews.json` + site pages
+- Footer social links (FB / X / YouTube) added — **awaiting real page URLs**; Google reviews link wired
+- Added Cloudflare **Worker** deploy path: `wrangler.jsonc` + `worker/index.js` (serves `site/` static assets + `/api/contact`), `site/.assetsignore` — targets existing `norcalcarbmobile.silverbackai.workers.dev` worker
+- **Pending:** GBP photos (egress-blocked — need upload or domain allowlist); connect Cloudflare Pages; propagate 33 → email templates + `squarespace/schema-local-business.html`
+
+Blog pipeline:
+- Added `blog_drafts/` drop-zone + `docs/blog-pipeline-runbook.md` (import slug-preserving → new layout → weekly schedule → go-live gate)
+- **Blockers (need Bryan):** `.xml`/WXR blog export (not in repo/Drive; live site unscrapable); `Blog Page Options.html` pending `/design-login`
 
 ## 2026-06-22 — Samantha GBP post status cron
 

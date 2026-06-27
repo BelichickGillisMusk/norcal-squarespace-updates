@@ -213,7 +213,7 @@ Or merge PR and let cron run at `0 15 * * *` UTC (8:00 AM Pacific during PDT).
 ## Phase 7 — Verification checklist
 
 - [ ] Subscribe from live Squarespace page → row in sheet
-- [ ] Test email received at `bgillis99@gmail.com` with correct pricing (OBD $75 / OVI $199)
+- [ ] Test email received at `bgillis99@gmail.com` with correct pricing (OBD $75 / OVI $199 / Motorhome OBD $99 / Motorhome OVI $229)
 - [ ] "I already tested" link sets `reminders_enabled` to FALSE
 - [ ] `--dry-run` shows correct 90/60/30 matches for a seeded test row
 - [ ] Unsubscribe / cancel stops future sends for that row

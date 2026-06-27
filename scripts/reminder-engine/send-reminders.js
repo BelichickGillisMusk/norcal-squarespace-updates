@@ -33,7 +33,9 @@ function testTypeDisplay(testType) {
   const t = (testType || 'UNKNOWN').toUpperCase();
   if (t === 'OBD') return 'OBD — $75';
   if (t === 'OVI') return 'OVI — $199';
-  return 'OBD $75 · OVI $199';
+  if (t === 'MOTORHOME_OBD') return 'Motorhome OBD — $99';
+  if (t === 'MOTORHOME_OVI') return 'Motorhome OVI — $229';
+  return 'OBD $75 · OVI $199 · Motorhome $99/$229';
 }
 
 function buildVars(row, daysBefore) {

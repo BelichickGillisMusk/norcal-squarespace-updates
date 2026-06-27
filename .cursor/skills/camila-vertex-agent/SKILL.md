@@ -81,6 +81,7 @@ Thanks for reaching out to NorCal CARB Mobile — I'm Camila, our scheduling coo
 
 Mobile Clean Truck Check at your yard:
 • OBD $75 · OVI $199
+• Motorhome OBD $99 · Motorhome OVI $229
 • ★ 5 stars · 31 Google reviews: {reviews_url}
 
 Book: norcalcarbmobile.com/contact · 916-890-4427
@@ -101,14 +102,14 @@ NorCal CARB Mobile
 
 | Task | Default |
 |------|---------|
-| Reply 4–5★ reviews | Thank + mobile $75 + link |
+| Reply 4–5★ reviews | Thank + mobile $75 (Motorhome $99) + link |
 | Reply 1–3★ | Draft only → Bryan |
 | Local post | 2×/week — deadline season, tools hub |
 | Q&A | Answer from manifest pricing |
 
 **Post template:**
 
-> Mobile CARB Clean Truck Check — we come to your yard. OBD $75 · OVI $199. ★ 5 stars · 31 Google reviews. Book norcalcarbmobile.com
+> Mobile CARB Clean Truck Check — we come to your yard. OBD $75 · OVI $199 · Motorhome OBD $99 · Motorhome OVI $229. ★ 5 stars · 31 Google reviews. Book norcalcarbmobile.com
 
 ---
 

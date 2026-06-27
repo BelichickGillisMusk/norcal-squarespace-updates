@@ -27,7 +27,7 @@
 | Tier | Offer | Who |
 |------|-------|-----|
 | **Free** | Phone tools hub — deadlines, OBD/OVI, fleet math | Everyone |
-| **Transactional** | Mobile test OBD $75 / OVI $199 | Ready to book |
+| **Transactional** | Mobile test OBD $75 / OVI $199 / Motorhome OBD $99 / Motorhome OVI $229 | Ready to book |
 | **Switch** | Beat price or 50% off first test | Has another tester |
 | **Full Care** | CTC-VIS fee + $40/year — we handle CARB | Wants zero admin |
 

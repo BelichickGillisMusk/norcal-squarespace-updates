@@ -38,7 +38,7 @@
 - [ ] Enable Business Profile API; link GCP project
 - [ ] Paste `location_name` into `camila-agent-manifest.json`
 - [ ] Camila daily job: fetch new reviews → draft reply → auto-send 4–5★, queue 1–3★ for Bryan
-- [ ] Local post template: mobile $75 OBD / $199 OVI + reviews link
+- [ ] Local post template: mobile $75 OBD / $199 OVI / $99 Motorhome OBD / $229 Motorhome OVI + reviews link
 
 ### GSC
 
@@ -69,7 +69,7 @@
 - [ ] Resend DNS on `mail.` subdomain (automated nurture)
 - [ ] Deploy reminder snippet on Squarespace
 - [ ] Jul 2026: Cloudflare Pages — Camila re-submits sitemap in GSC
-- [ ] Align OVI price on site ($199) with email copy
+- [x] Align OVI price on site ($199) with email copy — **resolved**. Canonical pricing: OBD $75 · OVI $199 · Motorhome OBD $99 · Motorhome OVI $229
 
 ---
 
