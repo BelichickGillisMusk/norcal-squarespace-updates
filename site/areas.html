@@ -44,6 +44,7 @@
       <span class="brand-name">NorCal CARB Mobile<small>Mobile Clean Truck Check</small></span>
     </a>
     <nav class="nav" aria-label="Primary">
+      <button class="menu-toggle" aria-label="Menu" onclick="this.closest('.nav').classList.toggle('open')"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
       <a class="navlink" href="/">Home</a>
       <a class="navlink" href="/services">Services</a>
       <a class="navlink" href="/areas">Areas</a>
@@ -216,7 +217,7 @@
         <p class="muted">Sacramento · Stockton · Fairfield · San Jose · Bay Area</p>
       </div>
     </div>
-    <div style="border-top:1px solid #2c4334;padding:14px 0;margin-bottom:12px;font-size:.9rem;color:#9fb6a8">
+    <div style="border-top:1px solid var(--line);padding:14px 0;margin-bottom:12px;font-size:.9rem;color:var(--muted)">
       <strong style="color:#fff">Pricing:</strong> OBD $75 · OVI $199 · Motorhome $99/$229 · San Diego: $119/$219
       <br><em style="font-size:.82rem">Pricing is always subject to change due to matters out of our control.</em>
     </div>
