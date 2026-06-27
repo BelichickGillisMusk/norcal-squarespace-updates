@@ -10,8 +10,12 @@ Reference for building lead-gen tools on norcalcarbmobile.com and promoting them
 |-----------|-------|-------|
 | **OBD** (onboard diagnostics) | **$75** | Standard Clean Truck Check for OBD-equipped vehicles |
 | **OVI** (opacity / visual inspection) | **$199** | For vehicles that require OVI instead of OBD |
+| **Motorhome OBD** | **$99** | OBD test for motorhomes |
+| **Motorhome OVI** | **$229** | OVI test for motorhomes |
 
 Always show both prices when the tool identifies or asks about test type. Do not quote a single flat rate without context.
+
+**San Diego pricing:** OBD **$119** · OVI **$219** (extended service area surcharge).
 
 ### NorCal Family — Full Care (managed tier)
 
@@ -19,7 +23,7 @@ Always show both prices when the tool identifies or asks about test type. Do not
 |-----------|-------|
 | CARB annual compliance fee | Per vehicle, paid through [CTC-VIS](https://cleantruckcheck.arb.ca.gov) (CARB sets amount) |
 | NorCal setup, monitoring & coordination | **$40/year** per vehicle |
-| Each mobile test visit | OBD **$75** · OVI **$199** |
+| Each mobile test visit | OBD **$75** · OVI **$199** · Motorhome OBD **$99** · Motorhome OVI **$229** |
 
 **Positioning:** *Never talk to CARB again* — we handle CTC-VIS registration, deadline monitoring, reminders, and scheduling your tests.
 
@@ -36,7 +40,7 @@ Use this structure at the end of every tool, reminder email, and social landing 
 ### Primary CTA (new customers)
 
 > **Mobile testing — we come to your yard.**  
-> OBD **$75** · OVI **$199**  
+> OBD **$75** · OVI **$199** · Motorhome OBD **$99** · Motorhome OVI **$229**  
 > Sacramento · Stockton · Fairfield · San Jose · Bay Area  
 > **[Book a test]** · **[Fleet quote]**
 
@@ -61,7 +65,7 @@ After any result or before booking, ask:
 
 | Scenario | Offer |
 |----------|--------|
-| Single truck, switching from another provider | **50% off first test** — OBD **$37.50** or OVI **$99.50** |
+| Single truck, switching from another provider | **50% off first test** — OBD **$37.50** or OVI **$99.50** (Motorhome OBD **$49.50** · Motorhome OVI **$114.50**) |
 | Fleet (3+ trucks) with quoted competitor rate | **Match or beat** per-truck price where possible; document in fleet quote |
 | Already at or below our list price | Emphasize mobile convenience, batch yard visits, reminders — no forced discount |
 
@@ -97,7 +101,7 @@ After quiz result:
 ### 4. Fleet cost calculator
 
 Compare their current per-test spend vs.:
-- NorCal mobile OBD @ **$75** / OVI @ **$199**
+- NorCal mobile OBD @ **$75** / OVI @ **$199** / Motorhome OBD @ **$99** / Motorhome OVI @ **$229**
 - Include 2028 quarterly cadence (4×/year).
 
 **Fleet CTA:**
@@ -105,11 +109,11 @@ Compare their current per-test spend vs.:
 
 ### 5. Mobile vs. shop ROI
 
-Savings math uses **$75** (OBD) or **$199** (OVI) vs. shop range ($90–$300+).
+Savings math uses **$75** (OBD) or **$199** (OVI) vs. shop range ($90–$300+). Motorhome pricing: **$99** (OBD) / **$229** (OVI). Compare against mobile shop convenience -- we come to you, no shop wait or drive time.
 
 ### 6. Service area checker
 
-**We serve your area** → Book from **$75 OBD / $199 OVI** + switch line.
+**We serve your area** → Book from **$75 OBD / $199 OVI** (Motorhome OBD $99 / OVI $229) + switch line.
 
 ---
 
@@ -141,7 +145,7 @@ Savings math uses **$75** (OBD) or **$199** (OVI) vs. shop range ($90–$300+).
 
 ## Compliance disclaimer (all tools)
 
-> Computed schedules are based on CARB Clean Truck Check rules as published. Always confirm your deadline in [CTC-VIS](https://cleantruckcheck.arb.ca.gov) before relying on a date for compliance. Switch offers and price-match quotes are subject to confirmation; advertised list prices are OBD **$75** and OVI **$199**.
+> Computed schedules are based on CARB Clean Truck Check rules as published. Always confirm your deadline in [CTC-VIS](https://cleantruckcheck.arb.ca.gov) before relying on a date for compliance. Switch offers and price-match quotes are subject to confirmation; advertised list prices are OBD **$75**, OVI **$199**, Motorhome OBD **$99**, and Motorhome OVI **$229**. **San Diego pricing:** OBD **$119** · OVI **$219** (extended service area surcharge). Pricing is always subject to change due to matters out of our control.
 
 ---
 
