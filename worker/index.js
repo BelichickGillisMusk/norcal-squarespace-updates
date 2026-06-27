@@ -11,8 +11,8 @@
  * version). If you change one, change the other.
  */
 
-const DEFAULT_TO = 'admin@mobilecarbsmoketest.com';
-const DEFAULT_FROM = 'NorCal CARB Mobile <onboarding@resend.dev>';
+const DEFAULT_TO = 'bgillis99@gmail.com';
+const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
 
 /**
  * Old Squarespace URL → new path.  All return 301 so search engines
