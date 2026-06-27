@@ -14,6 +14,67 @@
 const DEFAULT_TO = 'bgillis99@gmail.com';
 const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
 
+/**
+ * Old Squarespace URL → new path.  All return 301 so search engines
+ * update their indexes and any inbound links keep working.
+ */
+const REDIRECTS = {
+  // → homepage
+  '/carb-services': '/',
+  '/store': '/',
+
+  // → /contact
+  '/bookcontact': '/contact',
+  '/book-schedule-carb-smoke-test-sacramento': '/contact',
+  '/contact-us': '/contact',
+
+  // → /services
+  '/clean-truck-check': '/services#obd',
+  '/smoke-opacity-test-near-me': '/services#ovi',
+  '/motorhome': '/services#motorhome',
+  '/agricultural-vehicles-clean-truck-check': '/services#agricultural',
+  '/clean-truck-check-rates': '/services#pricing',
+  '/services-mobile-ovi-smoke': '/services',
+
+  // → /faq
+  '/carb-questions-and-answers': '/faq',
+  '/what-is-clean-truck-check': '/faq',
+  '/faqs-carb-clean-truck-check-mobile': '/faq',
+  '/carb-resources': '/faq',
+  '/qa-and-glossary': '/faq',
+  '/carb-mobile-app': '/faq',
+  '/carb-penalties-deadlines': '/faq',
+
+  // → /areas
+  '/carb-locations': '/areas',
+  '/service-area-sacramento-carb-testing': '/areas#sacramento',
+  '/clean-truck-check-napa-st-helena-calistoga': '/areas#napa',
+  '/north-bay-carb-mobile-testing': '/areas#north-bay',
+  '/east-bay-mobile-carb-testing': '/areas#east-bay',
+  '/clean-truck-check-bay-area': '/areas#bay-area',
+  '/tracy-livermore-clean-truck-check-j1667': '/areas#tracy',
+  '/clean-truck-check-fresno': '/areas#central-valley',
+  '/clean-truck-check-hayward': '/areas#hayward',
+  '/clean-truck-check-fairfield': '/areas#fairfield',
+  '/service-area-butte-county-clean-truck-check': '/areas#butte',
+  '/service-area-san-joaquin-county-mobile-testing': '/areas#san-joaquin',
+  '/san-jose-mobile-carb-testing': '/areas#san-jose',
+  '/clean-truck-check-lodi': '/areas#lodi',
+  '/clean-truck-check-roseville': '/areas#roseville',
+  '/carb-mobile-clean-truck-check-antioch-california': '/areas#antioch',
+  '/clean-truck-check-san-diego': '/areas#san-diego',
+  '/clean-truck-check-orange-county': '/areas#orange-county',
+  '/service-locations': '/areas',
+  '/new-page': '/areas',
+
+  // → homepage #reviews section (no standalone reviews page yet)
+  '/clean-truck-top-review': '/#reviews',
+  '/reviews-service-area': '/#reviews',
+
+  // → homepage (no blog page yet)
+  '/clean-truck-check-blog': '/',
+};
+
 function esc(s) {
   return String(s || '').replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]));
 }
@@ -109,6 +170,15 @@ export default {
       if (request.method === 'POST') return handleContact(request, env);
       return new Response('Method Not Allowed', { status: 405, headers: { Allow: 'POST' } });
     }
+    // Check for old Squarespace URL redirects
+    const redirect = REDIRECTS[url.pathname] || REDIRECTS[url.pathname.replace(/\/$/, '')];
+    if (redirect) {
+      return new Response(null, {
+        status: 301,
+        headers: { 'Location': redirect, 'Cache-Control': 'public, max-age=86400' },
+      });
+    }
+
     // Everything else → static assets in ../site
     return env.ASSETS.fetch(request);
   },

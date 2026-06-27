@@ -144,9 +144,47 @@ section.soft { background: var(--bg-soft); }
 .site-footer .muted { color: #9fb6a8; }
 .foot-bottom { border-top: 1px solid #2c4334; padding-top: 16px; color: #9fb6a8; font-size: .85rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 
+/* ---------- Grid-4 for pricing cards ---------- */
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* ---------- Service detail cards ---------- */
+.service-card { text-align: left; }
+.service-card h3 { border-bottom: 2px solid var(--green); padding-bottom: 8px; }
+.service-card ul { padding-left: 18px; margin: 12px 0; }
+.service-card li { margin-bottom: 6px; }
+.service-card .price { font-family: Montserrat, sans-serif; font-weight: 800; font-size: 1.8rem; color: var(--green); margin: 8px 0; }
+.service-card .price small { font-size: .9rem; color: var(--muted); font-weight: 600; }
+
+.service-detail { text-align: left; }
+.service-detail h3 { border-bottom: 2px solid var(--green); padding-bottom: 8px; }
+.service-detail ul { padding-left: 18px; margin: 12px 0 18px; }
+.service-detail li { margin-bottom: 6px; }
+.service-detail .price { font-family: Montserrat, sans-serif; font-weight: 800; font-size: 2rem; color: var(--green); margin: 8px 0; }
+.service-detail .price small { font-size: .9rem; color: var(--muted); font-weight: 600; }
+
+.table-wrap { overflow-x: auto; }
+
+/* ---------- Area cards ---------- */
+.area-card { padding: 18px 22px; }
+.area-card h3 { font-size: 1.1rem; margin-bottom: 4px; }
+.area-card p { font-size: .92rem; color: var(--muted); margin: 0; }
+.area-card .san-diego-note { color: var(--gold); font-weight: 600; font-size: .85rem; margin-top: 6px; }
+
+/* ---------- FAQ ---------- */
+.faq-item { margin-bottom: 0; }
+.faq-item h3 { color: var(--green-dark); margin-bottom: 6px; font-size: 1.05rem; }
+.faq-item p { color: var(--body); margin: 0; }
+
+/* ---------- Pricing table ---------- */
+.pricing-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.pricing-table th { background: var(--green); color: #fff; font-family: Montserrat, sans-serif; font-weight: 700; padding: 12px 16px; text-align: left; }
+.pricing-table td { padding: 10px 16px; border-bottom: 1px solid var(--line); }
+.pricing-table tr:nth-child(even) { background: var(--bg-soft); }
+.pricing-table .price-cell { font-weight: 700; color: var(--green-dark); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
-  .grid-3, .grid-2, .contact-grid, .foot-grid { grid-template-columns: 1fr; }
+  .grid-3, .grid-4, .grid-2, .contact-grid, .foot-grid { grid-template-columns: 1fr; }
   .nav .navlink { display: none; }
 }
 @media (max-width: 560px) {
