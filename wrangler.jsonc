@@ -10,7 +10,14 @@
     "binding": "ASSETS",
     // serves /contact from contact.html (and / from index.html)
     "html_handling": "auto-trailing-slash"
-  }
+  },
+  // Custom domain — requires norcalcarbmobile.com zone active on this Cloudflare account.
+  // Once DNS nameservers are pointed to Cloudflare, run: wrangler deploy
+  // Cloudflare will auto-create the DNS record and issue the SSL certificate.
+  "routes": [
+    { "pattern": "norcalcarbmobile.com", "custom_domain": true },
+    { "pattern": "www.norcalcarbmobile.com", "custom_domain": true }
+  ]
   // Set secrets/vars in the dashboard or via:  wrangler secret put RESEND_API_KEY
   // Optional plain vars: CONTACT_TO, CONTACT_FROM
 }

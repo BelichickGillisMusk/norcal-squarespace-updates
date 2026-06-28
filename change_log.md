@@ -4,6 +4,28 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-06-28 — Emergency live launch: Squarespace canceled, site expanded to 9 pages
+
+**Context:** Squarespace canceled the site today. Cloudflare Worker site is now the live production site.
+
+- **New pages (4 added, bringing total to 9):**
+  - `/pricing` — dedicated pricing page with all 6 tiers, switch-and-save offer, Full Care, comparison table
+  - `/blog` — blog index linking 3 published posts
+  - `/blog/carb-clean-truck-check` — "What Is the CARB Clean Truck Check?" (~800 words, SEO: CARB Clean Truck Check Sacramento)
+  - `/blog/how-mobile-carb-testing-works` — "How Mobile CARB Testing Works" (~750 words, SEO: mobile CARB testing near me)
+  - `/blog/2026-carb-testing-deadlines` — "2026 CARB Testing Deadlines" (~850 words, SEO: CARB compliance deadline 2026)
+- **Navigation updated** across all 9 pages: added Pricing + Blog links to header nav and footer nav
+- **Worker redirects updated:** `/clean-truck-check-rates` → `/pricing`, `/clean-truck-check-blog` → `/blog`
+- **wrangler.jsonc** updated with custom domain routes for `norcalcarbmobile.com` and `www.norcalcarbmobile.com`
+- **Blog posts include:** Article JSON-LD schema, internal links to /contact and /services, proper meta descriptions
+- **All pages:** 9 total — `/` (home), `/services`, `/pricing`, `/areas`, `/faq`, `/blog`, `/blog/*` (3 posts), `/contact`
+- **Deployment required:** Bryan must:
+  1. Add `norcalcarbmobile.com` as a zone in Cloudflare (if not already)
+  2. Point domain nameservers to Cloudflare (at registrar)
+  3. Set `CLOUDFLARE_API_TOKEN` and run `npx wrangler deploy` from repo root
+  4. Set `RESEND_API_KEY` secret via `npx wrangler secret put RESEND_API_KEY`
+  5. Verify all pages at `norcalcarbmobile.com`
+
 ## 2026-06-27 — Cloudflare site buildout (5 pages + 42 redirects)
 
 - **New pages:** `/services` (4 service cards + pricing table), `/areas` (17 service area cards with anchor IDs), `/faq` (10 Q&A + FAQPage JSON-LD schema)
