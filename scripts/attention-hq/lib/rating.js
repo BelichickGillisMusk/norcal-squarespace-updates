@@ -11,7 +11,7 @@
  *   - A+ → zero invoice gaps, zero unbilled completed jobs
  *   - A  → ≤1 invoice gap and ≤1 unbilled job
  *   - B  → ≤3 invoice gaps OR ≤3 unbilled jobs
- *   - C  → anything worse, or status FAIL/PARTIAL
+ *   - C  → anything worse, or status FAIL, or status PARTIAL with issues
  */
 
 export function computeStatus(steps) {

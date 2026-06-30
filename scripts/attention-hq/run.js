@@ -158,10 +158,12 @@ async function main() {
 
   if (args.out) {
     fs.mkdirSync(path.dirname(path.resolve(args.out)), { recursive: true });
-    fs.writeFileSync(path.resolve(args.out), JSON.stringify(report, null, 2));
+    fs.writeFileSync(path.resolve(args.out), json + '\n');
   }
 
-  process.exit(report.status === 'FAIL' ? 2 : 0);
+  if (report.status === 'FAIL') process.exit(2);
+  if (report.status === 'PARTIAL' || report.actions_needed.length > 0) process.exit(1);
+  process.exit(0);
 }
 
 const isMain = import.meta.url === `file://${process.argv[1]}` ||

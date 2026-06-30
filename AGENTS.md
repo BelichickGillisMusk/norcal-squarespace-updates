@@ -6,13 +6,14 @@
 This is an **operations / automation repo** for the NorCal CARB Mobile business — not a web app. There is **no server, frontend, or build step**. It bundles agent instructions (`README.md`, `.cursor/skills/`), docs, static config/JSON, HTML email templates, and a small set of runnable Node.js CLI scripts. The public website itself is hosted externally on Squarespace and is not part of this repo.
 
 ### Runnable code (the actual "application")
-- `scripts/reminder-engine/` — the core email engine (Resend + Google Sheets). The **only package with dependencies** (`googleapis`) and the only lockfile. Run `npm ci` here. Node 20+ (CI uses 20; Node 22 also works). ESM (`"type": "module"`).
+- `scripts/reminder-engine/` — the core email engine (Resend + Google Sheets). Has a local `package.json`/lockfile (`googleapis`). Run `npm ci` here. Node 20+ (CI uses 20; Node 22 also works). ESM (`"type": "module"`).
+- `scripts/attention-hq/` — daily ops scorecard CLI (fixtures or Google Sheets). Has its own `package.json`/lockfile (`googleapis`). Run `npm ci` in this directory before running tests/CLI.
 - `scripts/email-deploy/` — `preflight.js`, a DNS/secret checker. **No dependencies**, nothing to install.
 - `scripts/cold-outreach/verify-emails.js` — MX/email verifier. No deps. Requires the `dig` system binary (already present).
 - `scripts/google-apps-script/WebApp.gs` — deployed as a Google Apps Script web app; **not runnable locally**.
 
 ### Lint / test / build
-There is **no lint config, no automated test suite, and no build step** in this repo. `.github/workflows/blank.yml` is a placeholder "hello world" CI. Do not expect `npm test`/`npm run lint` to exist. The remaining workflows just run the email scripts on cron.
+There is **no repo-wide lint config and no build step** in this repo. `scripts/attention-hq/` includes a self-contained Node test suite (`npm test`) and `.github/workflows/attention-hq.yml` runs it. `.github/workflows/blank.yml` remains a placeholder "hello world" workflow.
 
 ### How to run safely (no credentials needed)
 Live sends are gated behind both secrets and explicit flags. **Always use `--dry-run` for testing and never set `REMINDERS_LIVE` / `NURTURE_LIVE` / `BLAST_APPROVED=true` without Bryan's approval.**
