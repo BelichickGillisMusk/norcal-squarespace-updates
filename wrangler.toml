@@ -4,14 +4,15 @@ compatibility_date = "2024-09-23"
 
 [assets]
 directory = "./site"
+binding = "ASSETS"
 not_found_handling = "404-page"
 
 # Custom domain — mobilleovitest.com must be a zone in this Cloudflare account.
-# Wrangler will bind the worker to this domain on deploy.
+# custom_domain = true uses hostname-only matching (no /* path glob).
 [[routes]]
-pattern = "mobilleovitest.com/*"
+pattern = "mobilleovitest.com"
 custom_domain = true
 
 [[routes]]
-pattern = "www.mobilleovitest.com/*"
+pattern = "www.mobilleovitest.com"
 custom_domain = true
