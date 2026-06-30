@@ -66,7 +66,8 @@ async function handleContact(request, env) {
     subject: `New inquiry: ${lead.name}${lead.location ? " — " + lead.location : ""}`,
     html
   };
-  if (lead.email) payload.reply_to = lead.email;
+  const cleanEmail = lead.email.replace(/[\r\n]/g, "");
+  if (cleanEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) payload.reply_to = cleanEmail;
   try {
     const r = await fetch("https://api.resend.com/emails", {
       method: "POST",
