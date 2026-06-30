@@ -2,7 +2,7 @@
   // Cloudflare Worker that serves the NorCal CARB Mobile site (static assets in ./site)
   // plus the /api/contact form handler. Deploy with: wrangler deploy
   // Worker name matches the existing worker: norcalcarbmobile.silverbackai.workers.dev
-  "name": "norcalcarbmobile-site",
+  "name": "norcal-squarespace-updates-gillis",
   "main": "worker/index.js",
   "compatibility_date": "2025-06-01",
   "assets": {
