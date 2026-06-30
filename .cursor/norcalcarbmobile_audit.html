@@ -498,10 +498,10 @@
     </div>
 
     <div class="tabs">
-      <button class="tab active" onclick="showTab('overview')">Overview</button>
-      <button class="tab" onclick="showTab('seo')">SEO Control</button>
-      <button class="tab" onclick="showTab('cost')">Cost/Year</button>
-      <button class="tab" onclick="showTab('migration')">Migration</button>
+      <button class="tab active" data-tab="overview" onclick="showTab('overview')">Overview</button>
+      <button class="tab" data-tab="seo" onclick="showTab('seo')">SEO Control</button>
+      <button class="tab" data-tab="cost" onclick="showTab('cost')">Cost/Year</button>
+      <button class="tab" data-tab="migration" onclick="showTab('migration')">Migration</button>
     </div>
 
     <div class="tab-pane active" id="overview">
@@ -753,7 +753,7 @@ function showTab(id) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  const tabButton = document.querySelector(`.tab[onclick="showTab('${CSS.escape(id)}')"]`);
+  const tabButton = document.querySelector(`.tab[data-tab="${CSS.escape(id)}"]`);
   if (tabButton) tabButton.classList.add('active');
 }
 </script>
