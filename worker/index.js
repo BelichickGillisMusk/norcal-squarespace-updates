@@ -12,7 +12,7 @@
  */
 
 const DEFAULT_TO = 'bgillis99@gmail.com';
-const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
+const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.mobileovitest.com>';
 
 /**
  * Old Squarespace URL → new path.  All return 301 so search engines
@@ -133,7 +133,7 @@ async function handleContact(request, env) {
   };
 
   const html = `
-    <h2>New test request — norcalcarbmobile.com</h2>
+    <h2>New test request — mobileovitest.com</h2>
     <table cellpadding="6" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:15px">
       <tr><td><strong>Name</strong></td><td>${esc(lead.name)}</td></tr>
       <tr><td><strong>Phone</strong></td><td>${esc(lead.phone)}</td></tr>
