@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /design-system
 
 Sitemap: https://norcalcarbmobile.com/sitemap.xml

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Design System &amp; Page Types — NorCal CARB Mobile</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <style>
+    /* design-system chrome (reference page only) */
+    body { background: #eef2ef; }
+    .ds-top { background: var(--ink); color: #fff; padding: 30px 0; }
+    .ds-top h1 { color: #fff; margin: 0 0 6px; }
+    .ds-top p { color: #c7d6cb; margin: 0; max-width: 760px; }
+    .ds-toc { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid var(--line); padding: 10px 0; }
+    .ds-toc .wrap { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+    .ds-toc a { text-decoration: none; color: var(--ink); font-weight: 600; font-size: .92rem; }
+    .ds-toc a:hover { color: var(--green); }
+    .ds-block { padding: 30px 0; }
+    .ds-h { font-family: Montserrat, sans-serif; font-weight: 800; color: var(--ink); font-size: 1.5rem; margin: 0 0 4px; }
+    .ds-sub { color: var(--muted); margin: 0 0 18px; }
+    .ds-frame { background: #fff; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 26px; }
+    .ds-cap { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: baseline; justify-content: space-between;
+      background: #f3f7f4; border-bottom: 1px solid var(--line); padding: 10px 16px; }
+    .ds-cap .name { font-family: Montserrat, sans-serif; font-weight: 700; color: var(--ink); }
+    .ds-cap .tag { font-size: .8rem; color: var(--green-dark); background: #dcefe2; border-radius: 999px; padding: 2px 10px; font-weight: 700; }
+    .ds-cap .note { font-size: .85rem; color: var(--muted); flex-basis: 100%; }
+    .ds-pad { padding: 22px; }
+    .ds-mini { transform: none; }
+    /* swatches */
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+    .sw { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; }
+    .sw .chip { height: 64px; }
+    .sw .meta { padding: 8px 10px; font-size: .8rem; }
+    .sw .meta b { display: block; font-family: Montserrat, sans-serif; }
+    .sw .meta code { color: var(--muted); }
+    /* content brief */
+    .brief { background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
+    .brief header { background: var(--green); color: #fff; padding: 16px 20px; }
+    .brief header h3 { color: #fff; margin: 0; font-size: 1.15rem; }
+    .brief header p { margin: 4px 0 0; color: #d7ebdc; font-size: .88rem; }
+    .brief table { width: 100%; border-collapse: collapse; }
+    .brief td { padding: 11px 16px; border-top: 1px solid var(--line); vertical-align: top; font-size: .95rem; }
+    .brief td.k { width: 210px; font-weight: 700; color: var(--ink); background: #f7faf8; font-family: Montserrat, sans-serif; font-size: .85rem; }
+    .brief .pill { display: inline-block; background: #eef4f0; border: 1px solid #d6e5dc; color: var(--green-dark); border-radius: 6px; padding: 2px 8px; margin: 2px 4px 2px 0; font-size: .85rem; }
+    .brief ol, .brief ul { margin: 0; padding-left: 18px; }
+    .count { font-variant-numeric: tabular-nums; }
+    /* blog article sample */
+    .article { max-width: 720px; }
+    .article .kicker { color: var(--green); font-weight: 700; font-family: Montserrat, sans-serif; letter-spacing: .04em; text-transform: uppercase; font-size: .8rem; }
+    .article .byline { color: var(--muted); font-size: .9rem; margin: 4px 0 18px; }
+    .article .metabox { background: #f3f7f4; border-left: 4px solid var(--green); padding: 10px 14px; font-size: .9rem; color: var(--body); border-radius: 6px; margin: 0 0 18px; }
+    .article blockquote { border-left: 4px solid var(--gold); margin: 18px 0; padding: 4px 16px; font-size: 1.1rem; color: var(--ink); }
+    .pay-note { font-size: .85rem; color: var(--muted); margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+<div class="ds-top">
+  <div class="wrap">
+    <h1>Design System &amp; Page Types</h1>
+    <p>One example of every page type we’ll use across NorCal CARB Mobile + city sites, plus the SEO <b>content brief</b> we’ll fill out before writing each page. Use this to mark up exactly how you want content and styling to look — point at anything and tell me “more like this / change this.”</p>
+  </div>
+</div>
+
+<nav class="ds-toc" aria-label="Design system sections">
+  <div class="wrap">
+    <a href="#foundations">Foundations</a>
+    <a href="#home">Home</a>
+    <a href="#city">City landing</a>
+    <a href="#contact">Contact / booking</a>
+    <a href="#blog">Blog post</a>
+    <a href="#checkout">Checkout</a>
+    <a href="#brief">SEO content brief</a>
+  </div>
+</nav>
+
+<!-- ===================== FOUNDATIONS ===================== -->
+<section class="ds-block" id="foundations">
+  <div class="wrap">
+    <h2 class="ds-h">Foundations</h2>
+    <p class="ds-sub">Brand colors, type scale, and the building-block components every page reuses.</p>
+
+    <div class="ds-frame"><div class="ds-cap"><span class="name">Color</span><span class="tag">tokens</span></div>
+      <div class="ds-pad">
+        <div class="swatches">
+          <div class="sw"><div class="chip" style="background:#1a5f2a"></div><div class="meta"><b>Brand green</b><code>#1a5f2a</code></div></div>
+          <div class="sw"><div class="chip" style="background:#12421d"></div><div class="meta"><b>Green dark</b><code>#12421d</code></div></div>
+          <div class="sw"><div class="chip" style="background:#1f7a35"></div><div class="meta"><b>Green bright</b><code>#1f7a35</code></div></div>
+          <div class="sw"><div class="chip" style="background:#f5a623"></div><div class="meta"><b>Gold (stars)</b><code>#f5a623</code></div></div>
+          <div class="sw"><div class="chip" style="background:#1d2b22"></div><div class="meta"><b>Ink</b><code>#1d2b22</code></div></div>
+          <div class="sw"><div class="chip" style="background:#f4f7f4;border-bottom:1px solid #e2e8e4"></div><div class="meta"><b>Soft bg</b><code>#f4f7f4</code></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-frame"><div class="ds-cap"><span class="name">Typography</span><span class="tag">Montserrat + Source Sans 3</span></div>
+      <div class="ds-pad">
+        <h1 style="margin:0 0 6px">H1 — Mobile Clean Truck Check</h1>
+        <h2 style="margin:0 0 6px">H2 — Section heading</h2>
+        <h3 style="margin:0 0 10px">H3 — Sub-heading</h3>
+        <p class="lede" style="margin:0 0 8px">Lede / intro paragraph — slightly larger, sets up the page in one or two sentences.</p>
+        <p style="margin:0">Body copy — Source Sans 3, 18px, comfortable line height for fast reading on a phone in a truck yard.</p>
+      </div>
+    </div>
+
+    <div class="ds-frame"><div class="ds-cap"><span class="name">Buttons &amp; components</span><span class="tag">reusable</span></div>
+      <div class="ds-pad">
+        <p style="margin:0 0 14px"><a class="btn btn-primary" href="#">Primary</a> &nbsp; <a class="btn btn-ghost" href="#">Ghost</a> &nbsp; <a class="btn btn-primary btn-lg" href="#">Primary large</a></p>
+        <div class="grid grid-3">
+          <div class="card price-card"><h3>Pricing card</h3><div class="price">$75<small> / vehicle</small></div><a class="btn btn-ghost" href="#">Book</a></div>
+          <blockquote class="card quote"><span class="stars">★★★★★</span>“Review card — short quote.”<cite>— Google review</cite></blockquote>
+          <div class="step"><div class="num">1</div><h3>Step card</h3><p>Numbered process step.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOME ===================== -->
+<section class="ds-block" id="home">
+  <div class="wrap">
+    <h2 class="ds-h">Page type — Home / Landing</h2>
+    <p class="ds-sub">Hero + trust line + pricing. The “call or book in 5 seconds” page.</p>
+    <div class="ds-frame">
+      <div class="ds-cap"><span class="name">Home</span><span class="tag">/</span><span class="note">Goal: phone call or booking. Above the fold = what, where, price, proof, CTA.</span></div>
+      <div class="ds-pad" style="background:linear-gradient(160deg,#f4f7f4,#eaf2ec)">
+        <p class="reviews-line"><span class="stars">★★★★★</span> 5.0 · 33 Google reviews</p>
+        <h1>Mobile CARB Clean Truck Check — <span style="color:var(--green)">we come to your yard.</span></h1>
+        <p class="lede">OBD &amp; OVI testing across Northern California, often the same week.</p>
+        <p><a class="btn btn-primary btn-lg" href="#">Book a Test</a> <a class="btn btn-ghost btn-lg" href="#">Call (916) 890-4427</a></p>
+        <p class="hero-areas">Serving Sacramento · Stockton · Fairfield · San Jose · Bay Area</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CITY ===================== -->
+<section class="ds-block" id="city">
+  <div class="wrap">
+    <h2 class="ds-h">Page type — City landing</h2>
+    <p class="ds-sub">Same stock layout, localized: city + county + nearby towns + ZIPs. One per URL.</p>
+    <div class="ds-frame">
+      <div class="ds-cap"><span class="name">City landing</span><span class="tag">e.g. /stockton</span><span class="note">Swap city name, county, nearby towns, ZIPs, and the H1/title/meta. Everything else identical = consistent + fast to spin up.</span></div>
+      <div class="ds-pad">
+        <p class="reviews-line"><span class="stars">★★★★★</span> 5.0 · 33 Google reviews</p>
+        <h1>Mobile CARB Clean Truck Check in <span style="color:var(--green)">Stockton, CA</span></h1>
+        <p class="lede">OBD &amp; OVI Clean Truck Check in Stockton — we come to your yard. Serving Stockton and Lodi, Manteca, Tracy and Lathrop.</p>
+        <p><a class="btn btn-primary" href="#">Call (916) 890-4427</a> <a class="btn btn-ghost" href="#">Email to book</a></p>
+        <div class="card" style="margin-top:16px"><h3 style="margin-top:0">Serving Stockton &amp; San Joaquin County</h3><p style="margin:0">We test throughout Stockton and nearby Lodi, Manteca, Tracy and Lathrop. Common ZIPs: 95202, 95205, 95206, 95210.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="ds-block" id="contact">
+  <div class="wrap">
+    <h2 class="ds-h">Page type — Contact / Booking request</h2>
+    <p class="ds-sub">Direct contact (always works) on the left, a request form on the right.</p>
+    <div class="ds-frame">
+      <div class="ds-cap"><span class="name">Contact</span><span class="tag">/contact</span><span class="note">Form posts to /api/contact → emails the shop (Resend). Tap-to-call + email never fail.</span></div>
+      <div class="ds-pad">
+        <div class="contact-grid">
+          <div>
+            <div class="contact-method"><span class="ic">📞</span><div><strong>Call or text</strong><br><a href="#">(916) 890-4427</a></div></div>
+            <div class="contact-method"><span class="ic">✉️</span><div><strong>Email</strong><br><a href="#">sales@norcalcarbmobile.com</a></div></div>
+            <div class="contact-method"><span class="ic">📍</span><div><strong>Service area</strong><br>Sacramento · Stockton · Fairfield · San Jose · Bay Area</div></div>
+          </div>
+          <div class="card">
+            <h3 style="margin-top:0">Request a test</h3>
+            <div class="field"><label>Name</label><input type="text"></div>
+            <div class="field"><label>Phone</label><input type="tel"></div>
+            <div class="field"><label>What do you need?</label><select><option>OBD test ($75)</option><option>OVI / smoke test ($199)</option><option>Fleet / multiple</option></select></div>
+            <button class="btn btn-primary" type="button">Send request</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BLOG ===================== -->
+<section class="ds-block" id="blog">
+  <div class="wrap">
+    <h2 class="ds-h">Page type — Blog post / Article</h2>
+    <p class="ds-sub">SEO articles (Clean Truck Check explainers, deadlines, how-to). One H1, scannable H2s, one internal link, a CTA, schema.</p>
+    <div class="ds-frame">
+      <div class="ds-cap"><span class="name">Blog post</span><span class="tag">/blog/&lt;slug&gt;</span><span class="note">Old posts import here keeping their original slug. New ones publish on a weekly schedule.</span></div>
+      <div class="ds-pad">
+        <article class="article">
+          <p class="kicker">Clean Truck Check</p>
+          <h1>What Is the CARB Clean Truck Check?</h1>
+          <p class="byline">By NorCal CARB Mobile · Updated June 2026 · 4 min read</p>
+          <div class="metabox"><b>Meta description:</b> CARB’s Clean Truck Check is California’s emissions program for heavy trucks. Here’s who needs it, OBD vs OVI testing, deadlines, and what it costs.</div>
+          <p class="lede">If you run diesel trucks in California, the Clean Truck Check (CTC) is the emissions test you now have to pass — twice a year for many fleets. Here’s the plain-English version.</p>
+          <h2>Who needs a Clean Truck Check?</h2>
+          <p>Most non-gasoline vehicles over 14,000 lbs GVWR registered or operating in California…</p>
+          <h2>OBD vs OVI — which test do I need?</h2>
+          <p>Newer trucks (2013+) usually take the <strong>OBD</strong> test ($75). Older or non-OBD vehicles take the <strong>OVI</strong> smoke/opacity test ($199).</p>
+          <blockquote>“Tested all six trucks in under two hours.” — verified Google review</blockquote>
+          <h2>How to get tested without the hassle</h2>
+          <p>We bring the test to your yard. <a href="#">Book a mobile test</a> or call (916) 890-4427.</p>
+          <p><a class="btn btn-primary" href="#">Book a Test</a></p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CHECKOUT ===================== -->
+<section class="ds-block" id="checkout">
+  <div class="wrap">
+    <h2 class="ds-h">Page type — Checkout / Booking &amp; pay</h2>
+    <p class="ds-sub">Pick a test, set how many trucks, pay online. Powered by Stripe (pending account onboarding — see notes).</p>
+    <div class="ds-frame">
+      <div class="ds-cap"><span class="name">Checkout</span><span class="tag">/checkout</span><span class="note">Buttons become live Stripe Checkout / Payment Links once the Stripe account is finished. Until then they fall back to call/email.</span></div>
+      <div class="ds-pad">
+        <div class="grid grid-3">
+          <div class="card price-card"><h3>OBD Test</h3><div class="price">$75<small> / vehicle</small></div><p>Most 2013+ trucks.</p><a class="btn btn-primary" href="#">Pay &amp; book</a><p class="pay-note">× number of trucks</p></div>
+          <div class="card price-card feature"><span class="badge">Most thorough</span><h3>OVI (Smoke)</h3><div class="price">$199<small> / vehicle</small></div><p>Older / non-OBD &amp; motorhomes.</p><a class="btn btn-primary" href="#">Pay &amp; book</a><p class="pay-note">× number of trucks</p></div>
+          <div class="card price-card"><h3>Fleet / quote</h3><div class="price">Call<small> for pricing</small></div><p>Multi-truck &amp; recurring.</p><a class="btn btn-ghost" href="#">Get a quote</a></div>
+        </div>
+        <p class="center" style="margin-top:16px;color:var(--muted)">🔒 Secure checkout · 5.0★ · 33 Google reviews · we come to your yard</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SEO CONTENT BRIEF ===================== -->
+<section class="ds-block" id="brief">
+  <div class="wrap">
+    <h2 class="ds-h">SEO content brief (per page)</h2>
+    <p class="ds-sub">Fill this out before writing any page or post — it’s the spec the copy is written against (the “content-brief” step). Example below is for a Stockton city page.</p>
+    <div class="brief">
+      <header>
+        <h3>Content brief — Mobile CARB Clean Truck Check in Stockton</h3>
+        <p>Page type: City landing · Status: draft · Owner: NorCal CARB Mobile</p>
+      </header>
+      <table>
+        <tr><td class="k">Target URL</td><td>/stockton (its own repo/worker per the one-repo-per-URL rule)</td></tr>
+        <tr><td class="k">Primary keyword</td><td><span class="pill">CARB Clean Truck Check Stockton</span></td></tr>
+        <tr><td class="k">Secondary keywords</td><td><span class="pill">mobile smog test Stockton trucks</span><span class="pill">OVI smoke test Stockton</span><span class="pill">clean truck check San Joaquin County</span><span class="pill">diesel truck emissions test Stockton</span></td></tr>
+        <tr><td class="k">Search intent</td><td>Local + transactional — a fleet owner/operator who needs a truck tested now and is comparing local mobile testers.</td></tr>
+        <tr><td class="k">Title tag <span class="count">(≤60)</span></td><td>Mobile CARB Clean Truck Check in Stockton, CA | NorCal CARB Mobile</td></tr>
+        <tr><td class="k">Meta description <span class="count">(≤155)</span></td><td>Mobile CARB Clean Truck Check in Stockton — OBD $75, OVI $199. We come to your yard in Stockton &amp; San Joaquin County. 5.0★ · 33 reviews. Call (916) 890-4427.</td></tr>
+        <tr><td class="k">H1</td><td>Mobile CARB Clean Truck Check in Stockton, CA</td></tr>
+        <tr><td class="k">Outline (H2s)</td><td><ol><li>Stockton Clean Truck Check pricing (OBD $75 / OVI $199)</li><li>How mobile testing works in Stockton</li><li>Serving Stockton &amp; San Joaquin County (nearby towns + ZIPs)</li><li>Why fleets choose us (reviews)</li><li>Book your Stockton trucks</li></ol></td></tr>
+        <tr><td class="k">Word count</td><td><span class="count">450–700</span> (landing page; enough to be useful, not padded)</td></tr>
+        <tr><td class="k">Internal links</td><td>Home, Contact/Book, related city pages (Lodi, Tracy)</td></tr>
+        <tr><td class="k">Entities / must-mention</td><td><span class="pill">OBD</span><span class="pill">OVI / opacity</span><span class="pill">CTC-VIS</span><span class="pill">San Joaquin County</span><span class="pill">GVWR 14,000 lbs</span><span class="pill">CARB</span></td></tr>
+        <tr><td class="k">FAQs (People Also Ask)</td><td><ul><li>How much is a Clean Truck Check in Stockton?</li><li>Do you come to my yard?</li><li>OBD or OVI — which do I need?</li><li>How fast can you test?</li></ul></td></tr>
+        <tr><td class="k">Schema</td><td>LocalBusiness + areaServed Stockton; FAQPage for the Q&amp;A block</td></tr>
+        <tr><td class="k">Primary CTA</td><td>Call (916) 890-4427 / Book a test</td></tr>
+        <tr><td class="k">Proof / trust</td><td>5.0★ · 33 Google reviews; “we come to you”; same-week &amp; Saturday</td></tr>
+      </table>
+    </div>
+    <p class="ds-sub" style="margin-top:14px">This is my read of a good brief — tell me what fields you want added/removed and I’ll make it the standard template for every page and blog post.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap"><div class="foot-bottom" style="border:0"><span>NorCal CARB Mobile — internal design system (noindex)</span><span>Mark it up &amp; tell me what to change</span></div></div>
+</footer>
+</body>
+</html>
