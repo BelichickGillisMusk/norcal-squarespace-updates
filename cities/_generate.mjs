@@ -38,7 +38,8 @@ function page(c) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mobile CARB Clean Truck Check in ${c.name}, CA | NorCal CARB Mobile</title>
   <meta name="description" content="Mobile CARB Clean Truck Check testing in ${c.name}, CA. OBD $75 · OVI $199. We come to your yard in ${c.name} and ${nearbySentence}. 5.0★ · 33 Google reviews. Call ${PHONE_DISPLAY}.">
-  <link rel="canonical" href="https://cleantruckcheck-${c.slug}.com/">
+  <!-- TODO(canonical): set to this city's real URL once its domain is confirmed -->
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -49,7 +50,7 @@ function page(c) {
     "@type": "LocalBusiness",
     "name": "NorCal CARB Mobile LLC",
     "description": "Mobile CARB Clean Truck Check testing (OBD and OVI) in ${c.name}, ${c.county} County, CA — we come to your yard.",
-    "url": "https://cleantruckcheck-${c.slug}.com",
+    "url": "https://norcalcarbmobile.com",
     "telephone": "+1-916-890-4427",
     "email": "${EMAIL}",
     "priceRange": "$75-$199",
@@ -168,12 +169,14 @@ function page(c) {
 }
 
 const styles = fs.readFileSync(STYLES_SRC, 'utf8');
+const favicon = fs.readFileSync(path.join(ROOT, 'site', 'favicon.svg'), 'utf8');
 let count = 0;
 for (const c of CITIES) {
   const dir = path.join(OUT, c.slug);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'index.html'), page(c), 'utf8');
   fs.writeFileSync(path.join(dir, 'styles.css'), styles, 'utf8');
+  fs.writeFileSync(path.join(dir, 'favicon.svg'), favicon, 'utf8');
   count++;
   console.log(`generated cities/${c.slug}/ (index.html + styles.css)`);
 }
