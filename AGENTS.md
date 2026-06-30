@@ -13,7 +13,7 @@ This is an **operations / automation repo** for the NorCal CARB Mobile business 
 - `scripts/google-apps-script/WebApp.gs` — deployed as a Google Apps Script web app; **not runnable locally**.
 
 ### Lint / test / build
-There is **no repo-wide lint config and no build step** in this repo. `scripts/attention-hq/` includes a self-contained Node test suite (`npm test`) and `.github/workflows/attention-hq.yml` runs it. `.github/workflows/blank.yml` remains a placeholder "hello world" workflow.
+There is **no repo-wide ESLint/Prettier config and no build step** in this repo. `scripts/attention-hq/` includes a self-contained Node test suite (`npm test`) and `.github/workflows/attention-hq.yml` runs it. `.github/workflows/codeql.yml` provides security-focused static analysis. `.github/workflows/blank.yml` remains a placeholder "hello world" workflow.
 
 ### How to run safely (no credentials needed)
 Live sends are gated behind both secrets and explicit flags. **Always use `--dry-run` for testing and never set `REMINDERS_LIVE` / `NURTURE_LIVE` / `BLAST_APPROVED=true` without Bryan's approval.**

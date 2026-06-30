@@ -139,7 +139,7 @@ Manual run with `workflow_dispatch` lets Bryan override `date` and `dry_run` for
 
 When the daily report drops, Samantha works the `actions_needed` list top-down:
 
-1. **Every `fill_invoice_gap`** — open Jobber/QuickBooks, search for each missing number. If it's there but not in the sheet, paste it in. If it's truly missing, create it from the matching job. If voided, still log the actual invoice number in `invoice_number` so the sequence stays complete, and mark it as void in a separate note/status field.
+1. **Every `fill_invoice_gap`** — open Jobber/QuickBooks, search for each missing number. If it's there but not in the sheet, paste it in. If it's truly missing, create it from the matching job. If voided, still log the actual invoice number in `invoice_number` so the sequence stays complete, and track the voided state outside the `invoice_number` value.
 2. **Every `invoice_completed_job`** — same-day invoicing keeps the rating at A+. Create the invoice, write the number into the Jobs sheet.
 3. **`no_invoices_today`** — confirm with Bryan that the day's jobs were closed out.
 4. **`cron_failure`** — Slack/email Bryan; do not act on `found` values.
