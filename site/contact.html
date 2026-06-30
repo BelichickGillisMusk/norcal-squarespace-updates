@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — MobileOVI Test</title>
+<meta name="description" content="Get in touch to schedule a mobile OVI smoke opacity test.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0a;
+  --bg2:#111;
+  --border:#222;
+  --text:#e5e5e5;
+  --muted:#888;
+  --accent:#3b82f6;
+  --accent-hover:#2563eb;
+  --radius:10px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:-.3px}
+.logo span{color:var(--accent)}
+
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 16px}
+.card{width:100%;max-width:520px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:40px}
+h1{font-size:1.6rem;font-weight:700;margin-bottom:6px;color:#fff}
+.sub{color:var(--muted);font-size:.9rem;margin-bottom:28px}
+
+.alert{padding:14px 16px;border-radius:var(--radius);font-size:.9rem;margin-bottom:24px;display:none}
+.alert.success{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#86efac}
+.alert.error{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
+.alert.show{display:block}
+
+.field{margin-bottom:18px}
+label{display:block;font-size:.82rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+input,select,textarea{width:100%;background:#0d0d0d;border:1px solid var(--border);border-radius:var(--radius);padding:11px 14px;color:var(--text);font-size:.95rem;transition:border-color .2s;outline:none;font-family:inherit}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%23888'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+select option{background:#0d0d0d}
+textarea{resize:vertical;min-height:100px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* honeypot */
+.hp{display:none}
+
+button{width:100%;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);padding:13px;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:4px}
+button:hover:not(:disabled){background:var(--accent-hover)}
+button:disabled{opacity:.6;cursor:not-allowed}
+
+footer{text-align:center;padding:20px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border)}
+@media(max-width:480px){.row{grid-template-columns:1fr}.card{padding:28px 20px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span>Mobile</span>OVI Test</div>
+  <a href="/">Home</a>
+</header>
+
+<main>
+  <div class="card">
+    <h1>Get in touch</h1>
+    <p class="sub">Fill out the form below and we'll follow up to schedule your test.</p>
+
+    <div class="alert success" id="alert-success">
+      Thanks — we'll be in touch shortly.
+    </div>
+    <div class="alert error" id="alert-error">
+      Something went wrong. Please try again.
+    </div>
+
+    <form id="contact-form" action="/api/contact" method="POST">
+      <div class="row">
+        <div class="field">
+          <label for="name">Name *</label>
+          <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="phone">Phone *</label>
+          <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="(xxx) xxx-xxxx">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="location">Location / City</label>
+          <input type="text" id="location" name="location" placeholder="City or address">
+        </div>
+      </div>
+      <div class="field">
+        <label for="service">Service</label>
+        <select id="service" name="service">
+          <option value="">— Select —</option>
+          <option value="OVI Smoke Opacity">OVI Smoke Opacity</option>
+          <option value="HD-OBD">HD-OBD</option>
+          <option value="Not sure">Not sure — help me choose</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Details</label>
+        <textarea id="message" name="message" placeholder="Number of vehicles, preferred dates, anything else…"></textarea>
+      </div>
+      <div class="hp"><input type="text" name="company" tabindex="-1" autocomplete="off"></div>
+      <button type="submit" id="submit-btn">Send message</button>
+    </form>
+  </div>
+</main>
+
+<footer>&copy; 2026 MobileOVI Test</footer>
+
+<script>
+(function () {
+  const form = document.getElementById('contact-form');
+  const btn = document.getElementById('submit-btn');
+  const ok = document.getElementById('alert-success');
+  const err = document.getElementById('alert-error');
+  const params = new URLSearchParams(location.search);
+  if (params.get('sent') === '1') { ok.classList.add('show'); form.style.display = 'none'; }
+  if (params.get('error') === '1') err.classList.add('show');
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    ok.classList.remove('show');
+    err.classList.remove('show');
+    try {
+      const data = new FormData(form);
+      const r = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { accept: 'application/json' },
+        body: data
+      });
+      const j = await r.json();
+      if (j.ok) {
+        form.style.display = 'none';
+        ok.classList.add('show');
+      } else {
+        err.textContent = j.error || 'Something went wrong. Please try again.';
+        err.classList.add('show');
+        btn.disabled = false;
+        btn.textContent = 'Send message';
+      }
+    } catch {
+      err.classList.add('show');
+      btn.disabled = false;
+      btn.textContent = 'Send message';
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

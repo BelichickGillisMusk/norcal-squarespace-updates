@@ -1,0 +1,17 @@
+name = "mobilleovitest"
+main = "worker/index.js"
+compatibility_date = "2024-09-23"
+
+[assets]
+directory = "./site"
+not_found_handling = "404-page"
+
+# Custom domain — mobilleovitest.com must be a zone in this Cloudflare account.
+# Wrangler will bind the worker to this domain on deploy.
+[[routes]]
+pattern = "mobilleovitest.com/*"
+custom_domain = true
+
+[[routes]]
+pattern = "www.mobilleovitest.com/*"
+custom_domain = true
