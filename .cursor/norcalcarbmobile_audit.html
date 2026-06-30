@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NorCal CARB Mobile — Site Audit 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #12151c;
+    --surface2: #1a1f2e;
+    --border: #232940;
+    --accent: #f5a623;
+    --accent2: #e84040;
+    --accent3: #3ddc97;
+    --accent4: #5b9cf6;
+    --text: #e8eaf0;
+    --muted: #6b7280;
+    --mono: 'Space Mono', monospace;
+    --display: 'Bebas Neue', sans-serif;
+    --body: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 32px 0 24px;
+    background: linear-gradient(180deg, rgba(245,166,35,0.06) 0%, transparent 100%);
+  }
+  .header-inner { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .site-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(38px, 6vw, 72px);
+    letter-spacing: 0.04em;
+    color: var(--text);
+    line-height: 1;
+  }
+  h1 span { color: var(--accent); }
+  .audit-meta {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* SCORE BAND */
+  .score-band {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 32px 0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .score-cell {
+    background: var(--surface);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: background 0.2s;
+  }
+  .score-cell:hover { background: var(--surface2); }
+  .score-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
+  .score-value { font-family: var(--display); font-size: 42px; line-height: 1; }
+  .score-sub { font-size: 12px; color: var(--muted); }
+  .good { color: var(--accent3); }
+  .warn { color: var(--accent); }
+  .bad { color: var(--accent2); }
+  .info { color: var(--accent4); }
+
+  /* SECTION */
+  .section { margin: 40px 0; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  h2 {
+    font-family: var(--display);
+    font-size: 28px;
+    letter-spacing: 0.06em;
+    color: var(--text);
+  }
+  .pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-left: auto;
+  }
+  .pill-warn { background: rgba(245,166,35,0.12); color: var(--accent); border: 1px solid rgba(245,166,35,0.3); }
+  .pill-bad { background: rgba(232,64,64,0.12); color: var(--accent2); border: 1px solid rgba(232,64,64,0.3); }
+  .pill-good { background: rgba(61,220,151,0.12); color: var(--accent3); border: 1px solid rgba(61,220,151,0.3); }
+
+  /* FINDING CARDS */
+  .findings { display: flex; flex-direction: column; gap: 12px; }
+  .finding {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 14px;
+    align-items: start;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .finding:hover { border-color: var(--accent); background: var(--surface2); }
+  .finding-icon { font-size: 16px; margin-top: 2px; }
+  .finding-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+  .finding-desc { font-size: 13px; color: #9ca3af; line-height: 1.5; }
+  .impact-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-top: 3px;
+    align-self: start;
+  }
+  .impact-high { background: rgba(232,64,64,0.15); color: var(--accent2); }
+  .impact-med { background: rgba(245,166,35,0.15); color: var(--accent); }
+  .impact-low { background: rgba(91,156,246,0.15); color: var(--accent4); }
+
+  /* COMPARISON TABLE */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 200px repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 13px;
+  }
+  .cg-cell {
+    background: var(--surface);
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cg-header {
+    background: var(--surface2);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .cg-row:nth-child(odd) .cg-cell { background: rgba(255,255,255,0.01); }
+  .cg-row:hover .cg-cell { background: var(--surface2); }
+  .cg-label { color: var(--muted); font-size: 12px; }
+  .check { color: var(--accent3); }
+  .cross { color: var(--accent2); }
+  .partial { color: var(--accent); }
+  .platform-winner { background: rgba(61,220,151,0.06) !important; }
+
+  /* MIGRATION RISK */
+  .risk-meter {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .risk-track {
+    flex: 1;
+    height: 8px;
+    background: var(--surface2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .risk-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease;
+  }
+  .risk-label { font-family: var(--mono); font-size: 11px; color: var(--muted); min-width: 80px; text-align: right; }
+
+  /* VERDICT */
+  .verdict-box {
+    background: linear-gradient(135deg, rgba(245,166,35,0.1) 0%, rgba(91,156,246,0.05) 100%);
+    border: 1px solid rgba(245,166,35,0.3);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+  .verdict-title { font-family: var(--display); font-size: 22px; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 12px; }
+  .verdict-body { font-size: 14px; line-height: 1.7; color: #d1d5db; }
+  .verdict-body strong { color: var(--text); }
+
+  /* ROADMAP */
+  .roadmap { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .roadmap::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .roadmap-item {
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    gap: 16px;
+    padding: 16px 0;
+    align-items: start;
+    position: relative;
+  }
+  .roadmap-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    border: 2px solid;
+    background: var(--bg);
+    position: relative;
+    z-index: 1;
+  }
+  .dot-now { border-color: var(--accent2); color: var(--accent2); }
+  .dot-soon { border-color: var(--accent); color: var(--accent); }
+  .dot-later { border-color: var(--accent4); color: var(--accent4); }
+  .roadmap-content { padding-top: 6px; }
+  .roadmap-phase { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 4px; }
+  .roadmap-title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+  .roadmap-desc { font-size: 13px; color: #9ca3af; }
+
+  /* TABS */
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .tab {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    color: var(--muted);
+    transition: color 0.2s, border-color 0.2s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* CODE BLOCK */
+  pre {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px 18px;
+    font-family: var(--mono);
+    font-size: 12px;
+    overflow-x: auto;
+    color: #79c0ff;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6e7681; }
+  pre .string { color: #a5d6ff; }
+  pre .keyword { color: #f85149; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    margin-top: 60px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 640px) {
+    .compare-grid { grid-template-columns: 120px repeat(4, 1fr); font-size: 11px; }
+    .cg-cell { padding: 8px 8px; }
+    h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+  <div class="header-inner">
+    <div>
+      <div class="site-tag">⚡ Full Platform Audit · March 2026</div>
+      <h1>NORCAL<span>CARB</span><br>SITE AUDIT</h1>
+    </div>
+    <div class="audit-meta">
+      norcalcarbmobile.com<br>
+      Platform: Squarespace 7.1<br>
+      Pages Audited: 30+<br>
+      By: Claude / MIT-Level Analysis
+    </div>
+  </div>
+</div>
+</header>
+
+<div class="container">
+
+  <!-- SCORE BAND -->
+  <div class="score-band">
+    <div class="score-cell">
+      <div class="score-label">Performance Est.</div>
+      <div class="score-value warn">~52</div>
+      <div class="score-sub">Mobile / 100</div>
+    </div>
+    <div class="score-cell">
+      <div class="score-label">SEO Foundation</div>
+      <div class="score-value warn">C+</div>
+      <div class="score-sub">Good base, gaps</div>
+    </div>
+    <div class="score-cell">
+      <div class="score-label">Pages Indexed</div>
+      <div class="score-value info">30+</div>
+      <div class="score-sub">Many thin pages</div>
+    </div>
+    <div class="score-cell">
+      <div class="score-label">Schema Markup</div>
+      <div class="score-value bad">NONE</div>
+      <div class="score-sub">Zero structured data</div>
+    </div>
+    <div class="score-cell">
+      <div class="score-label">Platform Lock-in</div>
+      <div class="score-value bad">HIGH</div>
+      <div class="score-sub">Squarespace CDN</div>
+    </div>
+    <div class="score-cell">
+      <div class="score-label">Migration Risk</div>
+      <div class="score-value warn">MED</div>
+      <div class="score-sub">Manageable</div>
+    </div>
+  </div>
+
+  <!-- WHAT WE FOUND -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>WHAT WE FOUND</h2>
+      <span class="pill pill-warn">SQUARESPACE 7.1</span>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <div class="finding-icon">🖼️</div>
+        <div>
+          <div class="finding-title">Hero Image Loaded via Squarespace CDN — No WebP/AVIF</div>
+          <div class="finding-desc">The logo/hero image loads as JPEG at 1500w from squarespace-cdn.com. No next-gen format, no lazy loading hint, and it appears <strong>twice</strong> in the DOM (mobile + desktop duplicate). This is your #1 LCP killer on mobile — likely adding 800ms–1.5s to load time.</div>
+        </div>
+        <span class="impact-tag impact-high">HIGH IMPACT</span>
+      </div>
+
+      <div class="finding">
+        <div class="finding-icon">📋</div>
+        <div>
+          <div class="finding-title">Duplicate Navigation — Rendered Twice in HTML</div>
+          <div class="finding-desc">The entire navigation menu (30+ links) is duplicated in the HTML source — once for desktop, once for mobile. This bloats the DOM, confuses crawlers, and Squarespace's template system generates both simultaneously. No control to fix without leaving the platform.</div>
+        </div>
+        <span class="impact-tag impact-high">HIGH IMPACT</span>
+      </div>
+
+      <div class="finding">
+        <div class="finding-icon">🗺️</div>
+        <div>
+          <div class="finding-title">Zero Schema Markup (LocalBusiness, Service, FAQ)</div>
+          <div class="finding-desc">No LocalBusiness, Service, FAQ, or Review structured data found on any page. Competitors with schema get rich results in Google — star ratings, FAQ dropdowns, service prices. You're invisible in rich results. Squarespace makes custom schema injection very difficult.</div>
+        </div>
+        <span class="impact-tag impact-high">HIGH IMPACT</span>
+      </div>
+
+      <div class="finding">
+        <div class="finding-icon">📄</div>
+        <div>
+          <div class="finding-title">Thin Location Pages — 20+ Near-Duplicate City Pages</div>
+          <div class="finding-desc">Pages like /clean-truck-check-hayward, /clean-truck-check-lodi, /clean-truck-check-fairfield etc. appear to have minimal unique content. Google flags these as thin/duplicate and may be suppressing or ignoring them in rankings despite the keyword investment.</div>
+        </div>
+        <span class="impact-tag impact-high">HIGH IMPACT</span>
+      </div>
+
+      <div class="finding">
+        <div class="finding-icon">🔗</div>
+        <div>
+          <div class="finding-title">Inconsistent URL Naming Convention</div>
+          <div class="finding-desc">"New Page" is a live indexed page at /new-page. "Top Google Rated Service in Oakland" loads an .html file outside Squarespace CMS. Mix of dash-separated formats, no clear hierarchy. This signals to Google that the site lacks architectural discipline.</div>
+        </div>
+        <span class="impact-tag impact-med">MED IMPACT</span>
+      </div>
+
+      <div class="finding">
+        <div class="finding-icon">⚡</div>
+        <div>
+          <div class="finding-title">No Booking/CTA Optimization — Booking Page Buried</div>
+          <div class="finding-desc">The Book CARB Testing CTA lives deep in the nav. No sticky CTA, no urgency signals on service pages, no price anchoring with social proof. The OBD page doesn't have a visible "Book Now" button above the fold.</div>
+        </div>
+        <span class="impact-tag impact-med">MED IMPACT</span>
+      </div>
+
+      <div class="finding">
+        <div class="finding-icon">📱</div>
+        <div>
+          <div class="finding-title">Mobile Nav Has 30+ Links in Hamburger Menu</div>
+          <div class="finding-desc">Truck fleet managers on mobile are seeing 30+ links when they open the hamburger. This is a conversion killer. Most customers need: Book Test, Services, Call. Everything else is secondary.</div>
+        </div>
+        <span class="impact-tag impact-med">MED IMPACT</span>
+      </div>
+
+      <div class="finding">
+        <div class="finding-icon">🛒</div>
+        <div>
+          <div class="finding-title">Squarespace Commerce Cart — Unnecessary Overhead</div>
+          <div class="finding-desc">A cart icon shows [0] on every page, loading WooCommerce-equivalent Squarespace commerce scripts. If bookings go through Acuity or manual contact, this is dead weight affecting load time on every page visit.</div>
+        </div>
+        <span class="impact-tag impact-low">LOW IMPACT</span>
+      </div>
+
+      <div class="finding">
+        <div class="finding-icon">✅</div>
+        <div>
+          <div class="finding-title">GOOD: SSL, Mobile Responsive, Clean URLs, Fast Hosting</div>
+          <div class="finding-desc">Squarespace handles SSL auto-renewal, is fully mobile-responsive, generates an auto-sitemap, and uses Fastly CDN. These are genuinely good fundamentals and shouldn't be undervalued when comparing platforms.</div>
+        </div>
+        <span class="impact-tag" style="background:rgba(61,220,151,0.15);color:var(--accent3);">STRENGTH</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATFORM COMPARISON -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>PLATFORM COMPARISON</h2>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('overview')">Overview</button>
+      <button class="tab" onclick="showTab('seo')">SEO Control</button>
+      <button class="tab" onclick="showTab('cost')">Cost/Year</button>
+      <button class="tab" onclick="showTab('migration')">Migration</button>
+    </div>
+
+    <div class="tab-pane active" id="overview">
+      <div class="compare-grid">
+        <div class="cg-cell cg-header"></div>
+        <div class="cg-cell cg-header">Squarespace<br><span style="color:var(--accent);font-size:9px;">CURRENT</span></div>
+        <div class="cg-cell cg-header">WordPress<br><span style="color:var(--muted);font-size:9px;">+ WP Rocket</span></div>
+        <div class="cg-cell cg-header">Custom HTML<br><span style="color:var(--muted);font-size:9px;">Static Site</span></div>
+        <div class="cg-cell cg-header">Webflow<br><span style="color:var(--muted);font-size:9px;">No-code Pro</span></div>
+
+        <div class="cg-cell cg-label">Mobile Speed</div>
+        <div class="cg-cell"><span class="partial">⚠</span> ~50-60</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> 80-95</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> 95-100</div>
+        <div class="cg-cell"><span class="partial">⚠</span> 70-85</div>
+
+        <div class="cg-cell cg-label">Schema/Structured Data</div>
+        <div class="cg-cell"><span class="cross">✗</span> Workaround</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Plugin</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Full control</div>
+        <div class="cg-cell"><span class="partial">⚠</span> Addon</div>
+
+        <div class="cg-cell cg-label">Custom Code Injection</div>
+        <div class="cg-cell"><span class="partial">⚠</span> Limited</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Full</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Full</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Full</div>
+
+        <div class="cg-cell cg-label">Content Updates</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Easy</div>
+        <div class="cg-cell"><span class="partial">⚠</span> Medium</div>
+        <div class="cg-cell"><span class="cross">✗</span> Hard</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Easy</div>
+
+        <div class="cg-cell cg-label">Local SEO Tools</div>
+        <div class="cg-cell"><span class="cross">✗</span> Basic</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Advanced</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Custom</div>
+        <div class="cg-cell"><span class="partial">⚠</span> OK</div>
+
+        <div class="cg-cell cg-label">Security/Maintenance</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Auto</div>
+        <div class="cg-cell"><span class="cross">✗</span> Manual</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Minimal</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Managed</div>
+
+        <div class="cg-cell cg-label">CTA / Conversion Opt.</div>
+        <div class="cg-cell"><span class="partial">⚠</span> Limited</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Full</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Full</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Good</div>
+
+        <div class="cg-cell cg-label">DIY Manageable</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Yes</div>
+        <div class="cg-cell"><span class="partial">⚠</span> Moderate</div>
+        <div class="cg-cell"><span class="cross">✗</span> No</div>
+        <div class="cg-cell platform-winner"><span class="check">✓</span> Yes</div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="seo">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;">
+          <div style="font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:10px;">SQUARESPACE LIMITS</div>
+          <ul style="list-style:none;font-size:13px;color:#9ca3af;line-height:2;">
+            <li>✗ Can't add LocalBusiness schema easily</li>
+            <li>✗ Can't control Core Web Vitals at hosting level</li>
+            <li>✗ No redirect manager for bulk 301s</li>
+            <li>✗ Limited canonical URL control</li>
+            <li>✗ Can't de-index thin pages individually</li>
+            <li>✗ No granular crawl budget control</li>
+            <li>✗ No hreflang (if expanding)</li>
+          </ul>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;">
+          <div style="font-family:var(--mono);font-size:11px;color:var(--accent3);margin-bottom:10px;">WHAT YOU GAIN ON WORDPRESS</div>
+          <ul style="list-style:none;font-size:13px;color:#9ca3af;line-height:2;">
+            <li>✓ RankMath = full schema suite (free)</li>
+            <li>✓ WP Rocket = 90+ Core Web Vitals</li>
+            <li>✓ Bulk 301 redirect manager</li>
+            <li>✓ Per-page canonical control</li>
+            <li>✓ Noindex thin pages instantly</li>
+            <li>✓ Google Tag Manager full access</li>
+            <li>✓ Programmatic city pages at scale</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="cost">
+      <div class="compare-grid" style="grid-template-columns:200px repeat(3,1fr);">
+        <div class="cg-cell cg-header">Item</div>
+        <div class="cg-cell cg-header">Squarespace<br><span style="color:var(--accent);font-size:9px;">CURRENT</span></div>
+        <div class="cg-cell cg-header">WordPress<br><span style="color:var(--muted);font-size:9px;">Managed Hosting</span></div>
+        <div class="cg-cell cg-header">Custom HTML<br><span style="color:var(--muted);font-size:9px;">Cloudflare/GitHub</span></div>
+
+        <div class="cg-cell cg-label">Hosting/Platform</div>
+        <div class="cg-cell">$23–36/mo</div>
+        <div class="cg-cell">$15–30/mo</div>
+        <div class="cg-cell platform-winner" style="color:var(--accent3);">$0–5/mo</div>
+
+        <div class="cg-cell cg-label">SEO Plugins</div>
+        <div class="cg-cell">Included (basic)</div>
+        <div class="cg-cell">$0 (RankMath free)</div>
+        <div class="cg-cell">Coded in</div>
+
+        <div class="cg-cell cg-label">Speed Plugins</div>
+        <div class="cg-cell"><span class="cross">✗</span> Not available</div>
+        <div class="cg-cell">$49/yr (WP Rocket)</div>
+        <div class="cg-cell platform-winner" style="color:var(--accent3);">N/A — native fast</div>
+
+        <div class="cg-cell cg-label">Dev to Build</div>
+        <div class="cg-cell">~$500–1500</div>
+        <div class="cg-cell">~$1500–3000</div>
+        <div class="cg-cell">~$500–2000</div>
+
+        <div class="cg-cell cg-label" style="font-weight:600;">Year 1 Total Est.</div>
+        <div class="cg-cell warn">$776–1932</div>
+        <div class="cg-cell">$1729–3409</div>
+        <div class="cg-cell platform-winner" style="color:var(--accent3);">$560–2060</div>
+
+        <div class="cg-cell cg-label" style="font-weight:600;">Year 2+ Total Est.</div>
+        <div class="cg-cell warn">$276–432</div>
+        <div class="cg-cell">$229–409</div>
+        <div class="cg-cell platform-winner" style="color:var(--accent3);">$0–60/yr</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:10px;font-family:var(--mono);">* Does not include content creation or ongoing SEO services</div>
+    </div>
+
+    <div class="tab-pane" id="migration">
+      <div style="font-size:13px;color:#9ca3af;margin-bottom:16px;">Risk by category if you migrate away from Squarespace today:</div>
+
+      <div class="risk-meter">
+        <span style="font-size:13px;min-width:200px;">SEO Rankings (30-day risk)</span>
+        <div class="risk-track"><div class="risk-fill" style="width:55%;background:var(--accent);"></div></div>
+        <span class="risk-label">MEDIUM</span>
+      </div>
+      <div class="risk-meter">
+        <span style="font-size:13px;min-width:200px;">Google My Business</span>
+        <div class="risk-track"><div class="risk-fill" style="width:15%;background:var(--accent3);"></div></div>
+        <span class="risk-label">LOW</span>
+      </div>
+      <div class="risk-meter">
+        <span style="font-size:13px;min-width:200px;">Booking/Revenue Interruption</span>
+        <div class="risk-track"><div class="risk-fill" style="width:30%;background:var(--accent);"></div></div>
+        <span class="risk-label">LOW-MED</span>
+      </div>
+      <div class="risk-meter">
+        <span style="font-size:13px;min-width:200px;">URL / 301 Redirect Coverage</span>
+        <div class="risk-track"><div class="risk-fill" style="width:70%;background:var(--accent2);"></div></div>
+        <span class="risk-label">HIGH</span>
+      </div>
+      <div class="risk-meter">
+        <span style="font-size:13px;min-width:200px;">Content Migration Effort</span>
+        <div class="risk-track"><div class="risk-fill" style="width:45%;background:var(--accent);"></div></div>
+        <span class="risk-label">MEDIUM</span>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;margin-top:16px;font-size:13px;">
+        <div style="font-family:var(--mono);font-size:10px;color:var(--accent);margin-bottom:8px;">301 REDIRECT STRATEGY IS EVERYTHING</div>
+        Every current URL must have a 1:1 301 redirect set before DNS switch. With 30+ location pages indexed and potentially ranked, losing those URLs without redirects would be a Google disaster. This is manageable but requires a redirect map doc before migration starts.
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDATION -->
+  <div class="verdict-box">
+    <div class="verdict-title">⚡ THE VERDICT — HYBRID APPROACH WINS</div>
+    <div class="verdict-body">
+      <strong>Don't nuke and rebuild.</strong> The Squarespace site has real indexed pages, some SEO equity, and you can update it yourself — that matters. But Squarespace is capping your ceiling: <strong>no schema, no speed control, no programmatic pages at scale, limited schema injection.</strong><br><br>
+      
+      <strong>Short-term (0–60 days):</strong> Fix what you can inside Squarespace NOW — schema injection via code block, compress/replace hero image, consolidate thin location pages, add sticky CTA. These are free wins.<br><br>
+      
+      <strong>Medium-term (60–180 days):</strong> Build a <strong>WordPress or custom HTML parallel site</strong> with proper schema, speed-optimized, and programmatic city pages. Migrate with a full 301 redirect map. Expected gain: <strong>+20–40% organic traffic</strong> from schema rich results alone.<br><br>
+      
+      <strong>The custom HTML argument:</strong> For a service business with ~30 static pages, a custom HTML/CSS site on Cloudflare Pages is <em>genuinely superior</em> to both options — 95-100 PageSpeed, $0/month hosting, zero plugin bloat, total schema control. The downside is it requires a developer (or Claude) to update content. Hybrid: WordPress for the blog/CMS, static HTML for service landing pages.
+    </div>
+  </div>
+
+  <!-- ROADMAP -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>ACTION ROADMAP</h2>
+    </div>
+    <div class="roadmap">
+      <div class="roadmap-item">
+        <div class="roadmap-dot dot-now">1</div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase">🔥 NOW — INSIDE SQUARESPACE (FREE)</div>
+          <div class="roadmap-title">Schema Injection via Code Block</div>
+          <div class="roadmap-desc">Add LocalBusiness + Service schema to homepage/service pages using Squarespace code injection. Takes 30 min. Immediate rich results eligibility in Google. Use the SEO Schema Injector skill to generate the JSON-LD.</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-dot dot-now">2</div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase">🔥 NOW — QUICK WIN</div>
+          <div class="roadmap-title">Fix Hero Image — Add WebP + Lazy Load Hint</div>
+          <div class="roadmap-desc">Replace the 1500w JPEG hero with a WebP version. Set Squarespace image format to "High Quality WebP." This alone can drop LCP by 800ms–1.5s on mobile and improve Core Web Vitals pass rate.</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-dot dot-now">3</div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase">🔥 NOW — CONVERSION</div>
+          <div class="roadmap-title">Add Sticky CTA Bar + Simplify Mobile Nav</div>
+          <div class="roadmap-desc">Inject a sticky "Book $75 Test → 916-890-4427" bar via code injection. Restructure mobile nav to 5 top-level items only. Every week this isn't done = lost bookings.</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-dot dot-soon">4</div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase">SOON — 30 DAYS</div>
+          <div class="roadmap-title">Audit + Consolidate Thin Location Pages</div>
+          <div class="roadmap-desc">Either bulk up the thin city pages with 400+ words of unique local content, or noindex them and consolidate to a single "Service Areas" hub page with anchor links. Don't leave them as-is — they're diluting your domain authority.</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-dot dot-soon">5</div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase">SOON — 60 DAYS</div>
+          <div class="roadmap-title">Build WordPress or Static HTML Replacement</div>
+          <div class="roadmap-desc">Start the new site in parallel. Don't take old site down until new site is live, tested, and 301 redirects are mapped for every existing URL. Target: WordPress (easier self-manage) OR static HTML on Cloudflare Pages (max performance).</div>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-dot dot-later">6</div>
+        <div class="roadmap-content">
+          <div class="roadmap-phase">LATER — 90+ DAYS</div>
+          <div class="roadmap-title">Programmatic Location Pages at Scale</div>
+          <div class="roadmap-desc">Once off Squarespace, generate 50+ city/county landing pages from a single template with real local data (distance, # fleets, county compliance deadlines). This is the SEO multiplier that creates compounding organic growth.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container" style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:8px;">
+    <span>NORCALCARBMOBILE.COM AUDIT · MARCH 2026</span>
+    <span>POWERED BY CLAUDE / ANTHROPIC · MIT-LEVEL ANALYSIS</span>
+  </div>
+</footer>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

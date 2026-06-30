@@ -17,7 +17,12 @@
   "aggressive_pricing": {
     "obd": "$75",
     "ovi": "$199",
-    "shop_comparison": "Most shops charge $90–$300+ plus 1–3 hours downtime per truck",
+    "motorhome_obd": "$99",
+    "motorhome_ovi": "$229",
+    "san_diego_obd": "$119",
+    "san_diego_ovi": "$219",
+    "disclaimer": "Pricing is always subject to change due to matters out of our control.",
+    "shop_comparison": "Most mobile shops charge $90–$300+ per truck",
     "switch_offer": "50% off your first test when you switch — OBD from $37.50 · OVI from $99.50",
     "beat_price": "Send us your current tester's quote — we'll try to beat it",
     "fleet": "Fleet yard visits — batch multiple trucks, one stop",

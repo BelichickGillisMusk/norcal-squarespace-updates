@@ -75,6 +75,12 @@
   "pricing": {
     "obd": "$75",
     "ovi": "$199",
+    "motorhome_obd": "$99",
+    "motorhome_ovi": "$229",
+    "san_diego_obd": "$119",
+    "san_diego_ovi": "$219",
+    "disclaimer": "Pricing is always subject to change due to matters out of our control.",
+    "source_of_truth": "config/pricing.json",
     "full_care": "CARB annual fee + $40/year",
     "reviews_url": "https://www.google.com/search?q=NorCal+CARB+Mobile+reviews#lrd=0x4e7c7c20def2c42d:0xac8d2d40ef5c9451,1,,,,"
   },

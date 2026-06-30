@@ -1,0 +1,28 @@
+{
+  "source_of_truth": "config/pricing.json",
+  "last_updated": "2026-06-27",
+  "disclaimer": "Pricing is always subject to change due to matters out of our control.",
+  "standard": {
+    "obd": "$75",
+    "ovi": "$199"
+  },
+  "motorhome": {
+    "obd": "$99",
+    "ovi": "$229"
+  },
+  "san_diego": {
+    "obd": "$119",
+    "ovi": "$219",
+    "note": "San Diego area pricing differs from standard NorCal rates"
+  },
+  "switch_offer": {
+    "discount": "50%",
+    "obd_first_test": "$37.50",
+    "ovi_first_test": "$99.50"
+  },
+  "full_care": {
+    "annual": "$40/year",
+    "includes": "CARB annual fee (CTC-VIS) + setup, monitoring & scheduling"
+  },
+  "price_range_schema": "$75–$229"
+}

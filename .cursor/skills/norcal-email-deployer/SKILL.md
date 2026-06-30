@@ -109,8 +109,14 @@ Approved campaign IDs only: `tools-launch-v1`, `when-is-my-test-due-v1`, `manage
 |-------|-------|
 | OBD mobile test | $75 |
 | OVI mobile test | $199 |
+| Motorhome OBD mobile test | $99 |
+| Motorhome OVI mobile test | $229 |
 | Full Care (setup + monitoring) | CARB annual fee (CTC-VIS) + $40/year per vehicle |
 | Switch | Beat price or 50% off first test |
+
+**San Diego pricing:** OBD **$119** · OVI **$219** (extended service area surcharge).
+
+Pricing is always subject to change due to matters out of our control.
 
 ---
 
