@@ -7,12 +7,15 @@
 
 ## Phase 1 — Identity & inbox (Bryan, ~30 min)
 
-- [ ] Google Workspace: create **`camila@norcalcarbmobile.com`** (AI agent mailbox, not a human)
+- [ ] Google Workspace: create **`camila@norcalcarbmobile.com`** (AI agent — cold outreach + GBP/GSC)
+- [ ] Google Workspace: create **`sales@norcalcarbmobile.com`** (AI agent — contact form greets + customer replies)
 - [ ] Google Cloud: new project `norcal-camila-agent` (or use existing)
-- [ ] Enable APIs: Gmail, Sheets, Drive, Calendar, Business Profile, Search Console
+- [ ] Enable APIs: Gmail, Sheets, Drive, Calendar, Business Profile, Search Console, Places
 - [ ] Service account `camila-agent@...` + download JSON key → GitHub secret `CAMILA_SERVICE_ACCOUNT_JSON`
-- [ ] Admin Console → Domain-wide delegation for service account with scopes in manifest
-- [ ] Squarespace forms → notify **`camila@`** + CC `bryan@`
+- [ ] Admin Console → Domain-wide delegation for service account with scopes in manifest (includes `gmail.modify` + `chat.messages`)
+- [ ] Squarespace forms → notify **`sales@`** + CC `camila@` + CC `bryan@`
+- [ ] Google Chat: create Bryan's "NorCal Ops" space → Manage webhooks → copy URL → GitHub secret `GOOGLE_CHAT_WEBHOOK_URL`
+- [ ] FMCSA SAFER: get free API key at https://ai.fmcsa.dot.gov/SMS/Carrier/ → GitHub secret `FMCSA_API_KEY`
 
 **Test:** Service account can read camila@ inbox (Gmail API list messages).
 
@@ -20,13 +23,17 @@
 
 ## Phase 2 — Gmail + Sheets automation (agent, ~2–4 hrs)
 
-- [ ] Google Sheet **NorCal Camila Ops** — tabs: Send Queue, Form Leads, Suppression, GBP Log, GSC Weekly
-- [ ] Import CSV templates from `scripts/cold-outreach/`
-- [ ] Deploy Apps Script or Cloud Function: form email → Sheet row
-- [ ] Wire `gmail-send-approver` skill: queue → verify-emails.js → Bryan YES → Gmail API schedule send
-- [ ] Cold templates from `cold-outreach-agent-one-pager.md`
+- [ ] Google Sheet **NorCal Camila Ops** — run `scripts/google-apps-script/cold-outreach-log-setup.gs` → `setupCamilaOpsSheet()` to create all tabs automatically
+  - Tabs created: Send Queue, Cold Sends, Suppression, Form Leads, GBP Log, GSC Weekly, SAFER Leads, Chat Log
+- [ ] Paste `GOOGLE_CHAT_WEBHOOK_URL` into Apps Script Properties → run `installDailyTrigger()` to schedule 9 AM PT loop
+- [ ] Import CSV templates from `scripts/cold-outreach/` into Send Queue tab
+- [ ] Wire `gmail-send-approver` skill: queue → verify-emails.js → Bryan YES → `send-batch.js` → Gmail API schedule send
+- [ ] Cold templates from `cold-outreach-agent-one-pager.md` (baked into `send-batch.js`)
+- [ ] Contact form handler: Squarespace → `sales@` → `contact-reply.js` auto-reply within 15 min
+- [ ] Lead builder: `build-lead-queue.js --state CA` → SAFER carriers → MX verify → Send Queue import
+- [ ] GitHub workflow: `.github/workflows/camila-cold-outreach.yml` — daily 9 AM PT cron
 
-**Test:** Bryan `approved batch {date}` → 3 test scheduled sends from camila@.
+**Test:** Bryan `approved batch {date}` → 3 test scheduled drafts from camila@ (Phase 4, dry_run=false, send_approved_batch=true).
 
 ---
 
@@ -86,10 +93,17 @@
 
 ## Secrets (GitHub)
 
-| Secret | Phase |
-|--------|-------|
-| `CAMILA_SERVICE_ACCOUNT_JSON` | 1 |
-| `CAMILA_SHEET_ID` | 2 |
-| `GOOGLE_SPREADSHEET_ID` | 2 (may merge) |
-| `VERTEX_AGENT_ID` | 4 |
-| `GBP_LOCATION_NAME` | 3 |
+| Secret | Phase | Required for |
+|--------|-------|-------------|
+| `CAMILA_SERVICE_ACCOUNT_JSON` | 1 | All automation |
+| `CAMILA_SHEET_ID` | 2 | Queue, logs, form leads |
+| `GOOGLE_SPREADSHEET_ID` | 2 | Nurture/reminder engine (separate sheet) |
+| `GOOGLE_CHAT_WEBHOOK_URL` | 1 | Bryan batch-ready alerts + first-draft sent |
+| `FMCSA_API_KEY` | 2 | SAFER lead builder |
+| `GOOGLE_PLACES_API_KEY` | 2 | Lead domain/website enrichment |
+| `COLD_OUTREACH_LIVE` | 2 | Unlock actual Gmail sends (set `true` after Bryan approves) |
+| `SEND_FROM` | 2 | Default `camila@norcalcarbmobile.com` |
+| `REPLY_FROM` | 2 | Default `sales@norcalcarbmobile.com` (form replies) |
+| `ESCALATE_TO` | 2 | Default `bryan@norcalcarbmobile.com` |
+| `VERTEX_AGENT_ID` | 4 | Full Vertex AI agent |
+| `GBP_LOCATION_NAME` | 3 | GBP review/post automation |
