@@ -6,6 +6,9 @@ This folder holds blog posts as Markdown files with YAML front-matter, for two f
    Each keeps its **original slug** so existing links and SEO are preserved.
 2. **New posts** — already-written content to be published on a **weekly** schedule.
 
+The tracked `blog_drafts/_import/` folder is reserved for raw Squarespace/WXR exports before
+conversion.
+
 The weekly scheduler (`scripts/blog-schedule/`, modeled on `scripts/gbp-post/`) reads these
 files, picks the post due each week, and — only when `BLOG_PUBLISH_LIVE=true` — publishes it to
 the Squarespace blog. Default is dry-run (report only, no live publish).
@@ -24,7 +27,7 @@ original_url: "https://norcalcarbmobile.com/blog/carb-clean-truck-check"  # migr
 source: migrated                      # migrated | new
 date: 2025-09-14                      # original publish date (migrated) — preserves chronology
 publish_date: 2026-07-08              # when the scheduler should publish (new/scheduled posts)
-status: published                     # published | scheduled | approved | pending | draft
+status: pending                       # published | scheduled | approved | pending | draft
 bryan_approved: "NO"                  # YES once Bryan signs off — gate before any live publish
 tags: ["CARB", "Clean Truck Check", "Fleet Compliance"]
 meta_description: "≤155 chars — used for the SEO meta description."
