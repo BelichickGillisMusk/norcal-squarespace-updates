@@ -26,6 +26,11 @@
 
 name: Camila Cold Outreach
 
+permissions:
+  contents: read
+  actions: read
+  packages: read
+
 on:
   schedule:
     # 16:00 UTC = 9:00 AM PT (UTC-7 in summer)
