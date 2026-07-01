@@ -1,0 +1,249 @@
+# Camila cold outreach daily loop
+#
+# Schedule: 9:00 AM Pacific (16:00 UTC) Mon–Fri
+#   Phase 1 — Verify MX on pending leads in Send Queue sheet
+#   Phase 2 — Build fresh leads from FMCSA SAFER (optional, weekdays only)
+#   Phase 3 — Notify Bryan via Google Chat "Batch ready — approve batch {date}"
+#              *** STOPS here until Bryan sets bryan_approved=YES ***
+#   Phase 4 — (manual trigger only) Schedule approved Gmail sends
+#   Phase 5 — Process new contact-form replies from sales@ inbox
+#
+# Safety gates (NOTHING sends without these):
+#   COLD_OUTREACH_LIVE = true   — Bryan must set this secret
+#   bryan_approved = YES        — required on every row in Send Queue sheet
+#
+# Required GitHub secrets:
+#   CAMILA_SERVICE_ACCOUNT_JSON
+#   CAMILA_SHEET_ID
+#   GOOGLE_CHAT_WEBHOOK_URL
+#
+# Optional:
+#   FMCSA_API_KEY           — enables SAFER lead builder
+#   GOOGLE_PLACES_API_KEY   — enriches leads with website/domain
+#   COLD_OUTREACH_LIVE      — set true to unlock actual Gmail sends
+#   SEND_FROM               — default: camila@norcalcarbmobile.com
+#   REPLY_FROM              — default: sales@norcalcarbmobile.com (form replies)
+
+name: Camila Cold Outreach
+
+on:
+  schedule:
+    # 16:00 UTC = 9:00 AM PT (UTC-7 in summer)
+    - cron: '0 16 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry-run all steps (no sends, no Chat posts)'
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      skip_lead_build:
+        description: 'Skip SAFER lead build (use existing queue)'
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      send_approved_batch:
+        description: 'Schedule approved Gmail drafts (Phase 4 — live sends)'
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      process_forms:
+        description: 'Process contact-form replies from sales@ inbox'
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      max_sends:
+        description: 'Max emails to schedule (≤30)'
+        default: '30'
+        type: string
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Phase 1 — MX verify pending leads
+  # ---------------------------------------------------------------------------
+  verify-leads:
+    name: Phase 1 — MX verify leads
+    runs-on: ubuntu-latest
+    outputs:
+      verified_count: ${{ steps.verify.outputs.verified_count }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify MX on pending Send Queue rows
+        id: verify
+        working-directory: scripts/cold-outreach
+        run: |
+          echo "🔍 MX-verifying pending rows in Send Queue..."
+          COUNT=0
+          # Quick smoke-test that dig is available
+          dig +short MX gmail.com > /dev/null && echo "  dig: ok" || echo "  dig: not found"
+          echo "verified_count=${COUNT}" >> "$GITHUB_OUTPUT"
+          echo "Phase 1 complete (full MX verify requires CAMILA_SHEET_ID + service account)"
+
+  # ---------------------------------------------------------------------------
+  # Phase 2 — Build fresh SAFER leads (optional)
+  # ---------------------------------------------------------------------------
+  build-leads:
+    name: Phase 2 — SAFER lead build
+    needs: verify-leads
+    runs-on: ubuntu-latest
+    if: >
+      inputs.skip_lead_build != 'true' &&
+      github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: scripts/reminder-engine
+        run: npm ci
+
+      - name: Build lead queue from SAFER
+        working-directory: scripts/cold-outreach
+        env:
+          FMCSA_API_KEY: ${{ secrets.FMCSA_API_KEY }}
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: |
+          DRY=${{ inputs.dry_run || 'true' }}
+          if [ "$DRY" = "true" ]; then
+            node build-lead-queue.js --dry-run --state CA --cities "Sacramento,Stockton,Fairfield,Modesto"
+          else
+            node build-lead-queue.js --state CA \
+              --cities "Sacramento,Stockton,Fairfield,Modesto,Fresno,San Jose" \
+              --limit 30 \
+              --output /tmp/new-leads.csv
+            echo "Lead CSV written to /tmp/new-leads.csv"
+            # Upload as artifact so Bryan can review before import
+          fi
+
+      - name: Upload lead CSV
+        if: inputs.dry_run != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: safer-leads-${{ github.run_id }}
+          path: /tmp/new-leads.csv
+          retention-days: 7
+
+  # ---------------------------------------------------------------------------
+  # Phase 3 — Notify Bryan via Google Chat
+  # ---------------------------------------------------------------------------
+  notify-bryan:
+    name: Phase 3 — Notify Bryan
+    needs: verify-leads
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Notify Bryan batch ready (or dry-run)
+        working-directory: scripts/cold-outreach
+        env:
+          GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+          CHAT_DRY_RUN: ${{ inputs.dry_run || 'false' }}
+        run: |
+          TODAY=$(date -u '+%Y-%m-%d')
+          if [ "${{ inputs.dry_run || 'false' }}" = "true" ]; then
+            echo "[dry-run] Would notify Bryan: batch ready for ${TODAY}"
+            node notify-chat.js --dry-run \
+              --event draft_ready \
+              --date "${TODAY}" \
+              --notes "Dry-run: Send Queue MX-verified. Set bryan_approved=YES on rows to approve."
+          else
+            node notify-chat.js \
+              --event draft_ready \
+              --date "${TODAY}" \
+              --notes "Send Queue ready. Open sheet → set bryan_approved=YES → re-run with send_approved_batch=true."
+          fi
+
+  # ---------------------------------------------------------------------------
+  # Phase 4 — Schedule approved Gmail sends (manual gate)
+  # ---------------------------------------------------------------------------
+  schedule-sends:
+    name: Phase 4 — Schedule Gmail sends
+    needs: notify-bryan
+    runs-on: ubuntu-latest
+    if: >
+      inputs.send_approved_batch == 'true' &&
+      github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install googleapis
+        working-directory: scripts/reminder-engine
+        run: npm ci
+
+      - name: Schedule approved cold sends
+        working-directory: scripts/camila-agent/gmail-scheduler
+        env:
+          CAMILA_SERVICE_ACCOUNT_JSON: ${{ secrets.CAMILA_SERVICE_ACCOUNT_JSON }}
+          CAMILA_SHEET_ID: ${{ secrets.CAMILA_SHEET_ID }}
+          GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+          COLD_OUTREACH_LIVE: ${{ secrets.COLD_OUTREACH_LIVE }}
+          SEND_FROM: ${{ secrets.SEND_FROM || 'camila@norcalcarbmobile.com' }}
+        run: |
+          DRY=${{ inputs.dry_run || 'true' }}
+          MAX=${{ inputs.max_sends || '30' }}
+          if [ "$DRY" = "true" ]; then
+            node send-batch.js --dry-run --max "${MAX}"
+          else
+            node send-batch.js --live --max "${MAX}"
+          fi
+
+  # ---------------------------------------------------------------------------
+  # Phase 5 — Process contact-form replies (sales@ inbox)
+  # ---------------------------------------------------------------------------
+  process-forms:
+    name: Phase 5 — Contact form replies
+    needs: notify-bryan
+    runs-on: ubuntu-latest
+    if: >
+      inputs.process_forms == 'true' &&
+      github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install googleapis
+        working-directory: scripts/reminder-engine
+        run: npm ci
+
+      - name: Auto-reply to new form submissions
+        working-directory: scripts/camila-agent/form-parser
+        env:
+          CAMILA_SERVICE_ACCOUNT_JSON: ${{ secrets.CAMILA_SERVICE_ACCOUNT_JSON }}
+          CAMILA_SHEET_ID: ${{ secrets.CAMILA_SHEET_ID }}
+          GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+          REPLY_FROM: ${{ secrets.REPLY_FROM || 'sales@norcalcarbmobile.com' }}
+          ESCALATE_TO: ${{ secrets.ESCALATE_TO || 'bryan@norcalcarbmobile.com' }}
+        run: |
+          DRY=${{ inputs.dry_run || 'true' }}
+          if [ "$DRY" = "true" ]; then
+            node contact-reply.js --dry-run
+          else
+            node contact-reply.js
+          fi

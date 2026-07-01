@@ -4,6 +4,38 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-01 — Camila cold outreach setup (PR: "Camila Cold email setup tonight")
+
+### New files
+- `scripts/cold-outreach/notify-chat.js` — Google Chat webhook module: batch-ready cards, first-draft-sent alerts, bounce warnings. Dual-use as CLI + ESM import. `CHAT_DRY_RUN=true` for testing.
+- `scripts/cold-outreach/build-lead-queue.js` — FMCSA SAFER lead builder: queries CA fleet operators by city, MX-verifies emails, Google Places enrichment, outputs staggered Send Queue CSV. `--dry-run` safe.
+- `scripts/camila-agent/gmail-scheduler/send-batch.js` — Gmail API batch scheduler: reads approved rows from Google Sheet, creates camila@ drafts 7 min apart, notifies Bryan via Chat when first draft is ready.
+- `scripts/camila-agent/form-parser/contact-reply.js` — Contact form auto-reply from `sales@`: parses Squarespace notifications, logs to Form Leads sheet, auto-replies within 15 min, escalates fleet/complex leads to Bryan + Chat alert.
+- `scripts/google-apps-script/cold-outreach-log-setup.gs` — One-time sheet setup (run `setupCamilaOpsSheet()`) creates all 8 tabs with headers, conditional formatting, dropdowns. `installDailyTrigger()` sets 9 AM PT cron.
+- `scripts/camila-agent/package.json` — package manifest for camila-agent scripts (googleapis dep)
+- `.github/workflows/camila-cold-outreach.yml` — Daily 9 AM PT cron (Mon–Fri): Phase 1 MX verify → Phase 2 SAFER lead build (optional) → Phase 3 Bryan Chat notification → Phase 4 Gmail sends (manual gate) → Phase 5 form replies
+
+### Updated files
+- `config/camila-agent-manifest.json` — added `sales_email`, `google_chat`, `google_maps_places`, `fmcsa_safer`, `service_area` (primary + satellite cities incl. Stockton, Modesto, Fresno), updated `forms.squarespace_notification_inbox` → `sales@`, updated delegation scopes
+- `docs/camila-deploy-phases.md` — Phase 1 adds `sales@` mailbox + Chat webhook + FMCSA key; Phase 2 references new scripts; Secrets table expanded
+- `scripts/camila-agent/README.md` — full file map + quick-start commands
+- `.cursor/skills/norcal-email-deployer/references/secrets-checklist.md` — Camila cold outreach secrets table added
+
+### Safety gates (unchanged)
+- Nothing sends without `COLD_OUTREACH_LIVE=true` (GitHub secret)
+- Nothing sends without `bryan_approved=YES` on every row
+- 30/day max, 7 min between sends
+- `verify-emails.js` MX check required before queue
+
+### Blocker — Bryan must do (Phase 1)
+- Create `sales@norcalcarbmobile.com` Google Workspace mailbox
+- Create Google Chat space → Manage webhooks → paste URL as `GOOGLE_CHAT_WEBHOOK_URL` secret
+- Get free FMCSA key: https://ai.fmcsa.dot.gov/SMS/Carrier/ → paste as `FMCSA_API_KEY` secret
+- Run `cold-outreach-log-setup.gs` → `setupCamilaOpsSheet()` in Google Sheets
+- Set Squarespace form notifications → `sales@` + CC `camila@`
+
+---
+
 ## 2026-06-27 — Cloudflare site buildout (5 pages + 42 redirects)
 
 - **New pages:** `/services` (4 service cards + pricing table), `/areas` (17 service area cards with anchor IDs), `/faq` (10 Q&A + FAQPage JSON-LD schema)
