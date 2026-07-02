@@ -35,7 +35,21 @@ Set in repo **Settings → Secrets and variables → Actions**.
 | `SQUARESPACE_EMAIL` | Editor login |
 | `SQUARESPACE_PASSWORD` | Editor login |
 
+## Camila cold outreach + form auto-reply (new)
+
+| Secret | Example | Required for |
+|--------|---------|-------------|
+| `CAMILA_SERVICE_ACCOUNT_JSON` | Full JSON key | Gmail API (camila@ + sales@), Sheets |
+| `CAMILA_SHEET_ID` | From Sheet URL | Send Queue, Form Leads, logs |
+| `GOOGLE_CHAT_WEBHOOK_URL` | From Chat space → Manage webhooks | Bryan batch-ready alerts, first-draft sent |
+| `FMCSA_API_KEY` | From ai.fmcsa.dot.gov | SAFER lead builder (free key) |
+| `GOOGLE_PLACES_API_KEY` | From GCP Console | Lead domain/website enrichment |
+| `COLD_OUTREACH_LIVE` | `true` | Unlock actual Gmail sends (set after Bryan approves day 1) |
+| `SEND_FROM` | `camila@norcalcarbmobile.com` | Cold outreach sender |
+| `REPLY_FROM` | `sales@norcalcarbmobile.com` | Contact form auto-reply sender |
+| `ESCALATE_TO` | `bryan@norcalcarbmobile.com` | Fleet/complex lead escalation |
+
 ## Not in GitHub (Bryan only)
 
-- Gmail login for cold outreach (browser session)
+- Gmail login for manual cold outreach (browser session)
 - Resend dashboard access

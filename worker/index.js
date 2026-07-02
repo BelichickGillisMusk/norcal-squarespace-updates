@@ -77,8 +77,9 @@ const REDIRECTS = {
   '/clean-truck-check-blog': '/blog',
 };
 
+const HTML_ESC = { '<': '&lt;', '>': '&gt;', '&': '&amp;' };
 function esc(s) {
-  return String(s || '').replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]));
+  return String(s || '').replace(/[<>&]/g, (c) => HTML_ESC[c]);
 }
 
 function wantsJson(request) {
@@ -149,7 +150,8 @@ async function handleContact(request, env) {
     subject: `New test request: ${lead.name}${lead.location ? ' — ' + lead.location : ''}`,
     html,
   };
-  if (lead.email) payload.reply_to = lead.email;
+  const cleanEmail = lead.email.replace(/[\r\n]/g, '');
+  if (cleanEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) payload.reply_to = cleanEmail;
 
   try {
     const r = await fetch('https://api.resend.com/emails', {

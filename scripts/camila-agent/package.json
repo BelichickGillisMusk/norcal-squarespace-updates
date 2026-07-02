@@ -1,0 +1,16 @@
+{
+  "name": "norcal-camila-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Camila AI agent runtime — Gmail scheduler, form auto-reply",
+  "type": "module",
+  "scripts": {
+    "send-batch": "node gmail-scheduler/send-batch.js",
+    "form-reply": "node form-parser/contact-reply.js",
+    "send-batch-dry": "node gmail-scheduler/send-batch.js --dry-run",
+    "form-reply-dry": "node form-parser/contact-reply.js --dry-run"
+  },
+  "dependencies": {
+    "googleapis": "^173.0.0"
+  }
+}
