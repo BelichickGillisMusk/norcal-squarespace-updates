@@ -1,16 +1,19 @@
 {
-  // Cloudflare Worker that serves the NorCal CARB Mobile site (static assets in ./site)
-  // plus the /api/contact form handler. Deploy with: wrangler deploy
-  // Worker name matches the existing worker: norcalcarbmobile.silverbackai.workers.dev
-  "name": "norcal-squarespace-updates-gillis",
+  // Cloudflare Worker serving norcalcarbmobile.com
+  // Static assets in ./site, contact form handler at /api/contact
+  "name": "norcalcarbmobile-site",
   "main": "worker/index.js",
   "compatibility_date": "2025-06-01",
   "assets": {
     "directory": "./site",
     "binding": "ASSETS",
-    // serves /contact from contact.html (and / from index.html)
-    "html_handling": "auto-trailing-slash"
-  }
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "norcalcarbmobile.com", "custom_domain": true },
+    { "pattern": "www.norcalcarbmobile.com", "custom_domain": true }
+  ]
   // Set secrets/vars in the dashboard or via:  wrangler secret put RESEND_API_KEY
   // Optional plain vars: CONTACT_TO, CONTACT_FROM
 }

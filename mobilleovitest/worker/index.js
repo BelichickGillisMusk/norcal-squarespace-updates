@@ -1,8 +1,9 @@
 const DEFAULT_TO = "bgillis99@gmail.com";
 const DEFAULT_FROM = "MobileOVI Test <noreply@mobilleovitest.com>";
 
+const HTML_ESC = { "<": "&lt;", ">": "&gt;", "&": "&amp;" };
 function esc(s) {
-  return String(s || "").replace(/[<>&]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" })[c]);
+  return String(s || "").replace(/[<>&]/g, (c) => HTML_ESC[c]);
 }
 
 function wantsJson(request) {
