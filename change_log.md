@@ -4,37 +4,27 @@ Agents append timestamped entries below.
 
 ---
 
-## 2026-07-01 — Camila cold outreach setup (PR: "Camila Cold email setup tonight")
+## 2026-06-28 — Emergency live launch: Squarespace canceled, site expanded to 9 pages
 
-### New files
-- `scripts/cold-outreach/notify-chat.js` — Google Chat webhook module: batch-ready cards, first-draft-sent alerts, bounce warnings. Dual-use as CLI + ESM import. `CHAT_DRY_RUN=true` for testing.
-- `scripts/cold-outreach/build-lead-queue.js` — FMCSA SAFER lead builder: queries CA fleet operators by city, MX-verifies emails, Google Places enrichment, outputs staggered Send Queue CSV. `--dry-run` safe.
-- `scripts/camila-agent/gmail-scheduler/send-batch.js` — Gmail API batch scheduler: reads approved rows from Google Sheet, creates camila@ drafts 7 min apart, notifies Bryan via Chat when first draft is ready.
-- `scripts/camila-agent/form-parser/contact-reply.js` — Contact form auto-reply from `sales@`: parses Squarespace notifications, logs to Form Leads sheet, auto-replies within 15 min, escalates fleet/complex leads to Bryan + Chat alert.
-- `scripts/google-apps-script/cold-outreach-log-setup.gs` — One-time sheet setup (run `setupCamilaOpsSheet()`) creates all 8 tabs with headers, conditional formatting, dropdowns. `installDailyTrigger()` sets 9 AM PT cron.
-- `scripts/camila-agent/package.json` — package manifest for camila-agent scripts (googleapis dep)
-- `.github/workflows/camila-cold-outreach.yml` — Daily 9 AM PT cron (Mon–Fri): Phase 1 MX verify → Phase 2 SAFER lead build (optional) → Phase 3 Bryan Chat notification → Phase 4 Gmail sends (manual gate) → Phase 5 form replies
+**Context:** Squarespace canceled the site today. Cloudflare Worker site is now the live production site.
 
-### Updated files
-- `config/camila-agent-manifest.json` — added `sales_email`, `google_chat`, `google_maps_places`, `fmcsa_safer`, `service_area` (primary + satellite cities incl. Stockton, Modesto, Fresno), updated `forms.squarespace_notification_inbox` → `sales@`, updated delegation scopes
-- `docs/camila-deploy-phases.md` — Phase 1 adds `sales@` mailbox + Chat webhook + FMCSA key; Phase 2 references new scripts; Secrets table expanded
-- `scripts/camila-agent/README.md` — full file map + quick-start commands
-- `.cursor/skills/norcal-email-deployer/references/secrets-checklist.md` — Camila cold outreach secrets table added
-
-### Safety gates (unchanged)
-- Nothing sends without `COLD_OUTREACH_LIVE=true` (GitHub secret)
-- Nothing sends without `bryan_approved=YES` on every row
-- 30/day max, 7 min between sends
-- `verify-emails.js` MX check required before queue
-
-### Blocker — Bryan must do (Phase 1)
-- Create `sales@norcalcarbmobile.com` Google Workspace mailbox
-- Create Google Chat space → Manage webhooks → paste URL as `GOOGLE_CHAT_WEBHOOK_URL` secret
-- Get free FMCSA key: https://ai.fmcsa.dot.gov/SMS/Carrier/ → paste as `FMCSA_API_KEY` secret
-- Run `cold-outreach-log-setup.gs` → `setupCamilaOpsSheet()` in Google Sheets
-- Set Squarespace form notifications → `sales@` + CC `camila@`
-
----
+- **New pages (4 added, bringing total to 9):**
+  - `/pricing` — dedicated pricing page with all 6 tiers, switch-and-save offer, Full Care, comparison table
+  - `/blog` — blog index linking 3 published posts
+  - `/blog/carb-clean-truck-check` — "What Is the CARB Clean Truck Check?" (~800 words, SEO: CARB Clean Truck Check Sacramento)
+  - `/blog/how-mobile-carb-testing-works` — "How Mobile CARB Testing Works" (~750 words, SEO: mobile CARB testing near me)
+  - `/blog/2026-carb-testing-deadlines` — "2026 CARB Testing Deadlines" (~850 words, SEO: CARB compliance deadline 2026)
+- **Navigation updated** across all 9 pages: added Pricing + Blog links to header nav and footer nav
+- **Worker redirects updated:** `/clean-truck-check-rates` → `/pricing`, `/clean-truck-check-blog` → `/blog`
+- **wrangler.jsonc** updated with custom domain routes for `norcalcarbmobile.com` and `www.norcalcarbmobile.com`
+- **Blog posts include:** Article JSON-LD schema, internal links to /contact and /services, proper meta descriptions
+- **All pages:** 9 total — `/` (home), `/services`, `/pricing`, `/areas`, `/faq`, `/blog`, `/blog/*` (3 posts), `/contact`
+- **Deployment required:** Bryan must:
+  1. Add `norcalcarbmobile.com` as a zone in Cloudflare (if not already)
+  2. Point domain nameservers to Cloudflare (at registrar)
+  3. Set `CLOUDFLARE_API_TOKEN` and run `npx wrangler deploy` from repo root
+  4. Set `RESEND_API_KEY` secret via `npx wrangler secret put RESEND_API_KEY`
+  5. Verify all pages at `norcalcarbmobile.com`
 
 ## 2026-06-27 — Cloudflare site buildout (5 pages + 42 redirects)
 

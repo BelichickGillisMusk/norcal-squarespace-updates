@@ -12,7 +12,7 @@
  */
 
 const DEFAULT_TO = 'bgillis99@gmail.com';
-const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
+const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.mobileovitest.com>';
 
 /**
  * Old Squarespace URL → new path.  All return 301 so search engines
@@ -28,12 +28,14 @@ const REDIRECTS = {
   '/book-schedule-carb-smoke-test-sacramento': '/contact',
   '/contact-us': '/contact',
 
+  // → /pricing
+  '/clean-truck-check-rates': '/pricing',
+
   // → /services
   '/clean-truck-check': '/services#obd',
   '/smoke-opacity-test-near-me': '/services#ovi',
   '/motorhome': '/services#motorhome',
   '/agricultural-vehicles-clean-truck-check': '/services#agricultural',
-  '/clean-truck-check-rates': '/services#pricing',
   '/services-mobile-ovi-smoke': '/services',
 
   // → /faq
@@ -71,8 +73,8 @@ const REDIRECTS = {
   '/clean-truck-top-review': '/#reviews',
   '/reviews-service-area': '/#reviews',
 
-  // → homepage (no blog page yet)
-  '/clean-truck-check-blog': '/',
+  // → /blog
+  '/clean-truck-check-blog': '/blog',
 };
 
 const HTML_ESC = { '<': '&lt;', '>': '&gt;', '&': '&amp;' };
@@ -132,7 +134,7 @@ async function handleContact(request, env) {
   };
 
   const html = `
-    <h2>New test request — norcalcarbmobile.com</h2>
+    <h2>New test request — mobileovitest.com</h2>
     <table cellpadding="6" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:15px">
       <tr><td><strong>Name</strong></td><td>${esc(lead.name)}</td></tr>
       <tr><td><strong>Phone</strong></td><td>${esc(lead.phone)}</td></tr>
