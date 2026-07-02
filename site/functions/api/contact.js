@@ -9,7 +9,7 @@
  *   RESEND_API_KEY   — Resend API key
  * Optional:
  *   CONTACT_TO       — override recipient (default bgillis99@gmail.com)
- *   CONTACT_FROM     — verified Resend sender (default noreply@mail.mobileovitest.com)
+ *   CONTACT_FROM     — verified Resend sender (default noreply@mail.norcalcarbmobile.com)
  *
  * Until RESEND_API_KEY is set, the call returns a clear error and the page tells
  * the visitor to call — so we never silently swallow a lead (the exact bug the
@@ -17,7 +17,7 @@
  */
 
 const DEFAULT_TO = 'bgillis99@gmail.com';
-const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.mobileovitest.com>';
+const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
 
 function esc(s) {
   return String(s || '').replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]));
@@ -81,7 +81,7 @@ export async function onRequestPost(context) {
   };
 
   const html = `
-    <h2>New test request — mobileovitest.com</h2>
+    <h2>New test request — norcalcarbmobile.com</h2>
     <table cellpadding="6" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:15px">
       <tr><td><strong>Name</strong></td><td>${esc(lead.name)}</td></tr>
       <tr><td><strong>Phone</strong></td><td>${esc(lead.phone)}</td></tr>
