@@ -14,6 +14,44 @@
 const DEFAULT_TO = 'bgillis99@gmail.com';
 const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
 
+const SCHEMA_TAG = `<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutomotiveBusiness",
+  "name": "NorCal CARB Mobile LLC",
+  "legalName": "NorCal CARB Mobile LLC",
+  "url": "https://norcalcarbmobile.com",
+  "telephone": "+1-916-890-4427",
+  "priceRange": "$$",
+  "description": "Certified statewide mobile CARB Clean Truck Check provider executing official SAE J1667 smoke opacity testing and non-OBD compliance tracking across California.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "4810 7th Avenue",
+    "addressLocality": "Sacramento",
+    "addressRegion": "CA",
+    "postalCode": "95820",
+    "addressCountry": "US"
+  },
+  "knowsAbout": [
+    "CARB Clean Truck Check",
+    "SAE J1667 Smoke Opacity Testing",
+    "Heavy-Duty Diesel Emissions Compliance",
+    "Non-OBD Truck Inspections",
+    "OVI Clean Truck Check Compliance"
+  ],
+  "areaServed": [
+    { "@type": "AdministrativeArea", "name": "Sacramento County" },
+    { "@type": "AdministrativeArea", "name": "Butte County" },
+    { "@type": "AdministrativeArea", "name": "San Joaquin County" },
+    { "@type": "AdministrativeArea", "name": "Santa Clara County" },
+    { "@type": "AdministrativeArea", "name": "Sonoma County" },
+    { "@type": "AdministrativeArea", "name": "Alameda County" },
+    { "@type": "AdministrativeArea", "name": "San Diego County" }
+  ],
+  "sameAs": ["https://yelp.com"]
+}
+</script>`;
+
 /**
  * Old Squarespace URL → new path.  All return 301 so search engines
  * update their indexes and any inbound links keep working.
@@ -145,7 +183,7 @@ async function handleContact(request, env) {
   const payload = {
     from: env.CONTACT_FROM || DEFAULT_FROM,
     to: [env.CONTACT_TO || DEFAULT_TO],
-    subject: `New test request: ${lead.name}${lead.location ? ' — ' + lead.location : ''}`,
+    subject: `New test request: ${lead.name.replace(/[\r\n]/g, '')}${lead.location ? ' — ' + lead.location.replace(/[\r\n]/g, '') : ''}`,
     html,
   };
   const cleanEmail = lead.email.replace(/[\r\n]/g, '');
@@ -181,7 +219,12 @@ export default {
       });
     }
 
-    // Everything else → static assets in ../site
-    return env.ASSETS.fetch(request);
+    // Everything else → static assets; inject schema into HTML responses
+    const assetRes = await env.ASSETS.fetch(request);
+    const ct = assetRes.headers.get('content-type') || '';
+    if (!ct.includes('text/html')) return assetRes;
+    return new HTMLRewriter()
+      .on('head', { element(el) { el.append(SCHEMA_TAG, { html: true }); } })
+      .transform(assetRes);
   },
 };
