@@ -1,24 +1,50 @@
-# Camila Vertex agent — code home (future)
+# Camila agent — runtime scripts
 
-**Status:** Architecture + skills in repo. GCP deployment per `docs/camila-deploy-phases.md`.
+**Status:** Cold outreach + contact-form auto-reply deployed. GCP Vertex agent phase pending.
 
-## Planned components
+## Files
 
 | Path | Purpose |
 |------|---------|
-| `gmail-scheduler/` | Gmail API send with 7-min spacing |
-| `form-parser/` | Squarespace email → Sheet → auto-reply |
-| `gbp-worker/` | Review fetch + reply drafts |
-| `gsc-reporter/` | Weekly Search Console → Sheet |
+| `gmail-scheduler/send-batch.js` | Gmail API batch scheduler — reads approved rows from Send Queue sheet, creates drafts 7 min apart, notifies Bryan via Chat when first draft is created |
+| `form-parser/contact-reply.js` | Contact form auto-reply from `sales@` — parses Squarespace notifications, logs to Form Leads sheet, auto-replies within 15 min, escalates fleet/complex inquiries to Bryan |
 
-## Until deployed
+## Related files
 
-Use **Cursor skills** as the runtime:
+| Path | Purpose |
+|------|---------|
+| `scripts/cold-outreach/build-lead-queue.js` | SAFER lead builder — queries FMCSA API for NorCal CA fleet operators, MX-verifies emails, outputs Send Queue CSV |
+| `scripts/cold-outreach/notify-chat.js` | Google Chat webhook module — batch ready, first draft sent, bounce alerts |
+| `scripts/cold-outreach/verify-emails.js` | MX check for single email or CSV file |
+| `scripts/google-apps-script/cold-outreach-log-setup.gs` | One-time sheet setup + 9 AM PT daily trigger |
+| `.github/workflows/camila-cold-outreach.yml` | Daily cron: verify MX → build leads → notify Bryan → (manual) send batch → form replies |
 
-1. `.cursor/skills/camila-vertex-agent/SKILL.md` — daily orchestration
-2. `.cursor/skills/gmail-send-approver/SKILL.md` — cold batch execution
-3. `scripts/cold-outreach/verify-emails.js` — MX checks
+## Quick start (after secrets are set)
+
+```bash
+# 1. Dry-run — validate config, no sends, no Chat posts
+cd scripts/cold-outreach
+node notify-chat.js --dry-run --event draft_ready --date 2026-07-01
+
+# 2. Build a lead queue from SAFER (needs FMCSA_API_KEY)
+node build-lead-queue.js --state CA --cities "Sacramento,Stockton" --limit 10 --dry-run
+
+# 3. Verify MX on a CSV
+node verify-emails.js --file gmail-send-queue-template.csv
+
+# 4. Schedule approved Gmail drafts (needs CAMILA_SERVICE_ACCOUNT_JSON + CAMILA_SHEET_ID)
+cd ../camila-agent/gmail-scheduler
+node send-batch.js --dry-run
+
+# 5. Process contact-form inbox (sales@)
+cd ../form-parser
+node contact-reply.js --dry-run
+```
 
 ## Config
 
-`config/camila-agent-manifest.json` — fill GCP project, sheet IDs, GBP location after Phase 1.
+All IDs, scopes, satellite cities, and API references: **`config/camila-agent-manifest.json`**
+
+## Deployment order
+
+See **`docs/camila-deploy-phases.md`** (Phase 1 Workspace identity → Phase 2 Gmail+Sheets → Phase 3 GBP+GSC → Phase 4 Vertex agent).
