@@ -13,7 +13,7 @@ Bryan approves and `BLOG_PUBLISH_LIVE=true` is set.
 
 | Input | Needed for | Status |
 |-------|-----------|--------|
-| Squarespace blog export (`.xml` / WordPress WXR) | Migrating old posts + slugs | ⛔ **Need from Bryan** — not in repo, not in Drive, and the live site can't be scraped from CI (host not in egress allowlist). Drop it in Google Drive or commit it to `blog_drafts/_import/`. |
+| Squarespace blog export (`.xml` / WordPress WXR) | Migrating old posts + slugs | ⛔ **Need from Bryan** — not in repo, not in Drive, and the live site can't be scraped from CI (host not in egress allowlist). Drop it in Google Drive or commit it to `blog_drafts/_import/` (create the folder first if you're on an older clone without it). |
 | `Blog Page Options.html` (Claude Design) | New blog layout | ⏳ Pending `/design-login` + import (Bryan: "design done tonight") |
 | New written posts | Weekly schedule queue | ⛔ **Need from Bryan** — not found in Drive |
 | `SQUARESPACE_API_KEY_UPDATES` (GH secret) | Live publish (blog write) | ✅ Exists per repo README (verify blog-write scope at go-live) |
@@ -25,7 +25,7 @@ Bryan approves and `BLOG_PUBLISH_LIVE=true` is set.
 
 ## Phase 1 — Import old posts (slug-preserving)
 
-1. Receive the `.xml` (WXR) export → place at `blog_drafts/_import/export.xml`.
+1. Receive the `.xml` (WXR) export → place at `blog_drafts/_import/export.xml` (create `blog_drafts/_import/` first if it's missing in your clone).
 2. Parse each `<item>` of type `post`: title, **slug** (from `<wp:post_name>` / link), publish
    date, categories/tags, and HTML body.
 3. Convert each to `blog_drafts/<slug>.md` with front-matter (`source: migrated`,

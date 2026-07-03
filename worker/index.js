@@ -66,12 +66,14 @@ const REDIRECTS = {
   '/book-schedule-carb-smoke-test-sacramento': '/contact',
   '/contact-us': '/contact',
 
+  // → /pricing
+  '/clean-truck-check-rates': '/pricing',
+
   // → /services
   '/clean-truck-check': '/services#obd',
   '/smoke-opacity-test-near-me': '/services#ovi',
   '/motorhome': '/services#motorhome',
   '/agricultural-vehicles-clean-truck-check': '/services#agricultural',
-  '/clean-truck-check-rates': '/services#pricing',
   '/services-mobile-ovi-smoke': '/services',
 
   // → /faq
@@ -109,8 +111,8 @@ const REDIRECTS = {
   '/clean-truck-top-review': '/#reviews',
   '/reviews-service-area': '/#reviews',
 
-  // → homepage (no blog page yet)
-  '/clean-truck-check-blog': '/',
+  // → /blog
+  '/clean-truck-check-blog': '/blog',
 };
 
 const HTML_ESC = { '<': '&lt;', '>': '&gt;', '&': '&amp;' };
