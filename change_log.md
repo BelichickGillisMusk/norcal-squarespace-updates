@@ -84,7 +84,7 @@ Site — Squarespace → Cloudflare migration target (`site/`):
 - **Pending:** GBP photos (egress-blocked — need upload or domain allowlist); connect Cloudflare Pages; propagate 33 → email templates + `squarespace/schema-local-business.html`
 
 Blog pipeline:
-- Added `blog_drafts/` drop-zone + `docs/blog-pipeline-runbook.md` (import slug-preserving → new layout → weekly schedule → go-live gate)
+- Added `blog_drafts/` drop-zone + tracked `blog_drafts/_import/` placeholder + `docs/blog-pipeline-runbook.md` (import slug-preserving → new layout → weekly schedule → go-live gate)
 - **Blockers (need Bryan):** `.xml`/WXR blog export (not in repo/Drive; live site unscrapable); `Blog Page Options.html` pending `/design-login`
 
 ## 2026-06-22 — Samantha GBP post status cron
