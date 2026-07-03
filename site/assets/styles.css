@@ -60,6 +60,14 @@ a  { color: var(--green); text-decoration: none; }
 .btn-ghost { background: transparent; color: var(--green); border-color: var(--green); }
 .btn-ghost:hover { background: var(--green); color: #fff; }
 .btn-lg { padding: 16px 30px; font-size: 1.1rem; }
+.btn-call {
+  background: #ffffff; color: #dc2626; font-weight: 800;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  transition: background .15s ease, box-shadow .15s ease, transform .05s ease;
+}
+.btn-call:hover { background: #f9f9f9; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+.btn-call:active { background: #f4f4f4; box-shadow: 0 1px 4px rgba(0,0,0,0.35); transform: translateY(1px); }
 
 /* ---------- Header ---------- */
 .site-header {
