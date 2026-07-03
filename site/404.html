@@ -1,22 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Page Not Found — MobileOVI Test</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0a;color:#e5e5e5;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
-h1{font-size:4rem;font-weight:800;color:#666;margin-bottom:12px}
-p{color:#888;margin-bottom:24px}
-a{color:#3b82f6;text-decoration:none}a:hover{text-decoration:underline}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page Not Found — NorCal CARB Mobile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
 </head>
 <body>
-<div>
-  <h1>404</h1>
-  <p>This page doesn't exist.</p>
-  <a href="/">Go home</a>
-</div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <span class="brand-mark">NC</span>
+      <span class="brand-name">NorCal CARB Mobile<small>Mobile Clean Truck Check</small></span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <button class="menu-toggle" aria-label="Menu" onclick="this.closest('.nav').classList.toggle('open')"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+      <a class="navlink" href="/">Home</a>
+      <a class="navlink" href="/services">Services</a>
+      <a class="navlink" href="/pricing">Pricing</a>
+      <a class="navlink" href="/areas">Areas</a>
+      <a class="navlink" href="/faq">FAQ</a>
+      <a class="navlink" href="/blog">Blog</a>
+      <a class="navlink" href="/contact">Contact</a>
+      <span class="header-cta">
+        <a class="btn btn-ghost btn-book" href="/contact">Book a Test</a>
+        <a class="btn btn-call" href="tel:+19168904427">Call (916) 890-4427</a>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" style="text-align:center;padding:80px 0">
+    <div class="wrap">
+      <h1 style="font-size:4rem;margin-bottom:12px">404</h1>
+      <p class="lede">This page doesn't exist.</p>
+      <div class="hero-cta" style="justify-content:center;margin-top:24px">
+        <a class="btn btn-primary btn-lg" href="/">Go Home</a>
+        <a class="btn btn-ghost btn-lg" href="/contact">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>NorCal CARB Mobile</h4>
+        <p class="muted">Mobile CARB Clean Truck Check testing (OBD &amp; OVI). We come to your yard across Northern California.</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="tel:+19168904427">(916) 890-4427</a><br>
+        <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
+      </div>
+      <div>
+        <h4>Service area</h4>
+        <p class="muted">Sacramento · Stockton · Fairfield · San Jose · Bay Area</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 NorCal CARB Mobile LLC</span>
+      <span><a href="/">Home</a> · <a href="/services">Services</a> · <a href="/pricing">Pricing</a> · <a href="/areas">Areas</a> · <a href="/faq">FAQ</a> · <a href="/blog">Blog</a> · <a href="/contact">Contact</a></span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

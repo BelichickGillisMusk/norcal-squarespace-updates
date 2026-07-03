@@ -108,7 +108,7 @@ footer{text-align:center;padding:20px;color:var(--muted);font-size:.8rem;border-
         <label for="message">Details</label>
         <textarea id="message" name="message" placeholder="Number of vehicles, preferred dates, anything else…"></textarea>
       </div>
-      <div class="hp"><input type="text" name="company" tabindex="-1" autocomplete="off"></div>
+      <div class="hp" aria-hidden="true"><input type="text" name="company" tabindex="-1" autocomplete="off"></div>
       <button type="submit" id="submit-btn">Send message</button>
     </form>
   </div>
@@ -125,6 +125,7 @@ footer{text-align:center;padding:20px;color:var(--muted);font-size:.8rem;border-
   const params = new URLSearchParams(location.search);
   if (params.get('sent') === '1') { ok.classList.add('show'); form.style.display = 'none'; }
   if (params.get('error') === '1') err.classList.add('show');
+  function resetBtn() { btn.disabled = false; btn.textContent = 'Send message'; }
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
     btn.disabled = true;
@@ -145,13 +146,11 @@ footer{text-align:center;padding:20px;color:var(--muted);font-size:.8rem;border-
       } else {
         err.textContent = j.error || 'Something went wrong. Please try again.';
         err.classList.add('show');
-        btn.disabled = false;
-        btn.textContent = 'Send message';
+        resetBtn();
       }
     } catch {
       err.classList.add('show');
-      btn.disabled = false;
-      btn.textContent = 'Send message';
+      resetBtn();
     }
   });
 })();
