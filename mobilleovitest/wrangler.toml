@@ -1,0 +1,18 @@
+name = "mobilleovitest"
+main = "worker/index.js"
+compatibility_date = "2025-06-01"
+
+[assets]
+directory = "./site"
+binding = "ASSETS"
+not_found_handling = "404-page"
+
+# Custom domain — mobilleovitest.com must be a zone in this Cloudflare account.
+# custom_domain = true uses hostname-only matching (no /* path glob).
+[[routes]]
+pattern = "mobilleovitest.com"
+custom_domain = true
+
+[[routes]]
+pattern = "www.mobilleovitest.com"
+custom_domain = true

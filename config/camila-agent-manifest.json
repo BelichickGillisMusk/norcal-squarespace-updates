@@ -2,10 +2,11 @@
   "agent_name": "Camila",
   "display_name": "Camila — NorCal CARB Mobile",
   "identity_email": "camila@norcalcarbmobile.com",
+  "sales_email": "sales@norcalcarbmobile.com",
   "owner_email": "bryan@norcalcarbmobile.com",
   "owner_approvals_email": "bgillis99@gmail.com",
   "platform": "vertex-ai-agent",
-  "description": "Vertex AI agent on Google Workspace APIs — emails, website forms, Google Business Profile, Search Console. Bryan approves outbound; Camila executes.",
+  "description": "Vertex AI agent on Google Workspace APIs — emails, website forms, Google Business Profile, Search Console, Google Maps/Places. Bryan approves outbound; Camila executes. sales@ handles contact-form greets; camila@ handles cold outreach.",
 
   "gcp": {
     "project_id": "PASTE_GCP_PROJECT_ID",
@@ -15,15 +16,58 @@
   },
 
   "workspace_domain_wide_delegation": {
-    "impersonate_user": "camila@norcalcarbmobile.com",
+    "impersonate_users": [
+      "camila@norcalcarbmobile.com",
+      "sales@norcalcarbmobile.com"
+    ],
     "scopes": [
       "https://www.googleapis.com/auth/gmail.compose",
       "https://www.googleapis.com/auth/gmail.send",
+      "https://www.googleapis.com/auth/gmail.modify",
       "https://www.googleapis.com/auth/gmail.readonly",
       "https://www.googleapis.com/auth/spreadsheets",
       "https://www.googleapis.com/auth/drive.readonly",
-      "https://www.googleapis.com/auth/calendar.events"
-    ]
+      "https://www.googleapis.com/auth/calendar.events",
+      "https://www.googleapis.com/auth/chat.messages"
+    ],
+    "notes": "Admin Console → Security → API Controls → Domain-wide delegation. Add both sales@ and camila@ as delegated users."
+  },
+
+  "google_chat": {
+    "webhook_secret_name": "GOOGLE_CHAT_WEBHOOK_URL",
+    "space_description": "Bryan's approval space — Camila posts here for batch ready, first draft sent, escalations",
+    "events": [
+      "draft_ready",
+      "first_draft_sent",
+      "batch_approved",
+      "bounce_alert",
+      "opt_out",
+      "form_lead_escalated",
+      "daily_cap_reached"
+    ],
+    "notify_script": "scripts/cold-outreach/notify-chat.js"
+  },
+
+  "google_maps_places": {
+    "api_key_secret_name": "GOOGLE_PLACES_API_KEY",
+    "use_for": "lead enrichment — find business website/domain from company name + city",
+    "max_requests_per_run": 50,
+    "fields": ["name", "website", "formatted_phone_number"]
+  },
+
+  "fmcsa_safer": {
+    "api_key_secret_name": "FMCSA_API_KEY",
+    "api_base_url": "https://mobile.fmcsa.dot.gov/qc/services/carriers/",
+    "free_key_url": "https://ai.fmcsa.dot.gov/SMS/Carrier/",
+    "use_for": "build cold lead queue from NorCal fleet operators (CA diesel 14k+ GVWR)",
+    "lead_builder_script": "scripts/cold-outreach/build-lead-queue.js"
+  },
+
+  "service_area": {
+    "primary": ["Sacramento", "Stockton", "Fairfield", "San Jose", "Bay Area"],
+    "satellite": ["Modesto", "Fresno", "Tracy", "Lodi", "Hayward", "Oakland"],
+    "extended": ["San Diego"],
+    "san_diego_surcharge_note": "OBD $119 · OVI $219 in San Diego (extended area)"
   },
 
   "google_business_profile": {
@@ -56,11 +100,15 @@
   },
 
   "forms": {
-    "squarespace_notification_inbox": "camila@norcalcarbmobile.com",
+    "squarespace_notification_inbox": "sales@norcalcarbmobile.com",
+    "cc_inbox": "camila@norcalcarbmobile.com",
     "fallback_owner_inbox": "bryan@norcalcarbmobile.com",
+    "reply_from": "sales@norcalcarbmobile.com",
     "sheet_leads_tab": "Form Leads",
     "auto_reply_within_minutes": 15,
-    "escalate_to_bryan_when": ["fleet_3plus_trucks", "pricing_negotiation", "complaint", "legal"]
+    "escalate_to_bryan_when": ["fleet_3plus_trucks", "pricing_negotiation", "complaint", "legal"],
+    "form_reply_script": "scripts/camila-agent/form-parser/contact-reply.js",
+    "squarespace_setup_note": "Settings → Notifications → Contact/Booking form → route to sales@ + CC camila@"
   },
 
   "email_limits": {
@@ -96,6 +144,13 @@
     "skill": ".cursor/skills/camila-vertex-agent/SKILL.md",
     "architecture": "docs/camila-vertex-agent-architecture.md",
     "deploy_phases": "docs/camila-deploy-phases.md",
-    "gmail_queue_skill": ".cursor/skills/gmail-send-approver/SKILL.md"
+    "gmail_queue_skill": ".cursor/skills/gmail-send-approver/SKILL.md",
+    "cold_outreach_one_pager": "docs/cold-outreach-agent-one-pager.md",
+    "notify_chat": "scripts/cold-outreach/notify-chat.js",
+    "build_leads": "scripts/cold-outreach/build-lead-queue.js",
+    "send_batch": "scripts/camila-agent/gmail-scheduler/send-batch.js",
+    "form_reply": "scripts/camila-agent/form-parser/contact-reply.js",
+    "apps_script_setup": "scripts/google-apps-script/cold-outreach-log-setup.gs",
+    "workflow": ".github/workflows/camila-cold-outreach.yml"
   }
 }
