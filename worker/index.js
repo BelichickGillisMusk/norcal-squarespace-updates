@@ -163,9 +163,22 @@ async function handleContact(request, env) {
   return respond(request, true);
 }
 
+const ALIAS_DOMAINS = ['mobileovitest.com', 'www.mobileovitest.com'];
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    // Redirect alias domains to the canonical domain
+    if (ALIAS_DOMAINS.includes(url.hostname)) {
+      url.hostname = 'norcalcarbmobile.com';
+      url.port = '';
+      return new Response(null, {
+        status: 301,
+        headers: { 'Location': url.toString(), 'Cache-Control': 'public, max-age=86400' },
+      });
+    }
+
     if (url.pathname === '/api/contact') {
       if (request.method === 'POST') return handleContact(request, env);
       return new Response('Method Not Allowed', { status: 405, headers: { Allow: 'POST' } });
