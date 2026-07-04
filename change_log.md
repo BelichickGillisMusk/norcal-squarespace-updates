@@ -4,6 +4,26 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-04 — Coverage map + mobile content band + 250th logo/reviews color
+
+Site — `site/` (live Cloudflare Worker production site, all 11 static pages):
+
+- **Header logo:** replaced the `NC` mark + text brand name with Bryan's uploaded "Happy 250th, America!" NCM graphic (`site/assets/img/norcal-carb-mobile-logo-250th.png`), across all 11 pages.
+  - **Blocker/flag:** this graphic bakes in "HAPPY 250TH, AMERICA!" and "Now Serving San Diego County & the Central Valley" — both time-boxed claims, not the site's current areas (nav says Sacramento/Stockton/Fairfield/San Jose/Bay Area only). It's also a dense square social-post graphic, not a logotype — shrunk to a 56px header slot it's only legible as "a green/navy/red badge," not readable text. Recommended a cropped, evergreen version (mark + wordmark only) for the permanent header; left this exact file in place pending Bryan's call.
+- **Google reviews badge:** sampled the logo's green programmatically (`rgb(75,180,75)` / `#4bb44b`, added as `--brand-green`) and applied it to `.reviews-pill` (the "★ 5.0 · 33 on Google" footer badge). Verified via Playwright screenshot — renders solid green, readable on the navy footer.
+- **Coverage map (footer, sitewide + full-size on `/areas`):**
+  - Added `.footer-coverage-map` (500px max-width, centered, above the copyright line) to all 11 pages, and `.coverage-map-full` on `areas.html` just below the H1/intro.
+  - Both reference `/assets/img/norcal-coverage-map-evergreen.png` with `loading="lazy"` and the specified alt text.
+  - **BLOCKER — asset does not exist.** The cropped, anniversary-free coverage map PNG described in the brief was never added to this repo (checked the whole tree, the Squarespace export zip, `site-export/`, `screenshots/` — nowhere). I did not fabricate a placeholder graphic. The markup/CSS is fully wired and will work the moment the real file is dropped at that path; until then it renders a broken-image icon (verified via screenshot). **Needs Bryan (or whoever has Bryan's anniversary-graphic source file) to supply the actual cropped PNG.**
+- **Mobile content band (≤768px):** `main` background → `#f1f5f9` (slate-100) via a `--ink`/`--body`/`--muted` CSS-variable override scoped to `main`, re-asserted back to the original white/light-blue values inside `.hero`, `section.soft`, and `.cta-band` (which keep their own dark/red backgrounds) so those sections don't go dark-text-on-dark-background. Also fixed `.pricing-table` even-row striping, which would otherwise render invisible dark-on-dark text under the new light band.
+  - Went beyond the literal "just swap the background" instruction: this site's entire palette (`--ink:#fff`, `--body:#c8d6e5`, `--muted:#8a9bb5`) is designed for a dark background *everywhere*, not just the hero — a naive background swap would have made most body text/headings unreadable (light-gray-on-light-gray) on every default-background section. Verified the fix with mobile screenshots: light/dark sections now alternate correctly and read clean at 390px.
+  - **Per the brief's own flag: this is a real visible shift on mobile (dark→light→dark banding) and needs Bryan/Gus sign-off before it's considered final**, same as originally called out.
+- Header/footer stay navy on mobile as specified — unchanged (already correct at `body`/footer level, no override needed there).
+
+**Verified:** served `site/` locally + Playwright/Chromium screenshots at 390×844 (mobile) and 1280×900 (desktop) — logo, reviews badge, mobile banding, and the areas-page map slot all confirmed rendering as coded.
+
+**Next:** Bryan to (1) supply `norcal-coverage-map-evergreen.png`, (2) confirm/reject the 250th-logo-as-permanent-header call, (3) confirm the mobile light-band visual before this is treated as done. Run Lighthouse/PageSpeed once the real map PNG is in — flagged as a follow-up per the brief, not yet run (no real asset to measure against).
+
 ## 2026-06-28 — Emergency live launch: Squarespace canceled, site expanded to 9 pages
 
 **Context:** Squarespace canceled the site today. Cloudflare Worker site is now the live production site.

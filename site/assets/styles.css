@@ -14,6 +14,8 @@
   --line: #1a3a6e;
   --bg-soft: #001830;
   --gold: #B0B7BC;        /* Patriots silver (Pantone 877 C) */
+  --brand-green: #4bb44b; /* sampled from official NCM logo mark */
+  --brand-green-dark: #398a39;
   --radius: 10px;
   --maxw: 1080px;
   --shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
@@ -82,6 +84,7 @@ a  { color: var(--green); text-decoration: none; }
 }
 .brand-name { font-family: Montserrat, sans-serif; font-weight: 800; color: #fff; font-size: 1.1rem; line-height: 1.05; }
 .brand-name small { display: block; font-size: .72rem; font-weight: 600; color: var(--green); letter-spacing: .02em; }
+.brand-logo { display: block; width: 56px; height: 56px; border-radius: 8px; object-fit: cover; }
 .nav { display: flex; align-items: center; gap: 22px; }
 .nav a.navlink { text-decoration: none; color: #fff; font-weight: 600; transition: color .15s ease; }
 .nav a.navlink:hover { color: var(--green); }
@@ -264,10 +267,33 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
   .service-detail .price, .price-card .price { font-size: 2rem; }
 }
 
+/* ---------- Coverage map ---------- */
+.footer-coverage-map { max-width: 500px; margin: 0 auto 28px; text-align: center; }
+.footer-coverage-map img { width: 100%; height: auto; display: block; border-radius: var(--radius); }
+.coverage-map-full { max-width: 760px; margin: 0 auto; }
+.coverage-map-full img { width: 100%; height: auto; display: block; border-radius: var(--radius); box-shadow: var(--shadow); }
+
+/* ---------- Mobile content band (header/footer stay navy; content lightens) ---------- */
+@media (max-width: 768px) {
+  main {
+    background-color: #f1f5f9;
+    --ink: #0f172a;
+    --body: #334155;
+    --muted: #64748b;
+  }
+  /* sections that carry their own dark/red background keep the original light-on-dark palette */
+  main .hero, main section.soft, main .cta-band {
+    --ink: #ffffff;
+    --body: #c8d6e5;
+    --muted: #8a9bb5;
+  }
+  main .pricing-table tr:nth-child(even) { background: rgba(15, 23, 42, 0.05); }
+}
+
 /* ---------- Footer social ---------- */
 .social { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 2px 0 24px; }
 .social a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 9px; background: var(--line); color: #fff; text-decoration: none; transition: background .15s ease; }
 .social a:hover { background: var(--green); }
 .social svg { width: 20px; height: 20px; fill: currentColor; }
-.social .reviews-pill { width: auto; padding: 0 16px; gap: 8px; font-family: Montserrat, sans-serif; font-weight: 700; font-size: .9rem; color: #fff; }
-.social .reviews-pill:hover { background: var(--gold); color: #1a1a2e; }
+.social .reviews-pill { width: auto; padding: 0 16px; gap: 8px; font-family: Montserrat, sans-serif; font-weight: 700; font-size: .9rem; color: #fff; background: var(--brand-green); }
+.social .reviews-pill:hover { background: var(--brand-green-dark); color: #fff; }
