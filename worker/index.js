@@ -87,7 +87,8 @@ const REDIRECTS = {
 
   // → /areas
   '/carb-locations': '/areas',
-  '/service-area-sacramento-carb-testing': '/areas#sacramento',
+  '/service-area-sacramento-carb-testing': '/sacramento-carb-testing',
+  '/book-schedule-carb-smoke-test-sacramento': '/sacramento-carb-testing',
   '/clean-truck-check-napa-st-helena-calistoga': '/areas#napa',
   '/north-bay-carb-mobile-testing': '/areas#north-bay',
   '/east-bay-mobile-carb-testing': '/areas#east-bay',
@@ -106,6 +107,14 @@ const REDIRECTS = {
   '/clean-truck-check-orange-county': '/areas#orange-county',
   '/service-locations': '/areas',
   '/new-page': '/areas',
+  '/qa-glossary': '/faq',
+  '/norcal-carb-mobile-2026': '/',
+  '/services/opacity-smoke-test/': '/services#ovi',
+  '/clean-truck-check-blog/what-is-clean-truck-test-fairfield': '/stockton-clean-truck-check',
+  '/carb-clean-truck-check-store': '/pricing',
+  '/service-locations/blog-post-title-four-6x6kf': '/',
+  '/anitoch-clean-truck-check': '/bay-area-mobile-carb',
+  '/antioch-clean-truck-check': '/bay-area-mobile-carb',
 
   // → homepage #reviews section (no standalone reviews page yet)
   '/clean-truck-top-review': '/#reviews',
