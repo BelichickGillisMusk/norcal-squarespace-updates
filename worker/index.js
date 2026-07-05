@@ -114,6 +114,7 @@ const REDIRECTS = {
   '/carb-clean-truck-check-store': '/pricing',
   '/service-locations/blog-post-title-four-6x6kf': '/',
   '/anitoch-clean-truck-check': '/bay-area-mobile-carb',
+  '/antioch-clean-truck-check': '/bay-area-mobile-carb',
 
   // → homepage #reviews section (no standalone reviews page yet)
   '/clean-truck-top-review': '/#reviews',
