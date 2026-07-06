@@ -31,5 +31,13 @@ jobs:
               echo "::error::Unable to reach ${host}. Check runner/firewall outbound allowlist."
               exit 1
             fi
+            if [ "$code" = "403" ]; then
+              echo "::error::${host} returned HTTP 403. Verify Copilot/Claude access and Terms of Service acceptance."
+              exit 1
+            fi
+            if [[ "$code" =~ ^5 ]]; then
+              echo "::error::${host} returned HTTP ${code}. Copilot API is unavailable."
+              exit 1
+            fi
             echo "${host} reachable (HTTP ${code})."
           done
