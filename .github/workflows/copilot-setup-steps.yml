@@ -1,0 +1,35 @@
+name: Copilot Setup Steps
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+  pull_request:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Validate Copilot API reachability
+        run: |
+          set -euo pipefail
+          for host in \
+            api.individual.githubcopilot.com \
+            api.business.githubcopilot.com \
+            api.enterprise.githubcopilot.com; do
+            code=$(curl -sS -o /dev/null -w "%{http_code}" "https://${host}/" || true)
+            if [ "$code" = "000" ]; then
+              echo "::error::Unable to reach ${host}. Check runner/firewall outbound allowlist."
+              exit 1
+            fi
+            echo "${host} reachable (HTTP ${code})."
+          done
