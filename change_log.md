@@ -4,6 +4,16 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-05 — SonicJS CMS: document_types diagnosis + 65 legacy blog posts migrated
+
+SonicJS worker `my-sonicjs-app` + D1 `norcal-sonic-content` (separate from the live site worker — no live-site files touched):
+
+- **Diagnosed the empty `document_types` table:** not a bug. SonicJS seeds it lazily inside `bootstrapMiddleware()` on the Worker's *first HTTP request* — `registerCollections()` is in-memory only and `npm run deploy` executes no code. Bryan's first visit to `/admin` triggered the bootstrap; `document_types` now has 16 rows including `blog_post`, plus RBAC/plugin seed documents.
+- **Migrated 65 legacy blog posts** into the `documents` table as published `blog_post` documents (original slugs + publish dates preserved, 2025-06-18 → 2026-06-28): 61 from the Squarespace→WordPress WXR export (Drive), 3 from `site/blog/*.html`, 1 (`i-thought-it-was-ending`) recovered from the June Squarespace zip. Verified: 65 rows, 65 distinct slugs, all `data` JSON valid. 4 WXR posts skipped — empty bodies in every available export (list in `scripts/sonicjs-blog-migration/README.md`).
+- **Added** `scripts/sonicjs-blog-migration/` (parser + 65-post manifest + README) and `docs/sonicjs-blogging-guide.md` (first-admin setup, how to blog, API notes).
+- **ACTION NEEDED (Bryan):** register the FIRST account at the SonicJS `/auth/register` — first registrant automatically becomes admin; until then the URL is open for anyone to claim. Then disable public registration in admin settings.
+- Not done (deliberate): no `wrangler.toml` env/DNS changes, no production-env deploys, no new blog content written, moods/examplePlugin boilerplate left in place. The live `norcalcarbmobile.com` blog pages are still the static HTML — wiring them to the CMS API is a future step.
+
 ## 2026-07-04 — Coverage map + mobile content band + 250th logo/reviews color
 
 Site — `site/` (live Cloudflare Worker production site, all 11 static pages):
