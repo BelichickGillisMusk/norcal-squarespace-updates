@@ -26,7 +26,7 @@ jobs:
             api.individual.githubcopilot.com \
             api.business.githubcopilot.com \
             api.enterprise.githubcopilot.com; do
-            if ! code=$(curl -sS -o /dev/null -w "%{http_code}" "https://${host}/"); then
+            if ! code=$(curl -L -sS -o /dev/null -w "%{http_code}" "https://${host}/"); then
               code="000"
             fi
             if [ "$code" = "000" ]; then
@@ -37,7 +37,7 @@ jobs:
               echo "::error::${host} returned HTTP 403. Verify Copilot/Claude access and Terms of Service acceptance."
               exit 1
             fi
-            if [[ "$code" == 5* ]]; then
+            if [ "$code" -ge 500 ] && [ "$code" -lt 600 ]; then
               echo "::error::${host} returned HTTP ${code}. Copilot API is unavailable."
               exit 1
             fi
