@@ -118,7 +118,10 @@ def rewrite_href(href):
 
 def clean_content(raw):
     c = raw
-    c = re.sub(r"<script\b.*?</script\s*>", "", c, flags=re.S | re.I)
+    # browsers close a script on `</script` followed by whitespace or any junk
+    # before `>`, so the end-tag match must be equally permissive (CodeQL
+    # py/bad-tag-filter)
+    c = re.sub(r"<script\b.*?</script\b[^>]*>", "", c, flags=re.S | re.I)
     # a single h1 per page: demote in-body h1s
     c = re.sub(r"<(/?)h1\b", r"<\1h2", c, flags=re.I)
     # Squarespace CTA class → site button style
