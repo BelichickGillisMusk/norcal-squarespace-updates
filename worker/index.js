@@ -11,6 +11,8 @@
  * version). If you change one, change the other.
  */
 
+import { MIGRATED_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
+
 const DEFAULT_TO = 'bgillis99@gmail.com';
 const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
 
@@ -110,7 +112,6 @@ const REDIRECTS = {
   '/qa-glossary': '/faq',
   '/norcal-carb-mobile-2026': '/',
   '/services/opacity-smoke-test/': '/services#ovi',
-  '/clean-truck-check-blog/what-is-clean-truck-test-fairfield': '/stockton-clean-truck-check',
   '/carb-clean-truck-check-store': '/pricing',
   '/service-locations/blog-post-title-four-6x6kf': '/',
   '/anitoch-clean-truck-check': '/bay-area-mobile-carb',
@@ -119,10 +120,23 @@ const REDIRECTS = {
   // → homepage #reviews section (no standalone reviews page yet)
   '/clean-truck-top-review': '/#reviews',
   '/reviews-service-area': '/#reviews',
-
-  // → /blog
-  '/clean-truck-check-blog': '/blog',
 };
+
+/**
+ * Old Squarespace blog URLs (/clean-truck-check-blog and everything under it,
+ * including date-based paths like /clean-truck-check-blog/2025/10/8/<slug>).
+ * Migrated posts 301 to /blog/<slug>; posts whose content was unrecoverable
+ * 301 to the closest equivalent page; anything unknown lands on /blog.
+ */
+function legacyBlogTarget(pathname) {
+  const path = pathname.replace(/\/+$/, '');
+  if (path !== '/clean-truck-check-blog' && !path.startsWith('/clean-truck-check-blog/')) return null;
+  const slug = path.split('/').pop();
+  if (slug === 'clean-truck-check-blog') return '/blog';
+  if (LEGACY_BLOG_FALLBACKS[slug]) return LEGACY_BLOG_FALLBACKS[slug];
+  if (MIGRATED_BLOG_SLUGS.has(slug)) return `/blog/${slug}`;
+  return '/blog';
+}
 
 const HTML_ESC = { '<': '&lt;', '>': '&gt;', '&': '&amp;' };
 function esc(s) {
@@ -235,7 +249,10 @@ export default {
       return new Response('Method Not Allowed', { status: 405, headers: { Allow: 'POST' } });
     }
     // Check for old Squarespace URL redirects
-    const redirect = REDIRECTS[url.pathname] || REDIRECTS[url.pathname.replace(/\/$/, '')];
+    const redirect =
+      legacyBlogTarget(url.pathname) ||
+      REDIRECTS[url.pathname] ||
+      REDIRECTS[url.pathname.replace(/\/$/, '')];
     if (redirect) {
       return new Response(null, {
         status: 301,
