@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-07 — Old Squarespace blog posts live on the static site + legacy URL routing
+
+Site — `site/` + `worker/` (live Cloudflare Worker production site):
+
+- **Published 61 legacy blog posts** as static pages under `site/blog/<slug>.html`, generated from the recovered-content manifest (`scripts/sonicjs-blog-migration/manifest.json`) by the new `scripts/blog-migration/build_blog_pages.py`. Original slugs and publish dates preserved (2025-06-18 → 2026-03-18); pages use the existing site template (header/footer/CTA band, Article JSON-LD, canonical + meta description).
+- **Rebuilt `site/blog/index.html`** — now lists all 64 published posts newest-first (61 migrated + 3 hand-written June-2026 posts, whose pages were not touched). **Rebuilt `site/sitemap.xml`** with every blog URL.
+- **Legacy URL routing (no more 404s):** `worker/index.js` now 301-redirects every `/clean-truck-check-blog[/...]` path — migrated slugs → `/blog/<slug>`, date-based paths handled via final segment, and the 6 posts with unrecoverable/empty bodies → closest equivalent page (map in generated `worker/blog-redirects.js`). Unknown old blog paths land on `/blog` instead of erroring. Also set `not_found_handling: "404-page"` in `wrangler.jsonc` so any other unknown URL gets the branded `site/404.html`.
+- Cleaned content during generation: scripts stripped, in-body `h1`→`h2`, old Squarespace internal links rewritten to new paths, WXR tag-archive links → `/blog`, pre-wrap line breaks made explicit.
+- Verified locally with `wrangler dev`: all legacy redirect shapes (index, `?offset`, `?format=rss`, date paths, unknown slugs) 301 to a 200 page; zero broken internal links across `site/`; index + post pages screenshot-checked.
+- **Follow-up:** 13 in-post images still load from `images.squarespace-cdn.com` (network policy blocked re-hosting from this session) — download them into `site/assets/img/blog/` before the Squarespace subscription is cancelled. Deploy with `wrangler deploy` to go live.
+
 ## 2026-07-05 — SonicJS CMS: document_types diagnosis + 65 legacy blog posts migrated
 
 SonicJS worker `my-sonicjs-app` + D1 `norcal-sonic-content` (separate from the live site worker — no live-site files touched):
