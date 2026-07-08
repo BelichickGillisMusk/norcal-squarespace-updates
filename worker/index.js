@@ -48,7 +48,13 @@ const SCHEMA_TAG = `<script type="application/ld+json">
     { "@type": "AdministrativeArea", "name": "Alameda County" },
     { "@type": "AdministrativeArea", "name": "San Diego County" }
   ],
-  "sameAs": ["https://yelp.com"]
+  "sameAs": [
+    "https://www.facebook.com/carbcleantruckcheck/",
+    "https://www.instagram.com/carb.mobiletruckcheck/",
+    "https://x.com/carbcleantruck",
+    "https://www.youtube.com/@CARBCLEANTRUCKMOBILE",
+    "https://share.google/CUg6TEK1p3eO34S9G"
+  ]
 }
 </script>`;
 

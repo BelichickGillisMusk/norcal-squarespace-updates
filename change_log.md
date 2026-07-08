@@ -4,6 +4,14 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-08 — Footer social links + Google Business Profile link, sitewide
+
+Site — `site/` (live Cloudflare Worker production site) + `worker/index.js` + `squarespace/schema-local-business.html`:
+
+- **Replaced placeholder (`href="#"`) footer social icons with the real profiles** (URLs taken from the Squarespace export, which links these from the live header/footer): Facebook `facebook.com/carbcleantruckcheck`, X `x.com/carbcleantruck`, YouTube `youtube.com/@CARBCLEANTRUCKMOBILE`. Added an **Instagram** icon (`instagram.com/carb.mobiletruckcheck`) to match the profile set on the Squarespace site, and a **Google Business Profile** icon linking to the GBP share link `https://share.google/CUg6TEK1p3eO34S9G` (from `config/reviews.json`). All open in a new tab with `rel="noopener"`.
+- **Standardized the footer social row sitewide:** the block (5 icons + the "★ 5.0 · 33 on Google" reviews pill) previously existed on only 5 pages (index, services, areas, faq, contact) — it's now on all 14 pages, including pricing, 404, the 3 city landing pages, and the 4 blog pages. No new CSS needed (`.social` styles already sitewide).
+- **Structured data:** `worker/index.js` injected JSON-LD `sameAs` was the placeholder `["https://yelp.com"]` — replaced with the four social profiles + GBP link. Mirrored the same list into `squarespace/schema-local-business.html` (kept its existing Google-reviews URL entry).
+
 ## 2026-07-05 — SonicJS CMS: document_types diagnosis + 65 legacy blog posts migrated
 
 SonicJS worker `my-sonicjs-app` + D1 `norcal-sonic-content` (separate from the live site worker — no live-site files touched):
