@@ -4,6 +4,15 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-08 — Legacy posts moved to their exact old Squarespace URLs + navigation-redirect fix
+
+Follow-up to the 2026-07-07 blog migration (PR #45), per Bryan's request to keep the old URLs:
+
+- **Migrated posts now live at their exact old Squarespace paths** — `site/clean-truck-check-blog/<slug>.html`, served at `/clean-truck-check-blog/<slug>` (200, canonical). The interim `/blog/<slug>` URLs 301-redirect back to the old paths. The 3 hand-written June-2026 posts stay at `/blog/<slug>`. Blog index + sitemap updated to the old URLs.
+- **Critical routing fix (Codex review, P1):** with `not_found_handling` set and compatibility date ≥ 2025-04-01, browser *navigation* requests were served by asset handling and never invoked the Worker — every legacy redirect 404'd for real users (confirmed locally with `Sec-Fetch-Mode: navigate`). Added `run_worker_first: true` to `wrangler.jsonc`. This also makes the schema JSON-LD injection in `worker/index.js` actually apply to page loads.
+- **Content fixes (Copilot review):** WordPress `[caption]` shortcodes → `<figure>/<figcaption>`, missing `alt` attributes added, `mailto:` links with trailing `?` cleaned, malformed ARB URL corrected.
+- Verified with `wrangler dev` in navigation mode: old post URLs 200, date-based and `/blog/` variants 301 → 200, fallbacks intact, branded 404, zero broken internal links, 64 posts on the index.
+
 ## 2026-07-07 — Old Squarespace blog posts live on the static site + legacy URL routing
 
 Site — `site/` + `worker/` (live Cloudflare Worker production site):
