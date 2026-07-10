@@ -4,16 +4,22 @@ Agents append timestamped entries below.
 
 ---
 
-## 2026-07-07 — Old Squarespace blog posts live on the static site + legacy URL routing
+## 2026-07-10 — Homepage hero: two-column coverage-map layout (from Claude Design)
 
-Site — `site/` + `worker/` (live Cloudflare Worker production site):
+Site — `site/index.html` + `site/assets/styles.css` (homepage only). Imported from the Claude Design project `409da93a-…` (`i made changes to the homescreen`):
 
-- **Published 61 legacy blog posts** as static pages under `site/blog/<slug>.html`, generated from the recovered-content manifest (`scripts/sonicjs-blog-migration/manifest.json`) by the new `scripts/blog-migration/build_blog_pages.py`. Original slugs and publish dates preserved (2025-06-18 → 2026-03-18); pages use the existing site template (header/footer/CTA band, Article JSON-LD, canonical + meta description).
-- **Rebuilt `site/blog/index.html`** — now lists all 64 published posts newest-first (61 migrated + 3 hand-written June-2026 posts, whose pages were not touched). **Rebuilt `site/sitemap.xml`** with every blog URL.
-- **Legacy URL routing (no more 404s):** `worker/index.js` now 301-redirects every `/clean-truck-check-blog[/...]` path — migrated slugs → `/blog/<slug>`, date-based paths handled via final segment, and the 6 posts with unrecoverable/empty bodies → closest equivalent page (map in generated `worker/blog-redirects.js`). Unknown old blog paths land on `/blog` instead of erroring. Also set `not_found_handling: "404-page"` in `wrangler.jsonc` so any other unknown URL gets the branded `site/404.html`.
-- Cleaned content during generation: scripts stripped, in-body `h1`→`h2`, old Squarespace internal links rewritten to new paths, WXR tag-archive links → `/blog`, pre-wrap line breaks made explicit.
-- Verified locally with `wrangler dev`: all legacy redirect shapes (index, `?offset`, `?format=rss`, date paths, unknown slugs) 301 to a 200 page; zero broken internal links across `site/`; index + post pages screenshot-checked.
-- **Follow-up:** 13 in-post images still load from `images.squarespace-cdn.com` (network policy blocked re-hosting from this session) — download them into `site/assets/img/blog/` before the Squarespace subscription is cancelled. Deploy with `wrangler deploy` to go live.
+- **Hero is now a two-column grid.** Wrapped the existing hero copy in `.hero-copy` and added a `.hero-map` column holding a coverage-map image, with a new `hero-grid` class on the hero `.wrap`. Added the matching CSS block (`.hero-grid`, `.hero-map img`, and a ≤900px rule that stacks the columns to one). Verified with Playwright at 1200px (side-by-side) and 430px (stacked).
+- **Removed the "Most thorough" `badge`** from the OVI pricing card, per the design.
+- Kept the repo's absolute `/assets/...` path convention (the design used relative paths) and left the footer/head untouched — the design project was branched before the sitewide footer-social work, so only the intentional homescreen edits were applied.
+- **⚠️ IMAGE BLOCKER — `site/assets/img/coverage-map.png` is NOT in this commit.** The design project's copy exceeds the DesignSync 256 KiB read cap and comes back truncated/corrupt, and the authenticated design MCP isn't authorized in this non-interactive session, so I could not retrieve the real PNG intact. The HTML references `/assets/img/coverage-map.png`; **Bryan/Gus need to drop the actual file at `site/assets/img/coverage-map.png`** for the hero image to render. Until then the homepage hero shows a broken-image slot (preview build only — production deploys from `main`, which is unaffected).
+
+## 2026-07-08 — Footer social links + Google Business Profile link, sitewide
+
+Site — `site/` (live Cloudflare Worker production site) + `worker/index.js` + `squarespace/schema-local-business.html`:
+
+- **Replaced placeholder (`href="#"`) footer social icons with the real profiles** (URLs taken from the Squarespace export, which links these from the live header/footer): Facebook `facebook.com/carbcleantruckcheck`, X `x.com/carbcleantruck`, YouTube `youtube.com/@CARBCLEANTRUCKMOBILE`. Added an **Instagram** icon (`instagram.com/carb.mobiletruckcheck`) to match the profile set on the Squarespace site, and a **Google Business Profile** icon linking to the GBP share link `https://share.google/CUg6TEK1p3eO34S9G` (from `config/reviews.json`). All open in a new tab with `rel="noopener"`.
+- **Standardized the footer social row sitewide:** the block (5 icons + the "★ 5.0 · 33 on Google" reviews pill) previously existed on only 5 pages (index, services, areas, faq, contact) — it's now on all 14 pages, including pricing, 404, the 3 city landing pages, and the 4 blog pages. No new CSS needed (`.social` styles already sitewide).
+- **Structured data:** `worker/index.js` injected JSON-LD `sameAs` was the placeholder `["https://yelp.com"]` — replaced with the four social profiles + GBP link. Mirrored the same list into `squarespace/schema-local-business.html` (kept its existing Google-reviews URL entry).
 
 ## 2026-07-05 — SonicJS CMS: document_types diagnosis + 65 legacy blog posts migrated
 
