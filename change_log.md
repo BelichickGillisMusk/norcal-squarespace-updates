@@ -4,6 +4,15 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-10 — Homepage hero: two-column coverage-map layout (from Claude Design)
+
+Site — `site/index.html` + `site/assets/styles.css` (homepage only). Imported from the Claude Design project `409da93a-…` (`i made changes to the homescreen`):
+
+- **Hero is now a two-column grid.** Wrapped the existing hero copy in `.hero-copy` and added a `.hero-map` column holding a coverage-map image, with a new `hero-grid` class on the hero `.wrap`. Added the matching CSS block (`.hero-grid`, `.hero-map img`, and a ≤900px rule that stacks the columns to one). Verified with Playwright at 1200px (side-by-side) and 430px (stacked).
+- **Removed the "Most thorough" `badge`** from the OVI pricing card, per the design.
+- Kept the repo's absolute `/assets/...` path convention (the design used relative paths) and left the footer/head untouched — the design project was branched before the sitewide footer-social work, so only the intentional homescreen edits were applied.
+- **⚠️ IMAGE BLOCKER — `site/assets/img/coverage-map.png` is NOT in this commit.** The design project's copy exceeds the DesignSync 256 KiB read cap and comes back truncated/corrupt, and the authenticated design MCP isn't authorized in this non-interactive session, so I could not retrieve the real PNG intact. The HTML references `/assets/img/coverage-map.png`; **Bryan/Gus need to drop the actual file at `site/assets/img/coverage-map.png`** for the hero image to render. Until then the homepage hero shows a broken-image slot (preview build only — production deploys from `main`, which is unaffected).
+
 ## 2026-07-08 — Footer social links + Google Business Profile link, sitewide
 
 Site — `site/` (live Cloudflare Worker production site) + `worker/index.js` + `squarespace/schema-local-business.html`:
