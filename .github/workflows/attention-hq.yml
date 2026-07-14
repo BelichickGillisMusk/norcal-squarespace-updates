@@ -26,6 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    env:
+      ATTENTION_HQ_LIVE: ${{ secrets.ATTENTION_HQ_LIVE }}
     steps:
       - uses: actions/checkout@v4
 
@@ -44,7 +46,7 @@ jobs:
         run: npm test
 
       - name: Run attention-hq (fixture / dry run)
-        if: secrets.ATTENTION_HQ_LIVE != 'true' || inputs.dry_run == 'true'
+        if: env.ATTENTION_HQ_LIVE != 'true' || inputs.dry_run == 'true'
         working-directory: scripts/attention-hq
         run: |
           DATE_ARG=""
@@ -52,7 +54,7 @@ jobs:
           node run.js --fixtures fixtures/sample-day.json $DATE_ARG --pretty --out ../../artifacts/attention-hq.json
 
       - name: Run attention-hq (live)
-        if: secrets.ATTENTION_HQ_LIVE == 'true' && (github.event_name == 'schedule' || inputs.dry_run == 'false')
+        if: env.ATTENTION_HQ_LIVE == 'true' && (github.event_name == 'schedule' || inputs.dry_run == 'false')
         working-directory: scripts/attention-hq
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}

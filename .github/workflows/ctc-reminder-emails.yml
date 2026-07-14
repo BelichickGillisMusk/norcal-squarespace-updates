@@ -26,6 +26,8 @@ on:
 jobs:
   send-reminders:
     runs-on: ubuntu-latest
+    env:
+      REMINDERS_LIVE: ${{ secrets.REMINDERS_LIVE }}
     steps:
       - uses: actions/checkout@v4
 
@@ -40,7 +42,7 @@ jobs:
         run: npm ci
 
       - name: Dry run
-        if: (github.event_name == 'schedule' && secrets.REMINDERS_LIVE != 'true') || (github.event_name == 'workflow_dispatch' && inputs.dry_run == 'true')
+        if: (github.event_name == 'schedule' && env.REMINDERS_LIVE != 'true') || (github.event_name == 'workflow_dispatch' && inputs.dry_run == 'true')
         working-directory: scripts/reminder-engine
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
@@ -72,7 +74,7 @@ jobs:
         run: npm run send -- --test-email "${{ inputs.test_email }}" --force-template 30
 
       - name: Send live reminders
-        if: (github.event_name == 'schedule' && secrets.REMINDERS_LIVE == 'true') || (github.event_name == 'workflow_dispatch' && inputs.dry_run == 'false' && inputs.test_email == '')
+        if: (github.event_name == 'schedule' && env.REMINDERS_LIVE == 'true') || (github.event_name == 'workflow_dispatch' && inputs.dry_run == 'false' && inputs.test_email == '')
         working-directory: scripts/reminder-engine
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}

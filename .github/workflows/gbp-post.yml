@@ -25,6 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    env:
+      GBP_POST_LIVE: ${{ secrets.GBP_POST_LIVE }}
     steps:
       - uses: actions/checkout@v4
 
@@ -52,7 +54,7 @@ jobs:
           fi
 
       - name: Run gbp-post (fixture / dry run)
-        if: secrets.GBP_POST_LIVE != 'true' || inputs.dry_run == 'true'
+        if: env.GBP_POST_LIVE != 'true' || inputs.dry_run == 'true'
         working-directory: scripts/gbp-post
         run: |
           node run.js \
@@ -62,7 +64,7 @@ jobs:
             --out "../../artifacts/SAMANTHA_STATUS_gbp-post_${{ steps.date.outputs.value }}.json"
 
       - name: Run gbp-post (live)
-        if: secrets.GBP_POST_LIVE == 'true' && (github.event_name == 'schedule' || inputs.dry_run == 'false')
+        if: env.GBP_POST_LIVE == 'true' && (github.event_name == 'schedule' || inputs.dry_run == 'false')
         working-directory: scripts/gbp-post
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}

@@ -38,6 +38,8 @@ on:
 jobs:
   nurture:
     runs-on: ubuntu-latest
+    env:
+      NURTURE_LIVE: ${{ secrets.NURTURE_LIVE }}
     steps:
       - uses: actions/checkout@v4
 
@@ -52,7 +54,7 @@ jobs:
         run: npm ci
 
       - name: Welcome dry run
-        if: (github.event_name == 'schedule' && secrets.NURTURE_LIVE != 'true') || (inputs.job == 'welcome' && inputs.dry_run == 'true')
+        if: (github.event_name == 'schedule' && env.NURTURE_LIVE != 'true') || (inputs.job == 'welcome' && inputs.dry_run == 'true')
         working-directory: scripts/reminder-engine
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
@@ -69,7 +71,7 @@ jobs:
         run: npm run welcome -- --dry-run
 
       - name: Welcome live
-        if: (github.event_name == 'schedule' && secrets.NURTURE_LIVE == 'true') || (inputs.job == 'welcome' && inputs.dry_run == 'false')
+        if: (github.event_name == 'schedule' && env.NURTURE_LIVE == 'true') || (inputs.job == 'welcome' && inputs.dry_run == 'false')
         working-directory: scripts/reminder-engine
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
