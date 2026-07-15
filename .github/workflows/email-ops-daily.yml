@@ -46,6 +46,9 @@ jobs:
     needs: preflight
     if: always() && (needs.preflight.result == 'success' || inputs.skip_preflight == 'true')
     runs-on: ubuntu-latest
+    env:
+      NURTURE_LIVE: ${{ secrets.NURTURE_LIVE }}
+      REMINDERS_LIVE: ${{ secrets.REMINDERS_LIVE }}
     steps:
       - uses: actions/checkout@v4
 
@@ -60,7 +63,7 @@ jobs:
         run: npm ci
 
       - name: Welcome (dry run)
-        if: secrets.NURTURE_LIVE != 'true' || inputs.dry_run == 'true'
+        if: env.NURTURE_LIVE != 'true' || inputs.dry_run == 'true'
         working-directory: scripts/reminder-engine
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
@@ -77,7 +80,7 @@ jobs:
         run: npm run welcome -- --dry-run
 
       - name: Welcome (live)
-        if: secrets.NURTURE_LIVE == 'true' && (github.event_name == 'schedule' || inputs.dry_run == 'false')
+        if: env.NURTURE_LIVE == 'true' && (github.event_name == 'schedule' || inputs.dry_run == 'false')
         working-directory: scripts/reminder-engine
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
@@ -94,7 +97,7 @@ jobs:
         run: npm run welcome
 
       - name: Reminders (dry run)
-        if: secrets.REMINDERS_LIVE != 'true' || inputs.dry_run == 'true'
+        if: env.REMINDERS_LIVE != 'true' || inputs.dry_run == 'true'
         working-directory: scripts/reminder-engine
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
@@ -110,7 +113,7 @@ jobs:
         run: npm run send -- --dry-run
 
       - name: Reminders (live)
-        if: secrets.REMINDERS_LIVE == 'true' && (github.event_name == 'schedule' || inputs.dry_run == 'false')
+        if: env.REMINDERS_LIVE == 'true' && (github.event_name == 'schedule' || inputs.dry_run == 'false')
         working-directory: scripts/reminder-engine
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}

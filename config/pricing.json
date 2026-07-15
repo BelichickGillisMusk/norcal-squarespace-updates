@@ -20,6 +20,21 @@
     "obd_first_test": "$37.50",
     "ovi_first_test": "$99.50"
   },
+  "booking_deposit": {
+    "policy": "50% due at booking to hold the appointment, balance due on-site. See docs/booking-deposit-strategy.md.",
+    "standard": {
+      "obd": "$37.50",
+      "ovi": "$99.50"
+    },
+    "motorhome": {
+      "obd": "$49.50",
+      "ovi": "$114.50"
+    },
+    "san_diego": {
+      "obd": "$59.50",
+      "ovi": "$109.50"
+    }
+  },
   "full_care": {
     "annual": "$40/year",
     "includes": "CARB annual fee (CTC-VIS) + setup, monitoring & scheduling"

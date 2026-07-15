@@ -68,9 +68,11 @@ Target forms to inspect and repair:
 
 | Form | Location | Known Issue |
 |------|----------|-------------|
-| Book a Test / Schedule | Homepage, Services pages | May not submit or confirm |
+| Book a Test / Schedule | Homepage, Services pages | May not submit or confirm; also has **no payment step** — see below |
 | Contact Us | Contact page | Suspected broken email routing |
 | Fleet Inquiry / Quote Request | Any fleet/commercial pages | Check submit action and notification email |
+
+**Booking deposit (revenue-protecting, do after the form itself works):** `/book-schedule-carb-smoke-test-sacramento` currently lets anyone book with zero commitment, so no-shows cost a wasted mobile-technician trip. Add a clear CTA that collects a **50% deposit at booking** (balance due on-site) before the slot is confirmed. Deposit amounts live in `config/pricing.json` → `booking_deposit`. Full plan, CTA copy, and Stripe implementation options: see `docs/booking-deposit-strategy.md`. Requires Bryan's sign-off on the cancellation/reschedule window and Squarespace/Stripe access this repo's automated agent doesn't have — flag as a blocker rather than guessing the policy.
 
 **For each form:**
 - Confirm the form renders on both desktop and mobile
@@ -179,6 +181,7 @@ The agent should treat this as a **pre-flight checklist**, not a cosmetic pass.
 │   ├── DEPLOY_TODAY.md                  # Today's deploy checklist
 │   ├── summer-2026-email-strategy.md    # Jun–Sep email calendar
 │   ├── tools-and-cta-strategy.md        # Tool ideas, pricing, Full Care $40/yr
+│   ├── booking-deposit-strategy.md      # 50% deposit CTA to hold appointments
 │   ├── AGENT_START_HERE_EMAILS.md       # Agent entry point for all email systems
 │   ├── email-reminders-agent-runbook.md # 90/60/30 deadline reminders
 │   ├── subscriber-nurture-agent-runbook.md # Welcome, blasts, customer import
@@ -212,5 +215,8 @@ The agent should treat this as a **pre-flight checklist**, not a cosmetic pass.
 - If Squarespace's autosave triggers unexpectedly, verify the saved state before continuing.
 - The Squarespace config URL (`aqua-alpaca-m37c.squarespace.com`) is the internal editor. Public site is `norcalcarbmobile.com`. Do not confuse them.
 - Service areas: Sacramento, Stockton, Fairfield, San Jose, Bay Area. These must appear consistently across all service/contact pages.
-- Pricing: **OBD $75** · **OVI $199** · **Motorhome OBD $99** · **Motorhome OVI $229**. San Diego area: OBD $119 · OVI $219. All prices subject to change. Source of truth: `config/pricing.json`. Both must be accurate and visible on the homepage, services, and pricing pages. Tools and CTAs should show all rates; use the switch offer (*beat your price* or *50% off first test*) for prospects who already have a tester — see `docs/tools-and-cta-strategy.md`.
+- Pricing: **OBD $75** · **OVI $199** · **Motorhome OBD $99** · **Motorhome OVI $229**. San Diego area: OBD $119 · OVI $219. All prices subject to change. Source of truth: `config/pricing.json`. Both must be accurate and visible on the homepage, services, and pricing pages. Tools and CTAs should show all rates; use the switch offer (*beat your price* or *50% off first test*) for prospects who already have a tester — see `docs/tools-and-cta-strategy.md`. The booking page CTA should collect a 50% deposit to hold the appointment — see `docs/booking-deposit-strategy.md`.
 - If you encounter a Squarespace plan limitation blocking a feature (e.g., custom CSS editing requires a higher plan), log it as a blocker and move on — do not attempt to work around plan restrictions.
+Need to fix ASAP site is down.
+
+**STANDING INSTRUCTION — HIGH PRIORITY (Bryan, 2026-07-12):** Always err on the side of fixing without asking permission first. When you find a concrete, scoped bug — corrupted content, broken data, a small config error, a clear one-file fix — just fix it and report what you changed. Don't stop the run to ask "should I fix this?" Reserve asking-first for genuinely ambiguous or high-blast-radius changes (irreversible deletions, spend, anything touching live customer-facing email/SMS sends, DNS/production infra cutover).
