@@ -1,0 +1,7 @@
+data/*.json
+data/*.jsonl
+data/*.csv
+!data/.gitkeep
+!data/README.md
+node_modules/
+

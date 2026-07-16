@@ -1,0 +1,108 @@
+# Camila Ops — hourly cold send + auto-discover if queue empty
+#
+# Mon–Fri every hour 8 AM–4 PM PT.
+# Sends up to 3 emails/hour. Quotas: 5 Bay · 5 Sac · 5 SJ · 5 Stockton.
+# Cache persists queue + send-log across runs.
+#
+# Hermes: GOOGLE_PLACES_API_KEY
+# Live:   COLD_OUTREACH_LIVE=true + CAMILA_SERVICE_ACCOUNT_JSON
+
+name: Camila Ops Hourly Send
+
+on:
+  schedule:
+    - cron: '5 15-23 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Force dry-run (no Gmail send)'
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      industry:
+        description: 'Discover industry if queue empty'
+        default: 'cranes'
+        type: choice
+        options:
+          - cranes
+          - concrete
+      chunk:
+        description: 'Emails this hour'
+        default: '3'
+        type: string
+
+jobs:
+  hourly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: scripts/camila-ops/package-lock.json
+
+      - name: Install
+        working-directory: scripts/camila-ops
+        run: npm ci
+
+      - name: PT date
+        id: d
+        run: echo "date=$(TZ=America/Los_Angeles date +%F)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore Camila Ops data cache
+        uses: actions/cache@v4
+        with:
+          path: scripts/camila-ops/data
+          key: camila-ops-${{ steps.d.outputs.date }}-${{ github.run_id }}
+          restore-keys: |
+            camila-ops-${{ steps.d.outputs.date }}-
+            camila-ops-
+
+      - name: Discover if no queue today
+        working-directory: scripts/camila-ops
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: |
+          TODAY="${{ steps.d.outputs.date }}"
+          INDUSTRY="${{ inputs.industry || 'cranes' }}"
+          if [ ! -f "data/queue-${TODAY}.json" ]; then
+            echo "No queue for ${TODAY} — discovering ${INDUSTRY}"
+            if [ -z "${GOOGLE_PLACES_API_KEY}" ]; then
+              echo "⚠️ Missing Hermes GOOGLE_PLACES_API_KEY — seed demo only"
+              node run.js seed-demo
+            else
+              node run.js discover --industry "$INDUSTRY"
+            fi
+          else
+            echo "Queue exists for ${TODAY}"
+          fi
+
+      - name: Hourly send
+        working-directory: scripts/camila-ops
+        env:
+          CAMILA_SERVICE_ACCOUNT_JSON: ${{ secrets.CAMILA_SERVICE_ACCOUNT_JSON }}
+          COLD_OUTREACH_LIVE: ${{ secrets.COLD_OUTREACH_LIVE }}
+          SEND_FROM: ${{ secrets.SEND_FROM || 'camila@norcalcarbmobile.com' }}
+        run: |
+          CHUNK="${{ inputs.chunk || '3' }}"
+          FORCE_DRY="${{ inputs.dry_run || 'false' }}"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "$FORCE_DRY" = "true" ]; then
+            node run.js hourly --dry-run --chunk "$CHUNK"
+          elif [ "${COLD_OUTREACH_LIVE}" = "true" ]; then
+            node run.js hourly --chunk "$CHUNK"
+          else
+            echo "COLD_OUTREACH_LIVE not true — dry-run (still logs)"
+            node run.js hourly --dry-run --chunk "$CHUNK"
+          fi
+          node run.js status
+
+      - name: Upload log artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: camila-ops-${{ steps.d.outputs.date }}
+          path: scripts/camila-ops/data/
+          retention-days: 30

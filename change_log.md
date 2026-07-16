@@ -4,6 +4,27 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-16 — Camila Ops internal app: cranes nightly → hourly send → log
+
+Bryan: weeks to send one email is unacceptable — send what's easy while enriching.
+
+### Shipped
+- **`scripts/camila-ops/`** — internal app: `discover` (Places) → `hourly` (3/hr) → `send-log.jsonl` + daily CSV
+- **`config/camila-ops-rotation.json`** — 18 Places URLs (9 crane + 9 concrete metros), quotas **5 Bay · 5 Sacramento · 5 San Jose · 5 Stockton**, standing Bryan approval for cranes→concrete
+- **Workflows:** `camila-ops-nightly.yml` (7 PM PT discover), `camila-ops-hourly.yml` (hourly 8–4 PT Mon–Fri, auto-discover if no queue)
+- **Runbook:** `docs/camila-ops-runbook.md`
+
+### Is Camila ready?
+- App/process/logging: **YES**
+- Live Gmail: **NO** until Hermes `GOOGLE_PLACES_API_KEY` + `CAMILA_SERVICE_ACCOUNT_JSON` + `COLD_OUTREACH_LIVE=true`
+
+### Next for Bryan
+1. Paste Places API key from **Hermes** GCP → `GOOGLE_PLACES_API_KEY`
+2. Flip `COLD_OUTREACH_LIVE=true` when SA + camila@ DWD ready
+3. First industry: **cranes**; switch discover to **concrete** once crane queue is working
+
+---
+
 ## 2026-07-10 — Homepage hero: two-column coverage-map layout (from Claude Design)
 
 Site — `site/index.html` + `site/assets/styles.css` (homepage only). Imported from the Claude Design project `409da93a-…` (`i made changes to the homescreen`):

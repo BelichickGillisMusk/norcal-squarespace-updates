@@ -1,0 +1,68 @@
+# Camila Ops — evening discover (fills queue for next morning)
+# 02:00 UTC = 7:00 PM PT
+
+name: Camila Ops Nightly Discover
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      industry:
+        description: 'Industry'
+        default: 'cranes'
+        type: choice
+        options:
+          - cranes
+          - concrete
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: scripts/camila-ops/package-lock.json
+
+      - name: Install
+        working-directory: scripts/camila-ops
+        run: npm ci
+
+      - name: PT date
+        id: d
+        run: echo "date=$(TZ=America/Los_Angeles date +%F)" >> "$GITHUB_OUTPUT"
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: scripts/camila-ops/data
+          key: camila-ops-${{ steps.d.outputs.date }}-${{ github.run_id }}
+          restore-keys: |
+            camila-ops-${{ steps.d.outputs.date }}-
+            camila-ops-
+
+      - name: Discover
+        working-directory: scripts/camila-ops
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: |
+          INDUSTRY="${{ inputs.industry || 'cranes' }}"
+          if [ -z "${GOOGLE_PLACES_API_KEY}" ]; then
+            echo "⚠️ Hermes GOOGLE_PLACES_API_KEY missing"
+            node run.js discover --industry "$INDUSTRY" --dry-run
+            exit 0
+          fi
+          node run.js discover --industry "$INDUSTRY"
+          node run.js status
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: camila-ops-${{ steps.d.outputs.date }}
+          path: scripts/camila-ops/data/
+          retention-days: 30
+          if-no-files-found: warn

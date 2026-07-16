@@ -1,0 +1,19 @@
+{
+  "name": "norcal-camila-ops",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Camila Ops — nightly Places discover + hourly cold send + send log",
+  "type": "module",
+  "scripts": {
+    "status": "node run.js status",
+    "discover": "node run.js discover --industry cranes",
+    "discover:concrete": "node run.js discover --industry concrete",
+    "discover:dry": "node run.js discover --industry cranes --dry-run",
+    "hourly": "node run.js hourly",
+    "hourly:dry": "node run.js hourly --dry-run",
+    "seed-demo": "node run.js seed-demo"
+  },
+  "dependencies": {
+    "googleapis": "^173.0.0"
+  }
+}

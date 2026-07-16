@@ -1,0 +1,84 @@
+{
+  "app_name": "Camila Ops — Nightly Industry Sender",
+  "version": "1.0.0",
+  "standing_bryan_approval": {
+    "date": "2026-07-16",
+    "phrase": "send what is easy while we enrich — cranes then concrete, 5 Bay / 5 Sacramento / 5 San Jose / 5 Stockton nightly",
+    "industries_approved": ["cranes", "concrete"],
+    "notes": "Bryan authorized easy-path sends while enrichment continues. Live gate remains COLD_OUTREACH_LIVE=true + MX ok + not suppressed."
+  },
+  "send_from": "camila@norcalcarbmobile.com",
+  "daily_cap": 25,
+  "target_per_day": 20,
+  "per_city_quota": 5,
+  "min_minutes_between_sends": 7,
+  "hourly_chunk_size": 3,
+  "send_window_pt": { "start_hour": 8, "end_hour": 16 },
+  "template_id": "B",
+  "places_api": {
+    "secret_name": "GOOGLE_PLACES_API_KEY",
+    "source": "Hermes GCP project — Google Maps / Places API key",
+    "howto": "GCP Console (Hermes) → APIs & Services → Credentials → copy Places API key → GitHub secret GOOGLE_PLACES_API_KEY. Enable Places API (New) or Places API."
+  },
+  "metros": {
+    "Bay": {
+      "quota": 5,
+      "cities": ["Oakland", "Hayward", "Concord", "San Francisco", "Richmond", "Fremont"]
+    },
+    "Sacramento": {
+      "quota": 5,
+      "cities": ["Sacramento", "West Sacramento", "Roseville", "Rancho Cordova", "Elk Grove"]
+    },
+    "San Jose": {
+      "quota": 5,
+      "cities": ["San Jose", "Santa Clara", "Sunnyvale", "Milpitas"]
+    },
+    "Stockton": {
+      "quota": 5,
+      "cities": ["Stockton", "Lodi", "Tracy", "Manteca", "Modesto"]
+    }
+  },
+  "industry_rotation": [
+    {
+      "id": "cranes",
+      "label": "Crane companies",
+      "active": true,
+      "search_terms": ["crane rental", "crane service", "mobile crane", "crane company"],
+      "email_hook": "crane trucks and support diesel"
+    },
+    {
+      "id": "concrete",
+      "label": "Concrete / ready-mix",
+      "active": true,
+      "search_terms": ["concrete company", "ready mix concrete", "concrete pumping"],
+      "email_hook": "mixer and pump diesel"
+    },
+    {
+      "id": "trucking",
+      "label": "Trucking / hauling",
+      "active": false,
+      "search_terms": ["truck company", "hauling company", "dump truck"],
+      "email_hook": "fleet diesel"
+    }
+  ],
+  "places_search_urls": [
+    { "id": 1, "industry": "cranes", "metro": "Sacramento", "city": "Sacramento", "query": "crane rental Sacramento CA" },
+    { "id": 2, "industry": "cranes", "metro": "Sacramento", "city": "Roseville", "query": "crane company Roseville CA" },
+    { "id": 3, "industry": "cranes", "metro": "Stockton", "city": "Stockton", "query": "crane rental Stockton CA" },
+    { "id": 4, "industry": "cranes", "metro": "Stockton", "city": "Modesto", "query": "crane service Modesto CA" },
+    { "id": 5, "industry": "cranes", "metro": "San Jose", "city": "San Jose", "query": "crane rental San Jose CA" },
+    { "id": 6, "industry": "cranes", "metro": "San Jose", "city": "Santa Clara", "query": "crane company Santa Clara CA" },
+    { "id": 7, "industry": "cranes", "metro": "Bay", "city": "Oakland", "query": "crane rental Oakland CA" },
+    { "id": 8, "industry": "cranes", "metro": "Bay", "city": "Hayward", "query": "crane service Hayward CA" },
+    { "id": 9, "industry": "cranes", "metro": "Bay", "city": "Concord", "query": "crane company Concord CA" },
+    { "id": 10, "industry": "concrete", "metro": "Sacramento", "city": "Sacramento", "query": "ready mix concrete Sacramento CA" },
+    { "id": 11, "industry": "concrete", "metro": "Sacramento", "city": "Elk Grove", "query": "concrete company Elk Grove CA" },
+    { "id": 12, "industry": "concrete", "metro": "Stockton", "city": "Stockton", "query": "ready mix concrete Stockton CA" },
+    { "id": 13, "industry": "concrete", "metro": "Stockton", "city": "Tracy", "query": "concrete company Tracy CA" },
+    { "id": 14, "industry": "concrete", "metro": "San Jose", "city": "San Jose", "query": "ready mix concrete San Jose CA" },
+    { "id": 15, "industry": "concrete", "metro": "San Jose", "city": "Milpitas", "query": "concrete pumping Milpitas CA" },
+    { "id": 16, "industry": "concrete", "metro": "Bay", "city": "Oakland", "query": "ready mix concrete Oakland CA" },
+    { "id": 17, "industry": "concrete", "metro": "Bay", "city": "Hayward", "query": "concrete company Hayward CA" },
+    { "id": 18, "industry": "concrete", "metro": "Bay", "city": "Fremont", "query": "concrete pumping Fremont CA" }
+  ]
+}
