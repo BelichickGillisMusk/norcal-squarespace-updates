@@ -4,6 +4,22 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-16 — Lead packs ingested (Drive drop)
+
+Bryan uploaded CRM/SAFER packs. Copied to `scripts/camila-ops/leads/`.
+
+| Pack | Rows | Emails? |
+|------|------|---------|
+| CLEAN usable | 188 | Only **4 unique** YES emails (2 NorCal after filter) |
+| Tow in CLEAN | **25 NorCal** | **Phone-only** — saved `tow-phones-for-enrichment.csv` |
+| BG send tonight top 500 | 500 | **No emails** (SAFER names only) |
+| Hot leads 100 | 100 | **No emails** |
+| Darryl enriched | 19 | Most marked `NO_DO_NOT_USE` (mismatched) |
+| Sent suppress | 12 | Loaded into `data/suppression.csv` |
+
+**Verdict:** The tow list is real — it's phones. Can't hit 20 emails/night until Hermes Places turns phones→websites→MX emails. Queue today: 2 MX-ok (Altex, SHK Hauling).
+
+
 ## 2026-07-16 — Searched Drive/iCloud/Slack/briefs for tow list
 
 **Result:** This cloud agent **cannot open Google Drive or iCloud** (no mount, no Drive OAuth/SA in env).
