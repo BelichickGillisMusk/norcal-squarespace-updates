@@ -4,6 +4,18 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-16 — Federal skim restored (150 mi Sac + Oakland)
+
+Bryan’s Grok federal-DB skim upload (`Federal_darabase_rows`) was a **Socrata error stub** — wrong/non-tabular endpoint. Recreated as:
+
+- `scripts/camila-ops/federal-skim.js` → FMCSA Company Census `az4n-8mr2`
+- Radius filter via `lib/ca-zips-150mi-sac-oak.csv` (hubs Sac + Oakland, ≤150 mi)
+- `npm run federal-skim` / `federal-skim:dry`
+
+Also ingested: Mecca May certificates (~2180, almost no contacts), `600-emails` priority names (no emails), MultiHub GBP feed.
+
+---
+
 ## 2026-07-16 — Lead packs ingested (Drive drop)
 
 Bryan uploaded CRM/SAFER packs. Copied to `scripts/camila-ops/leads/`.

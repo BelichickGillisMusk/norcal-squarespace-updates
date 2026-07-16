@@ -15,8 +15,9 @@
  *   node run.js seed-demo
  *   node run.js import-csv --file tow-list.csv --industry tow_trucks
  *   node run.js discover --industry tow_trucks   # Places pool → skim 20 MX-ok
+ *   node federal-skim.js --with-email --limit 500  # FMCSA census ≤150mi Sac+Oak
  *
- * Funnel: Places/CSV (~1000 candidates) → website+MX → queue 20/day (5×4 metros)
+ * Funnel: Places/CSV/federal (~1000 candidates) → website+MX → queue 20/day (5×4 metros)
  *
  * Live: GOOGLE_PLACES_API_KEY (Hermes) + CAMILA_SERVICE_ACCOUNT_JSON + COLD_OUTREACH_LIVE=true
  */
@@ -596,6 +597,7 @@ async function main() {
     default:
       console.error(`Unknown command: ${cmd}`);
       console.error('Commands: status | discover | import-csv | hourly | seed-demo');
+      console.error('Also: node federal-skim.js --with-email  (FMCSA ≤150mi Sac+Oak)');
       process.exit(1);
   }
 }

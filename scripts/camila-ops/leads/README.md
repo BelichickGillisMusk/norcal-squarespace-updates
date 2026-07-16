@@ -13,8 +13,26 @@ Bryan dropped these from Drive/CRM. Copied here for the nightly funnel.
 | `sent-email-suppress.csv` | Already emailed — never re-send |
 | `tow-phones-for-enrichment.csv` | **25 NorCal tow cos with phones** — Places/website → email |
 | `tonight-sendable-emails.csv` | MX-candidate emails ready for `import-csv` |
+| `Mecca-May-certificates.csv` | ~2180 TRUCRS May cert rows — almost empty contacts (~1 email) |
+| `600-emails-priority-names.csv` | ~500 priority names — **no emails** (same shape as BG top 500) |
+| `NorCal-CARB-MultiHub-Location-Feed.csv` | GBP multi-hub location feed (our sites) |
+| `Federal_darabase_rows-BROKEN-socrata-error.csv` | Grok/data.gov miss — non-tabular endpoint |
+| `federal-150mi-sac-oak.csv` | Output of `npm run federal-skim` (FMCSA census ≤150mi) |
+
+## Federal skim (Sac + Oakland 150 mi)
+
+`Federal_darabase_rows` failed because it hit a **non-tabular** Socrata dataset. Correct source is FMCSA **Company Census** `az4n-8mr2` on data.transportation.gov.
+
+```bash
+cd scripts/camila-ops
+npm run federal-skim:dry
+node federal-skim.js --with-email --limit 500
+node federal-skim.js --with-email --min-power-units 3   # full skim → leads/federal-150mi-sac-oak.csv
+node run.js import-csv --file leads/federal-150mi-sac-oak.csv --industry cranes
+```
 
 ## Reality check
 Tow list is real — but it's **phones**. Path to 20 emails/day:
 1. Places/Hermes enrich `tow-phones-for-enrichment.csv` → websites → `info@` MX
-2. Meanwhile send from `tonight-sendable-emails.csv` (easy path)
+2. Federal skim → real emails from census within 150mi of Sac/Oakland
+3. Meanwhile send from `tonight-sendable-emails.csv` (easy path)

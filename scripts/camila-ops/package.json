@@ -12,6 +12,8 @@
     "discover:concrete": "node run.js discover --industry concrete",
     "discover:dry": "node run.js discover --industry tow_trucks --dry-run",
     "import-csv": "node run.js import-csv --industry tow_trucks",
+    "federal-skim": "node federal-skim.js --with-email",
+    "federal-skim:dry": "node federal-skim.js --dry-run --with-email",
     "hourly": "node run.js hourly",
     "hourly:dry": "node run.js hourly --dry-run",
     "seed-demo": "node run.js seed-demo"

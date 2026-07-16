@@ -76,6 +76,25 @@ cat data/send-log.jsonl
 
 ---
 
+## Federal skim — 150 mi Sac + Oakland (FMCSA census)
+
+The Grok “federal database” pull saved as `Federal_darabase_rows` is an **API error** (`Non-tabular datasets do not support rows requests`). Use the public FMCSA Company Census instead:
+
+```bash
+cd scripts/camila-ops
+npm run federal-skim:dry
+node federal-skim.js --with-email --limit 500          # sample
+node federal-skim.js --with-email --min-power-units 2  # full → leads/federal-150mi-sac-oak.csv
+node run.js import-csv --file leads/federal-150mi-sac-oak.csv --industry cranes
+```
+
+- Hubs: Sacramento `(38.5816, -121.4944)` + Oakland `(37.8044, -122.2712)`
+- Keep if `min(mi_sac, mi_oak) ≤ 150`
+- ZIP centroids: `lib/ca-zips-150mi-sac-oak.csv` (~780 ZIPs)
+- No API key (public SODA). Census emails are often real ops contacts — still MX-check via `import-csv`.
+
+---
+
 ## Why this instead of “wait for perfect emails”
 
 - Website + MX `info@` is good enough to start; notes say `enrich later`  
