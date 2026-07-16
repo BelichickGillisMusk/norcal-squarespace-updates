@@ -10,9 +10,10 @@ on:
     inputs:
       industry:
         description: 'Industry'
-        default: 'cranes'
+        default: 'tow_trucks'
         type: choice
         options:
+          - tow_trucks
           - cranes
           - concrete
 
@@ -50,7 +51,7 @@ jobs:
         env:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
         run: |
-          INDUSTRY="${{ inputs.industry || 'cranes' }}"
+          INDUSTRY="${{ inputs.industry || 'tow_trucks' }}"
           if [ -z "${GOOGLE_PLACES_API_KEY}" ]; then
             echo "⚠️ Hermes GOOGLE_PLACES_API_KEY missing"
             node run.js discover --industry "$INDUSTRY" --dry-run

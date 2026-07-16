@@ -4,6 +4,16 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-16 — Tow trucks + 1000→20 funnel
+
+- Added **`tow_trucks`** as priority industry (12 Places queries across Sac/Stockton/SJ/Bay)
+- Places pagination: up to **60 results/query** (~720 tow candidates before MX skim)
+- Funnel log: places → website → mx_ok → queued 20; full pool in `data/pool-tow_trucks.jsonl`
+- **`import-csv`** command + `tow-truck-list-template.csv` for any tow list Bryan already has
+- Nightly/hourly default industry → `tow_trucks`
+
+---
+
 ## 2026-07-16 — Camila Ops internal app: cranes nightly → hourly send → log
 
 Bryan: weeks to send one email is unacceptable — send what's easy while enriching.

@@ -23,9 +23,10 @@ on:
           - 'false'
       industry:
         description: 'Discover industry if queue empty'
-        default: 'cranes'
+        default: 'tow_trucks'
         type: choice
         options:
+          - tow_trucks
           - cranes
           - concrete
       chunk:
@@ -68,7 +69,7 @@ jobs:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
         run: |
           TODAY="${{ steps.d.outputs.date }}"
-          INDUSTRY="${{ inputs.industry || 'cranes' }}"
+          INDUSTRY="${{ inputs.industry || 'tow_trucks' }}"
           if [ ! -f "data/queue-${TODAY}.json" ]; then
             echo "No queue for ${TODAY} — discovering ${INDUSTRY}"
             if [ -z "${GOOGLE_PLACES_API_KEY}" ]; then

@@ -4,6 +4,30 @@
 
 ---
 
+## Funnel (Bryan: 20 out of 1000)
+
+Places / CSV can pull **hundreds–thousands** of tow/crane/concrete businesses. We do **not** email all of them.
+
+```
+Places/CSV pool  →  website found  →  MX ok (info@domain)  →  queue 20/day (5×4 metros)
+     ~1000              ~300                 ~20–80                  send these
+```
+
+Full pool stays in `data/pool-{industry}.jsonl` for enrichment later. Only MX-ok rows enter the send queue.
+
+### Tow trucks
+
+Priority industry #1. Drop any list you have:
+
+```bash
+# template: scripts/camila-ops/tow-truck-list-template.csv
+node run.js import-csv --file /path/to/tow-list.csv --industry tow_trucks
+# or Places:
+npm run discover:tow
+```
+
+---
+
 ## Answer: Is she ready?
 
 | | |

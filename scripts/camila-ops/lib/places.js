@@ -2,6 +2,9 @@
 /**
  * Google Places Text → business leads (website / phone / name)
  * Key: GOOGLE_PLACES_API_KEY from Hermes GCP project
+ *
+ * Paginates Text Search (up to 3 pages ≈ 60 results/query) so we can
+ * pull hundreds of tow/crane/concrete candidates and skim ~20 MX-ok emails.
  */
 
 import https from 'https';
@@ -26,29 +29,56 @@ function getJson(url) {
   });
 }
 
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
 /**
- * Text Text + details for website.
- * Returns array of { name, phone, website, domain, city, address, place_id, metro, industry, query }
+ * Paginated text search. Google caps at 60 results (3×20) per query.
  */
-export async function searchPlaces({ query, metro, industry, city, max = 8 }) {
+export async function searchPlaces({ query, metro, industry, city, max = 60 }) {
   if (!KEY) {
     throw new Error(
       'GOOGLE_PLACES_API_KEY not set. Get it from Hermes GCP → Places API → paste GitHub secret.'
     );
   }
 
-  const textUrl =
-    `https://maps.googleapis.com/maps/api/place/textsearch/json` +
-    `?query=${encodeURIComponent(query)}` +
-    `&key=${KEY}`;
+  const raw = [];
+  let pageToken = null;
+  let pages = 0;
 
-  const search = await getJson(textUrl);
-  if (search.status !== 'OK' && search.status !== 'ZERO_RESULTS') {
-    throw new Error(`Places TextSearch ${search.status}: ${search.error_message || ''}`);
+  while (raw.length < max && pages < 3) {
+    pages++;
+    let url =
+      `https://maps.googleapis.com/maps/api/place/textsearch/json` +
+      `?query=${encodeURIComponent(query)}` +
+      `&key=${KEY}`;
+    if (pageToken) url += `&pagetoken=${pageToken}`;
+
+    // next_page_token needs a short delay before it becomes valid
+    if (pageToken) await sleep(2000);
+
+    const search = await getJson(url);
+    if (search.status === 'ZERO_RESULTS') break;
+    if (search.status === 'INVALID_REQUEST' && pageToken) {
+      await sleep(2000);
+      continue;
+    }
+    if (search.status !== 'OK') {
+      throw new Error(`Places TextSearch ${search.status}: ${search.error_message || ''}`);
+    }
+
+    for (const r of search.results || []) {
+      raw.push(r);
+      if (raw.length >= max) break;
+    }
+
+    pageToken = search.next_page_token || null;
+    if (!pageToken) break;
   }
 
   const results = [];
-  for (const r of (search.results || []).slice(0, max)) {
+  for (const r of raw.slice(0, max)) {
     let website = null;
     let domain = null;
     let phone = r.formatted_phone_number || null;

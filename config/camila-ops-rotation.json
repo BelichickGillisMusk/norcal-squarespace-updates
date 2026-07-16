@@ -1,11 +1,11 @@
 {
   "app_name": "Camila Ops — Nightly Industry Sender",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "standing_bryan_approval": {
     "date": "2026-07-16",
-    "phrase": "send what is easy while we enrich — cranes then concrete, 5 Bay / 5 Sacramento / 5 San Jose / 5 Stockton nightly",
-    "industries_approved": ["cranes", "concrete"],
-    "notes": "Bryan authorized easy-path sends while enrichment continues. Live gate remains COLD_OUTREACH_LIVE=true + MX ok + not suppressed."
+    "phrase": "send what is easy while we enrich — cranes, tow trucks, concrete; 5 Bay / 5 Sacramento / 5 San Jose / 5 Stockton nightly. Places/scrape 1000 → skim 20 MX-ok.",
+    "industries_approved": ["cranes", "tow_trucks", "concrete"],
+    "notes": "Bryan authorized easy-path sends while enrichment continues. Funnel: Places/CSV pool → website+MX → queue 20/day. Live gate: COLD_OUTREACH_LIVE=true."
   },
   "send_from": "camila@norcalcarbmobile.com",
   "daily_cap": 25,
@@ -13,12 +13,18 @@
   "per_city_quota": 5,
   "min_minutes_between_sends": 7,
   "hourly_chunk_size": 3,
+  "funnel": {
+    "goal": "From ~1000 Places/CSV candidates, get ≥20 MX-ok emails/day",
+    "places_max_per_query": 60,
+    "keep_pool": true,
+    "pool_file_pattern": "data/pool-{industry}.jsonl"
+  },
   "send_window_pt": { "start_hour": 8, "end_hour": 16 },
   "template_id": "B",
   "places_api": {
     "secret_name": "GOOGLE_PLACES_API_KEY",
     "source": "Hermes GCP project — Google Maps / Places API key",
-    "howto": "GCP Console (Hermes) → APIs & Services → Credentials → copy Places API key → GitHub secret GOOGLE_PLACES_API_KEY. Enable Places API (New) or Places API."
+    "howto": "GCP Console (Hermes) → APIs & Services → Credentials → copy Places API key → GitHub secret GOOGLE_PLACES_API_KEY."
   },
   "metros": {
     "Bay": {
@@ -40,9 +46,18 @@
   },
   "industry_rotation": [
     {
+      "id": "tow_trucks",
+      "label": "Tow truck / roadside",
+      "active": true,
+      "priority": 1,
+      "search_terms": ["tow truck", "towing company", "roadside assistance", "heavy duty towing"],
+      "email_hook": "tow and recovery diesel trucks"
+    },
+    {
       "id": "cranes",
       "label": "Crane companies",
       "active": true,
+      "priority": 2,
       "search_terms": ["crane rental", "crane service", "mobile crane", "crane company"],
       "email_hook": "crane trucks and support diesel"
     },
@@ -50,6 +65,7 @@
       "id": "concrete",
       "label": "Concrete / ready-mix",
       "active": true,
+      "priority": 3,
       "search_terms": ["concrete company", "ready mix concrete", "concrete pumping"],
       "email_hook": "mixer and pump diesel"
     },
@@ -57,28 +73,35 @@
       "id": "trucking",
       "label": "Trucking / hauling",
       "active": false,
+      "priority": 4,
       "search_terms": ["truck company", "hauling company", "dump truck"],
       "email_hook": "fleet diesel"
     }
   ],
   "places_search_urls": [
-    { "id": 1, "industry": "cranes", "metro": "Sacramento", "city": "Sacramento", "query": "crane rental Sacramento CA" },
-    { "id": 2, "industry": "cranes", "metro": "Sacramento", "city": "Roseville", "query": "crane company Roseville CA" },
-    { "id": 3, "industry": "cranes", "metro": "Stockton", "city": "Stockton", "query": "crane rental Stockton CA" },
-    { "id": 4, "industry": "cranes", "metro": "Stockton", "city": "Modesto", "query": "crane service Modesto CA" },
-    { "id": 5, "industry": "cranes", "metro": "San Jose", "city": "San Jose", "query": "crane rental San Jose CA" },
-    { "id": 6, "industry": "cranes", "metro": "San Jose", "city": "Santa Clara", "query": "crane company Santa Clara CA" },
-    { "id": 7, "industry": "cranes", "metro": "Bay", "city": "Oakland", "query": "crane rental Oakland CA" },
-    { "id": 8, "industry": "cranes", "metro": "Bay", "city": "Hayward", "query": "crane service Hayward CA" },
-    { "id": 9, "industry": "cranes", "metro": "Bay", "city": "Concord", "query": "crane company Concord CA" },
-    { "id": 10, "industry": "concrete", "metro": "Sacramento", "city": "Sacramento", "query": "ready mix concrete Sacramento CA" },
-    { "id": 11, "industry": "concrete", "metro": "Sacramento", "city": "Elk Grove", "query": "concrete company Elk Grove CA" },
-    { "id": 12, "industry": "concrete", "metro": "Stockton", "city": "Stockton", "query": "ready mix concrete Stockton CA" },
-    { "id": 13, "industry": "concrete", "metro": "Stockton", "city": "Tracy", "query": "concrete company Tracy CA" },
-    { "id": 14, "industry": "concrete", "metro": "San Jose", "city": "San Jose", "query": "ready mix concrete San Jose CA" },
-    { "id": 15, "industry": "concrete", "metro": "San Jose", "city": "Milpitas", "query": "concrete pumping Milpitas CA" },
-    { "id": 16, "industry": "concrete", "metro": "Bay", "city": "Oakland", "query": "ready mix concrete Oakland CA" },
-    { "id": 17, "industry": "concrete", "metro": "Bay", "city": "Hayward", "query": "concrete company Hayward CA" },
-    { "id": 18, "industry": "concrete", "metro": "Bay", "city": "Fremont", "query": "concrete pumping Fremont CA" }
+    { "id": 1, "industry": "tow_trucks", "metro": "Sacramento", "city": "Sacramento", "query": "tow truck Sacramento CA" },
+    { "id": 2, "industry": "tow_trucks", "metro": "Sacramento", "city": "Roseville", "query": "towing company Roseville CA" },
+    { "id": 3, "industry": "tow_trucks", "metro": "Sacramento", "city": "Elk Grove", "query": "tow truck Elk Grove CA" },
+    { "id": 4, "industry": "tow_trucks", "metro": "Stockton", "city": "Stockton", "query": "tow truck Stockton CA" },
+    { "id": 5, "industry": "tow_trucks", "metro": "Stockton", "city": "Modesto", "query": "towing company Modesto CA" },
+    { "id": 6, "industry": "tow_trucks", "metro": "Stockton", "city": "Tracy", "query": "tow truck Tracy CA" },
+    { "id": 7, "industry": "tow_trucks", "metro": "San Jose", "city": "San Jose", "query": "tow truck San Jose CA" },
+    { "id": 8, "industry": "tow_trucks", "metro": "San Jose", "city": "Santa Clara", "query": "towing company Santa Clara CA" },
+    { "id": 9, "industry": "tow_trucks", "metro": "San Jose", "city": "Milpitas", "query": "heavy duty towing Milpitas CA" },
+    { "id": 10, "industry": "tow_trucks", "metro": "Bay", "city": "Oakland", "query": "tow truck Oakland CA" },
+    { "id": 11, "industry": "tow_trucks", "metro": "Bay", "city": "Hayward", "query": "towing company Hayward CA" },
+    { "id": 12, "industry": "tow_trucks", "metro": "Bay", "city": "Concord", "query": "tow truck Concord CA" },
+    { "id": 13, "industry": "cranes", "metro": "Sacramento", "city": "Sacramento", "query": "crane rental Sacramento CA" },
+    { "id": 14, "industry": "cranes", "metro": "Stockton", "city": "Stockton", "query": "crane rental Stockton CA" },
+    { "id": 15, "industry": "cranes", "metro": "San Jose", "city": "San Jose", "query": "crane rental San Jose CA" },
+    { "id": 16, "industry": "cranes", "metro": "Bay", "city": "Oakland", "query": "crane rental Oakland CA" },
+    { "id": 17, "industry": "cranes", "metro": "Bay", "city": "Hayward", "query": "crane service Hayward CA" },
+    { "id": 18, "industry": "cranes", "metro": "Stockton", "city": "Modesto", "query": "crane service Modesto CA" },
+    { "id": 19, "industry": "concrete", "metro": "Sacramento", "city": "Sacramento", "query": "ready mix concrete Sacramento CA" },
+    { "id": 20, "industry": "concrete", "metro": "Stockton", "city": "Stockton", "query": "ready mix concrete Stockton CA" },
+    { "id": 21, "industry": "concrete", "metro": "San Jose", "city": "San Jose", "query": "ready mix concrete San Jose CA" },
+    { "id": 22, "industry": "concrete", "metro": "Bay", "city": "Oakland", "query": "ready mix concrete Oakland CA" },
+    { "id": 23, "industry": "concrete", "metro": "Bay", "city": "Hayward", "query": "concrete company Hayward CA" },
+    { "id": 24, "industry": "concrete", "metro": "Sacramento", "city": "Elk Grove", "query": "concrete company Elk Grove CA" }
   ]
 }

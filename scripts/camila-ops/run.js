@@ -12,21 +12,20 @@
  *   node run.js discover --industry cranes
  *   node run.js hourly --dry-run
  *   node run.js hourly
- *   node run.js seed-demo          # local demo queue without Places key
+ *   node run.js seed-demo
+ *   node run.js import-csv --file tow-list.csv --industry tow_trucks
+ *   node run.js discover --industry tow_trucks   # Places pool → skim 20 MX-ok
  *
- * Live send requires:
- *   GOOGLE_PLACES_API_KEY   (Hermes GCP)
- *   CAMILA_SERVICE_ACCOUNT_JSON
- *   COLD_OUTREACH_LIVE=true
+ * Funnel: Places/CSV (~1000 candidates) → website+MX → queue 20/day (5×4 metros)
  *
- * Bryan standing approval 2026-07-16: cranes then concrete, 5×4 metros.
+ * Live: GOOGLE_PLACES_API_KEY (Hermes) + CAMILA_SERVICE_ACCOUNT_JSON + COLD_OUTREACH_LIVE=true
  */
 
 import fs from 'fs';
 import path from 'path';
 import { parseArgs } from 'node:util';
 import { searchPlaces, hasPlacesKey } from './lib/places.js';
-import { guessEmail } from './lib/mx.js';
+import { guessEmail, hasMx } from './lib/mx.js';
 import { renderCraneEmail } from './lib/templates.js';
 import { sendEmail, canSendLive } from './lib/send.js';
 import {
@@ -50,11 +49,46 @@ function activeIndustry(preferred) {
   if (preferred) {
     return CONFIG.industry_rotation.find((i) => i.id === preferred) || null;
   }
-  return CONFIG.industry_rotation.find((i) => i.active) || CONFIG.industry_rotation[0];
+  const active = CONFIG.industry_rotation.filter((i) => i.active);
+  active.sort((a, b) => (a.priority || 99) - (b.priority || 99));
+  return active[0] || CONFIG.industry_rotation[0];
 }
 
 function urlsForIndustry(industryId) {
   return CONFIG.places_search_urls.filter((u) => u.industry === industryId);
+}
+
+function poolPath(industryId) {
+  return path.resolve(import.meta.dirname, `data/pool-${industryId}.jsonl`);
+}
+
+function appendPool(industryId, rows) {
+  const p = poolPath(industryId);
+  const dir = path.dirname(p);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  for (const row of rows) {
+    fs.appendFileSync(p, JSON.stringify(row) + '\n');
+  }
+}
+
+function inferMetro(city) {
+  const c = String(city || '').toLowerCase();
+  for (const [metro, cfg] of Object.entries(CONFIG.metros)) {
+    if (cfg.cities.some((x) => c.includes(x.toLowerCase()) || x.toLowerCase().includes(c))) {
+      return metro;
+    }
+  }
+  if (c.includes('oakland') || c.includes('hayward') || c.includes('bay') || c.includes('fremont') || c.includes('concord')) {
+    return 'Bay';
+  }
+  if (c.includes('jose') || c.includes('clara') || c.includes('milpitas')) return 'San Jose';
+  if (c.includes('stockton') || c.includes('modesto') || c.includes('tracy') || c.includes('lodi')) {
+    return 'Stockton';
+  }
+  if (c.includes('sacramento') || c.includes('roseville') || c.includes('elk grove')) {
+    return 'Sacramento';
+  }
+  return 'Sacramento';
 }
 
 function readiness() {
@@ -64,7 +98,8 @@ function readiness() {
     cold_live: process.env.COLD_OUTREACH_LIVE === 'true',
     can_send_live: canSendLive(),
     standing_approval: Boolean(CONFIG.standing_bryan_approval?.date),
-    rotation_config: CONFIG.places_search_urls.length === 18,
+    places_urls: CONFIG.places_search_urls.length >= 12,
+    tow_trucks_urls: urlsForIndustry('tow_trucks').length >= 8,
   };
   const ready = checks.places_key_hermes && checks.camila_sa_json && checks.cold_live;
   return { ready, checks };
@@ -95,7 +130,7 @@ async function cmdStatus() {
 }
 
 async function cmdDiscover({ industryId, dryRun }) {
-  const industry = activeIndustry(industryId);
+  const industry = activeIndustry(industryId || 'tow_trucks');
   if (!industry) {
     console.error('Unknown industry');
     process.exit(1);
@@ -103,7 +138,9 @@ async function cmdDiscover({ industryId, dryRun }) {
 
   const date = todayPt();
   const urls = urlsForIndustry(industry.id);
-  console.log(`\n🔍 Discover — ${industry.label} (${urls.length} Places URLs)`);
+  const maxPerQuery = CONFIG.funnel?.places_max_per_query || 60;
+  console.log(`\n🔍 Discover — ${industry.label} (${urls.length} Places URLs, up to ${maxPerQuery}/query)`);
+  console.log(`   Funnel goal: ~1000 candidates → skim ${CONFIG.target_per_day} MX-ok`);
   console.log(`   Date: ${date} | Dry-run: ${dryRun}`);
 
   if (dryRun && !hasPlacesKey()) {
@@ -112,11 +149,14 @@ async function cmdDiscover({ industryId, dryRun }) {
       console.log(`   #${u.id} [${u.metro}] ${u.query}`);
     }
     console.log(`\nSet GOOGLE_PLACES_API_KEY from Hermes GCP to run live discover.`);
+    console.log('Or drop a list: node run.js import-csv --file tow-list.csv --industry tow_trucks');
     return;
   }
 
   const suppressed = loadSuppressionEmails();
   const already = new Set();
+  const funnel = { places: 0, with_website: 0, mx_ok: 0, suppressed: 0, queued: 0 };
+  const poolRows = [];
   const leads = [];
 
   for (const u of urls) {
@@ -128,35 +168,53 @@ async function cmdDiscover({ industryId, dryRun }) {
         metro: u.metro,
         industry: industry.id,
         city: u.city,
-        max: 6,
+        max: maxPerQuery,
       });
     } catch (err) {
       console.error(`     Places error: ${err.message}`);
       continue;
     }
 
+    funnel.places += places.length;
+
     for (const p of places) {
+      const poolRow = {
+        scraped_at: new Date().toISOString(),
+        industry: industry.id,
+        metro: u.metro,
+        city: u.city,
+        company: p.name,
+        phone: p.phone || '',
+        website: p.website || '',
+        domain: p.domain || '',
+        place_id: p.place_id || '',
+        query_id: u.id,
+        mx_ok: false,
+        email: null,
+      };
+
       if (!p.domain) {
-        console.log(`     ⏭ ${p.name} — no website/domain`);
+        poolRows.push(poolRow);
         continue;
       }
+      funnel.with_website++;
+
       const guessed = guessEmail(p.domain);
-      if (!guessed.email || !guessed.mx_ok) {
-        console.log(`     ❌ ${p.name} — no MX for ${p.domain}`);
-        continue;
-      }
+      poolRow.email = guessed.email;
+      poolRow.mx_ok = Boolean(guessed.mx_ok);
+      poolRows.push(poolRow);
+
+      if (!guessed.email || !guessed.mx_ok) continue;
+      funnel.mx_ok++;
+
       if (suppressed.has(guessed.email) || already.has(guessed.email)) {
-        console.log(`     ⏭ ${guessed.email} — suppressed/dup`);
+        funnel.suppressed++;
         continue;
       }
       already.add(guessed.email);
 
-      const metroQuota = CONFIG.metros[u.metro]?.quota || 5;
       const metroCount = leads.filter((l) => l.metro === u.metro).length;
-      if (metroCount >= metroQuota + 3) {
-        // keep a few extras as buffer beyond daily quota
-        continue;
-      }
+      if (metroCount >= CONFIG.per_city_quota + 5) continue; // buffer in pool→queue
 
       leads.push({
         email: guessed.email,
@@ -177,11 +235,10 @@ async function cmdDiscover({ industryId, dryRun }) {
         query_id: u.id,
         notes: `Places #${u.id}; enrich later`,
       });
-      console.log(`     ✅ ${guessed.email} — ${p.name} (${u.metro})`);
     }
   }
 
-  // Trim to fill 5 per metro (plus small buffer already limited)
+  // Skim to daily shape: 5 per metro (+2 buffer)
   const trimmed = [];
   const metroCounts = {};
   for (const lead of leads) {
@@ -190,24 +247,147 @@ async function cmdDiscover({ industryId, dryRun }) {
     metroCounts[lead.metro]++;
     trimmed.push(lead);
   }
+  funnel.queued = trimmed.length;
 
   const queue = {
     date,
     industry: industry.id,
     built_at: new Date().toISOString(),
+    funnel,
     leads: trimmed,
   };
 
   if (!dryRun) {
+    if (CONFIG.funnel?.keep_pool !== false && poolRows.length) {
+      appendPool(industry.id, poolRows);
+      console.log(`\n📦 Pool appended: ${poolRows.length} → data/pool-${industry.id}.jsonl`);
+    }
     saveQueue(queue);
-    console.log(`\n✅ Queue saved: ${trimmed.length} leads → data/queue-${date}.json`);
+    console.log(`✅ Queue saved: ${trimmed.length} MX-ok → data/queue-${date}.json`);
   } else {
-    console.log(`\n[dry-run] Would save ${trimmed.length} leads`);
+    console.log(`\n[dry-run] Would pool ${poolRows.length}, queue ${trimmed.length}`);
   }
 
+  console.log(`\n📊 Funnel: places=${funnel.places} → website=${funnel.with_website} → mx_ok=${funnel.mx_ok} → queued=${funnel.queued} (suppressed=${funnel.suppressed})`);
   for (const metro of Object.keys(CONFIG.metros)) {
     const n = trimmed.filter((l) => l.metro === metro).length;
-    console.log(`   ${metro}: ${n}`);
+    console.log(`   ${metro}: ${n}/${CONFIG.metros[metro].quota}`);
+  }
+}
+
+/**
+ * Import a tow/crane/concrete CSV list (phone+company OK; email optional).
+ * Columns: email,company,city,phone,website,metro (header row)
+ * MX-checks emails / guesses from website domain → fills today's queue.
+ */
+async function cmdImportCsv({ file, industryId, dryRun }) {
+  if (!file || !fs.existsSync(file)) {
+    console.error('Usage: node run.js import-csv --file path/to/list.csv --industry tow_trucks');
+    process.exit(1);
+  }
+  const industry = activeIndustry(industryId || 'tow_trucks');
+  const date = todayPt();
+  const lines = fs.readFileSync(file, 'utf8').split('\n').filter((l) => l.trim());
+  if (!lines.length) {
+    console.error('Empty CSV');
+    process.exit(1);
+  }
+
+  const header = lines[0].toLowerCase().split(',').map((h) => h.trim().replace(/"/g, ''));
+  const idx = (name) => header.indexOf(name);
+  const suppressed = loadSuppressionEmails();
+  const already = new Set();
+  const poolRows = [];
+  const leads = [];
+  const funnel = { rows: 0, mx_ok: 0, queued: 0 };
+
+  for (let i = 1; i < lines.length; i++) {
+    const cols = lines[i].split(',').map((c) => c.trim().replace(/^"|"$/g, ''));
+    funnel.rows++;
+    const company = cols[idx('company')] || cols[1] || '';
+    const city = cols[idx('city')] || cols[2] || '';
+    const phone = cols[idx('phone')] || '';
+    const website = cols[idx('website')] || '';
+    let email = (cols[idx('email')] || cols[0] || '').toLowerCase();
+    let metro = cols[idx('metro')] || inferMetro(city);
+    let domain = null;
+
+    if (website) {
+      try {
+        domain = new URL(website.startsWith('http') ? website : `https://${website}`).hostname.replace(/^www\./, '');
+      } catch {
+        domain = null;
+      }
+    }
+    if ((!email || !email.includes('@')) && domain) {
+      const g = guessEmail(domain);
+      email = g.email || '';
+    }
+
+    const poolRow = {
+      scraped_at: new Date().toISOString(),
+      source: 'csv_import',
+      industry: industry.id,
+      metro,
+      city,
+      company,
+      phone,
+      website,
+      domain: domain || '',
+      email: email || null,
+      mx_ok: false,
+    };
+
+    if (!email || !email.includes('@')) {
+      poolRows.push(poolRow);
+      continue;
+    }
+
+    const domainFromEmail = email.split('@')[1];
+    const mxOk = hasMx(domainFromEmail);
+    poolRow.mx_ok = mxOk;
+    poolRow.email = email;
+    poolRows.push(poolRow);
+
+    if (!mxOk) continue;
+    funnel.mx_ok++;
+    if (suppressed.has(email) || already.has(email)) continue;
+    already.add(email);
+
+    const metroCount = leads.filter((l) => l.metro === metro).length;
+    if (metroCount >= CONFIG.per_city_quota + 2) continue;
+
+    leads.push({
+      email,
+      company: company || email,
+      first_name: 'there',
+      city: city || metro,
+      metro,
+      industry: industry.id,
+      phone,
+      website,
+      domain: domainFromEmail,
+      template_id: CONFIG.template_id,
+      mx_ok: true,
+      email_guessed: !cols[idx('email')],
+      status: 'pending',
+      industry_hook: industry.email_hook,
+      notes: 'csv_import; enrich later',
+    });
+  }
+
+  funnel.queued = leads.length;
+  const queue = { date, industry: industry.id, built_at: new Date().toISOString(), funnel, leads };
+
+  console.log(`\n📥 CSV import — ${file}`);
+  console.log(`   rows=${funnel.rows} → mx_ok=${funnel.mx_ok} → queued=${funnel.queued}`);
+
+  if (!dryRun) {
+    appendPool(industry.id, poolRows);
+    saveQueue(queue);
+    console.log(`✅ Pool + queue saved for ${date} (${industry.id})`);
+  } else {
+    console.log('[dry-run] No files written');
   }
 }
 
@@ -227,7 +407,7 @@ async function cmdHourly({ dryRun, chunk }) {
   }
 
   if (!queue.leads?.length) {
-    console.log('⚠️  No queue for today. Run: node run.js discover --industry cranes');
+    console.log('⚠️  No queue for today. Run: node run.js discover --industry tow_trucks');
     return;
   }
 
@@ -379,6 +559,7 @@ async function main() {
     args: process.argv.slice(2),
     options: {
       industry: { type: 'string' },
+      file: { type: 'string' },
       'dry-run': { type: 'boolean', default: false },
       chunk: { type: 'string' },
     },
@@ -394,7 +575,14 @@ async function main() {
       await cmdStatus();
       break;
     case 'discover':
-      await cmdDiscover({ industryId: values.industry || 'cranes', dryRun });
+      await cmdDiscover({ industryId: values.industry || 'tow_trucks', dryRun });
+      break;
+    case 'import-csv':
+      await cmdImportCsv({
+        file: values.file,
+        industryId: values.industry || 'tow_trucks',
+        dryRun,
+      });
       break;
     case 'hourly':
       await cmdHourly({
@@ -407,7 +595,7 @@ async function main() {
       break;
     default:
       console.error(`Unknown command: ${cmd}`);
-      console.error('Commands: status | discover | hourly | seed-demo');
+      console.error('Commands: status | discover | import-csv | hourly | seed-demo');
       process.exit(1);
   }
 }

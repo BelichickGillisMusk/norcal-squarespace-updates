@@ -6,9 +6,12 @@
   "type": "module",
   "scripts": {
     "status": "node run.js status",
-    "discover": "node run.js discover --industry cranes",
+    "discover": "node run.js discover --industry tow_trucks",
+    "discover:tow": "node run.js discover --industry tow_trucks",
+    "discover:cranes": "node run.js discover --industry cranes",
     "discover:concrete": "node run.js discover --industry concrete",
-    "discover:dry": "node run.js discover --industry cranes --dry-run",
+    "discover:dry": "node run.js discover --industry tow_trucks --dry-run",
+    "import-csv": "node run.js import-csv --industry tow_trucks",
     "hourly": "node run.js hourly",
     "hourly:dry": "node run.js hourly --dry-run",
     "seed-demo": "node run.js seed-demo"
