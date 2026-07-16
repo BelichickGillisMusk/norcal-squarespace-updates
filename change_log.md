@@ -4,6 +4,33 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-16 — Email deployer PM run (norcal-email-deployer)
+
+**Week:** Jul 15–21 — fleet Template B push (summer strategy).  
+**Preflight:** FAIL — 1 blocker. LIVE Resend channels stay OFF.
+
+### Dig evidence
+```
+dig TXT send.mail.norcalcarbmobile.com     → (empty) ❌ Resend SPF missing
+dig TXT resend._domainkey.mail.norcalcarbmobile.com → present ✅
+dig MX  send.mail.norcalcarbmobile.com     → 10 feedback-smtp.us-east-1.amazonses.com ✅
+dig NS  norcalcarbmobile.com               → paislee/eric.ns.cloudflare.com (Cloudflare)
+DMARC p=reject — Resend must stay on mail. subdomain
+Google DKIM present — cold Gmail (camila@ / bryan@) OK
+```
+
+### Actions taken
+- Ran `scripts/email-deploy` preflight — exit 1
+- Applied blocker protocol: do **not** set `NURTURE_LIVE` / `REMINDERS_LIVE` / `BLAST_APPROVED`
+- Refreshed `docs/DEPLOY_TODAY.md` for Jul 15–21 week
+- Updated `references/dns-fix.md` + preflight error text: DNS fix is **Cloudflare**, not Squarespace
+- Cold channel (Google DKIM) may proceed with Bryan approval; Resend nurture/reminders/blasts blocked until SPF TXT lands
+
+### Bryan unblock
+Cloudflare DNS → TXT Name `send.mail` → value from Resend domain page → Verify → agent re-runs preflight → test send → `dmarc=pass` → then approval phrases.
+
+---
+
 ## 2026-07-10 — Homepage hero: two-column coverage-map layout (from Claude Design)
 
 Site — `site/index.html` + `site/assets/styles.css` (homepage only). Imported from the Claude Design project `409da93a-…` (`i made changes to the homescreen`):

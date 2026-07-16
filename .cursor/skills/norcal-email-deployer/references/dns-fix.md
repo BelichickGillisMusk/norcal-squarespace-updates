@@ -6,21 +6,24 @@
 
 **Fix:** Verify **`mail.norcalcarbmobile.com`** in Resend (subdomain), not the root.
 
-## Steps (Squarespace DNS)
+## Steps (Cloudflare DNS — current)
 
-1. [resend.com](https://resend.com) → Domains → **Add** `mail.norcalcarbmobile.com`
-2. Squarespace → Settings → Domains → norcalcarbmobile.com → **DNS Settings**
+**NS:** `paislee.ns.cloudflare.com` / `eric.ns.cloudflare.com`  
+(Squarespace DNS is retired for this domain as of Jun 2026.)
 
-Add records Resend shows (host names relative to subdomain):
+1. [resend.com](https://resend.com) → Domains → **`mail.norcalcarbmobile.com`**
+2. Cloudflare → Select `norcalcarbmobile.com` → **DNS** → Records
 
-| Type | Host in Squarespace | Notes |
-|------|---------------------|-------|
-| TXT | `resend._domainkey.mail` | Full DKIM value, no quotes |
-| TXT | `send.mail` | SPF TXT from Resend |
-| MX | `send.mail` | Priority 10 |
+Add (or confirm) records Resend shows:
+
+| Type | Name in Cloudflare | Notes |
+|------|--------------------|-------|
+| TXT | `resend._domainkey.mail` | ✅ Already present (Jul 2026 dig) |
+| TXT | `send.mail` | ❌ **Often missing** — SPF from Resend (e.g. `v=spf1 include:amazonses.com ~all`) |
+| MX | `send.mail` | ✅ Already present — Priority 10 → `feedback-smtp.us-east-1.amazonses.com` |
 
 3. Resend → **Verify DNS Records** (15 min – 24 hr)
-4. Update GitHub secret: `REMINDER_FROM_EMAIL=reminders@mail.norcalcarbmobile.com`
+4. Confirm GitHub secret: `REMINDER_FROM_EMAIL=reminders@mail.norcalcarbmobile.com`
 5. Run `npm run preflight` in `scripts/email-deploy`
 
 ## Verify
