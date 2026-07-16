@@ -4,6 +4,20 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-16 — Searched Drive/iCloud/Slack/briefs for tow list
+
+**Result:** This cloud agent **cannot open Google Drive or iCloud** (no mount, no Drive OAuth/SA in env).
+
+What we *did* find:
+- GitHub `BelichickGillisMusk/briefs` → `leads/Leads_2026-05-22.csv` + A+ calendar / retest JSON
+- Extracted **6–8 tow companies** → `scripts/camila-ops/tow-trucks-from-briefs.csv` (mostly past A+ jobs + one cold: 10-4 Tow San Leandro)
+- Slack file `Export (1).xlsx` (Jun 5) exists but MCP returns corrupted binary — need Bryan to re-upload CSV or share Drive folder with Camila SA
+- Master CRM referenced in Slack as Drive doc — not accessible here
+
+**To unlock the big list:** share the Drive folder / drop the tow CSV in Slack or commit under `scripts/camila-ops/` → `import-csv`. Until then Places (Hermes) is the 1000→20 path.
+
+---
+
 ## 2026-07-16 — Tow trucks + 1000→20 funnel
 
 - Added **`tow_trucks`** as priority industry (12 Places queries across Sac/Stockton/SJ/Bay)
