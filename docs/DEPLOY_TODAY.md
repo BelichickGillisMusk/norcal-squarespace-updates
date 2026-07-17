@@ -1,85 +1,99 @@
-# Deploy today — June 9, 2026
+# Deploy today — July 15–21, 2026 (week of Jul 16)
 
 **Skill:** `.cursor/skills/norcal-email-deployer/SKILL.md`  
-**Agent:** Execute this list in order. Stop at Bryan approval gates. Log to `change_log.md`.
+**Calendar week:** Jul 15–21 — Fleet template B (batch yard visits)  
+**Agent:** Execute in order. Stop at Bryan approval gates. Log to `change_log.md`.
 
 ---
 
-## Bryan — 15 minutes only (unblocks everything)
+## Status snapshot (2026-07-16 preflight)
 
-| # | You do | Time |
-|---|--------|------|
-| 1 | Resend.com → sign in → **Add domain** `mail.norcalcarbmobile.com` | 2 min |
-| 2 | Copy DNS records → Squarespace → Domains → norcalcarbmobile.com → **DNS** → paste | 5 min |
-| 3 | Resend → **Verify DNS** (may take 15–60 min) | 1 min |
-| 4 | GitHub repo → Settings → Secrets → paste `RESEND_API_KEY` if not set | 2 min |
-| 5 | Reply to agent: **"approved test send"** when test email arrives | 1 min |
-
----
-
-## Agent — today (automated where possible)
-
-### Morning block
-
-- [ ] **1. Preflight** — `cd scripts/email-deploy && npm ci && npm run preflight`
-- [ ] **2. Google Sheet** — import `subscribers-sheet-template.csv` → share with service account
-- [ ] **3. Apps Script** — deploy `WebApp.gs` → copy web app URL → secret `APPS_SCRIPT_WEBAPP_URL`
-- [ ] **4. Squarespace** — paste `reminder-signup-snippet.html` with web app URL
-- [ ] **5. GitHub secrets** — all items in `references/secrets-checklist.md`
-- [ ] **6. Set** `REMINDER_FROM_EMAIL=reminders@mail.norcalcarbmobile.com`
-
-### After Resend verifies (same day)
-
-- [ ] **7. Test welcome** — Actions → **CTC Subscriber Nurture** → welcome → dry_run false (one row seeded for Bryan)
-- [ ] **8. Test reminder** — Actions → **CTC Reminder Emails** → test_email `bryan@norcalcarbmobile.com`
-- [ ] **9. Bryan checks Gmail** → Show original → `dmarc=pass` — if fail, STOP → `dns-fix.md`
-
-### After Bryan says "approved welcome"
-
-- [ ] **10.** `NURTURE_LIVE=true`
-- [ ] **11.** Import `customer-import-template.csv` with real past customers
-- [ ] **12.** Enable **Email Ops Daily** workflow (scheduled 8:15 AM PT)
-
-### After Bryan says "approved reminders"
-
-- [ ] **13.** `REMINDERS_LIVE=true`
-
-### Cold (parallel)
-
-- [ ] **14.** Import `daily-send-log-template.csv` → tab **Cold Sends**
-- [ ] **15.** Draft **10** cold emails in Bryan Gmail (template A) — do not send until **approved cold send**
+| Check | Status |
+|-------|--------|
+| Root SPF / Google DKIM / DMARC | ✅ OK (cold Gmail OK) |
+| Resend DKIM `resend._domainkey.mail` | ✅ present |
+| Resend MX `send.mail` | ✅ present |
+| Resend SPF `send.mail` TXT | ❌ **BLOCKER** — missing |
+| DNS host | Cloudflare (`paislee` / `eric` NS) — not Squarespace |
+| `NURTURE_LIVE` / `REMINDERS_LIVE` / `BLAST_APPROVED` | **KEEP OFF** until SPF fixed + test `dmarc=pass` |
 
 ---
 
-## Scheduled automations (turn on today)
+## Bryan — unblock Resend (5–10 min)
 
-| Workflow | Schedule | Needs |
+DNS is on **Cloudflare**, not Squarespace.
+
+| # | You do |
+|---|--------|
+| 1 | Resend.com → Domains → `mail.norcalcarbmobile.com` → copy the **SPF TXT** value for `send.mail` |
+| 2 | Cloudflare → `norcalcarbmobile.com` → DNS → **Add record** |
+| 3 | Type **TXT**, Name **`send.mail`**, Content = exact SPF string from Resend (usually `v=spf1 include:amazonses.com ~all`) |
+| 4 | Resend → **Verify DNS** (wait 5–60 min) |
+| 5 | Reply **"approved test send"** when you want a welcome/reminder test |
+
+**Do not** set `NURTURE_LIVE` / `REMINDERS_LIVE` until agent re-runs preflight green + Gmail Show original shows `dmarc=pass`.
+
+---
+
+## Agent — this week
+
+### Blocker protocol (active)
+
+- [x] **1. Preflight** — FAIL (1 blocker: Resend SPF)
+- [x] **2. STOP live Resend** — do not flip LIVE secrets
+- [x] **3. Log dig evidence** — see `change_log.md` 2026-07-16 entry
+- [ ] **4. Re-run preflight** after Bryan adds TXT
+- [ ] **5. Test welcome** to `bryan@` → confirm `dmarc=pass`
+- [ ] **6. After "approved welcome"** → `NURTURE_LIVE=true`
+- [ ] **7. After "approved reminders"** → `REMINDERS_LIVE=true`
+
+### Cold outreach (parallel — Gmail only, NOT blocked by Resend SPF)
+
+Cold from `camila@` / `bryan@` uses Google DKIM ✅ — may continue with Bryan approval.
+
+| # | Action |
+|---|--------|
+| 8 | Confirm Cold Sends / Send Queue sheet + Camila Ops tabs exist |
+| 9 | Build / verify MX on queue (`verify-emails.js`) |
+| 10 | Draft up to **30/day** — **Template B** (fleet-switch) this week |
+| 11 | STOP until Bryan says **approved cold send** / **approved batch YYYY-MM-DD** |
+| 12 | Stagger 7 min; log count in `change_log.md` |
+
+### July calendar (this week)
+
+| Date | Plan |
+|------|------|
+| Jul 15–21 | Cold Template B — fleet yard visits (Sacramento, Stockton, Fairfield, San Jose, Bay Area) |
+| Jul 22–31 | Switch offer push — beat shop prices |
+| Blast | Next blast only if ≥30 days since last + Bryan **"approved blast [id]"** |
+
+---
+
+## Scheduled automations
+
+| Workflow | Schedule | Notes |
 |----------|----------|-------|
-| **Email Ops Daily** | 15:15 UTC (8:15 AM PT) | `NURTURE_LIVE` + `REMINDERS_LIVE` when approved |
-| **Email Preflight** | 14:00 UTC (7 AM PT) | DNS monitoring |
-| CTC Reminder Emails | (legacy — ops workflow supersedes) | — |
-| CTC Subscriber Nurture | (legacy — ops workflow supersedes) | — |
+| Email Preflight | 7 AM PT | Expect FAIL until SPF TXT lands |
+| Email Ops Daily | 8:15 AM PT | Dry-run only while LIVE secrets off |
+| Camila Cold Outreach | 9 AM PT Mon–Fri | Chat notify only until Bryan approves batch |
 
 ---
 
-## Success by end of day
+## Success by end of week
 
-- [ ] Preflight green (Resend subdomain verified)
-- [ ] Test emails in Bryan inbox, not spam
-- [ ] Sheet + Apps Script + Squarespace snippet live
-- [ ] Welcome test approved (or scheduled for tomorrow AM)
-- [ ] Cold drafts ready for tomorrow
-- [ ] `change_log.md` has full trail
+- [ ] Preflight green (Resend SPF present)
+- [ ] Test Resend email: `spf=pass` `dkim=pass` `dmarc=pass`
+- [ ] Welcome and/or reminders live only after Bryan phrases
+- [ ] Cold Template B drafts/sends logged (≤30/day)
+- [ ] `change_log.md` updated
 
 ---
 
-## If blocked
+## If still blocked
 
 | Blocker | Fix |
 |---------|-----|
-| Resend not verified | Wait 1h, re-check DNS host names (`send.mail`, `resend._domainkey.mail`) |
-| dmarc=fail | Do not set LIVE secrets — fix subdomain per dns-fix.md |
-| No Resend API key | Bryan adds secret |
-| Squarespace Code block blocked | Log blocker; use native form + manual import |
-
-**Tomorrow (Jun 10):** `NURTURE_LIVE` + customer import + first 10 cold sends after approvals.
+| `send.mail` TXT empty | Cloudflare DNS → add Resend SPF TXT (see `dns-fix.md`) |
+| Resend verify stuck | Wait 1h; Name field = `send.mail` not FQDN; no extra quotes |
+| dmarc=fail on test | Do not set LIVE — re-check subdomain alignment |
+| Want cold only | OK while Resend blocked — Google DKIM already passes |
