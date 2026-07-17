@@ -10,7 +10,12 @@
     // serves /contact from contact.html (and / from index.html)
     "html_handling": "auto-trailing-slash",
     // unknown paths get the branded site/404.html instead of a bare 404
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    // Always invoke the Worker. Without this, with a compatibility date >=
+    // 2025-04-01 and not_found_handling set, browser navigation requests are
+    // answered by asset serving directly — the legacy-URL redirects and the
+    // schema JSON-LD injection in worker/index.js would never run.
+    "run_worker_first": true
   },
   // Custom domain — requires norcalcarbmobile.com zone active on this Cloudflare account.
   // Once DNS nameservers are pointed to Cloudflare, run: wrangler deploy
