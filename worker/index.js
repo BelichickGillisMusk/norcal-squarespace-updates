@@ -11,7 +11,7 @@
  * version). If you change one, change the other.
  */
 
-import { MIGRATED_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
+import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
 
 const DEFAULT_TO = 'bgillis99@gmail.com';
 const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
@@ -129,18 +129,30 @@ const REDIRECTS = {
 };
 
 /**
- * Old Squarespace blog URLs (/clean-truck-check-blog and everything under it,
- * including date-based paths like /clean-truck-check-blog/2025/10/8/<slug>).
- * Migrated posts 301 to /blog/<slug>; posts whose content was unrecoverable
- * 301 to the closest equivalent page; anything unknown lands on /blog.
+ * Blog routing. Migrated Squarespace posts are served at their EXACT old URL,
+ * /clean-truck-check-blog/<slug> (per Bryan — keep the old slugs/paths live).
+ *
+ * Returns a redirect target, or null to fall through to static assets:
+ *  - /blog/<legacy-slug>                → 301 to the old path (early /blog layout)
+ *  - /clean-truck-check-blog            → 301 to /blog (the index)
+ *  - /clean-truck-check-blog/<slug>     → served directly (null)
+ *  - date-based /clean-truck-check-blog/2025/10/8/<slug> → 301 to the flat old path
+ *  - unrecoverable/unknown slugs        → closest equivalent page, else /blog
  */
 function legacyBlogTarget(pathname) {
   const path = pathname.replace(/\/+$/, '');
+  if (path.startsWith('/blog/')) {
+    const slug = path.slice('/blog/'.length);
+    return LEGACY_BLOG_SLUGS.has(slug) ? `/clean-truck-check-blog/${slug}` : null;
+  }
   if (path !== '/clean-truck-check-blog' && !path.startsWith('/clean-truck-check-blog/')) return null;
   const slug = path.split('/').pop();
   if (slug === 'clean-truck-check-blog') return '/blog';
   if (LEGACY_BLOG_FALLBACKS[slug]) return LEGACY_BLOG_FALLBACKS[slug];
-  if (MIGRATED_BLOG_SLUGS.has(slug)) return `/blog/${slug}`;
+  if (LEGACY_BLOG_SLUGS.has(slug)) {
+    const canonical = `/clean-truck-check-blog/${slug}`;
+    return path === canonical ? null : canonical;
+  }
   return '/blog';
 }
 

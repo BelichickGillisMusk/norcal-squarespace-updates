@@ -70,7 +70,7 @@ const resendDkim = dig('TXT', `resend._domainkey.${RESEND_SUBDOMAIN}`);
 if (resendDkim && resendDkim.includes('p=')) {
   pass('Resend DKIM', `resend._domainkey.${RESEND_SUBDOMAIN} present`);
 } else {
-  fail('Resend DKIM', `add resend._domainkey.mail in Squarespace DNS — see dns-fix.md`);
+  fail('Resend DKIM', `add resend._domainkey.mail in Cloudflare DNS — see dns-fix.md`);
 }
 
 // Resend SPF (send.mail)
@@ -78,7 +78,7 @@ const resendSpf = dig('TXT', `send.${RESEND_SUBDOMAIN}`);
 if (resendSpf && resendSpf.includes('spf1')) {
   pass('Resend SPF', `send.${RESEND_SUBDOMAIN} present`);
 } else {
-  fail('Resend SPF', `add send.mail TXT in Squarespace DNS`);
+  fail('Resend SPF', `add send.mail TXT in Cloudflare DNS — see dns-fix.md`);
 }
 
 // Resend MX

@@ -86,6 +86,15 @@ Site — `site/index.html` + `site/assets/styles.css` (homepage only). Imported 
 - Kept the repo's absolute `/assets/...` path convention (the design used relative paths) and left the footer/head untouched — the design project was branched before the sitewide footer-social work, so only the intentional homescreen edits were applied.
 - **⚠️ IMAGE BLOCKER — `site/assets/img/coverage-map.png` is NOT in this commit.** The design project's copy exceeds the DesignSync 256 KiB read cap and comes back truncated/corrupt, and the authenticated design MCP isn't authorized in this non-interactive session, so I could not retrieve the real PNG intact. The HTML references `/assets/img/coverage-map.png`; **Bryan/Gus need to drop the actual file at `site/assets/img/coverage-map.png`** for the hero image to render. Until then the homepage hero shows a broken-image slot (preview build only — production deploys from `main`, which is unaffected).
 
+## 2026-07-08 — Legacy posts moved to their exact old Squarespace URLs + navigation-redirect fix
+
+Follow-up to the 2026-07-07 blog migration (PR #45), per Bryan's request to keep the old URLs:
+
+- **Migrated posts now live at their exact old Squarespace paths** — `site/clean-truck-check-blog/<slug>.html`, served at `/clean-truck-check-blog/<slug>` (200, canonical). The interim `/blog/<slug>` URLs 301-redirect back to the old paths. The 3 hand-written June-2026 posts stay at `/blog/<slug>`. Blog index + sitemap updated to the old URLs.
+- **Critical routing fix (Codex review, P1):** with `not_found_handling` set and compatibility date ≥ 2025-04-01, browser *navigation* requests were served by asset handling and never invoked the Worker — every legacy redirect 404'd for real users (confirmed locally with `Sec-Fetch-Mode: navigate`). Added `run_worker_first: true` to `wrangler.jsonc`. This also makes the schema JSON-LD injection in `worker/index.js` actually apply to page loads.
+- **Content fixes (Copilot review):** WordPress `[caption]` shortcodes → `<figure>/<figcaption>`, missing `alt` attributes added, `mailto:` links with trailing `?` cleaned, malformed ARB URL corrected.
+- Verified with `wrangler dev` in navigation mode: old post URLs 200, date-based and `/blog/` variants 301 → 200, fallbacks intact, branded 404, zero broken internal links, 64 posts on the index.
+
 ## 2026-07-08 — Footer social links + Google Business Profile link, sitewide
 
 Site — `site/` (live Cloudflare Worker production site) + `worker/index.js` + `squarespace/schema-local-business.html`:

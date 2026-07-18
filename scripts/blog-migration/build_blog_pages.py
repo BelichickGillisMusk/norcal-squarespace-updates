@@ -4,11 +4,14 @@
 Reads scripts/sonicjs-blog-migration/manifest.json (65 posts recovered from the
 Squarespace WXR export + HTML export zip + current site) and generates:
 
-  - site/blog/<slug>.html        one page per migrated legacy post (source=wxr)
+  - site/clean-truck-check-blog/<slug>.html   one page per migrated legacy post
+                                 (source=wxr), served at the EXACT old
+                                 Squarespace URL /clean-truck-check-blog/<slug>
   - site/blog/index.html         blog index listing every published post
   - site/sitemap.xml             full sitemap including all blog URLs
   - worker/blog-redirects.js     slug set + legacy-path map used by worker/index.js
-                                 to 301 old /clean-truck-check-blog/* URLs
+                                 (/blog/<legacy-slug> 301s to the old path;
+                                 date-based old paths normalize to it)
 
 Skipped:
   - source=site posts (already exist as hand-written pages in site/blog/)
@@ -27,6 +30,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / "scripts" / "sonicjs-blog-migration" / "manifest.json"
 BLOG_DIR = ROOT / "site" / "blog"
+LEGACY_DIR = ROOT / "site" / "clean-truck-check-blog"
 SITEMAP = ROOT / "site" / "sitemap.xml"
 REDIRECTS_JS = ROOT / "worker" / "blog-redirects.js"
 
@@ -89,8 +93,12 @@ def truncate(txt, limit):
 
 def rewrite_href(href):
     href = href.strip()
-    # typo fix seen in one post
+    # authoring artifacts seen in the recovered content
     href = href.replace("mailto:sales@norcarbmobile.com", "mailto:sales@norcalcarbmobile.com")
+    if href.startswith("mailto:"):
+        href = href.rstrip("?")
+    if href == "https://ww2.arb.ca.gov/cleantruckcheck.arb.ca.gov":
+        href = "https://cleantruckcheck.arb.ca.gov/"
     if href.startswith("safari-reader://"):
         href = "https://" + href[len("safari-reader://"):]
     # absolute links to our own domains → site-relative
@@ -111,7 +119,8 @@ def rewrite_href(href):
     if path == "/clean-truck-check-blog" or path.startswith("/clean-truck-check-blog"):
         seg = path.rstrip("/").split("/")[-1]
         if seg and seg != "clean-truck-check-blog":
-            return LEGACY_FALLBACKS.get(seg, f"/blog/{seg}")
+            # legacy posts keep their exact old URL; only unrecoverable ones remap
+            return LEGACY_FALLBACKS.get(seg, f"/clean-truck-check-blog/{seg}")
         return "/blog"
     return href
 
@@ -136,6 +145,18 @@ def clean_content(raw):
         c,
         flags=re.S,
     )
+    # WordPress [caption] shortcodes from the WXR export → <figure>/<figcaption>
+    def captionize(m):
+        inner = m.group(1).strip()
+        img = re.search(r"<img\b[^>]*/?>", inner)
+        if img:
+            text = re.sub(r"<img\b[^>]*/?>", "", inner).strip()
+            cap = f"<figcaption>{text}</figcaption>" if text else ""
+            return f"<figure>{img.group(0)}{cap}</figure>"
+        return inner
+    c = re.sub(r"\[caption\b[^\]]*\](.*?)\[/caption\]", captionize, c, flags=re.S)
+    # accessibility/validity: images without alt get an empty (decorative) alt
+    c = re.sub(r"<img\b(?![^>]*\balt=)([^>]*?)(/?)>", r'<img\1 alt=""\2>', c)
     c = re.sub(r'href="([^"]*)"', lambda m: f'href="{rewrite_href(m.group(1))}"', c)
     return c.strip()
 
@@ -252,6 +273,13 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 """
 
 
+def post_path(post):
+    """Site-relative URL for a post: legacy posts keep their exact old
+    Squarespace path; the hand-written site posts live under /blog/."""
+    prefix = "/blog" if post["source"] == "site" else "/clean-truck-check-blog"
+    return f"{prefix}/{post['slug']}"
+
+
 def build_post_page(post):
     title_plain = plain_text(post["title"])
     content = clean_content(post["content"])
@@ -259,7 +287,7 @@ def build_post_page(post):
     excerpt = plain_text(post.get("excerpt") or "")
     desc = excerpt if 25 <= len(excerpt) <= 160 else truncate(body_text, 155)
     date = datetime.fromisoformat(post["publishedAt"].replace("Z", "+00:00"))
-    url = f"{BASE_URL}/blog/{post['slug']}"
+    url = f"{BASE_URL}{post_path(post)}"
     jsonld = json.dumps(
         {
             "@context": "https://schema.org",
@@ -284,7 +312,7 @@ def build_post_page(post):
     )
 
 
-INDEX_CARD = """        <a href="/blog/{slug}" class="card" style="text-decoration:none;color:inherit">
+INDEX_CARD = """        <a href="{path}" class="card" style="text-decoration:none;color:inherit">
           <p style="color:var(--muted);font-size:.85rem;margin-bottom:8px">{month_year}</p>
           <h3 style="color:var(--green);font-size:1.05rem">{title_esc}</h3>
           <p style="color:var(--body);font-size:.95rem">{blurb_esc}</p>
@@ -416,9 +444,15 @@ def main():
     for p in published:
         assert SLUG_RE.match(p["slug"]), f"unsafe slug: {p['slug']}"
 
+    LEGACY_DIR.mkdir(exist_ok=True)
     for p in generated:
-        (BLOG_DIR / f"{p['slug']}.html").write_text(build_post_page(p))
-    print(f"wrote {len(generated)} post pages")
+        (LEGACY_DIR / f"{p['slug']}.html").write_text(build_post_page(p))
+    # clean up pages from the earlier /blog/<slug> layout
+    site_slugs = {p["slug"] for p in published if p["source"] == "site"}
+    for f in BLOG_DIR.glob("*.html"):
+        if f.stem != "index" and f.stem not in site_slugs:
+            f.unlink()
+    print(f"wrote {len(generated)} post pages under /clean-truck-check-blog/")
 
     # ---- blog index (all published posts, newest first) ----
     cards = []
@@ -433,7 +467,7 @@ def main():
         date = datetime.fromisoformat(p["publishedAt"].replace("Z", "+00:00"))
         cards.append(
             INDEX_CARD.format(
-                slug=p["slug"],
+                path=post_path(p),
                 month_year=date.strftime("%B %Y"),
                 title_esc=esc(title_plain),
                 blurb_esc=esc(blurb),
@@ -450,36 +484,40 @@ def main():
     for path in STATIC_SITEMAP_PATHS:
         lines.append(f"  <url><loc>{BASE_URL}{path}</loc><lastmod>{LASTMOD}</lastmod></url>")
     for p in sorted(published, key=lambda p: p["publishedAt"], reverse=True):
-        if p["slug"] == "blog":
-            continue
         lines.append(
-            f"  <url><loc>{BASE_URL}/blog/{p['slug']}</loc><lastmod>{LASTMOD}</lastmod></url>"
+            f"  <url><loc>{BASE_URL}{post_path(p)}</loc><lastmod>{LASTMOD}</lastmod></url>"
         )
     lines.append("</urlset>")
     SITEMAP.write_text("\n".join(lines) + "\n")
     print("wrote sitemap")
 
     # ---- worker redirect data ----
-    slugs = sorted(p["slug"] for p in published)
+    legacy_slugs = sorted(p["slug"] for p in published if p["source"] != "site")
+    # the three hand-written posts never lived on Squarespace; if someone guesses
+    # an old-style URL for them, send them to the real /blog/<slug> page
+    fallbacks = dict(LEGACY_FALLBACKS)
+    for s in sorted(site_slugs):
+        fallbacks[s] = f"/blog/{s}"
     js = [
         "/**",
         " * Generated by scripts/blog-migration/build_blog_pages.py — do not hand-edit.",
         " *",
-        " * Routing data for legacy Squarespace blog URLs (/clean-truck-check-blog/...).",
-        " * MIGRATED_BLOG_SLUGS: posts that now live at /blog/<slug>.",
-        " * LEGACY_BLOG_FALLBACKS: old post slugs with no recoverable content, keyed by",
-        " * the final URL segment, pointing at the closest equivalent page.",
+        " * Routing data for the legacy Squarespace blog (/clean-truck-check-blog/...).",
+        " * LEGACY_BLOG_SLUGS: migrated posts served at their exact old URL",
+        " * /clean-truck-check-blog/<slug> (the /blog/<slug> variant 301s there).",
+        " * LEGACY_BLOG_FALLBACKS: slugs with no page at the old path, keyed by the",
+        " * final URL segment, pointing at the closest equivalent page.",
         " */",
-        "export const MIGRATED_BLOG_SLUGS = new Set([",
+        "export const LEGACY_BLOG_SLUGS = new Set([",
     ]
-    js += [f"  {json.dumps(s)}," for s in slugs]
+    js += [f"  {json.dumps(s)}," for s in legacy_slugs]
     js.append("]);")
     js.append("")
     js.append("export const LEGACY_BLOG_FALLBACKS = {")
-    js += [f"  {json.dumps(k)}: {json.dumps(v)}," for k, v in LEGACY_FALLBACKS.items()]
+    js += [f"  {json.dumps(k)}: {json.dumps(v)}," for k, v in fallbacks.items()]
     js.append("};")
     REDIRECTS_JS.write_text("\n".join(js) + "\n")
-    print(f"wrote worker/blog-redirects.js ({len(slugs)} slugs)")
+    print(f"wrote worker/blog-redirects.js ({len(legacy_slugs)} legacy slugs)")
 
 
 if __name__ == "__main__":
