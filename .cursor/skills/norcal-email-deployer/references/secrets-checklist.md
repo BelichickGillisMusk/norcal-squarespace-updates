@@ -42,7 +42,7 @@ Set in repo **Settings → Secrets and variables → Actions**.
 | `CAMILA_SERVICE_ACCOUNT_JSON` | Full JSON key | Gmail API (camila@ + sales@), Sheets |
 | `CAMILA_SHEET_ID` | From Sheet URL | Send Queue, Form Leads, logs |
 | `GOOGLE_CHAT_WEBHOOK_URL` | From Chat space → Manage webhooks | Bryan batch-ready alerts, first-draft sent |
-| `FMCSA_API_KEY` | From ai.fmcsa.dot.gov | SAFER lead builder (free key) |
+| `FMCSA_API_KEY` | QCMobile WebKey from mobile.fmcsa.dot.gov (My WebKeys) | SAFER / safer_query.py + lead builder |
 | `GOOGLE_PLACES_API_KEY` | From **Hermes** GCP Places API | Camila Ops nightly discover |
 | `COLD_OUTREACH_LIVE` | `true` | Unlock hourly Gmail sends (cranes/concrete) |
 | `SEND_FROM` | `camila@norcalcarbmobile.com` | Cold outreach sender |

@@ -100,7 +100,7 @@ function httpsGet(url) {
 async function queryFmcsaApi(state, start = 0) {
   if (!FMCSA_API_KEY) {
     throw new Error(
-      'FMCSA_API_KEY not set. Get a free key at https://ai.fmcsa.dot.gov/SMS/Carrier/'
+      'FMCSA_API_KEY not set. Get a QCMobile WebKey at https://mobile.fmcsa.dot.gov/ (My WebKeys)'
     );
   }
   const url =
@@ -267,8 +267,8 @@ async function main() {
 
   if (!FMCSA_API_KEY) {
     console.error('❌ FMCSA_API_KEY not set.');
-    console.error('   Get a free key: https://ai.fmcsa.dot.gov/SMS/Carrier/');
-    console.error('   Then: export FMCSA_API_KEY=your_key');
+    console.error('   Get a QCMobile WebKey: https://mobile.fmcsa.dot.gov/ (My WebKeys)');
+    console.error('   Then: export FMCSA_API_KEY=your_webkey');
     process.exit(1);
   }
 
