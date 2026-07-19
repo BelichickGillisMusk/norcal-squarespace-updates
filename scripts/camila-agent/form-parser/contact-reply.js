@@ -31,6 +31,7 @@ import path from 'path';
 import { google } from 'googleapis';
 import { parseArgs } from 'node:util';
 import { postToChat } from '../../cold-outreach/notify-chat.js';
+import { loadReviews, reviewLineWithUrl } from '../lib/load-reviews.js';
 
 // ---------------------------------------------------------------------------
 // Config
@@ -48,8 +49,8 @@ const MANIFEST_PATH = path.resolve(
   '../../../config/cold-email-manifest.json'
 );
 const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
-const REVIEWS_URL =
-  manifest.reviews.google_reviews_url_short || manifest.reviews.google_reviews_url;
+const reviews = loadReviews();
+const REVIEW_LINE = reviewLineWithUrl(reviews);
 
 // Keywords that trigger escalation to Bryan
 const ESCALATION_TRIGGERS = [
@@ -168,7 +169,7 @@ Thanks for reaching out to NorCal CARB Mobile — I'm Camila, our scheduling coo
 Mobile Clean Truck Check at your yard:
 • OBD $75 · OVI $199
 • Motorhome OBD $99 · Motorhome OVI $229
-• ★ 5 stars · 31 Google reviews: ${REVIEWS_URL}
+• ${REVIEW_LINE}
 
 Book: norcalcarbmobile.com/contact · 916-890-4427
 

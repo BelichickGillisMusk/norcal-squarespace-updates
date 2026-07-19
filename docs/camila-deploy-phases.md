@@ -7,6 +7,8 @@
 
 ## Phase 1 — Identity & inbox (Bryan, ~30 min)
 
+**Full checklist:** [`camila-mailbox-setup-checklist.md`](./camila-mailbox-setup-checklist.md) — run `cd scripts/camila-agent && npm run preflight` before any live cold send.
+
 - [ ] Google Workspace: create **`camila@norcalcarbmobile.com`** (AI agent — cold outreach + GBP/GSC)
 - [ ] Google Workspace: create **`sales@norcalcarbmobile.com`** (AI agent — contact form greets + customer replies)
 - [ ] Google Cloud: new project `norcal-camila-agent` (or use existing)

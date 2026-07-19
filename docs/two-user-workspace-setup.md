@@ -4,6 +4,7 @@
 
 Full architecture: `docs/camila-vertex-agent-architecture.md`  
 Deploy phases: `docs/camila-deploy-phases.md`  
+**camila@ go-live:** `docs/camila-mailbox-setup-checklist.md` + `npm run preflight` in `scripts/camila-agent`  
 Agent skill: `.cursor/skills/camila-vertex-agent/SKILL.md`
 
 ---

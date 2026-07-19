@@ -195,9 +195,19 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install googleapis
-        working-directory: scripts/reminder-engine
+      - name: Install camila-agent deps
+        working-directory: scripts/camila-agent
         run: npm ci
+
+      - name: Camila mailbox preflight (DNS + API)
+        working-directory: scripts/camila-agent
+        env:
+          CAMILA_SERVICE_ACCOUNT_JSON: ${{ secrets.CAMILA_SERVICE_ACCOUNT_JSON }}
+          CAMILA_SHEET_ID: ${{ secrets.CAMILA_SHEET_ID }}
+          GOOGLE_CHAT_WEBHOOK_URL: ${{ secrets.GOOGLE_CHAT_WEBHOOK_URL }}
+          COLD_OUTREACH_LIVE: ${{ secrets.COLD_OUTREACH_LIVE }}
+          SEND_FROM: ${{ secrets.SEND_FROM || 'camila@norcalcarbmobile.com' }}
+        run: node preflight-camila.js
 
       - name: Schedule approved cold sends
         working-directory: scripts/camila-agent/gmail-scheduler

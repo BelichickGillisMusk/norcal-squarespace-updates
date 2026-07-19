@@ -30,6 +30,11 @@ import path from 'path';
 import { google } from 'googleapis';
 import { parseArgs } from 'node:util';
 import { postToChat } from '../../cold-outreach/notify-chat.js';
+import {
+  loadReviews,
+  reviewLineFleetWithUrl,
+  reviewLineWithUrl,
+} from '../lib/load-reviews.js';
 
 // ---------------------------------------------------------------------------
 // Config
@@ -49,7 +54,13 @@ const MANIFEST_PATH = path.resolve(
   '../../../config/cold-email-manifest.json'
 );
 const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
-const REVIEWS_URL = manifest.reviews.google_reviews_url_short || manifest.reviews.google_reviews_url;
+const reviews = loadReviews();
+const REVIEWS_URL =
+  manifest.reviews.google_reviews_url_short ||
+  manifest.reviews.google_reviews_url ||
+  reviews.google_reviews_url;
+const REVIEW_LINE = reviewLineWithUrl(reviews);
+const REVIEW_LINE_FLEET = reviewLineFleetWithUrl(reviews);
 const BOOKING_URL = manifest.urls.booking;
 const TOOLS_URL = manifest.urls.tools;
 
@@ -61,7 +72,7 @@ const SUBJECTS = {
   A: '{company} — CTC deadline + $75 mobile testing',
   B: '$75 CTC at your yard — {company}',
   C: 'skip CARB calls — Full Care $40/yr + {company}',
-  D: '$75 mobile CTC — see our 5-star reviews (31 on Google)',
+  D: `$75 mobile CTC — see our 5-star reviews (${reviews.count} on Google)`,
 };
 
 const BODIES = {
@@ -76,7 +87,7 @@ OUR PRICING (mobile — we come to your yard):
 
 SWITCHING TESTERS? 50% off first test (OBD $37.50 · OVI $99.50) or we'll beat your quote.
 
-★ 5 stars · 31 Google reviews from NorCal fleets: ${REVIEWS_URL}
+${REVIEW_LINE_FLEET}
 
 Free deadline calculator: ${TOOLS_URL}/when-is-my-test-due
 
@@ -97,7 +108,7 @@ PRICING THAT BEATS MOST SHOPS:
 • Fleet visits — multiple trucks, one stop
 • Already have a tester? We BEAT your rate OR 50% off your first truck
 
-★ 5 stars · 31 Google reviews: ${REVIEWS_URL}
+${REVIEW_LINE}
 "Tested six trucks in under two hours." — fleet operator, Sacramento
 
 Book: ${BOOKING_URL} · Call/text 916-890-4427
@@ -117,7 +128,7 @@ Full Care: we set up CTC-VIS, monitor deadlines, send reminders, and mobile-test
 
 DIY option free: ${TOOLS_URL}
 
-★ 5 stars · 31 Google reviews: ${REVIEWS_URL}
+${REVIEW_LINE}
 
 Want the one-pager? Reply yes or book: ${BOOKING_URL}
 
@@ -137,7 +148,7 @@ NorCal CARB Mobile (we come to your yard):
 Typical shop:
   $90–$300+ per test + 1–3 hours off the road per truck
 
-★ 5 stars · 31 Google reviews: ${REVIEWS_URL}
+${REVIEW_LINE}
 
 Call 916-890-4427 or book: ${BOOKING_URL}
 
@@ -184,6 +195,7 @@ function encodeMessage({ from, to, subject, body }) {
   const raw = [
     `From: Camila <${from}>`,
     `To: ${to}`,
+    `Reply-To: ${from}`,
     `Subject: ${subject}`,
     'MIME-Version: 1.0',
     'Content-Type: text/plain; charset=utf-8',

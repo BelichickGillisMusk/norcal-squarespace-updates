@@ -46,6 +46,8 @@ Set in repo **Settings → Secrets and variables → Actions**.
 | `GOOGLE_PLACES_API_KEY` | From GCP Console | Lead domain/website enrichment |
 | `COLD_OUTREACH_LIVE` | `true` | Unlock actual Gmail sends (set after Bryan approves day 1) |
 | `SEND_FROM` | `camila@norcalcarbmobile.com` | Cold outreach sender |
+
+**Before go-live:** `cd scripts/camila-agent && npm ci && npm run preflight` — see `docs/camila-mailbox-setup-checklist.md`.
 | `REPLY_FROM` | `sales@norcalcarbmobile.com` | Contact form auto-reply sender |
 | `ESCALATE_TO` | `bryan@norcalcarbmobile.com` | Fleet/complex lead escalation |
 

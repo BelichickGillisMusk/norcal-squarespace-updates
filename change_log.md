@@ -4,6 +4,15 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-19 — 33 Google reviews + camila@ preflight
+
+- Bryan verified: **5 stars · 33 Google reviews** — updated manifests, schema, Squarespace snippets, cold templates
+- Added `scripts/camila-agent/preflight-camila.js` — MX/SPF/DKIM/DMARC + Gmail API delegation test for camila@ and sales@
+- Added `docs/camila-mailbox-setup-checklist.md` — Workspace + blacklist prevention before cold outreach
+- Cold send scripts load review copy from `config/reviews.json` (no hardcoded counts)
+
+---
+
 ## 2026-07-16 — Email deployer PM run (norcal-email-deployer)
 
 **Week:** Jul 15–21 — fleet Template B push (summer strategy).  

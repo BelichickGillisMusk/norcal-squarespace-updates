@@ -161,6 +161,24 @@ If `dmarc=fail` with `p=reject`, fix before any blast.
 
 ---
 
+## Part E — camila@ cold outreach (Gmail API, not Resend)
+
+Cold mail sends from **`camila@norcalcarbmobile.com`** via Google Workspace — same SPF/DKIM as Bryan@.
+
+**Checklist:** [`camila-mailbox-setup-checklist.md`](./camila-mailbox-setup-checklist.md)
+
+**Automated preflight:**
+
+```bash
+cd scripts/camila-agent && npm ci && npm run preflight
+```
+
+Must show ✅ Google MX, SPF, DKIM, DMARC, and (with secrets) ✅ Gmail API for `camila@` and `sales@` before `COLD_OUTREACH_LIVE=true`.
+
+**Never:** Resend, BCC blasts, or >30/day from camila@ — see `gmail-send-approver` skill.
+
+---
+
 ## Part D — Agent deploy order (deliverability)
 
 1. ✅ Confirm Squarespace SPF includes `_squarespace-mail.com` (already done)

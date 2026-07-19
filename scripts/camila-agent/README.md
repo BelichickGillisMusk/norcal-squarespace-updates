@@ -22,6 +22,9 @@
 ## Quick start (after secrets are set)
 
 ```bash
+# 0. Preflight — DNS + Gmail API (fix all ❌ before live sends)
+cd scripts/camila-agent && npm ci && npm run preflight
+
 # 1. Dry-run — validate config, no sends, no Chat posts
 cd scripts/cold-outreach
 node notify-chat.js --dry-run --event draft_ready --date 2026-07-01

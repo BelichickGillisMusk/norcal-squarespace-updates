@@ -136,14 +136,16 @@
   "reviews": {
     "source_of_truth": "config/reviews.json",
     "rating": 5,
-    "count": 31,
-    "headline": "5 stars · 31 Google reviews"
+    "count": 33,
+    "headline": "5 stars · 33 Google reviews"
   },
 
   "repos_and_docs": {
     "skill": ".cursor/skills/camila-vertex-agent/SKILL.md",
     "architecture": "docs/camila-vertex-agent-architecture.md",
     "deploy_phases": "docs/camila-deploy-phases.md",
+    "mailbox_checklist": "docs/camila-mailbox-setup-checklist.md",
+    "preflight_script": "scripts/camila-agent/preflight-camila.js",
     "gmail_queue_skill": ".cursor/skills/gmail-send-approver/SKILL.md",
     "cold_outreach_one_pager": "docs/cold-outreach-agent-one-pager.md",
     "notify_chat": "scripts/cold-outreach/notify-chat.js",
