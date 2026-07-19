@@ -16,7 +16,8 @@
  *   node build-lead-queue.js --dry-run               # validate config, no network calls
  *
  * Required secrets (set as env vars or GitHub secrets):
- *   FMCSA_API_KEY          — free at https://ai.fmcsa.dot.gov/SMS/Carrier/
+ *   FMCSA_API_KEY          — QCMobile WebKey at https://mobile.fmcsa.dot.gov/ (My WebKeys)
+ *                            Same key used by scripts/camila-ops/safer_query.py
  *
  * Optional:
  *   GOOGLE_PLACES_API_KEY  — enriches with website + email when domain not found

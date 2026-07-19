@@ -76,6 +76,24 @@ cat data/send-log.jsonl
 
 ---
 
+## SAFER / QCMobile enrichment (USDOT → phone, safety, fleet size)
+
+Official free JSON API (WebKey once):
+
+1. https://mobile.fmcsa.dot.gov/ → Login.gov → **My WebKeys** → new key (app: `NorCalCARBMobileEnricher`)
+2. `export FMCSA_API_KEY=your_webkey` (same secret name as `build-lead-queue.js`)
+
+```bash
+cd scripts/camila-ops
+npm run safer:dry
+python3 safer_query.py snapshot 785221
+python3 safer_query.py batch --in leads/federal-tonight-candidates.csv --out leads/safer-enriched.csv --delay 1
+```
+
+Adds `safer_*` columns (phone, safety rating, power units, OOS rates, `prospect_score`). Stdlib only — no `pip install`.
+
+---
+
 ## Federal skim — 150 mi Sac + Oakland (FMCSA census)
 
 The Grok “federal database” pull saved as `Federal_darabase_rows` is an **API error** (`Non-tabular datasets do not support rows requests`). Use the public FMCSA Company Census instead:

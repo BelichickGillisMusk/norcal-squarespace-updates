@@ -19,6 +19,13 @@ Bryan dropped these from Drive/CRM. Copied here for the nightly funnel.
 | `Federal_darabase_rows-BROKEN-socrata-error.csv` | Grok/data.gov miss — non-tabular endpoint |
 | `federal-150mi-sac-oak.csv` | Output of `npm run federal-skim` (FMCSA census ≤150mi) |
 
+## SAFER enrichment (USDOT → safety / phone / fleet)
+
+```bash
+export FMCSA_API_KEY=your_webkey   # https://mobile.fmcsa.dot.gov/ → My WebKeys
+python3 ../safer_query.py batch --in federal-tonight-candidates.csv --out safer-enriched.csv
+```
+
 ## Federal skim (Sac + Oakland 150 mi)
 
 `Federal_darabase_rows` failed because it hit a **non-tabular** Socrata dataset. Correct source is FMCSA **Company Census** `az4n-8mr2` on data.transportation.gov.

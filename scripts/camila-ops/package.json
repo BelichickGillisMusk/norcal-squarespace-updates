@@ -14,6 +14,9 @@
     "import-csv": "node run.js import-csv --industry tow_trucks",
     "federal-skim": "node federal-skim.js --with-email",
     "federal-skim:dry": "node federal-skim.js --dry-run --with-email",
+    "safer": "python3 safer_query.py",
+    "safer:dry": "python3 safer_query.py --dry-run",
+    "safer:batch": "python3 safer_query.py batch --in leads/federal-tonight-candidates.csv --out leads/safer-enriched.csv",
     "hourly": "node run.js hourly",
     "hourly:dry": "node run.js hourly --dry-run",
     "seed-demo": "node run.js seed-demo"

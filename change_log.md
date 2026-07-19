@@ -4,6 +4,19 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-19 — FMCSA SAFER QCMobile client (`safer_query.py`)
+
+Added stdlib Python CLI for official QCMobile API (WebKey via `FMCSA_API_KEY`):
+
+- `snapshot` / `basics` / `name` / `batch` CSV enrich
+- CRM fields: phone, address, safety rating, power units, OOS rates, `prospect_score`
+- Wire: `npm run safer:dry` · `npm run safer:batch`
+- Docs: runbook + deploy-phases WebKey URL → https://mobile.fmcsa.dot.gov/
+
+No live key in this environment — dry-run only until Bryan sets `FMCSA_API_KEY`.
+
+---
+
 ## 2026-07-16 — Federal skim restored (150 mi Sac + Oakland)
 
 Bryan’s Grok federal-DB skim upload (`Federal_darabase_rows`) was a **Socrata error stub** — wrong/non-tabular endpoint. Recreated as:
