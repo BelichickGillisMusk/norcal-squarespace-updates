@@ -28,6 +28,7 @@
 - [ ] Google Sheet **NorCal Camila Ops** — run `scripts/google-apps-script/cold-outreach-log-setup.gs` → `setupCamilaOpsSheet()` to create all tabs automatically
   - Tabs created: Send Queue, Cold Sends, Suppression, Form Leads, GBP Log, GSC Weekly, SAFER Leads, Chat Log
 - [ ] Paste `GOOGLE_CHAT_WEBHOOK_URL` into Apps Script Properties → run `installDailyTrigger()` to schedule 9 AM PT loop
+- [ ] Deploy **Ops Approval Dashboard** web app → set `APPROVAL_DASHBOARD_URL` — [`approval-dashboard.md`](./approval-dashboard.md)
 - [ ] Import CSV templates from `scripts/cold-outreach/` into Send Queue tab
 - [ ] Wire `gmail-send-approver` skill: queue → verify-emails.js → Bryan YES → `send-batch.js` → Gmail API schedule send
 - [ ] Cold templates from `cold-outreach-agent-one-pager.md` (baked into `send-batch.js`)

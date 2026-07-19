@@ -4,6 +4,12 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-19 — Ops Approval Dashboard (multi-user approve/remove)
+
+- Google Apps Script web app — approve or remove Send Queue / GBP Posts; **Approvers** tab for team
+- `docs/approval-dashboard.md`, `config/approval-dashboard.json`
+- Chat notifications link to `APPROVAL_DASHBOARD_URL` when set
+
 ## 2026-07-19 — 33 Google reviews + camila@ preflight
 
 - Bryan verified: **5 stars · 33 Google reviews** — updated manifests, schema, Squarespace snippets, cold templates
