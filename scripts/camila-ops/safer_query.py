@@ -231,7 +231,12 @@ def cmd_snapshot(client: FMCSASaferClient, dot: str, with_basics: bool) -> int:
     snap = client.get_carrier_snapshot(dot)
     basics = client.get_carrier_basics(dot) if with_basics else None
     fields = extract_crm_fields(dot, snap, basics)
-    print(json.dumps({"snapshot": snap, "basics": basics, "crm": fields}, indent=2, default=str))
+    safe_fields = dict(fields)
+    if safe_fields.get("phone"):
+        safe_fields["phone"] = "[REDACTED]"
+    if safe_fields.get("phy_zip"):
+        safe_fields["phy_zip"] = "[REDACTED]"
+    print(json.dumps({"snapshot": snap, "basics": basics, "crm": safe_fields}, indent=2, default=str))
     return 0
 
 
