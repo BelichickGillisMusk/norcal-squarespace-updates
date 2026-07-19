@@ -57,10 +57,12 @@
 
   "fmcsa_safer": {
     "api_key_secret_name": "FMCSA_API_KEY",
-    "api_base_url": "https://mobile.fmcsa.dot.gov/qc/services/carriers/",
-    "free_key_url": "https://ai.fmcsa.dot.gov/SMS/Carrier/",
-    "use_for": "build cold lead queue from NorCal fleet operators (CA diesel 14k+ GVWR)",
-    "lead_builder_script": "scripts/cold-outreach/build-lead-queue.js"
+    "api_base_url": "https://mobile.fmcsa.dot.gov/qc/services",
+    "free_key_url": "https://mobile.fmcsa.dot.gov/",
+    "webkey_path": "My WebKeys → Get a new WebKey",
+    "use_for": "USDOT snapshot/enrichment + cold lead queue (CA diesel 14k+ GVWR)",
+    "lead_builder_script": "scripts/cold-outreach/build-lead-queue.js",
+    "enricher_script": "scripts/camila-ops/safer_query.py"
   },
 
   "service_area": {

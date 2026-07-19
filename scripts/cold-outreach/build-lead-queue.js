@@ -16,7 +16,8 @@
  *   node build-lead-queue.js --dry-run               # validate config, no network calls
  *
  * Required secrets (set as env vars or GitHub secrets):
- *   FMCSA_API_KEY          — free at https://ai.fmcsa.dot.gov/SMS/Carrier/
+ *   FMCSA_API_KEY          — QCMobile WebKey at https://mobile.fmcsa.dot.gov/ (My WebKeys)
+ *                            Same key used by scripts/camila-ops/safer_query.py
  *
  * Optional:
  *   GOOGLE_PLACES_API_KEY  — enriches with website + email when domain not found
@@ -99,7 +100,7 @@ function httpsGet(url) {
 async function queryFmcsaApi(state, start = 0) {
   if (!FMCSA_API_KEY) {
     throw new Error(
-      'FMCSA_API_KEY not set. Get a free key at https://ai.fmcsa.dot.gov/SMS/Carrier/'
+      'FMCSA_API_KEY not set. Get a QCMobile WebKey at https://mobile.fmcsa.dot.gov/ (My WebKeys)'
     );
   }
   const url =
@@ -266,8 +267,8 @@ async function main() {
 
   if (!FMCSA_API_KEY) {
     console.error('❌ FMCSA_API_KEY not set.');
-    console.error('   Get a free key: https://ai.fmcsa.dot.gov/SMS/Carrier/');
-    console.error('   Then: export FMCSA_API_KEY=your_key');
+    console.error('   Get a QCMobile WebKey: https://mobile.fmcsa.dot.gov/ (My WebKeys)');
+    console.error('   Then: export FMCSA_API_KEY=your_webkey');
     process.exit(1);
   }
 

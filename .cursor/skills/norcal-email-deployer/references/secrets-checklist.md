@@ -42,9 +42,9 @@ Set in repo **Settings → Secrets and variables → Actions**.
 | `CAMILA_SERVICE_ACCOUNT_JSON` | Full JSON key | Gmail API (camila@ + sales@), Sheets |
 | `CAMILA_SHEET_ID` | From Sheet URL | Send Queue, Form Leads, logs |
 | `GOOGLE_CHAT_WEBHOOK_URL` | From Chat space → Manage webhooks | Bryan batch-ready alerts, first-draft sent |
-| `FMCSA_API_KEY` | From ai.fmcsa.dot.gov | SAFER lead builder (free key) |
-| `GOOGLE_PLACES_API_KEY` | From GCP Console | Lead domain/website enrichment |
-| `COLD_OUTREACH_LIVE` | `true` | Unlock actual Gmail sends (set after Bryan approves day 1) |
+| `FMCSA_API_KEY` | QCMobile WebKey from mobile.fmcsa.dot.gov (My WebKeys) | SAFER / safer_query.py + lead builder |
+| `GOOGLE_PLACES_API_KEY` | From **Hermes** GCP Places API | Camila Ops nightly discover |
+| `COLD_OUTREACH_LIVE` | `true` | Unlock hourly Gmail sends (cranes/concrete) |
 | `SEND_FROM` | `camila@norcalcarbmobile.com` | Cold outreach sender |
 | `REPLY_FROM` | `sales@norcalcarbmobile.com` | Contact form auto-reply sender |
 | `ESCALATE_TO` | `bryan@norcalcarbmobile.com` | Fleet/complex lead escalation |

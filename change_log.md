@@ -4,30 +4,89 @@ Agents append timestamped entries below.
 
 ---
 
-## 2026-07-16 — Email deployer PM run (norcal-email-deployer)
+## 2026-07-19 — FMCSA SAFER QCMobile client (`safer_query.py`)
 
-**Week:** Jul 15–21 — fleet Template B push (summer strategy).  
-**Preflight:** FAIL — 1 blocker. LIVE Resend channels stay OFF.
+Added stdlib Python CLI for official QCMobile API (WebKey via `FMCSA_API_KEY`):
 
-### Dig evidence
-```
-dig TXT send.mail.norcalcarbmobile.com     → (empty) ❌ Resend SPF missing
-dig TXT resend._domainkey.mail.norcalcarbmobile.com → present ✅
-dig MX  send.mail.norcalcarbmobile.com     → 10 feedback-smtp.us-east-1.amazonses.com ✅
-dig NS  norcalcarbmobile.com               → paislee/eric.ns.cloudflare.com (Cloudflare)
-DMARC p=reject — Resend must stay on mail. subdomain
-Google DKIM present — cold Gmail (camila@ / bryan@) OK
-```
+- `snapshot` / `basics` / `name` / `batch` CSV enrich
+- CRM fields: phone, address, safety rating, power units, OOS rates, `prospect_score`
+- Wire: `npm run safer:dry` · `npm run safer:batch`
+- Docs: runbook + deploy-phases WebKey URL → https://mobile.fmcsa.dot.gov/
 
-### Actions taken
-- Ran `scripts/email-deploy` preflight — exit 1
-- Applied blocker protocol: do **not** set `NURTURE_LIVE` / `REMINDERS_LIVE` / `BLAST_APPROVED`
-- Refreshed `docs/DEPLOY_TODAY.md` for Jul 15–21 week
-- Updated `references/dns-fix.md` + preflight error text: DNS fix is **Cloudflare**, not Squarespace
-- Cold channel (Google DKIM) may proceed with Bryan approval; Resend nurture/reminders/blasts blocked until SPF TXT lands
+No live key in this environment — dry-run only until Bryan sets `FMCSA_API_KEY`.
 
-### Bryan unblock
-Cloudflare DNS → TXT Name `send.mail` → value from Resend domain page → Verify → agent re-runs preflight → test send → `dmarc=pass` → then approval phrases.
+---
+
+## 2026-07-16 — Federal skim restored (150 mi Sac + Oakland)
+
+Bryan’s Grok federal-DB skim upload (`Federal_darabase_rows`) was a **Socrata error stub** — wrong/non-tabular endpoint. Recreated as:
+
+- `scripts/camila-ops/federal-skim.js` → FMCSA Company Census `az4n-8mr2`
+- Radius filter via `lib/ca-zips-150mi-sac-oak.csv` (hubs Sac + Oakland, ≤150 mi)
+- `npm run federal-skim` / `federal-skim:dry`
+
+Also ingested: Mecca May certificates (~2180, almost no contacts), `600-emails` priority names (no emails), MultiHub GBP feed.
+
+---
+
+## 2026-07-16 — Lead packs ingested (Drive drop)
+
+Bryan uploaded CRM/SAFER packs. Copied to `scripts/camila-ops/leads/`.
+
+| Pack | Rows | Emails? |
+|------|------|---------|
+| CLEAN usable | 188 | Only **4 unique** YES emails (2 NorCal after filter) |
+| Tow in CLEAN | **25 NorCal** | **Phone-only** — saved `tow-phones-for-enrichment.csv` |
+| BG send tonight top 500 | 500 | **No emails** (SAFER names only) |
+| Hot leads 100 | 100 | **No emails** |
+| Darryl enriched | 19 | Most marked `NO_DO_NOT_USE` (mismatched) |
+| Sent suppress | 12 | Loaded into `data/suppression.csv` |
+
+**Verdict:** The tow list is real — it's phones. Can't hit 20 emails/night until Hermes Places turns phones→websites→MX emails. Queue today: 2 MX-ok (Altex, SHK Hauling).
+
+
+## 2026-07-16 — Searched Drive/iCloud/Slack/briefs for tow list
+
+**Result:** This cloud agent **cannot open Google Drive or iCloud** (no mount, no Drive OAuth/SA in env).
+
+What we *did* find:
+- GitHub `BelichickGillisMusk/briefs` → `leads/Leads_2026-05-22.csv` + A+ calendar / retest JSON
+- Extracted **6–8 tow companies** → `scripts/camila-ops/tow-trucks-from-briefs.csv` (mostly past A+ jobs + one cold: 10-4 Tow San Leandro)
+- Slack file `Export (1).xlsx` (Jun 5) exists but MCP returns corrupted binary — need Bryan to re-upload CSV or share Drive folder with Camila SA
+- Master CRM referenced in Slack as Drive doc — not accessible here
+
+**To unlock the big list:** share the Drive folder / drop the tow CSV in Slack or commit under `scripts/camila-ops/` → `import-csv`. Until then Places (Hermes) is the 1000→20 path.
+
+---
+
+## 2026-07-16 — Tow trucks + 1000→20 funnel
+
+- Added **`tow_trucks`** as priority industry (12 Places queries across Sac/Stockton/SJ/Bay)
+- Places pagination: up to **60 results/query** (~720 tow candidates before MX skim)
+- Funnel log: places → website → mx_ok → queued 20; full pool in `data/pool-tow_trucks.jsonl`
+- **`import-csv`** command + `tow-truck-list-template.csv` for any tow list Bryan already has
+- Nightly/hourly default industry → `tow_trucks`
+
+---
+
+## 2026-07-16 — Camila Ops internal app: cranes nightly → hourly send → log
+
+Bryan: weeks to send one email is unacceptable — send what's easy while enriching.
+
+### Shipped
+- **`scripts/camila-ops/`** — internal app: `discover` (Places) → `hourly` (3/hr) → `send-log.jsonl` + daily CSV
+- **`config/camila-ops-rotation.json`** — 18 Places URLs (9 crane + 9 concrete metros), quotas **5 Bay · 5 Sacramento · 5 San Jose · 5 Stockton**, standing Bryan approval for cranes→concrete
+- **Workflows:** `camila-ops-nightly.yml` (7 PM PT discover), `camila-ops-hourly.yml` (hourly 8–4 PT Mon–Fri, auto-discover if no queue)
+- **Runbook:** `docs/camila-ops-runbook.md`
+
+### Is Camila ready?
+- App/process/logging: **YES**
+- Live Gmail: **NO** until Hermes `GOOGLE_PLACES_API_KEY` + `CAMILA_SERVICE_ACCOUNT_JSON` + `COLD_OUTREACH_LIVE=true`
+
+### Next for Bryan
+1. Paste Places API key from **Hermes** GCP → `GOOGLE_PLACES_API_KEY`
+2. Flip `COLD_OUTREACH_LIVE=true` when SA + camila@ DWD ready
+3. First industry: **cranes**; switch discover to **concrete** once crane queue is working
 
 ---
 

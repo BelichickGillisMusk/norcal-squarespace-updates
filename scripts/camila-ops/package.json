@@ -1,0 +1,27 @@
+{
+  "name": "norcal-camila-ops",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Camila Ops — nightly Places discover + hourly cold send + send log",
+  "type": "module",
+  "scripts": {
+    "status": "node run.js status",
+    "discover": "node run.js discover --industry tow_trucks",
+    "discover:tow": "node run.js discover --industry tow_trucks",
+    "discover:cranes": "node run.js discover --industry cranes",
+    "discover:concrete": "node run.js discover --industry concrete",
+    "discover:dry": "node run.js discover --industry tow_trucks --dry-run",
+    "import-csv": "node run.js import-csv --industry tow_trucks",
+    "federal-skim": "node federal-skim.js --with-email",
+    "federal-skim:dry": "node federal-skim.js --dry-run --with-email",
+    "safer": "python3 safer_query.py",
+    "safer:dry": "python3 safer_query.py --dry-run",
+    "safer:batch": "python3 safer_query.py batch --in leads/federal-tonight-candidates.csv --out leads/safer-enriched.csv",
+    "hourly": "node run.js hourly",
+    "hourly:dry": "node run.js hourly --dry-run",
+    "seed-demo": "node run.js seed-demo"
+  },
+  "dependencies": {
+    "googleapis": "^173.0.0"
+  }
+}

@@ -15,7 +15,7 @@
 - [ ] Admin Console → Domain-wide delegation for service account with scopes in manifest (includes `gmail.modify` + `chat.messages`)
 - [ ] Squarespace forms → notify **`sales@`** + CC `camila@` + CC `bryan@`
 - [ ] Google Chat: create Bryan's "NorCal Ops" space → Manage webhooks → copy URL → GitHub secret `GOOGLE_CHAT_WEBHOOK_URL`
-- [ ] FMCSA SAFER: get free API key at https://ai.fmcsa.dot.gov/SMS/Carrier/ → GitHub secret `FMCSA_API_KEY`
+- [ ] FMCSA QCMobile WebKey: https://mobile.fmcsa.dot.gov/ → My WebKeys → GitHub secret `FMCSA_API_KEY` (used by `safer_query.py` + `build-lead-queue.js`)
 
 **Test:** Service account can read camila@ inbox (Gmail API list messages).
 

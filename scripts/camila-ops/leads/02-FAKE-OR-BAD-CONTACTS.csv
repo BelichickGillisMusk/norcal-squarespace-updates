@@ -1,0 +1,82 @@
+source_file,sheet,company,email,phone,channel,email_ok,email_reason,phone_ok,phone_reason,city,usdot
+1226 NorCal CARB Mobile - Darryl Hot Leads CRM .csv,(csv),"Superior Cattle Feeders, LLC",rcosta@headstartnursery.com,,,FAKE,domain_not_company:headstartnursery.com,MISSING,missing,Calipatria,1248591
+1226 NorCal CARB Mobile - Darryl Hot Leads CRM .csv,(csv),"Sundance Stage Lines, Inc",,619-525-1570,phone_only,FAKE,domain_not_company:apexfenceok.com,YES,ok,San Diego,184090
+1226 NorCal CARB Mobile - Darryl Hot Leads CRM .csv,(csv),Dart International,dave@elderenterprises.com,,,FAKE,domain_not_company:elderenterprises.com,MISSING,missing,Corona,1780
+1226 NorCal CARB Mobile - Darryl Hot Leads CRM .csv,(csv),Material Transport Services,callen@alanritchey.com,,,FAKE,domain_not_company:alanritchey.com,MISSING,missing,Orange,2815
+1226 NorCal CARB Mobile - Darryl Hot Leads CRM .csv,(csv),Rockview Farms,kam@kamjohal.com,,,FAKE,domain_not_company:kamjohal.com,MISSING,missing,La Habra,48850
+1226 NorCal CARB Mobile - Darryl Hot Leads CRM .csv,(csv),SterlingPacific Meat Company,jeffa@arnoldbros.com,,,FAKE,domain_not_company:arnoldbros.com,MISSING,missing,Commerce,214000
+1226 NorCal CARB Mobile - Darryl Hot Leads CRM .csv,(csv),"Siskiyou Transportation, Inc.",chuck@chuckmillerconstruction.com,,,FAKE,domain_not_company:chuckmillerconstruction.com,MISSING,missing,,39920
+1226 NorCal CARB Mobile - Darryl Hot Leads CRM .csv,(csv),"Sunview Vineyards of California, Inc.",matt@flyinwrench.com,,,FAKE,domain_not_company:flyinwrench.com,MISSING,missing,Bakersfield,198624
+1226 NorCal CARB Mobile - Darryl Hot Leads CRM .csv,(csv),WENDT CONSTRUCTION CO INC,info@ando-home.co.jp,,,FAKE,domain_not_company:ando-home.co.jp,MISSING,missing,Fortuna,50465
+1226 NorCal CARB Mobile - Darryl Hot Leads CRM .csv,(csv),"Chambers Logging Co., Inc.",hezuo@ltd.com,,,FAKE,fake_domain:ltd.com,MISSING,missing,Fortuna,24903
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Servin Towing,,Unlisted,,MISSING,no_col,FAKE,missing,Hayward,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Romex Transport Inc,,1-877-766-3920,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Saia LTL Freight,,(916) 374-1030,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,CPC Logistics,,(916) 419-0806,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,MC Transportation,,(916) 648-7430,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Sac Freight Lines,— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Sekhon & Son Trucking,— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,GR Trucking,— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Best Logistics Inc,,(209) 762-6222,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Sunview Logistics Inc,,(925) 466-5400,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Reeve Trucking,,(800) 842-6677,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Artesian Transportation System Inc,,(866) 258-3217,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Gillson Solutions Inc,— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,California Materials Inc,— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Estes Express (Tracy terminal),— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,George Reed Inc,— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Modesto Sand & Gravel Inc,— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,R&A Trucking Company,,(510) 632-7112,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,East Bay Logistics Inc,,(510) 782-7900,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,JM & R Trucking,,(510) 568-6500,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,East Bay Trucking Inc,,(510) 839-2516,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,NBC Transportation & Warehouse Inc,,(510) 436-3580,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Mutual Express Co,,(510) 465-1711,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Odyssey Logistics,,(510) 264-0973,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,All Bay Trucking,— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,DHX - Dependable Hawaiian Express,— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,E&E Transport LLC,,(559) 417-7599,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,First Class Trucking,,(954) 228-2441,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,S & H Trucking,,(559) 277-0441,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,R & R Logistics,,(559) 312-8775,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Carino Trucking,,(559) 237-2648,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Slingshot Transportation,,(559) 261-0968,phone_only,FAKE,malformed,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Old Dominion Freight Line (Fresno),,(800) 235-5569,phone_only,FAKE,domain_not_company:odfl.com,YES,ok,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Estes Express (Fresno terminal),— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Sierra West Warehouse & Logistics,— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Conner Logistics,— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+CARB_Prospect_List_NorCal.xlsx,CARB Prospect List,Pierce Crane Inc,— needs enrichment,— verify,,FAKE,malformed,FAKE,missing,,
+aplus_leads_parsed_2-18.csv,(csv),Hotshot Express LLC,,OBD,,MISSING,no_col,FAKE,missing,CA,
+ENRICHED-Darryl-Hot-Leads-REAL.csv,(csv),"Superior Cattle Feeders, LLC",rcosta@headstartnursery.com,,,FAKE,domain_not_company:headstartnursery.com,MISSING,missing,Calipatria,1248591
+ENRICHED-Darryl-Hot-Leads-REAL.csv,(csv),"Sundance Stage Lines, Inc",,619-525-1570,phone_only,FAKE,domain_not_company:apexfenceok.com,YES,ok,San Diego,184090
+ENRICHED-Darryl-Hot-Leads-REAL.csv,(csv),Dart International,dave@elderenterprises.com,,,FAKE,domain_not_company:elderenterprises.com,MISSING,missing,Corona,1780
+ENRICHED-Darryl-Hot-Leads-REAL.csv,(csv),Material Transport Services,callen@alanritchey.com,,,FAKE,domain_not_company:alanritchey.com,MISSING,missing,Orange,2815
+ENRICHED-Darryl-Hot-Leads-REAL.csv,(csv),Rockview Farms,kam@kamjohal.com,,,FAKE,domain_not_company:kamjohal.com,MISSING,missing,La Habra,48850
+ENRICHED-Darryl-Hot-Leads-REAL.csv,(csv),SterlingPacific Meat Company,jeffa@arnoldbros.com,,,FAKE,domain_not_company:arnoldbros.com,MISSING,missing,Commerce,214000
+ENRICHED-Darryl-Hot-Leads-REAL.csv,(csv),"Siskiyou Transportation, Inc.",chuck@chuckmillerconstruction.com,,,FAKE,domain_not_company:chuckmillerconstruction.com,MISSING,missing,,39920
+ENRICHED-Darryl-Hot-Leads-REAL.csv,(csv),"Sunview Vineyards of California, Inc.",matt@flyinwrench.com,,,FAKE,domain_not_company:flyinwrench.com,MISSING,missing,Bakersfield,198624
+ENRICHED-Darryl-Hot-Leads-REAL.csv,(csv),WENDT CONSTRUCTION CO INC,info@ando-home.co.jp,,,FAKE,domain_not_company:ando-home.co.jp,MISSING,missing,Fortuna,50465
+ENRICHED-Darryl-Hot-Leads-REAL.csv,(csv),"Chambers Logging Co., Inc.",hezuo@ltd.com,,,FAKE,fake_domain:ltd.com,MISSING,missing,Fortuna,24903
+02-FAKE-OR-BAD-CONTACTS.csv,(csv),"Superior Cattle Feeders, LLC",rcosta@headstartnursery.com,,,FAKE,domain_not_company:headstartnursery.com,MISSING,missing,Calipatria,1248591
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),EB Towing,,See website,,MISSING,no_col,FAKE,missing,Oakland,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Tow Doctors,,See website,,MISSING,no_col,FAKE,missing,Oakland,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Toro Road Runners,,See website,,MISSING,no_col,FAKE,missing,Oakland,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Rocket Towing,,See website,,MISSING,no_col,FAKE,missing,Oakland,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Affordable Towing,,See Yelp,,MISSING,no_col,FAKE,missing,Oakland,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),ZR Towing,,See Yelp,,MISSING,no_col,FAKE,missing,Oakland,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Economy Towing,,See Yelp,,MISSING,no_col,FAKE,missing,Oakland,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Town Business Towing,,See Yelp,,MISSING,no_col,FAKE,missing,Oakland,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Towing Guyz,,See website,,MISSING,no_col,FAKE,missing,Fremont,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Jerry's Recovery & Transport,,See Yelp,,MISSING,no_col,FAKE,missing,Oakland,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),10-4 Tow Hayward,,See website,,MISSING,no_col,FAKE,missing,Hayward,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Elite Tow,,See website,,MISSING,no_col,FAKE,missing,Hayward,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Silverline Towing,,See website,,MISSING,no_col,FAKE,missing,Hayward,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),All Day Towing Inc,,See Nextdoor,,MISSING,no_col,FAKE,missing,Hayward,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Affordable Towing & Roadside,,See Yelp,,MISSING,no_col,FAKE,missing,Hayward,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Fast & Easy Towing,,See Yelp,,MISSING,no_col,FAKE,missing,Hayward,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Servin Towing,,See Yelp,,MISSING,no_col,FAKE,missing,Hayward,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Allied Towing & Transport,,See Yelp,,MISSING,no_col,FAKE,missing,Hayward,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),A9 Towing Co,,See website,,MISSING,no_col,FAKE,missing,Hayward,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),Jack James Road Solutions,,See website,,MISSING,no_col,FAKE,missing,East Bay,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),10-4 Tow San Leandro,,See website,,MISSING,no_col,FAKE,missing,San Leandro,
+Tow_Truck_Prospects_Oakland_2026-01-31.csv,(csv),10-4 Tow Fremont,,See website,,MISSING,no_col,FAKE,missing,Fremont,
