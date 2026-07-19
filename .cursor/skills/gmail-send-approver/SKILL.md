@@ -61,11 +61,13 @@ node verify-emails.js --input pending-rows.csv
 
 ### Step 4 — Bryan approval (STOP until YES)
 
-Message Bryan:
+**Preferred:** Bryan or any **Approvers** tab user opens the **Ops Approval Dashboard** (`docs/approval-dashboard.md`) → Approve or Remove each row.
 
-> **Cold batch ready:** {N} emails for {date}. Sheet tab `Queue`. MX verified: {ok}/{total}. Reply **`approved batch {date}`** to schedule Gmail sends.
+Message Bryan (include dashboard link when `APPROVAL_DASHBOARD_URL` is set):
 
-**Do not proceed** without exact phrase or `bryan_approved=YES` on every row.
+> **Cold batch ready:** {N} emails for {date}. Open the **Ops dashboard** to approve or remove. MX verified: {ok}/{total}. Or reply **`approved batch {date}`** to schedule Gmail sends.
+
+**Do not proceed** without dashboard approval, exact phrase, or `bryan_approved=YES` on every row.
 
 ### Step 5 — Schedule send (Gmail API preferred)
 

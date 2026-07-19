@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --bg: #f6f8fb;
+        --card: #fff;
+        --text: #1a1a1a;
+        --muted: #5f6368;
+        --green: #1e8e3e;
+        --red: #d93025;
+        --blue: #1a73e8;
+        --border: #dadce0;
+      }
+      * { box-sizing: border-box; }
+      body {
+        font-family: "Google Sans", Roboto, Arial, sans-serif;
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+      }
+      header {
+        background: #0d3b2e;
+        color: #fff;
+        padding: 16px 20px;
+      }
+      header h1 { margin: 0; font-size: 1.25rem; font-weight: 500; }
+      header p { margin: 6px 0 0; font-size: 0.875rem; opacity: 0.9; }
+      main { max-width: 920px; margin: 0 auto; padding: 20px; }
+      .tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+      .tab {
+        border: 1px solid var(--border);
+        background: var(--card);
+        padding: 8px 14px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.875rem;
+      }
+      .tab.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+      .toolbar {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+      }
+      button {
+        font: inherit;
+        border-radius: 6px;
+        border: none;
+        padding: 8px 14px;
+        cursor: pointer;
+      }
+      button.primary { background: var(--blue); color: #fff; }
+      button.danger { background: var(--red); color: #fff; }
+      button.ghost { background: var(--card); border: 1px solid var(--border); }
+      button:disabled { opacity: 0.5; cursor: not-allowed; }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+      }
+      .card h3 { margin: 0 0 8px; font-size: 1rem; }
+      .meta { font-size: 0.8125rem; color: var(--muted); line-height: 1.5; }
+      .actions { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+      .empty, .error, .loading {
+        text-align: center;
+        padding: 32px 16px;
+        color: var(--muted);
+      }
+      .error { color: var(--red); }
+      #status { font-size: 0.8125rem; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>NorCal Ops — Approvals</h1>
+      <p id="subtitle">Cold email &amp; GBP posts — approve or remove before Camila sends.</p>
+    </header>
+    <main>
+      <div id="gate" class="loading">Checking your Google account…</div>
+      <div id="app" style="display: none">
+        <div class="tabs" id="tabs"></div>
+        <div class="toolbar">
+          <button class="ghost" id="refreshBtn">Refresh list</button>
+          <button class="primary" id="approveAllBtn">Approve all on this tab</button>
+          <span id="status"></span>
+        </div>
+        <div id="list"></div>
+      </div>
+    </main>
+    <script>
+      let bootstrap = null;
+      let activeQueue = 'cold_send';
+
+      function setStatus(msg) {
+        document.getElementById('status').textContent = msg || '';
+      }
+
+      function showError(msg) {
+        document.getElementById('gate').className = 'error';
+        document.getElementById('gate').textContent = msg;
+      }
+
+      function renderTabs() {
+        const tabs = document.getElementById('tabs');
+        tabs.innerHTML = '';
+        (bootstrap.queues || []).forEach((q) => {
+          const btn = document.createElement('button');
+          btn.className = 'tab' + (q.id === activeQueue ? ' active' : '');
+          btn.textContent = q.title;
+          btn.onclick = () => {
+            activeQueue = q.id;
+            renderTabs();
+            loadList();
+          };
+          tabs.appendChild(btn);
+        });
+      }
+
+      function renderList(data) {
+        const list = document.getElementById('list');
+        if (!data.ok) {
+          list.innerHTML = '<div class="error">' + (data.error || 'Failed to load') + '</div>';
+          return;
+        }
+        if (!data.items.length) {
+          list.innerHTML =
+            '<div class="empty">Nothing waiting for approval on this tab. Camila will add new rows here.</div>';
+          return;
+        }
+        list.innerHTML = '';
+        data.items.forEach((item) => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          const lines = Object.keys(item)
+            .filter((k) => !['rowIndex', 'queueId', 'summary'].includes(k))
+            .map((k) => '<div><strong>' + k + ':</strong> ' + escapeHtml(String(item[k])) + '</div>')
+            .join('');
+          card.innerHTML =
+            '<h3>' +
+            escapeHtml(item.summary || 'Item') +
+            '</h3><div class="meta">' +
+            lines +
+            '</div><div class="actions">' +
+            '<button class="primary" data-action="approve" data-row="' +
+            item.rowIndex +
+            '">Approve</button>' +
+            '<button class="danger" data-action="remove" data-row="' +
+            item.rowIndex +
+            '">Remove</button>' +
+            '</div>';
+          list.appendChild(card);
+        });
+        list.querySelectorAll('button[data-action]').forEach((btn) => {
+          btn.onclick = () => act(btn.dataset.action, Number(btn.dataset.row), btn);
+        });
+      }
+
+      function escapeHtml(s) {
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      function loadList() {
+        setStatus('Loading…');
+        google.script.run
+          .withSuccessHandler((data) => {
+            renderList(data);
+            setStatus(data.items ? data.items.length + ' pending' : '');
+          })
+          .withFailureHandler((err) => {
+            renderList({ ok: false, error: err.message });
+          })
+          .listPendingItems(activeQueue);
+      }
+
+      function act(action, rowIndex, btn) {
+        btn.disabled = true;
+        setStatus('Saving…');
+        const fn = action === 'approve' ? 'approveItem' : 'removeItem';
+        google.script.run
+          .withSuccessHandler(() => {
+            setStatus(action === 'approve' ? 'Approved' : 'Removed');
+            loadList();
+          })
+          .withFailureHandler((err) => {
+            setStatus('');
+            alert(err.message);
+            btn.disabled = false;
+          })[fn](activeQueue, rowIndex);
+      }
+
+      document.getElementById('refreshBtn').onclick = loadList;
+      document.getElementById('approveAllBtn').onclick = () => {
+        if (!confirm('Approve every pending item on this tab?')) return;
+        setStatus('Approving all…');
+        google.script.run
+          .withSuccessHandler((res) => {
+            setStatus('Approved ' + (res.approved || 0));
+            loadList();
+          })
+          .withFailureHandler((err) => alert(err.message))
+          .approveAllPending(activeQueue);
+      };
+
+      google.script.run
+        .withSuccessHandler((data) => {
+          if (!data.ok) {
+            showError(data.error || 'Not signed in');
+            return;
+          }
+          bootstrap = data;
+          document.getElementById('gate').style.display = 'none';
+          document.getElementById('app').style.display = 'block';
+          document.getElementById('subtitle').textContent =
+            'Signed in as ' + data.user + ' — approve or remove before Camila schedules sends.';
+          renderTabs();
+          loadList();
+        })
+        .withFailureHandler((err) => showError(err.message))
+        .getDashboardBootstrap();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "name": "NorCal Ops Approval Dashboard",
+  "description": "Web app bound to NorCal Camila Ops spreadsheet — approve or remove cold sends (and GBP posts) without editing raw sheet rows.",
+  "spreadsheet": "NorCal Camila Ops",
+  "script_files": [
+    "scripts/google-apps-script/cold-outreach-log-setup.gs",
+    "scripts/google-apps-script/CamilaApprovalDashboard.gs",
+    "scripts/google-apps-script/CamilaApprovalDashboard.html"
+  ],
+  "default_approvers": [
+    "bryan@norcalcarbmobile.com",
+    "bgillis99@gmail.com"
+  ],
+  "queues": [
+    {
+      "id": "cold_send",
+      "sheet": "Send Queue",
+      "pending_when": "status=pending and bryan_approved empty",
+      "approve_sets": { "bryan_approved": "YES" },
+      "remove_sets": { "status": "removed", "bryan_approved": "NO" }
+    },
+    {
+      "id": "gbp_post",
+      "sheet": "GBP Posts",
+      "pending_when": "status=draft and bryan_approved empty",
+      "approve_sets": { "bryan_approved": "YES" },
+      "remove_sets": { "status": "removed", "bryan_approved": "NO" }
+    }
+  ],
+  "script_properties": {
+    "CAMILA_SHEET_ID": "Spreadsheet ID (set by setupCamilaOpsSheet)",
+    "APPROVAL_DASHBOARD_URL": "Web app URL after deploy — paste into Chat notifications",
+    "GOOGLE_CHAT_WEBHOOK_URL": "Optional batch-ready alerts"
+  }
+}

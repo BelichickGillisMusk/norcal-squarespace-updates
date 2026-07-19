@@ -12,6 +12,10 @@
 
 [`camila-mailbox-setup-checklist.md`](./camila-mailbox-setup-checklist.md) — Workspace user, DNS, delegation, preflight. Run `scripts/camila-agent` → `npm run preflight`.
 
+## Approval dashboard (Bryan + team)
+
+[`approval-dashboard.md`](./approval-dashboard.md) — Web app to **approve or remove** cold sends (and GBP posts). Add teammates on the **Approvers** sheet tab.
+
 ## Camila — Vertex AI agent (emails + forms + GBP + GSC)
 
 **`.cursor/skills/camila-vertex-agent/SKILL.md`**

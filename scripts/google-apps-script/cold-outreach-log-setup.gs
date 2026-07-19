@@ -88,6 +88,11 @@ function setupCamilaOpsSheet() {
   // Conditional formatting on Send Queue → bryan_approved column
   formatSendQueue(ss);
 
+  // Approvers tab + dashboard columns (CamilaApprovalDashboard.gs)
+  if (typeof setupApprovalDashboard === 'function') {
+    setupApprovalDashboard();
+  }
+
   // Store spreadsheet ID for use by other scripts
   var props = PropertiesService.getScriptProperties();
   props.setProperty('CAMILA_SHEET_ID', ss.getId());
@@ -229,7 +234,7 @@ function camilaDailyLoop() {
       '📬 Cold queue empty — action needed',
       'No approved rows in Send Queue for ' + today + '.\n' +
       'Remaining capacity: ' + remaining + ' sends.\n\n' +
-      'To approve: open Send Queue sheet → set bryan_approved = YES on rows you want sent.'
+      dashboardLinkLine_()
     );
     Logger.log('  No approved rows — Bryan notified via Chat.');
     return;
@@ -242,7 +247,7 @@ function camilaDailyLoop() {
       '📬 Cold batch ready — ' + today,
       approvedRows.length + ' emails approved and queued for ' + today + '.\n' +
       'Staggered sends will go out 8:05 AM–11:28 AM PT (7 min apart).\n\n' +
-      'To approve more rows: Send Queue sheet → bryan_approved = YES\n' +
+      dashboardLinkLine_() +
       'To pause: reply "hold camila"'
     );
     PropertiesService.getScriptProperties().setProperty('last_notified_date', today);
@@ -306,6 +311,14 @@ function countTodaySends(today) {
 // ---------------------------------------------------------------------------
 // Google Chat notification
 // ---------------------------------------------------------------------------
+
+function dashboardLinkLine_() {
+  var url = PropertiesService.getScriptProperties().getProperty('APPROVAL_DASHBOARD_URL');
+  if (url) {
+    return 'Approve or remove in the Ops dashboard:\n' + url + '\n\n';
+  }
+  return 'Approve in Send Queue (bryan_approved = YES) or deploy the Ops dashboard — docs/approval-dashboard.md\n\n';
+}
 
 function notifyBryan(title, message) {
   var webhookUrl = PropertiesService.getScriptProperties().getProperty('GOOGLE_CHAT_WEBHOOK_URL');

@@ -327,13 +327,16 @@ async function main() {
     sentCount++;
     if (!firstSentTo) firstSentTo = `${obj.first_name || ''} ${obj.company || ''} <${obj.email}>`.trim();
 
-    // Mark row as scheduled
-    await sheets.spreadsheets.values.update({
-      spreadsheetId: SHEET_ID,
-      range: `Send Queue!K${rowIndex}`, // 'status' column — adjust if schema differs
-      valueInputOption: 'RAW',
-      requestBody: { values: [['scheduled']] },
-    });
+    // Mark row as scheduled (status column by header name)
+    const statusCol = headers.indexOf('status') + 1;
+    if (statusCol > 0) {
+      await sheets.spreadsheets.values.update({
+        spreadsheetId: SHEET_ID,
+        range: `Send Queue!${columnToLetter(statusCol)}${rowIndex}`,
+        valueInputOption: 'RAW',
+        requestBody: { values: [['scheduled']] },
+      });
+    }
 
     // Stagger (150ms between API calls — actual scheduling is by Gmail scheduled send time)
     if (i < toSend.length - 1) await delay(300);
