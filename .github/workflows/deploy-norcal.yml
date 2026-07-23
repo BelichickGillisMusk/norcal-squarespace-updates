@@ -1,0 +1,33 @@
+name: Deploy NorCal CARB Mobile
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - site/**
+      - worker/**
+      - wrangler.jsonc
+      - .github/workflows/deploy-norcal.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-norcal-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy norcalcarbmobile.com
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Deploy Cloudflare Worker and static site
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
