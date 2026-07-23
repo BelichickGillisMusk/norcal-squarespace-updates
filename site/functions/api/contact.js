@@ -1,23 +1,19 @@
 /**
  * Cloudflare Pages Function — POST /api/contact
  *
- * Receives the homepage/contact form and emails the lead to the shop via Resend
- * (the same provider the repo's reminder-engine uses). Per repo README, form
- * notifications route to bgillis99@gmail.com.
+ * Receives the contact/booking form and emails the lead to the shop through Resend.
+ * Form notifications route to bgillis99@gmail.com by default.
  *
- * Required Pages env var (Settings → Environment variables):
- *   RESEND_API_KEY   — Resend API key
+ * Required Pages env var:
+ *   RESEND_API_KEY
  * Optional:
- *   CONTACT_TO       — override recipient (default bgillis99@gmail.com)
- *   CONTACT_FROM     — verified Resend sender (default noreply@mail.norcalcarbmobile.com)
- *
- * Until RESEND_API_KEY is set, the call returns a clear error and the page tells
- * the visitor to call — so we never silently swallow a lead (the exact bug the
- * README flags). Tap-to-call and the mailto link work regardless.
+ *   CONTACT_TO
+ *   CONTACT_FROM
  */
 
 const DEFAULT_TO = 'bgillis99@gmail.com';
 const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
+const CURRENT_TERMS_VERSION = '2026-07-22';
 
 function esc(s) {
   return String(s || '').replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]));
@@ -43,7 +39,6 @@ function respond(request, ok, message, status) {
       headers: { 'content-type': 'application/json' },
     });
   }
-  // No-JS fallback: redirect back to the page with a flag.
   const to = ok ? '/contact?sent=1' : '/contact?error=1';
   return new Response(null, { status: 303, headers: { Location: to } });
 }
@@ -66,6 +61,11 @@ export async function onRequestPost(context) {
     return respond(request, false, 'Please include your name and a phone number.', 422);
   }
 
+  const termsAccepted = String(data.terms_accepted || '').toLowerCase() === 'yes';
+  if (!termsAccepted) {
+    return respond(request, false, 'Please accept the Testing Terms & Customer Rights before sending your request.', 422);
+  }
+
   const apiKey = env.RESEND_API_KEY;
   if (!apiKey) {
     return respond(request, false, 'Form email isn’t configured yet — please call (916) 890-4427.', 503);
@@ -78,6 +78,9 @@ export async function onRequestPost(context) {
     location: (data.location || '').trim(),
     service: (data.service || '').trim(),
     message: (data.message || '').trim(),
+    termsAccepted: true,
+    termsVersion: (data.terms_version || CURRENT_TERMS_VERSION).trim(),
+    submittedAt: new Date().toISOString(),
   };
 
   const html = `
@@ -89,7 +92,10 @@ export async function onRequestPost(context) {
       <tr><td><strong>Location</strong></td><td>${esc(lead.location)}</td></tr>
       <tr><td><strong>Service</strong></td><td>${esc(lead.service)}</td></tr>
       <tr><td valign="top"><strong>Details</strong></td><td>${esc(lead.message).replace(/\n/g, '<br>')}</td></tr>
-    </table>`;
+      <tr><td><strong>Terms accepted</strong></td><td>Yes — version ${esc(lead.termsVersion)}</td></tr>
+      <tr><td><strong>Submitted</strong></td><td>${esc(lead.submittedAt)}</td></tr>
+    </table>
+    <p style="font-family:Arial,sans-serif;font-size:13px;color:#555">Policy: OVI/smoke tests, motorhome OVI tests, and appointments totaling more than $150 require payment in full before confirmation.</p>`;
 
   const payload = {
     from: env.CONTACT_FROM || DEFAULT_FROM,
