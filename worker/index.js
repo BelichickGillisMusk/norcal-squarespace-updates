@@ -15,6 +15,7 @@ import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
 
 const DEFAULT_TO = 'bgillis99@gmail.com';
 const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
+const CURRENT_TERMS_VERSION = '2026-07-22';
 
 const SCHEMA_TAG = `<script type="application/ld+json">
 {
@@ -96,7 +97,6 @@ const REDIRECTS = {
   // → /areas
   '/carb-locations': '/areas',
   '/service-area-sacramento-carb-testing': '/sacramento-carb-testing',
-  '/book-schedule-carb-smoke-test-sacramento': '/sacramento-carb-testing',
   '/clean-truck-check-napa-st-helena-calistoga': '/areas#napa',
   '/north-bay-carb-mobile-testing': '/areas#north-bay',
   '/east-bay-mobile-carb-testing': '/areas#east-bay',
@@ -200,6 +200,11 @@ async function handleContact(request, env) {
   const phone = (data.phone || '').trim();
   if (!name || !phone) return respond(request, false, 'Please include your name and a phone number.', 422);
 
+  const termsAccepted = String(data.terms_accepted || '').toLowerCase() === 'yes';
+  if (!termsAccepted) {
+    return respond(request, false, 'Please accept the Testing Terms & Customer Rights before sending your request.', 422);
+  }
+
   const apiKey = env.RESEND_API_KEY;
   if (!apiKey) return respond(request, false, 'Please call us directly at (916) 890-4427 to book your test.', 503);
 
@@ -210,6 +215,8 @@ async function handleContact(request, env) {
     location: (data.location || '').trim(),
     service: (data.service || '').trim(),
     message: (data.message || '').trim(),
+    termsVersion: (data.terms_version || CURRENT_TERMS_VERSION).trim(),
+    submittedAt: new Date().toISOString(),
   };
 
   const html = `
@@ -221,7 +228,10 @@ async function handleContact(request, env) {
       <tr><td><strong>Location</strong></td><td>${esc(lead.location)}</td></tr>
       <tr><td><strong>Service</strong></td><td>${esc(lead.service)}</td></tr>
       <tr><td valign="top"><strong>Details</strong></td><td>${esc(lead.message).replace(/\n/g, '<br>')}</td></tr>
-    </table>`;
+      <tr><td><strong>Terms accepted</strong></td><td>Yes — version ${esc(lead.termsVersion)}</td></tr>
+      <tr><td><strong>Submitted</strong></td><td>${esc(lead.submittedAt)}</td></tr>
+    </table>
+    <p style="font-family:Arial,sans-serif;font-size:13px;color:#555">OVI/smoke tests, motorhome OVI tests, and appointments totaling more than $150 require payment in full before confirmation.</p>`;
 
   const payload = {
     from: env.CONTACT_FROM || DEFAULT_FROM,
