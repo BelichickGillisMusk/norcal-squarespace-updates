@@ -4,6 +4,25 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-07-27 — Issue #49: Logo for favicon + social share (og:image)
+
+**Site branding (high priority)** — `worker/index.js`
+
+- Injected sitewide via HTMLRewriter (same pattern as schema JSON-LD):
+  - `<link rel="icon">` + `<link rel="apple-touch-icon">` → existing `/assets/img/norcal-carb-mobile-logo-250th.png`
+  - `og:image` + `twitter:image` + `twitter:card=summary` for link previews when the site (or Stripe paylinks that surface the domain) is shared
+- Covers every HTML response (home, services, pricing, blog posts, city pages, 404) without touching individual files.
+- Commit `ad6e5da` triggers `deploy-norcal.yml` → production Cloudflare Worker deploy.
+
+**Stripe branding (manual step still required)**  
+Stripe payment-link / receipt / invoice logos are controlled only in the Stripe Dashboard → Settings → Branding. Upload the same 250th logo (or a cropped square version) there so paylinks show the NorCal mark. Code cannot set this.
+
+**Note on asset size:** the current logo PNG is ~1.4 MB. It works as favicon/OG today; a follow-up should add optimized 32×32 / 180×180 / 1200×630 variants for better Lighthouse scores and faster social previews.
+
+Closes #49 once deploy is green and Stripe logo is uploaded.
+
+---
+
 ## 2026-07-19 — FMCSA SAFER QCMobile client (`safer_query.py`)
 
 Added stdlib Python CLI for official QCMobile API (WebKey via `FMCSA_API_KEY`):
@@ -103,7 +122,7 @@ Site — `site/index.html` + `site/assets/styles.css` (homepage only). Imported 
 
 Follow-up to the 2026-07-07 blog migration (PR #45), per Bryan's request to keep the old URLs:
 
-- **Migrated posts now live at their exact old Squarespace paths** — `site/clean-truck-check-blog/<slug>.html`, served at `/clean-truck-check-blog/<slug>` (200, canonical). The interim `/blog/<slug>` URLs 301-redirect back to the old paths. The 3 hand-written June-2026 posts stay at `/blog/<slug>`. Blog index + sitemap updated to the old URLs.
+- **Migrated posts now live at their exact old URLs** — `site/clean-truck-check-blog/<slug>.html`, served at `/clean-truck-check-blog/<slug>` (200, canonical). The interim `/blog/<slug>` URLs 301-redirect back to the old paths. The 3 hand-written June-2026 posts stay at `/blog/<slug>`. Blog index + sitemap updated to the old URLs.
 - **Critical routing fix (Codex review, P1):** with `not_found_handling` set and compatibility date ≥ 2025-04-01, browser *navigation* requests were served by asset handling and never invoked the Worker — every legacy redirect 404'd for real users (confirmed locally with `Sec-Fetch-Mode: navigate`). Added `run_worker_first: true` to `wrangler.jsonc`. This also makes the schema JSON-LD injection in `worker/index.js` actually apply to page loads.
 - **Content fixes (Copilot review):** WordPress `[caption]` shortcodes → `<figure>/<figcaption>`, missing `alt` attributes added, `mailto:` links with trailing `?` cleaned, malformed ARB URL corrected.
 - Verified with `wrangler dev` in navigation mode: old post URLs 200, date-based and `/blog/` variants 301 → 200, fallbacks intact, branded 404, zero broken internal links, 64 posts on the index.
