@@ -17,6 +17,19 @@ const DEFAULT_TO = 'bgillis99@gmail.com';
 const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
 const CURRENT_TERMS_VERSION = '2026-07-22';
 
+const LOGO_URL = 'https://norcalcarbmobile.com/assets/img/norcal-carb-mobile-logo-250th.png';
+
+/** Favicon + Open Graph / Twitter share image (Issue #49). Injected sitewide. */
+const BRANDING_TAGS = `
+<link rel="icon" href="${LOGO_URL}" type="image/png" sizes="any">
+<link rel="apple-touch-icon" href="${LOGO_URL}">
+<meta property="og:image" content="${LOGO_URL}">
+<meta property="og:image:alt" content="NorCal CARB Mobile — Mobile Clean Truck Check">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="${LOGO_URL}">
+<meta name="twitter:image:alt" content="NorCal CARB Mobile logo">
+`;
+
 const SCHEMA_TAG = `<script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -156,7 +169,7 @@ function legacyBlogTarget(pathname) {
   return '/blog';
 }
 
-const HTML_ESC = { '<': '&lt;', '>': '&gt;', '&': '&amp;' };
+const HTML_ESC = { '<': '<', '>': '>', '&': '&' };
 function esc(s) {
   return String(s || '').replace(/[<>&]/g, (c) => HTML_ESC[c]);
 }
@@ -288,12 +301,17 @@ export default {
       });
     }
 
-    // Everything else → static assets; inject schema into HTML responses
+    // Everything else → static assets; inject branding + schema into HTML responses
     const assetRes = await env.ASSETS.fetch(request);
     const ct = assetRes.headers.get('content-type') || '';
     if (!ct.includes('text/html')) return assetRes;
     return new HTMLRewriter()
-      .on('head', { element(el) { el.append(SCHEMA_TAG, { html: true }); } })
+      .on('head', {
+        element(el) {
+          el.append(BRANDING_TAGS, { html: true });
+          el.append(SCHEMA_TAG, { html: true });
+        },
+      })
       .transform(assetRes);
   },
 };
