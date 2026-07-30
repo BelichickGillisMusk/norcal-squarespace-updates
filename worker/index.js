@@ -6,6 +6,7 @@
  *
  * Deploy:  wrangler deploy            (config in ../wrangler.jsonc, name = norcalcarbmobile)
  * Env vars: RESEND_API_KEY (required to send) · CONTACT_TO · CONTACT_FROM (optional)
+ * Always CCs OWNER_GMAIL (bryan@norcalcarbmobile.com) on contact leads.
  *
  * NOTE: the contact logic below mirrors site/functions/api/contact.js (the Pages
  * version). If you change one, change the other.
@@ -14,6 +15,7 @@
 import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
 
 const DEFAULT_TO = 'bgillis99@gmail.com';
+const OWNER_GMAIL = 'bryan@norcalcarbmobile.com';
 const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
 const CURRENT_TERMS_VERSION = '2026-07-22';
 
@@ -246,12 +248,17 @@ async function handleContact(request, env) {
     </table>
     <p style="font-family:Arial,sans-serif;font-size:13px;color:#555">OVI/smoke tests, motorhome OVI tests, and appointments totaling more than $150 require payment in full before confirmation.</p>`;
 
+  const primaryTo = env.CONTACT_TO || DEFAULT_TO;
   const payload = {
     from: env.CONTACT_FROM || DEFAULT_FROM,
-    to: [env.CONTACT_TO || DEFAULT_TO],
+    to: [primaryTo],
+    // Always CC owner Gmail on contact leads (skip if already primary To).
     subject: `New test request: ${lead.name.replace(/[\r\n]/g, '')}${lead.location ? ' — ' + lead.location.replace(/[\r\n]/g, '') : ''}`,
     html,
   };
+  if (String(primaryTo).toLowerCase() !== OWNER_GMAIL.toLowerCase()) {
+    payload.cc = [OWNER_GMAIL];
+  }
   const cleanEmail = lead.email.replace(/[\r\n]/g, '');
   if (cleanEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) payload.reply_to = cleanEmail;
 
