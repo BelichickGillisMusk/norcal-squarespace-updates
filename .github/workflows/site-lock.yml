@@ -1,0 +1,36 @@
+name: NorCal Site Lock
+
+on:
+  pull_request:
+    paths:
+      - site/**
+      - worker/**
+      - wrangler.toml
+      - wrangler.jsonc
+      - config/site-template-lock.json
+      - scripts/site-lock/**
+      - .github/workflows/site-lock.yml
+      - .github/workflows/deploy-norcal.yml
+  push:
+    branches: [main]
+    paths:
+      - site/**
+      - worker/**
+      - wrangler.toml
+      - wrangler.jsonc
+      - config/site-template-lock.json
+      - scripts/site-lock/**
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Enforce approved NorCal template
+        run: node scripts/site-lock/validate.mjs
