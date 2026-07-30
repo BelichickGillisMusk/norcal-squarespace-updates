@@ -18,6 +18,7 @@ const DEFAULT_TO = 'bgillis99@gmail.com';
 const OWNER_GMAIL = 'bryan@norcalcarbmobile.com';
 const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
 const CURRENT_TERMS_VERSION = '2026-07-22';
+const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
 
 const LOGO_URL = 'https://norcalcarbmobile.com/assets/img/norcal-carb-mobile-logo-250th.png';
 
@@ -75,7 +76,7 @@ const SCHEMA_TAG = `<script type="application/ld+json">
     "https://www.instagram.com/carb.mobiletruckcheck/",
     "https://x.com/carbcleantruck",
     "https://www.youtube.com/@CARBCLEANTRUCKMOBILE",
-    "https://share.google/CUg6TEK1p3eO34S9G"
+    "${GOOGLE_REVIEWS_URL}"
   ]
 }
 </script>`;
@@ -85,6 +86,11 @@ const SCHEMA_TAG = `<script type="application/ld+json">
  * update their indexes and any inbound links keep working.
  */
 const REDIRECTS = {
+  // → external Google Business Profile / reviews
+  '/reviews': GOOGLE_REVIEWS_URL,
+  '/google': GOOGLE_REVIEWS_URL,
+  '/leave-review': GOOGLE_REVIEWS_URL,
+
   // → homepage
   '/carb-services': '/',
   '/store': '/',
@@ -175,7 +181,7 @@ function legacyBlogTarget(pathname) {
   return '/blog';
 }
 
-const HTML_ESC = { '<': '<', '>': '>', '&': '&' };
+const HTML_ESC = { '<': '&lt;', '>': '&gt;', '&': '&amp;' };
 function esc(s) {
   return String(s || '').replace(/[<>&]/g, (c) => HTML_ESC[c]);
 }
