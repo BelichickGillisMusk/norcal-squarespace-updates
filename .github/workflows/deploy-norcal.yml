@@ -36,12 +36,14 @@ jobs:
           command: deploy
 
       # EVALUATOR (key step) — green only if live site answers
+      # Use a browser UA: bare curl is often 403'd by Cloudflare bot/WAF from GHA IPs.
       - name: Evaluate live apex
         run: |
           set -euo pipefail
+          UA='Mozilla/5.0 (compatible; NorCalDeployEvaluator/1.0; +https://norcalcarbmobile.com)'
           echo "Evaluator: GET https://norcalcarbmobile.com/"
           for i in 1 2 3 4 5; do
-            code=$(curl -sS -o /tmp/apex.html -w '%{http_code}' -m 25 https://norcalcarbmobile.com/ || echo 000)
+            code=$(curl -sS -A "$UA" -o /tmp/apex.html -w '%{http_code}' -m 25 https://norcalcarbmobile.com/ || echo 000)
             echo "attempt $i → HTTP $code"
             if [ "$code" = "200" ]; then
               # cheap content gate (not a redesign check)
