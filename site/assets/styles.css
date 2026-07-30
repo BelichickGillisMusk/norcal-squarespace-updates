@@ -324,3 +324,23 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
   .card { padding: 18px; }
   .price-card .price { font-size: 2rem; }
 }
+
+/* ---------- Field coverage panel ---------- */
+.coverage-panel {
+  display:grid; grid-template-columns:minmax(260px,.85fr) minmax(0,1.15fr);
+  gap:28px; align-items:center; padding:22px; margin:0 0 28px;
+  border:2px solid var(--navy-mid); border-radius:18px; background:var(--bg-soft);
+  box-shadow:var(--shadow);
+}
+.coverage-panel-map img { display:block; width:100%; height:auto; max-height:520px; object-fit:cover; border-radius:12px; border:1px solid var(--line); }
+.coverage-panel-copy .eyebrow,.card .eyebrow {
+  margin:0 0 8px; color:var(--red); font-size:.76rem; font-weight:800;
+  letter-spacing:.08em; text-transform:uppercase;
+}
+.route-chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+.route-chips span { padding:7px 11px; border:1px solid var(--silver-line); border-radius:999px; background:#fff; color:var(--ink); font-size:.84rem; font-weight:700; }
+@media (max-width:760px) {
+  .coverage-panel { grid-template-columns:1fr; padding:14px; }
+  .coverage-panel-map img { max-height:none; }
+  .route-chips span { font-size:.8rem; }
+}
