@@ -1,3 +1,4 @@
+# Deploy norcalcarbmobile.com — Worker + site assets
 name: Deploy NorCal CARB Mobile
 
 on:
@@ -6,6 +7,7 @@ on:
     paths:
       - site/**
       - worker/**
+      - wrangler.toml
       - wrangler.jsonc
       - .github/workflows/deploy-norcal.yml
   workflow_dispatch:
@@ -22,12 +24,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy norcalcarbmobile.com
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Deploy Cloudflare Worker and static site
+      - name: Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.110.0"
           command: deploy
