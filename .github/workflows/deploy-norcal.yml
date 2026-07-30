@@ -1,4 +1,5 @@
 # Deploy norcalcarbmobile.com — Worker + site assets
+# Evaluator after deploy: apex must return 200 (fail the run if not)
 name: Deploy NorCal CARB Mobile
 
 on:
@@ -33,3 +34,22 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "4.110.0"
           command: deploy
+
+      # EVALUATOR (key step) — green only if live site answers
+      - name: Evaluate live apex
+        run: |
+          set -euo pipefail
+          echo "Evaluator: GET https://norcalcarbmobile.com/"
+          for i in 1 2 3 4 5; do
+            code=$(curl -sS -o /tmp/apex.html -w '%{http_code}' -m 25 https://norcalcarbmobile.com/ || echo 000)
+            echo "attempt $i → HTTP $code"
+            if [ "$code" = "200" ]; then
+              # cheap content gate (not a redesign check)
+              grep -qi 'norcal\|carb\|truck' /tmp/apex.html
+              echo "EVALUATOR PASS"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "EVALUATOR FAIL — apex not 200 after deploy"
+          exit 1
