@@ -1,0 +1,10 @@
+# Bryan must approve changes to the locked public identity and deployment gate.
+/site/index.html @fsu9913-gif
+/site/assets/styles.css @fsu9913-gif
+/site/assets/img/norcal-carb-mobile-logo-250th.png @fsu9913-gif
+/site/assets/img/coverage-map-v2.png @fsu9913-gif
+/worker/index.js @fsu9913-gif
+/config/site-template-lock.json @fsu9913-gif
+/scripts/site-lock/ @fsu9913-gif
+/.github/workflows/site-lock.yml @fsu9913-gif
+/.github/workflows/deploy-norcal.yml @fsu9913-gif

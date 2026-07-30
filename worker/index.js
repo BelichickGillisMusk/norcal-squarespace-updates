@@ -42,14 +42,6 @@ const SCHEMA_TAG = `<script type="application/ld+json">
   "telephone": "+1-916-890-4427",
   "priceRange": "$$",
   "description": "Certified statewide mobile CARB Clean Truck Check provider executing official SAE J1667 smoke opacity testing and non-OBD compliance tracking across California.",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "4810 7th Avenue",
-    "addressLocality": "Sacramento",
-    "addressRegion": "CA",
-    "postalCode": "95820",
-    "addressCountry": "US"
-  },
   "knowsAbout": [
     "CARB Clean Truck Check",
     "SAE J1667 Smoke Opacity Testing",
@@ -59,11 +51,23 @@ const SCHEMA_TAG = `<script type="application/ld+json">
   ],
   "areaServed": [
     { "@type": "AdministrativeArea", "name": "Sacramento County" },
+    { "@type": "AdministrativeArea", "name": "Placer County" },
+    { "@type": "AdministrativeArea", "name": "El Dorado County" },
+    { "@type": "AdministrativeArea", "name": "Yolo County" },
+    { "@type": "AdministrativeArea", "name": "Yuba County" },
     { "@type": "AdministrativeArea", "name": "Butte County" },
     { "@type": "AdministrativeArea", "name": "San Joaquin County" },
+    { "@type": "AdministrativeArea", "name": "Contra Costa County" },
+    { "@type": "AdministrativeArea", "name": "Solano County" },
+    { "@type": "AdministrativeArea", "name": "Napa County" },
     { "@type": "AdministrativeArea", "name": "Santa Clara County" },
     { "@type": "AdministrativeArea", "name": "Sonoma County" },
     { "@type": "AdministrativeArea", "name": "Alameda County" },
+    { "@type": "AdministrativeArea", "name": "Stanislaus County" },
+    { "@type": "AdministrativeArea", "name": "Merced County" },
+    { "@type": "AdministrativeArea", "name": "Fresno County" },
+    { "@type": "AdministrativeArea", "name": "Tulare County" },
+    { "@type": "AdministrativeArea", "name": "Tuolumne County" },
     { "@type": "AdministrativeArea", "name": "San Diego County" }
   ],
   "sameAs": [

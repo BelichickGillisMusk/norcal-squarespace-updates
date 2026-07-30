@@ -1,0 +1,47 @@
+{
+  "version": "2026-07-30",
+  "owner": "NorCal CARB Mobile LLC",
+  "requiredPhoneDisplay": "916-890-4427",
+  "requiredPhoneSchema": "+1-916-890-4427",
+  "requiredPhoneHref": "tel:+19168904427",
+  "protectedFiles": {
+    "site/index.html": "94c8d4f09c5bbced9f6fb8c02478182c5f1de2bbfba5fcec58ca7c873eeada70",
+    "site/assets/styles.css": "08347d4f46cfadc8fe942c157a0c67a9bcd7d6ede11d5070176dadadb3db2236",
+    "site/assets/img/norcal-carb-mobile-logo-250th.png": "774fb7772bfacb03a6410a2acc21772d4dd40f016edb9769d0c89e51f42f04b2",
+    "site/assets/img/coverage-map-v2.png": "0cad54e2baad77fad0ab55a10d807cffa94c907d1dd93992a392f44bd00c455d"
+  },
+  "requiredColors": {
+    "--navy": "#0a1628",
+    "--navy-deep": "#060e1a",
+    "--navy-mid": "#12263f",
+    "--red": "#b91c1c",
+    "--red-deep": "#991b1b",
+    "--bg": "#ffffff"
+  },
+  "requiredWorkerName": "norcal-squarespace-updates-gillis",
+  "requiredDomains": [
+    "norcalcarbmobile.com",
+    "www.norcalcarbmobile.com"
+  ],
+  "requiredServiceAreas": [
+    "Sacramento County",
+    "Placer County",
+    "El Dorado County",
+    "Yolo County",
+    "Yuba County",
+    "Butte County",
+    "San Joaquin County",
+    "Contra Costa County",
+    "Solano County",
+    "Napa County",
+    "Santa Clara County",
+    "Sonoma County",
+    "Alameda County",
+    "Stanislaus County",
+    "Merced County",
+    "Fresno County",
+    "Tulare County",
+    "Tuolumne County",
+    "San Diego County"
+  ]
+}

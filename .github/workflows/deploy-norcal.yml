@@ -10,6 +10,8 @@ on:
       - worker/**
       - wrangler.toml
       - wrangler.jsonc
+      - config/site-template-lock.json
+      - scripts/site-lock/**
       - .github/workflows/deploy-norcal.yml
   workflow_dispatch:
 
@@ -26,6 +28,13 @@ jobs:
     name: Deploy norcalcarbmobile.com
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Enforce approved NorCal template
+        run: node scripts/site-lock/validate.mjs
 
       - name: Deploy Worker
         uses: cloudflare/wrangler-action@v3
