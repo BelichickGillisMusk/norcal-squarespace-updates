@@ -45,11 +45,11 @@ for (const [token, value] of Object.entries(lock.requiredColors)) {
 }
 
 const worker = text("worker/index.js");
-if (!worker.includes(`"telephone": "${lock.requiredPhoneSchema}"`)) fail("Sitewide schema phone changed.");
+if (!worker.includes(`telephone: \'${lock.requiredPhoneSchema}\'`)) fail("Sitewide schema phone changed.");
 if (/"address"\s*:|"streetAddress"\s*:|"postalCode"\s*:/.test(worker)) fail("Public Worker schema must not expose a street or mailing address.");
-if (!worker.includes('"areaServed": [')) fail("Sitewide schema is missing areaServed.");
+if (!worker.includes("areaServed: [")) fail("Sitewide schema is missing areaServed.");
 for (const area of lock.requiredServiceAreas) {
-  if (!worker.includes(`"name": "${area}"`)) fail(`Sitewide schema is missing service area: ${area}`);
+  if (!worker.includes(`\'${area}\'`)) fail(`Sitewide schema is missing service area: ${area}`);
 }
 
 const publicFiles = walk(join(root, "site")).filter((path) => path.endsWith(".html"));
