@@ -33,54 +33,83 @@ const BRANDING_TAGS = `
 <meta name="twitter:image:alt" content="NorCal CARB Mobile logo">
 `;
 
-const SCHEMA_TAG = `<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AutomotiveBusiness",
-  "name": "NorCal CARB Mobile LLC",
-  "legalName": "NorCal CARB Mobile LLC",
-  "url": "https://norcalcarbmobile.com",
-  "telephone": "+1-916-890-4427",
-  "priceRange": "$$",
-  "description": "Certified statewide mobile CARB Clean Truck Check provider executing official SAE J1667 smoke opacity testing and non-OBD compliance tracking across California.",
-  "knowsAbout": [
-    "CARB Clean Truck Check",
-    "SAE J1667 Smoke Opacity Testing",
-    "Heavy-Duty Diesel Emissions Compliance",
-    "Non-OBD Truck Inspections",
-    "OVI Clean Truck Check Compliance"
-  ],
-  "areaServed": [
-    { "@type": "AdministrativeArea", "name": "Sacramento County" },
-    { "@type": "AdministrativeArea", "name": "Placer County" },
-    { "@type": "AdministrativeArea", "name": "El Dorado County" },
-    { "@type": "AdministrativeArea", "name": "Yolo County" },
-    { "@type": "AdministrativeArea", "name": "Yuba County" },
-    { "@type": "AdministrativeArea", "name": "Butte County" },
-    { "@type": "AdministrativeArea", "name": "San Joaquin County" },
-    { "@type": "AdministrativeArea", "name": "Contra Costa County" },
-    { "@type": "AdministrativeArea", "name": "Solano County" },
-    { "@type": "AdministrativeArea", "name": "Napa County" },
-    { "@type": "AdministrativeArea", "name": "Santa Clara County" },
-    { "@type": "AdministrativeArea", "name": "Sonoma County" },
-    { "@type": "AdministrativeArea", "name": "Alameda County" },
-    { "@type": "AdministrativeArea", "name": "Stanislaus County" },
-    { "@type": "AdministrativeArea", "name": "Merced County" },
-    { "@type": "AdministrativeArea", "name": "Fresno County" },
-    { "@type": "AdministrativeArea", "name": "Tulare County" },
-    { "@type": "AdministrativeArea", "name": "Tuolumne County" },
-    { "@type": "AdministrativeArea", "name": "San Diego County" }
-  ],
-  "sameAs": [
-    "https://www.facebook.com/carbcleantruckcheck/",
-    "https://www.instagram.com/carb.mobiletruckcheck/",
-    "https://x.com/carbcleantruck",
-    "https://www.youtube.com/@CARBCLEANTRUCKMOBILE",
-    "${GOOGLE_REVIEWS_URL}"
-  ]
+function schemaTag(pageUrl) {
+  const page = new URL(pageUrl);
+  page.hash = '';
+  const canonicalUrl = page.toString();
+  const schema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': ['LocalBusiness', 'AutomotiveBusiness'],
+        '@id': 'https://norcalcarbmobile.com/#business',
+        name: 'NorCal CARB Mobile LLC',
+        legalName: 'NorCal CARB Mobile LLC',
+        alternateName: 'NorCal CARB Mobile',
+        url: 'https://norcalcarbmobile.com/',
+        telephone: '+1-916-890-4427',
+        email: 'sales@norcalcarbmobile.com',
+        image: LOGO_URL,
+        logo: { '@type': 'ImageObject', url: LOGO_URL },
+        priceRange: '$75-$229',
+        description: 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Certified OBD and OVI smoke opacity testing at customer yards and jobsites across Northern California, with service available in San Diego County by appointment.',
+        knowsAbout: [
+          'CARB Clean Truck Check',
+          'SAE J1667 Smoke Opacity Testing',
+          'Heavy-Duty Diesel Emissions Compliance',
+          'OBD Clean Truck Check Testing',
+          'OVI Clean Truck Check Testing'
+        ],
+        areaServed: [
+          'Sacramento County', 'Placer County', 'El Dorado County', 'Yolo County',
+          'Yuba County', 'Butte County', 'San Joaquin County', 'Contra Costa County',
+          'Solano County', 'Napa County', 'Santa Clara County', 'Sonoma County',
+          'Alameda County', 'Stanislaus County', 'Merced County', 'Fresno County',
+          'Tulare County', 'Tuolumne County', 'San Diego County'
+        ].map((name) => ({ '@type': 'AdministrativeArea', name })),
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: 5,
+          reviewCount: 33,
+          bestRating: 5,
+          worstRating: 1
+        },
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Mobile CARB Testing Services',
+          itemListElement: [
+            { '@type': 'Offer', name: 'OBD Clean Truck Check', price: 75, priceCurrency: 'USD' },
+            { '@type': 'Offer', name: 'OVI Smoke Opacity Test', price: 199, priceCurrency: 'USD' },
+            { '@type': 'Offer', name: 'Motorhome OBD', price: 99, priceCurrency: 'USD' },
+            { '@type': 'Offer', name: 'Motorhome OVI', price: 229, priceCurrency: 'USD' }
+          ]
+        },
+        sameAs: [
+          'https://www.facebook.com/carbcleantruckcheck/',
+          'https://www.instagram.com/carb.mobiletruckcheck/',
+          'https://x.com/carbcleantruck',
+          'https://www.youtube.com/@CARBCLEANTRUCKMOBILE',
+          GOOGLE_REVIEWS_URL
+        ]
+      },
+      {
+        '@type': 'WebSite',
+        '@id': 'https://norcalcarbmobile.com/#website',
+        url: 'https://norcalcarbmobile.com/',
+        name: 'NorCal CARB Mobile',
+        publisher: { '@id': 'https://norcalcarbmobile.com/#business' }
+      },
+      {
+        '@type': 'WebPage',
+        '@id': `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        isPartOf: { '@id': 'https://norcalcarbmobile.com/#website' },
+        about: { '@id': 'https://norcalcarbmobile.com/#business' }
+      }
+    ]
+  };
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
-</script>`;
-
 /**
  * Old Squarespace URL → new path.  All return 301 so search engines
  * update their indexes and any inbound links keep working.
@@ -326,7 +355,7 @@ export default {
       .on('head', {
         element(el) {
           el.append(BRANDING_TAGS, { html: true });
-          el.append(SCHEMA_TAG, { html: true });
+          el.append(schemaTag(url.toString()), { html: true });
         },
       })
       .transform(assetRes);
