@@ -1,0 +1,24 @@
+name: Diagnose Site Lock Hashes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/diagnose-site-lock-hashes.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hashes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print protected-file SHA-256 hashes
+        run: |
+          sha256sum site/index.html
+          sha256sum site/assets/styles.css
+          sha256sum site/assets/img/norcal-carb-mobile-logo-250th.png
+          sha256sum site/assets/img/coverage-map-v2.png
+          exit 1
