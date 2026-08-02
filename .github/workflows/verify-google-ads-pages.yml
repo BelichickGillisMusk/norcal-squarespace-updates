@@ -1,0 +1,56 @@
+name: Verify Google Ads Landing Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/verify-google-ads-pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify production landing pages
+        run: |
+          set -euo pipefail
+          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36'
+          check() {
+            url="$1"
+            expected="$2"
+            for i in 1 2 3 4 5; do
+              code=$(curl -sS -A "$UA" -L -o /tmp/page.html -w '%{http_code}' -m 30 "$url" || echo 000)
+              if [ "$code" = "200" ] && grep -Fqi "$expected" /tmp/page.html; then
+                echo "$url: HTTP 200, expected content present"
+                return 0
+              fi
+              echo "attempt $i: $url returned $code or missing content"
+              sleep 8
+            done
+            return 1
+          }
+          check 'https://norcalcarbmobile.com/carb-obd-test' 'Mobile CARB OBD Testing'
+          check 'https://norcalcarbmobile.com/carb-ovi-test' 'Mobile CARB OVI Smoke Testing'
+          check 'https://norcalcarbmobile.com/motorhome-carb-test' 'Motorhome CARB Testing'
+          cat > google-ads/LIVE_VERIFICATION.md <<'EOF'
+          # Production verification
+
+          Verified from GitHub Actions after deployment:
+
+          - `https://norcalcarbmobile.com/carb-obd-test` — HTTP 200 and OBD landing-page content present.
+          - `https://norcalcarbmobile.com/carb-ovi-test` — HTTP 200 and OVI landing-page content present.
+          - `https://norcalcarbmobile.com/motorhome-carb-test` — HTTP 200 and motorhome landing-page content present.
+
+          Campaigns remain paused; this verification does not activate Google Ads or initiate spend.
+          EOF
+      - name: Commit production verification
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add google-ads/LIVE_VERIFICATION.md
+          git commit -m "Verify Google Ads landing pages in production"
+          git push
