@@ -1,3 +1,4 @@
+# One-time production verification; remove after successful marker commit.
 name: Verify Google Ads Landing Pages
 
 on:
