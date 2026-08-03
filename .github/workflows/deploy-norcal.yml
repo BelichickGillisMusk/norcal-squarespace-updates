@@ -1,6 +1,7 @@
 # PRODUCTION deploy — never runs on push.
 # GitHub is for test/validate only. Live ship requires Bryan GO in Actions UI.
-# Worker: norcal-squarespace-updates-gillis → norcalcarbmobile.com
+# Money site: norcalcarbmobile-prod on EMPTY Bryan CF account (token CF_GROK_KEY_NCM).
+# Do NOT point production at *.grok-sandbox.com — that is preview-only.
 name: Deploy NorCal CARB Mobile
 
 on:
@@ -12,7 +13,7 @@ on:
         default: ''
         type: string
       confirm_worker:
-        description: 'norcalcarbmobile-prod (empty Bryan account) OR norcal-squarespace-updates-gillis (legacy until cutover)'
+        description: 'norcalcarbmobile-prod (empty Bryan account) OR norcal-squarespace-updates-gillis (legacy Gillis until cutover)'
         required: true
         default: 'norcalcarbmobile-prod'
         type: string
@@ -44,14 +45,48 @@ jobs:
       - name: Enforce approved NorCal template (site-lock)
         run: node scripts/site-lock/validate.mjs
 
-      # Prefer EMPTY-account secrets (NORCAL_PROD_*). Fall back to legacy Gillis only if empty not set.
-      - name: Deploy Worker (money site)
+      # Empty-account path (preferred): org/repo secret CF_GROK_KEY_NCM + NORCAL_PROD_CF_ACCOUNT_ID.
+      # Legacy Gillis path only when confirm_worker is the old worker name.
+      - name: Require empty-account secrets for norcalcarbmobile-prod
+        if: github.event.inputs.confirm_worker == 'norcalcarbmobile-prod'
+        env:
+          CF_TOKEN: ${{ secrets.CF_GROK_KEY_NCM }}
+          CF_ACCOUNT: ${{ secrets.NORCAL_PROD_CF_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          if [ -z "${CF_TOKEN:-}" ]; then
+            echo "MISSING secret CF_GROK_KEY_NCM (org or repo) — empty Bryan CF API token."
+            echo "Grant org secret to BelichickGillisMusk/norcal-squarespace-updates or set repo secret with same name."
+            exit 1
+          fi
+          if [ -z "${CF_ACCOUNT:-}" ]; then
+            echo "MISSING secret NORCAL_PROD_CF_ACCOUNT_ID — empty Bryan Cloudflare account id (32 hex)."
+            echo "Dashboard → Account home (bryan@norcalcarbmobile.com). Never use Gillis bafa242…"
+            exit 1
+          fi
+          if [ "$CF_ACCOUNT" = "bafa242dd95d3fdce72540d20accd0a2" ]; then
+            echo "BLOCKED: NORCAL_PROD_CF_ACCOUNT_ID is Gillis Institute — money site must use empty account."
+            exit 1
+          fi
+          echo "Empty-account secrets present (token length ${#CF_TOKEN}, account ${CF_ACCOUNT:0:8}…)."
+
+      - name: Deploy Worker (money site → empty CF)
+        if: github.event.inputs.confirm_worker == 'norcalcarbmobile-prod'
         uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.NORCAL_PROD_CF_API_TOKEN || secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.NORCAL_PROD_CF_ACCOUNT_ID || secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CF_GROK_KEY_NCM }}
+          accountId: ${{ secrets.NORCAL_PROD_CF_ACCOUNT_ID }}
           wranglerVersion: '4.110.0'
-          command: ${{ github.event.inputs.confirm_worker == 'norcalcarbmobile-prod' && 'deploy --config wrangler.prod-empty.toml' || 'deploy' }}
+          command: deploy --config wrangler.prod-empty.toml
+
+      - name: Deploy Worker (legacy Gillis — until cutover only)
+        if: github.event.inputs.confirm_worker == 'norcal-squarespace-updates-gillis'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: '4.110.0'
+          command: deploy
 
       - name: Evaluate live apex
         run: |
@@ -92,5 +127,7 @@ jobs:
           echo "  bryan_go = GO"
           echo "  confirm_worker = norcalcarbmobile-prod   (empty Bryan account — preferred)"
           echo "  or norcal-squarespace-updates-gillis     (legacy Gillis — until cutover)"
+          echo "Empty path secrets: CF_GROK_KEY_NCM + NORCAL_PROD_CF_ACCOUNT_ID"
+          echo "Do not CNAME production to *.grok-sandbox.com (preview only)."
           echo "Push/PR never deploys. Other brands stay on Gillis account."
           exit 1

@@ -10,7 +10,9 @@
 4. When you actually want the site updated:  
    **Actions → Deploy NorCal CARB Mobile → Run workflow**  
    - `bryan_go` = `GO`  
-   - `confirm_worker` = `norcal-squarespace-updates-gillis`
+   - `confirm_worker` = `norcalcarbmobile-prod` (empty Bryan account — preferred)  
+   - Secrets: **`CF_GROK_KEY_NCM`** + **`NORCAL_PROD_CF_ACCOUNT_ID`**  
+   - Legacy until cutover only: `confirm_worker` = `norcal-squarespace-updates-gillis` (Gillis tokens)
 
 ## What does NOT deploy
 

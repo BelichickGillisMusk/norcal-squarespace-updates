@@ -1,11 +1,14 @@
 # MONEY SITE ONLY — deploy to empty Cloudflare account (bryan@norcalcarbmobile.com)
 # Do NOT use Gillis Institute account (bafa242…). Other brands stay there.
+# Do NOT point at *.grok-sandbox.com (Grok Code preview — not production).
 #
 # Before first deploy:
-#   1. wrangler login as bryan@norcalcarbmobile.com  OR  set CLOUDFLARE_API_TOKEN for empty account
-#   2. Paste account_id below from: wrangler whoami
-#   3. Zone norcalcarbmobile.com must be Active on THIS account
-#   4. ./scripts/deploy-norcal-empty-account.sh
+#   1. Prefer GitHub Actions: secret CF_GROK_KEY_NCM + NORCAL_PROD_CF_ACCOUNT_ID
+#      Actions → Deploy NorCal → bryan_go=GO · confirm_worker=norcalcarbmobile-prod
+#   2. Or local: export CLOUDFLARE_API_TOKEN=(CF_GROK_KEY_NCM) + account id
+#   3. Paste account_id below (empty account only)
+#   4. Zone norcalcarbmobile.com must be Active on THIS account
+#   5. ./scripts/deploy-norcal-empty-account.sh
 
 name = "norcalcarbmobile-prod"
 main = "worker/index.js"
