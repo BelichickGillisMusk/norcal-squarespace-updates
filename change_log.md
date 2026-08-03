@@ -4,6 +4,29 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-08-03 — Email deliverability blocker confirmed (still open since Jul 16)
+
+Bryan reported email "still being blocked" by norcalcarbmobile.com. Investigated via the live daily **Email Preflight** GitHub Action (run [30832383955](https://github.com/BelichickGillisMusk/norcal-squarespace-updates/actions/runs/30832383955), 2026-08-03 16:29 UTC) rather than guessing — this session has no Cloudflare dashboard/API/dig access, so the Action's real `dig` output is the source of truth.
+
+**Confirmed current DNS state (Cloudflare):**
+
+| Check | Status |
+|---|---|
+| Root SPF | ✅ present |
+| Google DKIM | ✅ present |
+| DMARC | ✅ present — `p=reject` (strict) |
+| Resend DKIM (`resend._domainkey.mail`) | ✅ present |
+| Resend MX (`send.mail`) | ✅ present → `feedback-smtp.us-east-1.amazonses.com` |
+| **Resend SPF (`send.mail` TXT)** | ❌ **missing — the one blocker** |
+
+**Root cause:** identical to the blocker first logged 2026-07-16 (`docs/DEPLOY_TODAY.md`) — it was never fixed, just re-confirmed. One Cloudflare TXT record is missing: `send.mail` → `v=spf1 include:amazonses.com ~all` (exact value should be copied from Resend → Domains → `mail.norcalcarbmobile.com`). Because DMARC is `p=reject`, any Resend-sent mail (reminders/welcome/blast) that doesn't get full alignment risks rejection/quarantine at receiving mailboxes — matches the "still being blocked" symptom.
+
+**Not fixed in this session:** no Cloudflare credentials available here (not logged into `wrangler`, no `CLOUDFLARE_API_TOKEN` in this environment) to add the DNS record directly. Repo does have `CLOUDFLARE_API_TOKEN`/`CLOUDFLARE_ACCOUNT_ID` as GitHub Actions secrets (used by `deploy-worker.yml`/`deploy-norcal.yml` for Worker deploys) — unconfirmed whether that token's scope includes `Zone:DNS:Edit`. Asked Bryan whether to (a) add the record manually in Cloudflare (2 min, see `.cursor/skills/norcal-email-deployer/references/dns-fix.md`) or (b) have an agent attempt it via that existing token in a one-off Action.
+
+**Next:** once `send.mail` TXT is added, re-run Email Preflight (or wait for the 7 AM PT schedule) → expect all-green → send test → confirm `dmarc=pass` in Gmail "Show original" before flipping any `LIVE` secrets.
+
+---
+
 ## 2026-07-27 — Issue #49: Logo for favicon + social share (og:image)
 
 **Site branding (high priority)** — `worker/index.js`
