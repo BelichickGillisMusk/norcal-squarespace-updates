@@ -25,6 +25,10 @@ Bryan reported email "still being blocked" by norcalcarbmobile.com. Investigated
 
 **Next:** once `send.mail` TXT is added, re-run Email Preflight (or wait for the 7 AM PT schedule) → expect all-green → send test → confirm `dmarc=pass` in Gmail "Show original" before flipping any `LIVE` secrets.
 
+**Attempted the GitHub Actions token route (Bryan approved):** added a one-off idempotent workflow (`cloudflare-dns-fix-resend-spf.yml`) to add the missing `send.mail` TXT record via the existing `CLOUDFLARE_API_TOKEN` repo secret. It ran (job `add-spf-record`, run [30860600435](https://github.com/BelichickGillisMusk/norcal-squarespace-updates/actions/runs/30860600435)) and failed at the very first Cloudflare API call: `{"code":9109,"message":"Invalid access token"}`. This isn't a missing-scope issue — the token itself is rejected outright, so it's expired/revoked or not actually an API Token (e.g. a Global API Key, which needs `X-Auth-Email`/`X-Auth-Key` headers, not `Authorization: Bearer`). Notably, `deploy-worker.yml` and `deploy-norcal.yml` (the only other consumers of this secret) are currently disabled, and this PR's own Worker deploy went out via Cloudflare's Git integration bot, not this token — so there was no independent evidence the secret still worked. Removed the one-off workflow after confirming the failure (no point leaving a permanently-red check on this branch).
+
+**Bottom line — still needs Bryan:** either (a) add the `send.mail` TXT record manually in Cloudflare (2 min, see `dns-fix.md`), or (b) refresh `CLOUDFLARE_API_TOKEN` in repo secrets with a real scoped API Token (Zone:DNS:Edit for `norcalcarbmobile.com`) so an agent can retry the automated route, or (c) authorize the Cloudflare MCP connector for an agent session.
+
 ---
 
 ## 2026-07-27 — Issue #49: Logo for favicon + social share (og:image)
