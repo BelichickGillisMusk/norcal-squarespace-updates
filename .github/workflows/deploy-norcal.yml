@@ -1,51 +1,56 @@
-# Deploy norcalcarbmobile.com — Worker + site assets
-# Evaluator after deploy: apex must return 200 (fail the run if not)
+# PRODUCTION deploy — never runs on push.
+# GitHub is for test/validate only. Live ship requires Bryan GO in Actions UI.
+# Worker: norcal-squarespace-updates-gillis → norcalcarbmobile.com
 name: Deploy NorCal CARB Mobile
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - site/**
-      - worker/**
-      - wrangler.toml
-      - wrangler.jsonc
-      - config/site-template-lock.json
-      - scripts/site-lock/**
-      - .github/workflows/deploy-norcal.yml
   workflow_dispatch:
+    inputs:
+      bryan_go:
+        description: 'Type GO to deploy production (required)'
+        required: true
+        default: ''
+        type: string
+      confirm_worker:
+        description: 'Must equal norcal-squarespace-updates-gillis'
+        required: true
+        default: 'norcal-squarespace-updates-gillis'
+        type: string
 
 permissions:
   contents: read
 
 concurrency:
   group: deploy-norcal-production
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy norcalcarbmobile.com
+    # Hard gates — fail before any Cloudflare call if Bryan did not type GO
+    if: >-
+      github.event.inputs.bryan_go == 'GO' &&
+      github.event.inputs.confirm_worker == 'norcal-squarespace-updates-gillis'
+    environment: production
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: '22'
 
-      - name: Enforce approved NorCal template
+      - name: Enforce approved NorCal template (site-lock)
         run: node scripts/site-lock/validate.mjs
 
-      - name: Deploy Worker
+      - name: Deploy Worker (gillis only)
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: "4.110.0"
+          wranglerVersion: '4.110.0'
           command: deploy
 
-      # EVALUATOR — green if apex 200 with content, or CF bot/WAF 403 from GHA IPs
-      # (Bot Fight Mode often blocks GitHub Actions; real browsers still get 200.)
       - name: Evaluate live apex
         run: |
           set -euo pipefail
@@ -60,16 +65,28 @@ jobs:
               exit 0
             fi
             if [ "$code" = "403" ]; then
-              # Cloudflare challenge / bot fight from GHA egress — deploy step already green
               if grep -qiE 'cloudflare|just a moment|cf-browser|attention required|blocked' /tmp/apex.html; then
                 echo "EVALUATOR PASS (apex 403 CF bot/WAF from GHA; Worker deploy already succeeded)"
-                head -c 400 /tmp/apex.html || true
-                echo
                 exit 0
               fi
             fi
             sleep 5
           done
-          echo "EVALUATOR FAIL — apex not healthy after deploy (last code=${code:-unknown})"
+          echo "EVALUATOR FAIL — apex not healthy after deploy"
           head -c 500 /tmp/apex.html || true
+          exit 1
+
+  blocked:
+    if: >-
+      github.event.inputs.bryan_go != 'GO' ||
+      github.event.inputs.confirm_worker != 'norcal-squarespace-updates-gillis'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reject deploy without Bryan GO
+        run: |
+          echo "DEPLOY BLOCKED — production is locked."
+          echo "To ship: Actions → Deploy NorCal CARB Mobile → Run workflow"
+          echo "  bryan_go = GO"
+          echo "  confirm_worker = norcal-squarespace-updates-gillis"
+          echo "Push/PR never deploys. Use CI / Site Lock to test only."
           exit 1

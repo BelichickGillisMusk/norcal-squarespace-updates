@@ -1,27 +1,36 @@
+# mobileovitest Worker — manual only (no push deploy)
 name: Deploy mobilleovitest Worker
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - mobilleovitest/worker/**
-      - mobilleovitest/site/**
-      - mobilleovitest/wrangler.toml
   workflow_dispatch:
+    inputs:
+      bryan_go:
+        description: 'Type GO to deploy (required)'
+        required: true
+        default: ''
+        type: string
 
 permissions:
   contents: read
 
 jobs:
   deploy:
+    if: github.event.inputs.bryan_go == 'GO'
     runs-on: ubuntu-latest
     name: Deploy to Cloudflare Workers
     steps:
       - uses: actions/checkout@v4
-
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: mobilleovitest
+
+  blocked:
+    if: github.event.inputs.bryan_go != 'GO'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "BLOCKED — type bryan_go=GO in workflow_dispatch only"
+          exit 1

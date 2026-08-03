@@ -1,0 +1,46 @@
+# TEST ONLY — never deploys to Cloudflare / never touches norcalcarbmobile.com
+# Run on every PR and push to main so GitHub validates code without shipping.
+name: CI Test Only (no deploy)
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  site-lock:
+    runs-on: ubuntu-latest
+    name: Site lock validate
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Enforce approved NorCal template
+        run: node scripts/site-lock/validate.mjs
+
+  attention-hq-fixture:
+    runs-on: ubuntu-latest
+    name: Attention HQ dry-run (fixture)
+    defaults:
+      run:
+        working-directory: scripts/attention-hq
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: scripts/attention-hq/package-lock.json
+      - name: Install
+        run: npm ci
+      - name: Unit tests
+        run: npm test
+      - name: Fixture run (no live Sheets)
+        run: |
+          mkdir -p ../../artifacts
+          node run.js --fixtures fixtures/sample-day.json --pretty --out ../../artifacts/attention-hq.json
