@@ -1,0 +1,31 @@
+# MONEY SITE ONLY — deploy to empty Cloudflare account (bryan@norcalcarbmobile.com)
+# Do NOT use Gillis Institute account (bafa242…). Other brands stay there.
+#
+# Before first deploy:
+#   1. wrangler login as bryan@norcalcarbmobile.com  OR  set CLOUDFLARE_API_TOKEN for empty account
+#   2. Paste account_id below from: wrangler whoami
+#   3. Zone norcalcarbmobile.com must be Active on THIS account
+#   4. ./scripts/deploy-norcal-empty-account.sh
+
+name = "norcalcarbmobile-prod"
+main = "worker/index.js"
+compatibility_date = "2025-06-01"
+workers_dev = true
+
+# PASTE empty-account Account ID here after bryan@ login (never use bafa242…):
+# account_id = "PASTE_EMPTY_ACCOUNT_ID"
+
+[assets]
+directory = "./site"
+binding = "ASSETS"
+html_handling = "auto-trailing-slash"
+not_found_handling = "404-page"
+run_worker_first = true
+
+[[routes]]
+pattern = "norcalcarbmobile.com"
+custom_domain = true
+
+[[routes]]
+pattern = "www.norcalcarbmobile.com"
+custom_domain = true

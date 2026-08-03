@@ -12,9 +12,9 @@ on:
         default: ''
         type: string
       confirm_worker:
-        description: 'Must equal norcal-squarespace-updates-gillis'
+        description: 'norcalcarbmobile-prod (empty Bryan account) OR norcal-squarespace-updates-gillis (legacy until cutover)'
         required: true
-        default: 'norcal-squarespace-updates-gillis'
+        default: 'norcalcarbmobile-prod'
         type: string
 
 permissions:
@@ -31,7 +31,8 @@ jobs:
     # Hard gates — fail before any Cloudflare call if Bryan did not type GO
     if: >-
       github.event.inputs.bryan_go == 'GO' &&
-      github.event.inputs.confirm_worker == 'norcal-squarespace-updates-gillis'
+      (github.event.inputs.confirm_worker == 'norcalcarbmobile-prod' ||
+       github.event.inputs.confirm_worker == 'norcal-squarespace-updates-gillis')
     environment: production
     steps:
       - uses: actions/checkout@v4
@@ -43,13 +44,14 @@ jobs:
       - name: Enforce approved NorCal template (site-lock)
         run: node scripts/site-lock/validate.mjs
 
-      - name: Deploy Worker (gillis only)
+      # Prefer EMPTY-account secrets (NORCAL_PROD_*). Fall back to legacy Gillis only if empty not set.
+      - name: Deploy Worker (money site)
         uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.NORCAL_PROD_CF_API_TOKEN || secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.NORCAL_PROD_CF_ACCOUNT_ID || secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: '4.110.0'
-          command: deploy
+          command: ${{ github.event.inputs.confirm_worker == 'norcalcarbmobile-prod' && 'deploy --config wrangler.prod-empty.toml' || 'deploy' }}
 
       - name: Evaluate live apex
         run: |
@@ -79,7 +81,8 @@ jobs:
   blocked:
     if: >-
       github.event.inputs.bryan_go != 'GO' ||
-      github.event.inputs.confirm_worker != 'norcal-squarespace-updates-gillis'
+      (github.event.inputs.confirm_worker != 'norcalcarbmobile-prod' &&
+       github.event.inputs.confirm_worker != 'norcal-squarespace-updates-gillis')
     runs-on: ubuntu-latest
     steps:
       - name: Reject deploy without Bryan GO
@@ -87,6 +90,7 @@ jobs:
           echo "DEPLOY BLOCKED — production is locked."
           echo "To ship: Actions → Deploy NorCal CARB Mobile → Run workflow"
           echo "  bryan_go = GO"
-          echo "  confirm_worker = norcal-squarespace-updates-gillis"
-          echo "Push/PR never deploys. Use CI / Site Lock to test only."
+          echo "  confirm_worker = norcalcarbmobile-prod   (empty Bryan account — preferred)"
+          echo "  or norcal-squarespace-updates-gillis     (legacy Gillis — until cutover)"
+          echo "Push/PR never deploys. Other brands stay on Gillis account."
           exit 1

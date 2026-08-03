@@ -7,9 +7,13 @@
 | | |
 |--|--|
 | **Site** | https://norcalcarbmobile.com |
-| **Worker** | `norcal-squarespace-updates-gillis` |
+| **Worker (legacy / live today)** | `norcal-squarespace-updates-gillis` on **Gillis Institute** |
+| **Worker (fresh start)** | `norcalcarbmobile-prod` on **empty bryan@norcalcarbmobile.com** CF account |
 | **Repo** | `BelichickGillisMusk/norcal-squarespace-updates` |
 | **Prices** | OBD $75 · OVI $199 · MH $99/$229 |
+
+**Other brands stay on Gillis.** Only the money site moves to the empty account.  
+See `docs/CLOUDFLARE-ACCOUNT-SPLIT.md`.
 
 ## GitHub = test. Production = Bryan GO only
 
