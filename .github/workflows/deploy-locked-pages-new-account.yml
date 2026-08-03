@@ -1,7 +1,6 @@
-# TEMP bridge: deploy frozen static snapshot to NEW CF account Pages only.
-# Source: _bridge/norcal-locked-static (from Downloads/…/norcal-LOCKED-2026-08-03-STATIC-UPLOAD)
-# Token: org/repo CF_GROK_KEY_NCM · Account: de5e37ebaff3f517602e28a6515549ec
-# Does NOT touch Gillis live Worker (customers stay on Gillis until domain cutover at home).
+# DISABLED — NorCal locked space is Bryan + Grok only.
+# Deploy from BelichickGillisMusk/norcal-LOCKED-2026-08-03, not this multi-agent repo.
+# This workflow always fails so helpers cannot ship money-site Pages from here.
 
 name: Deploy LOCKED Pages (new CF account)
 
@@ -9,58 +8,21 @@ on:
   workflow_dispatch:
     inputs:
       confirm:
-        description: 'Type DEPLOY to ship frozen snapshot to new account Pages only'
+        description: 'Do not use — space is Bryan+Grok only on norcal-LOCKED repo'
         required: true
         default: ''
 
 permissions:
   contents: read
 
-concurrency:
-  group: norcal-locked-pages-new-account
-  cancel-in-progress: false
-
 jobs:
-  deploy:
-    if: github.event.inputs.confirm == 'DEPLOY'
+  blocked:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Install Wrangler
-        run: npm install --no-save wrangler@4
-
-      - name: Deploy frozen static to Pages
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_GROK_KEY_NCM }}
-          CLOUDFLARE_ACCOUNT_ID: de5e37ebaff3f517602e28a6515549ec
-        working-directory: _bridge/norcal-locked-static
+      - name: Bryan + Grok only
         run: |
-          set -euo pipefail
-          if [ -z "${CLOUDFLARE_API_TOKEN:-}" ]; then
-            echo "Missing CF_GROK_KEY_NCM (grant org secret to this repo)."
-            exit 1
-          fi
-          test -f index.html
-          echo "Token length ${#CLOUDFLARE_API_TOKEN}"
-          echo "Account de5e37ebaff3f517602e28a6515549ec"
-          npx wrangler whoami
-          npx wrangler pages deploy . \
-            --project-name=norcal-locked-2026-08-03 \
-            --branch=main \
-            --commit-dirty=true \
-            --commit-message="bridge: locked static until Bryan home domain cutover"
-
-      - name: Summary
-        run: |
-          {
-            echo "### LOCKED Pages → new account"
-            echo "- Project: \`norcal-locked-2026-08-03\`"
-            echo "- Account: \`de5e37ebaff3f517602e28a6515549ec\`"
-            echo "- Live Gillis: **untouched** (customers still on Gillis Worker)"
-            echo "- When home: Custom domains → norcalcarbmobile.com on this Pages project, then detach Gillis"
-          } >> "$GITHUB_STEP_SUMMARY"
+          echo "BLOCKED."
+          echo "NorCal locked production is Bryan + Grok only."
+          echo "Use repo BelichickGillisMusk/norcal-LOCKED-2026-08-03"
+          echo "Claude / Cursor / helpers must not deploy from this repo."
+          exit 1
