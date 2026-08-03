@@ -14,8 +14,9 @@
 | **Prices** | OBD $75 · OVI $199 · MH $99/$229 |
 
 **Other brands stay on Gillis.** Only the money site moves to the empty account.  
+**Money-site space = Bryan + Grok only** (repo `norcal-LOCKED-2026-08-03`, CF `de5e37eb…`). Claude/Cursor/helpers stay out.  
 **Do not** attach production to `*.grok-sandbox.com` (Grok preview only).  
-See `docs/CLOUDFLARE-ACCOUNT-SPLIT.md`.
+See `docs/CLOUDFLARE-ACCOUNT-SPLIT.md` and locked repo `ACCESS.md`.
 
 ## GitHub = test. Production = Bryan GO only
 
