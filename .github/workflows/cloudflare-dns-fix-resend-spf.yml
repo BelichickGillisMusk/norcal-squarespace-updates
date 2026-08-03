@@ -5,8 +5,19 @@
 # it's absent — never touches any other DNS record.
 name: Fix Resend SPF DNS (send.mail TXT)
 
+# workflow_dispatch alone can't be API-triggered until this file is on the
+# default branch, so also run on push to this specific branch (idempotent —
+# safe to re-run; only creates the record if it's still missing).
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - claude/norcalcarbmobile-email-dns-gcr8ur
+    paths:
+      - .github/workflows/cloudflare-dns-fix-resend-spf.yml
+
+permissions:
+  contents: read
 
 jobs:
   add-spf-record:
