@@ -41,7 +41,9 @@ function schemaTag(pageUrl) {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': ['LocalBusiness', 'AutomotiveBusiness'],
+        // AutoRepair is the Google-recommended LocalBusiness subtype for emissions/test shops.
+        // Do NOT self-serve aggregateRating/review stars here — use Google Business Profile reviews.
+        '@type': ['AutoRepair', 'AutomotiveBusiness', 'LocalBusiness'],
         '@id': 'https://norcalcarbmobile.com/#business',
         name: 'NorCal CARB Mobile LLC',
         legalName: 'NorCal CARB Mobile LLC',
@@ -67,21 +69,14 @@ function schemaTag(pageUrl) {
           'Alameda County', 'Stanislaus County', 'Merced County', 'Fresno County',
           'Tulare County', 'Tuolumne County', 'San Diego County'
         ].map((name) => ({ '@type': 'AdministrativeArea', name })),
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: 5,
-          reviewCount: 33,
-          bestRating: 5,
-          worstRating: 1
-        },
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
           name: 'Mobile CARB Testing Services',
           itemListElement: [
-            { '@type': 'Offer', name: 'OBD Clean Truck Check', price: 75, priceCurrency: 'USD' },
-            { '@type': 'Offer', name: 'OVI Smoke Opacity Test', price: 199, priceCurrency: 'USD' },
-            { '@type': 'Offer', name: 'Motorhome OBD', price: 99, priceCurrency: 'USD' },
-            { '@type': 'Offer', name: 'Motorhome OVI', price: 229, priceCurrency: 'USD' }
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OBD Clean Truck Check', serviceType: 'HD-OBD Clean Truck Check' }, price: 75, priceCurrency: 'USD' },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OVI Smoke Opacity Test', serviceType: 'SAE J1667 OVI Smoke Opacity' }, price: 199, priceCurrency: 'USD' },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Motorhome OBD', serviceType: 'Motorhome HD-OBD' }, price: 99, priceCurrency: 'USD' },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Motorhome OVI', serviceType: 'Motorhome OVI Smoke Opacity' }, price: 229, priceCurrency: 'USD' }
           ]
         },
         sameAs: [
@@ -180,6 +175,30 @@ const REDIRECTS = {
   // → homepage #reviews section (no standalone reviews page yet)
   '/clean-truck-top-review': '/#reviews',
   '/reviews-service-area': '/#reviews',
+
+  // GSC / legacy broken paths (2026-08-07 audit — admin@ GSC top pages + crawl)
+  '/privacy': '/testing-terms',
+  '/privacy.html': '/testing-terms',
+  '/terms': '/testing-terms',
+  '/terms.html': '/testing-terms',
+  '/terms-of-service': '/testing-terms',
+  '/glossary': '/faq',
+  '/glossary.html': '/faq',
+  '/team': '/for-clients',
+  '/team.html': '/for-clients',
+  '/s/marketing-landing.html': '/',
+  '/marketing-landing': '/',
+  '/contact-us.html': '/contact',
+  '/services-mobile-ovi-smoke.html': '/services',
+  '/clean-truck-check.html': '/services',
+  '/service-locations.html': '/areas',
+  '/faqs-carb-clean-truck-check-mobile.html': '/faq',
+  '/carb-resources.html': '/faq',
+  '/carb-penalties-deadlines.html': '/faq',
+  '/smoke-opacity-test-near-me.html': '/services#ovi',
+  '/agricultural-vehicles-clean-truck-check.html': '/services#agricultural',
+  '/book': '/contact',
+  '/booking': '/contact',
 };
 
 /**
