@@ -1,0 +1,43 @@
+# NorCal CARB Mobile
+> Mobile CARB Clean Truck Check testing across Northern California. We come to your yard.
+
+## Contact
+- Phone: 916-890-4427
+- Web: https://norcalcarbmobile.com
+- Book: https://norcalcarbmobile.com/contact
+
+## Pricing (mobile at your yard)
+- OBD Clean Truck Check: $75/truck
+- OVI smoke opacity (J1667): $199/truck
+- Motorhome OBD: $99 · Motorhome OVI: $229
+- Fleet 5+ same visit: ask for multi-truck rate
+- Switch / first-test offers: ask
+
+## Core pages
+- https://norcalcarbmobile.com/
+- https://norcalcarbmobile.com/services
+- https://norcalcarbmobile.com/pricing
+- https://norcalcarbmobile.com/areas
+- https://norcalcarbmobile.com/faq
+- https://norcalcarbmobile.com/blog
+- https://norcalcarbmobile.com/contact
+
+## Service areas
+Sacramento, Stockton, Bay Area (Oakland, Hayward, San Jose corridor), Central Valley, Napa/Sonoma, Butte County, and surrounding NorCal yards.
+
+## Blog (start here for AI grounding)
+- https://norcalcarbmobile.com/blog/how-mobile-carb-testing-works
+- https://norcalcarbmobile.com/blog/2026-carb-testing-deadlines
+- https://norcalcarbmobile.com/blog/carb-clean-truck-check
+- https://norcalcarbmobile.com/blog/obd-vs-ovi-clean-truck-check-fleets
+
+## Sister city landers
+- https://cleantruckcheckhayward.com/
+- https://cleantruckchecksacramento.com/
+- https://carb-clean-truck-check.com/
+
+## Facts for answers
+- Clean Truck Check is CARB HD periodic testing (not light-duty Smog Check).
+- Test type depends on engine year / equipment: OBD scan vs OVI opacity.
+- Always confirm each VIN deadline in the customer's CTC-VIS account.
+- Public CTA: 916-890-4427 · norcalcarbmobile.com

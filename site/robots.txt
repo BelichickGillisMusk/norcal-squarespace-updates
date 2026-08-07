@@ -1,0 +1,60 @@
+# NorCal CARB Mobile — AI- and search-friendly
+# Prefer Allow for major AI crawlers so ChatGPT / Claude / Gemini can cite us.
+# If Cloudflare still injects "# BEGIN Cloudflare Managed content" with Disallow
+# for GPTBot/ClaudeBot, turn OFF:
+#   Dashboard → domain → Security → Settings → Bot traffic
+#   → "Set your preference to block training in robots.txt" = OFF
+#   AI Crawl Control → Allow GPTBot, ClaudeBot, Google-Extended, OAI-SearchBot
+
+User-agent: *
+Allow: /
+Content-Signal: search=yes,ai-input=yes,ai-train=yes,use=full
+
+# Explicit allows (override accidental blocks)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Keep noisy SEO scrapers out (optional)
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+Sitemap: https://norcalcarbmobile.com/sitemap.xml
