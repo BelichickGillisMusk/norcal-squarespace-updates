@@ -28,9 +28,9 @@ Photos / update already posted on the listing.
 **Page:** https://www.facebook.com/carbcleantruckcheck/
 
 ```
-From the Mojave corridor — NorCal CARB Mobile keeps Clean Truck Check on the road.
+We follow our fleet customers to some cool locations — the Mojave is one of them.
 
-We bring OBD and OVI testing to your yard so fleets don’t burn a day driving to a station. Same paperwork. Same compliance. Less downtime.
+We don’t normally go there, but we will when asked. Mobile Clean Truck Check (OBD + OVI) on-site so the trucks stay where the work is.
 
 Need a test? Book at norcalcarbmobile.com/contact or call (916) 890-4427.
 
