@@ -50,5 +50,5 @@ Facebook page (same caption + photos): https://www.facebook.com/carbcleantruckch
 ## Related
 
 - Active Mojave pack: `content/approvals/mojave-pack.md`
-- Blog draft: `blog_drafts/mojave-desert-on-the-road.md`
+- Blog draft: `blog_drafts/fleets-ovi-obd-porterville-mojave.md`
 - Weekly GBP queue monitor: `docs/gbp-post-runbook.md`

@@ -1,7 +1,7 @@
 # Mojave pack — Google Business Profile + Facebook + blog
 
 **Status:** blog shipped · GBP done by owner  
-**Live blog:** https://norcalcarbmobile.com/blog/mojave-desert-on-the-road
+**Live blog:** https://norcalcarbmobile.com/blog/fleets-ovi-obd-porterville-mojave
 
 No personal names in customer-facing copy.
 
@@ -17,7 +17,7 @@ Photos / update already posted on the listing.
 
 ## 2) Blog — SHIPPED
 
-- Page: `site/blog/mojave-desert-on-the-road.html`
+- Page: `site/blog/fleets-ovi-obd-porterville-mojave.html`
 - Indexed on `/blog` + sitemap
 - Goes live when this branch merges / deploys to production
 
@@ -28,13 +28,13 @@ Photos / update already posted on the listing.
 **Page:** https://www.facebook.com/carbcleantruckcheck/
 
 ```
-We follow our fleet customers to some cool locations — the Mojave is one of them.
+We follow our fleet customers to some cool locations — Porterville and the Mojave are examples.
 
 We don’t normally go there, but we will when asked. Mobile Clean Truck Check (OBD + OVI) on-site so the trucks stay where the work is.
 
 Need a test? Book at norcalcarbmobile.com/contact or call (916) 890-4427.
 
-Read more: norcalcarbmobile.com/blog/mojave-desert-on-the-road
+Read more: norcalcarbmobile.com/blog/fleets-ovi-obd-porterville-mojave
 
 OBD $75 · OVI $199
 ```

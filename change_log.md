@@ -6,13 +6,13 @@ Agents append timestamped entries below.
 
 ## 2026-08-08 — Mojave blog live on site (GBP already done by owner)
 
-- Shipped `site/blog/mojave-desert-on-the-road.html` — author branded **NorCal CARB Mobile** only (no personal names).
+- Shipped `site/blog/fleets-ovi-obd-porterville-mojave.html` — author branded **NorCal CARB Mobile** only (no personal names).
 - Angle: we follow fleet customers to cool locations; we do not normally go there, but will when asked.
 - Updated `site/blog.html` + `site/blog/index.html` (card + quick list; article count → 62) and `site/sitemap.xml`.
-- Draft marked published: `blog_drafts/mojave-desert-on-the-road.md`.
+- Draft marked published: `blog_drafts/fleets-ovi-obd-porterville-mojave.md`.
 - Pack updated: `content/approvals/mojave-pack.md` (GBP = owner done; blog = shipped; FB caption optional).
 - Docs: one-button GBP/blog path in `docs/gbp-owner-one-button.md`, `docs/sonicjs-blogging-guide.md`, `blog_drafts/README.md`, `docs/gbp-post-runbook.md`.
-- Live URL after deploy: https://norcalcarbmobile.com/blog/mojave-desert-on-the-road
+- Live URL after deploy: https://norcalcarbmobile.com/blog/fleets-ovi-obd-porterville-mojave
 
 ---
 
@@ -177,7 +177,7 @@ Site — `site/` (live Cloudflare Worker production site) + `worker/index.js` + 
 ## 2026-08-08 — Mojave content pack (GBP-first) + one-button approve
 
 - Added `content/approvals/mojave-pack.md` — Google Business Profile post + Facebook caption + blog link; gate is reply **`approve mojave`** only.
-- Added blog draft `blog_drafts/mojave-desert-on-the-road.md` (`owner_approved: NO` until that reply).
+- Added blog draft `blog_drafts/fleets-ovi-obd-porterville-mojave.md` (`owner_approved: NO` until that reply).
 - Added owner guide `docs/gbp-owner-one-button.md` (phone photo upload + one-phrase posts).
 - Updated `docs/sonicjs-blogging-guide.md`, `blog_drafts/README.md`, `docs/gbp-post-runbook.md` for Path A one-button approve; no personal names in customer-facing copy.
 - Not live yet: no `site/blog/` HTML until owner replies `approve mojave`. Photos still upload from the phone to GBP.

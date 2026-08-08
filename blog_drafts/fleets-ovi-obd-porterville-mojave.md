@@ -1,6 +1,6 @@
 ---
 title: "From the Mojave Corridor: Mobile Clean Truck Check on the Road"
-slug: "mojave-desert-on-the-road"
+slug: "fleets-ovi-obd-porterville-mojave"
 source: new
 date: 2026-08-08
 publish_date: 2026-08-08
@@ -14,7 +14,7 @@ channels:
   gbp: done_by_owner
   facebook: optional
   blog: published
-live_url: "https://norcalcarbmobile.com/blog/mojave-desert-on-the-road"
+live_url: "https://norcalcarbmobile.com/blog/fleets-ovi-obd-porterville-mojave"
 ---
 
 # From the Mojave Corridor: Mobile Clean Truck Check on the Road
@@ -48,6 +48,6 @@ Fleet and multi-truck scheduling available. [Request a callback](/contact) or ca
 
 ## The Mojave takeaway
 
-Cool locations look great in photos. The real story is simpler: we do not normally go to the Mojave, but we will when asked — because fleet customers should not have to haul trucks to a station just because the job site is farther out.
+Cool locations look great in photos. The real story is simpler: we do not normally run Porterville or Mojave as daily stops, but we will when asked — because fleet customers should not have to haul trucks to a station just because the job site is farther out.
 
 Need a test at your yard, job site, or a corridor stop? Ask. If the trucks are there, we can meet them. [Book online](/contact) or call [(916) 890-4427](tel:+19168904427).
