@@ -1,5 +1,5 @@
 ---
-title: "From the Mojave Corridor: Mobile Clean Truck Check on the Road"
+title: "Fleet OBD & OVI in Porterville and the Mojave"
 slug: "fleets-ovi-obd-porterville-mojave"
 source: new
 date: 2026-08-08
@@ -7,8 +7,17 @@ publish_date: 2026-08-08
 status: published
 owner_approved: "YES"
 approve_phrase: "approve mojave"
-tags: ["CARB", "Clean Truck Check", "Mobile Testing", "Mojave", "Fleet Compliance"]
-meta_description: "NorCal CARB Mobile follows fleet customers when asked — even cool corridors like the Mojave that are outside the usual route. Mobile OBD and OVI on-site."
+locations:
+  - "Porterville, CA"
+  - "Tulare County, CA"
+  - "Mojave Desert, CA"
+  - "Central Valley, CA"
+  - "Fresno, CA"
+  - "Sacramento, CA"
+  - "Stockton, CA"
+  - "Bay Area, CA"
+tags: ["CARB", "Clean Truck Check", "Mobile Testing", "Porterville", "Mojave", "OBD", "OVI", "Fleet Compliance"]
+meta_description: "NorCal CARB Mobile brings fleet OBD and OVI Clean Truck Check to Porterville, Tulare County, and the Mojave corridor when fleets ask — plus everyday NorCal yards."
 featured_image: ""
 channels:
   gbp: done_by_owner
@@ -17,25 +26,29 @@ channels:
 live_url: "https://norcalcarbmobile.com/blog/fleets-ovi-obd-porterville-mojave"
 ---
 
-# From the Mojave Corridor: Mobile Clean Truck Check on the Road
+# Fleet OBD & OVI in Porterville and the Mojave
 
-We follow our fleet customers to some cool locations. Porterville and the Mojave are examples. They are not on the everyday route — and that is the point. When a fleet asks for OBD or OVI Clean Truck Check on-site, NorCal CARB Mobile goes.
+Google — and fleet buyers — need proof that mobile Clean Truck Check actually shows up on a map. This post is that proof: NorCal CARB Mobile follows fleet customers to real places, including **Porterville**, **Tulare County**, and the **Mojave corridor**, when asked.
 
-Home base is Northern California yards and corridors. Special trips happen when a customer needs Clean Truck Check where the trucks already are. Testing still comes to the site. Paperwork still gets handled. The only change is the map pin.
+Everyday routes stay in Northern California — Sacramento, Stockton, the Bay Area, and the Central Valley field routes listed on our [service areas](/areas) page. Cool, farther pins still happen. We do not normally park in Porterville or the Mojave every week. We will when a fleet asks for on-site **OBD** or **OVI** where the trucks already sit.
 
-## Why fleets ask us to come along
+## Porterville and Tulare County — Central Valley yards
 
-Driving a truck to a fixed testing site costs more than the test fee. Someone leaves the route. Someone waits in line. Someone drives back. Multiply that by a small fleet and a compliance day turns into a lost workday.
+Porterville sits in Tulare County along the southern Central Valley ag and freight belt. Fleets there still need CARB Clean Truck Check on deadline. Hauling every diesel to a distant station burns drivers and hours. Mobile testing keeps the appointment in the yard.
 
-Mobile testing flips that. Equipment rolls to the location where the vehicles already sit. Drivers stay on assignment. The yard keeps moving.
+Nearby corridor context: Fresno-area stops, Highway 99 / I-5 freight, and other [Central Valley & Sierra](/central-valley-sierra-carb-testing) communities when the calendar lines up.
 
-## What we run on-site
+## Mojave corridor — when the job is farther out
+
+The Mojave is not a daily NorCal loop. It is the kind of cool, out-of-pattern location that shows up when a fleet customer says “meet us out here.” If the trucks are on that pin, we bring OBD and OVI gear to the site.
+
+Model: **home base first, fleet-asked locations second**. Sacramento and Stockton yards most weeks. Porterville, Mojave, Bakersfield-adjacent corridors, or San Diego County when the ask is real.
+
+## What we run on-site (any of these pins)
 
 - **OBD** for newer engines — diagnostic read, typically about 10–15 minutes per vehicle
 - **OVI (J1667 smoke opacity)** for older engines — calibrated meter at the exhaust, typically about 15–20 minutes per vehicle
-- **CARB paperwork** submitted through CTC-VIS so compliance status updates without a separate office trip
-
-Results come back on the spot. Passes move forward. Failures get a clear next step so repairs and retests do not turn into mystery downtime.
+- **CARB paperwork** submitted through CTC-VIS
 
 ## Pricing (subject to change)
 
@@ -44,10 +57,15 @@ Results come back on the spot. Passes move forward. Failures get a clear next st
 - Motorhome OBD: **$99**
 - Motorhome OVI: **$229**
 
-Fleet and multi-truck scheduling available. [Request a callback](/contact) or call [(916) 890-4427](tel:+19168904427).
+[Request a callback](/contact) or call [(916) 890-4427](tel:+19168904427).
 
-## The Mojave takeaway
+## Location proof — why this post exists
 
-Cool locations look great in photos. The real story is simpler: we do not normally run Porterville or Mojave as daily stops, but we will when asked — because fleet customers should not have to haul trucks to a station just because the job site is farther out.
+Named places on purpose so Google can connect the business to the map:
 
-Need a test at your yard, job site, or a corridor stop? Ask. If the trucks are there, we can meet them. [Book online](/contact) or call [(916) 890-4427](tel:+19168904427).
+- **Porterville, CA** and **Tulare County**
+- **Mojave corridor / Mojave Desert, CA**
+- **Fresno**, **Bakersfield**-adjacent freight context
+- **Sacramento**, **Stockton**, **San Jose**, and the wider **Bay Area**
+
+Need a test at your yard or corridor stop? [Book online](/contact) or call [(916) 890-4427](tel:+19168904427).

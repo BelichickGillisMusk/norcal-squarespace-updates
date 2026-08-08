@@ -39,8 +39,14 @@ featured_image: "https://images.squarespace-cdn.com/..."   # optional
 
 Post body in Markdown. H2s for sections. Include at least one internal link
 to /contact or /services (per README blog rules). Never use personal names —
-brand voice is NorCal CARB Mobile only.
+brand voice is NorCal CARB Mobile only. New posts must name real places
+(cities/corridors) for Google location proof — see `docs/blog-location-seo.md`.
 ```
+
+### Location SEO (required for new posts)
+
+Name real map pins in the slug/title/H2/body so Google can prove service geography.
+Full checklist: `docs/blog-location-seo.md`.
 
 ### One-button approve
 
