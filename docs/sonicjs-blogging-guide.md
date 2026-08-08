@@ -11,7 +11,7 @@ Two paths. Prefer **Path A** unless you want to use the CMS admin yourself.
 
 **Customer-facing rule:** never use personal names. Author/brand is always **NorCal CARB Mobile**.
 
-**Location rule (Google proof):** every new post must name real places — see `docs/blog-location-seo.md`. Slug, title, H2s, and body should hit cities/corridors so search engines can connect the business to the map.
+**Location + unique-content rule:** every new field post must include **industry + location + testing oddity + cool thing** (where the tester ate, or what’s on the list for next visit). See `docs/blog-location-seo.md`. Skeleton: `blog_drafts/_template-field-trip.md`.
 
 Public blog today: https://norcalcarbmobile.com/blog
 

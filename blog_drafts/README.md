@@ -30,6 +30,10 @@ publish_date: 2026-07-08              # when the scheduler should publish (new/s
 status: pending                       # published | scheduled | approved | pending | draft
 owner_approved: "NO"                  # YES after the one approve phrase — gate before live publish
 approve_phrase: "approve <pack>"      # owner replies with this exact phrase (e.g. approve mojave)
+industry: "freight"                   # NEW posts: industry type
+locations: ["Porterville, CA"]        # NEW posts: real map pins
+testing_oddity: "…"                   # NEW posts: one real test-day quirk
+cool_thing: "…"                       # NEW posts: meal stop OR next-visit pin
 tags: ["CARB", "Clean Truck Check", "Fleet Compliance"]
 meta_description: "≤155 chars — used for the SEO meta description."
 featured_image: "https://images.squarespace-cdn.com/..."   # optional
@@ -39,13 +43,17 @@ featured_image: "https://images.squarespace-cdn.com/..."   # optional
 
 Post body in Markdown. H2s for sections. Include at least one internal link
 to /contact or /services (per README blog rules). Never use personal names —
-brand voice is NorCal CARB Mobile only. New posts must name real places
-(cities/corridors) for Google location proof — see `docs/blog-location-seo.md`.
+brand voice is NorCal CARB Mobile only.
+
+**New field / trip posts** must hit: industry + location + testing oddity +
+cool human detail (where tester ate, or next visit on the list). Full rule:
+`docs/blog-location-seo.md`. Skeleton: `blog_drafts/_template-field-trip.md`.
 ```
 
-### Location SEO (required for new posts)
+### Location + unique content (required for new field posts)
 
-Name real map pins in the slug/title/H2/body so Google can prove service geography.
+Name real map pins **and** add industry, a testing oddity, and one cool detail
+so Google gets place signals and the post is not generic CARB copy.
 Full checklist: `docs/blog-location-seo.md`.
 
 ### One-button approve
