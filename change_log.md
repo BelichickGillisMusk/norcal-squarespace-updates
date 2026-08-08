@@ -8,6 +8,7 @@ Agents append timestamped entries below.
 
 - Shipped `site/blog/fleets-ovi-obd-porterville-mojave.html` — author branded **NorCal CARB Mobile** only (no personal names).
 - Angle: we follow fleet customers to cool locations; we do not normally go there, but will when asked.
+- Location SEO: title/H2s/body/JSON-LD name Porterville, Tulare County, Mojave, Central Valley, Sacramento, Stockton, Bay Area; rule doc `docs/blog-location-seo.md`.
 - Updated `site/blog.html` + `site/blog/index.html` (card + quick list; article count → 62) and `site/sitemap.xml`.
 - Draft marked published: `blog_drafts/fleets-ovi-obd-porterville-mojave.md`.
 - Pack updated: `content/approvals/mojave-pack.md` (GBP = owner done; blog = shipped; FB caption optional).
