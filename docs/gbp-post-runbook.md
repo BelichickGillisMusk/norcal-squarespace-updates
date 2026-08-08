@@ -59,9 +59,14 @@ Schema: `config/gbp-post-output.schema.json`
 ## Approval flow
 
 1. Samantha surfaces `approve_gbp_post` in the JSON report.
-2. Bryan replies **approved gbp post** (Chat or Sheet).
-3. Camila publishes via GBP API (`camila-vertex-agent` skill).
-4. Camila updates sheet row `status=published`.
+2. Owner replies with the **one approve phrase** for that pack (Chat or Sheet).
+   - Weekly queue default: **approved gbp post**
+   - Mojave pack: **approve mojave** (see `content/approvals/mojave-pack.md`)
+3. Camila / agent publishes via GBP API or posts the queued copy (`camila-vertex-agent` skill).
+4. Sheet row updated to `status=published`.
+
+**Photos:** upload from the phone in Business Profile → Photos. Guide: `docs/gbp-owner-one-button.md`.  
+**Copy rule:** no personal names — brand is NorCal CARB Mobile only.
 
 ## Local run
 

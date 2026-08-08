@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-08-08 — Mojave blog live on site (GBP already done by owner)
+
+- Shipped `site/blog/mojave-desert-on-the-road.html` — author branded **NorCal CARB Mobile** only (no personal names).
+- Updated `site/blog.html` + `site/blog/index.html` (card + quick list; article count → 62) and `site/sitemap.xml`.
+- Draft marked published: `blog_drafts/mojave-desert-on-the-road.md`.
+- Pack updated: `content/approvals/mojave-pack.md` (GBP = owner done; blog = shipped; FB caption optional).
+- Docs: one-button GBP/blog path in `docs/gbp-owner-one-button.md`, `docs/sonicjs-blogging-guide.md`, `blog_drafts/README.md`, `docs/gbp-post-runbook.md`.
+- Live URL after deploy: https://norcalcarbmobile.com/blog/mojave-desert-on-the-road
+
+---
+
 ## 2026-08-03 — Email deliverability blocker confirmed (still open since Jul 16)
 
 Bryan reported email "still being blocked" by norcalcarbmobile.com. Investigated via the live daily **Email Preflight** GitHub Action (run [30832383955](https://github.com/BelichickGillisMusk/norcal-squarespace-updates/actions/runs/30832383955), 2026-08-03 16:29 UTC) rather than guessing — this session has no Cloudflare dashboard/API/dig access, so the Action's real `dig` output is the source of truth.
@@ -161,6 +172,14 @@ Site — `site/` (live Cloudflare Worker production site) + `worker/index.js` + 
 - **Replaced placeholder (`href="#"`) footer social icons with the real profiles** (URLs taken from the Squarespace export, which links these from the live header/footer): Facebook `facebook.com/carbcleantruckcheck`, X `x.com/carbcleantruck`, YouTube `youtube.com/@CARBCLEANTRUCKMOBILE`. Added an **Instagram** icon (`instagram.com/carb.mobiletruckcheck`) to match the profile set on the Squarespace site, and a **Google Business Profile** icon linking to the GBP share link `https://share.google/CUg6TEK1p3eO34S9G` (from `config/reviews.json`). All open in a new tab with `rel="noopener"`.
 - **Standardized the footer social row sitewide:** the block (5 icons + the "★ 5.0 · 33 on Google" reviews pill) previously existed on only 5 pages (index, services, areas, faq, contact) — it's now on all 14 pages, including pricing, 404, the 3 city landing pages, and the 4 blog pages. No new CSS needed (`.social` styles already sitewide).
 - **Structured data:** `worker/index.js` injected JSON-LD `sameAs` was the placeholder `["https://yelp.com"]` — replaced with the four social profiles + GBP link. Mirrored the same list into `squarespace/schema-local-business.html` (kept its existing Google-reviews URL entry).
+
+## 2026-08-08 — Mojave content pack (GBP-first) + one-button approve
+
+- Added `content/approvals/mojave-pack.md` — Google Business Profile post + Facebook caption + blog link; gate is reply **`approve mojave`** only.
+- Added blog draft `blog_drafts/mojave-desert-on-the-road.md` (`owner_approved: NO` until that reply).
+- Added owner guide `docs/gbp-owner-one-button.md` (phone photo upload + one-phrase posts).
+- Updated `docs/sonicjs-blogging-guide.md`, `blog_drafts/README.md`, `docs/gbp-post-runbook.md` for Path A one-button approve; no personal names in customer-facing copy.
+- Not live yet: no `site/blog/` HTML until owner replies `approve mojave`. Photos still upload from the phone to GBP.
 
 ## 2026-07-05 — SonicJS CMS: document_types diagnosis + 65 legacy blog posts migrated
 
