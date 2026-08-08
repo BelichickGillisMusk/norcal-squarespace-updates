@@ -19,7 +19,7 @@ live_url: "https://norcalcarbmobile.com/blog/fleets-ovi-obd-porterville-mojave"
 
 # From the Mojave Corridor: Mobile Clean Truck Check on the Road
 
-We follow our fleet customers to some cool locations. The Mojave is one of them. It is not on the everyday route — and that is the point. When a fleet asks, NorCal CARB Mobile goes.
+We follow our fleet customers to some cool locations. Porterville and the Mojave are examples. They are not on the everyday route — and that is the point. When a fleet asks for OBD or OVI Clean Truck Check on-site, NorCal CARB Mobile goes.
 
 Home base is Northern California yards and corridors. Special trips happen when a customer needs Clean Truck Check where the trucks already are. Testing still comes to the site. Paperwork still gets handled. The only change is the map pin.
 
