@@ -5,9 +5,19 @@ source: new
 date: 2026-08-05
 publish_date: 2026-08-12
 status: full_html_ready_awaiting_deploy
+owner_approved: "NO"
 bryan_approved: "pending_GO"
+approve_phrase: "approve obd-vs-ovi"
 full_html: site/blog/obd-vs-ovi-clean-truck-check-fleets.html
-shipped_note: "Full HTML written 2026-08-07. Files on disk; wrangler deploy needs CLOUDFLARE_API_TOKEN. Live after deploy."
+shipped_note: "Full HTML written 2026-08-07. Live after deploy/merge when approved. Do not confuse with fleets-ovi-obd-porterville-mojave (separate live field post)."
+industry: "fleets (mixed — educational)"
+locations:
+  - "Sacramento, CA"
+  - "Bay Area, CA"
+  - "Central Valley, CA"
+  - "Stockton, CA"
+testing_oddity: "YOU FILL (optional for educational post): one real mixed-fleet yard moment that shows OBD+OVI same visit"
+cool_thing: "YOU FILL (optional): meal stop or next visit — only if tying a real field day to this explainer"
 tags:
   - Clean Truck Check
   - OBD
@@ -18,23 +28,34 @@ tags:
 meta_description: "OBD vs OVI for California fleets under Clean Truck Check. Who needs which test, 2026 timing, mobile pricing from $75 OBD / $199 OVI. Call 916-890-4427."
 outline_only: true
 campaign: JULY-CRITICAL
-voice: "VIN DIESEL the Weasel — plain fleet talk, no jargon dump, no Bryan last name"
+voice: "plain fleet talk, no jargon dump, no personal names"
 do_not_publish: true
+unique_content_rule: "docs/blog-location-seo.md — field posts need industry+location+oddity+cool thing; this educational post can ship without cool_thing but locations required"
 ---
 
-# OUTLINE ONLY — Bryan GO required before full draft or publish
+# OUTLINE — OBD vs OVI (educational) · owner GO before any further publish push
 
-**File purpose:** Sloane / sales-assist blog outline for NorCal CARB Mobile.  
-**Not published. Not deployed.** Full post + Squarespace live only after **Bryan GO** (`bryan_approved: "YES"`).
+**Not the Mojave field post.** Mojave/Porterville stays as-is for go-live: `/blog/fleets-ovi-obd-porterville-mojave`
 
-**Topic chosen:** OBD vs OVI for fleets (with July/August 2026 compliance window hook).  
-**Why this over pure “deadlines” post:** Clearer booking decision, maps straight to price card and yard visit, evergreen after Aug, still captures “am I due?” search intent.
+**File purpose:** Sales-assist blog outline + checklist for the OBD vs OVI explainer.  
+**HTML already on disk:** `site/blog/obd-vs-ovi-clean-truck-check-fleets.html` (may already be on main).  
 
-**Primary CTA (required):** Call **916-890-4427**  
-**List prices (required):** OBD **$75** · OVI **$199** (single-truck starting; multi-truck discounts on quote)  
-**Internal links (required in final post):** [/services](/services) · [/contact](/contact) · [/areas](/areas)
+**Primary CTA:** Call **916-890-4427**  
+**Prices:** OBD **$75** · OVI **$199**  
+**Links:** [/services](/services) · [/contact](/contact) · [/areas](/areas)
 
-**Official due-date caveat (must appear in final post):** Always confirm each VIN’s deadline in the fleet’s **CTC-VIS** account. Public tables (DMV reg month / VIN digit) are guides only — CARB account wins.
+---
+
+## Unique-content add-on (when you want it less generic)
+
+Paste real lines anytime — agents will weave them in without inventing:
+
+- **Industry angle:** `YOU FILL:` _(e.g. construction + freight mixed yard)_  
+- **Location proof:** Sacramento / Bay Area / Stockton / Central Valley already in outline — add a specific yard city if you want  
+- **Testing oddity:** `YOU FILL:` _(e.g. same visit did 8 OBD + 2 OVI)_  
+- **Cool thing:** `YOU FILL:` _(meal or next pin)_
+
+Field-trip stack (separate posts): `blog_drafts/queue/`
 
 ---
 
