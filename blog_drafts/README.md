@@ -56,6 +56,14 @@ Name real map pins **and** add industry, a testing oddity, and one cool detail
 so Google gets place signals and the post is not generic CARB copy.
 Full checklist: `docs/blog-location-seo.md`.
 
+## Future field-trip stack
+
+Ready-to-fill drafts (industry + location + YOU FILL oddity/cool thing):  
+`blog_drafts/queue/` — see that folder’s README.
+
+**Do not revise the live Mojave/Porterville HTML** while waiting on go-live:  
+`site/blog/fleets-ovi-obd-porterville-mojave.html`
+
 ### One-button approve
 
 Packs that also need Google Business Profile / Facebook live in `content/approvals/`.

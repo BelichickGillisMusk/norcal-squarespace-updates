@@ -15,11 +15,13 @@ Photos / update already posted on the listing.
 
 ---
 
-## 2) Blog — SHIPPED
+## 2) Blog — READY FOR LIVE (do not revise further without owner ask)
 
-- Page: `site/blog/fleets-ovi-obd-porterville-mojave.html`
+- Page: `site/blog/fleets-ovi-obd-porterville-mojave.html` — **locked for go-live**
 - Indexed on `/blog` + sitemap
-- Goes live when this branch merges / deploys to production
+- Goes live when PR merges / deploys
+
+**Future posts (separate):** fill `YOU FILL` lines in `blog_drafts/queue/` then reply `approve <slug>`.
 
 ---
 
