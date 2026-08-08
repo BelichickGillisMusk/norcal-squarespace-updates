@@ -7,6 +7,7 @@ Agents append timestamped entries below.
 ## 2026-08-08 — Mojave blog live on site (GBP already done by owner)
 
 - Shipped `site/blog/mojave-desert-on-the-road.html` — author branded **NorCal CARB Mobile** only (no personal names).
+- Angle: we follow fleet customers to cool locations; we do not normally go there, but will when asked.
 - Updated `site/blog.html` + `site/blog/index.html` (card + quick list; article count → 62) and `site/sitemap.xml`.
 - Draft marked published: `blog_drafts/mojave-desert-on-the-road.md`.
 - Pack updated: `content/approvals/mojave-pack.md` (GBP = owner done; blog = shipped; FB caption optional).

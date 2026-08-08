@@ -8,7 +8,7 @@ status: published
 owner_approved: "YES"
 approve_phrase: "approve mojave"
 tags: ["CARB", "Clean Truck Check", "Mobile Testing", "Mojave", "Fleet Compliance"]
-meta_description: "NorCal CARB Mobile on the Mojave corridor — why mobile Clean Truck Check keeps fleets compliant without a station trip. Book OBD or OVI on-site."
+meta_description: "NorCal CARB Mobile follows fleet customers when asked — even cool corridors like the Mojave that are outside the usual route. Mobile OBD and OVI on-site."
 featured_image: ""
 channels:
   gbp: done_by_owner
@@ -19,11 +19,11 @@ live_url: "https://norcalcarbmobile.com/blog/mojave-desert-on-the-road"
 
 # From the Mojave Corridor: Mobile Clean Truck Check on the Road
 
-Desert miles look empty until you watch freight move through them. Corridors still need compliant diesel. That is why NorCal CARB Mobile stays mobile — testing comes to the yard, not the other way around.
+We follow our fleet customers to some cool locations. The Mojave is one of them. It is not on the everyday route — and that is the point. When a fleet asks, NorCal CARB Mobile goes.
 
-This week’s road time through the Mojave is a simple reminder: Clean Truck Check does not pause for geography. If trucks are working, deadlines still count.
+Home base is Northern California yards and corridors. Special trips happen when a customer needs Clean Truck Check where the trucks already are. Testing still comes to the site. Paperwork still gets handled. The only change is the map pin.
 
-## Why corridor fleets lose time at stations
+## Why fleets ask us to come along
 
 Driving a truck to a fixed testing site costs more than the test fee. Someone leaves the route. Someone waits in line. Someone drives back. Multiply that by a small fleet and a compliance day turns into a lost workday.
 
@@ -48,6 +48,6 @@ Fleet and multi-truck scheduling available. [Request a callback](/contact) or ca
 
 ## The Mojave takeaway
 
-Road time in the desert is not a vacation post. It is proof of the model: NorCal CARB Mobile shows up where California fleets actually work — yards, job sites, and corridors — so Clean Truck Check stays a short stop instead of a full-day detour.
+Cool locations look great in photos. The real story is simpler: we do not normally go to the Mojave, but we will when asked — because fleet customers should not have to haul trucks to a station just because the job site is farther out.
 
-Need a test this week? [Book online](/contact) or call [(916) 890-4427](tel:+19168904427).
+Need a test at your yard, job site, or a corridor stop? Ask. If the trucks are there, we can meet them. [Book online](/contact) or call [(916) 890-4427](tel:+19168904427).
