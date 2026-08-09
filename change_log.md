@@ -350,3 +350,15 @@ Blog pipeline:
 - Camila = Vertex AI on Workspace APIs (not human hire)
 - Scope: camila@ email, Squarespace forms, GBP, GSC
 - `config/camila-agent-manifest.json` + deploy phases + camila-vertex-agent skill
+
+## 2026-08-08 — homepage CARB 5-day pass block (Giovanna draft)
+- Added #five-day-pass with official CARB fact sheet + CTC-VIS + video links
+- Footer link to /#five-day-pass
+- LIVE deploy pending Bryan GO
+
+## 2026-08-09 — Blog portal refresh (Laura kanban t_96a4b324)
+- Restored missing disk file: site/blog/fleets-ovi-obd-porterville-mojave.html (was live-only)
+- New post: site/blog/vin-diesel-best-lunch-norcal-routes.html (VIN Diesel lunch debate / corridor picks)
+- Hub blog/index.html + blog.html: 63 articles; cards + quick list
+- sitemap: new + restored /blog URLs
+- Also ships pending: homepage CARB 5-day pass block + FAQ CTC-VIS URL fix (cleantruckcheck.arb.ca.gov)
