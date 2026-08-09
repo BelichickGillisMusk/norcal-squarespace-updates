@@ -1,0 +1,17 @@
+---
+description: NorCal blog publish gate — 400 words, post-context header, link check before deploy
+globs: site/blog/**/*.html
+alwaysApply: false
+---
+
+# NorCal blog publishing
+
+When creating or editing posts under `site/blog/`:
+
+1. **≥400 words** (sweet spot 500–700). Gate counts `<main>` body.
+2. Open with required **post-context** `<aside data-post-context="true">` covering **Location**, **Industry**, **Test**.
+3. If the post corrects/explains a **mandate**, set `data-has-mandate="true"` and include a working official CARB/state link (e.g. `https://cleantruckcheck.arb.ca.gov/`).
+4. Before deploy: `node scripts/check-blog-links.mjs` must exit 0 — CI and Deploy NorCal run this gate.
+5. New posts go in `site/blog/`, not `_ARCHIVED-*` and not only under legacy `clean-truck-check-blog/` (legacy URLs stay for old posts).
+
+See `site/blog/CADENCE.md`.

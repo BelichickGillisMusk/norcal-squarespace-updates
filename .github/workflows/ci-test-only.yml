@@ -23,6 +23,9 @@ jobs:
       - name: Enforce approved NorCal template
         run: node scripts/site-lock/validate.mjs
 
+      - name: Blog gate (words + header + links)
+        run: node scripts/check-blog-links.mjs
+
   attention-hq-fixture:
     runs-on: ubuntu-latest
     name: Attention HQ dry-run (fixture)

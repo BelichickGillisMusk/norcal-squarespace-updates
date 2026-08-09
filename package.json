@@ -1,0 +1,11 @@
+{
+  "name": "norcal-squarespace-updates",
+  "private": true,
+  "description": "NorCal CARB Mobile static site + Worker (norcalcarbmobile.com)",
+  "scripts": {
+    "check:blog": "node scripts/check-blog-links.mjs",
+    "check:blog:local": "node scripts/check-blog-links.mjs --skip-network",
+    "check:site-lock": "node scripts/site-lock/validate.mjs",
+    "predeploy": "npm run check:blog && npm run check:site-lock"
+  }
+}

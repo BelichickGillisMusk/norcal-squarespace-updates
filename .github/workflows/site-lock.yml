@@ -9,6 +9,8 @@ on:
       - wrangler.jsonc
       - config/site-template-lock.json
       - scripts/site-lock/**
+      - scripts/check-blog-links.mjs
+      - site/blog/**
       - .github/workflows/site-lock.yml
       - .github/workflows/deploy-norcal.yml
   push:
@@ -20,6 +22,8 @@ on:
       - wrangler.jsonc
       - config/site-template-lock.json
       - scripts/site-lock/**
+      - scripts/check-blog-links.mjs
+      - site/blog/**
 
 permissions:
   contents: read
@@ -34,3 +38,6 @@ jobs:
           node-version: "20"
       - name: Enforce approved NorCal template
         run: node scripts/site-lock/validate.mjs
+
+      - name: Blog gate (words + header + links)
+        run: node scripts/check-blog-links.mjs

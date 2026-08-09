@@ -45,6 +45,9 @@ jobs:
       - name: Enforce approved NorCal template (site-lock)
         run: node scripts/site-lock/validate.mjs
 
+      - name: Blog gate (words + header + links)
+        run: node scripts/check-blog-links.mjs
+
       # Empty-account path (preferred): org/repo secret CF_GROK_KEY_NCM + NORCAL_PROD_CF_ACCOUNT_ID.
       # Legacy Gillis path only when confirm_worker is the old worker name.
       - name: Require empty-account secrets for norcalcarbmobile-prod
