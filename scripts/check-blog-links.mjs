@@ -137,7 +137,11 @@ function checkPostContext(file, html) {
     }
   }
 
-  const hasMandateAttr = /data-has-mandate=["']true["']/i.test(asideHtml);
+  const hasMandateAttrMatch = asideHtml.match(/data-has-mandate=["'](true|false)["']/i);
+  if (!hasMandateAttrMatch) {
+    fail(`${rel}: post-context header must set data-has-mandate="true" or "false"`);
+  }
+  const hasMandateAttr = hasMandateAttrMatch?.[1]?.toLowerCase() === "true";
   const hasMandateLabel = /\b(Official|Mandate)\s*:/i.test(asideText);
   if (hasMandateAttr || hasMandateLabel) {
     const hrefs = collectHrefs(asideHtml);
