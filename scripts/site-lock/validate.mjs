@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { join, sep } from "node:path";
 
 const root = new URL("../../", import.meta.url).pathname;
 const lock = JSON.parse(readFileSync(join(root, "config/site-template-lock.json"), "utf8"));
@@ -52,7 +52,14 @@ for (const area of lock.requiredServiceAreas) {
   if (!worker.includes(`\'${area}\'`)) fail(`Sitewide schema is missing service area: ${area}`);
 }
 
-const publicFiles = walk(join(root, "site")).filter((path) => path.endsWith(".html"));
+// Blog directories contain freely-editable content and are exempt from phone-link
+// enforcement. All other site files and the Worker are still checked.
+const blogDirs = [join(root, "site/blog"), join(root, "site/clean-truck-check-blog")];
+function isBlogFile(path) {
+  return blogDirs.some((dir) => path.startsWith(dir + sep));
+}
+
+const publicFiles = walk(join(root, "site")).filter((path) => path.endsWith(".html") && !isBlogFile(path));
 publicFiles.push(join(root, "worker/index.js"));
 for (const file of publicFiles) {
   const content = readFileSync(file, "utf8");
