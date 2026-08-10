@@ -304,7 +304,7 @@ async function handleContact(request, env) {
       <tr><td><strong>Terms accepted</strong></td><td>Yes — version ${esc(lead.termsVersion)}</td></tr>
       <tr><td><strong>Submitted</strong></td><td>${esc(lead.submittedAt)}</td></tr>
     </table>
-    <p style="font-family:Arial,sans-serif;font-size:13px;color:#555">OVI/smoke tests, motorhome OVI tests, and appointments totaling more than $150 require payment in full before confirmation.</p>`;
+    <p style="font-family:Arial,sans-serif;font-size:13px;color:#555">New lead from the website contact form. Call or text them to confirm schedule and payment.</p>`;
 
   const primaryTo = env.CONTACT_TO || DEFAULT_TO;
   const payload = {

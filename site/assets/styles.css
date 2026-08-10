@@ -1,22 +1,23 @@
-/* NorCal CARB Mobile — design system v2026-07-30
-   Navy · White · Red · Silver. Apple-clean. Never red text on blue backgrounds. */
+/* NorCal CARB Mobile — design system v2026-08-07
+   Charcoal · White · Red · Silver. NOT blue/navy. Never red text on dark headers. */
 
 :root {
-  --navy: #0a1628;
-  --navy-deep: #060e1a;
-  --navy-mid: #12263f;
-  --navy-gloss: linear-gradient(180deg, #163056 0%, #0a1628 55%, #060e1a 100%);
+  /* Kept as --navy* names for CSS compatibility, but values are charcoal/black (no blue cast) */
+  --navy: #141414;
+  --navy-deep: #0a0a0a;
+  --navy-mid: #2a2a2a;
+  --navy-gloss: linear-gradient(180deg, #2c2c2c 0%, #141414 55%, #0a0a0a 100%);
   --red: #b91c1c;
   --red-deep: #991b1b;
   --red-soft: #fef2f2;
-  --silver: #94a3b8;
-  --silver-line: #e2e8f0;
-  --ink: #0f172a;
-  --body: #334155;
-  --muted: #64748b;
+  --silver: #a1a1aa;
+  --silver-line: #e4e4e7;
+  --ink: #18181b;
+  --body: #3f3f46;
+  --muted: #71717a;
   --bg: #ffffff;
-  --bg-soft: #f8fafc;
-  --line: #e2e8f0;
+  --bg-soft: #fafafa;
+  --line: #e4e4e7;
   --radius: 12px;
   --maxw: 1080px;
   --shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06);
