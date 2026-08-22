@@ -123,7 +123,6 @@ async function main() {
   fs.writeFileSync(outPath, json + '\n', 'utf8');
 
   if (report.status === 'FAIL') process.exit(2);
-  if (report.actions_needed.length > 0) process.exit(1);
   process.exit(0);
 }
 
