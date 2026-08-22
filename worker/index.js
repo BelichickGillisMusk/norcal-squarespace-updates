@@ -141,6 +141,9 @@ const REDIRECTS = {
   '/carb-resources': '/faq',
   '/qa-and-glossary': '/faq',
   '/carb-mobile-app': '/faq',
+  '/blog/check-compliance-carb-app': '/faq',
+  '/clean-truck-check-blog/check-compliance-carb-app': '/faq',
+  '/blog/vin-diesel-best-lunch-norcal-routes': '/blog',
   '/carb-penalties-deadlines': '/faq',
 
   // → /areas

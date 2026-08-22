@@ -19,7 +19,6 @@ export const LEGACY_BLOG_SLUGS = new Set([
   "carb-j1667-smoke-testing-explained-californias-heavy-duty-standard",
   "carb-rancho-cordova-oakand-hayward-stockton",
   "carb-violation",
-  "check-compliance-carb-app",
   "clean-truck-check-hayward-union-city-fremont-newark",
   "clean-truck-check-hd-im-program",
   "clean-truck-check-info-blog",
@@ -72,6 +71,7 @@ export const LEGACY_BLOG_SLUGS = new Set([
 ]);
 
 export const LEGACY_BLOG_FALLBACKS = {
+  "check-compliance-carb-app": "/faq",
   "i-thought-it-was-ending": "/blog",
   "how-much-does-a-diesel-truck-obd-test-cost-complete-guide-to-carb-emissions-testing-prices-in-california": "/pricing",
   "smoke-opacity-test-oakland-j1667-certified-mobile-testing-for-east-bay-diesel-trucks": "/blog/oakland-clean-truck-checks-san-leandro",

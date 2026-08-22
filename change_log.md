@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-08-22 — Strip .app domains + VIN Diesel promo from www (PR only, no deploy)
+
+Bryan GO: take `carbcleantruckcheck.app` / `cleantruckcheckvin.app` off live www, plus VIN Diesel / `/carb-mobile-app` promo. Source-only. **Did not deploy. Did not run wrangler.**
+
+- Stripped `.app` hrefs + companion-app CTAs from three posts that stay live; replaced with existing 916 / norcalcarbmobile.com book CTAs.
+- Unpublished CTC Coach app post (`check-compliance-carb-app`) and VIN Diesel lunch post (deleted HTML, sitemap locs, blog cards). Worker now 301s those paths to `/faq` and `/blog`.
+- `/carb-mobile-app` was already redirect-only → `/faq`. No nav/page promo in `site/`. `cleantruckcheckvin.app` was not in www source. No Silverback promo on www templates.
+- Did not add PostalAddress, 415, ads, or new claims. Public phone remains (916) 890-4427.
+
+---
+
 ## 2026-08-08 — Mojave blog live on site (GBP already done by owner)
 
 - Shipped `site/blog/fleets-ovi-obd-porterville-mojave.html` — author branded **NorCal CARB Mobile** only (no personal names).
