@@ -6,7 +6,10 @@
  *
  * Deploy:  wrangler deploy            (config in ../wrangler.jsonc, name = norcalcarbmobile)
  * Env vars: RESEND_API_KEY (required to send) · CONTACT_TO · CONTACT_FROM (optional)
- * Always CCs OWNER_GMAIL (bryan@norcalcarbmobile.com) on contact leads.
+ * Form To is always sales@ + carb@ + fsu9913@gmail.com (Resend accepts an array).
+ * CONTACT_TO may add more addresses but cannot drop those three or add never-To
+ * inboxes (mila@*, bgillis99@gmail.com, admin@mobilecarbsmoketest.com).
+ * Always CCs OWNER_GMAIL (bryan@norcalcarbmobile.com) unless already in To.
  *
  * NOTE: the contact logic below mirrors site/functions/api/contact.js (the Pages
  * version). If you change one, change the other.
@@ -14,8 +17,16 @@
 
 import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
 
-const DEFAULT_TO = 'bgillis99@gmail.com';
+const DEFAULT_TO = [
+  'sales@norcalcarbmobile.com',
+  'carb@norcalcarbmobile.com',
+  'fsu9913@gmail.com',
+];
 const OWNER_GMAIL = 'bryan@norcalcarbmobile.com';
+const NEVER_TO = [
+  'bgillis99@gmail.com',
+  'admin@mobilecarbsmoketest.com',
+];
 const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
 const CURRENT_TERMS_VERSION = '2026-07-22';
 const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
@@ -237,6 +248,35 @@ function esc(s) {
   return String(s || '').replace(/[<>&]/g, (c) => HTML_ESC[c]);
 }
 
+function parseAddressList(value) {
+  const raw = Array.isArray(value) ? value : String(value == null ? '' : value).split(/[,;]+/);
+  const seen = new Set();
+  const out = [];
+  for (const item of raw) {
+    const email = String(item || '').trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) continue;
+    const key = email.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(email);
+  }
+  return out;
+}
+
+function isNeverTo(email) {
+  const key = String(email || '').trim().toLowerCase();
+  if (!key) return true;
+  if (NEVER_TO.includes(key)) return true;
+  // Never route form leads to mila@ on any domain.
+  return key.startsWith('mila@');
+}
+
+/** Resend `to` array: required form inboxes, plus any extra allowed CONTACT_TO addresses. */
+function contactToList(env) {
+  const extra = parseAddressList(env && env.CONTACT_TO).filter((email) => !isNeverTo(email));
+  return parseAddressList([...DEFAULT_TO, ...extra]);
+}
+
 function wantsJson(request) {
   return (request.headers.get('accept') || '').includes('application/json');
 }
@@ -309,15 +349,15 @@ async function handleContact(request, env) {
     </table>
     <p style="font-family:Arial,sans-serif;font-size:13px;color:#555">New lead from the website contact form. Call or text them to confirm schedule and payment.</p>`;
 
-  const primaryTo = env.CONTACT_TO || DEFAULT_TO;
+  const to = contactToList(env);
   const payload = {
     from: env.CONTACT_FROM || DEFAULT_FROM,
-    to: [primaryTo],
-    // Always CC owner Gmail on contact leads (skip if already primary To).
+    to,
     subject: `New test request: ${lead.name.replace(/[\r\n]/g, '')}${lead.location ? ' — ' + lead.location.replace(/[\r\n]/g, '') : ''}`,
     html,
   };
-  if (String(primaryTo).toLowerCase() !== OWNER_GMAIL.toLowerCase()) {
+  const toLower = new Set(to.map((email) => email.toLowerCase()));
+  if (!toLower.has(OWNER_GMAIL.toLowerCase())) {
     payload.cc = [OWNER_GMAIL];
   }
   const cleanEmail = lead.email.replace(/[\r\n]/g, '');
@@ -329,9 +369,9 @@ async function handleContact(request, env) {
       headers: { Authorization: `Bearer ${apiKey}`, 'content-type': 'application/json' },
       body: JSON.stringify(payload),
     });
-    if (!r.ok) return respond(request, false, "Got it! We’ll call you shortly, or reach us at (916) 890-4427.", 502);
+    if (!r.ok) return respond(request, false, 'We couldn’t send that — please call (916) 890-4427.', 502);
   } catch {
-    return respond(request, false, "Got it! We’ll call you shortly, or reach us at (916) 890-4427.", 502);
+    return respond(request, false, 'We couldn’t send that — please call (916) 890-4427.', 502);
   }
 
   return respond(request, true);

@@ -76,7 +76,7 @@ Target forms to inspect and repair:
 - Confirm the form renders on both desktop and mobile
 - Submit a test entry using `test@norcalcarbtest.dev` as the email
 - Verify the confirmation message appears
-- Verify the notification email routes to `bgillis99@gmail.com`
+- Verify the notification email routes to `sales@norcalcarbmobile.com`, `carb@norcalcarbmobile.com`, and `fsu9913@gmail.com`
 - If email routing is broken, re-connect the form to the Gmail/notification integration in Squarespace settings
 
 ---
@@ -141,7 +141,7 @@ Write and publish at least 3 blog posts targeting the following topics. Each pos
 
 Before closing the run, the agent must confirm:
 
-- [ ] All forms submit successfully and route to `bgillis99@gmail.com`
+- [ ] All forms submit successfully and route to `sales@norcalcarbmobile.com`, `carb@norcalcarbmobile.com`, and `fsu9913@gmail.com`
 - [ ] No page has mismatched fonts or broken layout at 1280px and 390px viewports
 - [ ] All CTA buttons are visually consistent site-wide
 - [ ] Minimum 3 blog posts published with correct metadata

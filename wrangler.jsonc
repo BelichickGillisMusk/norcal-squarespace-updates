@@ -23,7 +23,12 @@
   "routes": [
     { "pattern": "norcalcarbmobile.com", "custom_domain": true },
     { "pattern": "www.norcalcarbmobile.com", "custom_domain": true }
-  ]
-  // Set secrets/vars in the dashboard or via:  wrangler secret put RESEND_API_KEY
-  // Optional plain vars: CONTACT_TO, CONTACT_FROM
+  ],
+  // CONTACT_TO overrides Worker DEFAULT_TO. Must be the form inboxes (all three),
+  // never a single mailbox and never bgillis99 / mila@ / admin@mobilecarbsmoketest.com.
+  "vars": {
+    "CONTACT_TO": "sales@norcalcarbmobile.com,carb@norcalcarbmobile.com,fsu9913@gmail.com"
+  }
+  // Set secrets in the dashboard or via:  wrangler secret put RESEND_API_KEY
+  // CONTACT_FROM optional (default noreply@mail.norcalcarbmobile.com)
 }
