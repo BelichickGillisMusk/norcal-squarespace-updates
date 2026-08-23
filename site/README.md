@@ -26,10 +26,13 @@ npx wrangler secret put RESEND_API_KEY      # so the contact form can send
 npx wrangler deploy                          # → norcalcarbmobile.silverbackai.workers.dev
 ```
 
-Optional plain vars (dashboard or `wrangler.jsonc` "vars"): `CONTACT_TO`
-(default `bgillis99@gmail.com`), `CONTACT_FROM` (default `noreply@mail.norcalcarbmobile.com`,
-must be a verified Resend sender). `site/.assetsignore` keeps `functions/` and `README.md`
-from being web-served.
+Optional plain vars (dashboard or `wrangler.jsonc` / `wrangler.toml` "vars"): `CONTACT_TO`
+must be all three form inboxes
+`sales@norcalcarbmobile.com,carb@norcalcarbmobile.com,fsu9913@gmail.com`
+(Resend `to` is an array). Never set this to `bgillis99@gmail.com`, `mila@*`, or
+`admin@mobilecarbsmoketest.com`. `CONTACT_FROM` defaults to
+`noreply@mail.norcalcarbmobile.com` (must be a verified Resend sender).
+`site/.assetsignore` keeps `functions/` and `README.md` from being web-served.
 
 ### Option B — Cloudflare Pages
 
@@ -48,7 +51,8 @@ from being web-served.
 - Photos: drop files in `assets/img/` and reference them, e.g. `<img src="/assets/img/truck.jpg">`.
 
 ## Notes
-- Contact form routes notifications to `bgillis99@gmail.com` (per repo README). Tap-to-call and
+- Contact form routes notifications to `sales@norcalcarbmobile.com`,
+  `carb@norcalcarbmobile.com`, and `fsu9913@gmail.com`. Tap-to-call and
   the mailto link work with no backend; the form needs `RESEND_API_KEY` set to deliver.
 - This is a fresh, clean rebuild (the live Squarespace HTML can't be scraped from CI). To mirror
   the exact current site instead, allowlist `norcalcarbmobile.com` in the env's egress settings.

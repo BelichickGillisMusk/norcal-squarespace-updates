@@ -18,3 +18,8 @@ custom_domain = true
 [[routes]]
 pattern = "www.norcalcarbmobile.com"
 custom_domain = true
+
+# CONTACT_TO overrides Worker DEFAULT_TO. All three form inboxes — not one.
+# Never: bgillis99@gmail.com, mila@*, admin@mobilecarbsmoketest.com
+[vars]
+CONTACT_TO = "sales@norcalcarbmobile.com,carb@norcalcarbmobile.com,fsu9913@gmail.com"

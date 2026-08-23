@@ -4,6 +4,20 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-08-23 — Contact form To: sales@ + carb@ + fsu9913@ (inbound fix)
+
+Bryan GO: website contact leads were going to `CONTACT_TO` / `DEFAULT_TO` = `bgillis99@gmail.com` (admin@mc mailbox), so two fills produced zero shop mail. Page could still say “Got it” on Resend 502.
+
+- `worker/index.js` + `site/functions/api/contact.js`: Resend `to` is always
+  `sales@norcalcarbmobile.com`, `carb@norcalcarbmobile.com`, `fsu9913@gmail.com`.
+- `CONTACT_TO` parsed as a comma/semicolon list. Never-To stripped:
+  `bgillis99@gmail.com`, `admin@mobilecarbsmoketest.com`, `mila@*`.
+- From unchanged: `CONTACT_FROM` / `noreply@mail.norcalcarbmobile.com`. CC `bryan@` if not already in To.
+- Wrangler `vars.CONTACT_TO` set to all three in `wrangler.jsonc`, `wrangler.toml`, `wrangler.prod-empty.toml`.
+- Honest 502 copy (no “Got it” on Resend failure). No ads, no mila@ send, no sister-host / DNS / SPF edits.
+
+---
+
 ## 2026-08-22 — Strip .app domains + VIN Diesel promo from www (PR only, no deploy)
 
 Bryan GO: take `carbcleantruckcheck.app` / `cleantruckcheckvin.app` off live www, plus VIN Diesel / `/carb-mobile-app` promo. Source-only. **Did not deploy. Did not run wrangler.**

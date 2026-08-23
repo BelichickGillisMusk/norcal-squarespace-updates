@@ -2,18 +2,57 @@
  * Cloudflare Pages Function — POST /api/contact
  *
  * Receives the contact/booking form and emails the lead to the shop through Resend.
- * Form notifications route to bgillis99@gmail.com by default.
+ * Form To is always sales@ + carb@ + fsu9913@gmail.com (Resend accepts an array).
+ * Never To: mila@*, bgillis99@gmail.com, admin@mobilecarbsmoketest.com.
  *
  * Required Pages env var:
  *   RESEND_API_KEY
  * Optional:
- *   CONTACT_TO
+ *   CONTACT_TO   (comma-separated extras; cannot drop the required three)
  *   CONTACT_FROM
+ *
+ * Mirror of worker/index.js handleContact — change both.
  */
 
-const DEFAULT_TO = 'bgillis99@gmail.com';
+const DEFAULT_TO = [
+  'sales@norcalcarbmobile.com',
+  'carb@norcalcarbmobile.com',
+  'fsu9913@gmail.com',
+];
+const OWNER_GMAIL = 'bryan@norcalcarbmobile.com';
+const NEVER_TO = [
+  'bgillis99@gmail.com',
+  'admin@mobilecarbsmoketest.com',
+];
 const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
 const CURRENT_TERMS_VERSION = '2026-07-22';
+
+function parseAddressList(value) {
+  const raw = Array.isArray(value) ? value : String(value == null ? '' : value).split(/[,;]+/);
+  const seen = new Set();
+  const out = [];
+  for (const item of raw) {
+    const email = String(item || '').trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) continue;
+    const key = email.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(email);
+  }
+  return out;
+}
+
+function isNeverTo(email) {
+  const key = String(email || '').trim().toLowerCase();
+  if (!key) return true;
+  if (NEVER_TO.includes(key)) return true;
+  return key.startsWith('mila@');
+}
+
+function contactToList(env) {
+  const extra = parseAddressList(env && env.CONTACT_TO).filter((email) => !isNeverTo(email));
+  return parseAddressList([...DEFAULT_TO, ...extra]);
+}
 
 function esc(s) {
   return String(s || '').replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]));
@@ -97,12 +136,17 @@ export async function onRequestPost(context) {
     </table>
     <p style="font-family:Arial,sans-serif;font-size:13px;color:#555">New lead from the website contact form. Call or text them to confirm schedule and payment.</p>`;
 
+  const to = contactToList(env);
   const payload = {
     from: env.CONTACT_FROM || DEFAULT_FROM,
-    to: [env.CONTACT_TO || DEFAULT_TO],
+    to,
     subject: `New test request: ${lead.name}${lead.location ? ' — ' + lead.location : ''}`,
     html,
   };
+  const toLower = new Set(to.map((email) => email.toLowerCase()));
+  if (!toLower.has(OWNER_GMAIL.toLowerCase())) {
+    payload.cc = [OWNER_GMAIL];
+  }
   if (lead.email) payload.reply_to = lead.email;
 
   try {
