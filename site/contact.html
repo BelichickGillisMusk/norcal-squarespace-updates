@@ -1,152 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark" data-lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact NorCal CARB Mobile — Book Mobile Clean Truck Check Testing</title>
-  <meta name="description" content="Contact NorCal CARB Mobile to book mobile OBD or OVI Clean Truck Check testing. Call (916) 890-4427 or send a request. Serving Sacramento, Stockton, Fairfield, San Jose & the Bay Area.">
+  <title>Contact NorCal CARB Mobile — We come to you. Clean Truck Check.</title>
+  <meta name="description" content="Book mobile Clean Truck Check testing. We come to you in Oakland, Hayward, Peninsula, Napa, and Wine Country. OBD $75 · Mobile OVI $199 · Motorhome $99/$229. Call (916) 890-4427.">
   <link rel="canonical" href="https://norcalcarbmobile.com/contact">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/styles.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('ncm-theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+        var l = localStorage.getItem('ncm-lang') === 'es' ? 'es' : 'en';
+        document.documentElement.lang = l;
+        document.documentElement.setAttribute('data-lang', l);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+  <script src="/assets/js/theme-i18n.js" defer></script>
 </head>
-<body>
-<a class="skip" href="#main">Skip to content</a>
+<body class="contact-page">
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="/">
-      <img class="brand-logo" src="/assets/img/norcal-carb-mobile-logo-250th.png" alt="NorCal CARB Mobile" width="56" height="56" loading="eager">
+    <a class="brand brand-lockup" href="/">
+      <img class="brand-logo ncm-mark" src="/assets/img/norcal-carb-mobile-logo-250th.png" width="152" height="168" alt="NorCal CARB Mobile — NCM road mark" loading="eager">
+      <span class="brand-wordmark">
+        <span class="brand-name">NorCal <em>CARB</em> MOBILE</span>
+        <span class="brand-tagline" data-i18n="tagline">Mobile Smoke &amp; OBD Testing</span>
+        <span class="brand-serving" data-i18n="serving">Now Serving San Diego County &amp; the Central Valley</span>
+      </span>
     </a>
     <nav class="nav" aria-label="Primary">
-      <button class="menu-toggle" aria-label="Menu" onclick="this.closest('.nav').classList.toggle('open')"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
-      <a class="navlink" href="/">Home</a>
-      <a class="navlink" href="/services">Services</a>
-      <a class="navlink" href="/pricing">Pricing</a>
-      <a class="navlink" href="/areas">Areas</a>
-      <a class="navlink" href="/faq">FAQ</a>
-      <a class="navlink" href="/blog">Blog</a>
-      <a class="navlink" href="/contact">Contact</a>
+      <button class="menu-toggle" data-i18n-aria="nav_menu" aria-label="Menu" onclick="this.closest('.nav').classList.toggle('open')"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+      <a class="navlink" href="/" data-i18n="nav_home">Home</a>
+      <a class="navlink" href="/services" data-i18n="nav_services">Services</a>
+      <a class="navlink" href="/pricing" data-i18n="nav_pricing">Pricing</a>
+      <a class="navlink" href="/areas" data-i18n="nav_areas">Areas</a>
+      <a class="navlink" href="/faq" data-i18n="nav_faq">FAQ</a>
+      <a class="navlink" href="/blog" data-i18n="nav_blog">Blog</a>
+      <a class="navlink" href="/contact" data-i18n="nav_contact">Contact</a>
+      <div class="chrome-toggles">
+        <div class="seg" role="group" data-i18n-aria="lang_label" aria-label="Language">
+          <button type="button" class="seg-btn is-active" data-set-lang="en" aria-pressed="true">EN</button>
+          <button type="button" class="seg-btn" data-set-lang="es" aria-pressed="false">ES</button>
+        </div>
+        <div class="seg" role="group" data-i18n-aria="theme_label" aria-label="Color mode">
+          <button type="button" class="seg-btn" data-set-theme="dark" data-i18n="theme_dark" aria-pressed="true">Dark</button>
+          <button type="button" class="seg-btn" data-set-theme="light" data-i18n="theme_light" aria-pressed="false">Light</button>
+        </div>
+      </div>
       <span class="header-cta">
-        <a class="btn btn-call" href="tel:+19168904427">Call (916) 890-4427</a>
+        <a class="btn btn-book" href="tel:+19168904427" data-i18n="call_btn">Call (916) 890-4427</a>
       </span>
     </nav>
   </div>
 </header>
 
+<div class="nap-bar" aria-label="Name address phone pricing">
+  <div class="wrap">
+    <div data-i18n="nap_name">NorCal CARB Mobile · Mobile Clean Truck Check</div>
+    <div class="nap-prices"><strong>OBD $75</strong> · <strong>Mobile OVI $199</strong> · $99/$229</div>
+    <div><a href="tel:+19168904427">(916) 890-4427</a> · <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></div>
+  </div>
+</div>
+
 <main id="main">
-  <section>
+  <section class="hero">
     <div class="wrap">
-      <div id="sent-banner" class="banner" hidden>✅ Thanks — your request is in. We'll reply shortly. Need it today? Call <a href="tel:+19168904427">(916) 890-4427</a>.</div>
+      <div id="sent-banner" class="banner" hidden data-i18n="sent">Thanks — your request is in. We will reply shortly. Need it today? Call (916) 890-4427.</div>
 
-      <div class="section-head">
-        <h1>Contact &amp; booking</h1>
-        <p>Tell us where your trucks are and what you need tested — or just call. We serve Sacramento, Stockton, Fairfield, San Jose and the Bay Area, including Saturdays.</p>
-      </div>
-
-      <div class="contact-grid">
-        <div>
-          <div class="contact-method">
-            <span class="ic">📞</span>
-            <div><strong>Call or text</strong><br><a href="tel:+19168904427">(916) 890-4427</a><br><span class="muted" style="font-size:.9rem">Fastest for same-day scheduling</span></div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="reputation-row">
+            <img class="cred-lockup" src="/assets/img/credentialed-tester.jpg" width="280" height="120" data-i18n-alt="cred_alt" alt="NorCal CARB Mobile — Clean Truck Check credentialed tester">
+            <p class="reviews-line"><span class="stars">★★★★★</span> <span data-i18n="reviews_line">5.0 · 33 Google reviews</span> · <a href="/reviews" data-i18n="reviews_read">Read our Google reviews</a></p>
           </div>
-          <div class="contact-method">
-            <span class="ic">✉️</span>
-            <div><strong>Email</strong><br><a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></div>
+          <h1 data-i18n="h1">We come to you. Clean Truck Check.</h1>
+          <p class="lede" data-i18n="lede">Mobile Clean Truck Check for trucks and motorhomes. Oakland, Hayward, Peninsula, Napa, and Wine Country. 7 days a week.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary btn-lg" href="tel:+19168904427" data-i18n="call_btn">Call (916) 890-4427</a>
+            <a class="btn btn-ghost btn-lg" href="#request" data-i18n="request_cb">Request a callback</a>
           </div>
-          <div class="contact-method">
-            <span class="ic">📍</span>
-            <div><strong>Service area</strong><br>Sacramento · Stockton · Fairfield · San Jose · Bay Area</div>
-          </div>
-          <div class="contact-method">
-            <span class="ic">🕗</span>
-            <div><strong>Hours</strong><br>By appointment, 7 days a week — Saturday appointments available</div>
-          </div>
-          <div class="card" style="margin-top:8px">
-            <h3 style="margin-top:0">Pricing</h3>
-            <p style="margin:0">OBD <strong>$75</strong> · OVI (smoke) <strong>$199</strong> · per vehicle<br>
-            Motorhome: OBD <strong>$99</strong> · OVI <strong>$229</strong><br>
-            <span class="muted">San Diego County: call 916-890-4427 for pricing</span><br>
-            <span class="muted">Switching from another tester? First test 50% off.</span></p>
-            <p style="margin:8px 0 0;font-size:.82rem;color:var(--muted);font-style:italic">Pricing is subject to confirmation and may change due to matters outside our control.</p>
-          </div>
+          <p class="hero-areas"><a href="tel:+19168904427">(916) 890-4427</a> · <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
         </div>
-
-        <div class="card">
-          <h2 style="margin-top:0">Request a test</h2>
-          <form id="contact-form" method="POST" action="/api/contact">
-            <div class="field">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" autocomplete="name" required>
-            </div>
-            <div class="field">
-              <label for="phone">Phone</label>
-              <input id="phone" name="phone" type="tel" autocomplete="tel" required>
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email">
-            </div>
-            <div class="field">
-              <label for="location">Truck location / city</label>
-              <input id="location" name="location" type="text" placeholder="e.g. Stockton yard, 95205">
-            </div>
-            <div class="field">
-              <label for="service">What do you need?</label>
-              <select id="service" name="service">
-                <option value="OBD ($75)">OBD test ($75)</option>
-                <option value="OVI ($199)">OVI / smoke test ($199)</option>
-                <option value="Motorhome OBD ($99)">Motorhome OBD ($99)</option>
-                <option value="Motorhome OVI ($229)">Motorhome OVI / smoke ($229)</option>
-                <option value="Multiple / fleet">Multiple trucks / fleet</option>
-                <option value="Not sure">Not sure — help me pick</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="message">Details (how many trucks, timing)</label>
-              <textarea id="message" name="message" placeholder="e.g. 3 trucks, hoping for this Saturday morning"></textarea>
-            </div>
-
-            <div class="field" style="padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--soft)">
-              <label for="terms_accepted" style="display:flex;align-items:flex-start;gap:10px;font-weight:600;cursor:pointer">
-                <input id="terms_accepted" name="terms_accepted" type="checkbox" value="yes" required style="width:20px;height:20px;margin-top:3px;flex:0 0 auto">
-                <span>I agree to the <a href="/testing-terms" target="_blank" rel="noopener">Testing Terms &amp; Customer Rights</a>.</span>
-              </label>
-            </div>
-            <input type="hidden" name="terms_version" value="2026-07-22">
-
-            <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <button class="btn btn-primary btn-lg" type="submit">Send request</button>
-            <p id="form-status" class="muted" style="margin:12px 0 0;font-size:.9rem"></p>
-          </form>
+        <div class="hero-map">
+          <div class="contact-map-frame">
+            <img src="/assets/img/coverage-map-v2.png" width="1126" height="1200" data-i18n-alt="map_alt" alt="Coverage map framed to the Bay Area, Peninsula, Oakland, Hayward, Napa, and Wine Country" loading="eager" decoding="async">
+          </div>
+          <div class="route-chips" data-i18n-aria="chips_label" aria-label="Ads corridor">
+            <span>Oakland</span><span>Hayward</span><span>Peninsula</span><span>Napa</span><span>Wine Country</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-i18n="prices_how">How much</h2>
+      </div>
+      <div class="grid grid-3">
+        <div class="card price-card">
+          <h3 data-i18n="tile_obd">OBD</h3>
+          <div class="price">$75<small data-i18n="tile_obd_sub"> / vehicle</small></div>
+          <p data-i18n="tile_obd_copy">On-board diagnostic Clean Truck Check for 2013+ diesel trucks.</p>
+          <a class="btn btn-primary" href="tel:+19168904427" data-i18n="call_to_book">Call to book</a>
+        </div>
+        <div class="card price-card feature">
+          <h3 data-i18n="tile_ovi">Mobile OVI</h3>
+          <div class="price">$199<small data-i18n="tile_ovi_sub"> / vehicle</small></div>
+          <p data-i18n="tile_ovi_copy">Smoke opacity test when OBD does not apply — older units and many motorhomes.</p>
+          <a class="btn btn-primary" href="tel:+19168904427" data-i18n="call_to_book">Call to book</a>
+        </div>
+        <div class="card price-card">
+          <h3 data-i18n="tile_mh">Motorhome</h3>
+          <div class="price">$99<small> OBD</small> / $229<small> OVI</small></div>
+          <p data-i18n="tile_mh_copy">RV / motorhome testing at your location. Motorhome is its own appointment.</p>
+          <a class="btn btn-ghost" href="#request" data-i18n="request_cb">Request a callback</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="soft" id="request">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="contact-method">
+          <div>
+            <strong data-i18n="phone_label">Call or text</strong><br>
+            <a href="tel:+19168904427">(916) 890-4427</a>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div>
+            <strong data-i18n="email_label">Email</strong><br>
+            <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div>
+            <strong data-i18n="area_label">Service corridor</strong><br>
+            <span data-i18n="area_copy">Oakland · Hayward · Peninsula · Napa · Wine Country</span>
+          </div>
+        </div>
+        <div class="contact-method">
+          <div>
+            <strong data-i18n="hours">7 days a week — we come to your yard</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="contact-card">
+        <h2 style="margin-top:0" data-i18n="form_title">Request a test</h2>
+        <form id="contact-form" method="POST" action="/api/contact">
+          <div class="field">
+            <label for="name" data-i18n="label_name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="phone" data-i18n="label_phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="field">
+            <label for="location" data-i18n="label_location">Truck or motorhome city/yard</label>
+            <input id="location" name="location" type="text" data-i18n-placeholder="loc_ph" placeholder="e.g. Oakland yard, Hayward, Peninsula, Napa">
+          </div>
+          <div class="field">
+            <label for="service" data-i18n="label_service">What do you need?</label>
+            <select id="service" name="service">
+              <option value="OBD ($75)" data-i18n="opt_obd">OBD test ($75)</option>
+              <option value="Mobile OVI ($199)" data-i18n="opt_ovi">Mobile OVI / smoke test ($199)</option>
+              <option value="Motorhome OBD ($99)" data-i18n="opt_mh_obd">Motorhome OBD ($99)</option>
+              <option value="Motorhome OVI ($229)" data-i18n="opt_mh_ovi">Motorhome OVI / smoke ($229)</option>
+              <option value="Multiple / fleet" data-i18n="opt_fleet">Multiple trucks / fleet</option>
+              <option value="Not sure" data-i18n="opt_unsure">Not sure — help me pick</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="email" data-i18n="label_email">Email (optional)</label>
+            <input id="email" name="email" type="email" autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="message" data-i18n="label_details">Details (optional)</label>
+            <textarea id="message" name="message" data-i18n-placeholder="details_ph" placeholder="How many trucks or motorhomes, and when you need us"></textarea>
+          </div>
+          <div class="field terms-box">
+            <label for="terms_accepted">
+              <input id="terms_accepted" name="terms_accepted" type="checkbox" value="yes" required>
+              <span data-i18n="terms_html" data-i18n-html>I agree to the <a href="/testing-terms" target="_blank" rel="noopener">Testing Terms &amp; Customer Rights</a>.</span>
+            </label>
+          </div>
+          <input type="hidden" name="terms_version" value="2026-07-22">
+          <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn-primary btn-lg" type="submit" data-i18n="send">Send request</button>
+          <p id="form-status" class="muted" style="margin:12px 0 0;font-size:.9rem"></p>
+        </form>
+      </div>
+    </div>
+  </section>
 </main>
+
+<div class="mobile-callbar" aria-label="Call now">
+  <a class="btn btn-book" href="tel:+19168904427" data-i18n="call_btn">Call (916) 890-4427</a>
+  <a class="btn btn-call" href="#request" data-i18n="mobile_book">Book</a>
+</div>
 
 <footer class="site-footer">
   <div class="wrap">
     <div class="foot-grid">
       <div>
         <h4>NorCal CARB Mobile</h4>
-        <p class="muted">Mobile CARB Clean Truck Check testing (OBD &amp; OVI). We come to your yard across Northern California.</p>
+        <p class="muted" data-i18n="foot_blurb">Mobile Clean Truck Check testing (OBD and OVI). We come to you.</p>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h4 data-i18n="foot_contact">Contact</h4>
         <p><a href="tel:+19168904427">(916) 890-4427</a><br>
         <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
       </div>
       <div>
-        <h4>Policies</h4>
-        <p><a href="/testing-terms">Testing Terms &amp; Customer Rights</a></p>
+        <h4 data-i18n="foot_policies">Policies</h4>
+        <p><a href="/testing-terms" data-i18n="terms_short">Testing Terms &amp; Customer Rights</a></p>
       </div>
     </div>
-    <p class="center" style="margin-top:0;margin-bottom:8px;color:var(--muted);font-size:.88rem">OBD $75 · OVI $199 · Motorhome $99/$229 · San Diego County: call for pricing</p>
+    <p class="center" style="margin-top:0;margin-bottom:8px;color:var(--muted);font-size:.88rem" data-i18n="foot_prices">OBD $75 · Mobile OVI $199 · Motorhome $99/$229</p>
     <div class="foot-bottom">
       <span>&copy; 2026 NorCal CARB Mobile LLC</span>
-      <span><a href="/">Home</a> · <a href="/services">Services</a> · <a href="/pricing">Pricing</a> · <a href="/areas">Areas</a> · <a href="/faq">FAQ</a> · <a href="/blog">Blog</a> · <a href="/contact">Contact</a> · <a href="/testing-terms">Testing Terms</a></span>
+      <span>
+        <a href="/" data-i18n="nav_home">Home</a> ·
+        <a href="/services" data-i18n="nav_services">Services</a> ·
+        <a href="/pricing" data-i18n="nav_pricing">Pricing</a> ·
+        <a href="/contact" data-i18n="nav_contact">Contact</a> ·
+        <a href="/testing-terms" data-i18n="terms_short">Testing Terms &amp; Customer Rights</a>
+      </span>
     </div>
   </div>
 </footer>
@@ -167,7 +264,8 @@
         if (!form.reportValidity()) return;
         var btn = form.querySelector('button[type=submit]');
         btn.disabled = true;
-        status.textContent = 'Sending…';
+        var dict = (window.NCM_UI && window.NCM_UI.strings[document.documentElement.getAttribute('data-lang') || 'en']) || {};
+        status.textContent = dict.sending || 'Sending…';
         fetch(form.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) })
           .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
           .then(function (res) {
@@ -177,12 +275,12 @@
               if (b) { b.hidden = false; b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
               status.textContent = '';
             } else {
-              status.textContent = (res.j && res.j.error) || 'We could not send that request. Please call (916) 890-4427.';
+              status.textContent = (res.j && res.j.error) || dict.error || 'We could not send that request. Please call (916) 890-4427.';
               btn.disabled = false;
             }
           })
           .catch(function () {
-            status.textContent = 'We could not send that request. Please call (916) 890-4427.';
+            status.textContent = dict.error || 'We could not send that request. Please call (916) 890-4427.';
             btn.disabled = false;
           });
       });

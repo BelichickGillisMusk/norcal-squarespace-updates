@@ -64,7 +64,7 @@ function schemaTag(pageUrl) {
         email: 'sales@norcalcarbmobile.com',
         image: LOGO_URL,
         logo: { '@type': 'ImageObject', url: LOGO_URL },
-        priceRange: '$79-$189',
+        priceRange: '$75-$229',
         description: 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Certified OBD and OVI smoke opacity testing at customer yards and jobsites across Northern California, with service available in San Diego County by appointment.',
         knowsAbout: [
           'CARB Clean Truck Check',
@@ -84,10 +84,10 @@ function schemaTag(pageUrl) {
           '@type': 'OfferCatalog',
           name: 'Mobile CARB Testing Services',
           itemListElement: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OBD Clean Truck Check', serviceType: 'HD-OBD Clean Truck Check' }, price: 79, priceCurrency: 'USD' },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OVI Smoke Opacity Test', serviceType: 'SAE J1667 OVI Smoke Opacity' }, price: 189, priceCurrency: 'USD' },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Motorhome OBD', serviceType: 'Motorhome HD-OBD' }, price: 79, priceCurrency: 'USD' },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Motorhome OVI', serviceType: 'Motorhome OVI Smoke Opacity' }, price: 189, priceCurrency: 'USD' }
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OBD Clean Truck Check', serviceType: 'HD-OBD Clean Truck Check' }, price: 75, priceCurrency: 'USD' },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OVI Smoke Opacity Test', serviceType: 'SAE J1667 OVI Smoke Opacity' }, price: 199, priceCurrency: 'USD' },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Motorhome OBD', serviceType: 'Motorhome HD-OBD' }, price: 99, priceCurrency: 'USD' },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Motorhome OVI', serviceType: 'Motorhome OVI Smoke Opacity' }, price: 229, priceCurrency: 'USD' }
           ]
         },
         sameAs: [
