@@ -150,9 +150,7 @@
   function bootTheme() {
     var saved;
     try { saved = localStorage.getItem(THEME_KEY); } catch (e) { saved = null; }
-    var theme = saved === 'light' || saved === 'dark'
-      ? saved
-      : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    var theme = saved === 'light' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', theme);
     return theme;
   }
