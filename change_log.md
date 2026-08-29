@@ -4,6 +4,16 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-08-29 — Sitewide header: one stacked NCM; no second lockup (PR only, no deploy)
+
+Bryan: ship the stacked NCM he likes, and delete the duplicate logo-header look on the other pages.
+
+- Shared chrome is `styles.css` (no HTML partial). `.brand-logo` is now the readable stacked NCM (`norcal-carb-mobile-logo-250th.png`, object-fit contain) on every page that already uses that file — home, services, pricing, areas, FAQ, blog, contact, and the rest.
+- `/contact` uses that same single header mark. The credentialed-tester truck lockup is a small badge next to 5.0 · 33 reviews only, not a second header-sized logo.
+- Dark first-visit default, EN|ES locked strings, 4427, prices, and `/api/contact` unchanged. No deploy.
+
+---
+
 ## 2026-08-29 — /contact header: stacked NCM only, dark default (PR only, no deploy)
 
 Bryan NO on live /contact: header was reading as the truck wordmark, and first visit opened Light.
