@@ -93,11 +93,13 @@ a:hover { color: var(--green); }
   border-bottom: 1px solid rgba(255,255,255,.08);
   box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 8px 32px rgba(0,0,0,.25);
 }
-.site-header .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 16px; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 152px; gap: 16px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.brand-logo {
-  display: block; width: 56px; height: 56px; border-radius: 10px;
-  object-fit: contain; background: #001a33;
+.brand-logo,
+.ncm-mark {
+  display: block; width: 144px; height: 144px; border-radius: 8px;
+  object-fit: contain; object-position: center;
+  background: #001a33; flex: 0 0 auto;
   box-shadow: 0 0 0 1px rgba(255,255,255,.12);
 }
 .brand-name { font-weight: 800; color: #fff; font-size: 1.05rem; line-height: 1.05; }
@@ -311,7 +313,7 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
     border-top: 1px solid rgba(255,255,255,.1); color: #fff;
   }
   .nav.open {
-    position: absolute; top: 64px; left: 0; right: 0;
+    position: absolute; top: 100%; left: 0; right: 0;
     background: var(--navy-deep); flex-direction: column; padding: 0 20px 16px;
     border-bottom: 1px solid rgba(255,255,255,.08); box-shadow: 0 12px 32px rgba(0,0,0,.4);
   }
@@ -352,17 +354,10 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
   .route-chips span { font-size:.8rem; }
 }
 
-/* ---------- Contact: stacked NCM lockup, dark/light, EN|ES chrome ---------- */
-.contact-page .site-header .wrap { min-height: 220px; align-items: center; }
-.brand-ncm { align-items: center; gap: 10px; }
-.ncm-mark {
-  width: 220px; height: 220px; border-radius: 8px;
-  object-fit: contain; object-position: center;
-  background: #001a33; flex: 0 0 auto;
-}
-.ncm-i18n { display: none; flex-direction: column; gap: 2px; max-width: 14rem; }
+/* ---------- Contact: dark/light + EN|ES (header mark is sitewide .brand-logo) ---------- */
+.ncm-i18n { display: none; flex-direction: column; gap: 2px; max-width: 12rem; }
 html[data-lang="es"] .ncm-i18n { display: flex; }
-.ncm-i18n span { font-size: .72rem; line-height: 1.25; font-weight: 700; color: #fff; }
+.ncm-i18n span { font-size: .7rem; line-height: 1.25; font-weight: 700; color: #fff; }
 .ncm-i18n span[data-i18n="serving"] { color: var(--green-bright); }
 
 .chrome-toggles { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -438,11 +433,12 @@ html[data-theme="light"] body.contact-page a:hover { color: var(--green-deep); }
 
 .contact-page .hero h1 { font-size: clamp(2.1rem, 6vw, 3.4rem); letter-spacing: -0.03em; }
 .contact-page .lede { font-size: 1.18rem; max-width: 40rem; }
-.reputation-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 16px; }
+.reputation-row { display: flex; flex-wrap: nowrap; align-items: center; gap: 8px 10px; margin-bottom: 16px; }
 .cred-lockup {
-  display: block; width: 160px; height: auto; flex: 0 0 auto;
-  background: #fff; border-radius: 8px; padding: 4px 6px;
+  display: block; width: 88px; height: auto; flex: 0 0 auto;
+  background: #fff; border-radius: 6px; padding: 2px 4px;
 }
+.reputation-row .reviews-line { margin: 0; }
 .contact-map-frame {
   overflow: hidden; border-radius: 16px; aspect-ratio: 4 / 3;
   border: 1px solid var(--line); box-shadow: var(--shadow-lg); background: #0a2033;
@@ -465,9 +461,10 @@ html[data-theme="light"] body.contact-page a:hover { color: var(--green-deep); }
 .contact-page .field textarea { min-height: 120px; }
 
 @media (max-width: 860px) {
-  .ncm-mark { width: 148px; height: 148px; }
-  .contact-page .site-header .wrap { flex-wrap: wrap; min-height: 0; }
-  .cred-lockup { width: 132px; }
+  .brand-logo, .ncm-mark { width: 112px; height: 112px; }
+  .site-header .wrap { min-height: 120px; }
+  .contact-page .site-header .wrap { flex-wrap: wrap; }
+  .cred-lockup { width: 72px; }
   .contact-page .hero h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
   .nav.open .chrome-toggles { width: 100%; padding-top: 12px; }
 }
