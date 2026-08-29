@@ -353,24 +353,17 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
 }
 
 /* ---------- Contact: stacked NCM lockup, dark/light, EN|ES chrome ---------- */
-.brand-lockup { align-items: center; gap: 12px; max-width: min(420px, 58vw); }
+.contact-page .site-header .wrap { min-height: 220px; align-items: center; }
+.brand-ncm { align-items: center; gap: 10px; }
 .ncm-mark {
-  width: 140px; height: 200px; border-radius: 10px;
-  object-fit: cover; object-position: center 40%;
+  width: 220px; height: 220px; border-radius: 8px;
+  object-fit: contain; object-position: center;
   background: #001a33; flex: 0 0 auto;
 }
-.brand-wordmark { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-.brand-wordmark .brand-name {
-  color: #fff; font-weight: 800; font-size: 0.98rem; letter-spacing: .02em;
-}
-.brand-wordmark .brand-name em {
-  color: var(--green-bright); font-style: normal; font-weight: 900;
-}
-.brand-tagline, .brand-serving {
-  display: block; font-size: .68rem; line-height: 1.25; font-weight: 700;
-}
-.brand-tagline { color: #fff; }
-.brand-serving { color: var(--green-bright); }
+.ncm-i18n { display: none; flex-direction: column; gap: 2px; max-width: 14rem; }
+html[data-lang="es"] .ncm-i18n { display: flex; }
+.ncm-i18n span { font-size: .72rem; line-height: 1.25; font-weight: 700; color: #fff; }
+.ncm-i18n span[data-i18n="serving"] { color: var(--green-bright); }
 
 .chrome-toggles { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .seg {
@@ -408,8 +401,14 @@ html[data-theme="light"] body.contact-page {
   background: var(--bg);
   color: var(--body);
 }
-html[data-theme="light"] body.contact-page .brand-wordmark .brand-name,
-html[data-theme="light"] body.contact-page .brand-tagline { color: #fff; }
+html[data-theme="dark"] body.contact-page a { color: #fff; }
+html[data-theme="dark"] body.contact-page a:hover { color: var(--green-bright); }
+html[data-theme="dark"] body.contact-page .reviews-line a,
+html[data-theme="dark"] body.contact-page .hero-areas a,
+html[data-theme="dark"] body.contact-page .terms-box a,
+html[data-theme="dark"] body.contact-page .nap-bar a {
+  color: var(--green-bright);
+}
 html[data-theme="dark"] body.contact-page .hero,
 html[data-theme="dark"] body.contact-page section { background: var(--bg); }
 html[data-theme="dark"] body.contact-page section.soft { background: var(--bg-soft); }
@@ -439,11 +438,10 @@ html[data-theme="light"] body.contact-page a:hover { color: var(--green-deep); }
 
 .contact-page .hero h1 { font-size: clamp(2.1rem, 6vw, 3.4rem); letter-spacing: -0.03em; }
 .contact-page .lede { font-size: 1.18rem; max-width: 40rem; }
-.reputation-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 22px; margin-bottom: 16px; }
+.reputation-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 16px; }
 .cred-lockup {
-  display: block; width: min(280px, 100%); height: auto;
-  background: #fff; border-radius: 10px; padding: 8px 10px;
-  box-shadow: var(--shadow);
+  display: block; width: 160px; height: auto; flex: 0 0 auto;
+  background: #fff; border-radius: 8px; padding: 4px 6px;
 }
 .contact-map-frame {
   overflow: hidden; border-radius: 16px; aspect-ratio: 4 / 3;
@@ -467,9 +465,9 @@ html[data-theme="light"] body.contact-page a:hover { color: var(--green-deep); }
 .contact-page .field textarea { min-height: 120px; }
 
 @media (max-width: 860px) {
-  .ncm-mark { width: 104px; height: 148px; }
-  .contact-page .site-header .wrap { flex-wrap: wrap; }
-  .brand-lockup { max-width: none; }
+  .ncm-mark { width: 148px; height: 148px; }
+  .contact-page .site-header .wrap { flex-wrap: wrap; min-height: 0; }
+  .cred-lockup { width: 132px; }
   .contact-page .hero h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
   .nav.open .chrome-toggles { width: 100%; padding-top: 12px; }
 }

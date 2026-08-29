@@ -4,6 +4,18 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-08-29 — /contact header: stacked NCM only, dark default (PR only, no deploy)
+
+Bryan NO on live /contact: header was reading as the truck wordmark, and first visit opened Light.
+
+- Header mark is only `norcal-carb-mobile-logo-250th.png` (stacked NCM, road in the green C + NorCal / CARB / MOBILE). Removed the HTML NorCal/CARB/MOBILE wordmark and the extra “Now Serving San Diego…” line from the header. Those two locked strings still swap under EN|ES when language is ES; on EN they stay on the graphic.
+- Dark is the first-visit default. `prefers-color-scheme` no longer flips to Light. Light remains an opt-in toggle.
+- Credentialed-tester truck lockup stays a small badge next to 5.0 · 33 reviews only — not the header.
+- Dark-mode phone, email, review, and Testing Terms links are white/lime on navy.
+- No deploy. No wrangler. Ads parked. Phone still (916) 890-4427.
+
+---
+
 ## 2026-08-29 — /contact navy-green lockup, dark/light, EN|ES (PR only, no deploy)
 
 Bryan lock: stacked NCM (road in the green C) is THE logo. /contact redesigned to match the live homepage layout with navy + lime tokens, not the emoji contact page.

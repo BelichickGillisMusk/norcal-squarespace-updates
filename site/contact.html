@@ -13,10 +13,7 @@
   <script>
     (function () {
       try {
-        var t = localStorage.getItem('ncm-theme');
-        if (t !== 'light' && t !== 'dark') {
-          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-        }
+        var t = localStorage.getItem('ncm-theme') === 'light' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', t);
         var l = localStorage.getItem('ncm-lang') === 'es' ? 'es' : 'en';
         document.documentElement.lang = l;
@@ -33,12 +30,11 @@
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand brand-lockup" href="/">
-      <img class="brand-logo ncm-mark" src="/assets/img/norcal-carb-mobile-logo-250th.png" width="152" height="168" alt="NorCal CARB Mobile — NCM road mark" loading="eager">
-      <span class="brand-wordmark">
-        <span class="brand-name">NorCal <em>CARB</em> MOBILE</span>
-        <span class="brand-tagline" data-i18n="tagline">Mobile Smoke &amp; OBD Testing</span>
-        <span class="brand-serving" data-i18n="serving">Now Serving San Diego County &amp; the Central Valley</span>
+    <a class="brand brand-ncm" href="/">
+      <img class="ncm-mark" src="/assets/img/norcal-carb-mobile-logo-250th.png" width="220" height="220" alt="NorCal CARB Mobile — stacked NCM road lockup" loading="eager">
+      <span class="ncm-i18n">
+        <span data-i18n="tagline">Mobile Smoke &amp; OBD Testing</span>
+        <span data-i18n="serving">Now Serving San Diego County &amp; the Central Valley</span>
       </span>
     </a>
     <nav class="nav" aria-label="Primary">
@@ -83,7 +79,7 @@
       <div class="hero-grid">
         <div class="hero-copy">
           <div class="reputation-row">
-            <img class="cred-lockup" src="/assets/img/credentialed-tester.jpg" width="280" height="120" data-i18n-alt="cred_alt" alt="NorCal CARB Mobile — Clean Truck Check credentialed tester">
+            <img class="cred-lockup" src="/assets/img/credentialed-tester.jpg" width="160" height="68" data-i18n-alt="cred_alt" alt="NorCal CARB Mobile — Clean Truck Check credentialed tester">
             <p class="reviews-line"><span class="stars">★★★★★</span> <span data-i18n="reviews_line">5.0 · 33 Google reviews</span> · <a href="/reviews" data-i18n="reviews_read">Read our Google reviews</a></p>
           </div>
           <h1 data-i18n="h1">We come to you. Clean Truck Check.</h1>
