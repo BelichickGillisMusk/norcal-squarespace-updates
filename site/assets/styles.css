@@ -355,7 +355,7 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
 /* ---------- Contact: stacked NCM lockup, dark/light, EN|ES chrome ---------- */
 .brand-lockup { align-items: center; gap: 12px; max-width: min(420px, 58vw); }
 .ncm-mark {
-  width: 132px; height: 148px; border-radius: 12px;
+  width: 140px; height: 200px; border-radius: 10px;
   object-fit: cover; object-position: center 40%;
   background: #001a33; flex: 0 0 auto;
 }
@@ -467,7 +467,8 @@ html[data-theme="light"] body.contact-page a:hover { color: var(--green-deep); }
 .contact-page .field textarea { min-height: 120px; }
 
 @media (max-width: 860px) {
-  .ncm-mark { width: 96px; height: 108px; }
+  .ncm-mark { width: 104px; height: 148px; }
+  .contact-page .site-header .wrap { flex-wrap: wrap; }
   .brand-lockup { max-width: none; }
   .contact-page .hero h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
   .nav.open .chrome-toggles { width: 100%; padding-top: 12px; }
