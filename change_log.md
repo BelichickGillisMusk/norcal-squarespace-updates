@@ -4,6 +4,20 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-08-29 — /contact navy-green lockup, dark/light, EN|ES (PR only, no deploy)
+
+Bryan lock: stacked NCM (road in the green C) is THE logo. /contact redesigned to match the live homepage layout with navy + lime tokens, not the emoji contact page.
+
+- Header uses the real `norcal-carb-mobile-logo-250th.png` as a rectangular stacked lockup (not a fake circle, not a truck-only mark). Taglines stay on the graphic; HTML repeats the two locked lines so EN|ES can swap them.
+- Shared tokens: `--navy` `#002244`, `--navy-deep` `#001a33`, `--green` `#3d9b2f` / `#66bb3c`. Red CTAs retired ( `--red` now aliases green).
+- Dark default on `/contact` (navy like the lockup). Light mode = white background, navy type, green stays. Dark | Light control + `localStorage`. First load follows `prefers-color-scheme` when nothing is saved.
+- EN | ES toggle on `/contact`. Locked ES: “Pruebas de humo y OBD móviles” and “Ahora sirviendo al Condado de San Diego y el Valle Central”. Clean Truck Check stays English. No CTC as a public phrase.
+- Reputation row: credentialed-tester lockup + 5.0 · 33 Google reviews. Prices: OBD $75, Mobile OVI $199, Motorhome $99/$229. Corridor copy leads Oakland / Hayward / Peninsula / Napa / Wine Country. Map is the existing coverage asset framed to Bay Area → Napa. No San Diego chips. Phone only (916) 890-4427. Form still POST `/api/contact`. Worker To unchanged (sales@ + documented carb@ + fsu9913@).
+- JSON-LD offer prices corrected to 75 / 199 / 99 / 229 (`priceRange` `$75-$229`).
+- Ads stay parked. No wrangler. No second Pages project. No deploy from this change.
+
+---
+
 ## 2026-08-23 — Contact form To: sales@ + carb@ + fsu9913@ (inbound fix)
 
 Bryan GO: website contact leads were going to `CONTACT_TO` / `DEFAULT_TO` = `bgillis99@gmail.com` (admin@mc mailbox), so two fills produced zero shop mail. Page could still say “Got it” on Resend 502.
