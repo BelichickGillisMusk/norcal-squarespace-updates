@@ -1,39 +1,49 @@
 ---
-title: "Ag Fleets in Porterville & Tulare County — Mobile OBD / OVI"
+title: "Porterville and Tulare Ag Yards — Haul Trucks Still Test Twice a Year"
 slug: "ag-fleets-porterville-tulare-obd-ovi"
 source: new
-date: 2026-08-08
-publish_date: ""
-status: draft
+date: 2026-09-01
+publish_date: 2026-10-06
+status: pending
 owner_approved: "NO"
 approve_phrase: "approve ag-porterville"
 industry: "agriculture"
 locations:
   - "Porterville, CA"
   - "Tulare County, CA"
-  - "Central Valley, CA"
-testing_oddity: "YOU FILL: what was different on the ag yard (season, harvest trucks, OVI mix, dusty yard, early start, …)"
-cool_thing: "YOU FILL: where the tester ate OR what’s on the list for next visit"
-tags: ["CARB", "Clean Truck Check", "Agriculture", "Porterville", "Tulare", "OBD", "OVI"]
-meta_description: "Mobile Clean Truck Check for ag fleets in Porterville and Tulare County — OBD and OVI on-site when the trucks can’t leave the yard."
+  - "Merced, CA"
+  - "Woodland, CA"
+testing_oddity: "Harvest yards mix qualifying ag (annual) with haul and packing-house road units (semi-annual). Same dirt lot, two clocks. OBD units in that haul group go quarterly in October 2027."
+cool_thing: "Do not duplicate the harvest post. Link it. Next documented ag/haul pins: Woodland and Merced corridor pages already live. Porterville field post already live at /blog/fleets-ovi-obd-porterville-mojave."
+tags: ["CARB", "Clean Truck Check", "Agriculture", "Porterville", "Tulare", "Merced", "OBD", "OVI"]
+meta_description: "Porterville and Tulare County Clean Truck Check: qualifying ag stays annual, haul trucks stay semi-annual. Mobile OBD $75 / OVI $199. Call 916-890-4427."
 ---
 
-# Ag fleets in Porterville & Tulare County
+# Ag fleets in Porterville and Tulare County
 
-NorCal CARB Mobile follows **agriculture** fleets into the southern Central Valley when asked. **Porterville** and **Tulare County** sit on the ag/freight belt — harvest and haul trucks still need Clean Truck Check on deadline. Everyday home base stays Northern California ([service areas](/areas)); Porterville is the kind of pin we hit when the fleet says meet us here.
+**Porterville** and **Tulare County** sit on the southern Central Valley ag/freight belt. NorCal CARB Mobile hits that pin when the fleet asks. Home base stays Northern California. Route page: [Central Valley & Sierra](/central-valley-sierra-carb-testing) · [areas](/areas).
 
-## Testing notes from the yard
+This post does not replace the harvest explainer. Read that first: [Harvest season: ag can stay annual. Haul trucks cannot](/blog/harvest-season-clean-truck-check-ag-haul). Field companion already live: [Fleet OBD & OVI in Porterville and the Mojave](/blog/fleets-ovi-obd-porterville-mojave).
 
-**YOU FILL (testing oddity — one real sentence):**  
-_e.g. “Half the units needed OVI snaps before sun-up,” or “OBD ports buried under aftermarket dash kits,” or whatever actually happened._
+## Two clocks on one yard
 
-Placeholder until filled: On-site we run **OBD** ($75) and **OVI** ($199) with CTC-VIS paperwork handled so the yard keeps moving. Mixed ag fleets on one visit are normal — see also [Central Valley & Sierra routes](/central-valley-sierra-carb-testing).
+CARB’s rule is not “we farm, so skip.”
 
-## Cool stop / next on the list
+- Vehicles that **meet** the agricultural definition: **annual**.
+- Haul trucks, packing-house road units, and anything that fails the definition: **semi-annual** (two tests per year).
+- Qualifying ag and qualifying CA motorhomes do **not** move to quarterly OBD in October 2027.
+- A 2013+ haul truck on the OBD path **does** move to four tests per year beginning October 2027.
 
-**YOU FILL (cool thing — AI cannot invent this):**  
-_Where the tester ate, a roadside find, **or** the next pin already queued._
+Official reference: [CARB agricultural vehicles and CA motorhomes annual requirements](https://ww2.arb.ca.gov/resources/documents/clean-truck-check-agricultural-vehicles-california-motor-homes-annual).
+
+Also see: [Is your truck an agricultural vehicle?](/clean-truck-check-blog/is-your-truck-an-agricultural-vehicle-your-carb-clean-truck-check-guide) · [Merced County guide](/clean-truck-check-blog/carb-compliance-guide-for-truckers-in-merced-county-navigating-clean-truck-regulations) · [Woodland agriculture](/clean-truck-check-blog/woodland-agriculture-meets-carb-compliance).
+
+## Testing notes
+
+Dusty yards and early starts are normal. The testing oddity that matters is the mix: OBD haul units and OVI older iron on the same dirt. We bring both. **OBD $75** · **OVI $199**. Five-plus OBD same appointment: ask for the multi-truck rate.
+
+Do not invent a Porterville lunch line here. The live Mojave/Porterville field post already carries the trip detail.
 
 ## Book
 
-[Contact](/contact) · [(916) 890-4427](tel:+19168904427)
+**916-890-4427** · [contact](/contact) · [services](/services) · [pricing](/pricing).
