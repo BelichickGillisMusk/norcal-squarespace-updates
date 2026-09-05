@@ -1,20 +1,21 @@
 {
-  "version": "2026-08-29.1",
+  "version": "2026-09-05.1",
   "owner": "NorCal CARB Mobile LLC",
   "requiredPhoneDisplay": "916-890-4427",
   "requiredPhoneSchema": "+1-916-890-4427",
   "requiredPhoneHref": "tel:+19168904427",
   "protectedFiles": {
-    "site/index.html": "6782e70f6b8bf88937c79a138f801309e8e63cb1168caf6ed5c55c57dd6a0a8b",
-    "site/assets/styles.css": "4cf4d43dbb1a7cde7a1ea7b1539a9c4485d452d584dab2bdeefe754f266388f2",
+    "site/index.html": "dc71826fb52021fe858b490d6b2c276126d7872a6640a47a6ecc23f962a8601d",
+    "site/assets/styles.css": "65cfa823a8c194d8d505015339f19ffac1c398f90841699572208f15c047dc9c",
+    "site/assets/img/ncm-logo.png": "31977ac93ff9aebd5cb6b42a8101eec8d53aac4cea1952afb264b7de01c0b69b",
     "site/assets/img/norcal-carb-mobile-logo-250th.png": "774fb7772bfacb03a6410a2acc21772d4dd40f016edb9769d0c89e51f42f04b2",
     "site/assets/img/coverage-map-v2.png": "0cad54e2baad77fad0ab55a10d807cffa94c907d1dd93992a392f44bd00c455d"
   },
   "requiredColors": {
-    "--navy": "#002244",
-    "--navy-deep": "#001a33",
+    "--navy": "#012241",
+    "--navy-deep": "#00182f",
     "--navy-mid": "#0a3a5c",
-    "--green": "#3d9b2f",
+    "--green": "#4ab94e",
     "--bg": "#ffffff"
   },
   "requiredWorkerName": "norcal-squarespace-updates-gillis",
