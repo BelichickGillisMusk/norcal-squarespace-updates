@@ -4,6 +4,16 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-05 — Align Stockton / corridor visible prices to homepage lock
+
+Madison found live Stockton still showing OBD $79 / OVI $189 / MH $79/$189 and Full Care $70 while homepage lock is OBD $75 · OVI $199 · Motorhome $99/$229 and Full Care = CARB annual fee + $40/year.
+
+- `site/stockton-clean-truck-check.html` and `site/clean-truck-check-lodi.html`: visible cards, meta, OG, and footer now $75 / $199 / $99 / $229.
+- Full Care cards on Stockton, Lodi, Sacramento, and Bay Area now match homepage wording (`+$40/year` — not $70).
+- Phone stays 916-890-4427. No 415. No ads. No wrangler. No Deploy NorCal dispatch. Gillis Git Worker only.
+
+---
+
 ## 2026-09-05 — Ally navy/green NCM mark sitewide (PR only, no deploy)
 
 Bryan GO via Ally: replace Happy-250th / leftover red chrome with the navy-square NCM mark on www (Gillis worker only).
