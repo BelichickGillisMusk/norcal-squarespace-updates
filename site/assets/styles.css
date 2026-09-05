@@ -1,18 +1,19 @@
-/* NorCal CARB Mobile — design system v2026-08-29
-   Navy · Lime/forest green · White. Red CTAs retired. */
+/* NorCal CARB Mobile — design system v2026-09-05
+   Ally brand kit: navy #012241 · green #4ab94e · white.
+   Legacy red (#e60000 / #e10000) retired. Stripe invoice #00a859 is not a www CTA. */
 
 :root {
-  --navy: #002244;
-  --navy-deep: #001a33;
+  --navy: #012241;
+  --navy-deep: #00182f;
   --navy-mid: #0a3a5c;
-  --navy-gloss: linear-gradient(180deg, #003058 0%, #002244 55%, #001a33 100%);
-  --green: #3d9b2f;
-  --green-bright: #66bb3c;
-  --green-deep: #2d7a22;
+  --navy-gloss: linear-gradient(180deg, #0a3a5c 0%, #012241 55%, #00182f 100%);
+  --green: #4ab94e;
+  --green-bright: #5cc860;
+  --green-deep: #3a9440;
   /* Primary CTA token — brand green. --red kept as alias so existing .btn-primary stays on-token. */
-  --red: #3d9b2f;
-  --red-deep: #2d7a22;
-  --red-soft: #eaf6e6;
+  --red: #4ab94e;
+  --red-deep: #3a9440;
+  --red-soft: #e8f6e9;
   --silver: #a1a1aa;
   --silver-line: #e4e4e7;
   --ink: #18181b;
@@ -99,7 +100,7 @@ a:hover { color: var(--green); }
 .ncm-mark {
   display: block; width: 144px; height: 144px; border-radius: 8px;
   object-fit: contain; object-position: center;
-  background: #001a33; flex: 0 0 auto;
+  background: #012241; flex: 0 0 auto;
   box-shadow: 0 0 0 1px rgba(255,255,255,.12);
 }
 .brand-name { font-weight: 800; color: #fff; font-size: 1.05rem; line-height: 1.05; }
@@ -375,8 +376,8 @@ html[data-lang="es"] .ncm-i18n { display: flex; }
 .seg-btn.is-active:hover { background: var(--green-deep); }
 
 html[data-theme="dark"] body.contact-page {
-  --bg: #001a33;
-  --bg-soft: #002244;
+  --bg: #00182f;
+  --bg-soft: #012241;
   --ink: #ffffff;
   --body: #e8eef4;
   --muted: #b4c3d1;
@@ -389,8 +390,8 @@ html[data-theme="dark"] body.contact-page {
 html[data-theme="light"] body.contact-page {
   --bg: #ffffff;
   --bg-soft: #f4f7fa;
-  --ink: #002244;
-  --body: #002244;
+  --ink: #012241;
+  --body: #012241;
   --muted: #3a5166;
   --line: #d5dee6;
   background: var(--bg);
@@ -409,14 +410,14 @@ html[data-theme="dark"] body.contact-page section { background: var(--bg); }
 html[data-theme="dark"] body.contact-page section.soft { background: var(--bg-soft); }
 html[data-theme="dark"] body.contact-page .card,
 html[data-theme="dark"] body.contact-page .nap-bar {
-  background: #002a52;
+  background: #0a3158;
   border-color: var(--line);
 }
 html[data-theme="dark"] body.contact-page .nap-bar a { color: #fff; }
 html[data-theme="dark"] body.contact-page .field input,
 html[data-theme="dark"] body.contact-page .field textarea,
 html[data-theme="dark"] body.contact-page .field select {
-  background: #001a33; color: #fff; border-color: rgba(255,255,255,.22);
+  background: #00182f; color: #fff; border-color: rgba(255,255,255,.22);
 }
 html[data-theme="dark"] body.contact-page .btn-ghost {
   background: transparent; color: #fff !important; border-color: rgba(255,255,255,.35);
@@ -425,10 +426,10 @@ html[data-theme="dark"] body.contact-page .btn-ghost:hover {
   background: rgba(255,255,255,.08); color: #fff !important;
 }
 html[data-theme="dark"] body.contact-page .route-chips span {
-  background: #001a33; color: #fff; border-color: rgba(255,255,255,.2);
+  background: #00182f; color: #fff; border-color: rgba(255,255,255,.2);
 }
 html[data-theme="light"] body.contact-page .card { background: #fff; }
-html[data-theme="light"] body.contact-page a { color: #002244; }
+html[data-theme="light"] body.contact-page a { color: #012241; }
 html[data-theme="light"] body.contact-page a:hover { color: var(--green-deep); }
 
 .contact-page .hero h1 { font-size: clamp(2.1rem, 6vw, 3.4rem); letter-spacing: -0.03em; }

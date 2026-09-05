@@ -31,16 +31,18 @@ const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
 const CURRENT_TERMS_VERSION = '2026-07-22';
 const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
 
-const LOGO_URL = 'https://norcalcarbmobile.com/assets/img/norcal-carb-mobile-logo-250th.png';
+const LOGO_URL = 'https://norcalcarbmobile.com/assets/img/ncm-logo.png';
+const OG_IMAGE_URL = 'https://norcalcarbmobile.com/assets/img/norcal-carb-mobile-logo-web-512x512.png';
 
-/** Favicon + Open Graph / Twitter share image (Issue #49). Injected sitewide. */
+/** Favicon + Open Graph / Twitter share image. Injected sitewide. */
 const BRANDING_TAGS = `
-<link rel="icon" href="${LOGO_URL}" type="image/png" sizes="any">
-<link rel="apple-touch-icon" href="${LOGO_URL}">
-<meta property="og:image" content="${LOGO_URL}">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:image" content="${OG_IMAGE_URL}">
 <meta property="og:image:alt" content="NorCal CARB Mobile — Mobile Clean Truck Check">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="${LOGO_URL}">
+<meta name="twitter:image" content="${OG_IMAGE_URL}">
 <meta name="twitter:image:alt" content="NorCal CARB Mobile logo">
 `;
 

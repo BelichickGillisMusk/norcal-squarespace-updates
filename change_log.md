@@ -4,6 +4,19 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-05 — Ally navy/green NCM mark sitewide (PR only, no deploy)
+
+Bryan GO via Ally: replace Happy-250th / leftover red chrome with the navy-square NCM mark on www (Gillis worker only).
+
+- Header mark is `site/assets/img/ncm-logo.png` (same master as `site/Logo.png`) — stacked NCM on navy, not the truck wordmark, not a second lockup.
+- Favicon / apple-touch at site root: `/favicon.ico` (multi-size 16/32/48/64 from kit PNGs, ~12KB), `/favicon.png` (official 32x32), `/apple-touch-icon.png`. Wired in HTML heads and Worker inject.
+- OG / Twitter: `norcal-carb-mobile-logo-web-512x512.png`.
+- Tokens: navy `#012241`, green `#4ab94e`. `--red` still aliases green. Stripe `#00a859` not used on www CTAs. `/contact` dark-default + EN|ES kept.
+- Homepage footer has no `carbcleantruckcheck.app` promo (already stripped). Public phone remains (916) 890-4427. No 617. No ads. No wrangler. No second Pages/Workers project.
+- Sister hosts `mobilecarbsmoketest.com` and `carbcleantruckcheck.app` are not this Gillis worker — www only.
+
+---
+
 ## 2026-08-29 — Sitewide header: one stacked NCM; no second lockup (PR only, no deploy)
 
 Bryan: ship the stacked NCM he likes, and delete the duplicate logo-header look on the other pages.
