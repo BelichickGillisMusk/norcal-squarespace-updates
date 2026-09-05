@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-05 — Restore navy + green on Gillis www CSS (Grok/Cursor request)
+
+Live `https://www.norcalcarbmobile.com/assets/styles.css` still ships the Aug 7 charcoal/red sheet (`--navy: #141414`, `--red: #b91c1c`, header "Charcoal · White · Red · Silver. NOT blue/navy"). Ally + Bryan locked navy + green; live is not green. Grok/Cursor requested this brand fix.
+
+- `site/assets/styles.css` (Gillis Worker ASSETS = `./site`): `--navy` `#012241`, `--green` `#4ab94e`, hover `--green-deep` `#3d9b2f`. `--red*` still aliases green so leftover selectors flip. Header comment is Navy · White · Green (not charcoal/red).
+- `_bridge/norcal-locked-static/assets/styles.css`: same token remap (was `#0a1628` / `#b91c1c`). Bridge does not feed www; aligned so it cannot reintroduce red.
+- Phone stays 916-890-4427. No 415. No copy/price/metric changes. No deploy. No wrangler.
+- Header mark `ncm-logo.png` is already navy + green. `norcal-carb-mobile-logo-250th.png` still has flag stripes — out of scope.
+
+---
+
 ## 2026-09-05 — Align Stockton / corridor visible prices to homepage lock
 
 Madison found live Stockton still showing OBD $79 / OVI $189 / MH $79/$189 and Full Care $70 while homepage lock is OBD $75 · OVI $199 · Motorhome $99/$229 and Full Care = CARB annual fee + $40/year.
