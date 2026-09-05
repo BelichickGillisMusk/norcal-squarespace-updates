@@ -7,7 +7,7 @@ migration. Plain HTML/CSS + one Pages Function for the contact form. Editable by
 site/
 ├── index.html              # Homepage
 ├── contact.html            # Contact + booking (served at /contact)
-├── assets/styles.css       # All styles (brand green #1a5f2a, Montserrat/Source Sans)
+├── assets/styles.css       # All styles (navy #012241 · green #4ab94e)
 ├── functions/api/contact.js# POST /api/contact → emails lead via Resend
 ├── _headers                # Cache + security headers
 └── assets/img/             # Photos (add Google Business Profile pics here)

@@ -1,6 +1,8 @@
 /* NorCal CARB Mobile — design system v2026-09-05
-   Ally brand kit: navy #012241 · green #4ab94e · white.
-   Legacy red (#e60000 / #e10000) retired. Stripe invoice #00a859 is not a www CTA. */
+   Navy · White · Green. Not charcoal/red.
+   Tokens: navy #012241 · green #4ab94e · hover #3d9b2f.
+   Legacy --red* aliases green so older selectors stay on-token.
+   Stripe invoice #00a859 is not a www CTA. */
 
 :root {
   --navy: #012241;
@@ -9,10 +11,10 @@
   --navy-gloss: linear-gradient(180deg, #0a3a5c 0%, #012241 55%, #00182f 100%);
   --green: #4ab94e;
   --green-bright: #5cc860;
-  --green-deep: #3a9440;
+  --green-deep: #3d9b2f;
   /* Primary CTA token — brand green. --red kept as alias so existing .btn-primary stays on-token. */
   --red: #4ab94e;
-  --red-deep: #3a9440;
+  --red-deep: #3d9b2f;
   --red-soft: #e8f6e9;
   --silver: #a1a1aa;
   --silver-line: #e4e4e7;
