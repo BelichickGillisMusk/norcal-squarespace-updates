@@ -4,6 +4,19 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-05 — Switch & Save is second test/truck, not first (Grok/Cursor)
+
+Live `https://www.norcalcarbmobile.com/pricing` still sold “50% off your first test” (OBD $37.50 / OVI $99.50 as first-test prices). Bryan lock via Ally: first test/truck stays full price ($75 OBD / $199 OVI); second test or second truck is 50% ($37.50 / $99.50) same call or next visit.
+
+- `site/pricing.html` (Gillis Worker ASSETS = `./site`): headline, line items, and CTA now say second test/truck; first stays $75 / $199.
+- `site/index.html`: fleet card “First-timer switch offer available” → second-truck / return-visit half-off.
+- `site/services.html`: Switch & Save row “50% off 1st test” → “50% off 2nd test/truck”.
+- `_bridge/norcal-locked-static/` pricing, home, services, contact, motorhome, and agricultural-vehicles pages aligned so they cannot reintroduce first-test 50% copy. Bridge does not feed www.
+- MH prices stay $99/$229. Phone stays 916-890-4427. No names. No invented metrics. No VIN tool. No new comparison table. No deploy. No wrangler.
+- `config/site-template-lock.json` homepage hash + version `2026-09-05.3` — Bryan/Ally approved the index.html second-truck copy (required site-lock check).
+
+---
+
 ## 2026-09-05 — Restore navy + green on Gillis www CSS (Grok/Cursor request)
 
 Live `https://www.norcalcarbmobile.com/assets/styles.css` still ships the Aug 7 charcoal/red sheet (`--navy: #141414`, `--red: #b91c1c`, header "Charcoal · White · Red · Silver. NOT blue/navy"). Ally + Bryan locked navy + green; live is not green. Grok/Cursor requested this brand fix.
