@@ -4,6 +4,28 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-05 — CSS cache-bust + Bryan 711 lock (Grok/Cursor)
+
+Bryan still saw red Call CTAs after navy+green PR #81. Live CSS was already navy `#012241` + green `#4ab94e` (etag `d912c4e79321adaa24f3ec1f86f36651`), but HTML linked `/assets/styles.css` with no query and `site/_headers` shipped `cache-control: public, max-age=31536000, immutable` on `/assets/*`. Browsers that cached the pre-#81 red sheet will never refetch.
+
+Bryan 711 lock (this PR):
+- CSS stays a separate file (`site/assets/styles.css`). No inline brand tokens / hex in page HTML.
+- Every color/token change goes only in that stylesheet.
+- Cache-bust THAT file only: `<link>` href is now `/assets/styles.css?v=20260905-navygreen`.
+- Kill year-long immutable on CSS: Worker + `_headers` use `public, max-age=3600, must-revalidate` for `*.css`. Images under `/assets/` can stay long-cache.
+- Do not inline navy/green into index/pricing/etc.
+
+Files:
+- 87 `site/**/*.html` stylesheet hrefs (reviews redirect stub has no CSS link)
+- `site/_headers`
+- `worker/index.js`
+- `scripts/blog-migration/build_blog_pages.py` (future regenerations)
+- `scripts/site-lock/validate.mjs` + `config/site-template-lock.json` (homepage href hash + 711 checks)
+
+Phone stays 916-890-4427. Brand colors unchanged. No ads. No invent metrics. No deploy.
+
+---
+
 ## 2026-09-05 — Switch & Save is second test/truck, not first (Grok/Cursor)
 
 Live `https://www.norcalcarbmobile.com/pricing` still sold “50% off your first test” (OBD $37.50 / OVI $99.50 as first-test prices). Bryan lock via Ally: first test/truck stays full price ($75 OBD / $199 OVI); second test or second truck is 50% ($37.50 / $99.50) same call or next visit.

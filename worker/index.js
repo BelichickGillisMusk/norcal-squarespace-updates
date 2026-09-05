@@ -414,6 +414,18 @@ export default {
 
     // Everything else → static assets; inject branding + schema into HTML responses
     const assetRes = await env.ASSETS.fetch(request);
+    // Bryan 711 lock: unversioned CSS must not ship year-long immutable.
+    // HTML cache-busts /assets/styles.css with ?v=; Worker still short-caches
+    // any *.css so a missed query string cannot lock browsers on stale brand.
+    if (url.pathname.toLowerCase().endsWith('.css')) {
+      const headers = new Headers(assetRes.headers);
+      headers.set('Cache-Control', 'public, max-age=3600, must-revalidate');
+      return new Response(assetRes.body, {
+        status: assetRes.status,
+        statusText: assetRes.statusText,
+        headers,
+      });
+    }
     const ct = assetRes.headers.get('content-type') || '';
     if (!ct.includes('text/html')) return assetRes;
     return new HTMLRewriter()
