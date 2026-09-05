@@ -4,6 +4,16 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-05 — Enable Workers Observability on Gillis www (PR, no wrangler deploy)
+
+Enable Workers Logs on the live money Worker `norcal-squarespace-updates-gillis` via Cloudflare Git build on merge. Config only.
+
+- `wrangler.toml` and `wrangler.jsonc`: `observability.enabled = true`, `observability.logs.invocation_logs = true`, `head_sampling_rate = 1`.
+- Worker name stays `norcal-squarespace-updates-gillis`. No second Pages/Workers project. No `wrangler.prod-empty.toml` / `norcalcarbmobile-prod`. No workflow_dispatch Deploy NorCal. No local wrangler deploy.
+- No www HTML/content, ads, or phone copy changes.
+
+---
+
 ## 2026-09-05 — Ally navy/green NCM mark sitewide (PR only, no deploy)
 
 Bryan GO via Ally: replace Happy-250th / leftover red chrome with the navy-square NCM mark on www (Gillis worker only).
