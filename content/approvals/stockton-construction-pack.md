@@ -11,7 +11,7 @@ No personal names in customer-facing copy.
 
 ## Internal links already in the draft
 
-- /stockton-clean-truck-check
+- /stockton-clean-truck-check  (prices now $75 / $199 / $99 / $229 — safe)
 - /service-area-san-joaquin-county-mobile-testing
 - /clean-truck-check-blog/mobile-clean-truck-check-near-stockton-on-site-emissions-testing-for-san-joaquin-county-fleets
 - /clean-truck-check-blog/how-norcal-carb-mobile-keeps-mitchell-concrete-moving-strong-in-rancho-cordova
@@ -21,8 +21,6 @@ No personal names in customer-facing copy.
 - /blog/2026-carb-testing-deadlines
 - /clean-truck-check-blog/keeping-pallets-moving-amp-trucks-carb-clean-a-partnership-with-all-good-pallets-stockton-ca
 - /clean-truck-check-blog/when-every-minute-counts-how-norcal-carb-mobile-saved-banwait-truckings-deadline
-
-Fix $79/$189 on /stockton-clean-truck-check before this URL goes live.
 
 ---
 

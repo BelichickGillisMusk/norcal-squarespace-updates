@@ -2,7 +2,7 @@
 title: "Stockton Construction and Concrete Fleets — Yard Clean Truck Check on the 99 / I-5 Loop"
 slug: "stockton-construction-concrete-clean-truck-check"
 source: rewrite-from-unreleased-queue
-date: 2026-09-05
+date: 2026-09-06
 publish_date: 2026-09-08
 status: pending
 owner_approved: "NO"
@@ -16,7 +16,7 @@ locations:
   - "Manteca, CA"
   - "San Joaquin County, CA"
 testing_oddity: "Construction mixers, dumps, and F550s on this corridor are not the agricultural annual exception. Same-visit mix of OBD and OVI is normal. Engine year is confirmed before dispatch, not at the gate."
-cool_thing: "Documented construction pins already on the board: Mitchell Concrete on the Rancho Cordova / Granite Bay corridor; All Fence, 1900 Spring St, Redwood City, Sat 9/5 8:30a, 7 OBD. No invented Stockton diner."
+cool_thing: "Documented construction pins: Mitchell Concrete on the Rancho Cordova / Granite Bay corridor; All Fence, 1900 Spring St, Redwood City, completed Sat 9/5 8:30a, 7 OBD. No invented Stockton diner."
 tags: ["CARB", "Clean Truck Check", "Construction", "Concrete", "Stockton", "Lodi", "Tracy", "San Joaquin", "OBD", "OVI"]
 meta_description: "Mobile Clean Truck Check for Stockton construction and concrete fleets. OBD $75 and OVI $199 at the yard in Stockton, Lodi, Tracy, Lathrop, and Manteca. Call 916-890-4427."
 ---
@@ -46,13 +46,13 @@ Book: **916-890-4427** or [contact](/contact).
 
 ## What CARB requires in 2026 — and what changes in October 2027
 
-Clean Truck Check is heavy-duty periodic testing, not light-duty Smog Check. Source of truth for each VIN is the fleet’s **CTC-VIS** account, not a blog calendar.
+Clean Truck Check is heavy-duty periodic testing, not light-duty Smog Check. Source of truth for each VIN is the fleet’s **CTC-VIS** account, not a blog calendar. Official cadence: [CARB emissions compliance testing requirements](https://ww2.arb.ca.gov/clean-truck-check-emissions-compliance-testing-requirements).
 
 - **Now through September 2027:** most construction trucks = **2 tests per year**. Qualifying agricultural vehicles and qualifying CA recreational / emergency motorhomes = **1 test per year**.
 - **Beginning October 2027:** OBD-equipped vehicles move to **4 tests per year**. Opacity-path units (typically 2012-and-older diesel) stay semi-annual. Ag and qualifying CA recreational motorhomes stay annual.
 - Passing results may be submitted **up to 90 days before** the CTC-VIS deadline. That window exists so a fail can be repaired and retested before a DMV hold.
 
-A concrete mixer, dump, water truck, or F550 used as a work truck is **not** the agricultural annual exception unless the unit meets CARB’s published agricultural definition. Confirm the unit in [CTC-VIS](https://cleantruckcheck.arb.ca.gov). Official cadence: [CARB emissions compliance testing requirements](https://ww2.arb.ca.gov/clean-truck-check-emissions-compliance-testing-requirements).
+A concrete mixer, dump, water truck, or F550 used as a work truck is **not** the agricultural annual exception unless the unit meets CARB’s published agricultural definition. Confirm the unit in [CTC-VIS](https://cleantruckcheck.arb.ca.gov).
 
 What stops the truck is a **CA DMV registration hold**. A fine is a bill. A hold is a parked mixer that still costs insurance and misses the pour.
 
@@ -73,7 +73,7 @@ We confirm OBD vs OVI from engine year / equipment **before** dispatch. Unsure u
 Documented construction pins already on the board:
 
 - **Mitchell Concrete** — Rancho Cordova / Granite Bay corridor (published).
-- **All Fence** — 1900 Spring St, Redwood City, Saturday 9/5 8:30 a.m., seven OBD.
+- **All Fence** — 1900 Spring St, Redwood City. Completed Saturday 9/5 8:30 a.m., seven OBD.
 
 No invented Stockton lunch stop. If a real meal pin from a Stockton construction day is added later, it goes in on the next edit.
 
