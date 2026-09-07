@@ -34,6 +34,10 @@ const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
 const LOGO_URL = 'https://norcalcarbmobile.com/assets/img/ncm-logo.png';
 const OG_IMAGE_URL = 'https://norcalcarbmobile.com/assets/img/norcal-carb-mobile-logo-web-512x512.png';
 
+/** Cloudflare Web Analytics RUM beacon (Ally NAP). Injected sitewide before </body>. */
+const CF_WEB_ANALYTICS_BEACON =
+  `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "231f8b2f40e24c50b92870168dbb3f06"}'></script>`;
+
 /** Favicon + Open Graph / Twitter share image. Injected sitewide. */
 const BRANDING_TAGS = `
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -412,7 +416,7 @@ export default {
       });
     }
 
-    // Everything else → static assets; inject branding + schema into HTML responses
+    // Everything else → static assets; inject branding, schema, and CF Web Analytics
     const assetRes = await env.ASSETS.fetch(request);
     const ct = assetRes.headers.get('content-type') || '';
     if (!ct.includes('text/html')) return assetRes;
@@ -421,6 +425,11 @@ export default {
         element(el) {
           el.append(BRANDING_TAGS, { html: true });
           el.append(schemaTag(url.toString()), { html: true });
+        },
+      })
+      .on('body', {
+        element(el) {
+          el.append(CF_WEB_ANALYTICS_BEACON, { html: true });
         },
       })
       .transform(assetRes);
