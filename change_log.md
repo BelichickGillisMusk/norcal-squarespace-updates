@@ -4,6 +4,12 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-07 — Cloudflare Web Analytics beacon (Ally NAP)
+
+Ally NAP: RUM beacon missing on www.norcalcarbmobile.com. Add Cloudflare Web Analytics via Worker HTMLRewriter (same path as branding/schema) so every public HTML page gets the snippet before `</body>`. Token `231f8b2f40e24c50b92870168dbb3f06`. Site-lock asserts the exact snippet/token. No other analytics. No price/phone/branding changes. No wrangler deploy — Bryan GO required.
+
+---
+
 ## 2026-09-05 — Switch & Save is second test/truck, not first (Grok/Cursor)
 
 Live `https://www.norcalcarbmobile.com/pricing` still sold “50% off your first test” (OBD $37.50 / OVI $99.50 as first-test prices). Bryan lock via Ally: first test/truck stays full price ($75 OBD / $199 OVI); second test or second truck is 50% ($37.50 / $99.50) same call or next visit.

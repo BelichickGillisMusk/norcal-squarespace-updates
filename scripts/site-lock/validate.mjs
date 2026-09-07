@@ -52,6 +52,18 @@ for (const area of lock.requiredServiceAreas) {
   if (!worker.includes(`\'${area}\'`)) fail(`Sitewide schema is missing service area: ${area}`);
 }
 
+const homepage = text("site/index.html");
+const cfToken = lock.requiredCfWebAnalyticsToken;
+const cfBeaconSnippet = `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${cfToken}"}'></script>`;
+// Homepage HTML is Worker-injected (run_worker_first). Static site/index.html stays
+// hash-locked; the beacon must appear in the inject that produces served homepage HTML.
+if (!worker.includes(cfBeaconSnippet) && !homepage.includes(cfBeaconSnippet)) {
+  fail("Cloudflare Web Analytics beacon missing from homepage HTML (Worker inject or site/index.html).");
+}
+if (!worker.includes(cfToken) && !homepage.includes(cfToken)) {
+  fail(`Cloudflare Web Analytics token missing from homepage HTML: ${cfToken}`);
+}
+
 const publicFiles = walk(join(root, "site")).filter((path) => path.endsWith(".html"));
 publicFiles.push(join(root, "worker/index.js"));
 for (const file of publicFiles) {

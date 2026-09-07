@@ -19,6 +19,7 @@
     "--green-deep": "#3d9b2f",
     "--bg": "#ffffff"
   },
+  "requiredCfWebAnalyticsToken": "231f8b2f40e24c50b92870168dbb3f06",
   "requiredWorkerName": "norcal-squarespace-updates-gillis",
   "requiredDomains": [
     "norcalcarbmobile.com",
