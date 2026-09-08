@@ -4,6 +4,23 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-08 — Bryan ASAP GO: GBP footer / reviews (blank Maps CID)
+
+Footer + homepage review CTAs used `href="/reviews"`. Live `/reviews` 301'd to `https://maps.google.com/?cid=16019693078134296096` (blank Maps for the owner). `site/reviews/index.html` also meta-refreshed to that CID.
+
+Verified listing (NorCal CARB Mobile LLC, service-area, no shop address):
+`https://www.google.com/maps/place/?q=place_id:ChIJLcTy3iB8fE4RUZRc70Atjaw`
+
+- Homepage / contact / OBD / OVI / motorhome user-facing GBP + review links now open that place_id URL in a new tab (`target="_blank"` `rel="noopener noreferrer"`).
+- Worker no longer 301s `/reviews` to Maps. `/google` and `/leave-review` 301 to on-site `/reviews`.
+- `/reviews` is a real page with stars/count + CTA (new tab). Site chrome kept so visitors are not dumped onto Maps.
+- Worker JSON-LD `sameAs` uses the place_id URL (not the broken CID). No PostalAddress / street added.
+- Phone stays 916-890-4427. No owner name in customer copy. No price changes. No ads.
+- Site-lock now fails if the broken CID reappears in `site/` or `worker/index.js`.
+- No wrangler deploy — Actions → Deploy NorCal CARB Mobile + `bryan_go=GO` + `confirm_worker=norcal-squarespace-updates-gillis` (Gillis path until cutover).
+
+---
+
 ## 2026-09-07 — Cloudflare Web Analytics beacon (Ally NAP)
 
 Ally NAP: RUM beacon missing on www.norcalcarbmobile.com. Add Cloudflare Web Analytics via Worker HTMLRewriter (same path as branding/schema) so every public HTML page gets the snippet before `</body>`. Token `231f8b2f40e24c50b92870168dbb3f06`. Site-lock asserts the exact snippet/token. No other analytics. No price/phone/branding changes. No wrangler deploy — Bryan GO required.

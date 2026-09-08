@@ -29,7 +29,8 @@ const NEVER_TO = [
 ];
 const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
 const CURRENT_TERMS_VERSION = '2026-07-22';
-const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
+// Verified NorCal CARB Mobile LLC GBP (place_id). Never use the old maps.google.com cid link — it opens blank Maps.
+const GOOGLE_REVIEWS_URL = 'https://www.google.com/maps/place/?q=place_id:ChIJLcTy3iB8fE4RUZRc70Atjaw';
 
 const LOGO_URL = 'https://norcalcarbmobile.com/assets/img/ncm-logo.png';
 const OG_IMAGE_URL = 'https://norcalcarbmobile.com/assets/img/norcal-carb-mobile-logo-web-512x512.png';
@@ -127,10 +128,10 @@ function schemaTag(pageUrl) {
  * update their indexes and any inbound links keep working.
  */
 const REDIRECTS = {
-  // → external Google Business Profile / reviews
-  '/reviews': GOOGLE_REVIEWS_URL,
-  '/google': GOOGLE_REVIEWS_URL,
-  '/leave-review': GOOGLE_REVIEWS_URL,
+  // /reviews is an on-site page (site/reviews/index.html) with a new-tab GBP CTA.
+  // Do not 301 these to Maps — same-tab dump loses the visitor.
+  '/google': '/reviews',
+  '/leave-review': '/reviews',
 
   // → homepage
   '/carb-services': '/',

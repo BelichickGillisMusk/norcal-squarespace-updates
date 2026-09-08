@@ -75,6 +75,9 @@ for (const file of publicFiles) {
   if (/619-786-4328|\+1-619|415-900-8563|916-890-4277|\$119|\$219/.test(content)) {
     fail(`Legacy phone number or fixed San Diego price found in ${relative}`);
   }
+  if (content.includes("cid=16019693078134296096") || content.includes("maps.google.com/?cid=")) {
+    fail(`Broken Maps CID in ${relative} — use place_id ChIJLcTy3iB8fE4RUZRc70Atjaw or share.google/CUg6TEK1p3eO34S9G`);
+  }
 }
 
 for (const configPath of ["wrangler.toml", "wrangler.jsonc"]) {
