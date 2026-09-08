@@ -4,6 +4,19 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-08 — Soft scrape-harden llms.txt + robots.txt (Bryan GO aggressive)
+
+Magic 2026-09-08: soften AI training / shrink the clone map on www. **Do not nuke Google / GBP indexing.**
+
+- `site/llms.txt`: keep Contact, Pricing, Core pages, four grounding blogs, 916-890-4427 only. No owner name. Dropped `cleantruckchecksacramento.com` (not ours) and `carb-clean-truck-check.com` (LET-DIE / historic 415). Dropped sister-city URL list so corridor landers are not an easy clone map. Hayward satellite stays live; it is just not listed here.
+- `site/robots.txt`: still `Allow: /` for `*` + Googlebot/Bingbot/GPTBot/OAI-SearchBot. Content-Signal `search=yes,ai-input=yes,ai-train=no` (was `ai-train=yes,use=full`). No money-path Disallow. No blanket GPTBot Disallow.
+- Sitemap left as-is — ~60 `/clean-truck-check-blog/*` URLs stay indexed on purpose (legacy prune = later GO).
+- Site-lock asserts the Google-open / train-soft / no-bad-domain rules so a later edit cannot silently block search.
+
+No redesign. No price changes. No wrangler in this PR. Live ship remains Actions → Deploy NorCal CARB Mobile (`bryan_go=GO`).
+
+---
+
 ## 2026-09-08 — Craft blog GO (Madison / Bryan): Craft So Good They Copy Us
 
 Bryan GO via Madison: publish craft blog NOW on www. **PR only — do not merge or wrangler deploy.**
