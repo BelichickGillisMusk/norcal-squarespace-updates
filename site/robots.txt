@@ -1,6 +1,9 @@
-# NorCal CARB Mobile — AI- and search-friendly
-# Prefer Allow for major AI crawlers so ChatGPT / Claude / Gemini can cite us.
-# If Cloudflare still injects "# BEGIN Cloudflare Managed content" with Disallow
+# NorCal CARB Mobile — search-open, training-soft
+# Keep Allow: / for Google / Bing / GBP indexing. Do not Disallow money paths
+# (/, /services, /pricing, /contact, /areas, /blog).
+# Soften training with Content-Signal ai-train=no. Do NOT blanket Disallow
+# GPTBot / OAI-SearchBot — that also kills useful citation.
+# If Cloudflare injects "# BEGIN Cloudflare Managed content" with Disallow
 # for GPTBot/ClaudeBot, turn OFF:
 #   Dashboard → domain → Security → Settings → Bot traffic
 #   → "Set your preference to block training in robots.txt" = OFF
@@ -8,9 +11,9 @@
 
 User-agent: *
 Allow: /
-Content-Signal: search=yes,ai-input=yes,ai-train=yes,use=full
+Content-Signal: search=yes,ai-input=yes,ai-train=no
 
-# Explicit allows (override accidental blocks)
+# Explicit allows (override accidental blocks). Search + citation stay open.
 User-agent: GPTBot
 Allow: /
 

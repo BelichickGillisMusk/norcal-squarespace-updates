@@ -32,8 +32,8 @@ For **each** money domain (start with norcalcarbmobile.com):
 - AI Crawl Control: `https://dash.cloudflare.com/?to=/:account/:zone/ai`
 
 ## Origin files (deployed with site)
-- `site/robots.txt` — explicit Allow for GPTBot, ClaudeBot, Google-Extended, OAI-SearchBot, PerplexityBot  
-- `site/llms.txt` — short AI grounding (prices, CTA, key URLs)
+- `site/robots.txt` — explicit Allow for GPTBot, ClaudeBot, Google-Extended, OAI-SearchBot, PerplexityBot. Soften training with `Content-Signal: search=yes,ai-input=yes,ai-train=no` (2026-09-08). Do **not** blanket Disallow GPTBot — that also kills citation. Do **not** turn Cloudflare “block training in robots.txt” ON (that injects Disallow).
+- `site/llms.txt` — short AI grounding (prices, CTA, core pages + a few blogs). No competitor / LET-DIE sister domains. No corridor URL dump.
 
 ## WAF note
 norcalcarbmobile.com custom rule currently only hard-blocks **PerplexityBot** by UA. Consider **Allow** there too if you want Perplexity citations.

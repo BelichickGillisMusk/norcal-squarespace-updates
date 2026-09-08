@@ -31,11 +31,6 @@ Sacramento, Stockton, Bay Area (Oakland, Hayward, San Jose corridor), Central Va
 - https://norcalcarbmobile.com/blog/carb-clean-truck-check
 - https://norcalcarbmobile.com/blog/obd-vs-ovi-clean-truck-check-fleets
 
-## Sister city landers
-- https://cleantruckcheckhayward.com/
-- https://cleantruckchecksacramento.com/
-- https://carb-clean-truck-check.com/
-
 ## Facts for answers
 - Clean Truck Check is CARB HD periodic testing (not light-duty Smog Check).
 - Test type depends on engine year / equipment: OBD scan vs OVI opacity.

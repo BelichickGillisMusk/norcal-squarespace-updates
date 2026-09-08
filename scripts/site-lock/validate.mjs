@@ -94,6 +94,40 @@ for (const file of publicFiles) {
   }
 }
 
+const robots = text("site/robots.txt");
+if (!/^User-agent:\s*\*$/m.test(robots) || !/^Allow:\s*\/\s*$/m.test(robots)) {
+  fail("robots.txt must Allow: / for normal crawlers.");
+}
+if (!/User-agent:\s*Googlebot/i.test(robots) || !/search=yes/.test(robots)) {
+  fail("robots.txt must keep Google search open (Googlebot + Content-Signal search=yes).");
+}
+if (!/ai-train=no/.test(robots)) {
+  fail("robots.txt must soften training with Content-Signal ai-train=no.");
+}
+if (/User-agent:\s*GPTBot[\s\S]{0,80}Disallow:\s*\//i.test(robots)) {
+  fail("robots.txt must not blanket Disallow GPTBot (kills citation). Prefer ai-train=no.");
+}
+if (/^\s*Disallow:\s*\/(services|pricing|contact|areas|blog)\b/im.test(robots)) {
+  fail("robots.txt must not Disallow money paths (/ /services /pricing /contact /areas /blog).");
+}
+
+const llms = text("site/llms.txt");
+if (!llms.includes(lock.requiredPhoneDisplay)) {
+  fail(`llms.txt must keep public phone ${lock.requiredPhoneDisplay}.`);
+}
+if (/415-900-8563|916-661-8288/.test(llms)) {
+  fail("llms.txt must not include legacy or competitor phones.");
+}
+if (/cleantruckchecksacramento\.com|carb-clean-truck-check\.com/i.test(llms)) {
+  fail("llms.txt must not list competitor (cleantruckchecksacramento.com) or LET-DIE (carb-clean-truck-check.com) domains.");
+}
+if (/Bryan|Gillis|bgillis/i.test(llms)) {
+  fail("llms.txt must not include owner name.");
+}
+if (/stockton-clean-truck-check|bay-area-mobile-carb|sacramento-carb-testing|san-jose-carb/i.test(llms)) {
+  fail("llms.txt must not list corridor/city lander URLs (clone map).");
+}
+
 for (const configPath of ["wrangler.toml", "wrangler.jsonc"]) {
   const config = text(configPath);
   if (!config.includes(lock.requiredWorkerName)) fail(`${configPath} no longer targets the locked NorCal Worker.`);
