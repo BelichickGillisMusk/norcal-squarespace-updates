@@ -4,6 +4,22 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-08 — Craft blog GO (Madison / Bryan): Craft So Good They Copy Us
+
+Bryan GO via Madison: publish craft blog NOW on www. **PR only — do not merge or wrangler deploy.**
+
+- New post `site/blog/craft-so-good-they-copy-us-hotdog-clipboard.html` — unique slug so clones copying the path are obvious.
+- Mid-copy canary phrase exactly once: `hotdog contest clipboard` (yard-note sentence, not a boast).
+- Signed **Manager, NorCal CARB Mobile**. No owner name. Phone digits only 916-890-4427. No 415. No competitor site named. No fake metrics.
+- Portal wired: `site/blog/index.html` + `site/blog.html` (card + quick list; article count 62 → 63). Sitemap row added.
+- Draft: `blog_drafts/craft-so-good-they-copy-us-hotdog-clipboard.md` (`owner_approved: YES` per Bryan GO).
+- No hero image — no watermarked craft asset in this repo; existing NCM header mark only.
+- Homepage / `styles.css` untouched (site-lock). No wrangler. No Actions deploy.
+
+Live URL after merge/deploy: https://norcalcarbmobile.com/blog/craft-so-good-they-copy-us-hotdog-clipboard
+
+---
+
 ## 2026-09-08 — Soft www scrape canary (Ally PRIORITY, PR only)
 
 Ally PRIORITY: competitor carbdieseltest.com scrapes NorCal www. Plant a soft technical canary so copies are provable — without breaking layout. **HOLD deploy** until Bryan GO on publish-home / canary plant.
