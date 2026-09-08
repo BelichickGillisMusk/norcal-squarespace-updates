@@ -64,6 +64,23 @@ if (!worker.includes(cfToken) && !homepage.includes(cfToken)) {
   fail(`Cloudflare Web Analytics token missing from homepage HTML: ${cfToken}`);
 }
 
+const canaryId = lock.requiredCanaryId;
+const canaryHref = lock.requiredCanaryCssHref;
+if (!existsSync(join(root, "site/assets/css/ncm-canary.css"))) {
+  fail("Isolated canary CSS is missing: site/assets/css/ncm-canary.css (Bryan 711 — do not merge into styles.css).");
+} else {
+  const canaryCss = text("site/assets/css/ncm-canary.css");
+  if (!canaryCss.includes(canaryId)) fail(`Isolated canary CSS is missing unique token: ${canaryId}`);
+  if (!canaryCss.includes("--ncm-canary-token")) fail("Isolated canary CSS is missing the inert --ncm-canary-token property.");
+  if (/margin:|padding:|position:\s*fixed|width:\s*[1-9]|height:\s*[1-9]|font-size:|display:\s*flex|display:\s*grid/.test(canaryCss)) {
+    fail("Isolated canary CSS must stay layout-inert (no box-model / flex / grid / fixed positioning).");
+  }
+}
+if (!worker.includes(canaryHref)) fail("Worker must link isolated canary CSS (Bryan 711 — do not merge into styles.css).");
+if (!worker.includes(canaryId)) fail(`Worker missing scrape-canary id: ${canaryId}`);
+if (!worker.includes("ncm-canary: norcalcarbmobile.com provenance")) fail("Worker missing HTML comment canary.");
+if (!worker.includes("data-ncm-canary=")) fail("Worker missing data-ncm-canary wrapper.");
+
 const publicFiles = walk(join(root, "site")).filter((path) => path.endsWith(".html"));
 publicFiles.push(join(root, "worker/index.js"));
 for (const file of publicFiles) {

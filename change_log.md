@@ -4,6 +4,21 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-08 — Soft www scrape canary (Ally PRIORITY, PR only)
+
+Ally PRIORITY: competitor carbdieseltest.com scrapes NorCal www. Plant a soft technical canary so copies are provable — without breaking layout. **HOLD deploy** until Bryan GO on publish-home / canary plant.
+
+- New isolated file `site/assets/css/ncm-canary.css` (Bryan 711). Do **not** edit `site/assets/styles.css` (hash-locked, year-cache).
+- Worker `HTMLRewriter` injects site-wide (same shared-head path as branding / schema / CF beacon):
+  - `<link rel="stylesheet" href="/assets/css/ncm-canary.css?v=20260908-v711">`
+  - HTML comment `ncm-canary: norcalcarbmobile.com provenance · ncm-www-origin-20260908-v711`
+  - hidden `data-ncm-canary="ncm-www-origin-20260908-v711"` wrapper
+  - hidden footer micro-mark `norcalcarbmobile.com` (existing public domain; phone stays 916-890-4427)
+- Also restores `worker/index.js` from the last good file — `e4e0dc8` accidentally replaced it with `PLACEHOLDER`. Schema / AutoRepair / prices / street unchanged vs that last good Worker.
+- Site-lock asserts the isolated CSS + inject strings. No wrangler. No Actions deploy. No blog article.
+
+---
+
 ## 2026-09-07 — Cloudflare Web Analytics beacon (Ally NAP)
 
 Ally NAP: RUM beacon missing on www.norcalcarbmobile.com. Add Cloudflare Web Analytics via Worker HTMLRewriter (same path as branding/schema) so every public HTML page gets the snippet before `</body>`. Token `231f8b2f40e24c50b92870168dbb3f06`. Site-lock asserts the exact snippet/token. No other analytics. No price/phone/branding changes. No wrangler deploy — Bryan GO required.
