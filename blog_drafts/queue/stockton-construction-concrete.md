@@ -2,8 +2,8 @@
 title: "Stockton Construction and Concrete Fleets — Yard Clean Truck Check on the 99 / I-5 Loop"
 slug: "stockton-construction-concrete-clean-truck-check"
 source: rewrite-from-unreleased-queue
-date: 2026-09-06
-publish_date: 2026-09-08
+date: 2026-09-10
+publish_date: 2026-09-10
 status: pending
 owner_approved: "NO"
 approve_phrase: "approve stockton-construction"
@@ -32,13 +32,12 @@ Book: **916-890-4427** or [contact](/contact).
 ## Related pages (same corridor / same industry)
 
 - [Stockton Clean Truck Check lander](/stockton-clean-truck-check)
-- [San Joaquin County mobile testing](/service-area-san-joaquin-county-mobile-testing)
+- [Lodi / San Joaquin corridor](/clean-truck-check-lodi)
+- [Service areas](/areas)
 - [Mobile Clean Truck Check near Stockton](/clean-truck-check-blog/mobile-clean-truck-check-near-stockton-on-site-emissions-testing-for-san-joaquin-county-fleets)
-- [San Joaquin on-site while you work](/clean-truck-check-blog/mobile-clean-truck-check-in-san-joaquin-county-on-site-service-while-you-work)
 - [Mitchell Concrete — Rancho Cordova](/clean-truck-check-blog/how-norcal-carb-mobile-keeps-mitchell-concrete-moving-strong-in-rancho-cordova)
 - [Construction and tree companies across Northern California](/clean-truck-check-blog/keep-rolling-norcal-carb-mobile-services-construction-and-tree-companies-across-northern-california)
 - [Sacramento mobile CARB](/sacramento-carb-testing)
-- [Sacramento service-area page](/service-area-sacramento-carb-testing)
 - [OBD vs OVI](/blog/obd-vs-ovi-clean-truck-check-fleets)
 - [2026 testing deadlines](/blog/2026-carb-testing-deadlines)
 - [All Good Pallets — Stockton](/clean-truck-check-blog/keeping-pallets-moving-amp-trucks-carb-clean-a-partnership-with-all-good-pallets-stockton-ca)

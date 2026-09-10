@@ -2,8 +2,8 @@
 title: "Harvest Season Clean Truck Check: Ag Can Stay Annual. Haul Trucks Cannot"
 slug: "harvest-season-clean-truck-check-ag-haul"
 source: rewrite-from-unreleased-journal
-date: 2026-09-06
-publish_date: 2026-09-08
+date: 2026-09-10
+publish_date: 2026-09-10
 status: pending
 owner_approved: "NO"
 approve_phrase: "approve harvest-ag-haul"
@@ -16,7 +16,7 @@ locations:
   - "Yolo County, CA"
   - "San Joaquin County, CA"
 testing_oddity: "Two clocks on one yard. A qualifying agricultural vehicle can stay annual. The truck that hauls the crop to the first point of processing is usually still semi-annual. Confirm the unit in CTC-VIS before anyone assumes harvest season is an exemption."
-cool_thing: "Portal already shows this title as NEW. The article URL 404s. This file is the missing body. No invented diner."
+cool_thing: "Article URL still 404 as of 2026-09-10 14:10 PT. This file is the missing body. No invented diner."
 tags: ["CARB", "Clean Truck Check", "Agriculture", "Harvest", "Woodland", "Merced", "Stockton", "Porterville", "OBD", "OVI"]
 meta_description: "Harvest season Clean Truck Check: qualifying ag stays annual, not exempt. Haul trucks stay twice a year. Mobile OBD $75 / OVI $199 in Woodland, Merced, Stockton. Call 916-890-4427."
 ---
@@ -39,7 +39,8 @@ Book: **916-890-4427** or [contact](/contact).
 - [Do California agricultural vehicles need Clean Truck Check testing?](/clean-truck-check-blog/ca-ag-vehicles-clean-truck-testing-info)
 - [Woodland agriculture meets CARB compliance](/clean-truck-check-blog/woodland-agriculture-meets-carb-compliance)
 - [Stockton Clean Truck Check lander](/stockton-clean-truck-check)
-- [San Joaquin County mobile testing](/service-area-san-joaquin-county-mobile-testing)
+- [Lodi / San Joaquin corridor](/clean-truck-check-lodi)
+- [Service areas](/areas)
 - [Fleet OBD and OVI in Porterville and the Mojave](/blog/fleets-ovi-obd-porterville-mojave)
 - [OBD vs OVI](/blog/obd-vs-ovi-clean-truck-check-fleets)
 - [2026 testing deadlines](/blog/2026-carb-testing-deadlines)
@@ -71,7 +72,7 @@ Field companion already live for the southern pin: [Porterville and the Mojave](
 
 ## Cool stop / next on the list
 
-The `/blog` portal already lists this title as NEW. The article URL currently 404s. This file is the missing body. No invented lunch stop. If a real harvest-day pin is added later, it goes in on the next edit.
+The article URL `/blog/harvest-season-clean-truck-check-ag-haul` still 404s as of September 10, 2026. This file is the missing body. No invented lunch stop. If a real harvest-day pin is added later, it goes in on the next edit.
 
 ## What to have ready
 

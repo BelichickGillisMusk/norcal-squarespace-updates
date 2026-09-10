@@ -2,8 +2,8 @@
 title: "Construction Fleets in Sacramento — Yard OBD and OVI Without Losing a Crew Day"
 slug: "construction-sacramento-yard-carb"
 source: new
-date: 2026-09-06
-publish_date: 2026-09-08
+date: 2026-09-10
+publish_date: 2026-09-10
 status: pending
 owner_approved: "NO"
 approve_phrase: "approve construction-sacramento"
@@ -46,7 +46,7 @@ We confirm OBD vs OVI from engine year / equipment **before** dispatch. Unsure u
 
 ## Cool stop / next on the list
 
-Completed construction pin: **All Fence**, 1900 Spring St, Redwood City, Saturday 9/5 8:30 a.m., seven OBD. Sacramento-side follow-up already on file: **American Buildings J&S**, 3250 51st Ave, Sacramento — one truck tested, two more still on the invoice board. Retest window is +17 weeks from the original visit, confirmed only after The Book has the VIN and test date.
+Completed construction pin: **All Fence**, 1900 Spring St, Redwood City, Saturday 9/5 8:30 a.m., seven OBD. Sacramento-side follow-up already on file: **American Buildings J&S**, 3250 51st Ave, Sacramento — one truck tested, two more still on the invoice board. The next public booking date is the VIN’s CTC-VIS deadline. Internal ops may plant a reminder after the last uploaded test; that reminder is not the legal interval.
 
 No invented lunch stop. If you want the meal line in this post, reply with the real pin and it goes in on the next edit.
 
