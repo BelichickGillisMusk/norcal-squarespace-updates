@@ -71,6 +71,35 @@ if (!worker.includes("max-age=3600, must-revalidate")) {
   fail("Bryan 711 lock: Worker CSS Cache-Control must be public, max-age=3600, must-revalidate.");
 }
 
+const homepage = text("site/index.html");
+const cfToken = lock.requiredCfWebAnalyticsToken;
+const cfBeaconSnippet = `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${cfToken}"}'></script>`;
+// Homepage HTML is Worker-injected (run_worker_first). Static site/index.html stays
+// hash-locked; the beacon must appear in the inject that produces served homepage HTML.
+if (!worker.includes(cfBeaconSnippet) && !homepage.includes(cfBeaconSnippet)) {
+  fail("Cloudflare Web Analytics beacon missing from homepage HTML (Worker inject or site/index.html).");
+}
+if (!worker.includes(cfToken) && !homepage.includes(cfToken)) {
+  fail(`Cloudflare Web Analytics token missing from homepage HTML: ${cfToken}`);
+}
+
+const canaryId = lock.requiredCanaryId;
+const canaryHref = lock.requiredCanaryCssHref;
+if (!existsSync(join(root, "site/assets/css/ncm-canary.css"))) {
+  fail("Isolated canary CSS is missing: site/assets/css/ncm-canary.css (Bryan 711 — do not merge into styles.css).");
+} else {
+  const canaryCss = text("site/assets/css/ncm-canary.css");
+  if (!canaryCss.includes(canaryId)) fail(`Isolated canary CSS is missing unique token: ${canaryId}`);
+  if (!canaryCss.includes("--ncm-canary-token")) fail("Isolated canary CSS is missing the inert --ncm-canary-token property.");
+  if (/margin:|padding:|position:\s*fixed|width:\s*[1-9]|height:\s*[1-9]|font-size:|display:\s*flex|display:\s*grid/.test(canaryCss)) {
+    fail("Isolated canary CSS must stay layout-inert (no box-model / flex / grid / fixed positioning).");
+  }
+}
+if (!worker.includes(canaryHref)) fail("Worker must link isolated canary CSS (Bryan 711 — do not merge into styles.css).");
+if (!worker.includes(canaryId)) fail(`Worker missing scrape-canary id: ${canaryId}`);
+if (!worker.includes("ncm-canary: norcalcarbmobile.com provenance")) fail("Worker missing HTML comment canary.");
+if (!worker.includes("data-ncm-canary=")) fail("Worker missing data-ncm-canary wrapper.");
+
 const publicFiles = walk(join(root, "site")).filter((path) => path.endsWith(".html"));
 publicFiles.push(join(root, "worker/index.js"));
 for (const file of publicFiles) {
@@ -97,6 +126,40 @@ for (const file of publicFiles) {
       fail(`Bryan 711 lock: brand token definition baked into ${relative}. Define tokens only in site/assets/styles.css.`);
     }
   }
+}
+
+const robots = text("site/robots.txt");
+if (!/^User-agent:\s*\*$/m.test(robots) || !/^Allow:\s*\/\s*$/m.test(robots)) {
+  fail("robots.txt must Allow: / for normal crawlers.");
+}
+if (!/User-agent:\s*Googlebot/i.test(robots) || !/search=yes/.test(robots)) {
+  fail("robots.txt must keep Google search open (Googlebot + Content-Signal search=yes).");
+}
+if (!/ai-train=no/.test(robots)) {
+  fail("robots.txt must soften training with Content-Signal ai-train=no.");
+}
+if (/User-agent:\s*GPTBot[\s\S]{0,80}Disallow:\s*\//i.test(robots)) {
+  fail("robots.txt must not blanket Disallow GPTBot (kills citation). Prefer ai-train=no.");
+}
+if (/^\s*Disallow:\s*\/(services|pricing|contact|areas|blog)\b/im.test(robots)) {
+  fail("robots.txt must not Disallow money paths (/ /services /pricing /contact /areas /blog).");
+}
+
+const llms = text("site/llms.txt");
+if (!llms.includes(lock.requiredPhoneDisplay)) {
+  fail(`llms.txt must keep public phone ${lock.requiredPhoneDisplay}.`);
+}
+if (/415-900-8563|916-661-8288/.test(llms)) {
+  fail("llms.txt must not include legacy or competitor phones.");
+}
+if (/cleantruckchecksacramento\.com|carb-clean-truck-check\.com/i.test(llms)) {
+  fail("llms.txt must not list competitor (cleantruckchecksacramento.com) or LET-DIE (carb-clean-truck-check.com) domains.");
+}
+if (/Bryan|Gillis|bgillis/i.test(llms)) {
+  fail("llms.txt must not include owner name.");
+}
+if (/stockton-clean-truck-check|bay-area-mobile-carb|sacramento-carb-testing|san-jose-carb/i.test(llms)) {
+  fail("llms.txt must not list corridor/city lander URLs (clone map).");
 }
 
 for (const configPath of ["wrangler.toml", "wrangler.jsonc"]) {

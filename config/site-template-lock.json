@@ -19,6 +19,9 @@
     "--green-deep": "#3d9b2f",
     "--bg": "#ffffff"
   },
+  "requiredCfWebAnalyticsToken": "231f8b2f40e24c50b92870168dbb3f06",
+  "requiredCanaryId": "ncm-www-origin-20260908-v711",
+  "requiredCanaryCssHref": "/assets/css/ncm-canary.css",
   "requiredWorkerName": "norcal-squarespace-updates-gillis",
   "requiredDomains": [
     "norcalcarbmobile.com",

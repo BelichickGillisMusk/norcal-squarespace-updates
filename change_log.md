@@ -4,6 +4,56 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-08 — Soft scrape-harden llms.txt + robots.txt (Bryan GO aggressive)
+
+Magic 2026-09-08: soften AI training / shrink the clone map on www. **Do not nuke Google / GBP indexing.**
+
+- `site/llms.txt`: keep Contact, Pricing, Core pages, four grounding blogs, 916-890-4427 only. No owner name. Dropped `cleantruckchecksacramento.com` (not ours) and `carb-clean-truck-check.com` (LET-DIE / historic 415). Dropped sister-city URL list so corridor landers are not an easy clone map. Hayward satellite stays live; it is just not listed here.
+- `site/robots.txt`: still `Allow: /` for `*` + Googlebot/Bingbot/GPTBot/OAI-SearchBot. Content-Signal `search=yes,ai-input=yes,ai-train=no` (was `ai-train=yes,use=full`). No money-path Disallow. No blanket GPTBot Disallow.
+- Sitemap left as-is — ~60 `/clean-truck-check-blog/*` URLs stay indexed on purpose (legacy prune = later GO).
+- Site-lock asserts the Google-open / train-soft / no-bad-domain rules so a later edit cannot silently block search.
+
+No redesign. No price changes. No wrangler in this PR. Live ship remains Actions → Deploy NorCal CARB Mobile (`bryan_go=GO`).
+
+---
+
+## 2026-09-08 — Craft blog GO (Madison / Bryan): Craft So Good They Copy Us
+
+Bryan GO via Madison: publish craft blog NOW on www. **PR only — do not merge or wrangler deploy.**
+
+- New post `site/blog/craft-so-good-they-copy-us-hotdog-clipboard.html` — unique slug so clones copying the path are obvious.
+- Mid-copy canary phrase exactly once: `hotdog contest clipboard` (yard-note sentence, not a boast).
+- Signed **Manager, NorCal CARB Mobile**. No owner name. Phone digits only 916-890-4427. No 415. No competitor site named. No fake metrics.
+- Portal wired: `site/blog/index.html` + `site/blog.html` (card + quick list; article count 62 → 63). Sitemap row added.
+- Draft: `blog_drafts/craft-so-good-they-copy-us-hotdog-clipboard.md` (`owner_approved: YES` per Bryan GO).
+- No hero image — no watermarked craft asset in this repo; existing NCM header mark only.
+- Homepage / `styles.css` untouched (site-lock). No wrangler. No Actions deploy.
+
+Live URL after merge/deploy: https://norcalcarbmobile.com/blog/craft-so-good-they-copy-us-hotdog-clipboard
+
+---
+
+## 2026-09-08 — Soft www scrape canary (Ally PRIORITY, PR only)
+
+Ally PRIORITY: competitor carbdieseltest.com scrapes NorCal www. Plant a soft technical canary so copies are provable — without breaking layout. **HOLD deploy** until Bryan GO on publish-home / canary plant.
+
+- New isolated file `site/assets/css/ncm-canary.css` (Bryan 711). Do **not** edit `site/assets/styles.css` (hash-locked, year-cache).
+- Worker `HTMLRewriter` injects site-wide (same shared-head path as branding / schema / CF beacon):
+  - `<link rel="stylesheet" href="/assets/css/ncm-canary.css?v=20260908-v711">`
+  - HTML comment `ncm-canary: norcalcarbmobile.com provenance · ncm-www-origin-20260908-v711`
+  - hidden `data-ncm-canary="ncm-www-origin-20260908-v711"` wrapper
+  - hidden footer micro-mark `norcalcarbmobile.com` (existing public domain; phone stays 916-890-4427)
+- Also restores `worker/index.js` from the last good file — `e4e0dc8` accidentally replaced it with `PLACEHOLDER`. Schema / AutoRepair / prices / street unchanged vs that last good Worker.
+- Site-lock asserts the isolated CSS + inject strings. No wrangler. No Actions deploy. No blog article.
+
+---
+
+## 2026-09-07 — Cloudflare Web Analytics beacon (Ally NAP)
+
+Ally NAP: RUM beacon missing on www.norcalcarbmobile.com. Add Cloudflare Web Analytics via Worker HTMLRewriter (same path as branding/schema) so every public HTML page gets the snippet before `</body>`. Token `231f8b2f40e24c50b92870168dbb3f06`. Site-lock asserts the exact snippet/token. No other analytics. No price/phone/branding changes. No wrangler deploy — Bryan GO required.
+
+---
+
 ## 2026-09-05 — CSS cache-bust + Bryan 711 lock (Grok/Cursor)
 
 Bryan still saw red Call CTAs after navy+green PR #81. Live CSS was already navy `#012241` + green `#4ab94e` (etag `d912c4e79321adaa24f3ec1f86f36651`), but HTML linked `/assets/styles.css` with no query and `site/_headers` shipped `cache-control: public, max-age=31536000, immutable` on `/assets/*`. Browsers that cached the pre-#81 red sheet will never refetch.

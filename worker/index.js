@@ -34,6 +34,19 @@ const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
 const LOGO_URL = 'https://norcalcarbmobile.com/assets/img/ncm-logo.png';
 const OG_IMAGE_URL = 'https://norcalcarbmobile.com/assets/img/norcal-carb-mobile-logo-web-512x512.png';
 
+/** Cloudflare Web Analytics RUM beacon (Ally NAP). Injected sitewide before </body>. */
+const CF_WEB_ANALYTICS_BEACON =
+  `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "231f8b2f40e24c50b92870168dbb3f06"}'></script>`;
+
+/** Soft scrape-canary (Ally PRIORITY 2026-09-08). Isolated CSS — never merge into styles.css (Bryan 711). */
+const NCM_CANARY_ID = 'ncm-www-origin-20260908-v711';
+const NCM_CANARY_HEAD = `
+<link rel="stylesheet" href="/assets/css/ncm-canary.css?v=20260908-v711">
+<!-- ncm-canary: norcalcarbmobile.com provenance · ncm-www-origin-20260908-v711 -->
+`;
+const NCM_CANARY_WRAP = `<div class="ncm-canary-wrap" data-ncm-canary="${NCM_CANARY_ID}" hidden></div>`;
+const NCM_CANARY_FOOTER = `<span class="ncm-canary-mark" hidden>norcalcarbmobile.com</span>`;
+
 /** Favicon + Open Graph / Twitter share image. Injected sitewide. */
 const BRANDING_TAGS = `
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -412,7 +425,7 @@ export default {
       });
     }
 
-    // Everything else → static assets; inject branding + schema into HTML responses
+    // Everything else → static assets; inject branding, schema, canary, and CF Web Analytics
     const assetRes = await env.ASSETS.fetch(request);
     // Bryan 711 lock: unversioned CSS must not ship year-long immutable.
     // HTML cache-busts /assets/styles.css with ?v=; Worker still short-caches
@@ -431,8 +444,20 @@ export default {
     return new HTMLRewriter()
       .on('head', {
         element(el) {
+          el.append(NCM_CANARY_HEAD, { html: true });
           el.append(BRANDING_TAGS, { html: true });
           el.append(schemaTag(url.toString()), { html: true });
+        },
+      })
+      .on('body', {
+        element(el) {
+          el.prepend(NCM_CANARY_WRAP, { html: true });
+          el.append(CF_WEB_ANALYTICS_BEACON, { html: true });
+        },
+      })
+      .on('footer.site-footer', {
+        element(el) {
+          el.append(NCM_CANARY_FOOTER, { html: true });
         },
       })
       .transform(assetRes);

@@ -2,8 +2,8 @@
 title: "Construction Fleets in Sacramento — Yard OBD and OVI Without Losing a Crew Day"
 slug: "construction-sacramento-yard-carb"
 source: new
-date: 2026-09-01
-publish_date: 2026-09-08
+date: 2026-09-10
+publish_date: 2026-09-10
 status: pending
 owner_approved: "NO"
 approve_phrase: "approve construction-sacramento"
@@ -14,7 +14,7 @@ locations:
   - "Granite Bay, CA"
   - "Lincoln, CA"
 testing_oddity: "Same-visit mix of mixer/dump/F550 units. Two $75 OBD on one construction account is normal. Friday DMV-tied windows are the usual crunch, not a shop line."
-cool_thing: "Next documented construction pin on the board: All Fence, 1900 Spring St, Redwood City, Sat 9/5 8:30a, 7 OBD. Sacramento-side follow-up sits at American Buildings J&S, 3250 51st Ave."
+cool_thing: "Completed construction pin: All Fence, 1900 Spring St, Redwood City, Sat 9/5 8:30a, 7 OBD. Sacramento-side follow-up sits at American Buildings J&S, 3250 51st Ave."
 tags: ["CARB", "Clean Truck Check", "Construction", "Sacramento", "OBD", "OVI", "Rancho Cordova"]
 meta_description: "Mobile Clean Truck Check for Sacramento construction fleets. OBD $75 and OVI $199 at the yard in Sacramento, Rancho Cordova, Granite Bay, and Lincoln. Call 916-890-4427."
 ---
@@ -25,13 +25,11 @@ Construction yards in **Sacramento**, **Rancho Cordova**, **Granite Bay**, and *
 
 Public rate card: **OBD $75** · **OVI $199**. Multi-truck same visit is quoted on the call. Book: [contact](/contact) or 916-890-4427.
 
-Related pages: [Sacramento CARB testing](/sacramento-carb-testing) · [Sacramento Valley & foothills](/sacramento-valley-foothills-carb-testing) · [areas](/areas) · [OBD vs OVI](/blog/obd-vs-ovi-clean-truck-check-fleets).
+Related pages: [Sacramento CARB testing](/sacramento-carb-testing) · [Sacramento Valley & foothills](/sacramento-valley-foothills-carb-testing) · [areas](/areas) · [OBD vs OVI](/blog/obd-vs-ovi-clean-truck-check-fleets) · [Stockton construction sister post](/blog/stockton-construction-concrete-clean-truck-check).
 
 ## What CARB actually requires in 2026
 
-Clean Truck Check is heavy-duty periodic testing, not light-duty Smog Check. Most construction trucks over 14,000 lb GVWR are on a **semi-annual** clock: one test tied to the CA DMV registration month, one test six months later. Passing results can be submitted up to **90 days before** the CTC-VIS deadline.
-
-That is the gap the statute left open. CARB built CTC-VIS and the 90-day window. They did not put a tester in your yard on a Friday when the mixer has to pour Monday.
+Clean Truck Check is heavy-duty periodic testing, not light-duty Smog Check. Most construction trucks over 14,000 lb GVWR are on a **semi-annual** clock: one test tied to the CA DMV registration month, one test six months later. Passing results can be submitted up to **90 days before** the CTC-VIS deadline. Official cadence: [CARB emissions compliance testing requirements](https://ww2.arb.ca.gov/clean-truck-check-emissions-compliance-testing-requirements).
 
 Beginning **October 2027**, OBD-equipped units move to four tests per year. Opacity-path units stay semi-annual. Agricultural vehicles that meet the CARB definition, and qualifying CA-registered motorhomes, stay annual. Construction mixers, dumps, and F550s used as work trucks are not those exceptions. Confirm the unit in [CTC-VIS](https://cleantruckcheck.arb.ca.gov).
 
@@ -48,7 +46,7 @@ We confirm OBD vs OVI from engine year / equipment **before** dispatch. Unsure u
 
 ## Cool stop / next on the list
 
-Next documented construction pin: **All Fence**, 1900 Spring St, Redwood City, Saturday 9/5 8:30 a.m., seven OBD. Sacramento-side follow-up already on file: **American Buildings J&S**, 3250 51st Ave, Sacramento — one truck tested, two more still on the invoice board, retest window mid-August 2026 + 17 weeks from the original visit.
+Completed construction pin: **All Fence**, 1900 Spring St, Redwood City, Saturday 9/5 8:30 a.m., seven OBD. Sacramento-side follow-up already on file: **American Buildings J&S**, 3250 51st Ave, Sacramento — one truck tested, two more still on the invoice board. The next public booking date is the VIN’s CTC-VIS deadline. Internal ops may plant a reminder after the last uploaded test; that reminder is not the legal interval.
 
 No invented lunch stop. If you want the meal line in this post, reply with the real pin and it goes in on the next edit.
 
@@ -63,3 +61,5 @@ No invented lunch stop. If you want the meal line in this post, reply with the r
 ## Book
 
 Call **916-890-4427**. Request a callback at [contact](/contact). Service menu: [services](/services) · [pricing](/pricing).
+
+Do not publish this file until the owner replies `approve construction-sacramento`.

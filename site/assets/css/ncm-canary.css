@@ -1,0 +1,9 @@
+/* ncm-canary: ncm-www-origin-20260908-v711 — isolated, layout-inert. Do not merge into styles.css (Bryan 711). */
+:root {
+  --ncm-canary-token: ncm-www-origin-20260908-v711;
+}
+
+.ncm-canary-wrap,
+.ncm-canary-mark {
+  display: none;
+}
