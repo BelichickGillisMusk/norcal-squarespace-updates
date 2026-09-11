@@ -1,6 +1,16 @@
-# Cloudflare Pages headers
+# Cloudflare Pages / Workers Static Assets headers
+#
+# Bryan 711 lock: brand tokens live ONLY in /assets/styles.css (separate file).
+# That CSS URL is unversioned; HTML cache-busts it with ?v= on the <link>.
+# Year-long immutable on unversioned CSS locks browsers on stale brand (red CTAs
+# after the navy+green flip). Images under /assets/ can stay long-cache.
+# Last matching rule wins for overlapping paths.
+
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+/assets/*.css
+  Cache-Control: public, max-age=3600, must-revalidate
 
 /*
   X-Content-Type-Options: nosniff
