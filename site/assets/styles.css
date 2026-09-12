@@ -143,13 +143,17 @@ a:hover { color: var(--green); }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
 .hero-areas { margin-top: 18px; font-weight: 600; color: var(--muted); font-size: .92rem; }
 .hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; }
+.hero-map {
+  max-width: 420px;
+  width: 100%;
+  margin-inline: auto;
+}
 .hero-map img {
   display: block; width: 100%; height: auto; border-radius: 16px;
   box-shadow: var(--shadow-lg); border: 1px solid var(--line);
 }
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; gap: 28px; }
-  .hero-map { max-width: 480px; }
 }
 
 /* ---------- Sections ---------- */
@@ -344,7 +348,7 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
   border:2px solid var(--navy-mid); border-radius:18px; background:var(--bg-soft);
   box-shadow:var(--shadow);
 }
-.coverage-panel-map img { display:block; width:100%; height:auto; max-height:520px; object-fit:cover; border-radius:12px; border:1px solid var(--line); }
+.coverage-panel-map img { display:block; width:100%; height:auto; max-height:460px; object-fit:contain; border-radius:12px; border:1px solid var(--line); }
 .coverage-panel-copy .eyebrow,.card .eyebrow {
   margin:0 0 8px; color:var(--green); font-size:.76rem; font-weight:800;
   letter-spacing:.08em; text-transform:uppercase;
@@ -353,7 +357,7 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
 .route-chips span { padding:7px 11px; border:1px solid var(--silver-line); border-radius:999px; background:#fff; color:var(--ink); font-size:.84rem; font-weight:700; }
 @media (max-width:760px) {
   .coverage-panel { grid-template-columns:1fr; padding:14px; }
-  .coverage-panel-map img { max-height:none; }
+  .coverage-panel-map img { max-height:380px; }
   .route-chips span { font-size:.8rem; }
 }
 
@@ -465,8 +469,7 @@ html[data-theme="light"] body.contact-page a:hover { color: var(--green-deep); }
 
 @media (max-width: 860px) {
   .brand-logo, .ncm-mark { width: 112px; height: 112px; }
-  .site-header .wrap { min-height: 120px; }
-  .contact-page .site-header .wrap { flex-wrap: wrap; }
+  .site-header .wrap { min-height: 120px; flex-wrap: wrap; }
   .cred-lockup { width: 72px; }
   .contact-page .hero h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
   .nav.open .chrome-toggles { width: 100%; padding-top: 12px; }

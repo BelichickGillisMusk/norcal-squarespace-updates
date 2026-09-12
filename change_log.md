@@ -4,6 +4,18 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-12 — Soft PR: home/areas map size + EN|ES chrome (do not merge)
+
+Bryan asked for two www chrome/CSS fixes. **PR only — do not merge, do not wrangler, do not deploy.**
+
+- `site/assets/styles.css`: cap `.hero-map` on all viewports (`max-width: 420px; width: 100%; margin-inline: auto`). Areas `.coverage-panel-map img` now `object-fit: contain` with `max-height: 460px` desktop / `380px` mobile (was `cover` + `max-height: none` on phones). Mobile header wrap is sitewide so chrome can sit next to the logo.
+- EN|ES + Dark/Light chrome from `/contact` mirrored onto home, `/pricing`, and `/services` (same `data-theme`/`data-lang`, `.chrome-toggles`, `/assets/js/theme-i18n.js`). No new i18n system. Page body copy, prices, and phone unchanged. No `?v=` cache invent — styles link stays `/assets/styles.css`.
+- `config/site-template-lock.json` hashes updated for the approved `index.html` + `styles.css` template (`2026-09-12.1`).
+
+Rollback: revert this PR’s commit (restore prior `styles.css` + HTML headers + lock hashes).
+
+---
+
 ## 2026-09-08 — Soft scrape-harden llms.txt + robots.txt (Bryan GO aggressive)
 
 Magic 2026-09-08: soften AI training / shrink the clone map on www. **Do not nuke Google / GBP indexing.**
