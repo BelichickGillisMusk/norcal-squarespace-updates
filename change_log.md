@@ -25,6 +25,23 @@ Live URLs after merge/deploy:
 
 ---
 
+## 2026-09-13 — Three more unpublished posts (same PR; San Diego last)
+
+Bryan: keep the first three; add missed-deadline, owner-operators, DEF/DPF on the same PR. **Do not merge.** San Diego last — not a hold on these six. Strip SD / SoCal / street from the new pages. No resource-hub, hidden-cost rewrite, or PSIP rewrite.
+
+- `/clean-truck-check-blog/missed-carb-testing-deadline-california` — canary `bay bridge pickle ticket`. Civil penalties described as compounding (no draft dollar table).
+- `/clean-truck-check-blog/clean-truck-check-owner-operators-california` — canary `hotdog contest clipboard`. OBD $75 / second $37.50.
+- `/clean-truck-check-blog/def-dpf-problems-fail-smoke-opacity-test` — canary `tuesday mustard ledger`. Opacity pair only: 55% / 40%.
+
+Portal count 66 → 69. Sitemap + `LEGACY_BLOG_SLUGS` updated so the three new `/clean-truck-check-blog/` slugs serve 200.
+
+Live URLs after merge/deploy (posts 4–6):
+- https://norcalcarbmobile.com/clean-truck-check-blog/missed-carb-testing-deadline-california
+- https://norcalcarbmobile.com/clean-truck-check-blog/clean-truck-check-owner-operators-california
+- https://norcalcarbmobile.com/clean-truck-check-blog/def-dpf-problems-fail-smoke-opacity-test
+
+---
+
 ## 2026-09-08 — Soft scrape-harden llms.txt + robots.txt (Bryan GO aggressive)
 
 Magic 2026-09-08: soften AI training / shrink the clone map on www. **Do not nuke Google / GBP indexing.**
