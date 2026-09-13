@@ -4,6 +4,18 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-13 — Magic FIX-CRAFT: contact chrome on remaining primary-nav pages (PR #89)
+
+Live www still missing EN|ES on home/pricing because this PR is unmerged. Worker does **not** inject a shared header — contact has chrome because `contact.html` includes it; home/pricing were template-missing. No `homepage-enes-soft` include exists.
+
+This pass keeps the map-size CSS and the home/pricing/services chrome from 2026-09-12, then:
+
+- Same contact `.chrome-toggles` + `theme-i18n.js` boot on `/areas`, `/faq`, `/blog` (`blog.html` + `blog/index.html`).
+- CSS: `.chrome-toggles` nowrap + `flex-shrink: 0` so EN|ES + Dark|Light stay a visible pill pair (contact target), not a wrapped leftover.
+- Prices/phone unchanged. No wrangler. No merge.
+
+---
+
 ## 2026-09-12 — Soft PR: home/areas map size + EN|ES chrome (do not merge)
 
 Bryan asked for two www chrome/CSS fixes. **PR only — do not merge, do not wrangler, do not deploy.**

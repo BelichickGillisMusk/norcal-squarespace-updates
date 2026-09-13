@@ -107,7 +107,7 @@ a:hover { color: var(--green); }
 }
 .brand-name { font-weight: 800; color: #fff; font-size: 1.05rem; line-height: 1.05; }
 .brand-name small { display: block; font-size: .7rem; font-weight: 600; color: var(--silver); letter-spacing: .02em; }
-.nav { display: flex; align-items: center; gap: 18px; }
+.nav { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 14px; }
 .nav a.navlink { text-decoration: none; color: rgba(255,255,255,.92); font-weight: 600; font-size: 0.92rem; transition: color .15s ease; }
 .nav a.navlink:hover { color: #fff; }
 .header-cta { display: flex; gap: 8px; align-items: center; }
@@ -367,7 +367,7 @@ html[data-lang="es"] .ncm-i18n { display: flex; }
 .ncm-i18n span { font-size: .7rem; line-height: 1.25; font-weight: 700; color: #fff; }
 .ncm-i18n span[data-i18n="serving"] { color: var(--green-bright); }
 
-.chrome-toggles { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chrome-toggles { display: flex; flex-wrap: nowrap; gap: 8px; align-items: center; flex-shrink: 0; }
 .seg {
   display: inline-flex; border: 1px solid rgba(255,255,255,.22);
   border-radius: 999px; overflow: hidden; background: rgba(0,0,0,.2);

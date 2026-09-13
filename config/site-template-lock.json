@@ -1,12 +1,12 @@
 {
-  "version": "2026-09-12.1",
+  "version": "2026-09-13.1",
   "owner": "NorCal CARB Mobile LLC",
   "requiredPhoneDisplay": "916-890-4427",
   "requiredPhoneSchema": "+1-916-890-4427",
   "requiredPhoneHref": "tel:+19168904427",
   "protectedFiles": {
     "site/index.html": "364324a506d139e4b4123d8ab31aa6e252957e6d16346afd0cd32ebd6ee6fc09",
-    "site/assets/styles.css": "30e209b0d7fbf26198214b44a125161feb62fe9580c68bb99b7179637d32b212",
+    "site/assets/styles.css": "2eceda8614d5c417799bd285e680e80499bed447107b25b49c35aa2df4b6811e",
     "site/assets/img/ncm-logo.png": "31977ac93ff9aebd5cb6b42a8101eec8d53aac4cea1952afb264b7de01c0b69b",
     "site/assets/img/norcal-carb-mobile-logo-250th.png": "774fb7772bfacb03a6410a2acc21772d4dd40f016edb9769d0c89e51f42f04b2",
     "site/assets/img/coverage-map-v2.png": "0cad54e2baad77fad0ab55a10d807cffa94c907d1dd93992a392f44bd00c455d"
