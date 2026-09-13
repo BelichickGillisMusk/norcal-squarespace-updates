@@ -107,7 +107,7 @@ a:hover { color: var(--green); }
 }
 .brand-name { font-weight: 800; color: #fff; font-size: 1.05rem; line-height: 1.05; }
 .brand-name small { display: block; font-size: .7rem; font-weight: 600; color: var(--silver); letter-spacing: .02em; }
-.nav { display: flex; align-items: center; gap: 18px; }
+.nav { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 14px; }
 .nav a.navlink { text-decoration: none; color: rgba(255,255,255,.92); font-weight: 600; font-size: 0.92rem; transition: color .15s ease; }
 .nav a.navlink:hover { color: #fff; }
 .header-cta { display: flex; gap: 8px; align-items: center; }
@@ -143,13 +143,17 @@ a:hover { color: var(--green); }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
 .hero-areas { margin-top: 18px; font-weight: 600; color: var(--muted); font-size: .92rem; }
 .hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; }
+.hero-map {
+  max-width: 420px;
+  width: 100%;
+  margin-inline: auto;
+}
 .hero-map img {
   display: block; width: 100%; height: auto; border-radius: 16px;
   box-shadow: var(--shadow-lg); border: 1px solid var(--line);
 }
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; gap: 28px; }
-  .hero-map { max-width: 480px; }
 }
 
 /* ---------- Sections ---------- */
@@ -344,7 +348,7 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
   border:2px solid var(--navy-mid); border-radius:18px; background:var(--bg-soft);
   box-shadow:var(--shadow);
 }
-.coverage-panel-map img { display:block; width:100%; height:auto; max-height:520px; object-fit:cover; border-radius:12px; border:1px solid var(--line); }
+.coverage-panel-map img { display:block; width:100%; height:auto; max-height:460px; object-fit:contain; border-radius:12px; border:1px solid var(--line); }
 .coverage-panel-copy .eyebrow,.card .eyebrow {
   margin:0 0 8px; color:var(--green); font-size:.76rem; font-weight:800;
   letter-spacing:.08em; text-transform:uppercase;
@@ -353,7 +357,7 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
 .route-chips span { padding:7px 11px; border:1px solid var(--silver-line); border-radius:999px; background:#fff; color:var(--ink); font-size:.84rem; font-weight:700; }
 @media (max-width:760px) {
   .coverage-panel { grid-template-columns:1fr; padding:14px; }
-  .coverage-panel-map img { max-height:none; }
+  .coverage-panel-map img { max-height:380px; }
   .route-chips span { font-size:.8rem; }
 }
 
@@ -363,7 +367,7 @@ html[data-lang="es"] .ncm-i18n { display: flex; }
 .ncm-i18n span { font-size: .7rem; line-height: 1.25; font-weight: 700; color: #fff; }
 .ncm-i18n span[data-i18n="serving"] { color: var(--green-bright); }
 
-.chrome-toggles { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chrome-toggles { display: flex; flex-wrap: nowrap; gap: 8px; align-items: center; flex-shrink: 0; }
 .seg {
   display: inline-flex; border: 1px solid rgba(255,255,255,.22);
   border-radius: 999px; overflow: hidden; background: rgba(0,0,0,.2);
@@ -465,8 +469,7 @@ html[data-theme="light"] body.contact-page a:hover { color: var(--green-deep); }
 
 @media (max-width: 860px) {
   .brand-logo, .ncm-mark { width: 112px; height: 112px; }
-  .site-header .wrap { min-height: 120px; }
-  .contact-page .site-header .wrap { flex-wrap: wrap; }
+  .site-header .wrap { min-height: 120px; flex-wrap: wrap; }
   .cred-lockup { width: 72px; }
   .contact-page .hero h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
   .nav.open .chrome-toggles { width: 100%; padding-top: 12px; }
