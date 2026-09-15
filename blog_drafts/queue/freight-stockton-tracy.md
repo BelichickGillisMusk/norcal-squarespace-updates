@@ -26,7 +26,7 @@ Searchers looking for **Clean Truck Check Tracy CA** or a tester near Stockton d
 
 NorCal CARB Mobile brings OBD and OVI to the yard. **OBD $75** · **OVI $199**. CTC-VIS upload is part of the visit. Call **916-890-4427**.
 
-Corridor pages: [Stockton Clean Truck Check](/stockton-clean-truck-check) · [San Joaquin County mobile testing](/service-area-san-joaquin-county-mobile-testing) · [Lodi corridor](/clean-truck-check-lodi) · [areas](/areas) · existing Stockton explainer [Mobile Clean Truck Check near Stockton](/clean-truck-check-blog/mobile-clean-truck-check-near-stockton-on-site-emissions-testing-for-san-joaquin-county-fleets).
+Corridor pages: [Stockton Clean Truck Check](/stockton-clean-truck-check) · [Service areas](/areas) · [Lodi corridor](/clean-truck-check-lodi) · existing Stockton explainer [Mobile Clean Truck Check near Stockton](/clean-truck-check-blog/mobile-clean-truck-check-near-stockton-on-site-emissions-testing-for-san-joaquin-county-fleets).
 
 ## Clean Truck Check Tracy CA — what the visit looks like
 
