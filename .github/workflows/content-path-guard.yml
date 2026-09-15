@@ -1,0 +1,30 @@
+name: Content path guard
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reject chrome files in content diffs
+        run: |
+          chmod +x scripts/content-guard/check-paths.sh
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch origin "${{ github.base_ref }}" --depth=50
+            bash scripts/content-guard/check-paths.sh "origin/${{ github.base_ref }}" HEAD
+          else
+            if git rev-parse HEAD~1 >/dev/null 2>&1; then
+              bash scripts/content-guard/check-paths.sh HEAD~1 HEAD
+            else
+              echo "Single commit on default branch; skip range."
+            fi
+          fi

@@ -1,0 +1,43 @@
+name: CF preview version (no promote)
+
+on:
+  pull_request:
+    paths:
+      - site/**
+      - worker/**
+      - wrangler.toml
+      - wrangler.jsonc
+      - wrangler.prod-empty.toml
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: cf-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Site lock before any Cloudflare call
+        run: node scripts/site-lock/validate.mjs
+      - name: Upload Worker version only (official preview)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.110.0"
+          command: versions upload
+      - name: Remind reviewers
+        run: |
+          echo "This is versions upload only."
+          echo "Preview URL is in the wrangler-action log."
+          echo "Production does not change until Deploy NorCal GO."
+          echo "Worker name must stay norcal-squarespace-updates-gillis."
