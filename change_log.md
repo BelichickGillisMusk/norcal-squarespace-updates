@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-17 — Stockton corridor lander: Manteca + Oakdale content (no body reviews)
+
+Expand `/stockton-clean-truck-check` for the real south-county / 120 market. Same site header/footer chrome. No testimonial block in the page body — Google reviews stay on the footer pill only.
+
+- Cities in copy + schema: Stockton, Manteca, Oakdale, Tracy, Lodi, Lathrop, Ripon, Escalon, French Camp, Modesto, Turlock, Patterson, Mountain House, Riverbank, Linden, Lockeford.
+- Prices stay locked: OBD **$75** · OVI **$199** · motorhome **$99 / $229** (the $49 test is not on the page; it did not sell).
+- `areas.html` Stockton card + chips name Manteca and Oakdale. Sitemap lastmod 2026-09-17.
+- No `styles.css` edit. No wrangler. No live email.
+
+---
+
 ## 2026-09-08 — Soft scrape-harden llms.txt + robots.txt (Bryan GO aggressive)
 
 Magic 2026-09-08: soften AI training / shrink the clone map on www. **Do not nuke Google / GBP indexing.**
