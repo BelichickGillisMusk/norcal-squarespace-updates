@@ -47,6 +47,19 @@ const NCM_CANARY_HEAD = `
 const NCM_CANARY_WRAP = `<div class="ncm-canary-wrap" data-ncm-canary="${NCM_CANARY_ID}" hidden></div>`;
 const NCM_CANARY_FOOTER = `<span class="ncm-canary-mark" hidden>norcalcarbmobile.com</span>`;
 
+/** Subtle blog watermark (2026-09-17). Isolated CSS — never merge into styles.css. */
+const NCM_BLOG_MARK_ID = 'ncm-blog-origin-20260917-v1';
+const NCM_BLOG_MARK_HEAD = `
+<link rel="stylesheet" href="/assets/css/ncm-blog-mark.css?v=20260917-v1">
+<!-- ncm-blog-mark: norcalcarbmobile.com original · ncm-blog-origin-20260917-v1 -->
+`;
+const NCM_BLOG_MARK = `<div class="ncm-blog-mark" aria-hidden="true" data-ncm-blog-mark="${NCM_BLOG_MARK_ID}"></div>`;
+
+function isBlogPath(pathname) {
+  const path = pathname.replace(/\/$/, '') || '/';
+  return path === '/blog' || path === '/blog.html' || path.startsWith('/blog/') || path.startsWith('/clean-truck-check-blog');
+}
+
 /** Favicon + Open Graph / Twitter share image. Injected sitewide. */
 const BRANDING_TAGS = `
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -429,10 +442,12 @@ export default {
     const assetRes = await env.ASSETS.fetch(request);
     const ct = assetRes.headers.get('content-type') || '';
     if (!ct.includes('text/html')) return assetRes;
+    const blogPage = isBlogPath(url.pathname);
     return new HTMLRewriter()
       .on('head', {
         element(el) {
           el.append(NCM_CANARY_HEAD, { html: true });
+          if (blogPage) el.append(NCM_BLOG_MARK_HEAD, { html: true });
           el.append(BRANDING_TAGS, { html: true });
           el.append(schemaTag(url.toString()), { html: true });
         },
@@ -440,6 +455,13 @@ export default {
       .on('body', {
         element(el) {
           el.prepend(NCM_CANARY_WRAP, { html: true });
+          if (blogPage) {
+            const existing = el.getAttribute('class') || '';
+            if (!existing.split(/\s+/).includes('ncm-blog-origin')) {
+              el.setAttribute('class', `${existing} ncm-blog-origin`.trim());
+            }
+            el.prepend(NCM_BLOG_MARK, { html: true });
+          }
           el.append(CF_WEB_ANALYTICS_BEACON, { html: true });
         },
       })

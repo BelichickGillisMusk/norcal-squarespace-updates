@@ -81,6 +81,26 @@ if (!worker.includes(canaryId)) fail(`Worker missing scrape-canary id: ${canaryI
 if (!worker.includes("ncm-canary: norcalcarbmobile.com provenance")) fail("Worker missing HTML comment canary.");
 if (!worker.includes("data-ncm-canary=")) fail("Worker missing data-ncm-canary wrapper.");
 
+const blogMarkId = "ncm-blog-origin-20260917-v1";
+if (!existsSync(join(root, "site/assets/css/ncm-blog-mark.css"))) {
+  fail("Isolated blog watermark CSS is missing: site/assets/css/ncm-blog-mark.css (do not merge into styles.css).");
+} else {
+  const blogMarkCss = text("site/assets/css/ncm-blog-mark.css");
+  if (!blogMarkCss.includes(blogMarkId)) fail(`Isolated blog watermark CSS is missing unique token: ${blogMarkId}`);
+  if (!blogMarkCss.includes("pointer-events: none")) fail("Blog watermark CSS must stay non-interactive (pointer-events: none).");
+  if (!blogMarkCss.includes("opacity: 0.08")) fail("Blog watermark CSS must stay subtle (opacity: 0.08 on the mark layer).");
+}
+if (!worker.includes("ncm-blog-mark.css")) fail("Worker must link isolated blog watermark CSS on blog paths.");
+if (!worker.includes(blogMarkId)) fail(`Worker missing blog watermark token: ${blogMarkId}`);
+if (!worker.includes("function isBlogPath")) fail("Worker missing isBlogPath gate so the watermark stays off non-blog pages.");
+
+for (const portal of ["site/blog/index.html", "site/blog.html"]) {
+  const portalHtml = text(portal);
+  if (portalHtml.includes("&amp;#") || portalHtml.includes("&amp;amp;")) {
+    fail(`${portal} has double-encoded HTML entities (apostrophes/ampersands display as raw source).`);
+  }
+}
+
 const publicFiles = walk(join(root, "site")).filter((path) => path.endsWith(".html"));
 publicFiles.push(join(root, "worker/index.js"));
 for (const file of publicFiles) {

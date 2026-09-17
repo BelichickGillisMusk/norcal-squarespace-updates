@@ -1,0 +1,36 @@
+/* ncm-blog-mark: ncm-blog-origin-20260917-v1 — isolated. Do not merge into styles.css (Bryan 711). */
+/* Subtle provenance watermark for blog pages so scrapes copy a NorCal-original mark. */
+
+.ncm-blog-mark {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ncm-blog-mark::before {
+  content: "";
+  position: fixed;
+  top: 88px;
+  right: 14px;
+  width: 72px;
+  height: 72px;
+  background: url("/assets/img/ncm-logo.png") no-repeat center / contain;
+  opacity: 0.08;
+}
+
+.ncm-blog-mark::after {
+  content: "norcalcarbmobile.com";
+  position: fixed;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%) rotate(-22deg);
+  font-family: Montserrat, system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.35rem, 4.6vw, 2.8rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(1, 34, 65, 0.07);
+  white-space: nowrap;
+  user-select: none;
+}

@@ -1,9 +1,10 @@
 # Harvest / ag-haul pack — blog + GBP + Facebook + X
 
-**Status:** draft ready · waiting `approve harvest-ag-haul`  
+**Status:** HTML in repo 2026-09-17 (owner: ship one that's ready). Social still owner-paste only — do not auto-post.  
 **Slug:** `harvest-season-clean-truck-check-ag-haul`  
 **File:** `blog_drafts/queue/harvest-season-clean-truck-check-ag-haul.md`  
-**Live check 2026-09-07:** https://norcalcarbmobile.com/blog/harvest-season-clean-truck-check-ag-haul is 404. This pack ships with the missing body.
+**HTML:** `site/blog/harvest-season-clean-truck-check-ag-haul.html`  
+**URL after deploy:** https://norcalcarbmobile.com/blog/harvest-season-clean-truck-check-ag-haul
 
 No personal names in customer-facing copy. Do not auto-post.
 
