@@ -4,6 +4,21 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-17 — Hayward-to-Tracy corridor lander (from 580/205 preview)
+
+Turn the mobilecarbtest.workers.dev 209/925 preview into a real www area page covering **Hayward → Tracy** (I-880 / 238 / 580 / 205), not Concord/Antioch as the hero.
+
+- New `site/hayward-tracy-carb-testing.html`. Same site chrome. No body testimonials — Google reviews stay in the footer pill.
+- Phone only **916-890-4427**. Did not copy 209-818-1371, $40 cash referral, Amazon-as-client claims, or $49 pricing.
+- Prices locked: OBD **$75** · OVI **$199** · motorhome **$99 / $229**.
+- Cities: Hayward, San Leandro, Castro Valley, Union City, Fremont, Newark, Pleasanton, Dublin, Livermore, San Ramon, Mountain House, Tracy.
+- Worker 301s: `/clean-truck-check-hayward`, `/tracy-livermore-clean-truck-check-j1667`, `/east-bay-mobile-carb-testing` → the new page.
+- `areas.html` card + sitemap. Cross-links from Bay Area and Stockton landers.
+
+No `styles.css` edit. No wrangler. No live email.
+
+---
+
 ## 2026-09-17 — Stockton corridor lander: Manteca + Oakdale content (no body reviews)
 
 Expand `/stockton-clean-truck-check` for the real south-county / 120 market. Same site header/footer chrome. No testimonial block in the page body — Google reviews stay on the footer pill only.
