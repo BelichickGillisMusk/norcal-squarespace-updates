@@ -4,8 +4,9 @@ slug: "harvest-season-clean-truck-check-ag-haul"
 source: rewrite-from-unreleased-journal
 date: 2026-09-10
 publish_date: 2026-09-10
-status: pending
-owner_approved: "NO"
+status: published
+owner_approved: "YES"
+shipped: "2026-09-17 — owner: do one that's ready already (P0 harvest body)"
 approve_phrase: "approve harvest-ag-haul"
 industry: "agriculture / harvest haul"
 locations:
@@ -16,7 +17,7 @@ locations:
   - "Yolo County, CA"
   - "San Joaquin County, CA"
 testing_oddity: "Two clocks on one yard. A qualifying agricultural vehicle can stay annual. The truck that hauls the crop to the first point of processing is usually still semi-annual. Confirm the unit in CTC-VIS before anyone assumes harvest season is an exemption."
-cool_thing: "Article URL still 404 as of 2026-09-10 14:10 PT. This file is the missing body. No invented diner."
+cool_thing: "No invented diner. Next documented pin already live: /blog/fleets-ovi-obd-porterville-mojave."
 tags: ["CARB", "Clean Truck Check", "Agriculture", "Harvest", "Woodland", "Merced", "Stockton", "Porterville", "OBD", "OVI"]
 meta_description: "Harvest season Clean Truck Check: qualifying ag stays annual, not exempt. Haul trucks stay twice a year. Mobile OBD $75 / OVI $199 in Woodland, Merced, Stockton. Call 916-890-4427."
 ---
@@ -86,4 +87,4 @@ The article URL `/blog/harvest-season-clean-truck-check-ag-haul` still 404s as o
 
 Call **916-890-4427**. Request a callback at [contact](/contact). Service menu: [services](/services) · [pricing](/pricing) · [areas](/areas).
 
-Do not publish this file until the owner replies `approve harvest-ag-haul`.
+Shipped to `site/blog/harvest-season-clean-truck-check-ag-haul.html` on 2026-09-17 after the owner asked to publish one ready post. Wrangler still Bryan GO.

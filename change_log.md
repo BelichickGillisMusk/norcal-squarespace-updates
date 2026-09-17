@@ -4,6 +4,21 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-17 — Blog portal entity fix + harvest post (ready queue) + subtle watermark
+
+Owner: ship one post that's already ready (PT40 not in repo). P0 queue body is harvest. Also fix portal titles that displayed raw `&#x27;` / `&amp;` so the index looked copied.
+
+- New post `site/blog/harvest-season-clean-truck-check-ag-haul.html` from `blog_drafts/queue/harvest-season-clean-truck-check-ag-haul.md`. Law lock: HD I/M 5/20/30/40 not printed as 40/55; ag annual vs haul semi-annual; Oct 2027 4× OBD; CTC-VIS is the deadline. No invented diner. Canary comment `two-clocks-on-one-yard`.
+- Portal: harvest card + quick list; article count 63 → 64. Sitemap row added.
+- `site/blog/index.html` + `site/blog.html`: undouble 30 entities plus one truncated `West&amp;#x…` blurb.
+- Isolated CSS `site/assets/css/ncm-blog-mark.css` (`ncm-blog-origin-20260917-v1`) — faint NCM logo + diagonal `norcalcarbmobile.com`. Do **not** merge into `styles.css`.
+- Worker injects the mark on `/blog` and `/clean-truck-check-blog` only. Homepage/pricing untouched.
+- Builder `plain_text()` now undoubles before unescape. Guard: `scripts/blog-migration/check_blog_entities.py` + site-lock.
+- Social: pack copy is for owner paste only. Do not auto-post GBP / Facebook / X.
+- No wrangler. No PR 91. No price/phone/homepage changes. Live ship remains Actions → Deploy NorCal CARB Mobile (`bryan_go=GO`).
+
+---
+
 ## 2026-09-08 — Soft scrape-harden llms.txt + robots.txt (Bryan GO aggressive)
 
 Magic 2026-09-08: soften AI training / shrink the clone map on www. **Do not nuke Google / GBP indexing.**

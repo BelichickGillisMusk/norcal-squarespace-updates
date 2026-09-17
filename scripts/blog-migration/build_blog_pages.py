@@ -74,12 +74,31 @@ SITE_POST_BLURBS = {
 SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
 
 
+DOUBLE_ENTITY_RE = re.compile(r"&amp;(#x?[0-9A-Fa-f]+;|#\d+;|[a-zA-Z]+;)")
+
+
+def undouble_entities(s):
+    """Turn `&amp;#x27;` / `&amp;amp;` back into a single encoding.
+
+    Manifest titles and hand-built portal HTML sometimes arrive already
+    escaped. Escaping again makes browsers show the entity source, which
+    reads like a broken scrape.
+    """
+    prev = None
+    out = s
+    while out != prev:
+        prev = out
+        out = DOUBLE_ENTITY_RE.sub(r"&\1", out)
+    return out
+
+
 def esc(s):
     return html.escape(s, quote=True)
 
 
 def plain_text(fragment):
     txt = re.sub(r"<[^>]+>", " ", fragment)
+    txt = undouble_entities(txt)
     txt = html.unescape(txt)
     return re.sub(r"\s+", " ", txt).strip()
 
@@ -177,6 +196,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="stylesheet" href="/assets/css/ncm-blog-mark.css?v=20260917-v1">
   <script type="application/ld+json">
   {jsonld}
   </script>
@@ -187,7 +207,8 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .post-body blockquote {{ border-left: 4px solid var(--green); margin: 1em 0; padding: .25em 0 .25em 1em; color: var(--muted); }}
   </style>
 </head>
-<body>
+<body class="ncm-blog-origin">
+<!-- ncm-blog-mark: norcalcarbmobile.com original · ncm-blog-origin-20260917-v1 -->
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-header">
@@ -336,8 +357,10 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="stylesheet" href="/assets/css/ncm-blog-mark.css?v=20260917-v1">
 </head>
-<body>
+<body class="ncm-blog-origin">
+<!-- ncm-blog-mark: norcalcarbmobile.com original · ncm-blog-origin-20260917-v1 -->
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-header">

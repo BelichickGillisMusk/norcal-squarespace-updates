@@ -23,7 +23,7 @@ Price-leak status rechecked 2026-09-10:
 - `/east-bay-mobile-carb-testing` — 301 to /areas
 - `/blog/carb-clean-truck-check` — frequency paragraph still says "at least once per year." Hold rewrite.
 
-Harvest URL `/blog/harvest-season-clean-truck-check-ag-haul` is still 404. Body is `queue/harvest-season-clean-truck-check-ag-haul.md`.
+Harvest URL `/blog/harvest-season-clean-truck-check-ag-haul` HTML is in `site/blog/` as of 2026-09-17. Live still needs wrangler / Actions GO.
 
 | # | File | Industry | Pins | Approve phrase | Publish date |
 |---|------|----------|------|----------------|--------------|
