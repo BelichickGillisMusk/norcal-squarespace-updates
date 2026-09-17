@@ -4,6 +4,21 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-17 — Two verticals + Fairfield NorCal header (leave Hayward)
+
+Bryan: Fairfield must be fixed before using the 209/925 workers preview. Hayward is hot — leave it. Area headers were too chopped. Two long verticals:
+
+1. **Hayward: San Jose to Santa Rosa** (more traffic) → `/bay-area-mobile-carb`. `/clean-truck-check-hayward` 301s here, not to Tracy.
+2. **Roseville to Stockton** (same shape, inland) → `/stockton-clean-truck-check`.
+
+- New `/clean-truck-check-fairfield` with the real NorCal header/footer and **916-890-4427**. Solano I-80 only. Did not paste the Fairfield workers.dev 209 clone (wrong phone, fake reviews, Tracy/Amazon copy).
+- `/hayward-tracy-carb-testing` retitled as the Tracy/Livermore **580 spur**, not the Hayward header.
+- `/areas` leads with the two verticals plus Fairfield.
+
+No `styles.css`. No wrangler. No live email.
+
+---
+
 ## 2026-09-17 — Hayward-to-Tracy corridor lander (from 580/205 preview)
 
 Turn the mobilecarbtest.workers.dev 209/925 preview into a real www area page covering **Hayward → Tracy** (I-880 / 238 / 580 / 205), not Concord/Antioch as the hero.
