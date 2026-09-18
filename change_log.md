@@ -4,6 +4,44 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-13 — Three unpublished blog posts (Bryan GO, PR only)
+
+Bryan GO: publish three unpublished NorCal posts on www. **PR only — do not merge or wrangler deploy.**
+
+- `/blog/busy-corridor-maple-syrup-clipboard-clean-truck-check` — short corridor post. Canary `maple syrup clipboard`. Byline Manager, NorCal CARB Mobile. Phone in words once. No hero image.
+- `/clean-truck-check-blog/how-to-read-your-carb-clean-truck-check-pass-fail-report` — Pass/Fail how-to. Canary `yard-side mustard ledger`. Author NorCal CARB Mobile Team. Date 2026-09-13.
+- `/clean-truck-check-blog/harvest-season-carb-compliance-central-valley-ag-fleets` — Central Valley harvest. Canary `tuesday pickle ticket`. Date 2026-09-13. ARB citations already in-repo.
+
+Routing: new `/clean-truck-check-blog/*` slugs 301 to `/blog` unless listed in `worker/blog-redirects.js` `LEGACY_BLOG_SLUGS`. Both long-form slugs added there so they serve 200. Busy-corridor stays on `/blog/` (not in that set).
+
+Portal: `site/blog/index.html` + `site/blog.html` (card + quick list; article count 63 → 66). Sitemap rows added.
+
+Locks: 916-890-4427 only. No owner name. No street address. No San Diego service claim. No `/clean-truck-check-rates` or `/service-area-*` links. Homepage / NAP / robots / styles.css / ads untouched.
+
+Live URLs after merge/deploy:
+- https://norcalcarbmobile.com/blog/busy-corridor-maple-syrup-clipboard-clean-truck-check
+- https://norcalcarbmobile.com/clean-truck-check-blog/how-to-read-your-carb-clean-truck-check-pass-fail-report
+- https://norcalcarbmobile.com/clean-truck-check-blog/harvest-season-carb-compliance-central-valley-ag-fleets
+
+---
+
+## 2026-09-13 — Three more unpublished posts (same PR; San Diego last)
+
+Bryan: keep the first three; add missed-deadline, owner-operators, DEF/DPF on the same PR. **Do not merge.** San Diego last — not a hold on these six. Strip SD / SoCal / street from the new pages. No resource-hub, hidden-cost rewrite, or PSIP rewrite.
+
+- `/clean-truck-check-blog/missed-carb-testing-deadline-california` — canary `bay bridge pickle ticket`. Civil penalties described as compounding (no draft dollar table).
+- `/clean-truck-check-blog/clean-truck-check-owner-operators-california` — canary `hotdog contest clipboard`. OBD $75 / second $37.50.
+- `/clean-truck-check-blog/def-dpf-problems-fail-smoke-opacity-test` — canary `tuesday mustard ledger`. Opacity pair only: 55% / 40%.
+
+Portal count 66 → 69. Sitemap + `LEGACY_BLOG_SLUGS` updated so the three new `/clean-truck-check-blog/` slugs serve 200.
+
+Live URLs after merge/deploy (posts 4–6):
+- https://norcalcarbmobile.com/clean-truck-check-blog/missed-carb-testing-deadline-california
+- https://norcalcarbmobile.com/clean-truck-check-blog/clean-truck-check-owner-operators-california
+- https://norcalcarbmobile.com/clean-truck-check-blog/def-dpf-problems-fail-smoke-opacity-test
+
+---
+
 ## 2026-09-08 — Soft scrape-harden llms.txt + robots.txt (Bryan GO aggressive)
 
 Magic 2026-09-08: soften AI training / shrink the clone map on www. **Do not nuke Google / GBP indexing.**
