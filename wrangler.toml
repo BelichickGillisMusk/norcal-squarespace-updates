@@ -1,4 +1,5 @@
-# Production — norcalcarbmobile.com (same as wrangler.jsonc; TOML for CI)
+# Production name locked. Branch experiment — run_worker_first is a path list.
+# Do not merge to main until canary + schema + legacy redirects live in site/ files.
 name = "norcal-squarespace-updates-gillis"
 main = "worker/index.js"
 compatibility_date = "2025-06-01"
@@ -9,7 +10,7 @@ directory = "./site"
 binding = "ASSETS"
 html_handling = "auto-trailing-slash"
 not_found_handling = "404-page"
-run_worker_first = true
+run_worker_first = [ "/api/*", "/contact", "/contact/" ]
 
 [[routes]]
 pattern = "norcalcarbmobile.com"
@@ -19,7 +20,5 @@ custom_domain = true
 pattern = "www.norcalcarbmobile.com"
 custom_domain = true
 
-# CONTACT_TO overrides Worker DEFAULT_TO. All three form inboxes — not one.
-# Never: bgillis99@gmail.com, mila@*, admin@mobilecarbsmoketest.com
 [vars]
 CONTACT_TO = "sales@norcalcarbmobile.com,carb@norcalcarbmobile.com,fsu9913@gmail.com"
