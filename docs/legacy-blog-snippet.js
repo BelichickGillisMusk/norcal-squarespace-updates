@@ -1,0 +1,100 @@
+// Zone Snippet — norcalcarbmobile.com legacy blog 301s
+// Dash: Rules → Snippets. Not wrangler. Not index.js.
+// Rule: (http.host eq "norcalcarbmobile.com" or http.host eq "www.norcalcarbmobile.com")
+//   and (starts_with(http.request.uri.path, "/blog/") or starts_with(http.request.uri.path, "/clean-truck-check-blog/"))
+
+const LEGACY = new Set([
+  "attention-california-diesel-truck-owners",
+  "avoid-carb-fines-simplify-compliance-with-norcal-carb-mobile",
+  "blog-smoke-opacity-rain-elements",
+  "butte-county-carb-clean-truck-check-supporting-loggersorchards-agriculture-and-local-fleets-not-just-in-chico",
+  "ca-ag-vehicles-clean-truck-testing-info",
+  "carb-clean-truck-tests-not-so-hidden-cost-of-driving-to-the-testing-location",
+  "carb-compliance-guide-for-truckers-in-merced-county-navigating-clean-truck-regulations",
+  "carb-j1667-opacity-test-antioch-mobile-clean-truck-check",
+  "carb-j1667-smoke-testing-explained-californias-heavy-duty-standard",
+  "carb-rancho-cordova-oakand-hayward-stockton",
+  "carb-violation",
+  "clean-truck-check-hayward-union-city-fremont-newark",
+  "clean-truck-check-hd-im-program",
+  "clean-truck-check-info-blog",
+  "clean-truck-check-what-california-fleet-owners-need-to-know-for-20242025",
+  "complete-guide-to-californias-carb-clean-truck-check-program",
+  "everything-you-need-to-know-about-carb-compliance",
+  "find-key-answers",
+  "find-your-vehicles-test-group-engine-family-number-veci-label-for-j1667-smoke-opacity-testing",
+  "four-counties-six-stops-one-day-keeping-california-fleets-carb-clean-truck",
+  "how-carb-automation-streamlines-fleet-compliance",
+  "how-norcal-carb-mobile-keeps-mitchell-concrete-moving-strong-in-rancho-cordova",
+  "how-norcalcarbmobilecom-helps-diesel-truck-owners-save-time-and-stay-carb-ctc-compliant-in-the-field",
+  "how-to-calculate-90-days-for-carb-testing-compliance",
+  "introducing-our-carb-compliant-for-2012-and-older-engines-new-wager-6500-smoke-opacity-meter-the-next-generation-of-accuracy-and-reliability",
+  "is-carb-clean-truck-check-ctc-for-diesel-trucks-over-14k-lbs-going-away",
+  "is-carb-clean-truck-check-testing-four-times-this-year",
+  "is-your-truck-an-agricultural-vehicle-your-carb-clean-truck-check-guide",
+  "keep-rolling-norcal-carb-mobile-services-construction-and-tree-companies-across-northern-california",
+  "keep-your-wheels-turning-not-waiting-how-extended-hours-emissions-testing-saves-your-norcal-fleet-money",
+  "keeping-california-compliant-why-norcalcarbmobilecom-is-the-go-to-for-on-site-clean-truck-check-testing",
+  "keeping-castillo-fencings-fleet-rolling-before-sunrise",
+  "keeping-pallets-moving-amp-trucks-carb-clean-a-partnership-with-all-good-pallets-stockton-ca",
+  "keeping-republic-electric-wests-fleet-road-ready-how-norcal-carb-mobile-delivers-247-clean-truck-check-excellence",
+  "keeping-sm-transport-rolling-how-norcal-carb-mobile-powers-on-time-deliveries",
+  "keeping-the-bubbles-flowing-welcoming-carbonic-service-to-the-family",
+  "mobile-carbdmv-diesel-clean-truck-checks-compliance-for-semi-trucks-in-sacramento-to-fresno-corridor",
+  "mobile-clean-truck-check-in-san-joaquin-county-on-site-service-while-you-work",
+  "mobile-clean-truck-check-near-stockton-on-site-emissions-testing-for-san-joaquin-county-fleets",
+  "mobile-clean-truck-checks-in-brentwood-and-beyond",
+  "mobile-hd-im-testing-in-sacramento-county-early-amp-late-service-that-works-around-your-schedule",
+  "mobile-opacity-testing-vs-shop-visits-the-real-cost-comparison-every-diesel-owner-needs-to-see",
+  "motorhome-carb-testing-in-california-your-complete-guide",
+  "napa-carb-clean-truck",
+  "norcalcarbmobilecom-your-trusted-partner-for-carb-clean-truck-checks-across-california",
+  "oakland-carb-compliance-at-active-job-sites-keeping-east-bay-municipal-utility-district-projects-moving",
+  "oakland-clean-truck-checks-san-leandro",
+  "on-the-road-opacity-testing-amp-visual-inspections-across-northern-californias-major-corridors",
+  "ovi-j1667-smoke-opacity-analysis",
+  "requirements-for-personal-non-commercial-usenbspmotorhomes",
+  "sacramento-carb-clean-truck-compliance-helping-logistics-agriculture-and-government-heavy-diesel-vehicles",
+  "san-francisco-clean-truck-check-carb",
+  "smoke-opacity-test-bay-area-central-valley",
+  "the-clean-truck-check-what-elk-grove-truckers-and-ag-operators-need-to-know",
+  "top-5-reasons-trucks-fail-clean-truck-check-and-how-to-avoid-them",
+  "what-is-clean-truck-test",
+  "when-every-minute-counts-how-norcal-carb-mobile-saved-banwait-truckings-deadline",
+  "when-friday-deadline-pressure-hits-how-norcal-carb-mobile-kept-the-plaster-groups-f550-fleet-compliant",
+  "woodland-agriculture-meets-carb-compliance",
+  "your-guide-to-carbs-deadlines-and-requirements-for-2025"
+]);
+
+const FALLBACKS = {
+  "check-compliance-carb-app": "/faq",
+  "i-thought-it-was-ending": "/blog",
+  "how-much-does-a-diesel-truck-obd-test-cost-complete-guide-to-carb-emissions-testing-prices-in-california": "/pricing",
+  "smoke-opacity-test-oakland-j1667-certified-mobile-testing-for-east-bay-diesel-trucks": "/blog/oakland-clean-truck-checks-san-leandro",
+  "how-to-avoid-carb-fines": "/blog/carb-violation",
+  "fleet-c-arb-clean-truck-check-sacramento": "/sacramento-carb-testing",
+  "what-is-clean-truck-test-fairfield": "/stockton-clean-truck-check",
+  "2026-carb-testing-deadlines": "/blog/2026-carb-testing-deadlines",
+  "carb-clean-truck-check": "/blog/carb-clean-truck-check",
+  "how-mobile-carb-testing-works": "/blog/how-mobile-carb-testing-works"
+};
+
+export default {
+  async fetch(request) {
+    const url = new URL(request.url);
+    let path = url.pathname.replace(/\/+$/, "") || "/";
+    const parts = path.split("/").filter(Boolean);
+    if (parts.length < 2) return fetch(request);
+    const root = parts[0];
+    const slug = parts[parts.length - 1];
+    if (root !== "blog" && root !== "clean-truck-check-blog") return fetch(request);
+
+    if (slug in FALLBACKS) {
+      return Response.redirect(new URL(FALLBACKS[slug], url.origin), 301);
+    }
+    if (root === "blog" && LEGACY.has(slug)) {
+      return Response.redirect(new URL("/clean-truck-check-blog/" + slug, url.origin), 301);
+    }
+    return fetch(request);
+  }
+};
