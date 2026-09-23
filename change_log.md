@@ -12,6 +12,7 @@ Bryan GO via COS Aria: publish `/blog/bayshore-sf-free-retest-ovi-wager-6500` an
 - Portal: `site/blog/index.html` + `site/blog.html` (card + quick list; article count 63 → 64). Sitemap row added.
 - Related field notes on `/areas`, Bay Area (includes this post), Sacramento Valley & foothills, Butte, Sacramento, and Stockton. Porterville/Mojave note is not on the Bay Area page.
 - Follow-up: merged the three BODY drafts into the content wells (Bay Area, Sacramento Valley & foothills, Butte). Header/footer kept. Related field notes kept ahead of the CTA. Maps iframe + GBP cid 16019693078134296096. “Most thorough” dropped. Locked OBD $75 / OVI $199 / MH $99/$229. Butte was an update of the existing page, not a new file.
+- `/areas` Where we test is Bryan’s six regions (Sacramento and surrounding, Bay Area, Napa to Livermore, San Jose South Bay, East Bay, Butte over to Santa Rosa). Existing child URLs only. San Jose and Livermore link `/contact`. Hub Related field notes includes the Bayshore post.
 - No Ads, robots, DNS, or 301 changes. No wrangler.
 
 Rollback: revert this commit. Production stays on the previous Worker version until a separate Bryan GO deploy.
