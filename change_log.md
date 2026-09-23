@@ -4,6 +4,20 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-23 — Bayshore blog + area related field notes (Bryan GO, PR only)
+
+Bryan GO via COS Aria: publish `/blog/bayshore-sf-free-retest-ovi-wager-6500` and add Related field notes on area pages. **PR only — do not merge or wrangler deploy.**
+
+- New post `site/blog/bayshore-sf-free-retest-ovi-wager-6500.html` with Article JSON-LD. Byline Vin CA Diesel. USDOT 4357321 / CA 655692; door name held off. No owner legal name. No fail language. OBD $75 · OVI $199 · 916-890-4427.
+- Portal: `site/blog/index.html` + `site/blog.html` (card + quick list; article count 63 → 64). Sitemap row added.
+- Related field notes on `/areas`, Bay Area (includes this post), Sacramento Valley & foothills, Butte, Sacramento, and Stockton. Porterville/Mojave note is not on the Bay Area page.
+- Area BODY HTML drafts (`2026-09-22-seo-areas-blogs-go` and the three `*.body.html` files) were not in the upload set, so existing area main copy was not rewritten. Butte page already existed (`site/butte-county-carb-testing.html`) — update, not create.
+- No Ads, robots, DNS, or 301 changes. No wrangler.
+
+Rollback: revert this commit. Production stays on the previous Worker version until a separate Bryan GO deploy.
+
+---
+
 ## 2026-09-08 — Soft scrape-harden llms.txt + robots.txt (Bryan GO aggressive)
 
 Magic 2026-09-08: soften AI training / shrink the clone map on www. **Do not nuke Google / GBP indexing.**
