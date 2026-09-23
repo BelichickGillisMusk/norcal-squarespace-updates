@@ -79,6 +79,36 @@
 
   <section>
     <div class="wrap">
+      <div class="section-head">
+        <h2>Check the truck before we roll</h2>
+        <p>Same tools as the city pages. This page is NorCal CARB Mobile, not a separate site. Engine year picks the test. The VIN box is a lookup, not a CARB certificate.</p>
+      </div>
+      <div class="grid grid-2">
+        <div class="card" id="which-test">
+          <h3>Which test?</h3>
+          <p>Use the engine year, not the cab year.</p>
+          <div class="field">
+            <label for="engine-year">Engine year</label>
+            <input id="engine-year" name="engine-year" type="number" inputmode="numeric" min="1990" max="2027" placeholder="e.g. 2016">
+          </div>
+          <p id="which-out" class="muted">Enter a year. 2013 and newer is usually OBD. Older or no OBD port is OVI.</p>
+        </div>
+        <div class="card">
+          <h3>Done in 3 steps</h3>
+          <ol>
+            <li>Call or book. Tell us the yard in Lodi, Galt, Woodbridge, Acampo, or Lockeford.</li>
+            <li>We come to the yard with the OBD tool or the smoke meter.</li>
+            <li>We submit the result. You keep the paperwork.</li>
+          </ol>
+          <p><a class="btn btn-primary" href="/contact">Book this route</a></p>
+        </div>
+      </div>
+      <aside id="carb-vin-gadget" data-carb-vin-gadget data-city="Lodi" data-phone="916-890-4427" data-book="/contact" data-api="" aria-label="Clean Truck Check VIN lookup"></aside>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
       <div class="grid grid-2">
         <div class="card">
           <h2>Built for Valley fleets</h2>
@@ -117,7 +147,7 @@
       <div class="grid grid-2">
         <div class="card">
           <h2>Cities we cover from the Lodi route</h2>
-          <p>Lodi · Stockton · Tracy · Manteca · Lathrop · Ripon · Escalon · Mountain House · French Camp · Linden · Lockeford · and surrounding San Joaquin yards.</p>
+          <p>Lodi · Galt · Woodbridge · Acampo · Lockeford · Stockton · Tracy · Manteca · Lathrop · Ripon · Escalon · Highway 99 and I-5. Not the I-80 Fairfield run.</p>
         </div>
         <div class="card">
           <h2>Lodi / Stockton FAQ</h2>
@@ -177,5 +207,25 @@
     </div>
   </div>
 </footer>
+<script src="/assets/js/carb-vin-gadget.js" defer></script>
+<script>
+  (function () {
+    var input = document.getElementById('engine-year');
+    var out = document.getElementById('which-out');
+    if (!input || !out) return;
+    input.addEventListener('input', function () {
+      var y = parseInt(input.value, 10);
+      if (!y || y < 1990 || y > 2027) {
+        out.textContent = 'Enter the engine year. 2013 and newer is usually OBD. Older or no OBD port is OVI.';
+        return;
+      }
+      if (y >= 2013) {
+        out.textContent = '2013 or newer diesel: OBD test. $75 at the yard. Motorhome OBD is $99.';
+      } else {
+        out.textContent = '2012 or older, or no OBD port: OVI smoke test. $199. Motorhome OVI is $229.';
+      }
+    });
+  })();
+</script>
 </body>
 </html>
