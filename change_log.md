@@ -4,6 +4,19 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-23 — Clean Truck Check facts hub (Bryan GO, PR only)
+
+Bryan GO via COS-Aria: ship `/clean-truck-check-facts` and close the `/new-page` stub. **PR only — do not merge, do not wrangler deploy, do not touch DNS or mail MX.**
+
+- New page `site/clean-truck-check-facts.html`. H1, mobile OBD & OVI intro, phone 916-890-4427, E01–E08 caption facts, FAQ (who must test, 14,000 lb GVWR, credentialed tester, 90-day window). WebPage + FAQPage JSON-LD. No VideoObject (Shorts iframe has no src and no video id).
+- Header mark stays `/assets/img/ncm-logo.png` (stacked NCM). Canary still injected by the Worker. `styles.css` untouched.
+- Worker `REDIRECTS`: `/new-page` and `/new-page.html` now 301 to `/clean-truck-check-facts`. No stub HTML was in `site/`. `/clean-truck-check` stays 301 to `/services#obd`.
+- Sitemap row added. `llms.txt` core pages lists the hub. No ads. No owner name.
+
+Rollback: revert this commit. Production stays on the previous Worker version until a separate deploy GO.
+
+---
+
 ## 2026-09-23 — Bayshore blog + area related field notes (Bryan GO, PR only)
 
 Bryan GO via COS Aria: publish `/blog/bayshore-sf-free-retest-ovi-wager-6500` and add Related field notes on area pages. **PR only — do not merge or wrangler deploy.**
