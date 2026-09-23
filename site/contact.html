@@ -262,6 +262,15 @@
 
     var form = document.getElementById('contact-form');
     var status = document.getElementById('form-status');
+    function showFormError(msg) {
+      var err = document.getElementById('form-error');
+      if (err) {
+        err.hidden = false;
+        err.textContent = msg;
+        err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      if (status) status.textContent = msg;
+    }
     if (form && window.fetch) {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -279,12 +288,12 @@
               if (b) { b.hidden = false; b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
               status.textContent = '';
             } else {
-              status.textContent = (res.j && res.j.error) || dict.error || 'We could not send that request. Please call (916) 890-4427.';
+              showFormError((res.j && res.j.error) || dict.error || 'We could not send that request. Please call (916) 890-4427.');
               btn.disabled = false;
             }
           })
           .catch(function () {
-            status.textContent = dict.error || 'We could not send that request. Please call (916) 890-4427.';
+            showFormError(dict.error || 'We could not send that request. Please call (916) 890-4427.');
             btn.disabled = false;
           });
       });
