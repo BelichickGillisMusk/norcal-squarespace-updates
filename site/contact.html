@@ -78,6 +78,7 @@
   <section class="hero">
     <div class="wrap">
       <div id="sent-banner" class="banner" hidden data-i18n="sent">Thanks — your request is in. We will reply shortly. Need it today? Call (916) 890-4427.</div>
+      <div id="form-error" class="banner banner-error" hidden data-i18n="error">We could not send that request. Please call (916) 890-4427.</div>
 
       <div class="hero-grid">
         <div class="hero-copy">
@@ -202,7 +203,7 @@
             </label>
           </div>
           <input type="hidden" name="terms_version" value="2026-07-22">
-          <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input class="hp" type="text" name="ncm_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button class="btn btn-primary btn-lg" type="submit" data-i18n="send">Send request</button>
           <p id="form-status" class="muted" style="margin:12px 0 0;font-size:.9rem"></p>
         </form>
@@ -253,6 +254,10 @@
     if (p.get('sent') === '1') {
       var b = document.getElementById('sent-banner');
       if (b) { b.hidden = false; b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    }
+    if (p.get('error') === '1') {
+      var err = document.getElementById('form-error');
+      if (err) { err.hidden = false; err.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
     }
 
     var form = document.getElementById('contact-form');

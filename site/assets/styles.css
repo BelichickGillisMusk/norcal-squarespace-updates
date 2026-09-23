@@ -35,7 +35,7 @@
   --font-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-html { box-sizing: border-box; scroll-behavior: smooth; }
+html { box-sizing: border-box; scroll-behavior: smooth; overflow-x: clip; }
 *, *::before, *::after { box-sizing: inherit; }
 
 img { max-width: 100%; height: auto; }
@@ -240,6 +240,7 @@ section.soft { background: var(--bg-soft); border-top: 1px solid var(--line); bo
 .hp { position: absolute; left: -9999px; }
 .contact-method { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
 .banner { background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; padding: 14px 18px; border-radius: 10px; margin-bottom: 20px; font-weight: 600; }
+.banner-error { background: var(--bg-soft); border: 1px solid var(--line); color: var(--ink); }
 
 /* ---------- Footer = same language as header ---------- */
 .site-footer {
@@ -342,27 +343,45 @@ figure:not(.shorts-slot) img:not(.brand-logo):not(.cred-lockup) {
 
 @media (max-width: 860px) {
   .grid-3, .grid-4, .grid-2, .contact-grid, .foot-grid { grid-template-columns: 1fr; }
-  .menu-toggle { display: block; }
+  .site-header .wrap { flex-wrap: wrap; align-items: center; row-gap: 8px; min-height: 0; }
+  .brand { order: 1; flex: 1 1 auto; }
+  /* Closed nav drops out of the box so logo, menu, and CTAs share the header flex. */
+  .nav:not(.open) { display: contents; }
+  .menu-toggle { display: block; order: 2; margin-left: auto; min-width: 44px; min-height: 44px; }
   .nav .navlink { display: none; }
-  .header-cta { display: none; }
+  .header-cta {
+    display: flex; flex-wrap: wrap; order: 3; flex: 1 1 100%;
+    gap: 8px; min-width: 0;
+  }
+  .header-cta .btn { flex: 1 1 100%; text-align: center; min-height: 48px; }
+  .chrome-toggles { order: 4; flex: 1 1 100%; justify-content: flex-start; }
+  .seg-btn { min-height: 44px; min-width: 44px; }
   .nav.open .navlink {
     display: block; width: 100%; padding: 14px 0; font-size: 1.05rem;
     border-top: 1px solid rgba(255,255,255,.1); color: #fff;
   }
   .nav.open {
-    position: absolute; top: 100%; left: 0; right: 0;
+    display: flex; position: absolute; top: 100%; left: 0; right: 0;
     background: var(--navy-deep); flex-direction: column; padding: 0 20px 16px;
     border-bottom: 1px solid rgba(255,255,255,.08); box-shadow: 0 12px 32px rgba(0,0,0,.4);
   }
-  .nav.open .menu-toggle { position: absolute; top: -50px; right: 16px; z-index: 10; }
-  .nav.open .header-cta { width: 100%; display: flex !important; flex-direction: column; gap: 10px; padding-top: 12px; }
+  .nav.open .menu-toggle { position: absolute; top: -50px; right: 16px; z-index: 10; margin-left: 0; }
+  .nav.open .header-cta { width: 100%; display: flex !important; flex-direction: column; gap: 10px; padding-top: 12px; order: 0; }
   .nav.open .header-cta .btn { text-align: center; }
+  .nav.open .chrome-toggles { order: 0; width: 100%; padding-top: 12px; }
   .hero { padding: 36px 0 32px; }
   .hero-cta { flex-direction: column; }
-  .hero-cta .btn { text-align: center; }
-  .mobile-callbar { display: flex; }
-  body { padding-bottom: 72px; }
-  .nap-bar .wrap { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .hero-cta .btn { text-align: center; width: 100%; }
+  .mobile-callbar { display: flex; flex-wrap: wrap; }
+  .mobile-callbar a {
+    flex: 1 1 140px; min-height: 48px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  body { padding-bottom: calc(120px + env(safe-area-inset-bottom)); }
+  .nap-bar .wrap { flex-direction: column; align-items: flex-start; gap: 4px; max-width: 100%; }
+  #contact-form button[type="submit"], #form-status, #form-error, #sent-banner {
+    scroll-margin-bottom: 128px;
+  }
 }
 @media (max-width: 560px) {
   body { font-size: 16px; }
@@ -418,7 +437,7 @@ html[data-lang="es"] .ncm-i18n { display: flex; }
 .seg-btn {
   appearance: none; border: 0; background: transparent; color: #fff;
   font: 700 0.78rem/1 var(--font-sans); letter-spacing: .04em;
-  padding: 10px 12px; min-height: 40px; min-width: 44px; cursor: pointer;
+  padding: 10px 12px; min-height: 44px; min-width: 44px; cursor: pointer;
 }
 .seg-btn.is-active { background: var(--green); color: #fff; }
 .seg-btn:hover { background: rgba(255,255,255,.1); }
@@ -512,7 +531,6 @@ html[data-theme="light"] body.contact-page a:hover { color: var(--green-deep); }
 .contact-page .field textarea { min-height: 120px; }
 
 @media (max-width: 860px) {
-  .contact-page .site-header .wrap { flex-wrap: wrap; }
   .cred-lockup { max-width: 72px; }
   .contact-page .hero h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
   .nav.open .chrome-toggles { width: 100%; padding-top: 12px; }

@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-23 — Mobile chrome + contact form 503 (PR only, no wrangler)
+
+Live `POST /api/contact` from the contact page returns **503** `{"ok":false,"error":"Please call us directly at (916) 890-4427 to book your test."}`. That string is only returned when `env.RESEND_API_KEY` is missing on worker `norcal-squarespace-updates-gillis`. No key was invented and nothing was deployed.
+
+- Mobile header at ≤860px: logo stays clamp, nav uses flex wrap, call/book CTAs stay on a full-width row (44px+ targets), no fixed 144px/112px. Body padding clears the call bar.
+- Honeypot field renamed `ncm_hp` (worker + Pages function + contact and ad forms). `name="company"` was an autofill trap that dropped real leads before the mail send.
+- `/contact?error=1` now shows the call-us banner. Native posts from the ad pages were redirecting there with no message.
+- Secret steps are in `site/README.md`. Form still cannot deliver until Bryan sets `RESEND_API_KEY` on the Gillis worker.
+
+---
+
 ## 2026-09-23 — CSS layout/color lock (PR only, no wrangler)
 
 Bryan: site colors looked wrong after recent page touches. Live `/assets/styles.css` tokens were already navy `#012241` / green `#4ab94e`. No charcoal/red in the stylesheet. The visible break was a fixed 144px/112px header logo plus a 152px header, `:nth-child` pricing stripes, and a red price block on `/for-clients` (`#b22234`, off-navy `#0D2349`).

@@ -15,16 +15,23 @@ site/
 
 ## Deploy
 
-### Option A — Cloudflare Worker (matches the live `norcalcarbmobile` worker)
+### Option A — Cloudflare Worker (live `norcal-squarespace-updates-gillis`)
 
-Config: `../wrangler.jsonc` (worker name `norcalcarbmobile`, serves this `site/` as static
-assets + routes `/api/contact` to `../worker/index.js`).
+Config: `../wrangler.jsonc` and `../wrangler.toml`. The worker serves this `site/` as static
+assets and handles `POST /api/contact` in `../worker/index.js`.
+
+The live form returns **HTTP 503** until `RESEND_API_KEY` is set on that worker.
+Do not commit the key. Do not invent one. Customer copy stays “call (916) 890-4427”.
 
 ```bash
-# from repo root
-npx wrangler secret put RESEND_API_KEY      # so the contact form can send
-npx wrangler deploy                          # → norcalcarbmobile.silverbackai.workers.dev
+# from repo root, against norcal-squarespace-updates-gillis — Bryan only, not from a CSS PR
+npx wrangler secret put RESEND_API_KEY
 ```
+
+`CONTACT_FROM` must be a verified Resend sender. Default is
+`noreply@mail.norcalcarbmobile.com`. A missing mail-domain DNS record makes Resend
+reject the send (HTTP 502) even after the key exists. That DNS change is separate
+from this repo.
 
 Optional plain vars (dashboard or `wrangler.jsonc` / `wrangler.toml` "vars"): `CONTACT_TO`
 must be all three form inboxes
