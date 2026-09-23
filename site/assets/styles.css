@@ -1,8 +1,11 @@
-/* NorCal CARB Mobile — design system v2026-09-05
+/* NorCal CARB Mobile — design system v2026-09-23
    Navy · White · Green. Not charcoal/red.
    Tokens: navy #012241 · green #4ab94e · hover #3d9b2f.
    Legacy --red* aliases green so older selectors stay on-token.
-   Stripe invoice #00a859 is not a www CTA. */
+   Stripe invoice #00a859 is not a www CTA.
+   Layout lock: border-box inherit, flexible header/logo (clamp),
+   .price-row-alt instead of tr:nth-child, images keep aspect-ratio.
+   Canary CSS stays in /assets/css/ncm-canary.css — do not merge it here. */
 
 :root {
   --navy: #012241;
@@ -32,8 +35,10 @@
   --font-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { box-sizing: border-box; scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: inherit; }
+
+img { max-width: 100%; height: auto; }
 
 body {
   margin: 0;
@@ -96,18 +101,31 @@ a:hover { color: var(--green); }
   border-bottom: 1px solid rgba(255,255,255,.08);
   box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 8px 32px rgba(0,0,0,.25);
 }
-.site-header .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 152px; gap: 16px; }
-.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.site-header .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: clamp(8px, 2vw, 16px);
+  min-height: clamp(72px, 12vw, 104px);
+  padding-top: 8px; padding-bottom: 8px;
+}
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; flex: 0 1 auto; }
 .brand-logo,
 .ncm-mark {
-  display: block; width: 144px; height: 144px; border-radius: 8px;
+  display: block;
+  width: clamp(64px, 9vw, 88px);
+  max-width: min(88px, 24vw);
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 8px;
   object-fit: contain; object-position: center;
-  background: #012241; flex: 0 0 auto;
+  background: #012241; flex: 0 1 auto;
   box-shadow: 0 0 0 1px rgba(255,255,255,.12);
 }
 .brand-name { font-weight: 800; color: #fff; font-size: 1.05rem; line-height: 1.05; }
 .brand-name small { display: block; font-size: .7rem; font-weight: 600; color: var(--silver); letter-spacing: .02em; }
-.nav { display: flex; align-items: center; gap: 18px; }
+.nav {
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: clamp(10px, 1.5vw, 18px); min-width: 0; flex: 1 1 auto;
+}
 .nav a.navlink { text-decoration: none; color: rgba(255,255,255,.92); font-weight: 600; font-size: 0.92rem; transition: color .15s ease; }
 .nav a.navlink:hover { color: #fff; }
 .header-cta { display: flex; gap: 8px; align-items: center; }
@@ -144,7 +162,9 @@ a:hover { color: var(--green); }
 .hero-areas { margin-top: 18px; font-weight: 600; color: var(--muted); font-size: .92rem; }
 .hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; }
 .hero-map img {
-  display: block; width: 100%; height: auto; border-radius: 16px;
+  display: block; width: 100%; max-width: 100%; height: auto;
+  aspect-ratio: 1126 / 1200; object-fit: cover;
+  border-radius: 16px;
   box-shadow: var(--shadow-lg); border: 1px solid var(--line);
 }
 @media (max-width: 900px) {
@@ -161,9 +181,9 @@ section.soft { background: var(--bg-soft); border-top: 1px solid var(--line); bo
 
 /* ---------- Cards ---------- */
 .grid { display: grid; gap: 18px; }
-.grid-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .card {
   background: #fff;
   border: 1px solid var(--line);
@@ -206,7 +226,7 @@ section.soft { background: var(--bg-soft); border-top: 1px solid var(--line); bo
 .cta-band .btn-call { background: #fff; color: var(--ink) !important; }
 
 /* Contact form */
-.contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 36px; align-items: start; }
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 36px; align-items: start; }
 .field { margin-bottom: 14px; }
 .field label { display: block; font-weight: 600; color: var(--ink); margin-bottom: 6px; font-size: 0.92rem; }
 .field input, .field textarea, .field select {
@@ -232,7 +252,7 @@ section.soft { background: var(--bg-soft); border-top: 1px solid var(--line); bo
 }
 .site-footer a { color: #fff; font-weight: 600; }
 .site-footer a:hover { color: #fff; text-decoration: underline; }
-.foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 28px; margin-bottom: 26px; }
+.foot-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: 28px; margin-bottom: 26px; }
 .site-footer h4 { color: #fff; margin: 0 0 10px; font-size: 0.85rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 700; }
 .site-footer .muted { color: rgba(255,255,255,.55); }
 .foot-bottom {
@@ -257,10 +277,15 @@ section.soft { background: var(--bg-soft); border-top: 1px solid var(--line); bo
 .faq-item h3 { color: var(--ink); margin-bottom: 6px; font-size: 1.05rem; }
 .faq-item p { color: var(--body); margin: 0; }
 
-.pricing-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.table-wrap { max-width: 100%; overflow-x: auto; }
+.pricing-table { width: 100%; max-width: 100%; border-collapse: collapse; font-size: .95rem; }
 .pricing-table th { background: var(--navy); color: #fff; font-weight: 700; padding: 12px 16px; text-align: left; }
 .pricing-table td { padding: 10px 16px; border-bottom: 1px solid var(--line); color: var(--body); background: #fff; }
-.pricing-table tr:nth-child(even) td { background: var(--bg-soft); }
+/* Stripe with a functional class. Do not use tr:nth-child().
+   Every other tbody row opts in: <tr class="price-row-alt">.
+   .row-alt is the same band if a later page uses that name. */
+.pricing-table .price-row-alt td,
+.pricing-table .row-alt td { background: var(--bg-soft); }
 .pricing-table .price-cell { font-weight: 700; color: var(--ink); }
 
 a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
@@ -276,9 +301,18 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
 .blog-card h3 a:hover { color: var(--green); }
 .blog-card p { flex: 1; color: var(--muted); font-size: 0.92rem; margin: 0 0 12px; }
 .blog-card .meta { font-size: 0.78rem; color: var(--silver); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 8px; }
-.blog-layout { display: grid; grid-template-columns: 1fr 280px; gap: 36px; align-items: start; }
+.blog-card img {
+  display: block; width: 100%; height: auto; margin: 0 0 12px;
+  aspect-ratio: 16 / 10; object-fit: cover; border-radius: 10px;
+}
+.prose img:not(.brand-logo):not(.cred-lockup),
+figure:not(.shorts-slot) img:not(.brand-logo):not(.cred-lockup) {
+  display: block; width: 100%; max-width: 100%; height: auto;
+  aspect-ratio: 3 / 2; object-fit: contain; background: var(--bg-soft);
+}
+.blog-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 280px); gap: 36px; align-items: start; }
 @media (max-width: 860px) { .blog-layout { grid-template-columns: 1fr; } }
-.blog-side .card { position: sticky; top: 88px; }
+.blog-side .card { position: sticky; top: 112px; }
 .blog-side a { display: block; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 0.9rem; color: var(--ink); }
 .prose { max-width: 42rem; }
 .prose a { color: var(--green); }
@@ -344,16 +378,29 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
   border:2px solid var(--navy-mid); border-radius:18px; background:var(--bg-soft);
   box-shadow:var(--shadow);
 }
-.coverage-panel-map img { display:block; width:100%; height:auto; max-height:520px; object-fit:cover; border-radius:12px; border:1px solid var(--line); }
+.coverage-panel-map img {
+  display: block; width: 100%; max-width: 100%; height: auto;
+  aspect-ratio: 1126 / 1200; object-fit: cover;
+  border-radius: 12px; border: 1px solid var(--line);
+}
 .coverage-panel-copy .eyebrow,.card .eyebrow {
   margin:0 0 8px; color:var(--green); font-size:.76rem; font-weight:800;
   letter-spacing:.08em; text-transform:uppercase;
 }
 .route-chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
 .route-chips span { padding:7px 11px; border:1px solid var(--silver-line); border-radius:999px; background:#fff; color:var(--ink); font-size:.84rem; font-weight:700; }
+.shorts-slot { margin: 0; max-width: min(420px, 100%); }
+.shorts-slot iframe,
+.shorts-frame {
+  display: block; width: 100%; max-width: 100%; height: auto;
+  aspect-ratio: 9 / 16;
+  border: 1px solid var(--line); border-radius: 16px;
+  background: var(--navy);
+}
+.shorts-slot figcaption { color: var(--muted); margin-top: 10px; }
+
 @media (max-width:760px) {
   .coverage-panel { grid-template-columns:1fr; padding:14px; }
-  .coverage-panel-map img { max-height:none; }
   .route-chips span { font-size:.8rem; }
 }
 
@@ -438,7 +485,8 @@ html[data-theme="light"] body.contact-page a:hover { color: var(--green-deep); }
 .contact-page .lede { font-size: 1.18rem; max-width: 40rem; }
 .reputation-row { display: flex; flex-wrap: nowrap; align-items: center; gap: 8px 10px; margin-bottom: 16px; }
 .cred-lockup {
-  display: block; width: 88px; height: auto; flex: 0 0 auto;
+  display: block; width: clamp(72px, 12vw, 88px); max-width: 88px; height: auto;
+  aspect-ratio: 857 / 571; object-fit: contain; flex: 0 1 auto;
   background: #fff; border-radius: 6px; padding: 2px 4px;
 }
 .reputation-row .reviews-line { margin: 0; }
@@ -464,10 +512,8 @@ html[data-theme="light"] body.contact-page a:hover { color: var(--green-deep); }
 .contact-page .field textarea { min-height: 120px; }
 
 @media (max-width: 860px) {
-  .brand-logo, .ncm-mark { width: 112px; height: 112px; }
-  .site-header .wrap { min-height: 120px; }
   .contact-page .site-header .wrap { flex-wrap: wrap; }
-  .cred-lockup { width: 72px; }
+  .cred-lockup { max-width: 72px; }
   .contact-page .hero h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
   .nav.open .chrome-toggles { width: 100%; padding-top: 12px; }
 }

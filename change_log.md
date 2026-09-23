@@ -4,6 +4,18 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-23 — CSS layout/color lock (PR only, no wrangler)
+
+Bryan: site colors looked wrong after recent page touches. Live `/assets/styles.css` tokens were already navy `#012241` / green `#4ab94e`. No charcoal/red in the stylesheet. The visible break was a fixed 144px/112px header logo plus a 152px header, `:nth-child` pricing stripes, and a red price block on `/for-clients` (`#b22234`, off-navy `#0D2349`).
+
+- `site/assets/styles.css`: border-box inherit, clamp logo, `.price-row-alt` / `.row-alt`, aspect-ratio on logo, hero/coverage maps, blog cards, shorts frame, credential badge. Contact dark/light tokens unchanged. Canary CSS not merged.
+- HTML hooks: `.price-row-alt` on `/pricing` and `/services` tables. Facts shorts slot uses `.shorts-frame`. Contact logo attributes 88×88. `/for-clients` prices use `var(--green)`.
+- `config/site-template-lock.json` stylesheet hash updated so site-lock stays green. Homepage HTML hash unchanged.
+
+PR only. Do not merge. Do not wrangler deploy. `/assets/*` is cached `immutable` for a year — hard-refresh after Workers Builds.
+
+---
+
 ## 2026-09-23 — Clean Truck Check facts hub (Bryan GO, PR only)
 
 Bryan GO via COS-Aria: ship `/clean-truck-check-facts` and close the `/new-page` stub. **PR only — do not merge, do not wrangler deploy, do not touch DNS or mail MX.**
