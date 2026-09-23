@@ -14,27 +14,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/styles.css">
+  <style>
+    .route-chips a { color: inherit; text-decoration: none; }
+    .route-chips a:hover { text-decoration: underline; }
+  </style>
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "NorCal CARB Mobile LLC",
-    "alternateName": "NorCal CARB Mobile",
-    "description": "Mobile CARB Clean Truck Check testing — OBD and OVI — we come to your yard across California.",
-    "url": "https://norcalcarbmobile.com",
-    "telephone": "+1-916-890-4427",
-    "email": "sales@norcalcarbmobile.com",
-    "areaServed": [
-      "Sacramento, CA","Roseville, CA","Lincoln, CA","Sheridan, CA","Knights Landing, CA",
-      "Placerville, CA","Chico, CA","Butte County, CA","Santa Rosa, CA","Calistoga, CA",
-      "St. Helena, CA","Napa, CA","Antioch, CA","Concord, CA","Stockton, CA",
-      "San Jose, CA","Sonora, CA","Porterville, CA","Tulare County, CA","San Diego County, CA"
-    ]
-  }
-  </script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -83,35 +69,41 @@
           <h2>Core service and scheduled routes</h2>
           <p>Regular service across Northern California, with route-based appointments in Butte County, wine country, the Central Valley, Sierra foothills and San Diego County.</p>
           <div class="route-chips" aria-label="Featured service communities">
-            <span>Chico</span><span>Placerville</span><span>Santa Rosa</span><span>Calistoga</span><span>St. Helena</span><span>Napa</span><span>Antioch</span><span>Concord</span><span>Stockton</span><span>San Jose</span><span>Sonora</span><span>Porterville</span><span>San Diego County</span>
+            <span><a href="/butte-county-carb-testing">Chico</a></span>
+            <span><a href="/sacramento-valley-foothills-carb-testing">Placerville</a></span>
+            <span><a href="/napa-sonoma-carb-testing">Santa Rosa</a></span>
+            <span><a href="/napa-sonoma-carb-testing">Calistoga</a></span>
+            <span><a href="/napa-sonoma-carb-testing">St. Helena</a></span>
+            <span><a href="/napa-sonoma-carb-testing">Napa</a></span>
+            <span><a href="/bay-area-mobile-carb">Antioch</a></span>
+            <span><a href="/bay-area-mobile-carb">Concord</a></span>
+            <span><a href="/stockton-clean-truck-check">Stockton</a></span>
+            <span><a href="/bay-area-mobile-carb">San Jose</a></span>
+            <span><a href="/central-valley-sierra-carb-testing">Sonora</a></span>
+            <span><a href="/central-valley-sierra-carb-testing">Porterville</a></span>
+            <span><a href="#san-diego">San Diego County</a></span>
           </div>
         </div>
       </div>
       <div class="grid grid-3">
-        <article class="card"><p class="eyebrow">Where we test</p><h3>Sacramento and Surrounding Areas</h3><p>Sacramento yards, plus Roseville and the valley and foothill routes already on the book.</p><a class="btn btn-ghost" href="/sacramento-carb-testing">Sacramento</a> <a class="btn btn-ghost" href="/sacramento-valley-foothills-carb-testing">Valley &amp; foothills</a></article>
-        <article class="card"><p class="eyebrow">Where we test</p><h3>Bay Area</h3><p>San Francisco, the Peninsula, and Bay Area yards on the daily unit.</p><a class="btn btn-ghost" href="/bay-area-mobile-carb">Bay Area details</a></article>
-        <article class="card"><p class="eyebrow">Where we test</p><h3>Napa to Livermore</h3><p>Napa and Sonoma have a live route page. Livermore does not have its own page yet — request that stop when you book.</p><a class="btn btn-ghost" href="/napa-sonoma-carb-testing">Napa &amp; Sonoma</a> <a class="btn btn-ghost" href="/contact">Livermore — request a stop</a></article>
-        <article class="card"><p class="eyebrow">Where we test</p><h3>San Jose South Bay Area</h3><p>South Bay yards, including San Jose, are booked on the Bay Area page. No separate city page.</p><a class="btn btn-ghost" href="/bay-area-mobile-carb">Bay Area details</a></article>
-        <article class="card"><p class="eyebrow">Where we test</p><h3>East Bay</h3><p>Oakland, Hayward, Fremont, San Leandro, Richmond, and Concord on the I-880 unit.</p><a class="btn btn-ghost" href="/bay-area-mobile-carb">East Bay details</a></article>
-        <article class="card"><p class="eyebrow">Where we test</p><h3>Butte over to Santa Rosa</h3><p>Butte County field routes, and Santa Rosa on the existing Napa and Sonoma page.</p><a class="btn btn-ghost" href="/butte-county-carb-testing">Butte County</a> <a class="btn btn-ghost" href="/napa-sonoma-carb-testing">Santa Rosa</a></article>
+        <article class="card" id="sacramento"><p class="eyebrow">Core route</p><h3>Sacramento</h3><p>Sacramento, Elk Grove, Rancho Cordova, and West Sacramento yards.</p><a class="btn btn-ghost" href="/sacramento-carb-testing">Sacramento details</a></article>
+        <article class="card" id="foothills"><p class="eyebrow">Core route</p><h3>Valley and foothills</h3><p>Roseville, Lincoln, Auburn, and Placerville.</p><a class="btn btn-ghost" href="/sacramento-valley-foothills-carb-testing">Valley and foothills</a></article>
+        <article class="card" id="bay-area"><p class="eyebrow">Core route</p><h3>Bay Area</h3><p>Oakland, San Francisco, the Peninsula, Hayward, Fremont, San Jose, Antioch, and Concord. One route page. No extra city sites.</p><a class="btn btn-ghost" href="/bay-area-mobile-carb">Bay Area details</a></article>
+        <article class="card" id="napa"><p class="eyebrow">Scheduled route</p><h3>Napa and Sonoma</h3><p>Napa, St. Helena, Calistoga, and Santa Rosa. Livermore is booked from here. There is no Livermore page.</p><a class="btn btn-ghost" href="/napa-sonoma-carb-testing">Napa and Sonoma</a></article>
+        <article class="card" id="stockton"><p class="eyebrow">Core route</p><h3>Stockton and Lodi</h3><p>Stockton yards and the Lodi corridor. Each already has a page.</p><a class="btn btn-ghost" href="/stockton-clean-truck-check">Stockton</a> <a class="btn btn-ghost" href="/clean-truck-check-lodi">Lodi</a></article>
+        <article class="card" id="butte"><p class="eyebrow">Scheduled route</p><h3>Butte County</h3><p>Chico, Oroville, Paradise, Gridley, Biggs, and Durham.</p><a class="btn btn-ghost" href="/butte-county-carb-testing">Butte County</a></article>
+        <article class="card" id="central-valley"><p class="eyebrow">Field route</p><h3>Central Valley and Sierra</h3><p>Modesto, Merced, Sonora, Porterville, and nearby ag yards. Route scheduling, not a same-day core loop.</p><a class="btn btn-ghost" href="/central-valley-sierra-carb-testing">Central Valley and Sierra</a></article>
+        <article class="card" id="san-diego"><p class="eyebrow">By appointment</p><h3>San Diego County</h3><p>Countywide scheduling stays with NorCal CARB Mobile. Call <a href="tel:+19168904427">916-890-4427</a> for pricing. No separate San Diego price on this page.</p><a class="btn btn-ghost" href="/contact">Request San Diego</a></article>
       </div>
 
       <div class="card" style="margin-top:36px;text-align:center;border-color:var(--green)">
         <h3>Not listed?</h3>
-        <p>Don't see your area? Call <a href="tel:+19168904427">(916) 890-4427</a> — we travel across California for fleet testing.</p>
+        <p>Call <a href="tel:+19168904427">(916) 890-4427</a>. Same published prices on these routes: OBD $75 · OVI $199 · Motorhome $99/$229.</p>
         <a class="btn btn-primary" href="/contact">Request a Quote</a>
       </div>
     </div>
   </section>
 
-  <section aria-labelledby="related-field-notes">
-    <div class="wrap">
-      <h2 id="related-field-notes">Related field notes</h2>
-      <ul>
-        <li><a href="/blog/obd-vs-ovi-clean-truck-check-fleets">OBD vs OVI for fleets — which Clean Truck Check test</a></li>
-        <li><a href="/blog/bayshore-sf-free-retest-ovi-wager-6500">Free retest peace of mind on Bayshore, then opacity on the spot</a></li>
-        <li><a href="/blog/craft-so-good-they-copy-us-hotdog-clipboard">Craft so good they copy us</a></li>
-      </ul>
     </div>
   </section>
 
@@ -145,7 +137,7 @@
         <p class="muted">Sacramento · Stockton · Fairfield · San Jose · Bay Area</p>
       </div>
     </div>
-    <p class="center" style="margin-top:0;margin-bottom:8px;color:var(--muted);font-size:.88rem">Core-area rates shown where applicable · Extended routes: call for quote</p>
+    <p class="center" style="margin-top:0;margin-bottom:8px;color:var(--muted);font-size:.88rem">OBD $75 · OVI $199 · Motorhome $99/$229. San Diego County: call 916-890-4427 for pricing.</p>
     <p class="center" style="margin-top:0;margin-bottom:16px;color:var(--muted);font-size:.82rem;font-style:italic">Pricing is always subject to change due to matters out of our control.</p>
     <div class="social" aria-label="Follow NorCal CARB Mobile">
       <a href="https://www.facebook.com/carbcleantruckcheck/" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 22v-8h2.7l.4-3H13V9.2c0-.9.3-1.5 1.6-1.5H16V5.1c-.3 0-1.2-.1-2.3-.1-2.3 0-3.7 1.4-3.7 3.9V11H7.5v3H10v8h3z"/></svg></a>
