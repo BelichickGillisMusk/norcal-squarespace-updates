@@ -11,7 +11,7 @@ Bryan GO via COS Aria: publish `/blog/bayshore-sf-free-retest-ovi-wager-6500` an
 - New post `site/blog/bayshore-sf-free-retest-ovi-wager-6500.html` with Article JSON-LD. Byline Vin CA Diesel. USDOT 4357321 / CA 655692; door name held off. No owner legal name. No fail language. OBD $75 · OVI $199 · 916-890-4427.
 - Portal: `site/blog/index.html` + `site/blog.html` (card + quick list; article count 63 → 64). Sitemap row added.
 - Related field notes on `/areas`, Bay Area (includes this post), Sacramento Valley & foothills, Butte, Sacramento, and Stockton. Porterville/Mojave note is not on the Bay Area page.
-- Area BODY HTML drafts (`2026-09-22-seo-areas-blogs-go` and the three `*.body.html` files) were not in the upload set, so existing area main copy was not rewritten. Butte page already existed (`site/butte-county-carb-testing.html`) — update, not create.
+- Follow-up: merged the three BODY drafts into the content wells (Bay Area, Sacramento Valley & foothills, Butte). Header/footer kept. Related field notes kept ahead of the CTA. Maps iframe + GBP cid 16019693078134296096. “Most thorough” dropped. Locked OBD $75 / OVI $199 / MH $99/$229. Butte was an update of the existing page, not a new file.
 - No Ads, robots, DNS, or 301 changes. No wrangler.
 
 Rollback: revert this commit. Production stays on the previous Worker version until a separate Bryan GO deploy.
