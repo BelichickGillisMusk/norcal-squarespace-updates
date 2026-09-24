@@ -190,7 +190,14 @@ const REDIRECTS = {
   // '/clean-truck-check-lodi': '/areas#lodi',
   '/clean-truck-check-roseville': '/areas#roseville',
   '/carb-mobile-clean-truck-check-antioch-california': '/areas#antioch',
-  '/clean-truck-check-san-diego': '/areas#san-diego',
+  // San Diego County booking/pricing lives on the sibling site. Absolute Location
+  // is returned as-is by the redirect handler. Trailing-slash keys are listed
+  // because lookup is exact, then one trailing slash stripped.
+  '/clean-truck-check-san-diego': 'https://mobilecarbsmoketest.com/',
+  '/san-diego': 'https://mobilecarbsmoketest.com/',
+  '/san-diego/': 'https://mobilecarbsmoketest.com/',
+  '/areas/san-diego': 'https://mobilecarbsmoketest.com/',
+  '/areas/san-diego/': 'https://mobilecarbsmoketest.com/',
   '/clean-truck-check-orange-county': '/areas#orange-county',
   '/service-locations': '/areas',
   // Squarespace "New Page" stub. Stable Shorts URL is the facts hub.
