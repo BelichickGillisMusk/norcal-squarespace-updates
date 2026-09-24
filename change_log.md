@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-24 — Homepage features YouTube Short CARB-LIFE q8osFPN8jyI (Bryan GO, PR only)
+
+Bryan GO via Drill Instructor: feature Short `q8osFPN8jyI` on the homepage. **PR only — do not wrangler deploy.** Workers Builds on `main` after merge.
+
+- New soft section `#carb-life` directly under the hero: heading “See us in the field”, eyebrow CARB-LIFE, 9:16 embed `https://www.youtube.com/embed/q8osFPN8jyI`, links to the Short and `@CARBCLEANTRUCKMOBILE`.
+- `#five-day-pass` “CARB how-to video” stays on the official CARB video (`tJ78m6VYhX8`). Phone `916-890-4427` unchanged.
+- CSS classes `.field-short-band` / `.field-short` / `.field-short-frame` in `site/assets/styles.css` (aspect-ratio 9/16, clamp width). Navy `#012241` / green `#4ab94e` / white.
+- Site-lock hashes for `site/index.html` and `site/assets/styles.css` updated with this approved template. No Worker, smoke-site, or contact-form edits.
+
+---
+
 ## 2026-09-24 — Delete canary / theme second paint (Bryan 2026-09-23)
 
 Owner: delete black/red CSS and the canary paint override. Delete, not recolor. Worker target stays `norcal-squarespace-updates-gillis`. After merge, deploy with Workers Builds on the production branch (not a hot `wrangler deploy` from this change). HOLD the merge until Donger confirms Worker API proof and Bryan/Aria GO in chat.
