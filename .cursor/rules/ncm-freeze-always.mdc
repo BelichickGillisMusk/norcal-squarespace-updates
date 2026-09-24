@@ -1,0 +1,50 @@
+---
+description: Always-apply NorCal www freeze. Palette, chrome, and deploy stay locked. Content-only publishing path.
+alwaysApply: true
+---
+
+# NorCal www freeze (always on)
+
+You are in `BelichickGillisMusk/norcal-squarespace-updates`. Live site is https://norcalcarbmobile.com. Worker is `norcal-squarespace-updates-gillis`. This repo IS the site (`site/` + `worker/`). Squarespace is dead. Do not treat the site as external.
+
+## Palette (do not change)
+
+- Navy `#012241` / `--navy`
+- Navy deep `#00182f` / `--navy-deep`
+- Green `#4ab94e` / `--green`
+- Background `#ffffff` / `--bg`
+- Public prices: OBD $75 / OVI $199 / MH $99/$229
+- Public phone: 916-890-4427
+- Public email: sales@norcalcarbmobile.com
+- Byline: NorCal CARB Mobile
+
+Do not invent theme tokens. Do not "improve" contrast by changing these.
+
+## Never touch (needs owner GO)
+
+- `site/assets/styles.css`
+- `site/assets/css/**` (including `ncm-canary.css`)
+- `site/index.html` homepage chrome
+- `site/assets/img/ncm-logo.png`
+- `site/assets/img/coverage-map-v2.png`
+- `worker/**`
+- `wrangler.toml` / `wrangler.jsonc` / `wrangler.prod-empty.toml`
+- `config/site-template-lock.json` hashes
+- Any local `wrangler deploy` / Pages dual-deploy
+
+Leave Wrangler files in the repo. Do not run them. Do not rewrite them.
+
+## Cloudflare spec (overrides Cursor taste)
+
+- PR / non-main: `npx wrangler versions upload` only. Preview URL. Does not flip norcalcarbmobile.com.
+- Production: Actions → Deploy NorCal → `bryan_go=GO` + `confirm_worker=norcal-squarespace-updates-gillis`.
+- No Pages. No second template Worker. No local wrangler from agents.
+
+## Content-only path (this is how you blog)
+
+1. Draft: `blog_drafts/<slug>.md`
+2. Render: `site/blog/<slug>.html` using an existing post as the template
+3. Card only: `site/blog/index.html` and `site/blog.html` if that index exists
+4. Optional: `site/sitemap.xml`, `site/llms.txt`, `change_log.md`
+
+Copy header/footer/CSS links from an existing live post. Do not restyle. If a blog task seems to need CSS or Worker change, STOP.

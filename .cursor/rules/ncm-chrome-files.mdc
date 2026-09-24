@@ -1,0 +1,18 @@
+---
+description: Extra scream when chrome files are open. Do not edit CSS, homepage, Worker, or Wrangler.
+globs: site/assets/**/*.css,site/**/index.html,site/index.html,worker/**,wrangler.*,config/site-template-lock.json
+alwaysApply: false
+---
+
+# Stop. This file is locked chrome.
+
+You opened a layout / palette / deploy file.
+
+Do not edit it for a blog, price note, map tweak, or "small CSS fix."
+
+Allowed next moves:
+1. Close the file.
+2. Put content in `blog_drafts/` + `site/blog/<slug>.html`.
+3. If chrome is actually broken, write the exact file + the exact one-line fix and wait for owner GO.
+
+Canary CSS (`ncm-canary.css`) stays layout-inert. Do not merge it into `styles.css`.
