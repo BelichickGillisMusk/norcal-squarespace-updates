@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-24 — Lock homepage CARB-LIFE Short to portrait 9:16
+
+Live proof showed the `#carb-life` player as a wide 16:9 box. The frame had `aspect-ratio: 9 / 16` while the iframe stayed in flow at `height: 100%`, so the player’s intrinsic 16:9 could win. **PR only — do not wrangler deploy.**
+
+- `.field-short-frame` is `position: relative` with `aspect-ratio: 9 / 16`. The iframe is `position: absolute; inset: 0` so it cannot stretch the box. Width stays `min(100%, clamp(16rem, 72vw, 20rem))`.
+- Iframe keeps `https://www.youtube.com/embed/q8osFPN8jyI` and gains width/height `270`/`480` (9:16) as the no-CSS fallback. `#five-day-pass` how-to stays `tJ78m6VYhX8`. Phone unchanged.
+- Homepage stylesheet link is `/assets/styles.css?v=20260924-916` because `/assets/*` is cached `immutable` for a year.
+- Site-lock hashes updated (`2026-09-24.2`). No Worker, smoke-site, or contact-form edits.
+
+---
+
 ## 2026-09-24 — Homepage features YouTube Short CARB-LIFE q8osFPN8jyI (Bryan GO, PR only)
 
 Bryan GO via Drill Instructor: feature Short `q8osFPN8jyI` on the homepage. **PR only — do not wrangler deploy.** Workers Builds on `main` after merge.
