@@ -38,15 +38,6 @@ const OG_IMAGE_URL = 'https://norcalcarbmobile.com/assets/img/norcal-carb-mobile
 const CF_WEB_ANALYTICS_BEACON =
   `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "231f8b2f40e24c50b92870168dbb3f06"}'></script>`;
 
-/** Soft scrape-canary (Ally PRIORITY 2026-09-08). Isolated CSS — never merge into styles.css (Bryan 711). */
-const NCM_CANARY_ID = 'ncm-www-origin-20260908-v711';
-const NCM_CANARY_HEAD = `
-<link rel="stylesheet" href="/assets/css/ncm-canary.css?v=20260908-v711">
-<!-- ncm-canary: norcalcarbmobile.com provenance · ncm-www-origin-20260908-v711 -->
-`;
-const NCM_CANARY_WRAP = `<div class="ncm-canary-wrap" data-ncm-canary="${NCM_CANARY_ID}" hidden></div>`;
-const NCM_CANARY_FOOTER = `<span class="ncm-canary-mark" hidden>norcalcarbmobile.com</span>`;
-
 /** Favicon + Open Graph / Twitter share image. Injected sitewide. */
 const BRANDING_TAGS = `
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -434,27 +425,20 @@ export default {
       });
     }
 
-    // Everything else → static assets; inject branding, schema, canary, and CF Web Analytics
+    // Everything else → static assets; inject branding, schema, and CF Web Analytics
     const assetRes = await env.ASSETS.fetch(request);
     const ct = assetRes.headers.get('content-type') || '';
     if (!ct.includes('text/html')) return assetRes;
     return new HTMLRewriter()
       .on('head', {
         element(el) {
-          el.append(NCM_CANARY_HEAD, { html: true });
           el.append(BRANDING_TAGS, { html: true });
           el.append(schemaTag(url.toString()), { html: true });
         },
       })
       .on('body', {
         element(el) {
-          el.prepend(NCM_CANARY_WRAP, { html: true });
           el.append(CF_WEB_ANALYTICS_BEACON, { html: true });
-        },
-      })
-      .on('footer.site-footer', {
-        element(el) {
-          el.append(NCM_CANARY_FOOTER, { html: true });
         },
       })
       .transform(assetRes);
