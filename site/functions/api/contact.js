@@ -91,8 +91,8 @@ export async function onRequestPost(context) {
     return respond(request, false, 'Could not read your submission.', 400);
   }
 
-  // Honeypot — bots fill "company"; humans never see it. Pretend success, drop it.
-  if (data.company) return respond(request, true);
+  // Honeypot. Name is ncm_hp, not "company" — mobile autofill fills company and was dropping real leads.
+  if (String(data.ncm_hp || '').trim()) return respond(request, true);
 
   const name = (data.name || '').trim();
   const phone = (data.phone || '').trim();

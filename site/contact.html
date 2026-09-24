@@ -34,7 +34,7 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/">
-      <img class="brand-logo" src="/assets/img/ncm-logo.png" width="144" height="144" alt="NorCal CARB Mobile — stacked NCM road lockup" loading="eager">
+      <img class="brand-logo" src="/assets/img/ncm-logo.png" width="88" height="88" alt="NorCal CARB Mobile — stacked NCM road lockup" loading="eager">
       <span class="ncm-i18n">
         <span data-i18n="tagline">Mobile Smoke &amp; OBD Testing</span>
         <span data-i18n="serving">Now Serving San Diego County &amp; the Central Valley</span>
@@ -78,6 +78,7 @@
   <section class="hero">
     <div class="wrap">
       <div id="sent-banner" class="banner" hidden data-i18n="sent">Thanks — your request is in. We will reply shortly. Need it today? Call (916) 890-4427.</div>
+      <div id="form-error" class="banner banner-error" hidden data-i18n="error">We could not send that request. Please call (916) 890-4427.</div>
 
       <div class="hero-grid">
         <div class="hero-copy">
@@ -202,7 +203,7 @@
             </label>
           </div>
           <input type="hidden" name="terms_version" value="2026-07-22">
-          <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input class="hp" type="text" name="ncm_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button class="btn btn-primary btn-lg" type="submit" data-i18n="send">Send request</button>
           <p id="form-status" class="muted" style="margin:12px 0 0;font-size:.9rem"></p>
         </form>
@@ -254,9 +255,22 @@
       var b = document.getElementById('sent-banner');
       if (b) { b.hidden = false; b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
     }
+    if (p.get('error') === '1') {
+      var err = document.getElementById('form-error');
+      if (err) { err.hidden = false; err.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    }
 
     var form = document.getElementById('contact-form');
     var status = document.getElementById('form-status');
+    function showFormError(msg) {
+      var err = document.getElementById('form-error');
+      if (err) {
+        err.hidden = false;
+        err.textContent = msg;
+        err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      if (status) status.textContent = msg;
+    }
     if (form && window.fetch) {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -274,12 +288,12 @@
               if (b) { b.hidden = false; b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
               status.textContent = '';
             } else {
-              status.textContent = (res.j && res.j.error) || dict.error || 'We could not send that request. Please call (916) 890-4427.';
+              showFormError((res.j && res.j.error) || dict.error || 'We could not send that request. Please call (916) 890-4427.');
               btn.disabled = false;
             }
           })
           .catch(function () {
-            status.textContent = dict.error || 'We could not send that request. Please call (916) 890-4427.';
+            showFormError(dict.error || 'We could not send that request. Please call (916) 890-4427.');
             btn.disabled = false;
           });
       });

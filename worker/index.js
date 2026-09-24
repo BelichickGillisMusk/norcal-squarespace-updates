@@ -334,8 +334,8 @@ async function handleContact(request, env) {
     return respond(request, false, 'Please try again, or call us at (916) 890-4427.', 400);
   }
 
-  // Honeypot — bots fill "company"; humans never see it.
-  if (data.company) return respond(request, true);
+  // Honeypot. Name is ncm_hp, not "company" — mobile autofill fills company and was dropping real leads.
+  if (String(data.ncm_hp || '').trim()) return respond(request, true);
 
   const name = (data.name || '').trim();
   const phone = (data.phone || '').trim();
