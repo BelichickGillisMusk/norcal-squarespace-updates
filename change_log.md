@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-24 — Delete canary / theme second paint (Bryan 2026-09-23)
+
+Owner: delete black/red CSS and the canary paint override. Delete, not recolor. Worker target stays `norcal-squarespace-updates-gillis`. After merge, deploy with Workers Builds on the production branch (not a hot `wrangler deploy` from this change). HOLD the merge until Donger confirms Worker API proof and Bryan/Aria GO in chat.
+
+- Deleted `site/assets/css/ncm-canary.css`. No replacement theme sheet. No black→navy or red→green remap inside an override file.
+- Worker `norcal-squarespace-updates-gillis` no longer injects canary CSS into `<head>`, a canary wrap into `<body>`, or a canary mark into `footer.site-footer`. Branding tags, schema, CF Web Analytics, redirects, and contact form handling stay.
+- `scripts/site-lock/validate.mjs` and `config/site-template-lock.json` no longer require the canary file or inject strings.
+- `site/assets/styles.css` unchanged: navy `#012241`, green `#4ab94e`.
+
+---
+
 ## 2026-09-23 — Clean Truck Check facts hub (Bryan GO, PR only)
 
 Bryan GO via COS-Aria: ship `/clean-truck-check-facts` and close the `/new-page` stub. **PR only — do not merge, do not wrangler deploy, do not touch DNS or mail MX.**
