@@ -345,7 +345,7 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
   box-shadow:var(--shadow);
 }
 .coverage-panel-map img { display:block; width:100%; height:auto; max-height:520px; object-fit:cover; border-radius:12px; border:1px solid var(--line); }
-.coverage-panel-copy .eyebrow,.card .eyebrow {
+.coverage-panel-copy .eyebrow,.card .eyebrow,.field-short-band .eyebrow {
   margin:0 0 8px; color:var(--green); font-size:.76rem; font-weight:800;
   letter-spacing:.08em; text-transform:uppercase;
 }
@@ -355,6 +355,44 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
   .coverage-panel { grid-template-columns:1fr; padding:14px; }
   .coverage-panel-map img { max-height:none; }
   .route-chips span { font-size:.8rem; }
+}
+
+/* ---------- Homepage field Short (9:16) ---------- */
+.field-short-band {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(12rem, 20rem);
+  gap: clamp(16px, 3vw, 40px);
+  align-items: center;
+}
+.hero + #carb-life { border-top: 0; }
+.field-short-band .section-head { margin-bottom: 0; max-width: none; }
+.field-short-band .eyebrow { margin: 0 0 8px; }
+.field-short {
+  box-sizing: border-box;
+  width: min(100%, clamp(16rem, 72vw, 20rem));
+  margin: 0 auto;
+  justify-self: center;
+}
+.field-short-frame {
+  box-sizing: border-box;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--navy);
+  box-shadow: var(--shadow);
+}
+.field-short-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+}
+@media (max-width: 760px) {
+  .field-short-band { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ---------- Contact: dark/light + EN|ES (header mark is sitewide .brand-logo) ---------- */
