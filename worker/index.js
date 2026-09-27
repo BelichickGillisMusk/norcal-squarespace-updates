@@ -191,6 +191,8 @@ const REDIRECTS = {
   '/areas/san-diego/': 'https://mobilecarbsmoketest.com/',
   '/clean-truck-check-orange-county': '/areas#orange-county',
   '/service-locations': '/areas',
+  // Legacy Squarespace path. One trailing slash is stripped in the lookup below.
+  '/service-areas': '/areas',
   // Squarespace "New Page" stub. Stable Shorts URL is the facts hub.
   '/new-page': '/clean-truck-check-facts',
   '/new-page.html': '/clean-truck-check-facts',
