@@ -193,6 +193,8 @@ const REDIRECTS = {
   '/service-locations': '/areas',
   // Legacy Squarespace path. One trailing slash is stripped in the lookup below.
   '/service-areas': '/areas',
+  // Legacy alias — restore after 404 regression (Jennifer pulse 2026-09-27)
+  '/locations': '/areas',
   // Squarespace "New Page" stub. Stable Shorts URL is the facts hub.
   '/new-page': '/clean-truck-check-facts',
   '/new-page.html': '/clean-truck-check-facts',
