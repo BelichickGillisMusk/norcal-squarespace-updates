@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-27 — Aria GO draft: /service-areas 301, facts hub ship, footer policies
+
+Draft PR only. Do not merge. Do not `wrangler deploy`. Workers Builds on the production branch after Aria merge GO.
+
+- Worker `REDIRECTS`: `/service-areas` → `/areas` with the same HTTP 301 handler as `/privacy` and `/terms` → `/testing-terms`. One trailing slash is already stripped before lookup, so `/service-areas/` uses the same target.
+- `/clean-truck-check-facts` already exists as `site/clean-truck-check-facts.html` (E01–E08, FAQ, OBD $75 / OVI $199, phone 916-890-4427) and is already in `site/sitemap.xml` and `site/llms.txt`. Not rewritten. Live 404 is the unshipped asset bundle, not a path strip in git. Next Workers Builds upload of `./site` publishes it.
+- Homepage `foot-bottom` adds Privacy Policy and Terms, both to `/testing-terms`. Contact form untouched.
+- Homepage `<title>` and `og:title` trimmed to `Clean Truck Check (OBD & OVI) | NorCal CARB Mobile` (50 characters). Meta description unchanged. H1 stays `Mobile Clean Truck Check — we come to your yard` (no hard conflict). Site-lock hash for `site/index.html` updated.
+
+---
+
 ## 2026-09-24 — Lock homepage CARB-LIFE Short to portrait 9:16
 
 Live proof showed the `#carb-life` player as a wide 16:9 box. The frame had `aspect-ratio: 9 / 16` while the iframe stayed in flow at `height: 100%`, so the player’s intrinsic 16:9 could win. **PR only — do not wrangler deploy.**
