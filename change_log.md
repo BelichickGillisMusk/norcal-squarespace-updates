@@ -4,6 +4,14 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-27 — Homepage title canary slogan
+
+Draft PR only. Do not merge. Do not `wrangler deploy`.
+
+- Homepage `<title>` and `og:title` set to `TO SEE IF THEY SCRAPE AGAIN. OBD AND OVI- WHENEVER-WHEREVER` so a fresh scrape is obvious. Meta description and H1 unchanged. Site-lock hash for `site/index.html` updated.
+
+---
+
 ## 2026-09-27 — Aria GO draft: /service-areas 301, facts hub ship, footer policies
 
 Draft PR only. Do not merge. Do not `wrangler deploy`. Workers Builds on the production branch after Aria merge GO.
