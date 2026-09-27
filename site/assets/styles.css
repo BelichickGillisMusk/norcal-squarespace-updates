@@ -17,13 +17,13 @@
   --red-deep: #3d9b2f;
   --red-soft: #e8f6e9;
   --silver: #a1a1aa;
-  --silver-line: #e4e4e7;
+  --silver-line: #d4d4d8; /* was #e4e4e7 */
   --ink: #18181b;
   --body: #3f3f46;
-  --muted: #71717a;
+  --muted: #52525b; /* was #71717a */
   --bg: #ffffff;
   --bg-soft: #fafafa;
-  --line: #e4e4e7;
+  --line: #d4d4d8; /* was #e4e4e7 */
   --radius: 12px;
   --maxw: 1080px;
   --shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06);
@@ -73,8 +73,8 @@ a:hover { color: var(--green); }
   letter-spacing: -0.01em; min-height: 48px; line-height: 1.2;
 }
 .btn:active { transform: scale(0.98); }
-.btn-primary { background: var(--green); color: #fff !important; box-shadow: 0 1px 2px rgba(61,155,47,.28); }
-.btn-primary:hover { background: var(--green-deep); color: #fff !important; }
+.btn-primary { background: #237a26; color: #fff !important; box-shadow: 0 1px 2px rgba(61,155,47,.28); }
+.btn-primary:hover { background: #1b5e20; color: #fff !important; }
 .btn-ghost { background: #fff; color: var(--ink) !important; border-color: var(--silver-line); }
 .btn-ghost:hover { border-color: var(--navy); color: var(--ink) !important; background: var(--bg-soft); }
 .btn-lg { padding: 16px 28px; font-size: 1.08rem; min-height: 56px; }
@@ -85,9 +85,9 @@ a:hover { color: var(--green); }
 }
 .btn-call:hover { background: #f8fafc; color: var(--navy) !important; }
 .btn-book {
-  background: var(--green); color: #fff !important; border: 1.5px solid transparent;
+  background: #237a26; color: #fff !important; border: 1.5px solid transparent;
 }
-.btn-book:hover { background: var(--green-deep); color: #fff !important; }
+.btn-book:hover { background: #1b5e20; color: #fff !important; }
 
 /* ---------- Header: glossy darker navy ---------- */
 .site-header {
@@ -198,7 +198,7 @@ section.soft { background: var(--bg-soft); border-top: 1px solid var(--line); bo
 .quote cite { display: block; margin-top: 10px; color: var(--muted); font-style: normal; font-weight: 600; font-size: .9rem; }
 
 /* CTA band: green solid, white type only */
-.cta-band { background: var(--green); color: #fff; text-align: center; border: 0; }
+.cta-band { background: #237a26; color: #fff; text-align: center; border: 0; }
 .cta-band h2 { color: #fff; }
 .cta-band p { color: rgba(255,255,255,.9); max-width: 620px; margin-left: auto; margin-right: auto; }
 .cta-band .btn-ghost { background: #fff; border-color: #fff; color: var(--ink) !important; }
