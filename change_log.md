@@ -4,6 +4,14 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-09-27 — Homepage title names the yard cities
+
+Draft PR only. Do not merge. Do not `wrangler deploy`.
+
+- Title and `og:title`: `OBD CARB Hayward, San Jose, Chico, Fairfield, West Sac` (54 characters). Those are named customer yards (Hayward trucking and tours, San Jose OBD, All Star Rents Chico, Fairfield Freightliner, West Sac logistics), not the contested city names Sacramento, Oakland, or San Francisco. Meta description and H1 unchanged.
+
+---
+
 ## 2026-09-27 — Homepage title from Squarespace-era search queries
 
 Draft PR only. Do not merge. Do not `wrangler deploy`.
