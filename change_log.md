@@ -4,11 +4,12 @@ Agents append timestamped entries below.
 
 ---
 
-## 2026-09-27 — Homepage title canary slogan
+## 2026-09-27 — Homepage title from Squarespace-era search queries
 
 Draft PR only. Do not merge. Do not `wrangler deploy`.
 
-- Homepage `<title>` and `og:title` set to `TO SEE IF THEY SCRAPE AGAIN. OBD AND OVI- WHENEVER-WHEREVER` so a fresh scrape is obvious. Meta description and H1 unchanged. Site-lock hash for `site/index.html` updated.
+- GSC export `Queries.csv` (Search type Web, Last 3 months, chart 2026-03-23 through 2026-06-22, Squarespace period). Click leader is `carb testing near me` (6 clicks / 202 impressions). Smoke, OBD, and smog queries are in the same export but smaller. `Clean Truck Check` has impressions and almost no clicks, so it is not the title.
+- Homepage `<title>` and `og:title`: `CARB Testing Near Me | OBD, Smoke & Smog`. Meta description and H1 unchanged. Site-lock hash updated.
 
 ---
 
