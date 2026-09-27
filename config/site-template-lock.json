@@ -5,11 +5,11 @@
   "requiredPhoneSchema": "+1-916-890-4427",
   "requiredPhoneHref": "tel:+19168904427",
   "protectedFiles": {
-    "site/index.html": "9941eed1f8eebc8b8efbcd465a9511fec003220cc380ffcae267afc7ea4836f5",
+    "site/index.html": "e5d802fbe2d104581ab6107c0e7fc400658db791bd4d43be6ba9d2c93baebe02",
     "site/assets/styles.css": "7f88ea13d8e1842f241ab6e034923d0a22cedb74a7f6f100407fd82c57d649ad",
-    "site/assets/img/ncm-logo.png": "31977ac93ff9aebd5cb6b42a8101eec8d53aac4cea1952afb264b7de01c0b69b",
-    "site/assets/img/norcal-carb-mobile-logo-250th.png": "774fb7772bfacb03a6410a2acc21772d4dd40f016edb9769d0c89e51f42f04b2",
-    "site/assets/img/coverage-map-v2.png": "0cad54e2baad77fad0ab55a10d807cffa94c907d1dd93992a392f44bd00c455d"
+    "site/assets/img/ncm-logo.png": "cd43812c0c78033ed650339ed114100f8fd6bb4d0f1ebf3bf9e0a8abdcd1992a",
+    "site/assets/img/norcal-carb-mobile-logo-250th.png": "cf6f038d66c310e9de69173c3059379f88cf57115e07dead7d7ab88eecfd9ab2",
+    "site/assets/img/coverage-map-v2.png": "f9b0de5c5a5c5cb3e3316cab9df31a0257592b72e2d5b26952551f419c4b6944"
   },
   "requiredColors": {
     "--navy": "#012241",
