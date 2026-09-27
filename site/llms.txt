@@ -15,6 +15,7 @@
 
 ## Core pages
 - https://norcalcarbmobile.com/
+- https://norcalcarbmobile.com/about
 - https://norcalcarbmobile.com/services
 - https://norcalcarbmobile.com/pricing
 - https://norcalcarbmobile.com/areas

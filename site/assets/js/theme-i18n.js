@@ -10,6 +10,7 @@
     en: {
       skip: 'Skip to content',
       nav_home: 'Home',
+      nav_about: 'About',
       nav_services: 'Services',
       nav_pricing: 'Pricing',
       nav_areas: 'Areas',
@@ -79,6 +80,7 @@
     es: {
       skip: 'Saltar al contenido',
       nav_home: 'Inicio',
+      nav_about: 'Nosotros',
       nav_services: 'Servicios',
       nav_pricing: 'Precios',
       nav_areas: 'Zonas',
