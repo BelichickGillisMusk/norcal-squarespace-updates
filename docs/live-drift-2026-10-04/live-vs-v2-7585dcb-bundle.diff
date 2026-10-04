@@ -1,0 +1,51 @@
+--- cursor/gsc-indexing-fixes-v2 @ 7585dcb, wrangler deploy --dry-run bundle
++++ live norcal-squarespace-updates-gillis script after the esbuild banner, 2026-10-04 ~4:05 PM PT
+@@ -115,11 +115,10 @@
+   "/service-area-sacramento-carb-testing": "/sacramento-carb-testing",
+   "/clean-truck-check-napa-st-helena-calistoga": "/areas#napa",
+   "/north-bay-carb-mobile-testing": "/areas#north-bay",
+-  "/east-bay-mobile-carb-testing": "/areas#east-bay",
+-  "/clean-truck-check-bay-area": "/areas#bay-area",
++  "/east-bay-mobile-carb-testing": "/clean-truck-check-hayward",
++  "/clean-truck-check-bay-area": "/carb-test-bay-area",
+   "/tracy-livermore-clean-truck-check-j1667": "/areas#tracy",
+   "/clean-truck-check-fresno": "/areas#central-valley",
+-  "/clean-truck-check-hayward": "/areas#hayward",
+   "/clean-truck-check-fairfield": "/areas#fairfield",
+   "/service-area-butte-county-clean-truck-check": "/areas#butte",
+   "/service-area-san-joaquin-county-mobile-testing": "/areas#san-joaquin",
+@@ -494,12 +493,27 @@
+       if (request.method === "POST") return handleContact(request, env);
+       return new Response("Method Not Allowed", { status: 405, headers: { Allow: "POST" } });
+     }
+-    const redirect = resolveRedirect(url.pathname, url.search);
++    var corridorPath = url.pathname.length > 1 && url.pathname.endsWith("/") ? url.pathname.slice(0, -1) : url.pathname;
++    var corridorHtml = (request.method === "GET" || request.method === "HEAD") ? (CORRIDOR_PAGES[corridorPath] || "") : "";
++    if (request.method === "HEAD" && corridorHtml) return new Response(null, { status: 200, headers: { "content-type": "text/html; charset=utf-8" } });
++    const redirect = corridorHtml ? "" : resolveRedirect(url.pathname, url.search);
+     const offCanonicalHost = url.hostname === WWW_HOST || url.hostname === APEX_HOST && url.protocol === "http:";
+     const safeMethod = request.method === "GET" || request.method === "HEAD";
+     if (redirect) return permanentRedirect(redirect);
+     if (offCanonicalHost && safeMethod) return permanentRedirect(url.pathname + url.search);
+-    const assetRes = await env.ASSETS.fetch(request);
++    let assetRes = corridorHtml ? new Response(corridorHtml, { headers: { "content-type": "text/html; charset=utf-8" } }) : await env.ASSETS.fetch(request);
++    if (!corridorHtml && request.method === "GET" && (url.pathname === "/areas" || url.pathname === "/areas/")) {
++      var areasHtml = await assetRes.text();
++      var areasHeaders = new Headers(assetRes.headers);
++      areasHeaders.delete("content-length");
++      assetRes = new Response(swapAreasHtml(areasHtml), { status: assetRes.status, headers: areasHeaders });
++    }
++    if (!corridorHtml && request.method === "GET" && url.pathname === "/sitemap.xml") {
++      var xmlBody = await assetRes.text();
++      var xmlHeaders = new Headers(assetRes.headers);
++      xmlHeaders.delete("content-length");
++      return new Response(sitemapWithCorridors(xmlBody), { status: assetRes.status, headers: xmlHeaders });
++    }
+     const ct = assetRes.headers.get("content-type") || "";
+     if (!ct.includes("text/html")) return assetRes;
+     const isErrorPage = url.pathname === "/404";
+@@ -526,4 +540,3 @@
+ export {
+   index_default as default
+ };
+-//# sourceMappingURL=index.js.map
