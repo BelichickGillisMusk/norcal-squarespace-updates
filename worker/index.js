@@ -16,6 +16,7 @@
  */
 
 import { GOOGLE_REVIEWS_URL, resolveRedirect } from './redirects.js';
+import { esc } from './html-escape.js';
 
 const DEFAULT_TO = [
   'sales@norcalcarbmobile.com',
@@ -120,10 +121,6 @@ function schemaTag(pageUrl) {
     ]
   };
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
-}
-const HTML_ESC = { '<': '<', '>': '>', '&': '&' };
-function esc(s) {
-  return String(s || '').replace(/[<>&]/g, (c) => HTML_ESC[c]);
 }
 
 function parseAddressList(value) {
