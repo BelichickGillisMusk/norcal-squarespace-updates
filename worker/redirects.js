@@ -79,7 +79,7 @@ export const REDIRECTS = {
   '/san-diego/': 'https://mobilecarbsmoketest.com/',
   '/areas/san-diego': 'https://mobilecarbsmoketest.com/',
   '/areas/san-diego/': 'https://mobilecarbsmoketest.com/',
-  '/clean-truck-check-orange-county': '/areas#orange-county',
+  '/clean-truck-check-orange-county': '/areas',
   '/service-locations': '/areas',
   // Legacy Squarespace path. One trailing slash is stripped in the lookup below.
   '/service-areas': '/areas',
