@@ -121,7 +121,7 @@ function schemaTag(pageUrl) {
   };
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
-const HTML_ESC = { '<': '&lt;', '>': '&gt;', '&': '&amp;' };
+const HTML_ESC = { '<': '<', '>': '>', '&': '&' };
 function esc(s) {
   return String(s || '').replace(/[<>&]/g, (c) => HTML_ESC[c]);
 }
