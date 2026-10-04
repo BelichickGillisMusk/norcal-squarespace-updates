@@ -71,7 +71,7 @@ function schemaTag(pageUrl) {
         image: LOGO_URL,
         logo: { '@type': 'ImageObject', url: LOGO_URL },
         priceRange: '$75-$229',
-        description: 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Certified OBD and OVI smoke opacity testing at customer yards and jobsites across Northern California, with service available in San Diego County by appointment.',
+        description: 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Certified OBD and OVI smoke opacity testing at customer yards and jobsites across Northern California.',
         knowsAbout: [
           'CARB Clean Truck Check',
           'SAE J1667 Smoke Opacity Testing',
@@ -84,7 +84,7 @@ function schemaTag(pageUrl) {
           'Yuba County', 'Butte County', 'San Joaquin County', 'Contra Costa County',
           'Solano County', 'Napa County', 'Santa Clara County', 'Sonoma County',
           'Alameda County', 'Stanislaus County', 'Merced County', 'Fresno County',
-          'Tulare County', 'Tuolumne County', 'San Diego County'
+          'Tulare County', 'Tuolumne County'
         ].map((name) => ({ '@type': 'AdministrativeArea', name })),
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
@@ -189,7 +189,7 @@ const REDIRECTS = {
   '/san-diego/': 'https://mobilecarbsmoketest.com/',
   '/areas/san-diego': 'https://mobilecarbsmoketest.com/',
   '/areas/san-diego/': 'https://mobilecarbsmoketest.com/',
-  '/clean-truck-check-orange-county': '/areas#orange-county',
+  '/clean-truck-check-orange-county': '/areas',
   '/service-locations': '/areas',
   // Legacy Squarespace path. One trailing slash is stripped in the lookup below.
   '/service-areas': '/areas',
