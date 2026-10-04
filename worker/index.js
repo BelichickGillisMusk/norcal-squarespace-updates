@@ -15,7 +15,7 @@
  * version). If you change one, change the other.
  */
 
-import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
+import { GOOGLE_REVIEWS_URL, resolveRedirect } from './redirects.js';
 
 const DEFAULT_TO = [
   'sales@norcalcarbmobile.com',
@@ -29,7 +29,6 @@ const NEVER_TO = [
 ];
 const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
 const CURRENT_TERMS_VERSION = '2026-07-22';
-const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
 
 const LOGO_URL = 'https://norcalcarbmobile.com/assets/img/ncm-logo.png';
 const OG_IMAGE_URL = 'https://norcalcarbmobile.com/assets/img/norcal-carb-mobile-logo-web-512x512.png';
@@ -122,148 +121,7 @@ function schemaTag(pageUrl) {
   };
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
-/**
- * Old Squarespace URL → new path.  All return 301 so search engines
- * update their indexes and any inbound links keep working.
- */
-const REDIRECTS = {
-  // → external Google Business Profile / reviews
-  '/reviews': GOOGLE_REVIEWS_URL,
-  '/google': GOOGLE_REVIEWS_URL,
-  '/leave-review': GOOGLE_REVIEWS_URL,
-
-  // → homepage
-  '/carb-services': '/',
-  '/store': '/',
-
-  // → /contact
-  '/bookcontact': '/contact',
-  '/book-schedule-carb-smoke-test-sacramento': '/contact',
-  '/contact-us': '/contact',
-
-  // → /pricing
-  '/clean-truck-check-rates': '/pricing',
-
-  // → /services
-  '/clean-truck-check': '/services#obd',
-  '/smoke-opacity-test-near-me': '/services#ovi',
-  '/motorhome': '/services#motorhome',
-  '/agricultural-vehicles-clean-truck-check': '/services#agricultural',
-  '/services-mobile-ovi-smoke': '/services',
-
-  // → /faq
-  '/carb-questions-and-answers': '/faq',
-  '/what-is-clean-truck-check': '/faq',
-  '/faqs-carb-clean-truck-check-mobile': '/faq',
-  '/carb-resources': '/faq',
-  '/qa-and-glossary': '/faq',
-  '/carb-mobile-app': '/faq',
-  '/blog/check-compliance-carb-app': '/faq',
-  '/clean-truck-check-blog/check-compliance-carb-app': '/faq',
-  '/blog/vin-diesel-best-lunch-norcal-routes': '/blog',
-  '/carb-penalties-deadlines': '/faq',
-
-  // → /areas
-  '/carb-locations': '/areas',
-  '/service-area-sacramento-carb-testing': '/sacramento-carb-testing',
-  '/clean-truck-check-napa-st-helena-calistoga': '/areas#napa',
-  '/north-bay-carb-mobile-testing': '/areas#north-bay',
-  '/east-bay-mobile-carb-testing': '/areas#east-bay',
-  '/clean-truck-check-bay-area': '/areas#bay-area',
-  '/tracy-livermore-clean-truck-check-j1667': '/areas#tracy',
-  '/clean-truck-check-fresno': '/areas#central-valley',
-  '/clean-truck-check-hayward': '/areas#hayward',
-  '/clean-truck-check-fairfield': '/areas#fairfield',
-  '/service-area-butte-county-clean-truck-check': '/areas#butte',
-  '/service-area-san-joaquin-county-mobile-testing': '/areas#san-joaquin',
-  '/san-jose-mobile-carb-testing': '/areas#san-jose',
-  // Lodi now has its own full corridor page at /clean-truck-check-lodi
-  // '/clean-truck-check-lodi': '/areas#lodi',
-  '/clean-truck-check-roseville': '/areas#roseville',
-  '/carb-mobile-clean-truck-check-antioch-california': '/areas#antioch',
-  // San Diego County booking/pricing lives on the sibling site. Absolute Location
-  // is returned as-is by the redirect handler. Trailing-slash keys are listed
-  // because lookup is exact, then one trailing slash stripped.
-  '/clean-truck-check-san-diego': 'https://mobilecarbsmoketest.com/',
-  '/san-diego': 'https://mobilecarbsmoketest.com/',
-  '/san-diego/': 'https://mobilecarbsmoketest.com/',
-  '/areas/san-diego': 'https://mobilecarbsmoketest.com/',
-  '/areas/san-diego/': 'https://mobilecarbsmoketest.com/',
-  '/clean-truck-check-orange-county': '/areas#orange-county',
-  '/service-locations': '/areas',
-  // Legacy Squarespace path. One trailing slash is stripped in the lookup below.
-  '/service-areas': '/areas',
-  // Legacy alias — restore after 404 regression (Jennifer pulse 2026-09-27)
-  '/locations': '/areas',
-  // Squarespace "New Page" stub. Stable Shorts URL is the facts hub.
-  '/new-page': '/clean-truck-check-facts',
-  '/new-page.html': '/clean-truck-check-facts',
-  '/qa-glossary': '/faq',
-  '/norcal-carb-mobile-2026': '/',
-  '/services/opacity-smoke-test/': '/services#ovi',
-  '/carb-clean-truck-check-store': '/pricing',
-  '/service-locations/blog-post-title-four-6x6kf': '/',
-  '/anitoch-clean-truck-check': '/bay-area-mobile-carb',
-  '/antioch-clean-truck-check': '/bay-area-mobile-carb',
-
-  // → homepage #reviews section (no standalone reviews page yet)
-  '/clean-truck-top-review': '/#reviews',
-  '/reviews-service-area': '/#reviews',
-
-  // GSC / legacy broken paths (2026-08-07 audit — admin@ GSC top pages + crawl)
-  '/privacy': '/testing-terms',
-  '/privacy.html': '/testing-terms',
-  '/terms': '/testing-terms',
-  '/terms.html': '/testing-terms',
-  '/terms-of-service': '/testing-terms',
-  '/glossary': '/faq',
-  '/glossary.html': '/faq',
-  '/team': '/for-clients',
-  '/team.html': '/for-clients',
-  '/s/marketing-landing.html': '/',
-  '/marketing-landing': '/',
-  '/contact-us.html': '/contact',
-  '/services-mobile-ovi-smoke.html': '/services',
-  '/clean-truck-check.html': '/services',
-  '/service-locations.html': '/areas',
-  '/faqs-carb-clean-truck-check-mobile.html': '/faq',
-  '/carb-resources.html': '/faq',
-  '/carb-penalties-deadlines.html': '/faq',
-  '/smoke-opacity-test-near-me.html': '/services#ovi',
-  '/agricultural-vehicles-clean-truck-check.html': '/services#agricultural',
-  '/book': '/contact',
-  '/booking': '/contact',
-};
-
-/**
- * Blog routing. Migrated Squarespace posts are served at their EXACT old URL,
- * /clean-truck-check-blog/<slug> (per Bryan — keep the old slugs/paths live).
- *
- * Returns a redirect target, or null to fall through to static assets:
- *  - /blog/<legacy-slug>                → 301 to the old path (early /blog layout)
- *  - /clean-truck-check-blog            → 301 to /blog (the index)
- *  - /clean-truck-check-blog/<slug>     → served directly (null)
- *  - date-based /clean-truck-check-blog/2025/10/8/<slug> → 301 to the flat old path
- *  - unrecoverable/unknown slugs        → closest equivalent page, else /blog
- */
-function legacyBlogTarget(pathname) {
-  const path = pathname.replace(/\/+$/, '');
-  if (path.startsWith('/blog/')) {
-    const slug = path.slice('/blog/'.length);
-    return LEGACY_BLOG_SLUGS.has(slug) ? `/clean-truck-check-blog/${slug}` : null;
-  }
-  if (path !== '/clean-truck-check-blog' && !path.startsWith('/clean-truck-check-blog/')) return null;
-  const slug = path.split('/').pop();
-  if (slug === 'clean-truck-check-blog') return '/blog';
-  if (LEGACY_BLOG_FALLBACKS[slug]) return LEGACY_BLOG_FALLBACKS[slug];
-  if (LEGACY_BLOG_SLUGS.has(slug)) {
-    const canonical = `/clean-truck-check-blog/${slug}`;
-    return path === canonical ? null : canonical;
-  }
-  return '/blog';
-}
-
-const HTML_ESC = { '<': '<', '>': '>', '&': '&' };
+const HTML_ESC = { '<': '&lt;', '>': '&gt;', '&': '&amp;' };
 function esc(s) {
   return String(s || '').replace(/[<>&]/g, (c) => HTML_ESC[c]);
 }
@@ -398,6 +256,18 @@ async function handleContact(request, env) {
 }
 
 const ALIAS_DOMAINS = ['mobileovitest.com', 'www.mobileovitest.com'];
+const CANONICAL_ORIGIN = 'https://norcalcarbmobile.com';
+const WWW_HOST = 'www.norcalcarbmobile.com';
+const APEX_HOST = 'norcalcarbmobile.com';
+
+/** 301 with an absolute Location on the canonical https apex origin. */
+function permanentRedirect(target) {
+  const location = /^https?:\/\//.test(target) ? target : CANONICAL_ORIGIN + target;
+  return new Response(null, {
+    status: 301,
+    headers: { 'Location': location, 'Cache-Control': 'public, max-age=86400' },
+  });
+}
 
 export default {
   async fetch(request, env) {
@@ -417,23 +287,28 @@ export default {
       if (request.method === 'POST') return handleContact(request, env);
       return new Response('Method Not Allowed', { status: 405, headers: { Allow: 'POST' } });
     }
-    // Check for old Squarespace URL redirects
-    const redirect =
-      legacyBlogTarget(url.pathname) ||
-      REDIRECTS[url.pathname] ||
-      REDIRECTS[url.pathname.replace(/\/$/, '')];
-    if (redirect) {
-      return new Response(null, {
-        status: 301,
-        headers: { 'Location': redirect, 'Cache-Control': 'public, max-age=86400' },
-      });
-    }
+    // Old Squarespace URLs + canonical-path normalization (trailing slash,
+    // .html, /index.html) — all permanent 301s, one hop, before assets.
+    const redirect = resolveRedirect(url.pathname, url.search);
+    // www → apex and http → https in the SAME hop as any path fix. Today the
+    // zone answers www/http before the Worker runs; if that zone rule is
+    // removed (see PR notes), this keeps every variant to exactly one 301.
+    // GET/HEAD only, so a form POST is never turned into a GET.
+    const offCanonicalHost =
+      url.hostname === WWW_HOST || (url.hostname === APEX_HOST && url.protocol === 'http:');
+    const safeMethod = request.method === 'GET' || request.method === 'HEAD';
+    if (redirect) return permanentRedirect(redirect);
+    if (offCanonicalHost && safeMethod) return permanentRedirect(url.pathname + url.search);
 
     // Everything else → static assets; inject branding, schema, and CF Web Analytics
     const assetRes = await env.ASSETS.fetch(request);
     const ct = assetRes.headers.get('content-type') || '';
     if (!ct.includes('text/html')) return assetRes;
-    return new HTMLRewriter()
+    // /404 is the error page itself: never answer it with 200 (soft 404).
+    const isErrorPage = url.pathname === '/404';
+    // HEAD has no body to rewrite — return the asset headers as-is (was a 500).
+    if (request.method === 'HEAD') return isErrorPage ? notFound(assetRes) : assetRes;
+    const page = new HTMLRewriter()
       .on('head', {
         element(el) {
           el.append(BRANDING_TAGS, { html: true });
@@ -446,5 +321,12 @@ export default {
         },
       })
       .transform(assetRes);
+    return isErrorPage ? notFound(page) : page;
   },
 };
+
+function notFound(res) {
+  const headers = new Headers(res.headers);
+  headers.set('X-Robots-Tag', 'noindex');
+  return new Response(res.body, { status: 404, statusText: 'Not Found', headers });
+}
