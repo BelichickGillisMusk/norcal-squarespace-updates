@@ -138,7 +138,14 @@ for (const [from, to] of Object.entries(REDIRECTS)) {
 
 // 5. Nothing in the sitemap or site/ redirects; sitemap entries exist.
 const locs = [...readFileSync(join(site, 'sitemap.xml'), 'utf8').matchAll(/<loc>https:\/\/norcalcarbmobile\.com([^<]*)<\/loc>/g)].map((m) => m[1]);
-t('sitemap has 88 URLs', () => assert.equal(locs.length, 88));
+t('sitemap has 91 URLs (88 + 3 live corridor pages)', () => assert.equal(locs.length, 91));
+// Live corridor pages (2026-10-04 live-sync): served as pages, old East Bay / Bay Area URLs point at them.
+t('/clean-truck-check-hayward serves the landing page', () => assert.equal(resolveRedirect('/clean-truck-check-hayward'), null));
+t('/clean-truck-check-hayward/ -> one 301 to canonical', () => assert.equal(resolveRedirect('/clean-truck-check-hayward/'), '/clean-truck-check-hayward'));
+t('/carb-test-bay-area serves', () => assert.equal(resolveRedirect('/carb-test-bay-area'), null));
+t('/carb-mobile-test-near-me serves', () => assert.equal(resolveRedirect('/carb-mobile-test-near-me'), null));
+t('/east-bay-mobile-carb-testing -> Hayward page', () => assert.equal(resolveRedirect('/east-bay-mobile-carb-testing'), '/clean-truck-check-hayward'));
+t('/clean-truck-check-bay-area -> Bay Area page', () => assert.equal(resolveRedirect('/clean-truck-check-bay-area'), '/carb-test-bay-area'));
 for (const p of locs) {
   t(`sitemap ${p}`, () => { assert.equal(resolveRedirect(p), null); assert.ok(pageExists(p), `no page for ${p}`); });
 }
