@@ -4,6 +4,16 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-10-05 — Harvest Season Clean Truck Check blog (publish Tue 2026-10-06 9:00 AM PT)
+
+Draft PR for `/blog/harvest-season-clean-truck-check`. Do not merge. Do not `wrangler deploy`. Workers Builds on the production branch after Aria merge GO.
+
+- New post `site/blog/harvest-season-clean-truck-check.html`. Article JSON-LD, publisher telephone `+1-916-890-4427`, `datePublished` 2026-10-06, area link `/central-valley-sierra-carb-testing`. Slug stays `harvest-season-clean-truck-check`.
+- Portal cards on `site/blog.html` and `site/blog/index.html` (card + quick list; article count 64 → 65). Sitemap row added. Source draft `blog_drafts/harvest-season-clean-truck-check.md`.
+- Phone 916-890-4427 only. No owner name in customer copy. No wrangler.
+
+---
+
 ## 2026-09-27 — Aria GO draft: /service-areas 301, facts hub ship, footer policies
 
 Draft PR only. Do not merge. Do not `wrangler deploy`. Workers Builds on the production branch after Aria merge GO.
