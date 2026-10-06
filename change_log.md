@@ -4,6 +4,19 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-10-06 — Construction Sacramento blog (publish Tue 2026-10-13 9:00 AM PT, PR only)
+
+Jennifer moved Construction from 2026-10-08 to Tuesday 2026-10-13. **PR only — do not merge. Do not wrangler deploy.** Workers Builds on the production branch after Aria merge GO.
+
+- Post `site/blog/clean-truck-check-sacramento-construction-fleets.html`. Article JSON-LD telephone `+1-916-890-4427`. Area link `/sacramento-carb-testing`. `article:published_time`, `datePublished`, `dateModified`, and the published byline are 2026-10-13. Byline Vin CA Diesel. OBD $75 · OVI $199 · 916-890-4427.
+- Portal: `site/blog.html` and `site/blog/index.html` (Construction card above Harvest; same quick list; article count 66). Sitemap lastmod for `/blog` and this post is 2026-10-13. Harvest sitemap row kept.
+- Draft `blog_drafts/clean-truck-check-sacramento-construction-fleets.md` `publish_date: 2026-10-13`, status scheduled.
+- Six outside-repo landers are not in this PR. Harvest post, card, sitemap entry, and change_log entry kept from main.
+
+Live URL after merge and Workers Builds: https://norcalcarbmobile.com/blog/clean-truck-check-sacramento-construction-fleets
+
+---
+
 ## 2026-10-06 — Unblock site-lock for Harvest PR
 
 Site-lock was already failing on main the same three ways. This catch-up is so Harvest can merge. Harvest post unchanged. Do not `wrangler deploy`.
