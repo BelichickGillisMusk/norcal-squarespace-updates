@@ -196,6 +196,9 @@ const REDIRECTS = {
   '/service-areas': '/areas',
   // Legacy alias — restore after 404 regression (Jennifer pulse 2026-09-27)
   '/locations': '/areas',
+  // Aria COS 2026-10-06 — short aliases → carb-*-test landers; not sitemap.
+  '/obd': '/carb-obd-test',
+  '/ovi': '/carb-ovi-test',
   // Squarespace "New Page" stub. Stable Shorts URL is the facts hub.
   '/new-page': '/clean-truck-check-facts',
   '/new-page.html': '/clean-truck-check-facts',
