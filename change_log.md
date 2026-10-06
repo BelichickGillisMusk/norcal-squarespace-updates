@@ -4,6 +4,19 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-10-06 — Restore six 10/4 landers (PR only)
+
+Jennifer (SEO): Harvest #113 and Construction #114 Workers Builds dropped six landing pages that were live 2026-10-04. Three corridor pages lived only as Worker injection; the repo deploy 404'd them, and Hayward still 301'd to `/areas#hayward`. **PR only — do not merge. Do not wrangler.** Workers Builds on the production branch after merge.
+
+- Restored static assets: `site/clean-truck-check-hayward.html`, `site/carb-mobile-test-near-me.html`, `site/carb-test-bay-area.html`. Landings are the primary keyword pages.
+- Kept main `site/carb-obd-test.html` and `site/carb-ovi-test.html` (byte-close to the 10/4 copies; main already uses `/reviews`). Added the supporting-guide link on `site/motorhome-carb-test.html` and left the rest of that file.
+- Sitemap: six locs added. Harvest and Construction blog entries kept. `<url>` count 87 → 93.
+- Worker: commented out `'/clean-truck-check-hayward': '/areas#hayward'` (same pattern as Lodi). Corridor aliases now point at the landers: `/east-bay-mobile-carb-testing` → `/clean-truck-check-hayward`, `/clean-truck-check-bay-area` → `/carb-test-bay-area`.
+- Aria two-way cluster: Hayward blog links `/clean-truck-check-hayward` (not `/areas#hayward`); Hayward lander links the Hayward blog. Motorhome blog links `/motorhome-carb-test`; motorhome lander links the motorhome guide.
+- Phone (916) 890-4427. Prices OBD $75 / OVI $199 / motorhome $99/$229. `areas.html` East Bay card already goes to `/bay-area-mobile-carb`, not `#hayward`, so it was left alone.
+
+---
+
 ## 2026-10-06 — Construction Sacramento blog (publish Tue 2026-10-13 9:00 AM PT, PR only)
 
 Jennifer moved Construction from 2026-10-08 to Tuesday 2026-10-13. **PR only — do not merge. Do not wrangler deploy.** Workers Builds on the production branch after Aria merge GO.
