@@ -9,11 +9,30 @@ Agents append timestamped entries below.
 Jennifer moved Construction from 2026-10-08 to Tuesday 2026-10-13. **PR only — do not merge. Do not wrangler deploy.** Workers Builds on the production branch after Aria merge GO.
 
 - Post `site/blog/clean-truck-check-sacramento-construction-fleets.html`. Article JSON-LD telephone `+1-916-890-4427`. Area link `/sacramento-carb-testing`. `article:published_time`, `datePublished`, `dateModified`, and the published byline are 2026-10-13. Byline Vin CA Diesel. OBD $75 · OVI $199 · 916-890-4427.
-- Portal: `site/blog.html` and `site/blog/index.html` (same card + quick list; article count 65). Sitemap lastmod for `/blog` and this post is 2026-10-13.
+- Portal: `site/blog.html` and `site/blog/index.html` (Construction card above Harvest; same quick list; article count 66). Sitemap lastmod for `/blog` and this post is 2026-10-13. Harvest sitemap row kept.
 - Draft `blog_drafts/clean-truck-check-sacramento-construction-fleets.md` `publish_date: 2026-10-13`, status scheduled.
-- Six outside-repo landers are not in this PR. Harvest branch untouched.
+- Six outside-repo landers are not in this PR. Harvest post, card, sitemap entry, and change_log entry kept from main.
 
 Live URL after merge and Workers Builds: https://norcalcarbmobile.com/blog/clean-truck-check-sacramento-construction-fleets
+
+---
+
+## 2026-10-06 — Unblock site-lock for Harvest PR
+
+Site-lock was already failing on main the same three ways. This catch-up is so Harvest can merge. Harvest post unchanged. Do not `wrangler deploy`.
+
+- `config/site-template-lock.json` version `2026-10-06.1`. Protected hash for `site/index.html` caught up to the current file (`7b85572c…`). Homepage HTML not edited.
+- Sibling San Diego dollar strings removed from `site/areas.html` and `site/pricing.html` so validate no longer matches `$119` / `$219`. Narrative and `https://mobilecarbsmoketest.com/` links stay. NorCal rates ($75 / $199 / motorhome $99/$229) and phone 916-890-4427 unchanged.
+
+---
+
+## 2026-10-05 — Harvest Season Clean Truck Check blog (publish Tue 2026-10-06 9:00 AM PT)
+
+Draft PR for `/blog/harvest-season-clean-truck-check`. Do not merge. Do not `wrangler deploy`. Workers Builds on the production branch after Aria merge GO.
+
+- New post `site/blog/harvest-season-clean-truck-check.html`. Article JSON-LD, publisher telephone `+1-916-890-4427`, `datePublished` 2026-10-06, area link `/central-valley-sierra-carb-testing`. Slug stays `harvest-season-clean-truck-check`.
+- Portal cards on `site/blog.html` and `site/blog/index.html` (card + quick list; article count 64 → 65). Sitemap row added. Source draft `blog_drafts/harvest-season-clean-truck-check.md`.
+- Phone 916-890-4427 only. No owner name in customer copy. No wrangler.
 
 ---
 
