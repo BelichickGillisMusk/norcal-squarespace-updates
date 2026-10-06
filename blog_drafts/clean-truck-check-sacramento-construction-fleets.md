@@ -4,7 +4,7 @@ meta_title: "Clean Truck Check Sacramento for Construction Fleets"
 slug: "clean-truck-check-sacramento-construction-fleets"
 source: rewrite (queue/construction-sacramento.md)
 date: 2026-10-04
-publish_date: 2026-10-08
+publish_date: 2026-10-13
 status: scheduled
 owner_approved: "YES"
 approve_phrase: "approve clean-truck-check-sacramento-construction-fleets"
