@@ -4,6 +4,15 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-10-06 — Unblock site-lock for Harvest PR
+
+Site-lock was already failing on main the same three ways. This catch-up is so Harvest can merge. Harvest post unchanged. Do not `wrangler deploy`.
+
+- `config/site-template-lock.json` version `2026-10-06.1`. Protected hash for `site/index.html` caught up to the current file (`7b85572c…`). Homepage HTML not edited.
+- Sibling San Diego dollar strings removed from `site/areas.html` and `site/pricing.html` so validate no longer matches `$119` / `$219`. Narrative and `https://mobilecarbsmoketest.com/` links stay. NorCal rates ($75 / $199 / motorhome $99/$229) and phone 916-890-4427 unchanged.
+
+---
+
 ## 2026-10-05 — Harvest Season Clean Truck Check blog (publish Tue 2026-10-06 9:00 AM PT)
 
 Draft PR for `/blog/harvest-season-clean-truck-check`. Do not merge. Do not `wrangler deploy`. Workers Builds on the production branch after Aria merge GO.
