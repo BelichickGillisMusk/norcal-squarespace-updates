@@ -71,7 +71,7 @@ function schemaTag(pageUrl) {
         image: LOGO_URL,
         logo: { '@type': 'ImageObject', url: LOGO_URL },
         priceRange: '$75-$229',
-        description: 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Certified OBD and OVI smoke opacity testing at customer yards and jobsites across Northern California, San Diego County by appointment, and a 50-mile radius of 92553 Moreno Valley.',
+        description: 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Headquarters in Northern California. SoCal bookings use the name Mobile OVI Test, a 50-mile radius of 92553 Moreno Valley. Same prices: OBD $75, OVI $199.',
         knowsAbout: [
           'CARB Clean Truck Check',
           'SAE J1667 Smoke Opacity Testing',
