@@ -71,7 +71,7 @@ function schemaTag(pageUrl) {
         image: LOGO_URL,
         logo: { '@type': 'ImageObject', url: LOGO_URL },
         priceRange: '$75-$229',
-        description: 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Certified OBD and OVI smoke opacity testing at customer yards and jobsites across Northern California, with service available in San Diego County by appointment.',
+        description: 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Certified OBD and OVI smoke opacity testing at customer yards and jobsites across Northern California, San Diego County by appointment, and a 50-mile radius of 92553 Moreno Valley.',
         knowsAbout: [
           'CARB Clean Truck Check',
           'SAE J1667 Smoke Opacity Testing',
@@ -85,7 +85,18 @@ function schemaTag(pageUrl) {
           'Solano County', 'Napa County', 'Santa Clara County', 'Sonoma County',
           'Alameda County', 'Stanislaus County', 'Merced County', 'Fresno County',
           'Tulare County', 'Tuolumne County', 'San Diego County'
-        ].map((name) => ({ '@type': 'AdministrativeArea', name })),
+        ].map((name) => ({ '@type': 'AdministrativeArea', name })).concat([{
+          '@type': 'GeoCircle',
+          name: '50 miles of 92553, Moreno Valley, CA',
+          geoMidpoint: {
+            '@type': 'GeoCoordinates',
+            latitude: 33.9425,
+            longitude: -117.2297,
+            postalCode: '92553',
+            addressCountry: 'US',
+          },
+          geoRadius: 80467,
+        }]),
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
           name: 'Mobile CARB Testing Services',
