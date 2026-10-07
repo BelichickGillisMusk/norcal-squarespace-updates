@@ -519,3 +519,23 @@ html[data-theme="light"] body.contact-page a:hover { color: var(--green-deep); }
   .contact-page .hero h1 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
   .nav.open .chrome-toggles { width: 100%; padding-top: 12px; }
 }
+
+
+/* One open line under the logo bar. Not a second header, not a tester badge. */
+.open-bar {
+  margin: 0;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  color: var(--navy);
+  font-weight: 750;
+  font-weight: 700;
+  font-size: clamp(0.98rem, 2.4vw, 1.15rem);
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+}
+.open-bar .wrap { display: block; padding-top: 16px; padding-bottom: 16px; }
+html[data-theme="dark"] body.contact-page .open-bar {
+  background: #00182f;
+  color: #fff;
+  border-bottom-color: rgba(255,255,255,.12);
+}
