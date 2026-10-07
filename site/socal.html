@@ -23,15 +23,22 @@
     "@type": "LocalBusiness",
     "name": "NorCal CARB Mobile LLC",
     "alternateName": "NorCal CARB Mobile",
-    "description": "Mobile CARB Clean Truck Check testing — OBD and OVI — we come to your yard across California.",
+    "description": "Mobile OBD and OVI inside a 50-mile radius of ZIP 92553, Moreno Valley. OBD $75. OVI $199.",
     "url": "https://norcalcarbmobile.com",
     "telephone": "+1-916-890-4427",
     "email": "sales@norcalcarbmobile.com",
-    "areaServed": [
-      "92553 Moreno Valley, CA","Riverside, CA","San Bernardino, CA","Fontana, CA",
-      "Ontario, CA","Rancho Cucamonga, CA","Corona, CA","Temecula, CA","Hemet, CA",
-      "Palm Springs, CA","Victorville, CA","Pomona, CA","El Monte, CA","Anaheim, CA","Santa Ana, CA"
-    ]
+    "areaServed": {
+      "@type": "GeoCircle",
+      "name": "50 miles of 92553, Moreno Valley, CA",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 33.9425,
+        "longitude": -117.2297,
+        "postalCode": "92553",
+        "addressCountry": "US"
+      },
+      "geoRadius": 80467
+    }
   }
   </script>
 </head>
