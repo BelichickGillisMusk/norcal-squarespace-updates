@@ -539,3 +539,7 @@ html[data-theme="dark"] body.contact-page .open-bar {
   color: #fff;
   border-bottom-color: rgba(255,255,255,.12);
 }
+
+.open-bar a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
+html[data-theme="dark"] body.contact-page .open-bar a { color: #fff; }
+.route-chips a { text-decoration: none; }
