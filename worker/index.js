@@ -73,8 +73,8 @@ function schemaTag(pageUrl) {
         logo: { '@type': 'ImageObject', url: LOGO_URL },
         priceRange: socal ? '$99-$249' : '$75-$229',
         description: socal
-          ? 'Mobile OVI Test. Separate company. SoCal service is a 50-mile radius of 92553, Moreno Valley. Prices are not the Northern California card.'
-          : 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Headquarters in Northern California. OBD $75. OVI $199. SoCal bookings use Mobile OVI Test, a separate company, inside 50 miles of 92553. SoCal prices are not this card.',
+          ? 'Mobile OVI Test. OBD $99. OVI smoke $249. 50-mile radius of 92553, Moreno Valley.'
+          : 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Headquarters in Northern California. OBD $75. OVI $199.',
         knowsAbout: [
           'CARB Clean Truck Check',
           'SAE J1667 Smoke Opacity Testing',
@@ -88,7 +88,7 @@ function schemaTag(pageUrl) {
           'Solano County', 'Napa County', 'Santa Clara County', 'Sonoma County',
           'Alameda County', 'Stanislaus County', 'Merced County', 'Fresno County',
           'Tulare County', 'Tuolumne County', 'San Diego County'
-        ].map((name) => ({ '@type': 'AdministrativeArea', name })).concat([{
+        ].map((name) => ({ '@type': 'AdministrativeArea', name })).concat(socal ? [{
           '@type': 'GeoCircle',
           name: '50 miles of 92553, Moreno Valley, CA',
           geoMidpoint: {
@@ -99,7 +99,7 @@ function schemaTag(pageUrl) {
             addressCountry: 'US',
           },
           geoRadius: 80467,
-        }]),
+        }] : []),
         hasOfferCatalog: socal ? {
           '@type': 'OfferCatalog',
           name: 'Mobile OVI Test',
