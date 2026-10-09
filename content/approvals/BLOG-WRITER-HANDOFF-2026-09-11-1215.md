@@ -67,7 +67,7 @@ Source: https://ww2.arb.ca.gov/clean-truck-check-emissions-compliance-testing-re
 - Beginning Oct 2027: OBD → 4 / year. Opacity-path stays 2x. Ag and qualifying CA rec MH stay 1x.
 - 90-day submit window before CTC-VIS deadline.
 
-**OBD $75 · OVI $199 · MH $99 / $229 · 916-890-4427 · /contact**
+**OBD $75 · OVI $199 · MH $99 / $229 · 628-999-3912 · /contact**
 
 Full Care: landers print +$40 / year. Fleet-readiness draft still $80. Do not print a third number.
 

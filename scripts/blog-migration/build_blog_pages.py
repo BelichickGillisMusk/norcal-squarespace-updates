@@ -206,7 +206,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       <a class="navlink" href="/contact">Contact</a>
       <span class="header-cta">
         <a class="btn btn-ghost btn-book" href="/contact">Book a Test</a>
-        <a class="btn btn-call" href="tel:+19168904427">Call (916) 890-4427</a>
+        <a class="btn btn-call" href="tel:+16289993912">Call (628) 999-3912</a>
       </span>
     </nav>
   </div>
@@ -227,7 +227,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 {content}
 
-      <p style="margin-top:2em"><a class="btn btn-primary" href="/contact">Book a test</a> or call <a href="tel:+19168904427">(916) 890-4427</a> to schedule mobile Clean Truck Check testing.</p>
+      <p style="margin-top:2em"><a class="btn btn-primary" href="/contact">Book a test</a> or call <a href="tel:+16289993912">(628) 999-3912</a> to schedule mobile Clean Truck Check testing.</p>
 
     </div>
   </section>
@@ -238,7 +238,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       <p>Book mobile Clean Truck Check testing anywhere in Northern California.</p>
       <div class="hero-cta center" style="justify-content:center">
         <a class="btn btn-ghost btn-lg" href="/contact">Book a Test</a>
-        <a class="btn btn-ghost btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
+        <a class="btn btn-ghost btn-lg" href="tel:+16289993912">Call (628) 999-3912</a>
       </div>
     </div>
   </section>
@@ -254,7 +254,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       </div>
       <div>
         <h4>Contact</h4>
-        <p><a href="tel:+19168904427">(916) 890-4427</a><br>
+        <p><a href="tel:+16289993912">(628) 999-3912</a><br>
         <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
       </div>
       <div>
@@ -356,7 +356,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
       <a class="navlink" href="/contact">Contact</a>
       <span class="header-cta">
         <a class="btn btn-ghost btn-book" href="/contact">Book a Test</a>
-        <a class="btn btn-call" href="tel:+19168904427">Call (916) 890-4427</a>
+        <a class="btn btn-call" href="tel:+16289993912">Call (628) 999-3912</a>
       </span>
     </nav>
   </div>
@@ -386,7 +386,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
       <p>Book mobile Clean Truck Check testing anywhere in Northern California. Same-week and Saturday appointments available.</p>
       <div class="hero-cta center" style="justify-content:center">
         <a class="btn btn-ghost btn-lg" href="/contact">Book a Test</a>
-        <a class="btn btn-ghost btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
+        <a class="btn btn-ghost btn-lg" href="tel:+16289993912">Call (628) 999-3912</a>
       </div>
     </div>
   </section>
@@ -402,7 +402,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
       </div>
       <div>
         <h4>Contact</h4>
-        <p><a href="tel:+19168904427">(916) 890-4427</a><br>
+        <p><a href="tel:+16289993912">(628) 999-3912</a><br>
         <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
       </div>
       <div>

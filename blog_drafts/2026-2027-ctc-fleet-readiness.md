@@ -14,14 +14,14 @@ locations:
   - "Oakland, CA"
   - "Hayward, CA"
 tags: ["CARB", "Clean Truck Check", "Fleet", "2026", "2027", "OBD", "OVI", "CTC-VIS"]
-meta_description: "2026 Clean Truck Check is still two tests a year for most trucks. OBD units go to four tests starting October 2027. Mobile OBD $75 / OVI $199. Call 916-890-4427."
+meta_description: "2026 Clean Truck Check is still two tests a year for most trucks. OBD units go to four tests starting October 2027. Mobile OBD $75 / OVI $199. Call 628-999-3912."
 ---
 
 # 2026–2027 Clean Truck Check fleet readiness
 
 Rewritten from the Drive document *2026-2027 CTC Fleet Readiness Guide — CORRECTED* (updated 2026-09-05). Not a substitute for CTC-VIS.
 
-NorCal CARB Mobile · [norcalcarbmobile.com](https://norcalcarbmobile.com) · [916-890-4427](tel:+19168904427)
+NorCal CARB Mobile · [norcalcarbmobile.com](https://norcalcarbmobile.com) · [628-999-3912](tel:+16289993912)
 
 ## What changes — and what does not
 
@@ -98,7 +98,7 @@ Admin first, test when it fits. Portal work can stop an incoming hold faster tha
 - Full Care $80 / VIN / year, plus tests
 - Multi-truck same visit: ask on the call
 
-Book: **916-890-4427** · sales@norcalcarbmobile.com · [contact](/contact) · [services](/services) · [pricing](/pricing) · [areas](/areas).
+Book: **628-999-3912** · sales@norcalcarbmobile.com · [contact](/contact) · [services](/services) · [pricing](/pricing) · [areas](/areas).
 
 ## 90-day action list
 

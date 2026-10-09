@@ -16,7 +16,7 @@ locations:
 testing_oddity: "A single truck still owes the same CTC-VIS deadline as a 40-unit fleet. The visit is shorter. The clock is not."
 cool_thing: "Next documented single-unit construction pin already on the board: All Fence corridor is a fleet day; owner-operators book the leftover yard slots on the same loop."
 tags: ["CARB", "Clean Truck Check", "Owner Operator", "OBD", "OVI", "Sacramento", "Stockton"]
-meta_description: "Owner-operators need Clean Truck Check too. Mobile OBD $75 or OVI $199 at your yard or a legal parking spot. Call 916-890-4427."
+meta_description: "Owner-operators need Clean Truck Check too. Mobile OBD $75 or OVI $199 at your yard or a legal parking spot. Call 628-999-3912."
 ---
 
 # Clean Truck Check for owner-operators — one truck, one visit
@@ -25,7 +25,7 @@ If the truck is over 14,000 lb GVWR and it runs California public roads, Clean T
 
 NorCal CARB Mobile tests at the yard, the house lot if it is legal to work there, or a jobsite staging area. **OBD $75**. **OVI $199**. Motorhome OBD **$99** / OVI **$229** if that is the unit.
 
-Book: [contact](/contact) or **916-890-4427**.
+Book: [contact](/contact) or **628-999-3912**.
 
 Related pages: [services](/services) · [pricing](/pricing) · [areas](/areas) · [OBD vs OVI](/blog/obd-vs-ovi-clean-truck-check-fleets) · [Stockton corridor](/stockton-clean-truck-check) · [Hayward lander](https://cleantruckcheckhayward.com/).
 
@@ -72,6 +72,6 @@ Owner-operators show up in every corridor we already cover:
 
 ## Book the visit
 
-Call **916-890-4427**. Request a callback at [contact](/contact). Public menu: [services](/services) · [pricing](/pricing).
+Call **628-999-3912**. Request a callback at [contact](/contact). Public menu: [services](/services) · [pricing](/pricing).
 
 Do not publish this file until the owner replies `approve owner-operator`.

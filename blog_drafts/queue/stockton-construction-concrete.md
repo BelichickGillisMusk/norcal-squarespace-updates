@@ -18,7 +18,7 @@ locations:
 testing_oddity: "Construction mixers, dumps, and F550s on this corridor are not the agricultural annual exception. Same-visit mix of OBD and OVI is normal. Engine year is confirmed before dispatch, not at the gate."
 cool_thing: "Documented construction pins: Mitchell Concrete on the Rancho Cordova / Granite Bay corridor; All Fence, 1900 Spring St, Redwood City, completed Sat 9/5 8:30a, 7 OBD. No invented Stockton diner."
 tags: ["CARB", "Clean Truck Check", "Construction", "Concrete", "Stockton", "Lodi", "Tracy", "San Joaquin", "OBD", "OVI"]
-meta_description: "Mobile Clean Truck Check for Stockton construction and concrete fleets. OBD $75 and OVI $199 at the yard in Stockton, Lodi, Tracy, Lathrop, and Manteca. Call 916-890-4427."
+meta_description: "Mobile Clean Truck Check for Stockton construction and concrete fleets. OBD $75 and OVI $199 at the yard in Stockton, Lodi, Tracy, Lathrop, and Manteca. Call 628-999-3912."
 ---
 
 # Construction and concrete fleets in Stockton
@@ -27,7 +27,7 @@ A mixer or dump sitting in a station line in **Stockton** is a missed pour. Clea
 
 NorCal CARB Mobile tests at the yard or the staging lot in **Stockton**, **Lodi**, **Tracy**, **Lathrop**, and **Manteca**. Public rate card: **OBD $75** · **OVI $199**. Motorhome path if a unit is actually an RV: **OBD $99** · **OVI $229**. Multi-truck same visit is quoted on the call.
 
-Book: **916-890-4427** or [contact](/contact).
+Book: **628-999-3912** or [contact](/contact).
 
 ## Related pages (same corridor / same industry)
 
@@ -86,6 +86,6 @@ No invented Stockton lunch stop. If a real meal pin from a Stockton construction
 
 ## Book
 
-Call **916-890-4427**. Request a callback at [contact](/contact). Service menu: [services](/services) · [pricing](/pricing) · [areas](/areas).
+Call **628-999-3912**. Request a callback at [contact](/contact). Service menu: [services](/services) · [pricing](/pricing) · [areas](/areas).
 
 Do not publish this file until the owner replies `approve stockton-construction`.

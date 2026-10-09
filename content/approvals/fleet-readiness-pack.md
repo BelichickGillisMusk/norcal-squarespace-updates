@@ -38,7 +38,7 @@ After this goes live, point the stale 2025 deadline post (`/clean-truck-check-bl
 
 We test at the yard. OBD $75. OVI $199. Deadlines live in CTC-VIS, not a blog calendar.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 ```
 
 ---
@@ -52,7 +52,7 @@ Fleet managers: 2026 is still two Clean Truck Check tests for most trucks over 1
 
 Opacity-path trucks stay semi-annual. Qualifying ag and CA recreational motorhomes stay annual. Confirm each VIN in CTC-VIS.
 
-Mobile OBD $75 · OVI $199 at your yard. 916-890-4427
+Mobile OBD $75 · OVI $199 at your yard. 628-999-3912
 
 norcalcarbmobile.com/contact
 ```
@@ -64,7 +64,7 @@ After live: add `norcalcarbmobile.com/blog/2026-2027-ctc-fleet-readiness`
 ## 3) X / other
 
 ```
-CTC 2026 = 2x/year for most trucks. OBD goes 4x starting Oct 2027. Ag + qualifying CA MH stay annual. Mobile OBD $75 · OVI $199. 916-890-4427
+CTC 2026 = 2x/year for most trucks. OBD goes 4x starting Oct 2027. Ag + qualifying CA MH stay annual. Mobile OBD $75 · OVI $199. 628-999-3912
 ```
 
 ---
@@ -72,5 +72,5 @@ CTC 2026 = 2x/year for most trucks. OBD goes 4x starting Oct 2027. Ag + qualifyi
 ## 4) Retest SMS
 
 ```
-Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 916-890-4427
+Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 628-999-3912
 ```

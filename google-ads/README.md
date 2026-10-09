@@ -30,7 +30,7 @@ This folder contains a paused, low-risk Google Ads Editor build for NorCal CARB 
    - Calls to the website forwarding number, minimum call length 60 seconds.
    - Callback form success.
 5. Link the correct Google Business Profile and enable location assets.
-6. Confirm the number is `(916) 890-4427`.
+6. Confirm the number is `(628) 999-3912`.
 7. Preview all landing pages on mobile.
 8. Enable one campaign at a time. Start with OVI, then OBD, then Motorhome after call tracking is verified.
 

@@ -95,7 +95,7 @@ SWITCHING TESTERS? 50% off first test (OBD $37.50 · OVI $99.50) or we'll beat y
 
 Free deadline calculator: {tools_url}/when-is-my-test-due
 
-10-minute call this week? {booking_url} · 916-890-4427
+10-minute call this week? {booking_url} · 628-999-3912
 
 Camila · NorCal CARB Mobile
 camila@norcalcarbmobile.com
@@ -121,7 +121,7 @@ PRICING THAT BEATS MOST SHOPS:
 ★ 5 stars · 31 Google reviews: {reviews_url}
 "Tested six trucks in under two hours." — fleet operator, Sacramento
 
-Book: {booking_url} · Call/text 916-890-4427
+Book: {booking_url} · Call/text 628-999-3912
 
 Camila · NorCal CARB Mobile
 camila@norcalcarbmobile.com
@@ -172,7 +172,7 @@ Typical shop:
 
 ★ 5 stars · 31 Google reviews: {reviews_url}
 
-Call 916-890-4427 or book: {booking_url}
+Call 628-999-3912 or book: {booking_url}
 
 Camila · NorCal CARB Mobile
 

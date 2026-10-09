@@ -124,7 +124,7 @@ Norcal admin folder `18zt88Kp16nU62NpDG_e2OfLEh5X9IFUP`:
 
 ## Price / NAP lock
 
-**OBD $75 · OVI $199 · MH $99 / $229 · 916-890-4427 · sales@norcalcarbmobile.com · /contact**
+**OBD $75 · OVI $199 · MH $99 / $229 · 628-999-3912 · sales@norcalcarbmobile.com · /contact**
 
 Full Care landers: **+$40 / year**. Do not print $80 or $250.
 
@@ -155,7 +155,7 @@ We test at the farm, packing shed, or staging lot in Woodland, Merced, Stockton,
 
 OBD $75 · OVI $199 · we come to the yard.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 
 ### Stockton construction GBP
 
@@ -163,7 +163,7 @@ Construction and concrete fleets in Stockton, Lodi, Tracy, Lathrop, and Manteca 
 
 Clean Truck Check is still twice a year in 2026 for most work trucks. OBD $75. OVI $199. We come to the staging lot.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 
 ### Freight / Tracy GBP
 
@@ -171,7 +171,7 @@ Clean Truck Check Tracy CA and Stockton freight yards. Mobile OBD $75 · OVI $19
 
 Most highway units stay twice a year in 2026. CTC-VIS is the deadline.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 
 ## Calendar / contacts lock (ops, not public copy)
 

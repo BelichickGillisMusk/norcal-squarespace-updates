@@ -65,7 +65,7 @@ Also: SMS Backup+ → Gmail label `SMS`. Make 5425419 Scenario 1 FRONT DOOR only
 ## SMS if a human texts a due
 
 ```
-Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 916-890-4427
+Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 628-999-3912
 ```
 
 No sixth CRM. No Volume 2. No 254 mint from dirty sheet.

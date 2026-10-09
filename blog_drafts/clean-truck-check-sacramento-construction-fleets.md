@@ -18,7 +18,7 @@ locations:
 testing_oddity: "One yard, three test situations: a 2013+ mixer on OBD, an older dump truck on smoke opacity + visual, and a service truck nobody was sure was over 14,000 lbs."
 cool_thing: "Testing at the yard before the crews roll out means no one loses a jobsite day."
 tags: ["CARB", "Clean Truck Check", "Construction", "Sacramento", "Rancho Cordova", "Granite Bay", "Lincoln", "OBD", "OVI"]
-meta_description: "Clean Truck Check in Sacramento for construction fleets. We test mixers, dumps and service trucks at your yard. OBD $75, OVI $199. Call 916-890-4427."
+meta_description: "Clean Truck Check in Sacramento for construction fleets. We test mixers, dumps and service trucks at your yard. OBD $75, OVI $199. Call 628-999-3912."
 live_url: "https://norcalcarbmobile.com/blog/clean-truck-check-sacramento-construction-fleets"
 ---
 
@@ -93,4 +93,4 @@ Full details are on [our pricing page](https://norcalcarbmobile.com/pricing):
 - Switch & Save (switching from another tester): second test or second truck at half price ($37.50 OBD / $99.50 OVI)
 - Full construction yards and fleets: call for a yard quote
 
-Call [916-890-4427](tel:+19168904427) to set up a yard visit, or send a request through our [contact page](https://norcalcarbmobile.com/contact).
+Call [628-999-3912](tel:+16289993912) to set up a yard visit, or send a request through our [contact page](https://norcalcarbmobile.com/contact).

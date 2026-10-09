@@ -41,7 +41,7 @@ Source: https://ww2.arb.ca.gov/clean-truck-check-emissions-compliance-testing-re
 
 ## Price lock vs leaks
 
-Lock: OBD $75 · OVI $199 · MH $99 / $229 · 916-890-4427 · /contact
+Lock: OBD $75 · OVI $199 · MH $99 / $229 · 628-999-3912 · /contact
 
 Safe to link: `/stockton-clean-truck-check`
 

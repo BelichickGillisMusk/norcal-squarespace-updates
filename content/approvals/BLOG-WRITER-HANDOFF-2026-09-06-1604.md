@@ -35,7 +35,7 @@ Live pages that still contradict this (fix slugs, do not delete them):
 - `/service-area-san-joaquin-county-mobile-testing` — OVI still $250.
 - `/what-is-clean-truck-check` — OVI $250 / RV $300.
 
-Public card lock: OBD $75 · OVI $199 · MH $99 / $229 · phone 916-890-4427 only.
+Public card lock: OBD $75 · OVI $199 · MH $99 / $229 · phone 628-999-3912 only.
 Full Care $40 vs $80 is unresolved. Do not print a third number.
 
 ## Unpublished inventory (`owner_approved: NO`)

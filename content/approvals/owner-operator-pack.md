@@ -28,7 +28,7 @@ One truck still owes Clean Truck Check. Fleet size is not the test.
 
 Mobile OBD $75 or OVI $199 at your yard or a legal parking spot. Sacramento, Stockton, Hayward, San Jose.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 ```
 
 ---
@@ -42,7 +42,7 @@ Owner-operators: Clean Truck Check applies to one truck the same way it applies 
 
 We come to the yard. OBD $75. OVI $199. Confirm engine year on the call so we bring the right meter.
 
-916-890-4427 · norcalcarbmobile.com/contact
+628-999-3912 · norcalcarbmobile.com/contact
 ```
 
 After live: add `norcalcarbmobile.com/blog/clean-truck-check-owner-operators-one-truck`
@@ -52,7 +52,7 @@ After live: add `norcalcarbmobile.com/blog/clean-truck-check-owner-operators-one
 ## 3) X / other
 
 ```
-One truck still needs Clean Truck Check. Mobile OBD $75 · OVI $199 at your yard. 916-890-4427 norcalcarbmobile.com/contact
+One truck still needs Clean Truck Check. Mobile OBD $75 · OVI $199 at your yard. 628-999-3912 norcalcarbmobile.com/contact
 ```
 
 ---
@@ -60,5 +60,5 @@ One truck still needs Clean Truck Check. Mobile OBD $75 · OVI $199 at your yard
 ## 4) Retest SMS
 
 ```
-Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 916-890-4427
+Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 628-999-3912
 ```

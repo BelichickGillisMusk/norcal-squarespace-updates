@@ -17,7 +17,7 @@ locations:
 testing_oddity: "Split-site fleets are common: one OBD in Martinez and one in Crockett on the same day. East Bay yards also stack 8–9 OBD units at a single dock address."
 cool_thing: "Next Peninsula construction pin: All Fence, 1900 Spring St, Redwood City, Sat 9/5 8:30a, 7 OBD. East Bay repeat pin: Highway Towing, 23950 Clawiter Rd, Hayward."
 tags: ["CARB", "Clean Truck Check", "Bay Area", "Hayward", "San Leandro", "Oakland", "OBD", "OVI"]
-meta_description: "Mobile Clean Truck Check for Bay Area jobsite fleets in Hayward, San Leandro, Oakland, and Redwood City. OBD $75, OVI $199 at the staging lot. Call 916-890-4427."
+meta_description: "Mobile Clean Truck Check for Bay Area jobsite fleets in Hayward, San Leandro, Oakland, and Redwood City. OBD $75, OVI $199 at the staging lot. Call 628-999-3912."
 ---
 
 # Bay Area jobsite fleets
@@ -45,4 +45,4 @@ All Fence Redwood City, Saturday 9/5 8:30 a.m. Highway Towing Hayward stays on t
 
 ## Book
 
-**916-890-4427** · [contact](/contact) · [services](/services).
+**628-999-3912** · [contact](/contact) · [services](/services).

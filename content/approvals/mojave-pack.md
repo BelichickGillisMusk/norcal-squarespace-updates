@@ -34,7 +34,7 @@ Fleet OBD & OVI in Porterville and the Mojave — proof we go where the trucks a
 
 We follow fleet customers to cool locations. Everyday coverage is Northern California. We don’t normally sit in Porterville or the Mojave every week, but we will when asked.
 
-Mobile Clean Truck Check on-site. Book: norcalcarbmobile.com/contact · (916) 890-4427
+Mobile Clean Truck Check on-site. Book: norcalcarbmobile.com/contact · (628) 999-3912
 
 Read: norcalcarbmobile.com/blog/fleets-ovi-obd-porterville-mojave
 

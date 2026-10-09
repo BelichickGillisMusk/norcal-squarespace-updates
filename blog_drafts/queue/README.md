@@ -8,7 +8,7 @@ Queue drafts are filled. YOU FILL lines are closed with documented pins only. No
 Owner gate still stands. Reply the approve phrase. Agents will not set `owner_approved: YES`.
 
 Lock on every post:
-- Phone: 916-890-4427
+- Phone: 628-999-3912
 - Prices: OBD $75 · OVI $199 · MH $99 / $229
 - Book: /contact
 - Deadline source: CTC-VIS, not a blog calendar

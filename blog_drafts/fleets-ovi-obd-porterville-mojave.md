@@ -57,7 +57,7 @@ Model: **home base first, fleet-asked locations second**. Sacramento and Stockto
 - Motorhome OBD: **$99**
 - Motorhome OVI: **$229**
 
-[Request a callback](/contact) or call [(916) 890-4427](tel:+19168904427).
+[Request a callback](/contact) or call [(628) 999-3912](tel:+16289993912).
 
 ## Location proof — why this post exists
 
@@ -68,4 +68,4 @@ Named places on purpose so Google can connect the business to the map:
 - **Fresno**, **Bakersfield**-adjacent freight context
 - **Sacramento**, **Stockton**, **San Jose**, and the wider **Bay Area**
 
-Need a test at your yard or corridor stop? [Book online](/contact) or call [(916) 890-4427](tel:+19168904427).
+Need a test at your yard or corridor stop? [Book online](/contact) or call [(628) 999-3912](tel:+16289993912).

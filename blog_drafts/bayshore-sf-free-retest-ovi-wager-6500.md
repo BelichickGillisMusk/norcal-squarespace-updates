@@ -8,7 +8,7 @@ status: published
 owner_approved: "YES"
 approve_phrase: "Bryan GO"
 byline: "Vin CA Diesel"
-meta_description: "Yard-side Clean Truck Check on Bayshore in SF. Free retest when ready, then opacity the same visit. OBD $75 · OVI $199 · 916-890-4427."
+meta_description: "Yard-side Clean Truck Check on Bayshore in SF. Free retest when ready, then opacity the same visit. OBD $75 · OVI $199 · 628-999-3912."
 live_url: "https://norcalcarbmobile.com/blog/bayshore-sf-free-retest-ovi-wager-6500"
 ---
 
@@ -34,7 +34,7 @@ Opacity / OVI was next. The Wager 6500 was already in the trunk, so opacity ran 
 
 - OBD: $75
 - OVI: $199
-- Call or text: 916-890-4427
+- Call or text: 628-999-3912
 - Web: norcalcarbmobile.com
 
 — Vin CA Diesel

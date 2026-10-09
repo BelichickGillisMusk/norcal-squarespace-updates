@@ -33,7 +33,7 @@ Construction and concrete fleets in Stockton, Lodi, Tracy, Lathrop, and Manteca 
 
 Clean Truck Check is still twice a year in 2026 for most work trucks. OBD $75. OVI $199. We come to the staging lot.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 ```
 
 ---
@@ -49,7 +49,7 @@ A mixer in a station line is a missed pour. Most construction units over 14,000 
 
 OBD $75 · OVI $199 · we come to your yard.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 ```
 
 After live: add `norcalcarbmobile.com/blog/stockton-construction-concrete-clean-truck-check`
@@ -59,7 +59,7 @@ After live: add `norcalcarbmobile.com/blog/stockton-construction-concrete-clean-
 ## 3) X / other
 
 ```
-Stockton / Lodi / Tracy construction fleets: Clean Truck Check is still 2x in 2026. Mobile OBD $75 · OVI $199 at the yard. 916-890-4427 norcalcarbmobile.com/contact
+Stockton / Lodi / Tracy construction fleets: Clean Truck Check is still 2x in 2026. Mobile OBD $75 · OVI $199 at the yard. 628-999-3912 norcalcarbmobile.com/contact
 ```
 
 ---
@@ -67,5 +67,5 @@ Stockton / Lodi / Tracy construction fleets: Clean Truck Check is still 2x in 20
 ## 4) Retest SMS (calendar description + Night Watch)
 
 ```
-Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 916-890-4427
+Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 628-999-3912
 ```

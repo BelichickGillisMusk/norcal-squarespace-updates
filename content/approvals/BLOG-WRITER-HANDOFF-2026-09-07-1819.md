@@ -49,7 +49,7 @@ Mar 31 CRM task “Blog DAY 1 — Stockton satellite + Blog #1 Concrete/Construc
 
 Already live (do not rewrite): Mojave/Porterville, OBD vs OVI, 2026 deadlines, 62-article portal.
 
-Rate card locked in drafts: **OBD $75 · OVI $199 · MH $99 / $229 · 916-890-4427**.
+Rate card locked in drafts: **OBD $75 · OVI $199 · MH $99 / $229 · 628-999-3912**.
 
 ### Price pages still wrong (fix before or with first publish)
 
@@ -82,7 +82,7 @@ Packs: `content/approvals/stockton-construction-pack.md` and sibling `*-pack.md`
 Retest SMS body (Night Watch / calendar description):
 
 ```
-Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 916-890-4427
+Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 628-999-3912
 ```
 
 ## +17w calendar rule (for Grok when token lives)

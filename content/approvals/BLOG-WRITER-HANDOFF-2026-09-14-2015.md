@@ -73,7 +73,7 @@ Already live — do not republish:
 
 ## Price / NAP lock
 
-**OBD $75 · OVI $199 · MH $99 / $229 · 916-890-4427 · sales@norcalcarbmobile.com · /contact**
+**OBD $75 · OVI $199 · MH $99 / $229 · 628-999-3912 · sales@norcalcarbmobile.com · /contact**
 
 Full Care landers: **+$40 / year**. Do not print $80 or $250.
 Do not deep-link `/service-area-san-joaquin-county-mobile-testing` or `/east-bay-mobile-carb-testing` until $250 / 415 leaks are confirmed gone on every host.
@@ -115,7 +115,7 @@ We test at the farm, packing shed, or staging lot in Woodland, Merced, Stockton,
 
 OBD $75 · OVI $199 · we come to the yard.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 
 **Stockton construction GBP**
 
@@ -123,7 +123,7 @@ Construction and concrete fleets in Stockton, Lodi, Tracy, Lathrop, and Manteca 
 
 Clean Truck Check is still twice a year in 2026 for most work trucks. OBD $75. OVI $199. We come to the staging lot.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 
 ## What Blog Writer will not do
 

@@ -70,7 +70,7 @@ Already live — do not republish:
 
 ## Price / NAP lock
 
-**OBD $75 · OVI $199 · MH $99 / $229 · 916-890-4427 · sales@norcalcarbmobile.com · /contact**
+**OBD $75 · OVI $199 · MH $99 / $229 · 628-999-3912 · sales@norcalcarbmobile.com · /contact**
 
 Full Care landers: **+$40 / year**. Do not print $80 or $250.
 Do not add `/service-area-san-joaquin-county-mobile-testing` to new posts until the $250 leak is gone (301 to /areas already planned).

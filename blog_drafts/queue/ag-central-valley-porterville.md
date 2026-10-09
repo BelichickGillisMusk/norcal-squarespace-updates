@@ -16,7 +16,7 @@ locations:
 testing_oddity: "Harvest yards mix qualifying ag (annual) with haul and packing-house road units (semi-annual). Same dirt lot, two clocks. OBD units in that haul group go quarterly in October 2027."
 cool_thing: "Do not duplicate the harvest post. Link it. Next documented ag/haul pins: Woodland and Merced corridor pages already live. Porterville field post already live at /blog/fleets-ovi-obd-porterville-mojave."
 tags: ["CARB", "Clean Truck Check", "Agriculture", "Porterville", "Tulare", "Merced", "OBD", "OVI"]
-meta_description: "Porterville and Tulare County Clean Truck Check: qualifying ag stays annual, haul trucks stay semi-annual. Mobile OBD $75 / OVI $199. Call 916-890-4427."
+meta_description: "Porterville and Tulare County Clean Truck Check: qualifying ag stays annual, haul trucks stay semi-annual. Mobile OBD $75 / OVI $199. Call 628-999-3912."
 ---
 
 # Ag fleets in Porterville and Tulare County
@@ -46,4 +46,4 @@ Do not invent a Porterville lunch line here. The live Mojave/Porterville field p
 
 ## Book
 
-**916-890-4427** · [contact](/contact) · [services](/services) · [pricing](/pricing).
+**628-999-3912** · [contact](/contact) · [services](/services) · [pricing](/pricing).

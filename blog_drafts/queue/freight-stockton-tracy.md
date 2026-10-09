@@ -17,14 +17,14 @@ locations:
 testing_oddity: "99 / I-5 yards mix OBD and OVI on the same appointment. Confirm engine year before dispatch. CTC-VIS is the deadline, not a blog calendar."
 cool_thing: "Next San Joaquin pins already on the board: Lodi corridor and Tracy generator / tractor yards. Sister page already live at /stockton-clean-truck-check."
 tags: ["CARB", "Clean Truck Check", "Freight", "Tracy", "Stockton", "Lathrop", "Lodi", "OBD", "OVI"]
-meta_description: "Clean Truck Check Tracy CA and Stockton: mobile OBD $75 and OVI $199 at the yard. We come to Tracy, Lathrop, Lodi, and Stockton. Call 916-890-4427."
+meta_description: "Clean Truck Check Tracy CA and Stockton: mobile OBD $75 and OVI $199 at the yard. We come to Tracy, Lathrop, Lodi, and Stockton. Call 628-999-3912."
 ---
 
 # Clean Truck Check near Tracy CA and Stockton freight yards
 
 Searchers looking for **Clean Truck Check Tracy CA** or a tester near Stockton docks do not need a station run. Freight and distribution fleets on the **Highway 99 / I-5** belt — **Tracy**, **Stockton**, **Lathrop**, **Lodi**, Manteca — lose money when a tractor sits in a line. Clean Truck Check does not care about dock congestion. The test is still due twice a year for most units over 14,000 lb GVWR.
 
-NorCal CARB Mobile brings OBD and OVI to the yard. **OBD $75** · **OVI $199**. CTC-VIS upload is part of the visit. Call **916-890-4427**.
+NorCal CARB Mobile brings OBD and OVI to the yard. **OBD $75** · **OVI $199**. CTC-VIS upload is part of the visit. Call **628-999-3912**.
 
 Corridor pages: [Stockton Clean Truck Check](/stockton-clean-truck-check) · [Service areas](/areas) · [Lodi corridor](/clean-truck-check-lodi) · existing Stockton explainer [Mobile Clean Truck Check near Stockton](/clean-truck-check-blog/mobile-clean-truck-check-near-stockton-on-site-emissions-testing-for-san-joaquin-county-fleets).
 
@@ -61,6 +61,6 @@ Next documented San Joaquin pins: Lodi corridor jobs and Tracy yards already on 
 
 ## Book
 
-Call **916-890-4427**. [Contact](/contact) · [services](/services) · [pricing](/pricing).
+Call **628-999-3912**. [Contact](/contact) · [services](/services) · [pricing](/pricing).
 
 Do not publish this file until the owner replies `approve freight-stockton`.
