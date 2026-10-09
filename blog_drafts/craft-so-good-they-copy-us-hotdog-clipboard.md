@@ -12,7 +12,7 @@ locations: []
 testing_oddity: "Yard notes still look like yard notes; words get lifted anyway."
 cool_thing: "hotdog contest clipboard left on the seat — buried once in body, also in slug"
 tags: ["CARB", "Clean Truck Check", "Mobile Testing", "Craft"]
-meta_description: "When Clean Truck Check is done the right way — yard, test, paperwork — people notice. NorCal CARB Mobile comes to you. Call 916-890-4427."
+meta_description: "When Clean Truck Check is done the right way — yard, test, paperwork — people notice. NorCal CARB Mobile comes to you. Call 628-999-3912."
 featured_image: ""
 channels:
   gbp: hold
@@ -35,7 +35,7 @@ A test day still looks like a test day: VINs, keys, a spare fuse, a hotdog conte
 
 NorCal CARB Mobile is the real mobile crew: we come to you, seven days by appointment, Clean Truck Check with the paperwork done so you can get back on the road. How a visit runs: [How mobile CARB testing works](/blog/how-mobile-carb-testing-works). What we bring: [services](/services).
 
-Call nine one six, eight nine zero, four four two seven ([916-890-4427](tel:+19168904427)) · [norcalcarbmobile.com](https://norcalcarbmobile.com)
+Call six two eight, nine nine nine, three nine one two ([628-999-3912](tel:+16289993912)) · [norcalcarbmobile.com](https://norcalcarbmobile.com)
 
 Manager  
 NorCal CARB Mobile

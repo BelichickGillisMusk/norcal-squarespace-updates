@@ -18,7 +18,7 @@ locations:
 testing_oddity: "Two clocks on one yard. A qualifying agricultural vehicle can stay annual. The truck that hauls the crop to the first point of processing is usually still semi-annual. Confirm the unit in CTC-VIS before anyone assumes harvest season is an exemption."
 cool_thing: "Article URL still 404 as of 2026-09-10 14:10 PT. This file is the missing body. No invented diner."
 tags: ["CARB", "Clean Truck Check", "Agriculture", "Harvest", "Woodland", "Merced", "Stockton", "Porterville", "OBD", "OVI"]
-meta_description: "Harvest season Clean Truck Check: qualifying ag stays annual, not exempt. Haul trucks stay twice a year. Mobile OBD $75 / OVI $199 in Woodland, Merced, Stockton. Call 916-890-4427."
+meta_description: "Harvest season Clean Truck Check: qualifying ag stays annual, not exempt. Haul trucks stay twice a year. Mobile OBD $75 / OVI $199 in Woodland, Merced, Stockton. Call 628-999-3912."
 ---
 
 # Harvest season Clean Truck Check: ag can stay annual. Haul trucks cannot
@@ -31,7 +31,7 @@ Annual is not exempt. Semi-annual is not optional. The source of truth for each 
 
 NorCal CARB Mobile tests at the farm, packing shed, or staging lot in **Woodland**, **Merced**, **Stockton**, and **Porterville** when the fleet asks. Public rate card: **OBD $75** · **OVI $199**. Motorhome path if the unit is actually an RV: **OBD $99** · **OVI $229**.
 
-Book: **916-890-4427** or [contact](/contact).
+Book: **628-999-3912** or [contact](/contact).
 
 ## Related pages (same corridor / same rule)
 
@@ -84,6 +84,6 @@ The article URL `/blog/harvest-season-clean-truck-check-ag-haul` still 404s as o
 
 ## Book
 
-Call **916-890-4427**. Request a callback at [contact](/contact). Service menu: [services](/services) · [pricing](/pricing) · [areas](/areas).
+Call **628-999-3912**. Request a callback at [contact](/contact). Service menu: [services](/services) · [pricing](/pricing) · [areas](/areas).
 
 Do not publish this file until the owner replies `approve harvest-ag-haul`.

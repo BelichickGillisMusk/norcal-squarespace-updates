@@ -16,7 +16,7 @@ Technical. No live HTML. Owner gate unchanged. Calendar token still dead on this
 - Beginning October 2027: OBD-equipped = 4 tests/year. Opacity path stays semi-annual. Ag + those MH stay annual.
 - Passing tests may be submitted up to 90 days before the CTC-VIS deadline.
 - Deadline source = CTC-VIS, not a blog calendar.
-- Public card: OBD $75 · OVI $199 · MH $99/$229 · phone 916-890-4427 only.
+- Public card: OBD $75 · OVI $199 · MH $99/$229 · phone 628-999-3912 only.
 
 ## Unpublished inventory (`owner_approved: NO`)
 

@@ -55,7 +55,7 @@ Live page that is now stale: `/blog/carb-clean-truck-check` still says "at least
 
 ## Price lock vs leaks
 
-Lock: **OBD $75 · OVI $199 · MH $99 / $229 · 916-890-4427 · /contact**
+Lock: **OBD $75 · OVI $199 · MH $99 / $229 · 628-999-3912 · /contact**
 
 Safe to link: `/stockton-clean-truck-check` now prints the lock.
 

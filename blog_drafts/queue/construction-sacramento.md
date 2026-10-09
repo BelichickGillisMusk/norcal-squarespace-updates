@@ -16,14 +16,14 @@ locations:
 testing_oddity: "Same-visit mix of mixer/dump/F550 units. Two $75 OBD on one construction account is normal. Friday DMV-tied windows are the usual crunch, not a shop line."
 cool_thing: "Completed construction pin: All Fence, 1900 Spring St, Redwood City, Sat 9/5 8:30a, 7 OBD. Sacramento-side follow-up sits at American Buildings J&S, 3250 51st Ave."
 tags: ["CARB", "Clean Truck Check", "Construction", "Sacramento", "OBD", "OVI", "Rancho Cordova"]
-meta_description: "Mobile Clean Truck Check for Sacramento construction fleets. OBD $75 and OVI $199 at the yard in Sacramento, Rancho Cordova, Granite Bay, and Lincoln. Call 916-890-4427."
+meta_description: "Mobile Clean Truck Check for Sacramento construction fleets. OBD $75 and OVI $199 at the yard in Sacramento, Rancho Cordova, Granite Bay, and Lincoln. Call 628-999-3912."
 ---
 
 # Construction fleets in Sacramento — yard OBD and OVI
 
 Construction yards in **Sacramento**, **Rancho Cordova**, **Granite Bay**, and **Lincoln** cannot burn a crew-day driving mixers and F550s to a station. Clean Truck Check is still required on those units. NorCal CARB Mobile tests at the yard or the staging lot.
 
-Public rate card: **OBD $75** · **OVI $199**. Multi-truck same visit is quoted on the call. Book: [contact](/contact) or 916-890-4427.
+Public rate card: **OBD $75** · **OVI $199**. Multi-truck same visit is quoted on the call. Book: [contact](/contact) or 628-999-3912.
 
 Related pages: [Sacramento CARB testing](/sacramento-carb-testing) · [Sacramento Valley & foothills](/sacramento-valley-foothills-carb-testing) · [areas](/areas) · [OBD vs OVI](/blog/obd-vs-ovi-clean-truck-check-fleets) · [Stockton construction sister post](/blog/stockton-construction-concrete-clean-truck-check).
 
@@ -60,6 +60,6 @@ No invented lunch stop. If you want the meal line in this post, reply with the r
 
 ## Book
 
-Call **916-890-4427**. Request a callback at [contact](/contact). Service menu: [services](/services) · [pricing](/pricing).
+Call **628-999-3912**. Request a callback at [contact](/contact). Service menu: [services](/services) · [pricing](/pricing).
 
 Do not publish this file until the owner replies `approve construction-sacramento`.

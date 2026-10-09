@@ -107,7 +107,7 @@ export async function onRequestPost(context) {
 
   const apiKey = env.RESEND_API_KEY;
   if (!apiKey) {
-    return respond(request, false, 'Form email isn’t configured yet — please call (916) 890-4427.', 503);
+    return respond(request, false, 'Form email isn’t configured yet — please call (628) 999-3912.', 503);
   }
 
   const lead = {
@@ -156,10 +156,10 @@ export async function onRequestPost(context) {
       body: JSON.stringify(payload),
     });
     if (!r.ok) {
-      return respond(request, false, 'We couldn’t send that — please call (916) 890-4427.', 502);
+      return respond(request, false, 'We couldn’t send that — please call (628) 999-3912.', 502);
     }
   } catch {
-    return respond(request, false, 'Network error — please call (916) 890-4427.', 502);
+    return respond(request, false, 'Network error — please call (628) 999-3912.', 502);
   }
 
   return respond(request, true);

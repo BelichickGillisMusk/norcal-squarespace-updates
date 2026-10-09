@@ -58,7 +58,7 @@ Editorial calendar card today (“How to Read Your CARB Clean Truck Check Pass/F
 
 ## Price / NAP lock
 
-**OBD $75 · OVI $199 · MH $99 / $229 · 916-890-4427 · sales@norcalcarbmobile.com · /contact**
+**OBD $75 · OVI $199 · MH $99 / $229 · 628-999-3912 · sales@norcalcarbmobile.com · /contact**
 
 Full Care landers: **+$40 / year**. Do not print $80 or $250.
 

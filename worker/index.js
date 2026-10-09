@@ -67,7 +67,7 @@ function schemaTag(pageUrl) {
         legalName: 'NorCal CARB Mobile LLC',
         alternateName: 'NorCal CARB Mobile',
         url: 'https://norcalcarbmobile.com/',
-        telephone: '+1-916-890-4427',
+        telephone: '+1-628-999-3912',
         email: 'sales@norcalcarbmobile.com',
         image: LOGO_URL,
         logo: { '@type': 'ImageObject', url: LOGO_URL },
@@ -351,7 +351,7 @@ async function handleContact(request, env) {
   try {
     data = await readBody(request);
   } catch {
-    return respond(request, false, 'Please try again, or call us at (916) 890-4427.', 400);
+    return respond(request, false, 'Please try again, or call us at (628) 999-3912.', 400);
   }
 
   // Honeypot — bots fill "company"; humans never see it.
@@ -367,7 +367,7 @@ async function handleContact(request, env) {
   }
 
   const apiKey = env.RESEND_API_KEY;
-  if (!apiKey) return respond(request, false, 'Please call us directly at (916) 890-4427 to book your test.', 503);
+  if (!apiKey) return respond(request, false, 'Please call us directly at (628) 999-3912 to book your test.', 503);
 
   const lead = {
     name,
@@ -414,9 +414,9 @@ async function handleContact(request, env) {
       headers: { Authorization: `Bearer ${apiKey}`, 'content-type': 'application/json' },
       body: JSON.stringify(payload),
     });
-    if (!r.ok) return respond(request, false, 'We couldn’t send that — please call (916) 890-4427.', 502);
+    if (!r.ok) return respond(request, false, 'We couldn’t send that — please call (628) 999-3912.', 502);
   } catch {
-    return respond(request, false, 'We couldn’t send that — please call (916) 890-4427.', 502);
+    return respond(request, false, 'We couldn’t send that — please call (628) 999-3912.', 502);
   }
 
   return respond(request, true);

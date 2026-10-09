@@ -31,6 +31,6 @@ Where the tester ate, a roadside find, **or** the next pin already queued. Keep 
 
 - OBD: **$75** · OVI: **$199** · Motorhome OBD: **$99** · Motorhome OVI: **$229**
 
-[Book / callback](/contact) · [(916) 890-4427](tel:+19168904427)
+[Book / callback](/contact) · [(628) 999-3912](tel:+16289993912)
 
 <!-- Rules: docs/blog-location-seo.md — industry + location + oddity + cool thing; no personal names -->

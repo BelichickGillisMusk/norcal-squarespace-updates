@@ -37,7 +37,7 @@ We test at the farm, packing shed, or staging lot in Woodland, Merced, Stockton,
 
 OBD $75 · OVI $199 · we come to the yard.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 ```
 
 ---
@@ -53,7 +53,7 @@ Qualifying agricultural vehicles stay on an annual Clean Truck Check cycle. The 
 
 Mobile OBD $75 · OVI $199 at the farm or shed in Woodland, Merced, Stockton, Porterville.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 ```
 
 After live: add `norcalcarbmobile.com/blog/harvest-season-clean-truck-check-ag-haul`
@@ -63,7 +63,7 @@ After live: add `norcalcarbmobile.com/blog/harvest-season-clean-truck-check-ag-h
 ## 3) X / other
 
 ```
-Harvest CTC: ag can stay annual. Haul trucks cannot. Mobile OBD $75 · OVI $199 at the yard. Woodland / Merced / Stockton. 916-890-4427 norcalcarbmobile.com/contact
+Harvest CTC: ag can stay annual. Haul trucks cannot. Mobile OBD $75 · OVI $199 at the yard. Woodland / Merced / Stockton. 628-999-3912 norcalcarbmobile.com/contact
 ```
 
 ---
@@ -71,5 +71,5 @@ Harvest CTC: ag can stay annual. Haul trucks cannot. Mobile OBD $75 · OVI $199 
 ## 4) Retest SMS (calendar description + Night Watch)
 
 ```
-Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 916-890-4427
+Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 628-999-3912
 ```

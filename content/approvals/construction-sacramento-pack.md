@@ -33,7 +33,7 @@ Sacramento construction yards — Clean Truck Check at the mixer, not at a stati
 
 OBD $75. OVI $199. Sacramento, Rancho Cordova, Granite Bay, Lincoln. Saturday when the crew starts early.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 ```
 
 ---
@@ -47,7 +47,7 @@ Sacramento construction fleets — yard OBD and OVI so the mixer does not sit in
 
 Most work trucks still test twice in 2026. We come to Sacramento, Rancho Cordova, Granite Bay, and Lincoln.
 
-OBD $75 · OVI $199 · 916-890-4427
+OBD $75 · OVI $199 · 628-999-3912
 
 norcalcarbmobile.com/contact
 ```
@@ -59,7 +59,7 @@ After live: add `norcalcarbmobile.com/blog/construction-sacramento-yard-carb`
 ## 3) X / other
 
 ```
-Sacramento / Rancho Cordova construction: Clean Truck Check still 2x in 2026. Mobile OBD $75 · OVI $199 at the yard. 916-890-4427 norcalcarbmobile.com/contact
+Sacramento / Rancho Cordova construction: Clean Truck Check still 2x in 2026. Mobile OBD $75 · OVI $199 at the yard. 628-999-3912 norcalcarbmobile.com/contact
 ```
 
 ---
@@ -67,5 +67,5 @@ Sacramento / Rancho Cordova construction: Clean Truck Check still 2x in 2026. Mo
 ## 4) Retest SMS
 
 ```
-Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 916-890-4427
+Hi — Bryan, NorCal CARB Mobile. Ready for next Clean Truck Check? OBD $75 · OVI $199 · we come to your yard. Reply or call 628-999-3912
 ```

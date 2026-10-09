@@ -30,7 +30,7 @@ https://ww2.arb.ca.gov/clean-truck-check-emissions-compliance-testing-requiremen
 - Passing results up to 90 days before CTC-VIS deadline.
 - Deadline = CTC-VIS. What parks the truck = CA DMV registration hold.
 
-Public card lock: OBD $75 · OVI $199 · MH $99 / $229 · 916-890-4427 only.
+Public card lock: OBD $75 · OVI $199 · MH $99 / $229 · 628-999-3912 only.
 Full Care $40 vs $80 still unresolved. Do not print a third number.
 
 ## Unpublished queue — still `owner_approved: NO`

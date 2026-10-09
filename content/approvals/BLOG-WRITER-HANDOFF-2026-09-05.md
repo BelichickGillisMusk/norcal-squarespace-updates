@@ -26,7 +26,7 @@ Mar 31 CRM stub “Blog #1 Concrete/Construction + Stockton satellite” is draf
 - Now through Sep 2027: most HD = 2 tests/year. Qualifying ag + qualifying CA rec/emergency MH = 1/year.
 - Beginning Oct 2027: OBD-equipped = 4/year. Opacity path stays semi-annual. Ag + those MH stay annual.
 - 90-day early submit stands. Deadline source = CTC-VIS.
-- Public card: OBD $75 · OVI $199 · MH $99/$229 · phone 916-890-4427 only.
+- Public card: OBD $75 · OVI $199 · MH $99/$229 · phone 628-999-3912 only.
 
 ## Price / NAP leaks still live (fix before or with first publish)
 

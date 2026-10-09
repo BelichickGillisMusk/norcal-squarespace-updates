@@ -20,7 +20,7 @@ locations:
 testing_oddity: "Two clocks on one yard. The same tractor can be annual in October and semi-annual in March if what it hauls, or where it hauls it, changes."
 cool_thing: "CARB's first-point-of-processing list names nut hullers, cotton gins, packinghouses and dehydrators. That's harvest country in one sentence."
 tags: ["CARB", "Clean Truck Check", "Agriculture", "Harvest", "Woodland", "Merced", "Stockton", "Lodi", "OBD", "OVI"]
-meta_description: "Harvest season Clean Truck Check: which farm trucks stay annual under CARB's ag rule, and which go semi-annual. Mobile OBD $75 and OVI $199. 916-890-4427."
+meta_description: "Harvest season Clean Truck Check: which farm trucks stay annual under CARB's ag rule, and which go semi-annual. Mobile OBD $75 and OVI $199. 628-999-3912."
 live_url: "https://norcalcarbmobile.com/blog/harvest-season-clean-truck-check"
 ---
 
@@ -97,4 +97,4 @@ Our credentialed tester submits the result to CARB for you. CARB's rules say the
 - Switch & Save (switching from another tester): second test or second truck at half price ($37.50 OBD / $99.50 OVI)
 - Fleets and full yards: call for a yard quote
 
-Call [916-890-4427](tel:+19168904427) to book your harvest yard visit, or use our [contact page](https://norcalcarbmobile.com/contact).
+Call [628-999-3912](tel:+16289993912) to book your harvest yard visit, or use our [contact page](https://norcalcarbmobile.com/contact).

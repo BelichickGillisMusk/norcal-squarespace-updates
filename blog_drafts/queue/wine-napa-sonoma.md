@@ -16,7 +16,7 @@ locations:
 testing_oddity: "Same morning in St. Helena ran a commercial truck OBD and a motorhome. Truck stays on the 17-week / semi-annual clock. Qualifying CA motorhome stays on a ~300-day / annual clock. Do not put both on the same recurrence."
 cool_thing: "Next wine-country pin is the Napa–Sonoma route page, not a daily loop. St. Helena is the documented stop. Existing explainer: CARB Compliance in Napa Valley."
 tags: ["CARB", "Clean Truck Check", "Napa", "Sonoma", "St. Helena", "Wine", "OBD", "OVI", "Motorhome"]
-meta_description: "Mobile Clean Truck Check for Napa and Sonoma support fleets. St. Helena truck and motorhome same visit, different clocks. OBD $75 / OVI $199. Call 916-890-4427."
+meta_description: "Mobile Clean Truck Check for Napa and Sonoma support fleets. St. Helena truck and motorhome same visit, different clocks. OBD $75 / OVI $199. Call 628-999-3912."
 ---
 
 # Wine-country support fleets — Napa and Sonoma
@@ -44,4 +44,4 @@ St. Helena is the documented stop. Next wine-country visit is scheduled when the
 
 ## Book
 
-**916-890-4427** · [contact](/contact) · [services](/services).
+**628-999-3912** · [contact](/contact) · [services](/services).

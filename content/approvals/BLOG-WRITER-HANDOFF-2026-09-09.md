@@ -16,7 +16,7 @@ If data disagrees, we all learn.
 ## Live vs unpublished (verified this morning)
 
 LIVE — do not rewrite / do not republish:
-- `/blog/harvest-season-clean-truck-check-ag-haul` — live 200, published Aug 29 2026. Prices $75/$199. Phone 916-890-4427. No 2025 stale language.
+- `/blog/harvest-season-clean-truck-check-ag-haul` — live 200, published Aug 29 2026. Prices $75/$199. Phone 628-999-3912. No 2025 stale language.
 - `/blog/fleets-ovi-obd-porterville-mojave`
 - `/blog/obd-vs-ovi-clean-truck-check-fleets`
 - `/blog/how-mobile-carb-testing-works`
@@ -54,7 +54,7 @@ Ops +17w calendar ≠ CARB rule. Do not print +17w in public posts as the legal 
 
 ## Price / NAP lock vs leaks
 
-Lock: **OBD $75 · OVI $199 · MH $99 / $229 · 916-890-4427 · /contact**
+Lock: **OBD $75 · OVI $199 · MH $99 / $229 · 628-999-3912 · /contact**
 
 Safe to deep-link: `/stockton-clean-truck-check`, `/sacramento-carb-testing`, `/blog/obd-vs-ovi-clean-truck-check-fleets`, harvest post, Mitchell Concrete, Castillo, Plaster F550, All Good Pallets, Banwait.
 
@@ -102,7 +102,7 @@ Construction and concrete fleets in Stockton, Lodi, Tracy, Lathrop, and Manteca 
 
 Clean Truck Check is still twice a year in 2026 for most work trucks. OBD $75. OVI $199. We come to the staging lot.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 ```
 
 Facebook:
@@ -113,13 +113,13 @@ A mixer in a station line is a missed pour. Most construction units over 14,000 
 
 OBD $75 · OVI $199 · we come to your yard.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 ```
 After live: append `norcalcarbmobile.com/blog/stockton-construction-concrete-clean-truck-check`
 
 X:
 ```
-Stockton / Lodi / Tracy construction fleets: Clean Truck Check is still 2x in 2026. Mobile OBD $75 · OVI $199 at the yard. 916-890-4427 norcalcarbmobile.com/contact
+Stockton / Lodi / Tracy construction fleets: Clean Truck Check is still 2x in 2026. Mobile OBD $75 · OVI $199 at the yard. 628-999-3912 norcalcarbmobile.com/contact
 ```
 
 ## Owner clicks that ship content

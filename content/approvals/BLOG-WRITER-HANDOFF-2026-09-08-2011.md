@@ -62,7 +62,7 @@ Patch after owner says go (do not invent Full Care $):
 
 ## Price lock vs leaks
 
-Lock: OBD $75 · OVI $199 · MH $99 / $229 · 916-890-4427 · /contact
+Lock: OBD $75 · OVI $199 · MH $99 / $229 · 628-999-3912 · /contact
 
 Safe to link: `/stockton-clean-truck-check` · `/sacramento-carb-testing` · `/areas` · `/services` · `/pricing` · `/contact` · live `/blog/*` listed above · published `/clean-truck-check-blog/*` stories (Mitchell Concrete, Castillo, Plaster F550, All Good Pallets, Banwait).
 
@@ -105,7 +105,7 @@ Construction and concrete fleets in Stockton, Lodi, Tracy, Lathrop, and Manteca 
 
 Clean Truck Check is still twice a year in 2026 for most work trucks. OBD $75. OVI $199. We come to the staging lot.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 ```
 
 ### Ready-to-paste (Sacramento, after approve)
@@ -115,7 +115,7 @@ Sacramento construction yards — Clean Truck Check at the mixer, not at a stati
 
 OBD $75. OVI $199. Sacramento, Rancho Cordova, Granite Bay, Lincoln. Saturday when the crew starts early.
 
-Book: norcalcarbmobile.com/contact · (916) 890-4427
+Book: norcalcarbmobile.com/contact · (628) 999-3912
 ```
 
 ## Calendar / contacts note for Grok + Seal
