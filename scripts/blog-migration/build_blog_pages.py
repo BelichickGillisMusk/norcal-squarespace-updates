@@ -42,8 +42,8 @@ LASTMOD = "2026-07-07"
 LEGACY_FALLBACKS = {
     "i-thought-it-was-ending": "/blog",
     "how-much-does-a-diesel-truck-obd-test-cost-complete-guide-to-carb-emissions-testing-prices-in-california": "/pricing",
-    "smoke-opacity-test-oakland-j1667-certified-mobile-testing-for-east-bay-diesel-trucks": "/blog/oakland-clean-truck-checks-san-leandro",
-    "how-to-avoid-carb-fines": "/blog/carb-violation",
+    "smoke-opacity-test-oakland-j1667-certified-mobile-testing-for-east-bay-diesel-trucks": "/clean-truck-check-blog/oakland-clean-truck-checks-san-leandro",
+    "how-to-avoid-carb-fines": "/clean-truck-check-blog/carb-violation",
     "fleet-c-arb-clean-truck-check-sacramento": "/sacramento-carb-testing",
     "what-is-clean-truck-test-fairfield": "/stockton-clean-truck-check",
 }

@@ -258,6 +258,45 @@ const REDIRECTS = {
   '/agricultural-vehicles-clean-truck-check.html': '/services#agricultural',
   '/book': '/contact',
   '/booking': '/contact',
+  // Old Squarespace sitemap URLs still 404ing (Ally audit 2026-10-11).
+  // Each target is an existing 200 page. Tag archives → /areas.
+  '/home': '/',
+  '/privacy-policy': '/testing-terms',
+  '/terms-and-conditions': '/testing-terms',
+  '/thank-you': '/contact',
+  '/clean-truck-check-sacramento': '/sacramento-carb-testing',
+  '/faqs-clean-truck-check-mobile-sacramento': '/faq',
+  '/stockton-modesto-merced-turlock-clean-truck-check': '/carb-test-stockton',
+  '/service-locations/carb-compliance-guide-for-truckers-in-merced-county-navigating-clean-truck-regulations': '/clean-truck-check-blog/carb-compliance-guide-for-truckers-in-merced-county-navigating-clean-truck-regulations',
+  '/service-locations/carb-j1667-opacity-test-antioch-mobile-clean-truck-check': '/clean-truck-check-blog/carb-j1667-opacity-test-antioch-mobile-clean-truck-check',
+  '/service-locations/four-counties-six-stops-one-day-keeping-california-fleets-carb-clean-truck': '/clean-truck-check-blog/four-counties-six-stops-one-day-keeping-california-fleets-carb-clean-truck',
+  '/service-locations/how-norcal-carb-mobile-keeps-mitchell-concrete-moving-strong-in-rancho-cordova': '/clean-truck-check-blog/how-norcal-carb-mobile-keeps-mitchell-concrete-moving-strong-in-rancho-cordova',
+  '/service-locations/keeping-pallets-moving-amp-trucks-carb-clean-a-partnership-with-all-good-pallets-stockton-ca': '/clean-truck-check-blog/keeping-pallets-moving-amp-trucks-carb-clean-a-partnership-with-all-good-pallets-stockton-ca',
+  '/service-locations/keeping-republic-electric-wests-fleet-road-ready-how-norcal-carb-mobile-delivers-247-clean-truck-check-excellence': '/clean-truck-check-blog/keeping-republic-electric-wests-fleet-road-ready-how-norcal-carb-mobile-delivers-247-clean-truck-check-excellence',
+  '/service-locations/keeping-sm-transport-rolling-how-norcal-carb-mobile-powers-on-time-deliveries': '/clean-truck-check-blog/keeping-sm-transport-rolling-how-norcal-carb-mobile-powers-on-time-deliveries',
+  '/service-locations/mobile-clean-truck-checks-in-brentwood-and-beyond': '/clean-truck-check-blog/mobile-clean-truck-checks-in-brentwood-and-beyond',
+  '/service-locations/motorhome-carb-testing-in-california-your-complete-guide': '/clean-truck-check-blog/motorhome-carb-testing-in-california-your-complete-guide',
+  '/service-locations/napa-carb-clean-truck': '/clean-truck-check-blog/napa-carb-clean-truck',
+  '/service-locations/on-the-road-opacity-testing-amp-visual-inspections-across-northern-californias-major-corridors': '/clean-truck-check-blog/on-the-road-opacity-testing-amp-visual-inspections-across-northern-californias-major-corridors',
+  '/service-locations/when-friday-deadline-pressure-hits-how-norcal-carb-mobile-kept-the-plaster-groups-f550-fleet-compliant': '/clean-truck-check-blog/when-friday-deadline-pressure-hits-how-norcal-carb-mobile-kept-the-plaster-groups-f550-fleet-compliant',
+  '/service-locations/woodland-agriculture-meets-carb-compliance': '/clean-truck-check-blog/woodland-agriculture-meets-carb-compliance',
+  '/service-locations/tag/CARB+Compliance+Clean+Truck+Program+Stockton+Business+Fleet+Service+California+Trucking+Emissions+Testing+Mobile+Truck+Service+All+Good+Pallets+Bay+Area+Logistics+Sustainable+Trucking': '/areas',
+  '/service-locations/tag/CARB+Testing+Motorhome+Services+RV+Compliance+Diesel+Emissions+California+Regulations+Mobile+Testing+RV+Maintenance+Emissions+Standards': '/areas',
+  '/service-locations/tag/CARB+Compliance+Napa+Valley+Mobile+Testing+Fleet+Management+Wine+Country+Napa+Businesses+Commercial+Vehicles+Napa+County+On-Site+Service+Winery+Services': '/areas',
+  '/service-locations/tag/CARB+Compliance+Clean+Truck+Program+Stockton+Business+Petaluma+Business+San+Francisco+Business+Rancho+Cordova+Business+Delta+Charter+Bus+Seddon+Construction+I-Drill+Engineering+Sierra+Asphalt+Fleet+Service+Emissions+Testing+Sustainable+Trucking+Mobile+Truck+Service': '/areas',
+  '/service-locations/tag/CARB+compliance+services++California+emissions+testing++mobile+diesel+diagnostics++construction+fleet+maintenance++Mitchell+Concrete+partnership++CARB+retrofit+solutions++Sacramento+mobile+emissions+testing++on-site+engine+diagnostics++fleet+regulatory+compliance++construction+equipment+CARB+compliance': '/areas',
+  '/service-locations/tag/CARB+testing+Sacramento+fleet+CARB+testing+California+Sacramento+County+truck+testing+F550+diesel+testing+construction+fleet+compliance+The+Plaster+Group+Sacramento+commercial+testing+Northern+California+fleet+services+mobile+emissions+testing+Friday+deadline+compliance+fleet+testing+Sacramento+J1667+smoke+testing+Sacramento+OBD+fleet+testing+construction+truck+inspection+same+day+fleet+CARB+test+contractor+fleet+compliance': '/areas',
+  '/service-locations/tag/Clean+Truck+Check++CARB+compliance++Brentwood+CA+businesses++Mobile+emissions+testing++Fleet+compliance+services++Contra+Costa+truck+inspections++JC+Tree+Service++NorCal+CARB+Mobile++On-site+truck+testing++California+emissions+standards': '/areas',
+  '/service-locations/tag/Merced+County+Diesel+Emissions+Truck+Fleet+Management+San+Joaquin+Valley+Clean+Air+Regulations+Agricultural+Vehicles+Truck+Modernization': '/areas',
+  '/service-locations/tag/carb+testing+sacramento+motorhome+carb+test+northern+california+rv+emissions+testing+i-80+corridor+mobile+diesel+testing+service+california+motorhome+inspection+carb+compliance+motorhome+diesel+rv+testing+service+motorhome+smoke+test+california+rv+carb+testing+near+me+mobile+motorhome+emissions': '/areas',
+  '/service-locations/tag/carb-testing-woodland+mobile-carb-testing+diesel-emissions-testing+carb-compliance-service+norcal-carb-mobile+emissions-inspection+carb-certification': '/areas',
+  '/service-locations/tag/Sacramento+County+CARB+Regulations+Fleet+Testing+Emissions+Compliance+Commercial+Trucking+Vehicle+Inspections+Clean+Air+Initiatives': '/areas',
+  '/service-locations/tag/motorhome+carb+testing+california+rv+emissions+testing+diesel+motorhome+testing+mobile+carb+testing+rv+smoke+opacity+testing+northern+california+carb+testing+motorhome+emissions+compliance+california+diesel+rv+testing+mobile+emissions+testing+service': '/areas',
+  '/service-locations/tag/farm-carb-testing+agricultural-compliance+tractor-emissions-testing+farm-equipment-carb+harvest-season-testing+irrigation-pump-carb+dairy-farm-compliance+vineyard-equipment-testing+organic-farm-carb+livestock-operation-carb': '/areas',
+  '/service-locations/tag/opacity+testing+diesel+emissions+CARB+compliance+mobile+testing+service+visual+inspections+fleet+maintenance+I-5+corridor+I-80+corridor+Northern+California+Sacramento+Bay+Area+diesel+particulate+filter+emissions+testing+commercial+vehicles+heavy-duty+diesel': '/areas',
+  '/service-locations/tag/sacramento+carb+testing+northern+california+emissions+i-80+corridor+testing+i-5+motorhome+testing+highway+99+rv+service+bay+area+motorhome+testing+central+valley+carb+testing+davis+motorhome+testing+stockton+rv+emissions+modesto+carb+testing': '/areas',
+  '/service-locations/tag/tractor-carb-inspection+harvester-emissions+diesel-truck-testing+farm-machinery-carb+irrigation-equipment+agricultural-vehicles+heavy-equipment-carb+fleet-carb-testing': '/areas',
+  '/service-locations/tag/woodland-california+yolo-county-services+central-valley-carb+northern-california+sacramento-valley+woodland-ca-business+local-carb-testing': '/areas',
 };
 
 /**
@@ -272,7 +311,7 @@ const REDIRECTS = {
  *  - unrecoverable/unknown slugs        → closest equivalent page, else /blog
  */
 function legacyBlogTarget(pathname) {
-  const path = pathname.replace(/\/+$/, '');
+  const path = pathname.replace(/\/+$/, '').replace(/\.html$/i, '');
   if (path.startsWith('/blog/')) {
     const slug = path.slice('/blog/'.length);
     return LEGACY_BLOG_SLUGS.has(slug) ? `/clean-truck-check-blog/${slug}` : null;
@@ -286,6 +325,55 @@ function legacyBlogTarget(pathname) {
     return path === canonical ? null : canonical;
   }
   return '/blog';
+}
+
+/**
+ * Old Squarespace service-locations collection. Posts that were migrated live
+ * at /clean-truck-check-blog/<slug>. Tag archives go to the areas hub.
+ */
+function serviceLocationsTarget(pathname) {
+  const path = pathname.replace(/\/+$/, '').replace(/\.html$/i, '');
+  if (path.startsWith('/service-locations/tag/')) return '/areas';
+  if (!path.startsWith('/service-locations/')) return null;
+  const slug = path.slice('/service-locations/'.length);
+  if (slug && !slug.includes('/') && LEGACY_BLOG_SLUGS.has(slug)) {
+    return `/clean-truck-check-blog/${slug}`;
+  }
+  return null;
+}
+
+/** Canonical path: no trailing slash (except "/"), no .html, no /index.html. */
+function canonicalPath(pathname) {
+  if (pathname === '/') return '/';
+  let p = pathname.replace(/\/+$/, '') || '/';
+  if (/\/index\.html$/i.test(p)) p = p.replace(/\/index\.html$/i, '') || '/';
+  else if (/\.html$/i.test(p)) p = p.replace(/\.html$/i, '') || '/';
+  return p;
+}
+
+/**
+ * One 301 target, or null to serve the asset.
+ * Checked on the raw path, the path minus one trailing slash, and the
+ * canonical path, before ASSETS.fetch — so .html and trailing-slash variants
+ * are 301s, not the 307 from html_handling=auto-trailing-slash.
+ */
+function resolveRedirect(pathname, search = '') {
+  const clean = canonicalPath(pathname);
+  const target =
+    REDIRECTS[pathname] ||
+    REDIRECTS[pathname.replace(/\/$/, '')] ||
+    REDIRECTS[clean] ||
+    legacyBlogTarget(clean) ||
+    serviceLocationsTarget(clean);
+  if (target && target !== pathname) return target;
+  if (clean !== pathname) return clean + (search || '');
+  return null;
+}
+
+function notFound(res) {
+  const headers = new Headers(res.headers);
+  headers.set('X-Robots-Tag', 'noindex');
+  return new Response(res.body, { status: 404, statusText: 'Not Found', headers });
 }
 
 const HTML_ESC = { '<': '<', '>': '>', '&': '&' };
@@ -442,23 +530,28 @@ export default {
       if (request.method === 'POST') return handleContact(request, env);
       return new Response('Method Not Allowed', { status: 405, headers: { Allow: 'POST' } });
     }
-    // Check for old Squarespace URL redirects
-    const redirect =
-      legacyBlogTarget(url.pathname) ||
-      REDIRECTS[url.pathname] ||
-      REDIRECTS[url.pathname.replace(/\/$/, '')];
-    if (redirect) {
-      return new Response(null, {
-        status: 301,
-        headers: { 'Location': redirect, 'Cache-Control': 'public, max-age=86400' },
-      });
+    // Old Squarespace URLs, legacy blog paths, and canonical-path normalization
+    // (.html, /index.html, trailing slash). All 301s, one hop, before assets.
+    // /api/* is left alone so the contact handler and any future API routes
+    // are not rewritten into a redirect.
+    if (!url.pathname.startsWith('/api/')) {
+      const redirect = resolveRedirect(url.pathname, url.search);
+      if (redirect) {
+        return new Response(null, {
+          status: 301,
+          headers: { 'Location': redirect, 'Cache-Control': 'public, max-age=86400' },
+        });
+      }
     }
 
-    // Everything else → static assets; inject branding, schema, and CF Web Analytics
+    // Everything else → static assets; inject branding, schema, and CF Web Analytics.
+    // /404 is a real file, so html_handling would answer it with 200. Force 404.
+    // Unknown paths already come back as 404 via not_found_handling=404-page.
     const assetRes = await env.ASSETS.fetch(request);
     const ct = assetRes.headers.get('content-type') || '';
-    if (!ct.includes('text/html')) return assetRes;
-    return new HTMLRewriter()
+    const force404 = canonicalPath(url.pathname) === '/404' || assetRes.status === 404;
+    if (!ct.includes('text/html')) return force404 ? notFound(assetRes) : assetRes;
+    const page = new HTMLRewriter()
       .on('head', {
         element(el) {
           el.append(BRANDING_TAGS, { html: true });
@@ -471,5 +564,6 @@ export default {
         },
       })
       .transform(assetRes);
+    return force404 ? notFound(page) : page;
   },
 };
