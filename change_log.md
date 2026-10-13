@@ -4,6 +4,18 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-10-12 — Motorhome dog-show blog (publish Thu 2026-10-15 9:00 AM PT, PR only)
+
+Draft PR for `/blog/motorhome-clean-truck-check-dog-show-travel-diesels`. **Do not merge.** Merging deploys live. Scheduled for Thursday 2026-10-15, 9:00 AM PT. Do not `wrangler deploy`.
+
+- Post `site/blog/motorhome-clean-truck-check-dog-show-travel-diesels.html`. Article JSON-LD author Vin CA Diesel, publisher NorCal CARB Mobile, telephone `+1-628-999-3912`, `datePublished` 2026-10-15. Motorhome OBD $99 · OVI $229. Phone 628-999-3912 only.
+- Hero `site/assets/img/empty-motorhome-parked.jpg` (empty motorhome, no people). Source: muffinn, Wikimedia Commons / Flickr, CC BY 2.0.
+- Portal: `site/blog.html` and `site/blog/index.html` (card above Construction; same quick list; article count 66 → 67). Sitemap lastmod for `/blog` and this post is 2026-10-15.
+- `norcalgrc.org` club event link kept, with the ShowDogCentral listing beside it.
+- Source draft `blog_drafts/motorhome-clean-truck-check-dog-show-travel-diesels.md`, `publish_date: 2026-10-15`, status scheduled.
+
+---
+
 ## 2026-10-06 — Restore six 10/4 landers (PR only)
 
 Jennifer (SEO): Harvest #113 and Construction #114 Workers Builds dropped six landing pages that were live 2026-10-04. Three corridor pages lived only as Worker injection; the repo deploy 404'd them, and Hayward still 301'd to `/areas#hayward`. **PR only — do not merge. Do not wrangler.** Workers Builds on the production branch after merge.
