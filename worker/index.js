@@ -195,7 +195,9 @@ const REDIRECTS = {
   '/clean-truck-check-fresno': '/areas#central-valley',
   // Hayward now has its own full corridor page at /clean-truck-check-hayward
   // '/clean-truck-check-hayward': '/areas#hayward',
-  '/clean-truck-check-fairfield': '/areas#fairfield',
+  // Fairfield now has its own full corridor page at /areas-fairfield
+  '/clean-truck-check-fairfield': '/areas-fairfield',
+  '/clean-truck-check-fairfield/': '/areas-fairfield',
   '/service-area-butte-county-clean-truck-check': '/areas#butte',
   '/service-area-san-joaquin-county-mobile-testing': '/areas#san-joaquin',
   '/san-jose-mobile-carb-testing': '/areas#san-jose',
