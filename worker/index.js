@@ -67,7 +67,7 @@ function schemaTag(pageUrl) {
         legalName: 'NorCal CARB Mobile LLC',
         alternateName: 'NorCal CARB Mobile',
         url: 'https://norcalcarbmobile.com/',
-        telephone: '+1-628-999-3912',
+        telephone: '+1-916-890-4427',
         email: 'sales@norcalcarbmobile.com',
         image: LOGO_URL,
         logo: { '@type': 'ImageObject', url: LOGO_URL },
