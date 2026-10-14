@@ -2,7 +2,7 @@
   "version": "2026-10-14.1",
   "owner": "NorCal CARB Mobile LLC",
   "requiredPhoneDisplay": "(916) 890-4427",
-  "requiredPhoneSchema": "+1-628-999-3912",
+  "requiredPhoneSchema": "+1-916-890-4427",
   "requiredPhoneHref": "tel:+19168904427",
   "protectedFiles": {
     "site/index.html": "8de65a603b046732bc50f18d674362e4220fca6d6913da632a6109b25e5c425e",
