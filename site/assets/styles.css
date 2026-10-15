@@ -409,6 +409,90 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
   .field-short-band { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* Responsive images: modern format first, resized fallback in the img. */
+.brand-mark,
+.coverage-picture {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+}
+.hero-map .coverage-picture,
+.coverage-panel-map .coverage-picture { width: 100%; }
+.hero-map .coverage-picture img,
+.coverage-panel-map .coverage-picture img {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1126 / 1200;
+}
+.contact-map-frame .coverage-picture { width: 100%; height: 100%; }
+
+/* Click-to-load YouTube. 9:16 lives on .field-short-frame. */
+.yt-facade {
+  box-sizing: border-box;
+  appearance: none;
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--navy);
+  color: #fff;
+  cursor: pointer;
+}
+.yt-facade img {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 9 / 16;
+}
+.yt-facade-play {
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: 18%;
+  max-width: 4.5rem;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: var(--green);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 24px rgba(1, 34, 65, 0.35);
+}
+.yt-facade-play svg { width: 55%; height: 55%; display: block; }
+.yt-facade:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: -3px;
+}
+.shorts-slot { margin: 0; }
+
+/* Secondary line under the primary 916 number. */
+.phone-secondary {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.hero-cta .btn { order: 0; }
+.hero-cta .phone-secondary { flex: 1 1 100%; order: 1; }
+.phone-secondary a { color: var(--navy); font-weight: 800; }
+.site-footer .phone-secondary { color: rgba(255, 255, 255, 0.78); margin: 0; }
+.site-footer .phone-secondary a { color: #fff; }
+html[data-theme="dark"] body.contact-page .phone-secondary { color: #e8eef4; }
+html[data-theme="dark"] body.contact-page .phone-secondary a { color: #fff; }
+
 /* ---------- Contact: dark/light + EN|ES (header mark is sitewide .brand-logo) ---------- */
 .ncm-i18n { display: none; flex-direction: column; gap: 2px; max-width: 12rem; }
 html[data-lang="es"] .ncm-i18n { display: flex; }

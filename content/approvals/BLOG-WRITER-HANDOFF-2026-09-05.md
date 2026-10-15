@@ -26,7 +26,7 @@ Mar 31 CRM stub “Blog #1 Concrete/Construction + Stockton satellite” is draf
 - Now through Sep 2027: most HD = 2 tests/year. Qualifying ag + qualifying CA rec/emergency MH = 1/year.
 - Beginning Oct 2027: OBD-equipped = 4/year. Opacity path stays semi-annual. Ag + those MH stay annual.
 - 90-day early submit stands. Deadline source = CTC-VIS.
-- Public card: OBD $75 · OVI $199 · MH $99/$229 · phone 628-999-3912 only.
+- Public card: OBD $75 · OVI $199 · MH $99/$229 · phone (916) 890-4427 only.
 
 ## Price / NAP leaks still live (fix before or with first publish)
 
@@ -37,8 +37,8 @@ Still wrong:
 - `/service-area-sacramento-carb-testing` — OVI $250 / MH $300 (listed in queue README)
 - `/what-is-clean-truck-check` — OVI $250 / RV $300
 - `/contact-us` — MH $250
-- `/san-jose-mobile-carb-testing` — 415-900-8563 + MH $250
-- `/clean-truck-check-hayward` — 415-900-8563, Tesla/Amazon name-drop, BAR-license language
+- `/san-jose-mobile-carb-testing` — a retired phone number + MH $250
+- `/clean-truck-check-hayward` — a retired phone number, Tesla/Amazon name-drop, BAR-license language
 
 Do not point new Stockton construction HTML at the San Joaquin service-area page until OVI is $199.
 

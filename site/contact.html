@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/styles.css?v=20261006-open">
+  <link rel="stylesheet" href="/assets/styles.css?v=20261015-perf">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -34,7 +34,7 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/">
-      <img class="brand-logo" src="/assets/img/ncm-logo.png" width="144" height="144" alt="NorCal CARB Mobile — stacked NCM road lockup" loading="eager">
+      <picture class="brand-mark"><source srcset="/assets/img/ncm-logo.avif" type="image/avif"><source srcset="/assets/img/ncm-logo.webp" type="image/webp"><img class="brand-logo" src="/assets/img/ncm-logo.png" width="144" height="144" alt="NorCal CARB Mobile — stacked NCM road lockup" loading="eager"></picture>
       <span class="ncm-i18n">
         <span data-i18n="tagline">Mobile Smoke &amp; OBD Testing</span>
         <span data-i18n="serving">Now Serving San Diego County &amp; the Central Valley</span>
@@ -79,7 +79,7 @@
           <h1 data-i18n="h1">We come to you. Clean Truck Check.</h1>
           <p class="lede" data-i18n="lede">OBD is $75. OVI is $199. We test at your yard, statewide in California, 7 days a week.</p>
           <div class="hero-cta">
-            <a class="btn btn-primary btn-lg" href="tel:+19168904427" data-i18n="call_btn">Call (916) 890-4427</a>
+            <a class="btn btn-primary btn-lg" href="tel:+19168904427" data-i18n="call_btn">Call (916) 890-4427</a><span class="phone-secondary" data-i18n="phone_secondary" data-i18n-html>or text/call <a href="tel:+16289993912">(628) 999-3912</a></span>
             <a class="btn btn-ghost btn-lg" href="#request" data-i18n="request_cb">Request a callback</a>
           </div>
           <p class="reviews-line"><span class="stars">★★★★★</span> <span data-i18n="reviews_line">5.0 · 33 Google reviews</span> · <a href="/reviews" data-i18n="reviews_read">Read our Google reviews</a></p>
@@ -87,7 +87,7 @@
         </div>
         <div class="hero-map">
           <div class="contact-map-frame">
-            <img src="/assets/img/coverage-map-v2.png" width="1126" height="1200" data-i18n-alt="map_alt" alt="Coverage map framed to the Bay Area, Peninsula, Oakland, Hayward, Napa, and Wine Country" loading="eager" decoding="async">
+            <picture class="coverage-picture"><source srcset="/assets/img/coverage-map-v2.avif" type="image/avif"><source srcset="/assets/img/coverage-map-v2.webp" type="image/webp"><img src="/assets/img/coverage-map-v2.jpg" width="1126" height="1200" data-i18n-alt="map_alt" alt="Coverage map framed to the Bay Area, Peninsula, Oakland, Hayward, Napa, and Wine Country" loading="eager" decoding="async"></picture>
           </div>
           <div class="route-chips" data-i18n-aria="chips_label" aria-label="Where we test">
             <span>Statewide</span><span>San Bernardino County</span><span>LA County</span><span>Oakland</span><span>Hayward</span><span>Peninsula</span><span>Napa</span><span>Wine Country</span>
@@ -132,6 +132,7 @@
           <div>
             <strong data-i18n="phone_label">Call or text</strong><br>
             <a href="tel:+19168904427">(916) 890-4427</a>
+            <span class="phone-secondary" data-i18n="phone_secondary" data-i18n-html>or text/call <a href="tel:+16289993912">(628) 999-3912</a></span>
           </div>
         </div>
         <div class="contact-method">
@@ -218,6 +219,7 @@
       <div>
         <h4 data-i18n="foot_contact">Contact</h4>
         <p><a href="tel:+19168904427">(916) 890-4427</a><br>
+<span class="phone-secondary" data-i18n="phone_secondary" data-i18n-html>or text/call <a href="tel:+16289993912">(628) 999-3912</a></span><br>
         <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
       </div>
       <div>

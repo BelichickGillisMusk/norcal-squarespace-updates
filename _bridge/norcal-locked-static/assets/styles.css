@@ -348,3 +348,35 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
   .coverage-panel-map img { max-height:none; }
   .route-chips span { font-size:.8rem; }
 }
+
+.brand-mark,
+.coverage-picture {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+}
+.hero-map .coverage-picture,
+.coverage-panel-map .coverage-picture { width: 100%; }
+.hero-map .coverage-picture img,
+.coverage-panel-map .coverage-picture img {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1126 / 1200;
+}
+.phone-secondary {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.hero-cta .btn { order: 0; }
+.hero-cta .phone-secondary { flex: 1 1 100%; order: 1; }
+.phone-secondary a { color: var(--navy); font-weight: 800; }
+.site-footer .phone-secondary { color: rgba(255, 255, 255, 0.78); margin: 0; }
+.site-footer .phone-secondary a { color: #fff; }

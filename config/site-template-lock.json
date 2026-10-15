@@ -1,15 +1,17 @@
 {
-  "version": "2026-10-14.1",
+  "version": "2026-10-15.1",
   "owner": "NorCal CARB Mobile LLC",
   "requiredPhoneDisplay": "(916) 890-4427",
   "requiredPhoneSchema": "+1-916-890-4427",
   "requiredPhoneHref": "tel:+19168904427",
+  "secondaryPhoneDisplay": "(628) 999-3912",
+  "secondaryPhoneHref": "tel:+16289993912",
   "protectedFiles": {
-    "site/index.html": "8de65a603b046732bc50f18d674362e4220fca6d6913da632a6109b25e5c425e",
-    "site/assets/styles.css": "45d829d71bdc1713cd3f229d35483649c2b628fa192be866cff0c3311605c64a",
-    "site/assets/img/ncm-logo.png": "31977ac93ff9aebd5cb6b42a8101eec8d53aac4cea1952afb264b7de01c0b69b",
-    "site/assets/img/norcal-carb-mobile-logo-250th.png": "774fb7772bfacb03a6410a2acc21772d4dd40f016edb9769d0c89e51f42f04b2",
-    "site/assets/img/coverage-map-v2.png": "0cad54e2baad77fad0ab55a10d807cffa94c907d1dd93992a392f44bd00c455d"
+    "site/index.html": "0232937caf3eb3e647abd94cd651bb1db4b71c8770dd676e0e847108dee248c7",
+    "site/assets/styles.css": "3f9ede947b1cd3adb6a0c2ed3e84147eb82e4bd253f80ee03da2c5f9743422ee",
+    "site/assets/img/ncm-logo.png": "81d0cad0ef569253e26b36fa36d9ccd60f2acd617c598eb8ded3a1d7d4102d07",
+    "site/assets/img/norcal-carb-mobile-logo-250th.png": "3a3fd1343948098551de665eb5c3981d6d862f81be66421821fd93cdcdc5de86",
+    "site/assets/img/coverage-map-v2.png": "cd220dbbb263af6c6100520c502596beac24698e77686df39aff730b711b891b"
   },
   "requiredColors": {
     "--navy": "#012241",

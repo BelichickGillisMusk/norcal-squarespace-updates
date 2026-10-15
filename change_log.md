@@ -21,7 +21,7 @@ Jennifer (SEO): Harvest #113 and Construction #114 Workers Builds dropped six la
 
 Jennifer moved Construction from 2026-10-08 to Tuesday 2026-10-13. **PR only — do not merge. Do not wrangler deploy.** Workers Builds on the production branch after Aria merge GO.
 
-- Post `site/blog/clean-truck-check-sacramento-construction-fleets.html`. Article JSON-LD telephone `+1-628-999-3912`. Area link `/sacramento-carb-testing`. `article:published_time`, `datePublished`, `dateModified`, and the published byline are 2026-10-13. Byline Vin CA Diesel. OBD $75 · OVI $199 · 628-999-3912.
+- Post `site/blog/clean-truck-check-sacramento-construction-fleets.html`. Article JSON-LD telephone `+1-916-890-4427`. Area link `/sacramento-carb-testing`. `article:published_time`, `datePublished`, `dateModified`, and the published byline are 2026-10-13. Byline Vin CA Diesel. OBD $75 · OVI $199 · (916) 890-4427.
 - Portal: `site/blog.html` and `site/blog/index.html` (Construction card above Harvest; same quick list; article count 66). Sitemap lastmod for `/blog` and this post is 2026-10-13. Harvest sitemap row kept.
 - Draft `blog_drafts/clean-truck-check-sacramento-construction-fleets.md` `publish_date: 2026-10-13`, status scheduled.
 - Six outside-repo landers are not in this PR. Harvest post, card, sitemap entry, and change_log entry kept from main.
@@ -35,7 +35,7 @@ Live URL after merge and Workers Builds: https://norcalcarbmobile.com/blog/clean
 Site-lock was already failing on main the same three ways. This catch-up is so Harvest can merge. Harvest post unchanged. Do not `wrangler deploy`.
 
 - `config/site-template-lock.json` version `2026-10-06.1`. Protected hash for `site/index.html` caught up to the current file (`7b85572c…`). Homepage HTML not edited.
-- Sibling San Diego dollar strings removed from `site/areas.html` and `site/pricing.html` so validate no longer matches `$119` / `$219`. Narrative and `https://mobilecarbsmoketest.com/` links stay. NorCal rates ($75 / $199 / motorhome $99/$229) and phone 628-999-3912 unchanged.
+- Sibling San Diego dollar strings removed from `site/areas.html` and `site/pricing.html` so validate no longer matches `$119` / `$219`. Narrative and `https://mobilecarbsmoketest.com/` links stay. NorCal rates ($75 / $199 / motorhome $99/$229) and phone (916) 890-4427 unchanged.
 
 ---
 
@@ -43,9 +43,9 @@ Site-lock was already failing on main the same three ways. This catch-up is so H
 
 Draft PR for `/blog/harvest-season-clean-truck-check`. Do not merge. Do not `wrangler deploy`. Workers Builds on the production branch after Aria merge GO.
 
-- New post `site/blog/harvest-season-clean-truck-check.html`. Article JSON-LD, publisher telephone `+1-628-999-3912`, `datePublished` 2026-10-06, area link `/central-valley-sierra-carb-testing`. Slug stays `harvest-season-clean-truck-check`.
+- New post `site/blog/harvest-season-clean-truck-check.html`. Article JSON-LD, publisher telephone `+1-916-890-4427`, `datePublished` 2026-10-06, area link `/central-valley-sierra-carb-testing`. Slug stays `harvest-season-clean-truck-check`.
 - Portal cards on `site/blog.html` and `site/blog/index.html` (card + quick list; article count 64 → 65). Sitemap row added. Source draft `blog_drafts/harvest-season-clean-truck-check.md`.
-- Phone 628-999-3912 only. No owner name in customer copy. No wrangler.
+- Phone (916) 890-4427 only. No owner name in customer copy. No wrangler.
 
 ---
 
@@ -54,7 +54,7 @@ Draft PR for `/blog/harvest-season-clean-truck-check`. Do not merge. Do not `wra
 Draft PR only. Do not merge. Do not `wrangler deploy`. Workers Builds on the production branch after Aria merge GO.
 
 - Worker `REDIRECTS`: `/service-areas` → `/areas` with the same HTTP 301 handler as `/privacy` and `/terms` → `/testing-terms`. One trailing slash is already stripped before lookup, so `/service-areas/` uses the same target.
-- `/clean-truck-check-facts` already exists as `site/clean-truck-check-facts.html` (E01–E08, FAQ, OBD $75 / OVI $199, phone 628-999-3912) and is already in `site/sitemap.xml` and `site/llms.txt`. Not rewritten. Live 404 is the unshipped asset bundle, not a path strip in git. Next Workers Builds upload of `./site` publishes it.
+- `/clean-truck-check-facts` already exists as `site/clean-truck-check-facts.html` (E01–E08, FAQ, OBD $75 / OVI $199, phone (916) 890-4427) and is already in `site/sitemap.xml` and `site/llms.txt`. Not rewritten. Live 404 is the unshipped asset bundle, not a path strip in git. Next Workers Builds upload of `./site` publishes it.
 - Homepage `foot-bottom` adds Privacy Policy and Terms, both to `/testing-terms`. Contact form untouched.
 - Homepage `<title>` and `og:title` trimmed to `Clean Truck Check (OBD & OVI) | NorCal CARB Mobile` (50 characters). Meta description unchanged. H1 stays `Mobile Clean Truck Check — we come to your yard` (no hard conflict). Site-lock hash for `site/index.html` updated.
 
@@ -76,7 +76,7 @@ Live proof showed the `#carb-life` player as a wide 16:9 box. The frame had `asp
 Bryan GO via Drill Instructor: feature Short `q8osFPN8jyI` on the homepage. **PR only — do not wrangler deploy.** Workers Builds on `main` after merge.
 
 - New soft section `#carb-life` directly under the hero: heading “See us in the field”, eyebrow CARB-LIFE, 9:16 embed `https://www.youtube.com/embed/q8osFPN8jyI`, links to the Short and `@CARBCLEANTRUCKMOBILE`.
-- `#five-day-pass` “CARB how-to video” stays on the official CARB video (`tJ78m6VYhX8`). Phone `628-999-3912` unchanged.
+- `#five-day-pass` “CARB how-to video” stays on the official CARB video (`tJ78m6VYhX8`). Phone `(916) 890-4427` unchanged.
 - CSS classes `.field-short-band` / `.field-short` / `.field-short-frame` in `site/assets/styles.css` (aspect-ratio 9/16, clamp width). Navy `#012241` / green `#4ab94e` / white.
 - Site-lock hashes for `site/index.html` and `site/assets/styles.css` updated with this approved template. No Worker, smoke-site, or contact-form edits.
 
@@ -97,7 +97,7 @@ Owner: delete black/red CSS and the canary paint override. Delete, not recolor. 
 
 Bryan GO via COS-Aria: ship `/clean-truck-check-facts` and close the `/new-page` stub. **PR only — do not merge, do not wrangler deploy, do not touch DNS or mail MX.**
 
-- New page `site/clean-truck-check-facts.html`. H1, mobile OBD & OVI intro, phone 628-999-3912, E01–E08 caption facts, FAQ (who must test, 14,000 lb GVWR, credentialed tester, 90-day window). WebPage + FAQPage JSON-LD. No VideoObject (Shorts iframe has no src and no video id).
+- New page `site/clean-truck-check-facts.html`. H1, mobile OBD & OVI intro, phone (916) 890-4427, E01–E08 caption facts, FAQ (who must test, 14,000 lb GVWR, credentialed tester, 90-day window). WebPage + FAQPage JSON-LD. No VideoObject (Shorts iframe has no src and no video id).
 - Header mark stays `/assets/img/ncm-logo.png` (stacked NCM). Canary still injected by the Worker. `styles.css` untouched.
 - Worker `REDIRECTS`: `/new-page` and `/new-page.html` now 301 to `/clean-truck-check-facts`. No stub HTML was in `site/`. `/clean-truck-check` stays 301 to `/services#obd`.
 - Sitemap row added. `llms.txt` core pages lists the hub. No ads. No owner name.
@@ -110,7 +110,7 @@ Rollback: revert this commit. Production stays on the previous Worker version un
 
 Bryan GO via COS Aria: publish `/blog/bayshore-sf-free-retest-ovi-wager-6500` and add Related field notes on area pages. **PR only — do not merge or wrangler deploy.**
 
-- New post `site/blog/bayshore-sf-free-retest-ovi-wager-6500.html` with Article JSON-LD. Byline Vin CA Diesel. USDOT 4357321 / CA 655692; door name held off. No owner legal name. No fail language. OBD $75 · OVI $199 · 628-999-3912.
+- New post `site/blog/bayshore-sf-free-retest-ovi-wager-6500.html` with Article JSON-LD. Byline Vin CA Diesel. USDOT 4357321 / CA 655692; door name held off. No owner legal name. No fail language. OBD $75 · OVI $199 · (916) 890-4427.
 - Portal: `site/blog/index.html` + `site/blog.html` (card + quick list; article count 63 → 64). Sitemap row added.
 - Related field notes on `/areas`, Bay Area (includes this post), Sacramento Valley & foothills, Butte, Sacramento, and Stockton. Porterville/Mojave note is not on the Bay Area page.
 - Follow-up: merged the three BODY drafts into the content wells (Bay Area, Sacramento Valley & foothills, Butte). Header/footer kept. Related field notes kept ahead of the CTA. Maps iframe + GBP cid 16019693078134296096. “Most thorough” dropped. Locked OBD $75 / OVI $199 / MH $99/$229. Butte was an update of the existing page, not a new file.
@@ -125,7 +125,7 @@ Rollback: revert this commit. Production stays on the previous Worker version un
 
 Magic 2026-09-08: soften AI training / shrink the clone map on www. **Do not nuke Google / GBP indexing.**
 
-- `site/llms.txt`: keep Contact, Pricing, Core pages, four grounding blogs, 628-999-3912 only. No owner name. Dropped `cleantruckchecksacramento.com` (not ours) and `carb-clean-truck-check.com` (LET-DIE / historic 415). Dropped sister-city URL list so corridor landers are not an easy clone map. Hayward satellite stays live; it is just not listed here.
+- `site/llms.txt`: keep Contact, Pricing, Core pages, four grounding blogs, (916) 890-4427 only. No owner name. Dropped `cleantruckchecksacramento.com` (not ours) and `carb-clean-truck-check.com` (LET-DIE / historic 415). Dropped sister-city URL list so corridor landers are not an easy clone map. Hayward satellite stays live; it is just not listed here.
 - `site/robots.txt`: still `Allow: /` for `*` + Googlebot/Bingbot/GPTBot/OAI-SearchBot. Content-Signal `search=yes,ai-input=yes,ai-train=no` (was `ai-train=yes,use=full`). No money-path Disallow. No blanket GPTBot Disallow.
 - Sitemap left as-is — ~60 `/clean-truck-check-blog/*` URLs stay indexed on purpose (legacy prune = later GO).
 - Site-lock asserts the Google-open / train-soft / no-bad-domain rules so a later edit cannot silently block search.
@@ -140,7 +140,7 @@ Bryan GO via Madison: publish craft blog NOW on www. **PR only — do not merge 
 
 - New post `site/blog/craft-so-good-they-copy-us-hotdog-clipboard.html` — unique slug so clones copying the path are obvious.
 - Mid-copy canary phrase exactly once: `hotdog contest clipboard` (yard-note sentence, not a boast).
-- Signed **Manager, NorCal CARB Mobile**. No owner name. Phone digits only 628-999-3912. No 415. No competitor site named. No fake metrics.
+- Signed **Manager, NorCal CARB Mobile**. No owner name. Phone digits only (916) 890-4427. No 415. No competitor site named. No fake metrics.
 - Portal wired: `site/blog/index.html` + `site/blog.html` (card + quick list; article count 62 → 63). Sitemap row added.
 - Draft: `blog_drafts/craft-so-good-they-copy-us-hotdog-clipboard.md` (`owner_approved: YES` per Bryan GO).
 - No hero image — no watermarked craft asset in this repo; existing NCM header mark only.
@@ -159,7 +159,7 @@ Ally PRIORITY: competitor carbdieseltest.com scrapes NorCal www. Plant a soft te
   - `<link rel="stylesheet" href="/assets/css/ncm-canary.css?v=20260908-v711">`
   - HTML comment `ncm-canary: norcalcarbmobile.com provenance · ncm-www-origin-20260908-v711`
   - hidden `data-ncm-canary="ncm-www-origin-20260908-v711"` wrapper
-  - hidden footer micro-mark `norcalcarbmobile.com` (existing public domain; phone stays 628-999-3912)
+  - hidden footer micro-mark `norcalcarbmobile.com` (existing public domain; phone stays (916) 890-4427)
 - Also restores `worker/index.js` from the last good file — `e4e0dc8` accidentally replaced it with `PLACEHOLDER`. Schema / AutoRepair / prices / street unchanged vs that last good Worker.
 - Site-lock asserts the isolated CSS + inject strings. No wrangler. No Actions deploy. No blog article.
 
@@ -179,7 +179,7 @@ Live `https://www.norcalcarbmobile.com/pricing` still sold “50% off your first
 - `site/index.html`: fleet card “First-timer switch offer available” → second-truck / return-visit half-off.
 - `site/services.html`: Switch & Save row “50% off 1st test” → “50% off 2nd test/truck”.
 - `_bridge/norcal-locked-static/` pricing, home, services, contact, motorhome, and agricultural-vehicles pages aligned so they cannot reintroduce first-test 50% copy. Bridge does not feed www.
-- MH prices stay $99/$229. Phone stays 628-999-3912. No names. No invented metrics. No VIN tool. No new comparison table. No deploy. No wrangler.
+- MH prices stay $99/$229. Phone stays (916) 890-4427. No names. No invented metrics. No VIN tool. No new comparison table. No deploy. No wrangler.
 - `config/site-template-lock.json` homepage hash + version `2026-09-05.3` — Bryan/Ally approved the index.html second-truck copy (required site-lock check).
 
 ---
@@ -190,7 +190,7 @@ Live `https://www.norcalcarbmobile.com/assets/styles.css` still ships the Aug 7 
 
 - `site/assets/styles.css` (Gillis Worker ASSETS = `./site`): `--navy` `#012241`, `--green` `#4ab94e`, hover `--green-deep` `#3d9b2f`. `--red*` still aliases green so leftover selectors flip. Header comment is Navy · White · Green (not charcoal/red).
 - `_bridge/norcal-locked-static/assets/styles.css`: same token remap (was `#0a1628` / `#b91c1c`). Bridge does not feed www; aligned so it cannot reintroduce red.
-- Phone stays 628-999-3912. No 415. No copy/price/metric changes. No deploy. No wrangler.
+- Phone stays (916) 890-4427. No 415. No copy/price/metric changes. No deploy. No wrangler.
 - Header mark `ncm-logo.png` is already navy + green. `norcal-carb-mobile-logo-250th.png` still has flag stripes — out of scope.
 
 ---
@@ -201,7 +201,7 @@ Madison found live Stockton still showing OBD $79 / OVI $189 / MH $79/$189 and F
 
 - `site/stockton-clean-truck-check.html` and `site/clean-truck-check-lodi.html`: visible cards, meta, OG, and footer now $75 / $199 / $99 / $229.
 - Full Care cards on Stockton, Lodi, Sacramento, and Bay Area now match homepage wording (`+$40/year` — not $70).
-- Phone stays 628-999-3912. No 415. No ads. No wrangler. No Deploy NorCal dispatch. Gillis Git Worker only.
+- Phone stays (916) 890-4427. No 415. No ads. No wrangler. No Deploy NorCal dispatch. Gillis Git Worker only.
 
 ---
 
