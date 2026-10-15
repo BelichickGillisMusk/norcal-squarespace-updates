@@ -25,7 +25,7 @@ tags:
   - Fleet Compliance
   - CARB
   - Mobile Testing
-meta_description: "OBD vs OVI for California fleets under Clean Truck Check. Who needs which test, 2026 timing, mobile pricing from $75 OBD / $199 OVI. Call 628-999-3912."
+meta_description: "OBD vs OVI for California fleets under Clean Truck Check. Who needs which test, 2026 timing, mobile pricing from $75 OBD / $199 OVI. Call (916) 890-4427."
 outline_only: true
 campaign: JULY-CRITICAL
 voice: "plain fleet talk, no jargon dump, no personal names"
@@ -40,7 +40,7 @@ unique_content_rule: "docs/blog-location-seo.md — field posts need industry+lo
 **File purpose:** Sales-assist blog outline + checklist for the OBD vs OVI explainer.  
 **HTML already on disk:** `site/blog/obd-vs-ovi-clean-truck-check-fleets.html` (may already be on main).  
 
-**Primary CTA:** Call **628-999-3912**  
+**Primary CTA:** Call **(916) 890-4427**  
 **Prices:** OBD **$75** · OVI **$199**  
 **Links:** [/services](/services) · [/contact](/contact) · [/areas](/areas)
 
@@ -96,7 +96,7 @@ Field-trip stack (separate posts): `blog_drafts/queue/`
 - **2026:** most non-exempt vehicles on **semi-annual** testing (two times per year).
 - You may often test **up to ~90 days before** a compliance deadline (confirm current CARB guidance + CTC-VIS).
 - **Looking ahead:** OBD-equipped vehicles move toward **more frequent** testing later (industry/CARB messaging points to quarterly cadence beginning around **Oct 2027** for many OBD units — note as “coming,” not today’s only story).
-- **CTA soft:** If you’re due this summer window → call **628-999-3912** and we’ll confirm test type before we roll.
+- **CTA soft:** If you’re due this summer window → call **(916) 890-4427** and we’ll confirm test type before we roll.
 
 *Internal link:* [/services](/services)
 
@@ -106,7 +106,7 @@ Field-trip stack (separate posts): `blog_drafts/queue/`
 
 | | **OBD (HD-OBD scan)** | **OVI (opacity / visual)** |
 |--|----------------------|----------------------------|
-| **What it is** | Electronic scan of the engine’s on-board diagnostics with a CARB-certified device | Smoke opacity + visual inspection path for vehicles that need non-OBD testing |
+| **What it is** | Electronic scan of the engine’s on-board diagnostics with an OBD scan. Our CARB-credentialed tester runs your test and submits the results to CARB | Smoke opacity + visual inspection path for vehicles that need non-OBD testing |
 | **Typical who** | Newer HD diesels with supported OBD (commonly **2013+ diesel** / newer alt-fuel per CARB classes — verify per unit) | Older / non-OBD-supported units that still fall under CTC testing |
 | **At the yard** | Plug-in diagnostic test; fast when truck is ready | Meter + inspection workflow; still **mobile** — gear in the truck |
 | **Our starting price** | **$75** | **$199** |
@@ -159,7 +159,7 @@ Field-trip stack (separate posts): `blog_drafts/queue/`
 **Hard CTA block (copy-ready for final post):**
 
 > Ready to clear July/August Clean Truck Check units without guessing OBD vs OVI?  
-> **Call NorCal CARB Mobile: 628-999-3912**  
+> **Call NorCal CARB Mobile: (916) 890-4427**  
 > Or request a callback: [/contact](/contact)  
 > See what we run on site: [/services](/services) · Where we roll: [/areas](/areas)
 
@@ -172,7 +172,7 @@ Field-trip stack (separate posts): `blog_drafts/queue/`
 2. **Is OVI only at a shop?**  
    No. Our OVI is **mobile** (equipment in the vehicle).
 3. **What if I’m not sure which test I need?**  
-   Call **628-999-3912** with year/engine notes; we confirm before dispatch.
+   Call **(916) 890-4427** with year/engine notes; we confirm before dispatch.
 4. **Where do I see my real deadline?**  
    Your **CTC-VIS** account — not a blog table.
 
@@ -181,7 +181,7 @@ Field-trip stack (separate posts): `blog_drafts/queue/`
 ## Closing
 
 - One sentence restating: right test + on-time upload path + trucks stay on the job.  
-- Repeat phone: **628-999-3912**  
+- Repeat phone: **(916) 890-4427**  
 - Soft second path: [/contact](/contact)
 
 ---
@@ -190,7 +190,7 @@ Field-trip stack (separate posts): `blog_drafts/queue/`
 
 - [ ] Voice: VIN DIESEL — direct, slightly wry, zero corporate fluff  
 - [ ] No Bryan last name anywhere  
-- [ ] Phone **628-999-3912** in hero CTA + close (and once mid-post)  
+- [ ] Phone **(916) 890-4427** in hero CTA + close (and once mid-post)  
 - [ ] Prices **OBD $75** and **OVI $199** visible above the fold-ish and in table  
 - [ ] Links live: `/services`, `/contact`, `/areas`  
 - [ ] CTC-VIS disclaimer present  

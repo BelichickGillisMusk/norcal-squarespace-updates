@@ -54,7 +54,7 @@ Source: https://ww2.arb.ca.gov/clean-truck-check-emissions-compliance-testing-re
 
 ## Price / NAP lock vs leaks (rechecked 17:16 PT)
 
-Lock: **OBD $75 · OVI $199 · MH $99 / $229 · 628-999-3912 · /contact**
+Lock: **OBD $75 · OVI $199 · MH $99 / $229 · (916) 890-4427 · /contact**
 
 Now matching lock (queue README stale):
 - `/stockton-clean-truck-check` — $75 / $199 / $99 / $229
@@ -68,7 +68,7 @@ Still treat as leak until a line-by-line pass (do not deep-link from new posts):
 - `/san-jose-mobile-carb-testing` (may 301 to /areas)
 - `/clean-truck-check-hayward`
 - `/smoke-opacity-test-near-me`
-- hyphen domain carb-clean-truck-check.com — 415-900-8563 + admin@ NAP. Expire clock was Wed Sep 9.
+- hyphen domain carb-clean-truck-check.com — a retired phone number + admin@ NAP. Expire clock was Wed Sep 9.
 
 Full Care $40 (landers) vs $80 (fleet-readiness draft) vs $70 (older cards) unresolved. Do not print a fourth number.
 
@@ -112,7 +112,7 @@ We test at the farm, packing shed, or staging lot in Woodland, Merced, Stockton,
 
 OBD $75 · OVI $199 · we come to the yard.
 
-Book: norcalcarbmobile.com/contact · (628) 999-3912
+Book: norcalcarbmobile.com/contact · (916) 890-4427 or text/call (628) 999-3912
 ```
 
 Facebook:
@@ -123,13 +123,13 @@ Qualifying agricultural vehicles stay on an annual Clean Truck Check cycle. The 
 
 Mobile OBD $75 · OVI $199 at the farm or shed in Woodland, Merced, Stockton, Porterville.
 
-Book: norcalcarbmobile.com/contact · (628) 999-3912
+Book: norcalcarbmobile.com/contact · (916) 890-4427 or text/call (628) 999-3912
 ```
 After live: append `norcalcarbmobile.com/blog/harvest-season-clean-truck-check-ag-haul`
 
 X:
 ```
-Harvest CTC: ag can stay annual. Haul trucks cannot. Mobile OBD $75 · OVI $199 at the yard. Woodland / Merced / Stockton. 628-999-3912 norcalcarbmobile.com/contact
+Harvest CTC: ag can stay annual. Haul trucks cannot. Mobile OBD $75 · OVI $199 at the yard. Woodland / Merced / Stockton. (916) 890-4427 norcalcarbmobile.com/contact
 ```
 
 ### Stockton construction — paste after `approve stockton-construction`
@@ -140,7 +140,7 @@ Construction and concrete fleets in Stockton, Lodi, Tracy, Lathrop, and Manteca 
 
 Clean Truck Check is still twice a year in 2026 for most work trucks. OBD $75. OVI $199. We come to the staging lot.
 
-Book: norcalcarbmobile.com/contact · (628) 999-3912
+Book: norcalcarbmobile.com/contact · (916) 890-4427 or text/call (628) 999-3912
 ```
 
 Facebook:
@@ -151,13 +151,13 @@ A mixer in a station line is a missed pour. Most construction units over 14,000 
 
 OBD $75 · OVI $199 · we come to your yard.
 
-Book: norcalcarbmobile.com/contact · (628) 999-3912
+Book: norcalcarbmobile.com/contact · (916) 890-4427 or text/call (628) 999-3912
 ```
 After live: append `norcalcarbmobile.com/blog/stockton-construction-concrete-clean-truck-check`
 
 X:
 ```
-Stockton / Lodi / Tracy construction fleets: Clean Truck Check is still 2x in 2026. Mobile OBD $75 · OVI $199 at the yard. 628-999-3912 norcalcarbmobile.com/contact
+Stockton / Lodi / Tracy construction fleets: Clean Truck Check is still 2x in 2026. Mobile OBD $75 · OVI $199 at the yard. (916) 890-4427 norcalcarbmobile.com/contact
 ```
 
 ## Owner phrases that ship content

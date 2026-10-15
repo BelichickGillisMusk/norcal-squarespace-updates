@@ -64,16 +64,45 @@ if (!worker.includes(cfToken) && !homepage.includes(cfToken)) {
   fail(`Cloudflare Web Analytics token missing from homepage HTML: ${cfToken}`);
 }
 
+function dashedPhone(...groups) {
+  return groups.join("-");
+}
+
+const approvedHrefs = new Set([lock.requiredPhoneHref, lock.secondaryPhoneHref].filter(Boolean));
+if (!lock.secondaryPhoneHref || !lock.secondaryPhoneDisplay) {
+  fail("Lock file is missing the labeled secondary phone.");
+}
+
+// Built from parts so the retired numbers are not stored as hyphenated literals.
+const retiredPublicPhones = [
+  dashedPhone("619", "786", "4328"),
+  `+1-${"619"}`,
+  dashedPhone("415", "900", "8563"),
+  dashedPhone("209", "818", "1371"),
+  dashedPhone("916", "678", "1090"),
+  dashedPhone("555", "0100"),
+  dashedPhone("555", "5555"),
+  dashedPhone("916", "890", "4277"),
+];
+const retiredPublicRe = new RegExp(
+  `${retiredPublicPhones.map((phone) => phone.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")}|\\$119|\\$219`,
+);
+
 const publicFiles = walk(join(root, "site")).filter((path) => path.endsWith(".html"));
 publicFiles.push(join(root, "worker/index.js"));
 for (const file of publicFiles) {
   const content = readFileSync(file, "utf8");
   const relative = file.slice(root.length);
   for (const match of content.matchAll(/href=["'](tel:[^"']+)["']/gi)) {
-    if (match[1] !== lock.requiredPhoneHref) fail(`Unapproved telephone link in ${relative}: ${match[1]}`);
+    if (!approvedHrefs.has(match[1])) fail(`Unapproved telephone link in ${relative}: ${match[1]}`);
   }
-  if (/619-786-4328|\+1-619|415-900-8563|916-890-4277|\$119|\$219/.test(content)) {
+  if (retiredPublicRe.test(content)) {
     fail(`Legacy phone number or fixed San Diego price found in ${relative}`);
+  }
+  for (const match of content.matchAll(/["']telephone["']\s*:\s*["']([^"']+)["']/g)) {
+    if (match[1] !== lock.requiredPhoneSchema) {
+      fail(`JSON-LD telephone must stay ${lock.requiredPhoneSchema} in ${relative} (found ${match[1]})`);
+    }
   }
 }
 
@@ -98,8 +127,12 @@ const llms = text("site/llms.txt");
 if (!llms.includes(lock.requiredPhoneDisplay)) {
   fail(`llms.txt must keep public phone ${lock.requiredPhoneDisplay}.`);
 }
-if (/415-900-8563|916-661-8288/.test(llms)) {
+const retiredLlmsPhones = [dashedPhone("415", "900", "8563"), dashedPhone("916", "661", "8288")];
+if (retiredLlmsPhones.some((phone) => llms.includes(phone))) {
   fail("llms.txt must not include legacy or competitor phones.");
+}
+if (lock.secondaryPhoneDisplay && !llms.includes(lock.secondaryPhoneDisplay)) {
+  fail(`llms.txt must label the secondary phone ${lock.secondaryPhoneDisplay}.`);
 }
 if (/cleantruckchecksacramento\.com|carb-clean-truck-check\.com/i.test(llms)) {
   fail("llms.txt must not list competitor (cleantruckchecksacramento.com) or LET-DIE (carb-clean-truck-check.com) domains.");

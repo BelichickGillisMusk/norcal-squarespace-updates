@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/styles.css?v=20261006-open">
+  <link rel="stylesheet" href="/assets/styles.css?v=20261015-perf">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -42,7 +42,7 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/">
-      <img class="brand-logo" src="/assets/img/ncm-logo.png" alt="NorCal CARB Mobile" width="56" height="56" loading="eager">
+      <picture class="brand-mark"><source srcset="/assets/img/ncm-logo.avif" type="image/avif"><source srcset="/assets/img/ncm-logo.webp" type="image/webp"><img class="brand-logo" src="/assets/img/ncm-logo.png" alt="NorCal CARB Mobile" width="56" height="56" loading="eager"></picture>
     </a>
     <nav class="nav" aria-label="Primary">
       <button class="menu-toggle" aria-label="Menu" onclick="this.closest('.nav').classList.toggle('open')"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
@@ -129,6 +129,7 @@
       <div>
         <h4>Contact</h4>
         <p><a href="tel:+19168904427">(916) 890-4427</a><br>
+<span class="phone-secondary">or text/call <a href="tel:+16289993912">(628) 999-3912</a></span><br>
         <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
       </div>
       <div>

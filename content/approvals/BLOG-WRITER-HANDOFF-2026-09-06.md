@@ -16,7 +16,7 @@ Technical. No live HTML. Owner gate unchanged. Calendar token still dead on this
 - Beginning October 2027: OBD-equipped = 4 tests/year. Opacity path stays semi-annual. Ag + those MH stay annual.
 - Passing tests may be submitted up to 90 days before the CTC-VIS deadline.
 - Deadline source = CTC-VIS, not a blog calendar.
-- Public card: OBD $75 · OVI $199 · MH $99/$229 · phone 628-999-3912 only.
+- Public card: OBD $75 · OVI $199 · MH $99/$229 · phone (916) 890-4427 only.
 
 ## Unpublished inventory (`owner_approved: NO`)
 
@@ -53,7 +53,7 @@ Cleared:
 Still flag (do not point new posts at these until fixed):
 - Full Care $40 on Stockton lander AND `/blog/2026-carb-testing-deadlines` vs $80 on Drive corrected guide. Do not invent a third price. Owner picks one before fleet-readiness ships.
 - llms.txt still lists https://cleantruckchecksacramento.com/ under Sister city landers. That domain is Clean Truck Compliance Solutions, 916-661-8288. Delete that line.
-- carb-clean-truck-check.com still publishes 415-900-8563 and admin@mobilecarbsmoketest.com. Prices on that lander match the lock; phone and email do not.
+- carb-clean-truck-check.com still publishes a retired phone number and admin@mobilecarbsmoketest.com. Prices on that lander match the lock; phone and email do not.
 - Stockton lander still says “Most thorough” on OBD. Strip that line.
 
 ## Social destinations (copy already in packs)

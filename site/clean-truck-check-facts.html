@@ -120,7 +120,7 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/">
-      <img class="brand-logo" src="/assets/img/ncm-logo.png" alt="NorCal CARB Mobile" width="56" height="56" loading="eager">
+      <picture class="brand-mark"><source srcset="/assets/img/ncm-logo.avif" type="image/avif"><source srcset="/assets/img/ncm-logo.webp" type="image/webp"><img class="brand-logo" src="/assets/img/ncm-logo.png" alt="NorCal CARB Mobile" width="56" height="56" loading="eager"></picture>
     </a>
     <nav class="nav" aria-label="Primary">
       <button class="menu-toggle" aria-label="Menu" onclick="this.closest('.nav').classList.toggle('open')"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
@@ -164,15 +164,11 @@
         Leave the iframe without a src until a real playlist or video id exists.
         Do not insert a placeholder video id. Skip VideoObject until this embed is real.
       -->
-      <figure class="shorts-slot" style="margin:0;max-width:420px">
-        <iframe
-          title="YouTube Shorts playlist — Clean Truck Check facts E01 and later"
-          data-shorts-slot="E01+"
-          style="display:block;width:100%;aspect-ratio:9/16;border:1px solid var(--line);border-radius:16px;background:var(--navy)"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen></iframe>
-        <figcaption style="color:var(--muted);margin-top:10px">Empty embed slot for the Shorts playlist. E01 and later go here when they go live.</figcaption>
+      <figure class="field-short shorts-slot">
+        <div class="field-short-frame" data-shorts-slot="E01+" role="img" aria-label="YouTube Shorts slot. Empty until E01 and later are live.">
+          <span class="yt-facade-play" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7v10l8-5z" fill="#fff"/></svg></span>
+        </div>
+        <figcaption style="color:var(--muted);margin-top:10px">Empty slot for the Shorts playlist. E01 and later go here when they go live. Nothing loads from YouTube until a real video is added.</figcaption>
       </figure>
     </div>
   </section>
@@ -314,6 +310,7 @@
       <div>
         <h4>Contact</h4>
         <p><a href="tel:+19168904427">(916) 890-4427</a><br>
+<span class="phone-secondary">or text/call <a href="tel:+16289993912">(628) 999-3912</a></span><br>
         <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
       </div>
       <div>
