@@ -53,6 +53,11 @@ for (const area of lock.requiredServiceAreas) {
 }
 
 const homepage = text("site/index.html");
+for (const banned of ["San Bernardino", "Moreno Valley", "92553", "Statewide Clean Truck Check", "grand opening"]) {
+  if (homepage.includes(banned)) fail(`Homepage has banned copy: ${banned}`);
+}
+if (!homepage.includes("Northern California")) fail("Homepage must say Northern California.");
+if (!homepage.includes("tel:+16289993912")) fail("Homepage call button must stay 628-999-3912.");
 const cfToken = lock.requiredCfWebAnalyticsToken;
 const cfBeaconSnippet = `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${cfToken}"}'></script>`;
 // Homepage HTML is Worker-injected (run_worker_first). Static site/index.html stays
@@ -69,8 +74,9 @@ publicFiles.push(join(root, "worker/index.js"));
 for (const file of publicFiles) {
   const content = readFileSync(file, "utf8");
   const relative = file.slice(root.length);
+  const phoneHref = relative.endsWith("site/index.html") ? "tel:+16289993912" : lock.requiredPhoneHref;
   for (const match of content.matchAll(/href=["'](tel:[^"']+)["']/gi)) {
-    if (match[1] !== lock.requiredPhoneHref) fail(`Unapproved telephone link in ${relative}: ${match[1]}`);
+    if (match[1] !== phoneHref) fail(`Unapproved telephone link in ${relative}: ${match[1]}`);
   }
   if (/619-786-4328|\+1-619|415-900-8563|916-890-4277|\$119|\$219/.test(content)) {
     fail(`Legacy phone number or fixed San Diego price found in ${relative}`);
@@ -128,4 +134,4 @@ if (failures.length) {
 
 console.log("NORCAL SITE LOCK PASSED");
 console.log(`Protected template version: ${lock.version}`);
-console.log("Homepage, colors, logo, map, 916 phone, service-area schema and Worker routing are unchanged.");
+console.log("Homepage is Northern California with 628. Other pages keep the 916 lock. Colors, logo, map, schema, and Worker routing are unchanged.");
