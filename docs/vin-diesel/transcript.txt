@@ -1,0 +1,89 @@
+### booking
+
+Visitor: Yeah, I need my truck tested.
+Vin: Hey, I'm Vin Diesel with NorCal CARB Mobile. Looking to get a truck tested?
+
+What's your name?
+Visitor: Mike Chen
+Vin: Thanks, Mike. What's a good callback number?
+Visitor: 916-555-0148
+Vin: Got it. How many trucks, what type and year?
+Visitor: One 2018 Freightliner box truck
+Vin: What's your company name?
+Visitor: Chen Hauling
+Vin: Where's the yard or city/ZIP?
+Visitor: West Sacramento 95691
+Vin: What's the reason for the test?
+Visitor: Annual clean truck check
+Vin: What date and time would you like?
+Visitor: Next Tuesday at 9am
+Vin: I've requested that slot for you. We'll confirm the time with you by call or text.
+Visitor: 916-555-0148
+
+Saved rows: appointment #2 urgent=0 email=not_requested; summary #1 urgent=0 email=sent
+Flags: none
+
+### fleet-8
+
+Visitor: I have 8 trucks in Stockton that need testing before Friday.
+Vin: Hey, I'm Vin Diesel with NorCal CARB Mobile. For 5-10 trucks it's often about $50-60 each depending on details. What's your name and company?
+Visitor: Ruiz Freight
+Vin: Got it, Ruiz Freight with 8 trucks in Stockton, before Friday. What's your name and callback number?
+Visitor: Dana Ruiz
+Vin: Thanks, Dana. What's your callback number? I'll get these details to the team for pricing.
+Visitor: 916-555-0199
+Vin: Thanks, Dana. What types and years are the 8 trucks, and preferred date/time?
+Visitor: 8 trucks, 2016 to 2022 Freightliner and Kenworth
+Vin: I'll get these details to the team and someone will get back to you with exact pricing. Preferred date and time?
+Visitor: Thursday morning. Deadline is Friday.
+Vin: Got it, urgent for Thursday morning before Friday. The team will get back to you ASAP. Anything else?
+
+Saved rows: summary #3 urgent=1 email=sent; summary #2 urgent=1 email=sent; summary #1 urgent=1 email=sent
+Flags: none
+
+### ask-bryan
+
+Visitor: Can I talk to Bryan?
+Vin: Yeah, the guys are out testing right now. Give me your name and number, and a date and time if you want, and I'll put it on the calendar so they can get back to you with a confirmation.
+Visitor: Alex Ortiz
+Vin: What's your phone number?
+Visitor: 916-555-0177
+Vin: What's your company?
+Visitor: Ortiz Trucking
+Vin: How many vehicles, what types and years?
+Visitor: Tomorrow at 2pm works.
+Vin: What's the location (city or ZIP)?
+Visitor: Sacramento
+Vin: How many vehicles, types, and years?
+Visitor: Tomorrow at 2pm works.
+Vin: How many vehicles, types, and years?
+Visitor: Tomorrow at 2pm works.
+Vin: How many vehicles, types, and years?
+Visitor: Tomorrow at 2pm works.
+
+Saved rows: summary #1 urgent=0 email=sent
+Flags: SAID A STAFF NAME
+
+### spanish
+
+Visitor: Hola, necesito hacerle la prueba a mi camión en Sacramento.
+Vin: Hola, soy Vin Diesel de NorCal CARB Mobile. ¿Me puede dar su nombre?
+Visitor: Luis Mora
+Vin: ¿Me puede dar su número de teléfono para llamarlo?
+Visitor: 916-555-0133
+Vin: ¿Cuántos camiones, qué tipo y año?
+Visitor: Un camión Freightliner 2015
+Vin: ¿Cuál es el nombre de su compañía?
+Visitor: Mora Transportes
+Vin: ¿Para qué necesita la prueba? ¿Registro o algo más?
+Visitor: Clean Truck Check anual
+Vin: ¿En qué fecha y hora le gustaría la prueba?
+Visitor: El viernes a las 10
+Vin: He solicitado ese horario para usted. Le confirmaremos la hora por llamada o texto. ¿Algo más?
+Visitor: El viernes a las 10
+Vin: He solicitado ese horario para usted. Le confirmaremos la hora por llamada o texto. ¿Algo más?
+Visitor: El viernes a las 10
+
+Saved rows: appointment #3 urgent=0 email=not_requested; appointment #2 urgent=0 email=not_requested; summary #1 urgent=0 email=sent
+Flags: none
+

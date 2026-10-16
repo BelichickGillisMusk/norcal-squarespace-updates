@@ -23,3 +23,17 @@ custom_domain = true
 # Never: bgillis99@gmail.com, mila@*, admin@mobilecarbsmoketest.com
 [vars]
 CONTACT_TO = "sales@norcalcarbmobile.com,carb@norcalcarbmobile.com,fsu9913@gmail.com"
+
+# Vin Diesel chat store. Replace database_id before any deploy:
+#   npx wrangler d1 create norcal-chat-leads
+#   npx wrangler d1 execute norcal-chat-leads --remote --file=worker/d1/0001_chat_leads.sql
+# The worker also creates the tables on first request if the binding exists.
+[[d1_databases]]
+binding = "CHAT_DB"
+database_name = "norcal-chat-leads"
+database_id = "00000000-0000-0000-0000-000000000001"
+
+# carb@ must be a verified destination. From-address must be on an onboarded domain.
+[[send_email]]
+name = "EMAIL"
+allowed_destination_addresses = [ "carb@norcalcarbmobile.com" ]

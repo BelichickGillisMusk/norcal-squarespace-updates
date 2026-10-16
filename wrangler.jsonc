@@ -1,6 +1,7 @@
 {
   // Cloudflare Worker serving norcalcarbmobile.com
   // Static assets in ./site, contact form handler at /api/contact
+  // Vin Diesel chat: POST /api/chat and GET /admin/leads
   "name": "norcal-squarespace-updates-gillis",
   "main": "worker/index.js",
   "compatibility_date": "2025-06-01",
@@ -28,7 +29,24 @@
   // never a single mailbox and never bgillis99 / mila@ / admin@mobilecarbsmoketest.com.
   "vars": {
     "CONTACT_TO": "sales@norcalcarbmobile.com,carb@norcalcarbmobile.com,fsu9913@gmail.com"
-  }
+  },
+  // Placeholder id. Create the database and paste the real id before deploy.
+  "d1_databases": [
+    {
+      "binding": "CHAT_DB",
+      "database_name": "norcal-chat-leads",
+      "database_id": "00000000-0000-0000-0000-000000000001"
+    }
+  ],
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "allowed_destination_addresses": ["carb@norcalcarbmobile.com"]
+    }
+  ]
   // Set secrets in the dashboard or via:  wrangler secret put RESEND_API_KEY
   // CONTACT_FROM optional (default noreply@mail.norcalcarbmobile.com)
+  // Vin Diesel: wrangler secret put XAI_API_KEY
+  //             wrangler secret put ADMIN_TOKEN
+  // Optional: CHAT_FROM (default noreply@mail.norcalcarbmobile.com)
 }

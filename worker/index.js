@@ -16,6 +16,7 @@
  */
 
 import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
+import { VIN_DIESEL_LOADER, handleVinDiesel } from './vin-diesel.js';
 
 const DEFAULT_TO = [
   'sales@norcalcarbmobile.com',
@@ -528,6 +529,9 @@ export default {
       });
     }
 
+    const vinDiesel = await handleVinDiesel(request, env);
+    if (vinDiesel) return vinDiesel;
+
     if (url.pathname === '/api/contact') {
       if (request.method === 'POST') return handleContact(request, env);
       return new Response('Method Not Allowed', { status: 405, headers: { Allow: 'POST' } });
@@ -563,6 +567,7 @@ export default {
       .on('body', {
         element(el) {
           el.append(CF_WEB_ANALYTICS_BEACON, { html: true });
+          el.append(VIN_DIESEL_LOADER, { html: true });
         },
       })
       .transform(assetRes);
