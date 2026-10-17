@@ -72,7 +72,7 @@
 <main id="main">
   <section class="hero">
     <div class="wrap">
-      <div id="sent-banner" class="banner" hidden data-i18n="sent">Thanks — your request is in. We will reply shortly. Need it today? Call (916) 890-4427.</div>
+      <div id="sent-banner" class="banner" hidden data-i18n="sent">Thank you, somebody will be in touch.</div>
 
       <div class="hero-grid">
         <div class="hero-copy">
@@ -167,6 +167,10 @@
           <div class="field">
             <label for="location" data-i18n="label_location">Truck or motorhome city/yard</label>
             <input id="location" name="location" type="text" data-i18n-placeholder="loc_ph" placeholder="e.g. Oakland yard, Hayward, Peninsula, Napa">
+          </div>
+          <div class="field">
+            <label for="trucks" data-i18n="label_trucks">How many trucks?</label>
+            <input id="trucks" name="trucks" type="number" min="1" max="999" inputmode="numeric">
           </div>
           <div class="field">
             <label for="service" data-i18n="label_service">What do you need?</label>

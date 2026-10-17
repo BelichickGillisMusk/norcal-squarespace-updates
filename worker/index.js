@@ -2,32 +2,27 @@
  * Cloudflare Worker entry for the `norcalcarbmobile` worker.
  *
  * Serves the static site in ../site via the ASSETS binding, and handles the
- * contact form (POST /api/contact) by emailing the lead via Resend.
+ * contact form (POST /api/contact) by emailing the lead through the
+ * Cloudflare Email Workers `send_email` binding (env.EMAIL). No Resend, no API key.
  *
- * Deploy:  wrangler deploy            (config in ../wrangler.jsonc, name = norcalcarbmobile)
- * Env vars: RESEND_API_KEY (required to send) · CONTACT_TO · CONTACT_FROM (optional)
- * Form To is always sales@ + carb@ + fsu9913@gmail.com (Resend accepts an array).
- * CONTACT_TO may add more addresses but cannot drop those three or add never-To
- * inboxes (mila@*, bgillis99@gmail.com, admin@mobilecarbsmoketest.com).
- * Always CCs OWNER_GMAIL (bryan@norcalcarbmobile.com) unless already in To.
+ * Deploy:  push to main (Workers Builds runs wrangler deploy; config in ../wrangler.jsonc)
+ * Binding: EMAIL (send_email) with allowed_destination_addresses = FORM_TO.
+ * Email Routing on norcalcarbmobile.com only lets the binding send to verified
+ * destination addresses (free on all plans). sales@ / carb@ / bryan@ are routed
+ * addresses (catch-all forwards to bgillis99@gmail.com), so the form sends to the
+ * verified Gmail destinations directly. Add an address here AND in the binding's
+ * allowed_destination_addresses, and verify it in Email Routing first.
  *
- * NOTE: the contact logic below mirrors site/functions/api/contact.js (the Pages
- * version). If you change one, change the other.
+ * NOTE: site/functions/api/contact.js is an old Pages copy that is not deployed.
  */
 
+import { EmailMessage } from 'cloudflare:email';
 import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
 
-const DEFAULT_TO = [
-  'sales@norcalcarbmobile.com',
-  'carb@norcalcarbmobile.com',
-  'fsu9913@gmail.com',
-];
-const OWNER_GMAIL = 'bryan@norcalcarbmobile.com';
-const NEVER_TO = [
-  'bgillis99@gmail.com',
-  'admin@mobilecarbsmoketest.com',
-];
-const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
+// Verified Email Routing destinations. sales@norcalcarbmobile.com forwards to
+// bgillis99@gmail.com; fsu9913@gmail.com is the third form inbox.
+const FORM_TO = ['bgillis99@gmail.com', 'fsu9913@gmail.com'];
+const FORM_FROM = { email: 'website@norcalcarbmobile.com', name: 'NorCal CARB Mobile Website' };
 const CURRENT_TERMS_VERSION = '2026-07-22';
 const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
 
@@ -383,35 +378,6 @@ function esc(s) {
   return String(s || '').replace(/[<>&]/g, (c) => HTML_ESC[c]);
 }
 
-function parseAddressList(value) {
-  const raw = Array.isArray(value) ? value : String(value == null ? '' : value).split(/[,;]+/);
-  const seen = new Set();
-  const out = [];
-  for (const item of raw) {
-    const email = String(item || '').trim();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) continue;
-    const key = email.toLowerCase();
-    if (seen.has(key)) continue;
-    seen.add(key);
-    out.push(email);
-  }
-  return out;
-}
-
-function isNeverTo(email) {
-  const key = String(email || '').trim().toLowerCase();
-  if (!key) return true;
-  if (NEVER_TO.includes(key)) return true;
-  // Never route form leads to mila@ on any domain.
-  return key.startsWith('mila@');
-}
-
-/** Resend `to` array: required form inboxes, plus any extra allowed CONTACT_TO addresses. */
-function contactToList(env) {
-  const extra = parseAddressList(env && env.CONTACT_TO).filter((email) => !isNeverTo(email));
-  return parseAddressList([...DEFAULT_TO, ...extra]);
-}
-
 function wantsJson(request) {
   return (request.headers.get('accept') || '').includes('application/json');
 }
@@ -436,6 +402,49 @@ function respond(request, ok, message, status) {
   return new Response(null, { status: 303, headers: { Location: location } });
 }
 
+function b64utf8(str) {
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin).replace(/.{1,76}/g, '$&\r\n');
+}
+
+/** Raw RFC 5322 message for the legacy EmailMessage API (one recipient). */
+function rawMime(message, to) {
+  const boundary = 'ncm-' + crypto.randomUUID();
+  const enc = (v) => '=?UTF-8?B?' + btoa(String.fromCharCode(...new TextEncoder().encode(v))) + '?=';
+  const headers = [
+    `From: ${enc(message.from.name)} <${message.from.email}>`,
+    `To: <${to}>`,
+    `Subject: ${enc(message.subject)}`,
+    `Date: ${new Date().toUTCString()}`,
+    `Message-ID: <${crypto.randomUUID()}@norcalcarbmobile.com>`,
+    'MIME-Version: 1.0',
+  ];
+  if (message.replyTo) headers.push(`Reply-To: <${message.replyTo}>`);
+  headers.push(`Content-Type: multipart/alternative; boundary="${boundary}"`);
+  return headers.join('\r\n') + '\r\n\r\n' +
+    `--${boundary}\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n${b64utf8(message.text)}` +
+    `--${boundary}\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n${b64utf8(message.html)}` +
+    `--${boundary}--\r\n`;
+}
+
+/**
+ * Send via the structured send() API. If this runtime only supports the legacy
+ * EmailMessage form (no error code, e.g. a TypeError), fall back to raw MIME,
+ * one message per verified recipient.
+ */
+async function sendLead(env, message) {
+  try {
+    return await env.EMAIL.send(message);
+  } catch (err) {
+    if (err && err.code) throw err;
+    for (const to of message.to) {
+      await env.EMAIL.send(new EmailMessage(message.from.email, to, rawMime(message, to)));
+    }
+  }
+}
+
 async function handleContact(request, env) {
   let data;
   try {
@@ -447,8 +456,8 @@ async function handleContact(request, env) {
   // Honeypot — bots fill "company"; humans never see it.
   if (data.company) return respond(request, true);
 
-  const name = (data.name || '').trim();
-  const phone = (data.phone || '').trim();
+  const name = String(data.name || '').trim().slice(0, 200);
+  const phone = String(data.phone || '').trim().slice(0, 50);
   if (!name || !phone) return respond(request, false, 'Please include your name and a phone number.', 422);
 
   const termsAccepted = String(data.terms_accepted || '').toLowerCase() === 'yes';
@@ -456,56 +465,59 @@ async function handleContact(request, env) {
     return respond(request, false, 'Please accept the Testing Terms & Customer Rights before sending your request.', 422);
   }
 
-  const apiKey = env.RESEND_API_KEY;
-  if (!apiKey) return respond(request, false, 'Please call us directly at (916) 890-4427 to book your test.', 503);
+  if (!env.EMAIL || typeof env.EMAIL.send !== 'function') {
+    return respond(request, false, 'Please call us directly at (916) 890-4427 to book your test.', 503);
+  }
 
+  const field = (k, max) => String(data[k] || '').trim().slice(0, max);
   const lead = {
     name,
     phone,
-    email: (data.email || '').trim(),
-    location: (data.location || '').trim(),
-    service: (data.service || '').trim(),
-    message: (data.message || '').trim(),
-    termsVersion: (data.terms_version || CURRENT_TERMS_VERSION).trim(),
+    email: field('email', 200),
+    city: field('location', 200) || field('city', 200),
+    trucks: field('trucks', 10),
+    service: field('service', 100),
+    message: field('message', 5000),
+    termsVersion: field('terms_version', 40) || CURRENT_TERMS_VERSION,
     submittedAt: new Date().toISOString(),
   };
 
+  const rows = [
+    ['Name', lead.name],
+    ['Phone', lead.phone],
+    ['Email', lead.email],
+    ['City / yard', lead.city],
+    ['Truck count', lead.trucks],
+    ['Service', lead.service],
+    ['Details', lead.message],
+    ['Terms accepted', 'Yes — version ' + lead.termsVersion],
+    ['Submitted', lead.submittedAt],
+  ];
   const html = `
     <h2>New test request — norcalcarbmobile.com</h2>
     <table cellpadding="6" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:15px">
-      <tr><td><strong>Name</strong></td><td>${esc(lead.name)}</td></tr>
-      <tr><td><strong>Phone</strong></td><td>${esc(lead.phone)}</td></tr>
-      <tr><td><strong>Email</strong></td><td>${esc(lead.email)}</td></tr>
-      <tr><td><strong>Location</strong></td><td>${esc(lead.location)}</td></tr>
-      <tr><td><strong>Service</strong></td><td>${esc(lead.service)}</td></tr>
-      <tr><td valign="top"><strong>Details</strong></td><td>${esc(lead.message).replace(/\n/g, '<br>')}</td></tr>
-      <tr><td><strong>Terms accepted</strong></td><td>Yes — version ${esc(lead.termsVersion)}</td></tr>
-      <tr><td><strong>Submitted</strong></td><td>${esc(lead.submittedAt)}</td></tr>
+      ${rows.map(([k, v]) => `<tr><td valign="top"><strong>${k}</strong></td><td>${esc(v).replace(/\n/g, '<br>')}</td></tr>`).join('\n      ')}
     </table>
     <p style="font-family:Arial,sans-serif;font-size:13px;color:#555">New lead from the website contact form. Call or text them to confirm schedule and payment.</p>`;
+  const text = 'New test request — norcalcarbmobile.com\n\n' +
+    rows.map(([k, v]) => `${k}: ${v}`).join('\n') +
+    '\n\nNew lead from the website contact form. Call or text them to confirm schedule and payment.';
 
-  const to = contactToList(env);
-  const payload = {
-    from: env.CONTACT_FROM || DEFAULT_FROM,
-    to,
-    subject: `New test request: ${lead.name.replace(/[\r\n]/g, '')}${lead.location ? ' — ' + lead.location.replace(/[\r\n]/g, '') : ''}`,
+  const oneLine = (v) => v.replace(/[\r\n]+/g, ' ');
+  const message = {
+    to: FORM_TO,
+    from: FORM_FROM,
+    subject: `New test request: ${oneLine(lead.name)}${lead.city ? ' — ' + oneLine(lead.city) : ''}`,
     html,
+    text,
   };
-  const toLower = new Set(to.map((email) => email.toLowerCase()));
-  if (!toLower.has(OWNER_GMAIL.toLowerCase())) {
-    payload.cc = [OWNER_GMAIL];
-  }
-  const cleanEmail = lead.email.replace(/[\r\n]/g, '');
-  if (cleanEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) payload.reply_to = cleanEmail;
+  const cleanEmail = oneLine(lead.email);
+  if (cleanEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) message.replyTo = cleanEmail;
 
   try {
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'content-type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    if (!r.ok) return respond(request, false, 'We couldn’t send that — please call (916) 890-4427.', 502);
-  } catch {
+    await sendLead(env, message);
+  } catch (err) {
+    console.error('contact send failed', err && err.code, err && err.message);
     return respond(request, false, 'We couldn’t send that — please call (916) 890-4427.', 502);
   }
 
