@@ -5,9 +5,10 @@
 name: CTC Reminder Emails
 
 on:
-  schedule:
-    # 15:00 UTC = 8:00 AM PDT / 7:00 AM PST
-    - cron: '0 15 * * *'
+  # Paused 2026-10-16 (owner request): schedule trigger disabled; run manually via workflow_dispatch.
+  # schedule:
+  #   # 15:00 UTC = 8:00 AM PDT / 7:00 AM PST
+  #   - cron: '0 15 * * *'
   workflow_dispatch:
     inputs:
       dry_run:

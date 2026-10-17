@@ -2,8 +2,9 @@
 name: Email Preflight
 
 on:
-  schedule:
-    - cron: '0 14 * * *'
+  # Paused 2026-10-16 (owner request): schedule trigger disabled; run manually via workflow_dispatch.
+  # schedule:
+  #   - cron: '0 14 * * *'
   workflow_dispatch:
 
 jobs:

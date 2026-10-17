@@ -4,8 +4,9 @@
 name: CTC Subscriber Nurture
 
 on:
-  schedule:
-    - cron: '30 15 * * *'
+  # Paused 2026-10-16 (owner request): schedule trigger disabled; run manually via workflow_dispatch.
+  # schedule:
+  #   - cron: '30 15 * * *'
   workflow_dispatch:
     inputs:
       job:

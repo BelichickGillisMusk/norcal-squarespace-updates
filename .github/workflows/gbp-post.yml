@@ -4,8 +4,9 @@
 name: gbp-post
 
 on:
-  schedule:
-    - cron: '0 17 * * 2'
+  # Paused 2026-10-16 (owner request): schedule trigger disabled; run manually via workflow_dispatch.
+  # schedule:
+  #   - cron: '0 17 * * 2'
   workflow_dispatch:
     inputs:
       dry_run:
