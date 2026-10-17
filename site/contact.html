@@ -27,6 +27,7 @@
     })();
   </script>
   <script src="/assets/js/theme-i18n.js" defer></script>
+  <script src="/assets/js/form-analytics.js" defer></script>
 </head>
 <body class="contact-page">
 <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
@@ -155,7 +156,7 @@
 
       <div class="card" id="contact-card">
         <h2 style="margin-top:0" data-i18n="form_title">Request a test</h2>
-        <form id="contact-form" method="POST" action="/api/contact">
+        <form id="contact-form" data-ncm-form="contact" method="POST" action="/api/contact">
           <div class="field">
             <label for="name" data-i18n="label_name">Name</label>
             <input id="name" name="name" type="text" autocomplete="name" required>
@@ -264,7 +265,7 @@
         var dict = (window.NCM_UI && window.NCM_UI.strings[document.documentElement.getAttribute('data-lang') || 'en']) || {};
         status.textContent = dict.sending || 'Sending…';
         fetch(form.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) })
-          .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+          .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, status: r.status, j: j }; }); })
           .then(function (res) {
             if (res.ok) {
               form.reset();
@@ -272,11 +273,13 @@
               if (b) { b.hidden = false; b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
               status.textContent = '';
             } else {
+              if (window.ncmTrack) window.ncmTrack('form_error', { form: 'contact', error_type: res.status >= 500 ? 'server' : 'validation' });
               status.textContent = (res.j && res.j.error) || dict.error || 'We could not send that request. Please call (916) 890-4427.';
               btn.disabled = false;
             }
           })
           .catch(function () {
+            if (window.ncmTrack) window.ncmTrack('form_error', { form: 'contact', error_type: 'server' });
             status.textContent = dict.error || 'We could not send that request. Please call (916) 890-4427.';
             btn.disabled = false;
           });
