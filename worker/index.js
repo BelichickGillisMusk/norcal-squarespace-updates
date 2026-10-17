@@ -18,6 +18,11 @@
 
 import { EmailMessage } from 'cloudflare:email';
 import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
+import site from '../config/site.json';
+import { expandHtmlTokens, expandTokens, tokenMap } from '../scripts/site-lock/site-copy.mjs';
+
+const SITE_TOKENS = tokenMap(site);
+const CALL_DISPLAY = site.phones.primary.display;
 
 // Sole form-lead inbox (Bryan's 10/16 lock): bgillis99@gmail.com, a verified
 // Email Routing destination. sales@norcalcarbmobile.com also forwards there.
@@ -62,14 +67,14 @@ function schemaTag(pageUrl) {
         legalName: 'NorCal CARB Mobile LLC',
         alternateName: 'NorCal CARB Mobile',
         url: 'https://norcalcarbmobile.com/',
-        telephone: '+1-916-890-4427',
+        telephone: site.phones.primary.schema,
         email: 'sales@norcalcarbmobile.com',
         image: LOGO_URL,
         logo: { '@type': 'ImageObject', url: LOGO_URL },
         priceRange: socal ? '$99-$249' : '$75-$229',
         description: socal
           ? 'Mobile OVI Test. OBD $99. OVI smoke $249. 50-mile radius of 92553, Moreno Valley.'
-          : 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Headquarters in Northern California. OBD $75. OVI $199.',
+          : `Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Headquarters in ${site.serviceArea.name}. OBD $75. OVI $199.`,
         knowsAbout: [
           'CARB Clean Truck Check',
           'SAE J1667 Smoke Opacity Testing',
@@ -77,13 +82,7 @@ function schemaTag(pageUrl) {
           'OBD Clean Truck Check Testing',
           'OVI Clean Truck Check Testing'
         ],
-        areaServed: [
-          'Sacramento County', 'Placer County', 'El Dorado County', 'Yolo County',
-          'Yuba County', 'Butte County', 'San Joaquin County', 'Contra Costa County',
-          'Solano County', 'Napa County', 'Santa Clara County', 'Sonoma County',
-          'Alameda County', 'Stanislaus County', 'Merced County', 'Fresno County',
-          'Tulare County', 'Tuolumne County', 'San Diego County'
-        ].map((name) => ({ '@type': 'AdministrativeArea', name })).concat(socal ? [{
+        areaServed: site.serviceArea.counties.map((name) => ({ '@type': 'AdministrativeArea', name })).concat(socal ? [{
           '@type': 'GeoCircle',
           name: '50 miles of 92553, Moreno Valley, CA',
           geoMidpoint: {
@@ -200,7 +199,7 @@ const REDIRECTS = {
   // '/clean-truck-check-lodi': '/areas#lodi',
   '/clean-truck-check-roseville': '/areas#roseville',
   '/carb-mobile-clean-truck-check-antioch-california': '/areas#antioch',
-  // San Diego County booking/pricing lives on the sibling site. Absolute Location
+  // San Diego booking/pricing lives on the sibling site. Absolute Location
   // is returned as-is by the redirect handler. Trailing-slash keys are listed
   // because lookup is exact, then one trailing slash stripped.
   '/clean-truck-check-san-diego': 'https://mobilecarbsmoketest.com/',
@@ -450,7 +449,7 @@ async function handleContact(request, env) {
   try {
     data = await readBody(request);
   } catch {
-    return respond(request, false, 'Please try again, or call us at (916) 890-4427.', 400);
+    return respond(request, false, `Please try again, or call us at ${CALL_DISPLAY}.`, 400);
   }
 
   // Honeypot — bots fill "company"; humans never see it.
@@ -466,7 +465,7 @@ async function handleContact(request, env) {
   }
 
   if (!env.EMAIL || typeof env.EMAIL.send !== 'function') {
-    return respond(request, false, 'Please call us directly at (916) 890-4427 to book your test.', 503);
+    return respond(request, false, `Please call us directly at ${CALL_DISPLAY} to book your test.`, 503);
   }
 
   const field = (k, max) => String(data[k] || '').trim().slice(0, max);
@@ -518,7 +517,7 @@ async function handleContact(request, env) {
     await sendLead(env, message);
   } catch (err) {
     console.error('contact send failed', err && err.code, err && err.message);
-    return respond(request, false, 'We couldn’t send that — please call (916) 890-4427.', 502);
+    return respond(request, false, `We couldn’t send that — please call ${CALL_DISPLAY}.`, 502);
   }
 
   return respond(request, true);
@@ -564,7 +563,22 @@ export default {
     const assetRes = await env.ASSETS.fetch(request);
     const ct = assetRes.headers.get('content-type') || '';
     const force404 = canonicalPath(url.pathname) === '/404' || assetRes.status === 404;
-    if (!ct.includes('text/html')) return force404 ? notFound(assetRes) : assetRes;
+    const expandable = /text\/html|text\/plain/.test(ct) || /\.(html?|txt)$/.test(url.pathname);
+    if (!expandable) return force404 ? notFound(assetRes) : assetRes;
+    const headers = new Headers(assetRes.headers);
+    headers.delete('content-length');
+    const rawBody = await assetRes.text();
+    const html = ct.includes('text/html') || url.pathname.endsWith('.html') || url.pathname.endsWith('.htm');
+    let body = html ? expandHtmlTokens(rawBody, SITE_TOKENS) : expandTokens(rawBody, SITE_TOKENS);
+    if (!html) {
+      const plain = new Response(body, { status: assetRes.status, headers });
+      return force404 ? notFound(plain) : plain;
+    }
+    if (!body.includes('window.NCM_SITE=')) {
+      const boot = `<script>window.NCM_SITE=${JSON.stringify(site).replace(/</g, '\\u003c')}</script>`;
+      body = body.includes('</head>') ? body.replace('</head>', `${boot}</head>`) : `${boot}${body}`;
+    }
+    const expanded = new Response(body, { status: assetRes.status, headers });
     const page = new HTMLRewriter()
       .on('head', {
         element(el) {
@@ -577,7 +591,7 @@ export default {
           el.append(CF_WEB_ANALYTICS_BEACON, { html: true });
         },
       })
-      .transform(assetRes);
+      .transform(expanded);
     return force404 ? notFound(page) : page;
   },
 };

@@ -1,0 +1,72 @@
+{
+  "phones": {
+    "primary": {
+      "display": "(916) 890-4427",
+      "compact": "916-890-4427",
+      "href": "tel:+19168904427",
+      "e164": "+19168904427",
+      "schema": "+1-916-890-4427"
+    },
+    "secondary": {
+      "display": "(628) 999-3912",
+      "compact": "628-999-3912",
+      "href": "tel:+16289993912",
+      "e164": "+16289993912",
+      "schema": "+1-628-999-3912"
+    }
+  },
+  "serviceArea": {
+    "name": "Northern California",
+    "nameEs": "Norte de California",
+    "summary": "Sacramento, the Bay Area & the Central Valley",
+    "summaryEs": "Sacramento, el Área de la Bahía y el Valle Central",
+    "serving": "Serving Sacramento, the Bay Area & the Central Valley",
+    "servingEs": "Servimos Sacramento, el Área de la Bahía y el Valle Central",
+    "homepageOpenBar": "Northern California · OBD and OVI · Sacramento, Stockton, Bay Area",
+    "contactOpenBar": "Northern California · OBD and OVI · Sacramento · Bay Area · Stockton",
+    "contactOpenBarEs": "Norte de California · OBD y OVI · Sacramento · Área de la Bahía · Stockton",
+    "footerAreas": "Northern California · Sacramento, Stockton, Bay Area",
+    "corridor": "Sacramento, Stockton, Bay Area",
+    "areaCopy": "Sacramento · Bay Area · Stockton · Central Valley",
+    "areaCopyEs": "Sacramento · Área de la Bahía · Stockton · Valle Central",
+    "tagline": "Northern California · OBD & OVI",
+    "taglineEs": "Norte de California · OBD y OVI",
+    "nap": "Mobile service · Northern California",
+    "llms": "Sacramento, Stockton, Bay Area (Oakland, Hayward, San Jose corridor), Central Valley, Napa/Sonoma, Butte County, and surrounding NorCal yards.",
+    "mapAlt": "Northern California coverage for mobile Clean Truck Check: Sacramento, the Bay Area, Stockton and the Central Valley",
+    "mapAltEs": "Cobertura en el Norte de California para Clean Truck Check móvil: Sacramento, el Área de la Bahía, Stockton y el Valle Central",
+    "lede": "OBD is $75. OVI is $199. We test at your yard in Northern California, 7 days a week.",
+    "ledeEs": "OBD $75. OVI $199. Probamos en su patio en el Norte de California, los 7 días.",
+    "counties": [
+      "Sacramento County",
+      "Placer County",
+      "El Dorado County",
+      "Yolo County",
+      "Yuba County",
+      "Butte County",
+      "San Joaquin County",
+      "Contra Costa County",
+      "Solano County",
+      "Napa County",
+      "Santa Clara County",
+      "Sonoma County",
+      "Alameda County",
+      "Stanislaus County",
+      "Merced County",
+      "Fresno County",
+      "Tulare County",
+      "Tuolumne County",
+      "San Diego County"
+    ]
+  },
+  "reviews": {
+    "rating": "5.0",
+    "count": 34,
+    "line": "5.0 · 34 Google reviews",
+    "lineEs": "5.0 · 34 reseñas de Google",
+    "homeKicker": "Google 5-star, 34 reviews",
+    "homeBand": "5.0 stars · 34 Google reviews",
+    "homeLink": "Read all 34 reviews on Google",
+    "pill": "★ 5.0 · 34 on Google"
+  }
+}

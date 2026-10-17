@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact NorCal CARB Mobile — We come to you. Clean Truck Check.</title>
-  <meta name="description" content="Mobile Clean Truck Check in Northern California — Sacramento, the Bay Area, Stockton and the Central Valley. OBD $75 and OVI $199 at your yard. Call (916) 890-4427.">
+  <meta name="description" content="Mobile Clean Truck Check in {{serviceArea.name}} — Sacramento, the Bay Area, Stockton and the Central Valley. OBD $75 and OVI $199 at your yard. Call {{phone.primary.display}}.">
   <link rel="canonical" href="https://norcalcarbmobile.com/contact">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,7 @@
       <img class="brand-logo" src="/assets/img/ncm-logo.png" width="144" height="144" alt="NorCal CARB Mobile — stacked NCM road lockup" loading="eager">
       <span class="ncm-i18n">
         <span data-i18n="tagline">Mobile Smoke &amp; OBD Testing</span>
-        <span data-i18n="serving">Serving Sacramento, the Bay Area &amp; the Central Valley</span>
+        <span data-i18n="serving">{{serviceArea.serving}}</span>
       </span>
     </a>
     <nav class="nav" aria-label="Primary">
@@ -61,13 +61,13 @@
         </div>
       </div>
       <span class="header-cta">
-        <a class="btn btn-book" href="tel:+19168904427" data-i18n="call_btn">Call (916) 890-4427</a>
+        <a class="btn btn-book" href="{{phone.primary.href}}" data-i18n="call_btn">Call {{phone.primary.display}}</a>
       </span>
     </nav>
   </div>
 </header>
 
-<p class="open-bar"><span class="wrap" data-i18n="open_bar" data-i18n-html>Northern California · OBD and OVI · Sacramento · Bay Area · Stockton</span></p>
+<p class="open-bar"><span class="wrap" data-i18n="open_bar" data-i18n-html>{{serviceArea.contactOpenBar}}</span></p>
 
 <main id="main">
   <section class="hero">
@@ -77,13 +77,13 @@
       <div class="hero-grid">
         <div class="hero-copy">
           <h1 data-i18n="h1">We come to you. Clean Truck Check.</h1>
-          <p class="lede" data-i18n="lede">OBD is $75. OVI is $199. We test at your yard in Northern California, 7 days a week.</p>
+          <p class="lede" data-i18n="lede">{{serviceArea.lede}}</p>
           <div class="hero-cta">
-            <a class="btn btn-primary btn-lg" href="tel:+19168904427" data-i18n="call_btn">Call (916) 890-4427</a>
+            <a class="btn btn-primary btn-lg" href="{{phone.primary.href}}" data-i18n="call_btn">Call {{phone.primary.display}}</a>
             <a class="btn btn-ghost btn-lg" href="#request" data-i18n="request_cb">Request a callback</a>
           </div>
-          <p class="reviews-line"><span class="stars">★★★★★</span> <span data-i18n="reviews_line">5.0 · 34 Google reviews</span> · <a href="/reviews" data-i18n="reviews_read">Read our Google reviews</a></p>
-          <p class="hero-areas"><a href="tel:+19168904427">(916) 890-4427</a> · Northern California</p>
+          <p class="reviews-line"><span class="stars">★★★★★</span> <span data-i18n="reviews_line">{{reviews.line}}</span> · <a href="/reviews" data-i18n="reviews_read">Read our Google reviews</a></p>
+          <p class="hero-areas"><a href="{{phone.primary.href}}">{{phone.primary.display}}</a> · {{serviceArea.name}}</p>
         </div>
         <div class="hero-map">
           <div class="contact-map-frame">
@@ -107,13 +107,13 @@
           <h3 data-i18n="tile_obd">OBD</h3>
           <div class="price">$75<small data-i18n="tile_obd_sub"> / vehicle</small></div>
           <p data-i18n="tile_obd_copy">On-board diagnostic Clean Truck Check for 2013+ diesel trucks.</p>
-          <a class="btn btn-primary" href="tel:+19168904427" data-i18n="call_to_book">Call to book</a>
+          <a class="btn btn-primary" href="{{phone.primary.href}}" data-i18n="call_to_book">Call to book</a>
         </div>
         <div class="card price-card feature">
           <h3 data-i18n="tile_ovi">Mobile OVI</h3>
           <div class="price">$199<small data-i18n="tile_ovi_sub"> / vehicle</small></div>
           <p data-i18n="tile_ovi_copy">Smoke opacity test when OBD does not apply — older units and many motorhomes.</p>
-          <a class="btn btn-primary" href="tel:+19168904427" data-i18n="call_to_book">Call to book</a>
+          <a class="btn btn-primary" href="{{phone.primary.href}}" data-i18n="call_to_book">Call to book</a>
         </div>
         <div class="card price-card">
           <h3 data-i18n="tile_mh">Motorhome</h3>
@@ -131,7 +131,7 @@
         <div class="contact-method">
           <div>
             <strong data-i18n="phone_label">Call or text</strong><br>
-            <a href="tel:+19168904427">(916) 890-4427</a>
+            <a href="{{phone.primary.href}}">{{phone.primary.display}}</a>
           </div>
         </div>
         <div class="contact-method">
@@ -208,7 +208,7 @@
 </main>
 
 <div class="mobile-callbar" aria-label="Call now">
-  <a class="btn btn-book" href="tel:+19168904427" data-i18n="call_btn">Call (916) 890-4427</a>
+  <a class="btn btn-book" href="{{phone.primary.href}}" data-i18n="call_btn">Call {{phone.primary.display}}</a>
   <a class="btn btn-call" href="#request" data-i18n="mobile_book">Book</a>
 </div>
 
@@ -221,7 +221,7 @@
       </div>
       <div>
         <h4 data-i18n="foot_contact">Contact</h4>
-        <p><a href="tel:+19168904427">(916) 890-4427</a><br>
+        <p><a href="{{phone.primary.href}}">{{phone.primary.display}}</a><br>
         <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
       </div>
       <div>
@@ -272,12 +272,12 @@
               if (b) { b.hidden = false; b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
               status.textContent = '';
             } else {
-              status.textContent = (res.j && res.j.error) || dict.error || 'We could not send that request. Please call (916) 890-4427.';
+              status.textContent = (res.j && res.j.error) || dict.error || 'We could not send that request. Please call {{phone.primary.display}}.';
               btn.disabled = false;
             }
           })
           .catch(function () {
-            status.textContent = dict.error || 'We could not send that request. Please call (916) 890-4427.';
+            status.textContent = dict.error || 'We could not send that request. Please call {{phone.primary.display}}.';
             btn.disabled = false;
           });
       });

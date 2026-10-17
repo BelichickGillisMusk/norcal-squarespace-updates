@@ -1,9 +1,12 @@
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
+import { expandHtmlTokens, expandTokens, tokenMap } from "./site-copy.mjs";
 
 const root = new URL("../../", import.meta.url).pathname;
 const lock = JSON.parse(readFileSync(join(root, "config/site-template-lock.json"), "utf8"));
+const siteCopy = JSON.parse(readFileSync(join(root, "config/site.json"), "utf8"));
+const siteTokens = tokenMap(siteCopy);
 const failures = [];
 
 function fail(message) {
@@ -11,7 +14,10 @@ function fail(message) {
 }
 
 function text(path) {
-  return readFileSync(join(root, path), "utf8");
+  const raw = readFileSync(join(root, path), "utf8");
+  if (path.endsWith(".html")) return expandHtmlTokens(raw, siteTokens);
+  if (path.endsWith(".txt")) return expandTokens(raw, siteTokens);
+  return raw;
 }
 
 function hash(path) {
@@ -45,11 +51,16 @@ for (const [token, value] of Object.entries(lock.requiredColors)) {
 }
 
 const worker = text("worker/index.js");
-if (!worker.includes(`telephone: \'${lock.requiredPhoneSchema}\'`)) fail("Sitewide schema phone changed.");
+if (siteCopy.phones.primary.schema !== lock.requiredPhoneSchema) fail("site.json primary schema phone drifted from the lock.");
+if (siteCopy.phones.primary.href !== lock.requiredPhoneHref) fail("site.json primary phone link drifted from the lock.");
+if (siteCopy.phones.primary.display !== lock.requiredPhoneDisplay) fail("site.json primary phone display drifted from the lock.");
+if (!siteCopy.phones.secondary || !siteCopy.phones.secondary.display) fail("site.json is missing the secondary phone.");
+if (!worker.includes("site.phones.primary.schema")) fail("Sitewide schema phone must be read from site.json.");
+if (!worker.includes("from '../config/site.json'") && !worker.includes('from "../config/site.json"')) fail("Worker schema must import config/site.json.");
 if (/"address"\s*:|"streetAddress"\s*:|"postalCode"\s*:/.test(worker)) fail("Public Worker schema must not expose a street or mailing address.");
-if (!worker.includes("areaServed: [")) fail("Sitewide schema is missing areaServed.");
+if (!worker.includes("site.serviceArea.counties")) fail("Sitewide schema areaServed must be read from site.json.");
 for (const area of lock.requiredServiceAreas) {
-  if (!worker.includes(`\'${area}\'`)) fail(`Sitewide schema is missing service area: ${area}`);
+  if (!siteCopy.serviceArea.counties.includes(area)) fail(`site.json is missing service area: ${area}`);
 }
 
 const homepage = text("site/index.html");
