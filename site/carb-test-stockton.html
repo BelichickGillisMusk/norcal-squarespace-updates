@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CARB Test Stockton | Port, Lathrop, Lodi | NorCal CARB Mobile</title>
-  <meta name="description" content="Mobile CARB Clean Truck Check in Stockton and San Joaquin County. Port of Stockton, Lathrop and Manteca yards, Lodi ag. I-5, Highway 99, I-205. OBD $75 · OVI $199. (916) 890-4427.">
+  <meta name="description" content="Mobile CARB Clean Truck Check in Stockton and {{serviceArea.county.SanJoaquinCounty}}. Port of Stockton, Lathrop and Manteca yards, Lodi ag. I-5, Highway 99, I-205. OBD $75 · OVI $199. {{phone.primary.display}}.">
   <link rel="canonical" href="https://norcalcarbmobile.com/carb-test-stockton">
-  <meta property="og:title" content="CARB Test Stockton | San Joaquin County">
+  <meta property="og:title" content="CARB Test Stockton | {{serviceArea.county.SanJoaquinCounty}}">
   <meta property="og:description" content="We test at the yard in Stockton, Lodi, Lathrop, Manteca, and Tracy. OBD $75 · OVI $199.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://norcalcarbmobile.com/carb-test-stockton">
@@ -26,7 +26,7 @@
       },
       {
         "@type": "Service",
-        "name": "CARB test Stockton — San Joaquin County",
+        "name": "CARB test Stockton — {{serviceArea.county.SanJoaquinCounty}}",
         "serviceType": "CARB Clean Truck Check (HD I/M) emissions testing",
         "provider": {"@id": "https://norcalcarbmobile.com/#business"},
         "areaServed": ["Stockton, CA", "Lodi, CA", "Manteca, CA", "Lathrop, CA", "Tracy, CA", "Ripon, CA", "Escalon, CA", "French Camp, CA"],
@@ -58,7 +58,7 @@
       <a class="navlink" href="/contact">Contact</a>
       <span class="header-cta">
         <a class="btn btn-ghost btn-book" href="/contact">Book a Test</a>
-        <a class="btn btn-call" href="tel:+19168904427">Call (916) 890-4427</a>
+        <a class="btn btn-call" href="{{phone.primary.href}}">Call {{phone.primary.display}}</a>
       </span>
     </nav>
   </div>
@@ -71,7 +71,7 @@
       <p class="lede">Mobile Clean Truck Check for Stockton fleets: Port of Stockton drayage, Lathrop and Manteca distribution yards, and Lodi ag haulers. We test at the yard, dock, or staging lot on I-5, Highway 99, and I-205. No station trip.</p>
       <div class="hero-cta">
         <a class="btn btn-primary btn-lg" href="/contact">Book a Mobile Test</a>
-        <a class="btn btn-ghost btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
+        <a class="btn btn-ghost btn-lg" href="{{phone.primary.href}}">Call {{phone.primary.display}}</a>
       </div>
     </div>
   </section>
@@ -85,7 +85,7 @@
         </div>
         <div class="card">
           <h2>Where this page stops</h2>
-          <p>This page is San Joaquin County. East Bay yards use <a href="/clean-truck-check-hayward">Hayward</a>. Highway 101 uses <a href="/carb-test-bay-area">CARB test Bay Area</a>.</p>
+          <p>This page is {{serviceArea.county.SanJoaquinCounty}}. East Bay yards use <a href="/clean-truck-check-hayward">Hayward</a>. Highway 101 uses <a href="/carb-test-bay-area">CARB test Bay Area</a>.</p>
           <p>Licensed tester IF530523. Same-day CTC-VIS submission. The due date for a VIN is in CTC-VIS, not on this page.</p>
         </div>
       </div>
@@ -113,7 +113,7 @@
       <p>Call with the city and the truck count.</p>
       <div class="hero-cta center" style="justify-content:center">
         <a class="btn btn-ghost btn-lg" href="/contact">Book a Test</a>
-        <a class="btn btn-call btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
+        <a class="btn btn-call btn-lg" href="{{phone.primary.href}}">Call {{phone.primary.display}}</a>
       </div>
     </div>
   </section>
@@ -123,11 +123,11 @@
     <div class="foot-grid">
       <div>
         <h4>NorCal CARB Mobile</h4>
-        <p class="muted">Mobile CARB Clean Truck Check testing (OBD &amp; OVI). We come to your yard across Northern California.</p>
+        <p class="muted">Mobile CARB Clean Truck Check testing (OBD &amp; OVI). We come to your yard across {{serviceArea.name}}.</p>
       </div>
       <div>
         <h4>Contact</h4>
-        <p><a href="tel:+19168904427">(916) 890-4427</a><br>
+        <p><a href="{{phone.primary.href}}">{{phone.primary.display}}</a><br>
         <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
       </div>
       <div>

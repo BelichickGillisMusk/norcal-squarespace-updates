@@ -8,6 +8,7 @@ on:
       - wrangler.toml
       - wrangler.jsonc
       - config/site-template-lock.json
+      - config/site.json
       - scripts/site-lock/**
       - .github/workflows/site-lock.yml
       - .github/workflows/deploy-norcal.yml
@@ -19,6 +20,7 @@ on:
       - wrangler.toml
       - wrangler.jsonc
       - config/site-template-lock.json
+      - config/site.json
       - scripts/site-lock/**
 
 permissions:
@@ -34,3 +36,5 @@ jobs:
           node-version: "20"
       - name: Enforce approved NorCal template
         run: node scripts/site-lock/validate.mjs
+      - name: Phones and service area stay in site.json
+        run: node scripts/site-lock/check-site-copy.mjs

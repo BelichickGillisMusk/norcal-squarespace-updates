@@ -18,23 +18,16 @@
       nav_blog: 'Blog',
       nav_contact: 'Contact',
       nav_menu: 'Menu',
-      call_btn: 'Call (916) 890-4427',
       book_online: 'Book online',
       theme_dark: 'Dark',
       theme_light: 'Light',
       theme_label: 'Color mode',
       lang_label: 'Language',
-      tagline: 'Northern California · OBD & OVI',
-      serving: 'Serving Sacramento, the Bay Area & the Central Valley',
       nap_name: 'NorCal CARB Mobile · Mobile Clean Truck Check',
-      reviews_line: '5.0 · 34 Google reviews',
       reviews_read: 'Read our Google reviews',
       cred_alt: 'NorCal CARB Mobile — Clean Truck Check credentialed tester',
       h1: 'We come to you. Clean Truck Check.',
-      lede: 'OBD is $75. OVI is $199. We test at your yard in Northern California, 7 days a week.',
-      open_bar: 'Northern California · OBD and OVI · Sacramento · Bay Area · Stockton',
       sent: 'Thank you, somebody will be in touch.',
-      error: 'We could not send that request. Please call (916) 890-4427.',
       sending: 'Sending…',
       prices_how: 'How much',
       tile_obd: 'OBD',
@@ -47,7 +40,6 @@
       tile_mh_copy: 'RV / motorhome testing at your location. Motorhome is its own appointment.',
       call_to_book: 'Call to book',
       request_cb: 'Request a callback',
-      map_alt: 'Northern California coverage for mobile Clean Truck Check: Sacramento, the Bay Area, Stockton and the Central Valley',
       chips_label: 'Ads corridor',
       form_title: 'Request a test',
       label_name: 'Name',
@@ -71,7 +63,6 @@
       email_label: 'Email',
       phone_label: 'Call or text',
       area_label: 'Where we test',
-      area_copy: 'Sacramento · Bay Area · Stockton · Central Valley',
       foot_blurb: 'Mobile Clean Truck Check testing (OBD and OVI). We come to you.',
       foot_contact: 'Contact',
       foot_policies: 'Policies',
@@ -90,23 +81,16 @@
       nav_blog: 'Blog',
       nav_contact: 'Contacto',
       nav_menu: 'Menú',
-      call_btn: 'Llamar (916) 890-4427',
       book_online: 'Reservar en línea',
       theme_dark: 'Oscuro',
       theme_light: 'Claro',
       theme_label: 'Modo de color',
       lang_label: 'Idioma',
-      tagline: 'Norte de California · OBD y OVI',
-      serving: 'Servimos Sacramento, el Área de la Bahía y el Valle Central',
       nap_name: 'NorCal CARB Mobile · Mobile Clean Truck Check',
-      reviews_line: '5.0 · 34 reseñas de Google',
       reviews_read: 'Lea nuestras reseñas de Google',
       cred_alt: 'NorCal CARB Mobile — Clean Truck Check credentialed tester',
       h1: 'Vamos a usted. Clean Truck Check.',
-      lede: 'OBD $75. OVI $199. Probamos en su patio en el Norte de California, los 7 días.',
-      open_bar: 'Norte de California · OBD y OVI · Sacramento · Área de la Bahía · Stockton',
       sent: 'Gracias, alguien se pondrá en contacto pronto.',
-      error: 'No pudimos enviar esa solicitud. Llame al (916) 890-4427.',
       sending: 'Enviando…',
       prices_how: 'Cuánto cuesta',
       tile_obd: 'OBD',
@@ -119,7 +103,6 @@
       tile_mh_copy: 'Pruebas de RV / casa rodante en su ubicación. La casa rodante es su propia cita.',
       call_to_book: 'Llamar para reservar',
       request_cb: 'Pedir una llamada',
-      map_alt: 'Cobertura en el Norte de California para Clean Truck Check móvil: Sacramento, el Área de la Bahía, Stockton y el Valle Central',
       chips_label: 'Corredor',
       form_title: 'Solicitar una prueba',
       label_name: 'Nombre',
@@ -143,7 +126,6 @@
       email_label: 'Correo',
       phone_label: 'Llame o envíe un mensaje',
       area_label: 'Dónde probamos',
-      area_copy: 'Sacramento · Área de la Bahía · Stockton · Valle Central',
       foot_blurb: 'Pruebas móviles Clean Truck Check (OBD y OVI). Vamos a usted.',
       foot_contact: 'Contacto',
       foot_policies: 'Políticas',
@@ -170,8 +152,31 @@
     return lang;
   }
 
+  function dictFor(lang) {
+    var base = Object.assign({}, strings[lang] || strings.en);
+    var config = window.NCM_SITE || {};
+    var area = config.serviceArea || {};
+    var reviews = config.reviews || {};
+    var phone = (config.phones && config.phones.primary) || {};
+    var es = lang === 'es';
+    if (area.tagline) base.tagline = es ? area.taglineEs : area.tagline;
+    if (area.serving) base.serving = es ? area.servingEs : area.serving;
+    if (reviews.line) base.reviews_line = es ? reviews.lineEs : reviews.line;
+    if (area.lede) base.lede = es ? area.ledeEs : area.lede;
+    if (area.contactOpenBar) base.open_bar = es ? area.contactOpenBarEs : area.contactOpenBar;
+    if (area.mapAlt) base.map_alt = es ? area.mapAltEs : area.mapAlt;
+    if (area.areaCopy) base.area_copy = es ? area.areaCopyEs : area.areaCopy;
+    if (phone.display) {
+      base.call_btn = (es ? 'Llamar ' : 'Call ') + phone.display;
+      base.error = es
+        ? 'No pudimos enviar esa solicitud. Llame al ' + phone.display + '.'
+        : 'We could not send that request. Please call ' + phone.display + '.';
+    }
+    return base;
+  }
+
   function applyI18n(lang) {
-    var dict = strings[lang] || strings.en;
+    var dict = dictFor(lang);
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       var key = el.getAttribute('data-i18n');
       if (!key || !dict[key]) return;
@@ -240,7 +245,10 @@
   });
 
   window.NCM_UI = {
-    strings: strings,
+    strings: {
+      get en() { return dictFor('en'); },
+      get es() { return dictFor('es'); }
+    },
     setTheme: setTheme,
     setLang: setLang,
     theme: function () { return document.documentElement.getAttribute('data-theme'); },

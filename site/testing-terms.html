@@ -34,7 +34,7 @@
       <a class="navlink" href="/contact">Contact</a>
       <span class="header-cta">
         <a class="btn btn-ghost btn-book" href="/contact">Book a Test</a>
-        <a class="btn btn-call" href="tel:+19168904427">Call (916) 890-4427</a>
+        <a class="btn btn-call" href="{{phone.primary.href}}">Call {{phone.primary.display}}</a>
       </span>
     </nav>
   </div>
@@ -102,7 +102,7 @@
       <h2>10. Contact</h2>
       <p>Questions, cancellations, or rescheduling requests should be sent as soon as possible:</p>
       <p><strong>NorCal CARB Mobile LLC</strong><br>
-      Phone or text: <a href="tel:+19168904427">(916) 890-4427</a><br>
+      Phone or text: <a href="{{phone.primary.href}}">{{phone.primary.display}}</a><br>
       Email: <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
 
       <div class="card" style="margin-top:32px">
@@ -119,11 +119,11 @@
     <div class="foot-grid">
       <div>
         <h4>NorCal CARB Mobile</h4>
-        <p class="muted">Mobile CARB Clean Truck Check testing (OBD &amp; OVI). We come to your yard across Northern California.</p>
+        <p class="muted">Mobile CARB Clean Truck Check testing (OBD &amp; OVI). We come to your yard across {{serviceArea.name}}.</p>
       </div>
       <div>
         <h4>Contact</h4>
-        <p><a href="tel:+19168904427">(916) 890-4427</a><br>
+        <p><a href="{{phone.primary.href}}">{{phone.primary.display}}</a><br>
         <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
       </div>
       <div>

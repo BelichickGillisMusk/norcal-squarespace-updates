@@ -1,8 +1,8 @@
 # NorCal CARB Mobile
-> Mobile CARB Clean Truck Check testing across Northern California. We come to your yard.
+> Mobile CARB Clean Truck Check testing across {{serviceArea.name}}. We come to your yard.
 
 ## Contact
-- Phone: (916) 890-4427
+- Phone: {{phone.primary.display}}
 - Web: https://norcalcarbmobile.com
 - Book: https://norcalcarbmobile.com/contact
 
@@ -25,7 +25,7 @@
 - https://norcalcarbmobile.com/contact
 
 ## Service areas
-Sacramento, Stockton, Bay Area (Oakland, Hayward, San Jose corridor), Central Valley, Napa/Sonoma, Butte County, and surrounding NorCal yards.
+{{serviceArea.llms}}
 
 ## Blog (start here for AI grounding)
 - https://norcalcarbmobile.com/blog/how-mobile-carb-testing-works
@@ -37,4 +37,4 @@ Sacramento, Stockton, Bay Area (Oakland, Hayward, San Jose corridor), Central Va
 - Clean Truck Check is CARB HD periodic testing (not light-duty Smog Check).
 - Test type depends on engine year / equipment: OBD scan vs OVI opacity.
 - Always confirm each VIN deadline in the customer's CTC-VIS account.
-- Public CTA: (916) 890-4427 · norcalcarbmobile.com
+- Public CTA: {{phone.primary.display}} · norcalcarbmobile.com

@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mobile Clean Truck Check in NorCal | NorCal CARB Mobile</title>
-  <meta name="description" content="Mobile CARB Clean Truck Check at your yard in Sacramento, the Bay Area, Stockton and the Central Valley. OBD $75, OVI $199. Call (916) 890-4427.">
+  <meta name="description" content="Mobile CARB Clean Truck Check at your yard in Sacramento, the Bay Area, Stockton and the Central Valley. OBD $75, OVI $199. Call {{phone.primary.display}}.">
   <link rel="canonical" href="https://norcalcarbmobile.com/">
   <meta property="og:title" content="Mobile Clean Truck Check in NorCal | NorCal CARB Mobile">
-  <meta property="og:description" content="Mobile CARB Clean Truck Check at your yard in Sacramento, the Bay Area, Stockton and the Central Valley. OBD $75, OVI $199. Call (916) 890-4427.">
+  <meta property="og:description" content="Mobile CARB Clean Truck Check at your yard in Sacramento, the Bay Area, Stockton and the Central Valley. OBD $75, OVI $199. Call {{phone.primary.display}}.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://norcalcarbmobile.com/">
   <meta property="og:image" content="https://norcalcarbmobile.com/assets/img/norcal-carb-mobile-logo-web-512x512.png">
@@ -26,10 +26,10 @@
     "@type": "LocalBusiness",
     "name": "NorCal CARB Mobile",
     "url": "https://norcalcarbmobile.com/",
-    "telephone": "+1-916-890-4427",
+    "telephone": "{{phone.primary.schema}}",
     "email": "sales@norcalcarbmobile.com",
-    "description": "Mobile Clean Truck Check at your yard in Northern California. OBD $75. OVI $199.",
-    "areaServed": ["Northern California", "Sacramento, CA", "Stockton, CA", "San Jose, CA", "San Francisco Bay Area, CA"],
+    "description": "Mobile Clean Truck Check at your yard in {{serviceArea.name}}. OBD $75. OVI $199.",
+    "areaServed": ["{{serviceArea.name}}", "Sacramento, CA", "Stockton, CA", "San Jose, CA", "San Francisco Bay Area, CA"],
     "priceRange": "$75-$229"
   }
   </script>
@@ -53,14 +53,14 @@
       <a class="navlink" href="/blog">Blog</a>
       <a class="navlink" href="/contact">Contact</a>
       <span class="header-cta">
-        <a class="btn btn-book" href="tel:+19168904427">Call (916) 890-4427</a>
+        <a class="btn btn-book" href="{{phone.primary.href}}">Call {{phone.primary.display}}</a>
         <a class="btn btn-call" href="/contact">Book online</a>
       </span>
     </nav>
   </div>
 </header>
 
-<p class="open-bar"><span class="wrap">Northern California · OBD and OVI · Sacramento, Stockton, Bay Area</span></p>
+<p class="open-bar"><span class="wrap">{{serviceArea.homepageOpenBar}}</span></p>
 
 <main id="main">
 
@@ -68,19 +68,19 @@
     <div class="wrap hero-grid">
       <div class="hero-copy">
       <p class="hero-kicker" style="margin:0 0 4px;font-weight:700">Rain, sleet, or snow, we come to you</p>
-      <p class="hero-kicker" style="margin:0 0 12px"><a href="https://maps.google.com/?cid=16019693078134296096" target="_blank" rel="noreferrer">★★★★★ Google 5-star, 34 reviews</a></p>
+      <p class="hero-kicker" style="margin:0 0 12px"><a href="https://maps.google.com/?cid=16019693078134296096" target="_blank" rel="noreferrer">★★★★★ {{reviews.homeKicker}}</a></p>
       <h1>Mobile Clean Truck Check — <span>we come to your yard</span></h1>
-      <p class="lede">OBD is $75. OVI is $199. We test at your yard in Northern California. Call once — we schedule, arrive, test, and handle the paperwork.</p>
+      <p class="lede">OBD is $75. OVI is $199. We test at your yard in {{serviceArea.name}}. Call once — we schedule, arrive, test, and handle the paperwork.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
+        <a class="btn btn-primary btn-lg" href="{{phone.primary.href}}">Call {{phone.primary.display}}</a>
         <a class="btn btn-ghost btn-lg" href="/contact">Request a callback</a>
         <a class="btn btn-ghost btn-lg" href="/pricing">See pricing</a>
       </div>
       </div>
       <div class="hero-map">
-          <a href="/areas" aria-label="Explore Northern California service areas"><img src="/assets/img/coverage-map-v2.png" width="1126" height="1200" alt="NorCal CARB Mobile coverage — Northern California, from Redding to San Jose" loading="eager" decoding="async" fetchpriority="high"></a>
+          <a href="/areas" aria-label="Explore {{serviceArea.name}} service areas"><img src="/assets/img/coverage-map-v2.png" width="1126" height="1200" alt="NorCal CARB Mobile coverage — {{serviceArea.name}}, from Redding to San Jose" loading="eager" decoding="async" fetchpriority="high"></a>
           <p class="center" style="margin:12px 0 8px"><a href="/areas"><strong>Explore real field routes →</strong></a></p>
-          <div class="route-chips" aria-label="Where we test"><span>Chico</span><span>Wine Country</span><span>Sonora</span><span>Porterville</span><span>San Diego County</span></div>
+          <div class="route-chips" aria-label="Where we test"><span>Chico</span><span>Wine Country</span><span>Sonora</span><span>Porterville</span><span>{{serviceArea.county.SanDiegoCounty}}</span></div>
         </div>
     </div>
   </section>
@@ -120,13 +120,13 @@
           <h3>OBD</h3>
           <div class="price">$75<small> / vehicle</small></div>
           <p>On-board diagnostic Clean Truck Check for 2013+ diesel trucks.</p>
-          <a class="btn btn-primary" href="tel:+19168904427">Call to book</a>
+          <a class="btn btn-primary" href="{{phone.primary.href}}">Call to book</a>
         </div>
         <div class="card price-card feature">
           <h3>OVI (smoke)</h3>
           <div class="price">$199<small> / vehicle</small></div>
           <p>Opacity / smoke test when OBD does not apply (older units, many motorhomes).</p>
-          <a class="btn btn-primary" href="tel:+19168904427">Call to book</a>
+          <a class="btn btn-primary" href="{{phone.primary.href}}">Call to book</a>
         </div>
         <div class="card price-card">
           <h3>Motorhome</h3>
@@ -138,11 +138,11 @@
           <h3>Fleet</h3>
           <div class="price">Ask<small> multi-truck</small></div>
           <p>5+ trucks one appointment — call for yard rate. Second-truck or return-visit half-off available.</p>
-          <a class="btn btn-ghost" href="tel:+19168904427">Call (916) 890-4427</a>
+          <a class="btn btn-ghost" href="{{phone.primary.href}}">Call {{phone.primary.display}}</a>
         </div>
       </div>
       <p class="center" style="margin-top:22px;color:var(--muted)">Fleet &amp; multi-truck discounts available — <a href="/contact">ask for a quote</a>.</p>
-      <p class="center" style="margin-top:10px;color:var(--muted);font-size:.92rem">San Diego County: call (916) 890-4427 for pricing</p>
+      <p class="center" style="margin-top:10px;color:var(--muted);font-size:.92rem">{{serviceArea.county.SanDiegoCounty}}: call {{phone.primary.display}} for pricing</p>
       <p class="center" style="margin-top:8px;color:var(--muted);font-size:.85rem;font-style:italic">Pricing is always subject to change due to matters out of our control.</p>
     </div>
   </section>
@@ -152,7 +152,7 @@
       <div class="section-head"><h2>How mobile testing works</h2><p>Three steps and you're compliant — usually within the week.</p></div>
       <div class="grid grid-3">
         <div class="step"><div class="num">1</div><h3>Book in minutes</h3><p>Call or send a request with your location and how many trucks need testing.</p></div>
-        <div class="step"><div class="num">2</div><h3>We come to you</h3><p>We arrive at your yard or jobsite in Northern California, including Saturdays.</p></div>
+        <div class="step"><div class="num">2</div><h3>We come to you</h3><p>We arrive at your yard or jobsite in {{serviceArea.name}}, including Saturdays.</p></div>
         <div class="step"><div class="num">3</div><h3>Pass &amp; paperwork</h3><p>You get your result on the spot and we handle the CARB Clean Truck Check submission.</p></div>
       </div>
     </div>
@@ -160,13 +160,13 @@
 
   <section id="reviews">
     <div class="wrap">
-      <div class="section-head"><h2>Trusted by NorCal fleets</h2><p><span class="stars" style="color:var(--gold)">★★★★★</span> 5.0 stars · 34 Google reviews</p></div>
+      <div class="section-head"><h2>Trusted by NorCal fleets</h2><p><span class="stars" style="color:var(--gold)">★★★★★</span> {{reviews.homeBand}}</p></div>
       <div class="grid grid-3">
         <blockquote class="card quote"><span class="stars">★★★★★</span>“Tested all six trucks in under two hours. Very professional.”<cite>— Google review</cite></blockquote>
         <blockquote class="card quote"><span class="stars">★★★★★</span>“Fair price, no upselling, no waiting.”<cite>— Google review</cite></blockquote>
         <blockquote class="card quote"><span class="stars">★★★★★</span>“Came out on a Saturday before our DMV deadline. Highly recommend.”<cite>— Google review</cite></blockquote>
       </div>
-      <p class="center" style="margin-top:26px"><a class="btn btn-ghost" href="/reviews">★ Read all 34 reviews on Google</a></p>
+      <p class="center" style="margin-top:26px"><a class="btn btn-ghost" href="/reviews">★ {{reviews.homeLink}}</a></p>
     </div>
   </section>
 
@@ -198,7 +198,7 @@
           <a class="btn btn-ghost btn-lg" href="https://cleantruckcheck.arb.ca.gov/" target="_blank" rel="noopener">Open CTC-VIS portal</a>
           <a class="btn btn-ghost btn-lg" href="https://www.youtube.com/watch?v=tJ78m6VYhX8" target="_blank" rel="noopener">CARB how-to video</a>
         </div>
-        <p style="margin:16px 0 0;color:var(--muted);font-size:.92rem">Need the actual test after the pass? We come to your yard — <a href="tel:+19168904427">(916) 890-4427</a> · OBD $75 · OVI $199.</p>
+        <p style="margin:16px 0 0;color:var(--muted);font-size:.92rem">Need the actual test after the pass? We come to your yard — <a href="{{phone.primary.href}}">{{phone.primary.display}}</a> · OBD $75 · OVI $199.</p>
       </div>
     </div>
   </section>
@@ -209,7 +209,7 @@
         <h2>Rather not deal with CARB at all?</h2>
         <p><strong>NorCal Family — Full Care.</strong> We register vehicles, watch CTC-VIS deadlines, remind you, and run mobile tests.</p>
         <p><strong>CARB annual fee</strong> (CTC-VIS, per vehicle) <strong>+ $40/year</strong> to us. Testing still OBD $75 · OVI $199 · Motorhome $99/$229 per visit.</p>
-        <a class="btn btn-primary" href="tel:+19168904427">Call about Full Care</a>
+        <a class="btn btn-primary" href="{{phone.primary.href}}">Call about Full Care</a>
       </div>
     </div>
   </section>
@@ -219,7 +219,7 @@
       <h2>Need a test? One call.</h2>
       <p>What we do · how much · where we are — then call. Three steps max to a human callback.</p>
       <div class="hero-cta center" style="justify-content:center">
-        <a class="btn btn-ghost btn-lg" href="tel:+19168904427">(916) 890-4427</a>
+        <a class="btn btn-ghost btn-lg" href="{{phone.primary.href}}">{{phone.primary.display}}</a>
         <a class="btn btn-ghost btn-lg" href="/contact">Contact form</a>
       </div>
     </div>
@@ -228,7 +228,7 @@
 </main>
 
 <div class="mobile-callbar" aria-label="Call now">
-  <a class="btn btn-book" href="tel:+19168904427">Call (916) 890-4427</a>
+  <a class="btn btn-book" href="{{phone.primary.href}}">Call {{phone.primary.display}}</a>
   <a class="btn btn-call" href="/contact">Book</a>
 </div>
 
@@ -241,8 +241,8 @@
         <div class="nap-block">
           <strong>NAP</strong>
           NorCal CARB Mobile LLC — CARB Clean Truck Check J1667<br>
-          Mobile service · Northern California<br>
-          <a href="tel:+19168904427">(916) 890-4427</a><br>
+          {{serviceArea.nap}}<br>
+          <a href="{{phone.primary.href}}">{{phone.primary.display}}</a><br>
           <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a><br>
           <a href="https://norcalcarbmobile.com/">norcalcarbmobile.com</a>
         </div>
@@ -252,11 +252,11 @@
         <p>OBD <strong style="color:#fff">$75</strong><br>
         OVI <strong style="color:#fff">$199</strong><br>
         Motorhome $99 / $229<br>
-        <span class="muted">San Diego County: call for pricing</span></p>
+        <span class="muted">{{serviceArea.county.SanDiegoCounty}}: call for pricing</span></p>
       </div>
       <div>
         <h4>Areas &amp; Reviews</h4>
-        <p class="muted">Northern California · Sacramento, Stockton, Bay Area</p>
+        <p class="muted">{{serviceArea.footerAreas}}</p>
         <p><a href="/reviews">Google Business Profile</a></p>
         <p><a href="/blog">Blog portal</a> · <a href="/for-clients">Share with fleet</a> · <a href="/#five-day-pass">CARB 5-day pass</a></p>
       </div>
@@ -268,7 +268,7 @@
       <a href="https://x.com/carbcleantruck" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.6l-5.2-6.8L5.2 22H2l7.8-8.9L1.5 2h6.8l4.7 6.2L18.9 2zm-2.3 18h1.8L7.5 3.8H5.6L16.6 20z"/></svg></a>
       <a href="https://www.youtube.com/@CARBCLEANTRUCKMOBILE" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 12s0-3.2-.4-4.7c-.2-.8-.9-1.5-1.7-1.7C19.4 5.2 12 5.2 12 5.2s-7.4 0-8.9.4c-.8.2-1.5.9-1.7 1.7C1 8.8 1 12 1 12s0 3.2.4 4.7c.2.8.9 1.5 1.7 1.7 1.5.4 8.9.4 8.9.4s7.4 0 8.9-.4c.8-.2 1.5-.9 1.7-1.7.4-1.5.4-4.7.4-4.7zM9.8 15.3V8.7l5.7 3.3-5.7 3.3z"/></svg></a>
       <a href="/reviews" aria-label="Google Business Profile" title="Google Business Profile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81z"/></svg></a>
-      <a class="reviews-pill" href="/reviews" title="Read our Google reviews">★ 5.0 · 34 on Google</a>
+      <a class="reviews-pill" href="/reviews" title="Read our Google reviews">{{reviews.pill}}</a>
     </div>
     <p class="center muted" style="margin:0 0 14px">Owned and operated by NorCal CARB Mobile LLC · CARB tester ID IF530523</p>
     <div class="foot-bottom">

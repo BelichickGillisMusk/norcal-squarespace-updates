@@ -22,6 +22,8 @@ jobs:
           node-version: '22'
       - name: Enforce approved NorCal template
         run: node scripts/site-lock/validate.mjs
+      - name: Phones and service area stay in site.json
+        run: node scripts/site-lock/check-site-copy.mjs
 
   attention-hq-fixture:
     runs-on: ubuntu-latest
