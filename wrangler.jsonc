@@ -26,11 +26,12 @@
   ],
   // Contact form email: Cloudflare Email Workers (Email Routing is enabled on the zone).
   // Free sending is limited to verified Email Routing destination addresses.
-  // sales@ forwards to bgillis99@gmail.com; keep in sync with FORM_TO in worker/index.js.
+  // Form leads go to bgillis99@gmail.com only (Bryan's 10/16 lock); sales@ also forwards there.
+  // Keep in sync with FORM_TO in worker/index.js.
   "send_email": [
     {
       "name": "EMAIL",
-      "allowed_destination_addresses": ["bgillis99@gmail.com", "fsu9913@gmail.com"]
+      "allowed_destination_addresses": ["bgillis99@gmail.com"]
     }
   ],
   // CONTACT_TO is no longer read by the Worker (kept for reference).

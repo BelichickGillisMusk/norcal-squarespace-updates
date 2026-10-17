@@ -9,8 +9,8 @@
  * Binding: EMAIL (send_email) with allowed_destination_addresses = FORM_TO.
  * Email Routing on norcalcarbmobile.com only lets the binding send to verified
  * destination addresses (free on all plans). sales@ / carb@ / bryan@ are routed
- * addresses (catch-all forwards to bgillis99@gmail.com), so the form sends to the
- * verified Gmail destinations directly. Add an address here AND in the binding's
+ * addresses (catch-all forwards to bgillis99@gmail.com), so the form sends to
+ * bgillis99@gmail.com directly, the sole lead inbox per Bryan's 10/16 lock. Add an address here AND in the binding's
  * allowed_destination_addresses, and verify it in Email Routing first.
  *
  * NOTE: site/functions/api/contact.js is an old Pages copy that is not deployed.
@@ -19,9 +19,9 @@
 import { EmailMessage } from 'cloudflare:email';
 import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
 
-// Verified Email Routing destinations. sales@norcalcarbmobile.com forwards to
-// bgillis99@gmail.com; fsu9913@gmail.com is the third form inbox.
-const FORM_TO = ['bgillis99@gmail.com', 'fsu9913@gmail.com'];
+// Sole form-lead inbox (Bryan's 10/16 lock): bgillis99@gmail.com, a verified
+// Email Routing destination. sales@norcalcarbmobile.com also forwards there.
+const FORM_TO = ['bgillis99@gmail.com'];
 const FORM_FROM = { email: 'website@norcalcarbmobile.com', name: 'NorCal CARB Mobile Website' };
 const CURRENT_TERMS_VERSION = '2026-07-22';
 const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';

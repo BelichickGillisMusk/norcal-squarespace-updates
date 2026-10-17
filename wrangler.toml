@@ -20,11 +20,11 @@ pattern = "www.norcalcarbmobile.com"
 custom_domain = true
 
 # Contact form email: Cloudflare Email Workers send_email binding.
-# Free sending is limited to verified Email Routing destinations; sales@ forwards
-# to bgillis99@gmail.com. Keep in sync with FORM_TO in worker/index.js.
+# Free sending is limited to verified Email Routing destinations. Form leads go to
+# bgillis99@gmail.com only (Bryan's 10/16 lock). Keep in sync with FORM_TO in worker/index.js.
 [[send_email]]
 name = "EMAIL"
-allowed_destination_addresses = ["bgillis99@gmail.com", "fsu9913@gmail.com"]
+allowed_destination_addresses = ["bgillis99@gmail.com"]
 
 # CONTACT_TO is no longer read by the Worker (kept for reference).
 [vars]

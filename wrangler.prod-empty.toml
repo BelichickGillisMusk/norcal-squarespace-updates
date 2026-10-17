@@ -33,7 +33,7 @@ custom_domain = true
 pattern = "www.norcalcarbmobile.com"
 custom_domain = true
 
-# CONTACT_TO overrides Worker DEFAULT_TO. All three form inboxes — not one.
-# Never: bgillis99@gmail.com, mila@*, admin@mobilecarbsmoketest.com
+# CONTACT_TO is no longer read by the Worker. Form leads go to bgillis99@gmail.com
+# only (Bryan's 10/16 lock) via the send_email binding in wrangler.jsonc / wrangler.toml.
 [vars]
 CONTACT_TO = "sales@norcalcarbmobile.com,carb@norcalcarbmobile.com,fsu9913@gmail.com"
