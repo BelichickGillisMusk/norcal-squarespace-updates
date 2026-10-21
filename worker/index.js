@@ -151,6 +151,9 @@ const REDIRECTS = {
   // → homepage
   '/carb-services': '/',
   '/store': '/',
+  // Legacy Squarespace product URL. Lookup is exact, then one trailing slash stripped.
+  '/store/p/carb-obd-emissions-test': '/carb-obd-test',
+  '/store/p/carb-obd-emissions-test/': '/carb-obd-test',
 
   // → /contact
   '/bookcontact': '/contact',
@@ -177,6 +180,8 @@ const REDIRECTS = {
   '/blog/check-compliance-carb-app': '/faq',
   '/clean-truck-check-blog/check-compliance-carb-app': '/faq',
   '/blog/vin-diesel-best-lunch-norcal-routes': '/blog',
+  '/blog/harvest-season-clean-truck-check-ag-haul': '/blog/harvest-season-clean-truck-check',
+  '/blog/harvest-season-clean-truck-check-ag-haul/': '/blog/harvest-season-clean-truck-check',
   '/carb-penalties-deadlines': '/faq',
 
   // → /areas
@@ -188,17 +193,24 @@ const REDIRECTS = {
   '/clean-truck-check-bay-area': '/carb-test-bay-area',
   '/tracy-livermore-clean-truck-check-j1667': '/areas#tracy',
   '/clean-truck-check-fresno': '/areas#central-valley',
+  '/clean-truck-check-central-valley': '/central-valley-sierra-carb-testing',
+  '/clean-truck-check-central-valley/': '/central-valley-sierra-carb-testing',
   // Hayward now has its own full corridor page at /clean-truck-check-hayward
   // '/clean-truck-check-hayward': '/areas#hayward',
   // Fairfield now has its own full corridor page at /areas-fairfield
   '/clean-truck-check-fairfield': '/areas-fairfield',
   '/clean-truck-check-fairfield/': '/areas-fairfield',
+  '/fairfield-carb-testing': '/areas-fairfield',
+  '/fairfield-carb-testing/': '/areas-fairfield',
   '/service-area-butte-county-clean-truck-check': '/areas#butte',
   '/service-area-san-joaquin-county-mobile-testing': '/areas#san-joaquin',
   '/san-jose-mobile-carb-testing': '/areas#san-jose',
   // Lodi now has its own full corridor page at /clean-truck-check-lodi
   // '/clean-truck-check-lodi': '/areas#lodi',
   '/clean-truck-check-roseville': '/areas#roseville',
+  // temporary until a Roseville page exists
+  '/clean-truck-check-roseville-1': '/sacramento-valley-foothills-carb-testing',
+  '/clean-truck-check-roseville-1/': '/sacramento-valley-foothills-carb-testing',
   '/carb-mobile-clean-truck-check-antioch-california': '/areas#antioch',
   // San Diego County booking/pricing lives on the sibling site. Absolute Location
   // is returned as-is by the redirect handler. Trailing-slash keys are listed
