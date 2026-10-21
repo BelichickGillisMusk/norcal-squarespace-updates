@@ -180,8 +180,6 @@ const REDIRECTS = {
   '/blog/check-compliance-carb-app': '/faq',
   '/clean-truck-check-blog/check-compliance-carb-app': '/faq',
   '/blog/vin-diesel-best-lunch-norcal-routes': '/blog',
-  '/blog/harvest-season-clean-truck-check-ag-haul': '/blog/harvest-season-clean-truck-check',
-  '/blog/harvest-season-clean-truck-check-ag-haul/': '/blog/harvest-season-clean-truck-check',
   '/carb-penalties-deadlines': '/faq',
 
   // → /areas
@@ -207,15 +205,17 @@ const REDIRECTS = {
   '/san-jose-mobile-carb-testing': '/areas#san-jose',
   // Lodi now has its own full corridor page at /clean-truck-check-lodi
   // '/clean-truck-check-lodi': '/areas#lodi',
-  '/clean-truck-check-roseville': '/areas#roseville',
+  // /areas#roseville is not an anchor. Both Roseville legacy URLs use the foothills page.
   // temporary until a Roseville page exists
+  '/clean-truck-check-roseville': '/sacramento-valley-foothills-carb-testing',
+  '/clean-truck-check-roseville/': '/sacramento-valley-foothills-carb-testing',
   '/clean-truck-check-roseville-1': '/sacramento-valley-foothills-carb-testing',
   '/clean-truck-check-roseville-1/': '/sacramento-valley-foothills-carb-testing',
   '/carb-mobile-clean-truck-check-antioch-california': '/areas#antioch',
-  // San Diego County booking/pricing lives on the sibling site. Absolute Location
-  // is returned as-is by the redirect handler. Trailing-slash keys are listed
-  // because lookup is exact, then one trailing slash stripped.
-  '/clean-truck-check-san-diego': 'https://mobilecarbsmoketest.com/',
+  // /clean-truck-check-san-diego stays on this site. Other San Diego aliases still
+  // point at the sibling site. Absolute Location is returned as-is. Trailing-slash
+  // keys are listed because lookup is exact, then one trailing slash stripped.
+  '/clean-truck-check-san-diego': '/socal',
   '/san-diego': 'https://mobilecarbsmoketest.com/',
   '/san-diego/': 'https://mobilecarbsmoketest.com/',
   '/areas/san-diego': 'https://mobilecarbsmoketest.com/',
@@ -306,6 +306,27 @@ const REDIRECTS = {
   '/service-locations/tag/sacramento+carb+testing+northern+california+emissions+i-80+corridor+testing+i-5+motorhome+testing+highway+99+rv+service+bay+area+motorhome+testing+central+valley+carb+testing+davis+motorhome+testing+stockton+rv+emissions+modesto+carb+testing': '/areas',
   '/service-locations/tag/tractor-carb-inspection+harvester-emissions+diesel-truck-testing+farm-machinery-carb+irrigation-equipment+agricultural-vehicles+heavy-equipment-carb+fleet-carb-testing': '/areas',
   '/service-locations/tag/woodland-california+yolo-county-services+central-valley-carb+northern-california+sacramento-valley+woodland-ca-business+local-carb-testing': '/areas',
+
+  // Legacy paths. Lookup is exact, then one trailing slash stripped.
+  '/clean-truck-check-san-joaquin-stockton': '/stockton-clean-truck-check',
+  '/clean-truck-check-greater-sacramento': '/sacramento-carb-testing',
+  '/s/Engine-Tag-Info-for-Smoke-Opacity-Tests.pdf': '/clean-truck-check-blog/find-your-vehicles-test-group-engine-family-number-veci-label-for-j1667-smoke-opacity-testing',
+  '/clean-truck-check-faqs': '/faq',
+  '/service-locations/2025/10/25/clean-truck-check-info-blog': '/clean-truck-check-blog/clean-truck-check-info-blog',
+  '/store/p/carb-ovi-smoke-opacity-test': '/carb-ovi-test',
+  '/store/p/ovi-test-250': '/carb-ovi-test',
+  '/locations/san-diego-carb-ctc': '/socal',
+  '/locations/orange-county-clean-truck-check': '/socal',
+  '/services/mobile-carb-testing': '/services',
+  '/locations/bay-area-clean-truck-check': '/bay-area-mobile-carb',
+  '/locations/hayward-clean-truck-check': '/clean-truck-check-hayward',
+  '/locations/san-joaquin-county-mobile-testing': '/stockton-clean-truck-check',
+  '/locations/fairfield-clean-truck-check': '/areas-fairfield',
+  '/guides/penalties-and-deadlines': '/blog/2026-carb-testing-deadlines',
+  '/locations/central-valley-clean-truck': '/central-valley-sierra-carb-testing',
+  '/locations/lodi-clean-truck-check': '/clean-truck-check-lodi',
+  '/guides/hd-im-program': '/clean-truck-check-blog/clean-truck-check-hd-im-program',
+  '/locations/butte-county-clean-truck-check': '/butte-county-carb-testing',
 };
 
 /**
@@ -377,6 +398,18 @@ function resolveRedirect(pathname, search = '') {
   if (target && target !== pathname) return target;
   if (clean !== pathname) return clean + (search || '');
   return null;
+}
+
+/** REDIRECTS map only. One trailing slash is stripped, same as resolveRedirect. */
+function redirectsMapTarget(pathname) {
+  const clean = canonicalPath(pathname);
+  const target =
+    REDIRECTS[pathname] ||
+    REDIRECTS[pathname.replace(/\/$/, '')] ||
+    REDIRECTS[clean] ||
+    null;
+  if (!target || target === pathname) return null;
+  return target;
 }
 
 function notFound(res) {
@@ -537,19 +570,51 @@ async function handleContact(request, env) {
 }
 
 const ALIAS_DOMAINS = ['mobileovitest.com', 'www.mobileovitest.com'];
+const APEX_HOST = 'norcalcarbmobile.com';
+const APEX_ORIGIN = 'https://norcalcarbmobile.com';
+
+/**
+ * Relative REDIRECTS targets on www (or an alias host) are one hop to the apex.
+ * Absolute targets are left unchanged.
+ */
+function redirectLocation(hostname, target) {
+  if (/^https?:\/\//i.test(target)) return target;
+  if (hostname === 'www.' + APEX_HOST || ALIAS_DOMAINS.includes(hostname)) {
+    return APEX_ORIGIN + target;
+  }
+  return target;
+}
+
+function redirectResponse(location) {
+  return new Response(null, {
+    status: 301,
+    headers: { Location: location, 'Cache-Control': 'public, max-age=86400' },
+  });
+}
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // REDIRECTS before the www-to-apex redirect. A www request whose path is in
+    // the map, including one trailing slash, 301s straight to
+    // https://norcalcarbmobile.com/<target>.
+    if (!url.pathname.startsWith('/api/')) {
+      const mapped = redirectsMapTarget(url.pathname);
+      if (mapped) return redirectResponse(redirectLocation(url.hostname, mapped));
+    }
+
+    if (url.hostname === 'www.' + APEX_HOST && !url.pathname.startsWith('/api/')) {
+      url.hostname = APEX_HOST;
+      url.port = '';
+      return redirectResponse(url.toString());
+    }
+
     // Redirect alias domains to the canonical domain
     if (ALIAS_DOMAINS.includes(url.hostname)) {
-      url.hostname = 'norcalcarbmobile.com';
+      url.hostname = APEX_HOST;
       url.port = '';
-      return new Response(null, {
-        status: 301,
-        headers: { 'Location': url.toString(), 'Cache-Control': 'public, max-age=86400' },
-      });
+      return redirectResponse(url.toString());
     }
 
     if (url.pathname === '/api/contact') {
@@ -562,12 +627,7 @@ export default {
     // are not rewritten into a redirect.
     if (!url.pathname.startsWith('/api/')) {
       const redirect = resolveRedirect(url.pathname, url.search);
-      if (redirect) {
-        return new Response(null, {
-          status: 301,
-          headers: { 'Location': redirect, 'Cache-Control': 'public, max-age=86400' },
-        });
-      }
+      if (redirect) return redirectResponse(redirectLocation(url.hostname, redirect));
     }
 
     // Everything else → static assets; inject branding, schema, and CF Web Analytics.
