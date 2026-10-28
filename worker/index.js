@@ -66,9 +66,9 @@ function schemaTag(pageUrl) {
         email: 'sales@norcalcarbmobile.com',
         image: LOGO_URL,
         logo: { '@type': 'ImageObject', url: LOGO_URL },
-        priceRange: socal ? '$99-$199' : '$75-$229',
+        priceRange: socal ? '$100-$200' : '$75-$229',
         description: socal
-          ? 'Mobile OVI Test. OBD $99. OVI smoke $199. 50-mile radius of 92553, Moreno Valley.'
+          ? 'Mobile OVI Test. OBD $100. OVI smoke $200. 50-mile radius of 92553, Moreno Valley.'
           : 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Headquarters in Northern California. OBD $75. OVI $199.',
         knowsAbout: [
           'CARB Clean Truck Check',
@@ -99,8 +99,8 @@ function schemaTag(pageUrl) {
           '@type': 'OfferCatalog',
           name: 'Mobile OVI Test',
           itemListElement: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OBD Clean Truck Check', serviceType: 'HD-OBD Clean Truck Check' }, price: 99, priceCurrency: 'USD' },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OVI Smoke Opacity Test', serviceType: 'SAE J1667 OVI Smoke Opacity' }, price: 199, priceCurrency: 'USD' }
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OBD Clean Truck Check', serviceType: 'HD-OBD Clean Truck Check' }, price: 100, priceCurrency: 'USD' },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OVI Smoke Opacity Test', serviceType: 'SAE J1667 OVI Smoke Opacity' }, price: 200, priceCurrency: 'USD' }
           ]
         } : {
           '@type': 'OfferCatalog',
