@@ -13,7 +13,8 @@
  * bgillis99@gmail.com directly, the sole lead inbox per Bryan's 10/16 lock. Add an address here AND in the binding's
  * allowed_destination_addresses, and verify it in Email Routing first.
  *
- * NOTE: site/functions/api/contact.js is an old Pages copy that is not deployed.
+ * The old Pages handler site/functions/api/contact.js has been removed.
+ * Nothing else should import it.
  */
 
 import { EmailMessage } from 'cloudflare:email';
