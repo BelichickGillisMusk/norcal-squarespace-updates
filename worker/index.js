@@ -45,6 +45,38 @@ const BRANDING_TAGS = `
 <meta name="twitter:image:alt" content="NorCal CARB Mobile logo">
 `;
 
+/** City links for the live footer and the contact page. Phone numbers stay put. */
+const SERVICE_AREA_HTML = `
+<p class="ncm-service-area" style="margin:0 0 14px;text-align:center;line-height:1.55">
+  <strong>SERVICE AREA</strong><br>
+  <a href="/sacramento-carb-testing">Sacramento</a> ·
+  <a href="/stockton-clean-truck-check">Stockton</a> ·
+  <a href="/areas-fairfield">Fairfield</a> ·
+  <a href="/bay-area-mobile-carb">San Jose</a> ·
+  <a href="/bay-area-mobile-carb">Bay Area</a> ·
+  <a href="/socal">Moreno Valley</a> ·
+  <a href="/butte-county-carb-testing">Chico</a> ·
+  <a href="/napa-sonoma-carb-testing">Calistoga</a> ·
+  <a href="/napa-sonoma-carb-testing">Santa Rosa</a> ·
+  Los Banos
+</p>`;
+
+const CONTACT_EDIT_CSS = `
+<style id="ncm-contact-edits">
+  body.contact-page main { display: flex; flex-direction: column; }
+  body.contact-page main > #request { order: -1; }
+  body.contact-page #contact-card,
+  body.contact-page .contact-grid > div > .contact-method:first-child {
+    border: 3px solid #fff;
+    border-radius: 14px;
+  }
+  body.contact-page #contact-card { padding: 18px; }
+  body.contact-page .contact-grid > div > .contact-method:first-child { padding: 14px 16px; margin-bottom: 12px; }
+  html[data-theme="light"] body.contact-page #contact-card,
+  html[data-theme="light"] body.contact-page .contact-grid > div > .contact-method:first-child { border-color: #143024; }
+  .ncm-service-area a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+</style>`;
+
 function schemaTag(pageUrl) {
   const page = new URL(pageUrl);
   page.hash = '';
@@ -565,16 +597,28 @@ export default {
     const ct = assetRes.headers.get('content-type') || '';
     const force404 = canonicalPath(url.pathname) === '/404' || assetRes.status === 404;
     if (!ct.includes('text/html')) return force404 ? notFound(assetRes) : assetRes;
+    const isContact = canonicalPath(url.pathname) === '/contact';
     const page = new HTMLRewriter()
       .on('head', {
         element(el) {
           el.append(BRANDING_TAGS, { html: true });
           el.append(schemaTag(url.toString()), { html: true });
+          if (isContact) el.append(CONTACT_EDIT_CSS, { html: true });
         },
       })
       .on('body', {
         element(el) {
           el.append(CF_WEB_ANALYTICS_BEACON, { html: true });
+        },
+      })
+      .on('footer.site-footer .foot-bottom', {
+        element(el) {
+          el.before(SERVICE_AREA_HTML, { html: true });
+        },
+      })
+      .on('body.contact-page #request', {
+        element(el) {
+          el.prepend(SERVICE_AREA_HTML, { html: true });
         },
       })
       .transform(assetRes);
