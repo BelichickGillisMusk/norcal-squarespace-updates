@@ -8,7 +8,7 @@ site/
 ├── index.html              # Homepage
 ├── contact.html            # Contact + booking (served at /contact)
 ├── assets/styles.css       # All styles (navy #012241 · green #4ab94e)
-├── functions/api/contact.js# POST /api/contact → emails lead via Resend
+├── (contact POST is worker/index.js → worker/contact.js, not a Pages Function)
 ├── _headers                # Cache + security headers
 └── assets/img/             # Photos (add Google Business Profile pics here)
 ```
@@ -39,7 +39,7 @@ must be all three form inboxes
 1. **Workers & Pages → Create → Pages → Connect to Git** → this repo + branch.
 2. Build: preset **None**, build command *(empty)*, output dir `site`.
 3. **Settings → Environment variables** → add `RESEND_API_KEY` (+ optional `CONTACT_TO`/`CONTACT_FROM`).
-   The Pages form handler is `functions/api/contact.js`.
+   Live `/api/contact` is the Worker handler in `worker/contact.js`, not a Pages Function.
 4. Deploy → instant `*.pages.dev` preview URL.
 
 > Custom domain `norcalcarbmobile.com` only gets pointed here at the planned July cutover

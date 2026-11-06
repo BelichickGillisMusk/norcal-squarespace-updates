@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-04 — Contact form: persist lead before email (PR only)
+
+POST `/api/contact` was returning HTTP 502 on every submit because `env.EMAIL.send` threw (Cloudflare Email Workers). A real customer lead was lost. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges; Workers Builds deploys from main.
+
+- Persist valid submissions to optional KV `LEADS` before emailing. If KV write succeeds, return 200 even when email fails. 502/503 only when both storage and email fail.
+- Deleted stale undeployed `site/functions/api/contact.js`.
+- `send_email` binding stays `allowed_destination_addresses = ["bgillis99@gmail.com"]`; From `website@norcalcarbmobile.com`. Owner must verify the Gmail destination in Email Routing and paste a real KV namespace id (commented placeholder only — no fake id in config).
+- Public phone remains (916) 890-4427.
+
+---
+
 ## 2026-10-06 — Restore six 10/4 landers (PR only)
 
 Jennifer (SEO): Harvest #113 and Construction #114 Workers Builds dropped six landing pages that were live 2026-10-04. Three corridor pages lived only as Worker injection; the repo deploy 404'd them, and Hayward still 301'd to `/areas#hayward`. **PR only — do not merge. Do not wrangler.** Workers Builds on the production branch after merge.
