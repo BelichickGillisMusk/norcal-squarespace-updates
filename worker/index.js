@@ -410,6 +410,20 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // HTTP on a custom-domain Worker with run_worker_first reaches this
+    // script. env.ASSETS.fetch(request) then throws on an http: URL
+    // (Workers static assets are HTTPS-only) and the visitor sees 500
+    // instead of a protocol upgrade. 301 to https with the same path
+    // and query before any asset fetch.
+    if (url.protocol === 'http:') {
+      url.protocol = 'https:';
+      url.port = '';
+      return new Response(null, {
+        status: 301,
+        headers: { 'Location': url.toString(), 'Cache-Control': 'public, max-age=86400' },
+      });
+    }
+
     // Redirect alias domains to the canonical domain
     if (ALIAS_DOMAINS.includes(url.hostname)) {
       url.hostname = 'norcalcarbmobile.com';
