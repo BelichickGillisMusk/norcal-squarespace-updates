@@ -15,6 +15,10 @@ main = "worker/index.js"
 compatibility_date = "2025-06-01"
 workers_dev = true
 
+[observability]
+enabled = true
+head_sampling_rate = 1
+
 # PASTE empty-account Account ID here after bryan@ login (never use bafa242…):
 # account_id = "PASTE_EMPTY_ACCOUNT_ID"
 

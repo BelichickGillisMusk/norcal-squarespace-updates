@@ -4,6 +4,15 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-10 — Contact intake: distinct native outcomes + observability (PR only)
+
+Draft PR stacked on PR 158 (`cursor/bay-area-contact-form-a40e`). Do not merge. Do not `wrangler deploy`. No Cloudflare dashboard changes. Workers Builds after Bryan merge GO as bgillis99.
+
+- Native HTML POSTs to `/api/contact` now 303 to distinct Locations: success `/contact?sent=1`, validation `/contact?error=1`, send failure `/contact?error=send`, honeypot `/contact?sent=1&h=1` (bot still sees sent=1). JSON contract unchanged.
+- Structured `contact_intake` console line on every outcome: `outcome`, `referer` path, `send_path` (`primary` / `fallback` / `none`). No names, phones, emails, or form fields.
+- Fallback to `fsu9913@gmail.com` only after primary `carb@norcalcarbmobile.com` send fails or throws. Primary success never dual-sends.
+- `[observability] enabled = true` and `head_sampling_rate = 1` in `wrangler.toml`, `wrangler.jsonc`, and `wrangler.prod-empty.toml`. Bindings, routes, and vars unchanged. Phone (916) 890-4427 unchanged.
+
 ## 2026-11-10 — Jennifer SEO package: Bay Area long-form body (PR 158 only)
 
 Draft PR only. Do not merge. Do not `wrangler deploy`. Do not change Cloudflare.
