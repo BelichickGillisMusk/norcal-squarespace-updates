@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-04 — Contact form: persist lead before email (PR only)
+
+POST `/api/contact` was returning HTTP 502 on every submit because `env.EMAIL.send` threw (Cloudflare Email Workers). A real customer lead was lost. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges; Workers Builds deploys from main.
+
+- Persist valid submissions to optional KV `LEADS` before emailing. If KV write succeeds, return 200 even when email fails. 502/503 only when both storage and email fail.
+- Deleted stale undeployed `site/functions/api/contact.js`.
+- `send_email` binding stays `allowed_destination_addresses = ["bgillis99@gmail.com"]`; From `website@norcalcarbmobile.com`. Owner must verify the Gmail destination in Email Routing and paste a real KV namespace id (commented placeholder only — no fake id in config).
+- Public phone remains (916) 890-4427.
+
+---
+
 ## 2026-10-12 — Motorhome dog-show blog (publish Thu 2026-10-15 9:00 AM PT, PR only)
 
 Draft PR for `/blog/motorhome-clean-truck-check-dog-show-travel-diesels`. **Do not merge.** Merging deploys live. Scheduled for Thursday 2026-10-15, 9:00 AM PT. Do not `wrangler deploy`.

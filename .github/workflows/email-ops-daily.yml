@@ -3,8 +3,9 @@
 name: Email Ops Daily
 
 on:
-  schedule:
-    - cron: '15 15 * * *'
+  # Paused 2026-10-16 (owner request): schedule trigger disabled; run manually via workflow_dispatch.
+  # schedule:
+  #   - cron: '15 15 * * *'
   workflow_dispatch:
     inputs:
       dry_run:

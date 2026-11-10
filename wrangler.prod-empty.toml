@@ -33,7 +33,21 @@ custom_domain = true
 pattern = "www.norcalcarbmobile.com"
 custom_domain = true
 
-# CONTACT_TO overrides Worker DEFAULT_TO. All three form inboxes — not one.
-# Never: bgillis99@gmail.com, mila@*, admin@mobilecarbsmoketest.com
+# Contact form email — same EMAIL binding as wrangler.toml / wrangler.jsonc.
+# bgillis99@gmail.com MUST be a VERIFIED Email Routing destination on this zone.
+# From is website@norcalcarbmobile.com. Keep in sync with FORM_TO in worker/contact.js.
+[[send_email]]
+name = "EMAIL"
+allowed_destination_addresses = ["bgillis99@gmail.com"]
+
+# OPTIONAL — contact-form lead backup (env.LEADS). Do NOT uncomment with a
+# placeholder id; wrangler deploy will fail until a real namespace id is pasted.
+#   npx wrangler kv namespace create LEADS --config wrangler.prod-empty.toml
+# [[kv_namespaces]]
+# binding = "LEADS"
+# id = "PASTE_KV_NAMESPACE_ID_HERE"
+
+# CONTACT_TO is no longer read by the Worker. Form leads go to bgillis99@gmail.com
+# only (Bryan's 10/16 lock) via the send_email binding.
 [vars]
 CONTACT_TO = "sales@norcalcarbmobile.com,carb@norcalcarbmobile.com,fsu9913@gmail.com"

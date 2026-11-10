@@ -53,6 +53,12 @@ for (const area of lock.requiredServiceAreas) {
 }
 
 const homepage = text("site/index.html");
+for (const banned of ["San Bernardino", "Moreno Valley", "92553", "Statewide Clean Truck Check", "grand opening"]) {
+  if (homepage.includes(banned)) fail(`Homepage has banned copy: ${banned}`);
+}
+if (!homepage.includes("Northern California")) fail("Homepage must say Northern California.");
+if (!homepage.includes("tel:+19168904427")) fail("Homepage call button must be 916-890-4427.");
+if (homepage.includes("628-999-3912")) fail("Homepage still has 628-999-3912.");
 const cfToken = lock.requiredCfWebAnalyticsToken;
 const cfBeaconSnippet = `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${cfToken}"}'></script>`;
 // Homepage HTML is Worker-injected (run_worker_first). Static site/index.html stays
@@ -128,4 +134,4 @@ if (failures.length) {
 
 console.log("NORCAL SITE LOCK PASSED");
 console.log(`Protected template version: ${lock.version}`);
-console.log("Homepage, colors, logo, map, 916 phone, service-area schema and Worker routing are unchanged.");
+console.log("Homepage is Northern California and 916-890-4427. Colors, logo, map, schema, and Worker routing are unchanged.");

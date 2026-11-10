@@ -1,0 +1,21 @@
+---
+description: NorCal site edits and merges go through Grok EDITS, not Cursor
+alwaysApply: true
+---
+
+# EDITS — NorCal site (do not merge)
+
+Bryan asks Grok with the word **EDITS**. Cursor is not the merge desk for the money sites.
+
+## Do not
+
+- Merge or push `norcal-squarespace-updates` main
+- `wrangler deploy` or `deploy-content.mjs --go` for norcalcarbmobile.com, mobileovitest.com, or mobilecarbsmoketest.com
+- Change 916-890-4427 or 628-999-3912 on a live site
+- Open Phone or FaceTime, or dial any number
+
+## Do
+
+Write a five-line card and stop: Site, Change, Stays, Phone, Ship.
+
+The Book, Gumption, and AR stay on this Cursor seat. Site edits do not.

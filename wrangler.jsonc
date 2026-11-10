@@ -24,11 +24,26 @@
     { "pattern": "norcalcarbmobile.com", "custom_domain": true },
     { "pattern": "www.norcalcarbmobile.com", "custom_domain": true }
   ],
-  // CONTACT_TO overrides Worker DEFAULT_TO. Must be the form inboxes (all three),
-  // never a single mailbox and never bgillis99 / mila@ / admin@mobilecarbsmoketest.com.
+  // Contact form email: Cloudflare Email Workers (Email Routing is enabled on the zone).
+  // Free sending is limited to verified Email Routing destination addresses.
+  // Form leads go to bgillis99@gmail.com only (Bryan's 10/16 lock); sales@ also forwards there.
+  // Keep in sync with FORM_TO in worker/contact.js.
+  // From is website@norcalcarbmobile.com (must be an address on this zone).
+  // bgillis99@gmail.com MUST be a VERIFIED destination in Email Routing or EMAIL.send 502s.
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "allowed_destination_addresses": ["bgillis99@gmail.com"]
+    }
+  ],
+  // OPTIONAL — contact-form lead backup (env.LEADS). Do NOT uncomment with a
+  // placeholder id; wrangler deploy will fail. After `npx wrangler kv namespace create LEADS`,
+  // paste the real id:
+  // "kv_namespaces": [
+  //   { "binding": "LEADS", "id": "PASTE_KV_NAMESPACE_ID_HERE" }
+  // ],
+  // CONTACT_TO is no longer read by the Worker (kept for reference).
   "vars": {
     "CONTACT_TO": "sales@norcalcarbmobile.com,carb@norcalcarbmobile.com,fsu9913@gmail.com"
   }
-  // Set secrets in the dashboard or via:  wrangler secret put RESEND_API_KEY
-  // CONTACT_FROM optional (default noreply@mail.norcalcarbmobile.com)
 }

@@ -2,33 +2,27 @@
  * Cloudflare Worker entry for the `norcalcarbmobile` worker.
  *
  * Serves the static site in ../site via the ASSETS binding, and handles the
- * contact form (POST /api/contact) by emailing the lead via Resend.
+ * contact form (POST /api/contact) by emailing the lead through the
+ * Cloudflare Email Workers `send_email` binding (env.EMAIL). No Resend, no API key.
  *
- * Deploy:  wrangler deploy            (config in ../wrangler.jsonc, name = norcalcarbmobile)
- * Env vars: RESEND_API_KEY (required to send) · CONTACT_TO · CONTACT_FROM (optional)
- * Form To is always sales@ + carb@ + fsu9913@gmail.com (Resend accepts an array).
- * CONTACT_TO may add more addresses but cannot drop those three or add never-To
- * inboxes (mila@*, bgillis99@gmail.com, admin@mobilecarbsmoketest.com).
- * Always CCs OWNER_GMAIL (bryan@norcalcarbmobile.com) unless already in To.
+ * Deploy:  push to main (Workers Builds runs wrangler deploy; config in ../wrangler.jsonc)
+ * Binding: EMAIL (send_email) with allowed_destination_addresses = FORM_TO.
+ * Email Routing on norcalcarbmobile.com only lets the binding send to verified
+ * destination addresses (free on all plans). sales@ / carb@ / bryan@ are routed
+ * addresses (catch-all forwards to bgillis99@gmail.com), so the form sends to
+ * bgillis99@gmail.com directly, the sole lead inbox per Bryan's 10/16 lock. Add an address here AND in the binding's
+ * allowed_destination_addresses, and verify it in Email Routing first.
  *
- * NOTE: the contact logic below mirrors site/functions/api/contact.js (the Pages
- * version). If you change one, change the other.
+ * Optional KV: env.LEADS. Persist every valid lead before emailing so a send_email
+ * failure does not drop the request. Owner must create the namespace and paste
+ * its id into wrangler.toml / wrangler.jsonc (commented placeholder — do not
+ * uncomment with a fake id or wrangler deploy fails).
  */
 
+import { EmailMessage } from 'cloudflare:email';
 import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
+import { handleContact } from './contact.js';
 
-const DEFAULT_TO = [
-  'sales@norcalcarbmobile.com',
-  'carb@norcalcarbmobile.com',
-  'fsu9913@gmail.com',
-];
-const OWNER_GMAIL = 'bryan@norcalcarbmobile.com';
-const NEVER_TO = [
-  'bgillis99@gmail.com',
-  'admin@mobilecarbsmoketest.com',
-];
-const DEFAULT_FROM = 'NorCal CARB Mobile <noreply@mail.norcalcarbmobile.com>';
-const CURRENT_TERMS_VERSION = '2026-07-22';
 const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
 
 const LOGO_URL = 'https://norcalcarbmobile.com/assets/img/ncm-logo.png';
@@ -50,6 +44,38 @@ const BRANDING_TAGS = `
 <meta name="twitter:image:alt" content="NorCal CARB Mobile logo">
 `;
 
+/** City links for the live footer and the contact page. Phone numbers stay put. */
+const SERVICE_AREA_HTML = `
+<p class="ncm-service-area" style="margin:0 0 14px;text-align:center;line-height:1.55">
+  <strong>SERVICE AREA</strong><br>
+  <a href="/sacramento-carb-testing">Sacramento</a> ·
+  <a href="/stockton-clean-truck-check">Stockton</a> ·
+  <a href="/areas-fairfield">Fairfield</a> ·
+  <a href="/bay-area-mobile-carb">San Jose</a> ·
+  <a href="/bay-area-mobile-carb">Bay Area</a> ·
+  <a href="/socal">Moreno Valley</a> ·
+  <a href="/butte-county-carb-testing">Chico</a> ·
+  <a href="/napa-sonoma-carb-testing">Calistoga</a> ·
+  <a href="/napa-sonoma-carb-testing">Santa Rosa</a> ·
+  Los Banos
+</p>`;
+
+const CONTACT_EDIT_CSS = `
+<style id="ncm-contact-edits">
+  body.contact-page main { display: flex; flex-direction: column; }
+  body.contact-page main > #request { order: -1; }
+  body.contact-page #contact-card,
+  body.contact-page .contact-grid > div > .contact-method:first-child {
+    border: 3px solid #fff;
+    border-radius: 14px;
+  }
+  body.contact-page #contact-card { padding: 18px; }
+  body.contact-page .contact-grid > div > .contact-method:first-child { padding: 14px 16px; margin-bottom: 12px; }
+  html[data-theme="light"] body.contact-page #contact-card,
+  html[data-theme="light"] body.contact-page .contact-grid > div > .contact-method:first-child { border-color: #143024; }
+  .ncm-service-area a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+</style>`;
+
 function schemaTag(pageUrl) {
   const page = new URL(pageUrl);
   page.hash = '';
@@ -67,13 +93,13 @@ function schemaTag(pageUrl) {
         legalName: 'NorCal CARB Mobile LLC',
         alternateName: 'NorCal CARB Mobile',
         url: 'https://norcalcarbmobile.com/',
-        telephone: '+1-628-999-3912',
+        telephone: '+1-916-890-4427',
         email: 'sales@norcalcarbmobile.com',
         image: LOGO_URL,
         logo: { '@type': 'ImageObject', url: LOGO_URL },
-        priceRange: socal ? '$99-$249' : '$75-$229',
+        priceRange: socal ? '$100-$200' : '$75-$229',
         description: socal
-          ? 'Mobile OVI Test. OBD $99. OVI smoke $249. 50-mile radius of 92553, Moreno Valley.'
+          ? 'Mobile OVI Test. OBD $100. OVI smoke $200. 50-mile radius of 92553, Moreno Valley.'
           : 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Headquarters in Northern California. OBD $75. OVI $199.',
         knowsAbout: [
           'CARB Clean Truck Check',
@@ -104,8 +130,8 @@ function schemaTag(pageUrl) {
           '@type': 'OfferCatalog',
           name: 'Mobile OVI Test',
           itemListElement: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OBD Clean Truck Check', serviceType: 'HD-OBD Clean Truck Check' }, price: 99, priceCurrency: 'USD' },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OVI Smoke Opacity Test', serviceType: 'SAE J1667 OVI Smoke Opacity' }, price: 249, priceCurrency: 'USD' }
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OBD Clean Truck Check', serviceType: 'HD-OBD Clean Truck Check' }, price: 100, priceCurrency: 'USD' },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OVI Smoke Opacity Test', serviceType: 'SAE J1667 OVI Smoke Opacity' }, price: 200, priceCurrency: 'USD' }
           ]
         } : {
           '@type': 'OfferCatalog',
@@ -195,7 +221,9 @@ const REDIRECTS = {
   '/clean-truck-check-fresno': '/areas#central-valley',
   // Hayward now has its own full corridor page at /clean-truck-check-hayward
   // '/clean-truck-check-hayward': '/areas#hayward',
-  '/clean-truck-check-fairfield': '/areas#fairfield',
+  // Fairfield now has its own full corridor page at /areas-fairfield
+  '/clean-truck-check-fairfield': '/areas-fairfield',
+  '/clean-truck-check-fairfield/': '/areas-fairfield',
   '/service-area-butte-county-clean-truck-check': '/areas#butte',
   '/service-area-san-joaquin-county-mobile-testing': '/areas#san-joaquin',
   '/san-jose-mobile-carb-testing': '/areas#san-jose',
@@ -376,140 +404,6 @@ function notFound(res) {
   return new Response(res.body, { status: 404, statusText: 'Not Found', headers });
 }
 
-const HTML_ESC = { '<': '<', '>': '>', '&': '&' };
-function esc(s) {
-  return String(s || '').replace(/[<>&]/g, (c) => HTML_ESC[c]);
-}
-
-function parseAddressList(value) {
-  const raw = Array.isArray(value) ? value : String(value == null ? '' : value).split(/[,;]+/);
-  const seen = new Set();
-  const out = [];
-  for (const item of raw) {
-    const email = String(item || '').trim();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) continue;
-    const key = email.toLowerCase();
-    if (seen.has(key)) continue;
-    seen.add(key);
-    out.push(email);
-  }
-  return out;
-}
-
-function isNeverTo(email) {
-  const key = String(email || '').trim().toLowerCase();
-  if (!key) return true;
-  if (NEVER_TO.includes(key)) return true;
-  // Never route form leads to mila@ on any domain.
-  return key.startsWith('mila@');
-}
-
-/** Resend `to` array: required form inboxes, plus any extra allowed CONTACT_TO addresses. */
-function contactToList(env) {
-  const extra = parseAddressList(env && env.CONTACT_TO).filter((email) => !isNeverTo(email));
-  return parseAddressList([...DEFAULT_TO, ...extra]);
-}
-
-function wantsJson(request) {
-  return (request.headers.get('accept') || '').includes('application/json');
-}
-
-async function readBody(request) {
-  const type = request.headers.get('content-type') || '';
-  if (type.includes('application/json')) return await request.json();
-  const form = await request.formData();
-  const obj = {};
-  for (const [k, v] of form.entries()) obj[k] = typeof v === 'string' ? v : '';
-  return obj;
-}
-
-function respond(request, ok, message, status) {
-  if (wantsJson(request)) {
-    return new Response(JSON.stringify(ok ? { ok: true } : { ok: false, error: message }), {
-      status: status || (ok ? 200 : 400),
-      headers: { 'content-type': 'application/json' },
-    });
-  }
-  const location = ok ? '/contact?sent=1' : '/contact?error=1';
-  return new Response(null, { status: 303, headers: { Location: location } });
-}
-
-async function handleContact(request, env) {
-  let data;
-  try {
-    data = await readBody(request);
-  } catch {
-    return respond(request, false, 'Please try again, or call us at (628) 999-3912.', 400);
-  }
-
-  // Honeypot — bots fill "company"; humans never see it.
-  if (data.company) return respond(request, true);
-
-  const name = (data.name || '').trim();
-  const phone = (data.phone || '').trim();
-  if (!name || !phone) return respond(request, false, 'Please include your name and a phone number.', 422);
-
-  const termsAccepted = String(data.terms_accepted || '').toLowerCase() === 'yes';
-  if (!termsAccepted) {
-    return respond(request, false, 'Please accept the Testing Terms & Customer Rights before sending your request.', 422);
-  }
-
-  const apiKey = env.RESEND_API_KEY;
-  if (!apiKey) return respond(request, false, 'Please call us directly at (628) 999-3912 to book your test.', 503);
-
-  const lead = {
-    name,
-    phone,
-    email: (data.email || '').trim(),
-    location: (data.location || '').trim(),
-    service: (data.service || '').trim(),
-    message: (data.message || '').trim(),
-    termsVersion: (data.terms_version || CURRENT_TERMS_VERSION).trim(),
-    submittedAt: new Date().toISOString(),
-  };
-
-  const html = `
-    <h2>New test request — norcalcarbmobile.com</h2>
-    <table cellpadding="6" style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:15px">
-      <tr><td><strong>Name</strong></td><td>${esc(lead.name)}</td></tr>
-      <tr><td><strong>Phone</strong></td><td>${esc(lead.phone)}</td></tr>
-      <tr><td><strong>Email</strong></td><td>${esc(lead.email)}</td></tr>
-      <tr><td><strong>Location</strong></td><td>${esc(lead.location)}</td></tr>
-      <tr><td><strong>Service</strong></td><td>${esc(lead.service)}</td></tr>
-      <tr><td valign="top"><strong>Details</strong></td><td>${esc(lead.message).replace(/\n/g, '<br>')}</td></tr>
-      <tr><td><strong>Terms accepted</strong></td><td>Yes — version ${esc(lead.termsVersion)}</td></tr>
-      <tr><td><strong>Submitted</strong></td><td>${esc(lead.submittedAt)}</td></tr>
-    </table>
-    <p style="font-family:Arial,sans-serif;font-size:13px;color:#555">New lead from the website contact form. Call or text them to confirm schedule and payment.</p>`;
-
-  const to = contactToList(env);
-  const payload = {
-    from: env.CONTACT_FROM || DEFAULT_FROM,
-    to,
-    subject: `New test request: ${lead.name.replace(/[\r\n]/g, '')}${lead.location ? ' — ' + lead.location.replace(/[\r\n]/g, '') : ''}`,
-    html,
-  };
-  const toLower = new Set(to.map((email) => email.toLowerCase()));
-  if (!toLower.has(OWNER_GMAIL.toLowerCase())) {
-    payload.cc = [OWNER_GMAIL];
-  }
-  const cleanEmail = lead.email.replace(/[\r\n]/g, '');
-  if (cleanEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) payload.reply_to = cleanEmail;
-
-  try {
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'content-type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    if (!r.ok) return respond(request, false, 'We couldn’t send that — please call (628) 999-3912.', 502);
-  } catch {
-    return respond(request, false, 'We couldn’t send that — please call (628) 999-3912.', 502);
-  }
-
-  return respond(request, true);
-}
-
 const ALIAS_DOMAINS = ['mobileovitest.com', 'www.mobileovitest.com'];
 
 export default {
@@ -527,7 +421,7 @@ export default {
     }
 
     if (url.pathname === '/api/contact') {
-      if (request.method === 'POST') return handleContact(request, env);
+      if (request.method === 'POST') return handleContact(request, env, EmailMessage);
       return new Response('Method Not Allowed', { status: 405, headers: { Allow: 'POST' } });
     }
     // Old Squarespace URLs, legacy blog paths, and canonical-path normalization
@@ -551,16 +445,28 @@ export default {
     const ct = assetRes.headers.get('content-type') || '';
     const force404 = canonicalPath(url.pathname) === '/404' || assetRes.status === 404;
     if (!ct.includes('text/html')) return force404 ? notFound(assetRes) : assetRes;
+    const isContact = canonicalPath(url.pathname) === '/contact';
     const page = new HTMLRewriter()
       .on('head', {
         element(el) {
           el.append(BRANDING_TAGS, { html: true });
           el.append(schemaTag(url.toString()), { html: true });
+          if (isContact) el.append(CONTACT_EDIT_CSS, { html: true });
         },
       })
       .on('body', {
         element(el) {
           el.append(CF_WEB_ANALYTICS_BEACON, { html: true });
+        },
+      })
+      .on('footer.site-footer .foot-bottom', {
+        element(el) {
+          el.before(SERVICE_AREA_HTML, { html: true });
+        },
+      })
+      .on('body.contact-page #request', {
+        element(el) {
+          el.prepend(SERVICE_AREA_HTML, { html: true });
         },
       })
       .transform(assetRes);

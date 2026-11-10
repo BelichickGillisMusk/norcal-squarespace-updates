@@ -23,6 +23,17 @@ jobs:
       - name: Enforce approved NorCal template
         run: node scripts/site-lock/validate.mjs
 
+  contact-handler:
+    runs-on: ubuntu-latest
+    name: Contact form handler
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit tests
+        run: node worker/contact.test.js
+
   attention-hq-fixture:
     runs-on: ubuntu-latest
     name: Attention HQ dry-run (fixture)
