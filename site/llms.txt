@@ -10,7 +10,7 @@
 - OBD Clean Truck Check: $75/truck
 - OVI smoke opacity (J1667): $199/truck
 - Motorhome OBD: $99 · Motorhome OVI: $229
-- Fleet 5+ same visit: ask for multi-truck rate
+- Fleet 5+ same visit: published per-vehicle prices; we can test multiple trucks in one appointment
 
 ## Core pages
 - https://norcalcarbmobile.com/
