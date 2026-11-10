@@ -8,10 +8,10 @@
  * Deploy:  push to main (Workers Builds runs wrangler deploy; config in ../wrangler.jsonc)
  * Binding: EMAIL (send_email) with allowed_destination_addresses = FORM_TO.
  * Email Routing on norcalcarbmobile.com only lets the binding send to verified
- * destination addresses (free on all plans). sales@ / carb@ / bryan@ are routed
- * addresses (catch-all forwards to bgillis99@gmail.com), so the form sends to
- * bgillis99@gmail.com directly, the sole lead inbox per Bryan's 10/16 lock. Add an address here AND in the binding's
- * allowed_destination_addresses, and verify it in Email Routing first.
+ * destination addresses (free on all plans). Live Worker
+ * norcal-squarespace-updates-gillis is locked to fsu9913@gmail.com. FORM_TO and
+ * the binding destination must stay on that verified list. A sales@ switch is a
+ * separate change after Ally verifies it.
  *
  * Optional KV: env.LEADS. Persist every valid lead before emailing so a send_email
  * failure does not drop the request. Owner must create the namespace and paste

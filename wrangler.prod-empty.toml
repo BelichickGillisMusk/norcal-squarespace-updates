@@ -34,11 +34,11 @@ pattern = "www.norcalcarbmobile.com"
 custom_domain = true
 
 # Contact form email — same EMAIL binding as wrangler.toml / wrangler.jsonc.
-# bgillis99@gmail.com MUST be a VERIFIED Email Routing destination on this zone.
+# fsu9913@gmail.com is the live verified Email Routing destination.
 # From is website@norcalcarbmobile.com. Keep in sync with FORM_TO in worker/contact.js.
 [[send_email]]
 name = "EMAIL"
-allowed_destination_addresses = ["bgillis99@gmail.com"]
+allowed_destination_addresses = ["fsu9913@gmail.com"]
 
 # OPTIONAL — contact-form lead backup (env.LEADS). Do NOT uncomment with a
 # placeholder id; wrangler deploy will fail until a real namespace id is pasted.
@@ -47,7 +47,8 @@ allowed_destination_addresses = ["bgillis99@gmail.com"]
 # binding = "LEADS"
 # id = "PASTE_KV_NAMESPACE_ID_HERE"
 
-# CONTACT_TO is no longer read by the Worker. Form leads go to bgillis99@gmail.com
-# only (Bryan's 10/16 lock) via the send_email binding.
+# CONTACT_TO is no longer read by the Worker. Form leads go to fsu9913@gmail.com
+# via the send_email binding (live verified destination).
 [vars]
-CONTACT_TO = "sales@norcalcarbmobile.com,carb@norcalcarbmobile.com,fsu9913@gmail.com"
+CONTACT_TO = "fsu9913@gmail.com"
+FORM_TO = "fsu9913@gmail.com"
