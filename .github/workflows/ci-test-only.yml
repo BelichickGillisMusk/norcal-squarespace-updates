@@ -33,6 +33,8 @@ jobs:
           node-version: '22'
       - name: Unit tests
         run: node worker/contact.test.js
+      - name: Blog redirect tests
+        run: node worker/blog-redirects.test.js
 
   attention-hq-fixture:
     runs-on: ubuntu-latest

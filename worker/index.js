@@ -20,7 +20,8 @@
  */
 
 import { EmailMessage } from 'cloudflare:email';
-import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
+import { LEGACY_BLOG_SLUGS } from './blog-redirects.js';
+import { legacyBlogTarget } from './blog-routing.js';
 import { handleContact } from './contact.js';
 
 const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
@@ -326,34 +327,6 @@ const REDIRECTS = {
   '/service-locations/tag/tractor-carb-inspection+harvester-emissions+diesel-truck-testing+farm-machinery-carb+irrigation-equipment+agricultural-vehicles+heavy-equipment-carb+fleet-carb-testing': '/areas',
   '/service-locations/tag/woodland-california+yolo-county-services+central-valley-carb+northern-california+sacramento-valley+woodland-ca-business+local-carb-testing': '/areas',
 };
-
-/**
- * Blog routing. Migrated Squarespace posts are served at their EXACT old URL,
- * /clean-truck-check-blog/<slug> (per Bryan — keep the old slugs/paths live).
- *
- * Returns a redirect target, or null to fall through to static assets:
- *  - /blog/<legacy-slug>                → 301 to the old path (early /blog layout)
- *  - /clean-truck-check-blog            → 301 to /blog (the index)
- *  - /clean-truck-check-blog/<slug>     → served directly (null)
- *  - date-based /clean-truck-check-blog/2025/10/8/<slug> → 301 to the flat old path
- *  - unrecoverable/unknown slugs        → closest equivalent page, else /blog
- */
-function legacyBlogTarget(pathname) {
-  const path = pathname.replace(/\/+$/, '').replace(/\.html$/i, '');
-  if (path.startsWith('/blog/')) {
-    const slug = path.slice('/blog/'.length);
-    return LEGACY_BLOG_SLUGS.has(slug) ? `/clean-truck-check-blog/${slug}` : null;
-  }
-  if (path !== '/clean-truck-check-blog' && !path.startsWith('/clean-truck-check-blog/')) return null;
-  const slug = path.split('/').pop();
-  if (slug === 'clean-truck-check-blog') return '/blog';
-  if (LEGACY_BLOG_FALLBACKS[slug]) return LEGACY_BLOG_FALLBACKS[slug];
-  if (LEGACY_BLOG_SLUGS.has(slug)) {
-    const canonical = `/clean-truck-check-blog/${slug}`;
-    return path === canonical ? null : canonical;
-  }
-  return '/blog';
-}
 
 /**
  * Old Squarespace service-locations collection. Posts that were migrated live

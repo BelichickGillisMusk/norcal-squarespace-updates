@@ -5,7 +5,9 @@
  * LEGACY_BLOG_SLUGS: migrated posts served at their exact old URL
  * /clean-truck-check-blog/<slug> (the /blog/<slug> variant 301s there).
  * LEGACY_BLOG_FALLBACKS: slugs with no page at the old path, keyed by the
- * final URL segment, pointing at the closest equivalent page.
+ * final URL segment, pointing at the closest equivalent page. Live
+ * /blog/<slug> posts (any HTML file in site/blog/) automatically map
+ * /clean-truck-check-blog/<slug> → /blog/<slug> in one hop.
  */
 export const LEGACY_BLOG_SLUGS = new Set([
   "attention-california-diesel-truck-owners",
@@ -79,6 +81,15 @@ export const LEGACY_BLOG_FALLBACKS = {
   "fleet-c-arb-clean-truck-check-sacramento": "/sacramento-carb-testing",
   "what-is-clean-truck-test-fairfield": "/stockton-clean-truck-check",
   "2026-carb-testing-deadlines": "/blog/2026-carb-testing-deadlines",
+  "bayshore-sf-free-retest-ovi-wager-6500": "/blog/bayshore-sf-free-retest-ovi-wager-6500",
   "carb-clean-truck-check": "/blog/carb-clean-truck-check",
+  "clean-truck-check-sacramento-construction-fleets": "/blog/clean-truck-check-sacramento-construction-fleets",
+  "clean-truck-check-west-sacramento-elite-rentals": "/blog/clean-truck-check-west-sacramento-elite-rentals",
+  "craft-so-good-they-copy-us-hotdog-clipboard": "/blog/craft-so-good-they-copy-us-hotdog-clipboard",
+  "fleets-ovi-obd-porterville-mojave": "/blog/fleets-ovi-obd-porterville-mojave",
+  "harvest-season-clean-truck-check": "/blog/harvest-season-clean-truck-check",
   "how-mobile-carb-testing-works": "/blog/how-mobile-carb-testing-works",
+  "jobsite-clean-truck-check-near-me-oakland": "/blog/jobsite-clean-truck-check-near-me-oakland",
+  "obd-vs-ovi-clean-truck-check-fleets": "/blog/obd-vs-ovi-clean-truck-check-fleets",
+  "which-trucks-dont-need-clean-truck-check": "/blog/which-trucks-dont-need-clean-truck-check",
 };
