@@ -37,11 +37,13 @@ const valid = {
   name: 'Test Driver',
   phone: '916 835-5127',
   email: 'driver@example.com',
+  company: 'Donger Fleet LLC',
   location: 'RV, Petaluma KOA',
   terms_accepted: 'yes',
   message: 'Need a test Friday',
   service: 'OVI',
   trucks: '2',
+  preferred_date: '2026-11-20',
 };
 
 function mockKv(store) {
@@ -121,7 +123,15 @@ console.error = (...args) => { logs.push(args); };
   assert(sent && sent.to[0] === FORM_TO[0], 'email To is FORM_TO');
   assert(sent.from.email === FORM_FROM.email, 'email From is website@norcalcarbmobile.com');
   assert(sent.replyTo === valid.email, 'replyTo from lead email');
+  assert(sent.text.includes('Company: Donger Fleet LLC'), 'email body includes company');
+  assert(sent.text.includes('Preferred date: 2026-11-20'), 'email body includes preferred date');
+  assert(sent.text.includes('Test type: OVI'), 'email body includes test type');
+  assert(sent.text.includes('City / site: RV, Petaluma KOA'), 'email body includes city/site');
+  assert(sent.text.includes('Truck count: 2'), 'email body includes truck count');
   assert(kv.size === 1, 'happy path still persists to KV');
+  const happy = JSON.parse([...kv.values()][0]);
+  assert(happy.company === valid.company, 'KV stores company');
+  assert(happy.preferredDate === valid.preferred_date, 'KV stores preferredDate');
 }
 
 {
@@ -153,6 +163,46 @@ console.error = (...args) => { logs.push(args); };
 }
 
 {
+  const res = await jsonRes(await handleContact(jsonRequest({
+    name: 'Email Only',
+    email: 'preview@example.com',
+    terms_accepted: 'yes',
+    location: 'Oakland yard',
+  }), { EMAIL: emailOk() }));
+  assert(res.status === 200 && res.body.ok === true, 'name + email without phone should 200');
+}
+
+{
+  const res = await jsonRes(await handleContact(jsonRequest({
+    name: 'No Reach',
+    terms_accepted: 'yes',
+  }), { EMAIL: emailOk() }));
+  assert(res.status === 422, `name without phone or email should 422, got ${res.status}`);
+  assert(/phone number or email/.test(res.body.error), `422 should mention phone or email, got ${res.body.error}`);
+}
+
+{
+  const res = await jsonRes(await handleContact(jsonRequest({
+    name: 'Bad Email',
+    email: 'not-an-email',
+    terms_accepted: 'yes',
+  }), { EMAIL: emailOk() }));
+  assert(res.status === 422, `invalid email without phone should 422, got ${res.status}`);
+}
+
+{
+  let sent;
+  await jsonRes(await handleContact(jsonRequest({
+    ...valid,
+    company: 'Visible Co',
+    website: '',
+  }), {
+    EMAIL: { async send(message) { sent = message; } },
+  }));
+  assert(sent && sent.text.includes('Company: Visible Co'), 'real company field is not treated as honeypot');
+}
+
+{
   const res = await jsonRes(await handleContact(jsonRequest({ name: 'A', phone: '1' }), {
     EMAIL: emailOk(),
   }));
@@ -162,7 +212,7 @@ console.error = (...args) => { logs.push(args); };
 {
   const kv = new Map();
   let sent = false;
-  const res = await jsonRes(await handleContact(jsonRequest({ ...valid, company: 'bot' }), {
+  const res = await jsonRes(await handleContact(jsonRequest({ ...valid, website: 'bot' }), {
     LEADS: mockKv(kv),
     EMAIL: { async send() { sent = true; } },
   }));
