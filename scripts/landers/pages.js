@@ -39,7 +39,7 @@ const BAY_FAQ = [
   },
   {
     q: 'Is travel really $0?',
-    a: `In our East Bay / Bay Area zone (Oakland, Hayward, Fremont, San Leandro, Richmond, Concord, Alameda &amp; Contra Costa), travel is $0. Call ${PUBLIC_PHONE.display} if you are unsure.`,
+    a: `In our Bay Area zone — including Oakland, Hayward, Fremont, San Leandro, Richmond, Concord, and the rest of Alameda and Contra Costa Counties — travel is $0. Call ${PUBLIC_PHONE.display} if you are unsure.`,
   },
   {
     q: 'Weekends?',
@@ -58,11 +58,11 @@ const OAKLAND_FAQ = [
   },
   {
     q: 'Which test do I need — OVI or OBD?',
-    a: `OVI smoke opacity is ${dollar(NORCAL_PRICES.ovi)} (pre-2013 and non-OBD). HD-OBD is ${dollar(NORCAL_PRICES.obd)} (2013+ diesel). Check your VIN at <a href="${VIN_CHECK_URL}" rel="noopener">the Clean Truck Check VIN tool</a>, then book.`,
+    a: `OVI smoke opacity is ${dollar(NORCAL_PRICES.ovi)} (pre-2013 and non-OBD). HD-OBD is ${dollar(NORCAL_PRICES.obd)} (2013+ diesel and 2018+ alt-fuel). Check your VIN at the Clean Truck Check VIN tool, then book.`,
   },
   {
     q: 'Can you cover Hayward and Richmond too?',
-    a: `Yes. Morning East Bay routes regularly include Oakland, Hayward, and Richmond. Same phone: ${PUBLIC_PHONE.display}.`,
+    a: `Yes. Morning East Bay routes regularly include Oakland, Hayward, and Richmond. Richmond is on I-80 / I-580, not I-880. Same phone: ${PUBLIC_PHONE.display}.`,
   },
 ];
 
@@ -285,11 +285,11 @@ export function renderOaklandPage() {
   const mainHtml = `${heroSection({
     eyebrow: '<a href="/areas">Service areas</a> · Oakland',
     h1Html: 'Mobile CARB testing from <span>Oakland</span>',
-    lede: `We are based in Oakland. Next-day — and often same-day — Clean Truck Check at your yard in Oakland, Hayward, and Richmond. OVI smoke opacity ${dollar(NORCAL_PRICES.ovi)}. HD-OBD ${dollar(NORCAL_PRICES.obd)}.`,
+    lede: `We are based in Oakland. Next-day — and often same-day — Clean Truck Check at your yard in Oakland, Hayward, and Richmond. OVI smoke opacity is ${dollar(NORCAL_PRICES.ovi)} per vehicle. HD-OBD is ${dollar(NORCAL_PRICES.obd)} per vehicle. There is no public street address and no second Google listing; we come to your yard, office, or jobsite. Call ${PUBLIC_PHONE.display} to book.`,
     callFirst: true,
     areasLine: `Oakland hub · Hayward · Richmond · <a href="${VIN_CHECK_URL}" rel="noopener">Check your VIN</a>`,
     mapAlt: 'NorCal CARB Mobile coverage — Oakland hub serving Hayward, Richmond, and the East Bay',
-    chips: ['Oakland', 'Hayward', 'Richmond', 'East Bay', 'I-880'],
+    chips: ['Oakland', 'Hayward', 'Richmond', 'East Bay'],
   })}
 
 <section>
@@ -297,9 +297,10 @@ export function renderOaklandPage() {
     <div class="coverage-panel">
       <div class="coverage-panel-copy">
         <p class="eyebrow">Based in Oakland</p>
-        <h2>Next-day, often same-day, at your yard</h2>
-        <p>The tester is based in Oakland, so East Bay mornings are built around Oakland, Hayward, and Richmond — not a long inbound drive. We come to the office, yard, or jobsite. Same company, one Google Business Profile, no shop counter to visit.</p>
-        <p>Not sure if you need smoke opacity or OBD? <a href="${VIN_CHECK_URL}" rel="noopener">Check the VIN on the Clean Truck Check tool</a>, then call or send the intake.</p>
+        <h2>Based in Oakland, without a shop pin</h2>
+        <p>The tester works from the Oakland hub, so East Bay mornings are built around Oakland, Hayward, and Richmond instead of a long inbound drive from Sacramento. We still sit in traffic like everyone else. We just start closer.</p>
+        <p>There is no street address, map pin, or LocalBusiness geo for the hub. One company, one Google Business Profile. Wider Bay coverage — San Francisco, the Peninsula, the North Bay, and San Jose — stays on <a href="${BAY_PATH}">Bay Area mobile CARB</a>.</p>
+        <p>Not sure whether you need smoke opacity or OBD? <a href="${VIN_CHECK_URL}" rel="noopener">Check the VIN</a>, then call.</p>
         ${`<div class="hero-cta">
         <a class="btn btn-call btn-lg" href="${PUBLIC_PHONE.href}">Call ${PUBLIC_PHONE.display}</a>
         <a class="btn btn-primary btn-lg" href="/contact">Book a Mobile Test</a>
@@ -318,7 +319,7 @@ export function renderOaklandPage() {
           <div class="card">
             <h3>On every test</h3>
             <ul>
-              <li>Same-day CTC-VIS submission</li>
+              <li>Same-day submission to CARB</li>
               <li>On-site proof of testing</li>
               <li>Free retest after repairs when booked with us</li>
             </ul>
@@ -332,27 +333,23 @@ export function renderOaklandPage() {
 <section class="soft">
   <div class="wrap">
     <div class="section-head">
-      <h2>Oakland, Hayward, and Richmond</h2>
-      <p>Mobile Clean Truck Check along I-880. Broader Bay coverage stays on the Bay Area page.</p>
+      <h2>The morning corridor, named correctly</h2>
+      <p>Mobile Clean Truck Check around the Oakland hub: I-880 through Hayward, and I-80 / I-580 through Richmond. Broader Bay coverage stays on the Bay Area page.</p>
     </div>
     <div class="grid grid-2">
       <div class="card">
         <h2>Where we roll</h2>
-        <ul>
-          <li>Oakland offices, yards, and construction sites</li>
-          <li>Hayward warehouse and fleet rows</li>
-          <li>Richmond and nearby East Bay stops</li>
-        </ul>
+        <p><strong>Oakland.</strong> Offices, yards, construction sites, warehouses, and port-adjacent staging. Port of Oakland drayage is a priority on the main Bay page; this lander is the local morning loop.</p>
+        <p><strong>Hayward and south I-880.</strong> Warehouse and fleet rows, including the Industrial Boulevard corridor. The long I-880 write-up is <a href="/clean-truck-check-hayward">Hayward</a> (Union City, Fremont, Newark, San Leandro, Castro Valley).</p>
+        <p><strong>Richmond and the north East Bay.</strong> Richmond is on I-80 / I-580, not I-880. Keep Richmond on this lander — just do not file it under “along I-880.”</p>
         <p>Need San Francisco, the Peninsula, or San Jose from the same hub? See <a href="${BAY_PATH}">Bay Area mobile CARB</a>.</p>
       </div>
       <div class="card">
         <h2>Who we test</h2>
-        <ul>
-          <li>East Bay distribution and construction fleets</li>
-          <li>Port-adjacent and I-880 drayage</li>
-          <li>Diesel motorhomes parked in Oakland, Hayward, or Richmond</li>
-        </ul>
-        <p>In-zone travel is $0. Same public number: <a href="${PUBLIC_PHONE.href}">${PUBLIC_PHONE.display}</a>.</p>
+        <p>East Bay distribution and construction fleets, port-adjacent and I-880 drayage, municipal and contractor rows, and diesel motorhomes parked in Oakland, Hayward, or Richmond. In-zone travel is $0 on this Bay book. Every test includes on-site proof, same-day submission to CARB, and a free retest after repairs when that follow-up is booked with us.</p>
+        <p>Oakland industries on this loop are practical, not decorative. Drayage and port-adjacent tractors stage here because the port is here. Construction and utility contractors stage here because the jobsites are here. Warehouse rows feed I-880 south toward Hayward and I-80 north toward Richmond.</p>
+        <p>If a customer asks for a shop address, the answer is the FAQ: there is not one. Sacramento and Stockton are reach from the hub and have their own pages — they are not Oakland neighborhoods.</p>
+        <p>Same public number: <a href="${PUBLIC_PHONE.href}">${PUBLIC_PHONE.display}</a>.</p>
       </div>
     </div>
   </div>
@@ -367,7 +364,7 @@ export function renderOaklandPage() {
     <div class="grid grid-3">
       <div class="step"><div class="num">1</div><h3>Book in minutes</h3><p>Call ${PUBLIC_PHONE.display} or use the <a href="/contact">contact intake</a>. City, truck count, test type.</p></div>
       <div class="step"><div class="num">2</div><h3>We come to you</h3><p>Next-day is the default. Same-day when the Oakland route still has a window.</p></div>
-      <div class="step"><div class="num">3</div><h3>Pass &amp; paperwork</h3><p>On-site proof plus same-day CTC-VIS submission. Free retest after repairs when booked with us.</p></div>
+      <div class="step"><div class="num">3</div><h3>Pass &amp; paperwork</h3><p>On-site proof plus same-day submission to CARB. Free retest after repairs when booked with us.</p></div>
     </div>
   </div>
 </section>
@@ -398,8 +395,12 @@ ${priceBand({
     <div class="wrap">
       <h2 id="related-field-notes">Related field notes</h2>
       <ul>
+        <li><a href="/blog/jobsite-clean-truck-check-near-me-oakland">Oakland and Bay Area jobsite fleets</a></li>
+        <li><a href="/clean-truck-check-blog/oakland-clean-truck-checks-san-leandro">Oakland Clean Truck Checks, San Leandro</a></li>
+        <li><a href="/clean-truck-check-blog/oakland-carb-compliance-at-active-job-sites-keeping-east-bay-municipal-utility-district-projects-moving">Oakland CARB compliance at active job sites</a></li>
         <li><a href="${BAY_PATH}">Bay Area mobile CARB testing</a></li>
         <li><a href="/clean-truck-check-hayward">Hayward corridor page</a></li>
+        <li><a href="/carb-mobile-test-near-me">CARB mobile test near me</a></li>
         <li><a href="/blog/obd-vs-ovi-clean-truck-check-fleets">OBD vs OVI for fleets</a></li>
         <li><a href="${VIN_CHECK_URL}" rel="noopener">Clean Truck Check VIN tool</a></li>
       </ul>

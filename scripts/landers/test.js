@@ -6,7 +6,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { NORCAL_PRICES, PUBLIC_PHONE, VIN_CHECK_URL } from '../../worker/prices.js';
-import { renderBayPage, renderOaklandPage, BAY_PATH, OAKLAND_PATH } from './pages.js';
+import { renderOaklandPage, BAY_PATH, OAKLAND_PATH } from './pages.js';
 import { writeLanders } from './render.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -22,7 +22,6 @@ function assert(cond, msg) {
   console.error('FAIL:', msg);
 }
 
-const bay = renderBayPage();
 const oakland = renderOaklandPage();
 writeLanders();
 
@@ -34,7 +33,6 @@ const worker = readFileSync(join(root, 'worker/index.js'), 'utf8');
 const pricesSrc = readFileSync(join(root, 'worker/prices.js'), 'utf8');
 
 assert(existsSync(join(root, 'site/oakland-mobile-carb-test.html')), 'Oakland HTML exists');
-assert(bayFile === bay, 'Committed Bay HTML matches renderer');
 assert(oakFile === oakland, 'Committed Oakland HTML matches renderer');
 
 assert(NORCAL_PRICES.obd === 75, 'OBD stays $75');
@@ -46,7 +44,7 @@ assert(pricesSrc.includes('obd: 75'), 'Price constant file is the one-line swap'
 assert(worker.includes('NORCAL_PRICES.obd'), 'Worker schema uses shared prices');
 assert(worker.includes('oakland-mobile-carb-test'), 'Worker footer links Oakland');
 
-for (const html of [bay, oakland]) {
+for (const html of [bayFile, oakland]) {
   assert(html.includes(`$${NORCAL_PRICES.ovi}`), 'Lander shows OVI from shared constant');
   assert(html.includes(`$${NORCAL_PRICES.obd}`), 'Lander shows OBD from shared constant');
   assert(html.includes(PUBLIC_PHONE.href), 'Lander uses public tel link');
@@ -61,6 +59,10 @@ assert(oakland.includes(`<link rel="canonical" href="https://norcalcarbmobile.co
 assert(oakland.includes(VIN_CHECK_URL), 'Oakland links VIN check');
 assert(oakland.includes('Hayward') && oakland.includes('Richmond') && /based in Oakland/i.test(oakland), 'Oakland/Hayward/Richmond copy');
 assert(/next-day/i.test(oakland) && /same-day/i.test(oakland), 'Next-day and same-day');
+assert(oakland.includes('I-80 / I-580 through Richmond'), 'Richmond is not filed only as I-880');
+assert(!oakland.includes('Mobile Clean Truck Check along I-880'), 'Old along-I-880 sentence removed');
+assert(oakland.includes('2018+ alt-fuel'), 'OBD FAQ/price names 2018+ alt-fuel');
+assert(!/"address"\s*:/.test(oakland) && !oakland.includes('"geo"'), 'No LocalBusiness address or geo');
 
 const oviIdx = oakland.indexOf('OVI Smoke Opacity Test');
 const obdIdx = oakland.indexOf('HD-OBD Periodic Test');
@@ -71,12 +73,12 @@ const hero = oakland.slice(0, heroEnd);
 assert(hero.includes(PUBLIC_PHONE.href) && hero.includes('href="/contact"'), 'Oakland above-the-fold call + contact');
 assert(oakland.includes('cta-band') && oakland.includes(PUBLIC_PHONE.href), 'Oakland bottom CTA includes call');
 
-assert(bay.includes(`<link rel="canonical" href="https://norcalcarbmobile.com${BAY_PATH}">`), 'Bay canonical unchanged');
-assert(bay.includes('Mobile CARB Clean Truck Check in the <span>Bay Area</span>'), 'Bay H1 unchanged');
-assert(bay.includes("Isn't it far from Sacramento?"), 'Bay Sacramento FAQ kept');
-assert(bay.includes('And better hot dog spots.'), 'Bay hot dog FAQ kept');
-assert(bay.includes(OAKLAND_PATH), 'Bay page links Oakland lander');
-assert(bay.includes('One Google Business Profile'), 'Bay still one GBP');
+assert(bayFile.includes(`<link rel="canonical" href="https://norcalcarbmobile.com${BAY_PATH}">`), 'Bay canonical unchanged');
+assert(bayFile.includes('Mobile CARB Clean Truck Check in the <span>Bay Area</span>'), 'Bay H1 unchanged');
+assert(bayFile.includes("Isn't it far from Sacramento?"), 'Bay Sacramento FAQ kept');
+assert(bayFile.includes('And better hot dog spots.'), 'Bay hot dog FAQ kept');
+assert(bayFile.includes(OAKLAND_PATH), 'Bay page links Oakland lander');
+assert(bayFile.includes('no second Google Business Profile'), 'Bay still one GBP');
 
 assert(sitemap.includes(`https://norcalcarbmobile.com${OAKLAND_PATH}`), 'Sitemap has Oakland');
 assert(areas.includes(OAKLAND_PATH), 'Areas page links Oakland');

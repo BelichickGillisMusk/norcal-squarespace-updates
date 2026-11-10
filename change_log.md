@@ -8,6 +8,16 @@ Agents append timestamped entries below.
 
 The motorhome dog-show article used `628-999-3912`. `main` locks the public phone to `(916) 890-4427` / `tel:+19168904427`. Updated the article and draft to that number so site-lock passes, then merge deploys.
 
+## 2026-11-10 — Jennifer SEO package: Oakland lander + /areas (PR 160 only)
+
+Draft PR only. Do not merge. Do not `wrangler deploy`. Rebased onto updated PR 158.
+
+- `/oakland-mobile-carb-test`: Jennifer copy. I-880 vs Richmond wording fixed. OBD FAQ names 2013+ diesel and 2018+ alt-fuel. No street address, geo, or second GBP. No stop photo (Ruby Street photo not used).
+- `/areas`: city-card rewrite on this stack because this PR already owned the file. East Bay details go to Hayward; Oakland hub card links `/oakland-mobile-carb-test`. Napa and Sonoma (not Livermore). Butte split from Santa Rosa. San Diego chip removed; SoCal card labeled Southern California → `/socal`. Kept `#san-joaquin` for the existing redirect.
+- Bay HTML from 158 kept (lander renderer no longer overwrites it); Oakland links added here.
+
+---
+
 ## 2026-11-10 — Jennifer SEO package: Bay Area long-form body (PR 158 only)
 
 Draft PR only. Do not merge. Do not `wrangler deploy`. Do not change Cloudflare.
