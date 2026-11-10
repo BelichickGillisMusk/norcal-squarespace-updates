@@ -21,6 +21,7 @@ import { EmailMessage } from 'cloudflare:email';
 import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
 import { handleContact } from './contact.js';
 import { NORCAL_PRICES } from './prices.js';
+import { SOCAL_PAGE_REDIRECTS } from './socal-redirects.js';
 
 const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
 
@@ -224,15 +225,10 @@ const REDIRECTS = {
   // '/clean-truck-check-lodi': '/areas#lodi',
   '/clean-truck-check-roseville': '/areas#roseville',
   '/carb-mobile-clean-truck-check-antioch-california': '/areas#antioch',
-  // San Diego County booking/pricing lives on the sibling site. Absolute Location
-  // is returned as-is by the redirect handler. Trailing-slash keys are listed
-  // because lookup is exact, then one trailing slash stripped.
-  '/clean-truck-check-san-diego': 'https://mobilecarbsmoketest.com/',
-  '/san-diego': 'https://mobilecarbsmoketest.com/',
-  '/san-diego/': 'https://mobilecarbsmoketest.com/',
-  '/areas/san-diego': 'https://mobilecarbsmoketest.com/',
-  '/areas/san-diego/': 'https://mobilecarbsmoketest.com/',
-  '/clean-truck-check-orange-county': '/areas#orange-county',
+  // San Diego and Orange County booking now land on /socal (301, same as other
+  // on-site aliases). Trailing-slash keys are listed because lookup is exact,
+  // then one trailing slash stripped.
+  ...SOCAL_PAGE_REDIRECTS,
   '/service-locations': '/areas',
   // Legacy Squarespace path. One trailing slash is stripped in the lookup below.
   '/service-areas': '/areas',

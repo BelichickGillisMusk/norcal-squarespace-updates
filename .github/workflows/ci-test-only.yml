@@ -32,7 +32,9 @@ jobs:
         with:
           node-version: '22'
       - name: Unit tests
-        run: node worker/contact.test.js
+        run: |
+          node worker/contact.test.js
+          node worker/redirects.test.js
 
   east-bay-landers:
     runs-on: ubuntu-latest
