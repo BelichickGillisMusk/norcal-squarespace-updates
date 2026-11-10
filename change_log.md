@@ -4,6 +4,15 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-10 — Homepage: no YouTube payload; Short on /videos (PR only)
+
+Owner GO: homepage must load no YouTube player. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges; Workers Builds deploys from main.
+
+- Removed `figure.field-short` iframe `youtube.com/embed/q8osFPN8jyI` from `site/index.html`. Replaced with a text link to `/videos`.
+- Added `site/videos.html` (canonical `/videos`) with youtube-nocookie Short embed (loading=lazy) and a link to `@CARBCLEANTRUCKMOBILE`.
+- Sitemap loc for `/videos`. Site-lock homepage hash refreshed. Contact form / wrangler bindings untouched.
+
+
 ## 2026-11-04 — Contact form: persist lead before email (PR only)
 
 POST `/api/contact` was returning HTTP 502 on every submit because `env.EMAIL.send` threw (Cloudflare Email Workers). A real customer lead was lost. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges; Workers Builds deploys from main.
