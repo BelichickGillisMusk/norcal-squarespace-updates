@@ -4,6 +4,16 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-10 — Bay Area ads-backup answer + FAQ merge (PR only)
+
+Draft PR only. Do not merge. Do not `wrangler deploy`. Jennifer 2026-11-10 6:12 AM PT draft (`DRAFT-bay-area-ads-backup-2026-11-10.md`) replaces her earlier Nov 9 drafts.
+
+- `/bay-area-mobile-carb`: placed Jennifer’s top answer block under the H1, word for word, including same-or-next-day arrival from the Oakland hub, $75 HD-OBD / $199 OVI, and same-day CARB submission.
+- Merged her four FAQs into the existing Bay Area FAQ block and the single FAQPage already in the page `@graph`. Replaced no second FAQPage. Kept the three unique existing FAQs (port flag, $0 travel, weekends) after her four. Visible questions and answers match the JSON-LD word for word, including “And better hot dog spots.”
+- No Oakland street address, LocalBusiness address, or geo added. Public phone (916) 890-4427 only. No owner name in customer copy.
+
+---
+
 ## 2026-11-10 — Bay Area lander polish + contact form fields (PR only)
 
 Draft PR only. Do not merge. Do not `wrangler deploy`. Workers Builds on `main` after owner merge.
