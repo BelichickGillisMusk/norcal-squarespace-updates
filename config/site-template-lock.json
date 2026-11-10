@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-04.1",
+  "version": "2026-11-10.1",
   "owner": "NorCal CARB Mobile LLC",
   "requiredPhoneDisplay": "(916) 890-4427",
   "requiredPhoneSchema": "+1-916-890-4427",
@@ -20,6 +20,7 @@
     "--bg": "#ffffff"
   },
   "requiredCfWebAnalyticsToken": "231f8b2f40e24c50b92870168dbb3f06",
+  "requiredGoogleAdsId": "AW-18285811780",
   "requiredWorkerName": "norcal-squarespace-updates-gillis",
   "requiredDomains": [
     "norcalcarbmobile.com",

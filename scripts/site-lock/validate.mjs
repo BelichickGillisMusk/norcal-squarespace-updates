@@ -70,6 +70,20 @@ if (!worker.includes(cfToken) && !homepage.includes(cfToken)) {
   fail(`Cloudflare Web Analytics token missing from homepage HTML: ${cfToken}`);
 }
 
+const adsId = lock.requiredGoogleAdsId;
+if (!adsId) {
+  fail("site-template-lock.json must pin requiredGoogleAdsId.");
+} else {
+  const ads = existsSync(join(root, "worker/google-ads.js")) ? text("worker/google-ads.js") : "";
+  if (!ads.includes(adsId)) fail(`Google Ads id missing from Worker inject: ${adsId}`);
+  if (!worker.includes("el.prepend(GOOGLE_ADS_HEAD")) {
+    fail("Google Ads tag must be prepended to <head> (first child) via GOOGLE_ADS_HEAD.");
+  }
+  if (homepage.includes(`gtag/js?id=${adsId}`)) {
+    fail("Homepage static HTML must not embed the Google Ads tag; the Worker injects it once.");
+  }
+}
+
 const publicFiles = walk(join(root, "site")).filter((path) => path.endsWith(".html"));
 publicFiles.push(join(root, "worker/index.js"));
 for (const file of publicFiles) {

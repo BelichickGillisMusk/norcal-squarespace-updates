@@ -22,6 +22,7 @@
 import { EmailMessage } from 'cloudflare:email';
 import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
 import { handleContact } from './contact.js';
+import { GOOGLE_ADS_HEAD } from './google-ads.js';
 
 const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
 
@@ -438,7 +439,8 @@ export default {
       }
     }
 
-    // Everything else → static assets; inject branding, schema, and CF Web Analytics.
+    // Everything else → static assets; inject Google Ads tag (first in <head>),
+    // branding, schema, and CF Web Analytics.
     // /404 is a real file, so html_handling would answer it with 200. Force 404.
     // Unknown paths already come back as 404 via not_found_handling=404-page.
     const assetRes = await env.ASSETS.fetch(request);
@@ -449,6 +451,7 @@ export default {
     const page = new HTMLRewriter()
       .on('head', {
         element(el) {
+          el.prepend(GOOGLE_ADS_HEAD, { html: true });
           el.append(BRANDING_TAGS, { html: true });
           el.append(schemaTag(url.toString()), { html: true });
           if (isContact) el.append(CONTACT_EDIT_CSS, { html: true });

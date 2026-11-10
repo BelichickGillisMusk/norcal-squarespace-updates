@@ -34,6 +34,17 @@ jobs:
       - name: Unit tests
         run: node worker/contact.test.js
 
+  google-ads:
+    runs-on: ubuntu-latest
+    name: Google Ads tag + conversion
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit tests
+        run: node worker/google-ads.test.js
+
   attention-hq-fixture:
     runs-on: ubuntu-latest
     name: Attention HQ dry-run (fixture)

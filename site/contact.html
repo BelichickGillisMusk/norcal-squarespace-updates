@@ -267,6 +267,9 @@
           .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
           .then(function (res) {
             if (res.ok) {
+              if (typeof window.ncmFireGoogleAdsConversion === 'function') {
+                window.ncmFireGoogleAdsConversion();
+              }
               form.reset();
               var b = document.getElementById('sent-banner');
               if (b) { b.hidden = false; b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }

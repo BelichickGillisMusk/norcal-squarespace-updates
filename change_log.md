@@ -4,6 +4,16 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-10 — Google Ads AW-18285811780 + contact success conversion (PR only)
+
+Install the Google tag on every HTML page and fire the contact conversion only after a successful intake. **PR only — do not merge from this agent. Do not wrangler deploy.** Needs Bryan merge GO as bgillis99, then a Workers Builds deploy and live Tag Assistant proof.
+
+- Worker HTMLRewriter prepends the Google tag (`AW-18285811780`) as the first child of `<head>` on every `text/html` response (blogs, landers, `/contact`).
+- Conversion `AW-18285811780/4JwWCNeT7ukcEMSwrY9E` fires only on `?sent=1` (non-JSON 303 after 2xx intake) or the `/contact` fetch `res.ok` branch. Not on page load, submit click, or `?error=1` / non-2xx. sessionStorage guards refresh double-fire.
+- No CSP header or meta tag exists in this repo; none added. No wrangler, phone, price, FORM_TO, or route changes.
+
+---
+
 ## 2026-11-04 — Contact form: persist lead before email (PR only)
 
 POST `/api/contact` was returning HTTP 502 on every submit because `env.EMAIL.send` threw (Cloudflare Email Workers). A real customer lead was lost. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges; Workers Builds deploys from main.
