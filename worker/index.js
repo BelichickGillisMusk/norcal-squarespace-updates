@@ -97,9 +97,9 @@ function schemaTag(pageUrl) {
         email: 'sales@norcalcarbmobile.com',
         image: LOGO_URL,
         logo: { '@type': 'ImageObject', url: LOGO_URL },
-        priceRange: socal ? '$100-$200' : `$${NORCAL_PRICES.obd}-$${NORCAL_PRICES.motorhomeOvi}`,
+        priceRange: socal ? undefined : `$${NORCAL_PRICES.obd}-$${NORCAL_PRICES.motorhomeOvi}`,
         description: socal
-          ? 'Mobile OVI Test. OBD $100. OVI smoke $200. 50-mile radius of 92553, Moreno Valley.'
+          ? 'Mobile OBD and OVI testing within 50 miles of ZIP 92553, Moreno Valley: Riverside, San Bernardino and most of Orange County. Call (916) 890-4427 for pricing.'
           : `Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Headquarters in Northern California. OBD $${NORCAL_PRICES.obd}. OVI $${NORCAL_PRICES.ovi}.`,
         knowsAbout: [
           'CARB Clean Truck Check',
@@ -126,14 +126,7 @@ function schemaTag(pageUrl) {
           },
           geoRadius: 80467,
         }] : []),
-        hasOfferCatalog: socal ? {
-          '@type': 'OfferCatalog',
-          name: 'Mobile OVI Test',
-          itemListElement: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OBD Clean Truck Check', serviceType: 'HD-OBD Clean Truck Check' }, price: 100, priceCurrency: 'USD' },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OVI Smoke Opacity Test', serviceType: 'SAE J1667 OVI Smoke Opacity' }, price: 200, priceCurrency: 'USD' }
-          ]
-        } : {
+        hasOfferCatalog: socal ? undefined : {
           '@type': 'OfferCatalog',
           name: 'Mobile CARB Testing Services',
           itemListElement: [
