@@ -681,3 +681,4 @@ Blog pipeline:
 - Hub blog/index.html + blog.html: 63 articles; cards + quick list
 - sitemap: new + restored /blog URLs
 - Also ships pending: homepage CARB 5-day pass block + FAQ CTC-VIS URL fix (cleantruckcheck.arb.ca.gov)
+- 2026-11-10: Fleet-rates line on Bay Area pricing and HD-OBD FAQ (visible + JSON-LD). No multi-truck discount amount.
