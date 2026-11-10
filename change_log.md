@@ -8,6 +8,16 @@ Agents append timestamped entries below.
 
 The motorhome dog-show article used `628-999-3912`. `main` locks the public phone to `(916) 890-4427` / `tel:+19168904427`. Updated the article and draft to that number so site-lock passes, then merge deploys.
 
+## 2026-11-10 — Jennifer SEO package: remaining area landers (draft PR)
+
+Draft PR only. Do not merge. Do not `wrangler deploy`. Stacked on PR 160. **`site/socal.html` not touched** (SoCal prices held).
+
+Pasted unique copy onto Hayward, Hwy 101, near-me, Sacramento, Valley/foothills, Stockton, Stockton door, Lodi, Fairfield, Napa/Sonoma, Butte, Central Valley/Sierra. Existing redirects kept. No new city slugs.
+
+Photos placed: Sacramento Elite Rentals set already in repo; Butte `site/jobsite/2025-07-11-1.jpg`. No verified Stockton pallet file in repo (left empty). No Hayward/Lodi/Fairfield/Napa stop photos.
+
+---
+
 ## 2026-11-10 — Jennifer SEO package: Oakland lander + /areas (PR 160 only)
 
 Draft PR only. Do not merge. Do not `wrangler deploy`. Rebased onto updated PR 158.
