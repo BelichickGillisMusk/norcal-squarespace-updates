@@ -5,7 +5,11 @@
  * Run: node worker/contact.test.js
  */
 
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { handleContact, persistLead, FORM_TO, FORM_FROM, THANKS_MESSAGE } from './contact.js';
+import { VERIFIED_EMAIL_ROUTING_DESTINATIONS } from './verified-email-destinations.js';
 
 let failed = 0;
 let passed = 0;
@@ -236,6 +240,67 @@ console.error = (...args) => { logs.push(args); };
 {
   const ok = await persistLead({}, jsonRequest(valid), { name: 'X' }, valid);
   assert(ok === false, 'persistLead no-ops when LEADS is unbound');
+}
+
+{
+  const allow = VERIFIED_EMAIL_ROUTING_DESTINATIONS;
+  assert(Array.isArray(allow) && allow.length > 0, 'verified destination allowlist must be non-empty');
+  assert(
+    allow.length === 1 && allow[0] === 'fsu9913@gmail.com',
+    `allowlist must be [fsu9913@gmail.com] only for now, got ${JSON.stringify(allow)}`,
+  );
+  assert(!allow.includes('bgillis99@gmail.com'), 'allowlist must not include bgillis99@gmail.com');
+  assert(!allow.includes('sales@norcalcarbmobile.com'), 'allowlist must not include sales@');
+
+  for (const addr of FORM_TO) {
+    assert(allow.includes(addr), `FORM_TO address not in verified Email Routing allowlist: ${addr}`);
+  }
+  assert(FORM_TO.length === allow.length, `FORM_TO length ${FORM_TO.length} must match allowlist ${allow.length}`);
+
+  const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+  const configs = [
+    { path: 'wrangler.toml', text: readFileSync(join(root, 'wrangler.toml'), 'utf8') },
+    { path: 'wrangler.jsonc', text: readFileSync(join(root, 'wrangler.jsonc'), 'utf8') },
+    { path: 'wrangler.prod-empty.toml', text: readFileSync(join(root, 'wrangler.prod-empty.toml'), 'utf8') },
+  ];
+
+  function bindingDestinations(text, path) {
+    const found = [];
+    const jsonc = path.endsWith('.jsonc') || path.endsWith('.json');
+    if (jsonc) {
+      const stripped = text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+      const parsed = JSON.parse(stripped);
+      const list = parsed.send_email?.flatMap((b) => b.allowed_destination_addresses || b.destination_address || []) || [];
+      found.push(...list);
+      if (parsed.vars?.FORM_TO) {
+        found.push(...String(parsed.vars.FORM_TO).split(',').map((s) => s.trim()).filter(Boolean));
+      }
+    } else {
+      const bind = [...text.matchAll(/allowed_destination_addresses\s*=\s*\[([^\]]*)\]/g)];
+      for (const m of bind) {
+        found.push(...[...m[1].matchAll(/"([^"]+)"/g)].map((x) => x[1]));
+      }
+      const dest = [...text.matchAll(/destination_address\s*=\s*"([^"]+)"/g)];
+      found.push(...dest.map((m) => m[1]));
+      const formToVar = text.match(/^\s*FORM_TO\s*=\s*"([^"]+)"/m);
+      if (formToVar) found.push(...formToVar[1].split(',').map((s) => s.trim()).filter(Boolean));
+    }
+    return found;
+  }
+
+  const formSet = [...new Set(FORM_TO)].sort();
+  for (const cfg of configs) {
+    const dests = bindingDestinations(cfg.text, cfg.path);
+    assert(dests.length > 0, `${cfg.path} must set a send_email destination or FORM_TO`);
+    for (const addr of dests) {
+      assert(allow.includes(addr), `${cfg.path} destination not in verified allowlist: ${addr}`);
+    }
+    const bindSet = [...new Set(dests)].sort();
+    assert(
+      JSON.stringify(bindSet) === JSON.stringify(formSet),
+      `${cfg.path} destinations ${JSON.stringify(bindSet)} disagree with FORM_TO ${JSON.stringify(formSet)}`,
+    );
+  }
 }
 
 console.error = origError;

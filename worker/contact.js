@@ -7,10 +7,12 @@
  *
  * Binding: EMAIL (send_email) with allowed_destination_addresses = FORM_TO.
  * From: website@norcalcarbmobile.com (must be on the norcalcarbmobile.com zone).
- * To: bgillis99@gmail.com — must stay a VERIFIED Email Routing destination.
+ * To: fsu9913@gmail.com — the live verified Email Routing destination.
  */
 
-export const FORM_TO = ['bgillis99@gmail.com'];
+import { VERIFIED_EMAIL_ROUTING_DESTINATIONS } from './verified-email-destinations.js';
+
+export const FORM_TO = [...VERIFIED_EMAIL_ROUTING_DESTINATIONS];
 export const FORM_FROM = { email: 'website@norcalcarbmobile.com', name: 'NorCal CARB Mobile Website' };
 export const CURRENT_TERMS_VERSION = '2026-07-22';
 export const THANKS_MESSAGE = "Thanks — we'll call you shortly.";
