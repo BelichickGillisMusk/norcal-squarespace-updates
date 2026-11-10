@@ -34,6 +34,17 @@ jobs:
       - name: Unit tests
         run: node worker/contact.test.js
 
+  east-bay-landers:
+    runs-on: ubuntu-latest
+    name: East Bay lander partials
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Lander tests
+        run: node scripts/landers/test.js
+
   attention-hq-fixture:
     runs-on: ubuntu-latest
     name: Attention HQ dry-run (fixture)

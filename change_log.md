@@ -29,6 +29,15 @@ Draft PR only. Do not merge. Do not `wrangler deploy`. Jennifer 2026-11-10 6:12 
 
 ---
 
+## 2026-11-10 — Oakland lander (PR only, stacked on Bay Area PR)
+
+Draft PR only. Do not merge. Do not `wrangler deploy`. No KV, secrets, or email destinations.
+
+- New `/oakland-mobile-carb-test` for an Oakland / Hayward / Richmond morning campaign. Based in Oakland; next-day and often same-day. Leads OVI $199 then OBD $75. VIN check → https://www.carbcleantruckcheck.app. Tap-to-call (916) 890-4427 and `/contact` above the fold and in the bottom band.
+- Shared NorCal prices in `worker/prices.js` (one-line swap). Bay + Oakland landers render from `scripts/landers/` partials (hero, price cards, CTAs, FAQ, chrome). Bay copy/structure kept; added internal links to the Oakland page.
+- Areas East Bay card + Worker footer service-area row + sitemap loc. Unique Oakland title/meta/canonical and LocalBusiness/Service schema with no address. No owner name. No second Google listing. Motorhome $99/$229 unchanged.
+
+---
 
 ## 2026-11-10 — Bay Area lander polish + contact form fields (PR only)
 

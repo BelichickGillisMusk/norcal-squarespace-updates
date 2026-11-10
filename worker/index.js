@@ -20,6 +20,7 @@
 import { EmailMessage } from 'cloudflare:email';
 import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
 import { handleContact } from './contact.js';
+import { NORCAL_PRICES } from './prices.js';
 
 const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
 
@@ -51,6 +52,7 @@ const SERVICE_AREA_HTML = `
   <a href="/areas-fairfield">Fairfield</a> ·
   <a href="/bay-area-mobile-carb">San Jose</a> ·
   <a href="/bay-area-mobile-carb">Bay Area</a> ·
+  <a href="/oakland-mobile-carb-test">Oakland</a> ·
   <a href="/socal">Moreno Valley</a> ·
   <a href="/butte-county-carb-testing">Chico</a> ·
   <a href="/napa-sonoma-carb-testing">Calistoga</a> ·
@@ -95,10 +97,10 @@ function schemaTag(pageUrl) {
         email: 'sales@norcalcarbmobile.com',
         image: LOGO_URL,
         logo: { '@type': 'ImageObject', url: LOGO_URL },
-        priceRange: socal ? '$100-$200' : '$75-$229',
+        priceRange: socal ? '$100-$200' : `$${NORCAL_PRICES.obd}-$${NORCAL_PRICES.motorhomeOvi}`,
         description: socal
           ? 'Mobile OVI Test. OBD $100. OVI smoke $200. 50-mile radius of 92553, Moreno Valley.'
-          : 'Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Headquarters in Northern California. OBD $75. OVI $199.',
+          : `Mobile CARB Clean Truck Check testing for heavy-duty vehicles. Headquarters in Northern California. OBD $${NORCAL_PRICES.obd}. OVI $${NORCAL_PRICES.ovi}.`,
         knowsAbout: [
           'CARB Clean Truck Check',
           'SAE J1667 Smoke Opacity Testing',
@@ -135,10 +137,10 @@ function schemaTag(pageUrl) {
           '@type': 'OfferCatalog',
           name: 'Mobile CARB Testing Services',
           itemListElement: [
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OBD Clean Truck Check', serviceType: 'HD-OBD Clean Truck Check' }, price: 75, priceCurrency: 'USD' },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OVI Smoke Opacity Test', serviceType: 'SAE J1667 OVI Smoke Opacity' }, price: 199, priceCurrency: 'USD' },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Motorhome OBD', serviceType: 'Motorhome HD-OBD' }, price: 99, priceCurrency: 'USD' },
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Motorhome OVI', serviceType: 'Motorhome OVI Smoke Opacity' }, price: 229, priceCurrency: 'USD' }
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OBD Clean Truck Check', serviceType: 'HD-OBD Clean Truck Check' }, price: NORCAL_PRICES.obd, priceCurrency: 'USD' },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'OVI Smoke Opacity Test', serviceType: 'SAE J1667 OVI Smoke Opacity' }, price: NORCAL_PRICES.ovi, priceCurrency: 'USD' },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Motorhome OBD', serviceType: 'Motorhome HD-OBD' }, price: NORCAL_PRICES.motorhomeObd, priceCurrency: 'USD' },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Motorhome OVI', serviceType: 'Motorhome OVI Smoke Opacity' }, price: NORCAL_PRICES.motorhomeOvi, priceCurrency: 'USD' }
           ]
         },
         sameAs: [
