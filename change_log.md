@@ -16,6 +16,10 @@ Pasted unique copy onto Hayward, Hwy 101, near-me, Sacramento, Valley/foothills,
 
 Photos placed: Sacramento Elite Rentals set already in repo; Butte `site/jobsite/2025-07-11-1.jpg`. Stockton All Good Pallets door logo at `site/jobsite/2025-09-17-all-good-pallets-stockton.jpg` on `/stockton-clean-truck-check` and `/carb-test-stockton`. No Hayward/Lodi/Fairfield/Napa stop photos.
 
+On this stack only: `/areas` San Diego card (`id="san-diego"`) links to `/socal`, not `https://mobilecarbsmoketest.com/`. Card copy has no SoCal dollar prices. `site/socal.html` still untouched.
+
+Scrubbed editor-voice sentences from these landers (page-about-the-page, “live page,” “stock photo,” “fake testimonial,” “not a test price”). Customer-facing cross-links kept. NorCal Family — Full Care remains where it was already on live main, without the “not a test price” aside.
+
 ---
 
 ## 2026-11-10 — Jennifer SEO package: Oakland lander + /areas (PR 160 only)
