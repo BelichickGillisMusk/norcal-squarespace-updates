@@ -8,7 +8,7 @@ Agents append timestamped entries below.
 
 Draft PR only. Do not merge. Do not `wrangler deploy`. Do not change Cloudflare.
 
-- `/bay-area-mobile-carb`: pasted Jennifer's Nov 10 long-form body (Oakland hub, grouped city lists, industries, official Clean Truck Check rules). Merged all seven FAQs into the existing single FAQPage, hot-dog question word for word. Travel FAQ now names Alameda and Contra Costa Counties without calling Richmond/Concord I-880 cities.
+- `/bay-area-mobile-carb`: pasted Jennifer's Nov 10 long-form body (Oakland hub, grouped city lists, industries, official Clean Truck Check rules). Merged all seven FAQs into the existing single FAQPage, hot-dog question word for word. Travel FAQ now names Alameda and Contra Costa Counties without calling Richmond/Concord I-880 cities. Editor-voice “this page / write-up / URL” sentences rewritten as customer copy.
 - Contact/FORM_TO changes already on this branch left alone. No `/oakland-mobile-carb-test` link (that stays on PR 160). No stop photo added (no verified Bayshore still in this repo).
 - Added `scripts/blog/faq-jsonld-match.mjs` so visible FAQ text can be checked against JSON-LD after paste.
 
