@@ -108,11 +108,13 @@ export async function persistLead(env, request, lead, fields) {
 function buildMessage(lead) {
   const rows = [
     ['Name', lead.name],
+    ['Company', lead.company],
     ['Phone', lead.phone],
     ['Email', lead.email],
-    ['City / yard', lead.city],
+    ['City / site', lead.city],
     ['Truck count', lead.trucks],
-    ['Service', lead.service],
+    ['Test type', lead.service],
+    ['Preferred date', lead.preferredDate],
     ['Details', lead.message],
     ['Terms accepted', 'Yes — version ' + lead.termsVersion],
     ['Submitted', lead.submittedAt],
@@ -148,12 +150,19 @@ export async function handleContact(request, env, EmailMessageCtor) {
     return respond(request, false, 'Please try again, or call us at (916) 890-4427.', 400);
   }
 
-  // Honeypot — bots fill "company"; humans never see it.
-  if (data.company) return respond(request, true, THANKS_MESSAGE);
+  // Honeypot — bots fill hidden "website"; humans never see it.
+  // "company" is a real field now (fleet / business name).
+  if (data.website) return respond(request, true, THANKS_MESSAGE);
 
   const name = String(data.name || '').trim().slice(0, 200);
   const phone = String(data.phone || '').trim().slice(0, 50);
-  if (!name || !phone) return respond(request, false, 'Please include your name and a phone number.', 422);
+  const email = String(data.email || '').trim().slice(0, 200);
+  if (!name || (!phone && !email)) {
+    return respond(request, false, 'Please include your name and a phone number or email.', 422);
+  }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return respond(request, false, 'Please enter a valid email address.', 422);
+  }
 
   const termsAccepted = String(data.terms_accepted || '').toLowerCase() === 'yes';
   if (!termsAccepted) {
@@ -164,10 +173,12 @@ export async function handleContact(request, env, EmailMessageCtor) {
   const lead = {
     name,
     phone,
-    email: field('email', 200),
-    city: field('location', 200) || field('city', 200),
+    email,
+    company: field('company', 200),
+    city: field('location', 200) || field('city', 200) || field('site_location', 200),
     trucks: field('trucks', 10),
-    service: field('service', 100),
+    service: field('service', 100) || field('test_type', 100),
+    preferredDate: field('preferred_date', 40) || field('date', 40),
     message: field('message', 5000),
     termsVersion: field('terms_version', 40) || CURRENT_TERMS_VERSION,
     submittedAt: new Date().toISOString(),

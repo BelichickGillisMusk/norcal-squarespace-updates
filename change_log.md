@@ -4,6 +4,16 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-10 — Bay Area lander polish + contact form fields (PR only)
+
+Draft PR only. Do not merge. Do not `wrangler deploy`. Workers Builds on `main` after owner merge.
+
+- `/bay-area-mobile-carb`: clearer hierarchy (open bar, hero + coverage map, Oakland hub copy, steps, prices unchanged). Primary Book a Mobile Test CTA above the fold and again in the bottom band, both to `/contact`. Same GBP cid as the rest of the site — not a second listing. No hub street address. Public phone (916) 890-4427 only.
+- Contact form now captures name, company, phone, email, city/site, truck count, test type, preferred date. Required: name plus phone or email. Honeypot moved from `company` to hidden `website`. Handler email body + optional KV record include the new fields.
+- “better hot dog spots” line was **not** found in the repo (closest is the blog canary “hotdog contest clipboard” on `/blog/craft-so-good-they-copy-us-hotdog-clipboard`). Not invented on the Bay page.
+
+---
+
 ## 2026-11-04 — Contact form: persist lead before email (PR only)
 
 POST `/api/contact` was returning HTTP 502 on every submit because `env.EMAIL.send` threw (Cloudflare Email Workers). A real customer lead was lost. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges; Workers Builds deploys from main.

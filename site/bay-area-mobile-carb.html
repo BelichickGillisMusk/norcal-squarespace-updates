@@ -22,19 +22,32 @@
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://norcalcarbmobile.com/"},
+          {"@type": "ListItem", "position": 2, "name": "Service areas", "item": "https://norcalcarbmobile.com/areas"},
+          {"@type": "ListItem", "position": 3, "name": "Bay Area mobile CARB", "item": "https://norcalcarbmobile.com/bay-area-mobile-carb"}
+        ]
+      },
+      {
         "@type": "LocalBusiness",
         "@id": "https://norcalcarbmobile.com/#business",
         "name": "NorCal CARB Mobile LLC",
         "alternateName": "NorCal CARB Mobile",
         "url": "https://norcalcarbmobile.com",
         "telephone": "+1-916-890-4427",
-        "areaServed": ["Oakland, CA", "Hayward, CA", "San Leandro, CA", "Richmond, CA", "San Francisco, CA", "Menlo Park, CA"]
+        "areaServed": ["Oakland, CA", "Hayward, CA", "San Leandro, CA", "Richmond, CA", "San Francisco, CA", "Menlo Park, CA", "San Jose, CA"]
       },
       {
         "@type": "Service",
         "name": "Mobile CARB Testing in the Bay Area",
+        "serviceType": "CARB Clean Truck Check (HD I/M) emissions testing",
         "provider": { "@id": "https://norcalcarbmobile.com/#business" },
-        "areaServed": ["Oakland, CA", "Hayward, CA", "San Leandro, CA", "Richmond, CA", "San Francisco, CA", "Menlo Park, CA"]
+        "areaServed": ["Oakland, CA", "Hayward, CA", "San Leandro, CA", "Richmond, CA", "San Francisco, CA", "Menlo Park, CA", "San Jose, CA"],
+        "offers": [
+          {"@type": "Offer", "name": "HD-OBD", "price": "75", "priceCurrency": "USD"},
+          {"@type": "Offer", "name": "OVI", "price": "199", "priceCurrency": "USD"}
+        ]
       }
     ]
   }
@@ -66,32 +79,82 @@
   </div>
 </header>
 
+<p class="open-bar"><span class="wrap">Oakland hub · East Bay I-880 · Hwy 101 · North Bay to San Jose</span></p>
+
 <main id="main">
 <section class="hero">
-  <div class="wrap">
-    <p class="reviews-line">NorCal CARB Mobile · East Bay &amp; Bay Area</p>
-    <h1>Mobile CARB Clean Truck Check in the Bay Area</h1>
-    <p class="lede">Daily unit on Hwy 101 and the East Bay I-880 corridor. $0 travel in zone. Weekends available. Free retest. We test at your office, yard, or jobsite — Port of Oakland priority for drayage.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary btn-lg" href="/contact">Book a Mobile Test</a>
-      <a class="btn btn-ghost btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow"><a href="/areas">Service areas</a> · Bay Area</p>
+      <h1>Mobile CARB Clean Truck Check in the <span>Bay Area</span></h1>
+      <p class="lede">The Bay tester is based at the Oakland hub, central to Sacramento, Stockton, and the North Bay down to San Jose. We test at your office, yard, or jobsite. OBD $75 · OVI $199. In-zone travel is $0.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" href="/contact">Book a Mobile Test</a>
+        <a class="btn btn-ghost btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
+      </div>
+      <p class="hero-areas">Port of Oakland priority for drayage · Weekends available · Free retest</p>
+    </div>
+    <div class="hero-map">
+      <a href="/areas" aria-label="Explore Northern California service areas"><img src="/assets/img/coverage-map-v2.png" width="1126" height="1200" alt="NorCal CARB Mobile coverage — Oakland hub, Bay Area, Sacramento, Stockton, and San Jose" loading="eager" decoding="async"></a>
+      <div class="route-chips" aria-label="Bay Area corridors">
+        <span>Oakland hub</span><span>East Bay</span><span>San Francisco</span><span>Peninsula</span><span>North Bay</span><span>San Jose</span>
+      </div>
     </div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
+    <div class="coverage-panel">
+      <div class="coverage-panel-copy">
+        <p class="eyebrow">Oakland hub</p>
+        <h2>One crew, one listing, we come to you</h2>
+        <p>The Bay tester works from the Oakland hub. That puts Sacramento, Stockton, the North Bay, and San Jose in reach on the same NorCal CARB Mobile route — not a second shop and not a second Google listing.</p>
+        <p>Tell us the city or yard. We schedule the visit there. Same-day CTC-VIS submission. Same public number: <a href="tel:+19168904427">(916) 890-4427</a>.</p>
+        <p><a class="btn btn-primary" href="/contact">Book a Mobile Test</a></p>
+      </div>
+      <div class="coverage-panel-map">
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Daily corridors</h3>
+            <ul>
+              <li>East Bay I-880</li>
+              <li>Hwy 101 / Peninsula</li>
+              <li>Port of Oakland drayage</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>In zone</h3>
+            <ul>
+              <li>$0 travel in zone</li>
+              <li>No bridge-toll line</li>
+              <li>Weekends available</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="soft">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>East Bay &amp; Bay Area coverage</h2>
+      <p>Office, yard, or jobsite. We come to you along Hwy 101 and I-880.</p>
+    </div>
     <div class="grid grid-2">
       <div class="card">
-        <h2>East Bay &amp; Bay Area coverage</h2>
-        <p>NorCal CARB Mobile runs a daily Bay Area unit along <strong>Hwy 101</strong> and the <strong>East Bay I-880</strong> corridor. In-zone travel is <strong>$0</strong>. Weekends available. Free retest when you need a follow-up after repairs.</p>
+        <h2>Where the unit runs</h2>
         <ul>
           <li>Oakland · Hayward · Fremont</li>
           <li>San Leandro · Richmond · Concord</li>
           <li>Alameda County &amp; Contra Costa County</li>
-          <li>Office, yard, or jobsite — we come to you</li>
+          <li>San Francisco and the Peninsula</li>
+          <li>North Bay down to San Jose</li>
           <li><strong>Port of Oakland</strong> — priority for drayage fleets</li>
         </ul>
+        <p>Need Sacramento or Stockton from the same hub? See <a href="/sacramento-carb-testing">Sacramento testing</a> and <a href="/stockton-clean-truck-check">Stockton testing</a>.</p>
       </div>
       <div class="card">
         <h2>Who we test</h2>
@@ -103,6 +166,20 @@
         </ul>
         <p>Flat pricing across the Bay — no bridge-toll surcharges, no hidden travel fees in zone.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How a Bay Area visit works</h2>
+      <p>Three steps. Same prices as the rest of Northern California.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="step"><div class="num">1</div><h3>Book in minutes</h3><p>Send the yard city, truck count, and test type — or call (916) 890-4427.</p></div>
+      <div class="step"><div class="num">2</div><h3>We come to you</h3><p>The Oakland-hub unit arrives at the office, yard, or jobsite, including weekends.</p></div>
+      <div class="step"><div class="num">3</div><h3>Pass &amp; paperwork</h3><p>On-site proof plus same-day CTC-VIS submission. Free retest after repairs when booked with us.</p></div>
     </div>
   </div>
 </section>
@@ -119,7 +196,7 @@
         <div class="price">$75<small> / vehicle</small></div>
         <p>2013+ diesel &amp; 2018+ alt-fuel vehicles.</p>
       </div>
-      <div class="card price-card">
+      <div class="card price-card feature">
         <h3>OVI Smoke Opacity Test</h3>
         <div class="price">$199<small> / vehicle</small></div>
         <p>Pre-2013 &amp; non-OBD engines.</p>
@@ -130,6 +207,7 @@
         <p>Diesel Class A, B, and C at your location.</p>
       </div>
     </div>
+    <p class="center" style="margin-top:22px"><a href="/pricing">Full pricing</a> · <a href="/blog/obd-vs-ovi-clean-truck-check-fleets">OBD vs OVI for fleets</a></p>
   </div>
 </section>
 
@@ -138,7 +216,8 @@
     <div class="grid grid-2">
       <div class="card">
         <h2>Local crew, local knowledge</h2>
-        <p>Our Bay Area unit knows the yards from the Port of Oakland to Hayward, plus airport, warehouse, and cross-dock routes along I-880 — and the Hwy 101 corridor through the Peninsula.</p>
+        <p>The Oakland-hub unit knows the yards from the Port of Oakland to Hayward, plus airport, warehouse, and cross-dock routes along I-880 — and the Hwy 101 corridor through the Peninsula down toward San Jose.</p>
+        <p>Highway 101 from Novato toward San Jose also has a corridor door at <a href="/carb-test-bay-area">CARB test Bay Area</a>.</p>
       </div>
       <div class="card">
         <h2>Bay Area FAQ</h2>
@@ -150,10 +229,6 @@
         <strong>A:</strong> Yes — weekends available. Free retest after repairs when booked with NorCal CARB Mobile.</p>
       </div>
     </div>
-    <div class="card" style="margin-top:28px;text-align:center">
-      <h2>Book your Bay Area mobile test</h2>
-      <p><a href="tel:+19168904427">Call (916) 890-4427</a> · <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a> · <a href="/contact">Book a Mobile Test</a></p>
-    </div>
   </div>
 </section>
 
@@ -161,7 +236,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2>Find NorCal CARB Mobile on Google</h2>
-        <p>Mobile Clean Truck Check — we come to your yard. <a href="https://maps.google.com/?cid=16019693078134296096" target="_blank" rel="noopener">Open our Google Business Profile · map &amp; reviews</a></p>
+        <p>One Google Business Profile for the company — we come to your yard. <a href="https://maps.google.com/?cid=16019693078134296096" target="_blank" rel="noopener">Open our Google Business Profile · map &amp; reviews</a></p>
       </div>
       <div class="map-embed" style="overflow:hidden;border-radius:12px;border:1px solid #e4e4e7">
         <iframe title="NorCal CARB Mobile — Google Maps" src="https://maps.google.com/maps?cid=16019693078134296096&amp;hl=en&amp;z=10&amp;output=embed" width="100%" height="360" style="border:0;display:block" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
@@ -182,15 +257,20 @@
 
 <section class="cta-band">
   <div class="wrap">
-    <h2>Ready to clear your fleet?</h2>
-    <p>NorCal CARB Mobile — schedule mobile CARB testing today.</p>
+    <h2>Ready to clear your Bay Area fleet?</h2>
+    <p>Send the yard city and truck count. We schedule from the Oakland hub.</p>
     <div class="hero-cta center" style="justify-content:center">
-      <a class="btn btn-ghost btn-lg" href="/contact">Request a Quote</a>
-      <a class="btn btn-ghost btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
+      <a class="btn btn-ghost btn-lg" href="/contact">Book a Mobile Test</a>
+      <a class="btn btn-call btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
     </div>
   </div>
 </section>
 </main>
+
+<div class="mobile-callbar" aria-label="Call now">
+  <a class="btn btn-book" href="tel:+19168904427">Call (916) 890-4427</a>
+  <a class="btn btn-call" href="/contact">Book a Mobile Test</a>
+</div>
 
 <footer class="site-footer">
   <div class="wrap">
