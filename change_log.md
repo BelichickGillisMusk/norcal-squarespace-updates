@@ -14,7 +14,7 @@ Draft PR only. Do not merge. Do not `wrangler deploy`. Stacked on PR 160. **`sit
 
 Pasted unique copy onto Hayward, Hwy 101, near-me, Sacramento, Valley/foothills, Stockton, Stockton door, Lodi, Fairfield, Napa/Sonoma, Butte, Central Valley/Sierra. Existing redirects kept. No new city slugs.
 
-Photos placed: Sacramento Elite Rentals set already in repo; Butte `site/jobsite/2025-07-11-1.jpg`. No verified Stockton pallet file in repo (left empty). No Hayward/Lodi/Fairfield/Napa stop photos.
+Photos placed: Sacramento Elite Rentals set already in repo; Butte `site/jobsite/2025-07-11-1.jpg`. Stockton All Good Pallets door logo at `site/jobsite/2025-09-17-all-good-pallets-stockton.jpg` on `/stockton-clean-truck-check` and `/carb-test-stockton`. No Hayward/Lodi/Fairfield/Napa stop photos.
 
 ---
 
