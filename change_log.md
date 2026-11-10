@@ -4,6 +4,12 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-10 — White hamburger on navy header (same Ads PR)
+
+Mobile menu icon used `stroke="currentColor"` and inherited body ink (`#012241` on contact light), so it disappeared on the navy header. CSS now forces white stroke; Worker also injects `#ncm-menu-toggle` so a cached stylesheet cannot hide it. Site-lock hash for `styles.css` updated (`2026-11-10.2`). Phone, prices, copy, FORM_TO unchanged. **Still PR only — no wrangler.**
+
+---
+
 ## 2026-11-10 — Google Ads AW-18285811780 + contact success conversion (PR only)
 
 Install the Google tag on every HTML page and fire the contact conversion only after a successful intake. **PR only — do not merge from this agent. Do not wrangler deploy.** Needs Bryan merge GO as bgillis99, then a Workers Builds deploy and live Tag Assistant proof.

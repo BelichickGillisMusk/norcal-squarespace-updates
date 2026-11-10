@@ -115,8 +115,9 @@ a[href^="tel:"], a[href^="sms:"] {
 .nav a.navlink { text-decoration: none; color: rgba(255,255,255,.92); font-weight: 600; font-size: 0.92rem; transition: color .15s ease; }
 .nav a.navlink:hover { color: #fff; }
 .header-cta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; max-width: 100%; }
-.menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
-.menu-toggle svg { width: 24px; height: 24px; stroke: #fff; fill: none; }
+.menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; color: #fff; }
+.menu-toggle svg { width: 24px; height: 24px; stroke: currentColor; fill: none; }
+.menu-toggle svg path { stroke: #fff; fill: none; }
 
 /* ---------- NAP strip (always visible path to callback) ---------- */
 .nap-bar {

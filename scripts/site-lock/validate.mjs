@@ -43,6 +43,9 @@ const css = text("site/assets/styles.css");
 for (const [token, value] of Object.entries(lock.requiredColors)) {
   if (!css.includes(`${token}: ${value}`)) fail(`Locked color changed or disappeared: ${token} must remain ${value}`);
 }
+if (!/\.menu-toggle svg path\s*\{\s*stroke:\s*#fff/.test(css)) {
+  fail("Mobile hamburger icon must keep a white stroke so it is visible on the navy header.");
+}
 
 const worker = text("worker/index.js");
 if (!worker.includes(`telephone: \'${lock.requiredPhoneSchema}\'`)) fail("Sitewide schema phone changed.");
@@ -78,6 +81,9 @@ if (!adsId) {
   if (!ads.includes(adsId)) fail(`Google Ads id missing from Worker inject: ${adsId}`);
   if (!worker.includes("el.prepend(GOOGLE_ADS_HEAD")) {
     fail("Google Ads tag must be prepended to <head> (first child) via GOOGLE_ADS_HEAD.");
+  }
+  if (!worker.includes("ncm-menu-toggle") || !worker.includes("el.append(MENU_TOGGLE_CSS")) {
+    fail("Worker must inject white hamburger styles so the menu stays visible on the navy header.");
   }
   if (homepage.includes(`gtag/js?id=${adsId}`)) {
     fail("Homepage static HTML must not embed the Google Ads tag; the Worker injects it once.");

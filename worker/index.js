@@ -33,6 +33,9 @@ const OG_IMAGE_URL = 'https://norcalcarbmobile.com/assets/img/norcal-carb-mobile
 const CF_WEB_ANALYTICS_BEACON =
   `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "231f8b2f40e24c50b92870168dbb3f06"}'></script>`;
 
+/** Hamburger sits on the navy header; path stroke=currentColor otherwise inherits body ink. */
+const MENU_TOGGLE_CSS = `<style id="ncm-menu-toggle">.menu-toggle{color:#fff!important}.menu-toggle svg,.menu-toggle svg path{stroke:#fff!important;fill:none!important}</style>`;
+
 /** Favicon + Open Graph / Twitter share image. Injected sitewide. */
 const BRANDING_TAGS = `
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -452,6 +455,7 @@ export default {
       .on('head', {
         element(el) {
           el.prepend(GOOGLE_ADS_HEAD, { html: true });
+          el.append(MENU_TOGGLE_CSS, { html: true });
           el.append(BRANDING_TAGS, { html: true });
           el.append(schemaTag(url.toString()), { html: true });
           if (isContact) el.append(CONTACT_EDIT_CSS, { html: true });
