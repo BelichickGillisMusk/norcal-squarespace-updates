@@ -18,100 +18,143 @@
   <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://norcalcarbmobile.com/"},
-          {"@type": "ListItem", "position": 2, "name": "Service areas", "item": "https://norcalcarbmobile.com/areas"},
-          {"@type": "ListItem", "position": 3, "name": "Bay Area mobile CARB", "item": "https://norcalcarbmobile.com/bay-area-mobile-carb"}
-        ]
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://norcalcarbmobile.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Service areas",
+          "item": "https://norcalcarbmobile.com/areas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Bay Area mobile CARB",
+          "item": "https://norcalcarbmobile.com/bay-area-mobile-carb"
+        }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://norcalcarbmobile.com/#business",
+      "name": "NorCal CARB Mobile LLC",
+      "alternateName": "NorCal CARB Mobile",
+      "url": "https://norcalcarbmobile.com",
+      "telephone": "+1-916-890-4427",
+      "areaServed": [
+        "Oakland, CA",
+        "Hayward, CA",
+        "San Leandro, CA",
+        "Richmond, CA",
+        "San Francisco, CA",
+        "Menlo Park, CA",
+        "San Jose, CA"
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Mobile CARB Testing in the Bay Area",
+      "serviceType": "CARB Clean Truck Check (HD I/M) emissions testing",
+      "provider": {
+        "@id": "https://norcalcarbmobile.com/#business"
       },
-      {
-        "@type": "LocalBusiness",
-        "@id": "https://norcalcarbmobile.com/#business",
-        "name": "NorCal CARB Mobile LLC",
-        "alternateName": "NorCal CARB Mobile",
-        "url": "https://norcalcarbmobile.com",
-        "telephone": "+1-916-890-4427",
-        "areaServed": ["Oakland, CA", "Hayward, CA", "San Leandro, CA", "Richmond, CA", "San Francisco, CA", "Menlo Park, CA", "San Jose, CA"]
-      },
-      {
-        "@type": "Service",
-        "name": "Mobile CARB Testing in the Bay Area",
-        "serviceType": "CARB Clean Truck Check (HD I/M) emissions testing",
-        "provider": { "@id": "https://norcalcarbmobile.com/#business" },
-        "areaServed": ["Oakland, CA", "Hayward, CA", "San Leandro, CA", "Richmond, CA", "San Francisco, CA", "Menlo Park, CA", "San Jose, CA"],
-        "offers": [
-          {"@type": "Offer", "name": "HD-OBD", "price": "75", "priceCurrency": "USD"},
-          {"@type": "Offer", "name": "OVI", "price": "199", "priceCurrency": "USD"}
-        ]
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Who does mobile Clean Truck Check in the Bay Area?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "NorCal CARB Mobile. Our Bay Area tester is based at our Oakland hub and comes to your yard, office, or jobsite, usually same or next day. OBD tests are $75 and OVI smoke tests are $199 per vehicle. Call (916) 890-4427 to book."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Isn't it far from Sacramento?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Not anymore. We started in Sacramento, and as we grew, and because of traffic, our other manager and tester is now based at our Oakland hub. We still sit in traffic like everyone else, but the Oakland hub puts us closer to clients from Sacramento and Stockton to the North Bay and down to San Jose, so we spend less time driving and more time testing. And better hot dog spots. Call (916) 890-4427 to book."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How much is a Clean Truck Check in the Bay Area?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "$75 per vehicle for an HD-OBD test and $199 per vehicle for an OVI smoke test. Every test includes same-day submission to CARB. Call (916) 890-4427 to book. Fleet of 3 or more trucks? Call for fleet rates: (916) 890-4427"
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How fast can you come out?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Usually same or next day from our Oakland hub. Call (916) 890-4427 and we'll give you a time."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "My truck got flagged at the Port of Oakland. Can you get me compliant fast?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. We prioritize port drayage and handle same-day CARB submission."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is travel really $0?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "In our Bay Area zone — including Oakland, Hayward, Fremont, San Leandro, Richmond, Concord, and the rest of Alameda and Contra Costa Counties — travel is $0. Call (916) 890-4427 if you are unsure."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Weekends?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes — weekends available. Free retest after repairs when booked with NorCal CARB Mobile."
-            }
+      "areaServed": [
+        "Oakland, CA",
+        "Hayward, CA",
+        "San Leandro, CA",
+        "Richmond, CA",
+        "San Francisco, CA",
+        "Menlo Park, CA",
+        "San Jose, CA"
+      ],
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "HD-OBD",
+          "price": "75",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "name": "OVI",
+          "price": "199",
+          "priceCurrency": "USD"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Who does mobile Clean Truck Check in the Bay Area?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NorCal CARB Mobile. Our Bay Area tester is based at our Oakland hub and comes to your yard, office, or jobsite, usually same or next day. OBD tests are $75 and OVI smoke tests are $199 per vehicle. Call (916) 890-4427 to book."
           }
-        ]
-      }
-    ]
-  }
+        },
+        {
+          "@type": "Question",
+          "name": "Isn't it far from Sacramento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not anymore. We started in Sacramento, and as we grew, and because of traffic, our other manager and tester is now based at our Oakland hub. We still sit in traffic like everyone else, but the Oakland hub puts us closer to clients from Sacramento and Stockton to the North Bay and down to San Jose, so we spend less time driving and more time testing. And better hot dog spots. Call (916) 890-4427 to book."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much is a Clean Truck Check in the Bay Area?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "$75 per vehicle for an HD-OBD test and $199 per vehicle for an OVI smoke test. Every test includes same-day submission to CARB. Call (916) 890-4427 to book."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How fast can you come out?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually same or next day from our Oakland hub. Call (916) 890-4427 and we'll give you a time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "My truck was pulled for inspection at the Port of Oakland. Can you get me compliant fast?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We prioritize port drayage and handle same-day CARB submission."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is travel really $0?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In our Bay Area zone — including Oakland, Hayward, Fremont, San Leandro, Richmond, Concord, and the rest of Alameda and Contra Costa Counties — travel is $0. Call (916) 890-4427 if you are unsure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Weekends?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — weekends available. Free retest after repairs when booked with NorCal CARB Mobile."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
 </head>
 <body>
@@ -143,224 +186,95 @@
 <p class="open-bar"><span class="wrap">Oakland hub · East Bay I-880 · Hwy 101 · North Bay to San Jose</span></p>
 
 <main id="main">
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow"><a href="/areas">Service areas</a> · Bay Area</p>
-      <h1>Mobile CARB Clean Truck Check in the <span>Bay Area</span></h1>
-      <p class="lede">NorCal CARB Mobile brings Clean Truck Check testing to your yard, office, or jobsite across the Bay Area. Our Bay Area tester is based at our Oakland hub, central to Sacramento, Stockton, the North Bay, and down to San Jose, so we can usually get to you same or next day. HD-OBD tests are $75 per vehicle and OVI smoke tests are $199 per vehicle, with same-day submission to CARB. Call (916) 890-4427 to book.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary btn-lg" href="/contact">Book a Mobile Test</a>
-        <a class="btn btn-ghost btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
-      </div>
-      <p class="hero-areas">Port of Oakland priority for drayage · Weekends available · Free retest</p>
-    </div>
-    <div class="hero-map">
-      <a href="/areas" aria-label="Explore Northern California service areas"><img src="/assets/img/coverage-map-v2.png" width="1126" height="1200" alt="NorCal CARB Mobile coverage — Oakland hub, Bay Area, Sacramento, Stockton, and San Jose" loading="eager" decoding="async"></a>
-      <div class="route-chips" aria-label="Bay Area corridors">
-        <span>Oakland hub</span><span>East Bay</span><span>San Francisco</span><span>Peninsula</span><span>North Bay</span><span>San Jose</span>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section>
-  <div class="wrap">
-    <div class="coverage-panel">
-      <div class="coverage-panel-copy">
-        <p class="eyebrow">Oakland hub</p>
-        <h2>The Oakland hub, not a second shop</h2>
-        <p>We started in Sacramento. As the book grew — and because of traffic — our other manager and tester is now based at our Oakland hub. There is no public Oakland street address and no second Google Business Profile. We come to your yard, office, or jobsite. We still sit in traffic like everyone else, but the hub puts us closer to clients from Sacramento and Stockton to the North Bay and down to San Jose, so we spend less time driving and more time testing.</p>
-        <p>If your trucks sit in Oakland, Hayward, or Richmond most mornings, we still cover every Bay Area corridor we run, with the cities grouped the way the highways work.</p>
-        <p>Tell us the city or yard. We schedule the visit there. Same-day submission to CARB. Same public number: <a href="tel:+19168904427">(916) 890-4427</a>.</p>
-        <p><a class="btn btn-primary" href="/contact">Book a Mobile Test</a></p>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><a href="/areas">Service areas</a> · Bay Area</p>
+        <h1>Mobile CARB Clean Truck Check in the <span>Bay Area</span></h1>
+        <p class="lede">NorCal CARB Mobile brings Clean Truck Check testing to your yard, office, or jobsite across the Bay Area. Our Bay Area tester is based at our Oakland hub, central to Sacramento, Stockton, the North Bay, and down to San Jose, so we can usually get to you same or next day. HD-OBD tests are $75 per vehicle and OVI smoke tests are $199 per vehicle, with same-day submission to CARB. Call <a href="tel:+19168904427">(916) 890-4427</a> to book.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="/contact">Book a Mobile Test</a>
+          <a class="btn btn-ghost btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
+        </div>
       </div>
-      <div class="coverage-panel-map">
-        <div class="grid grid-2">
-          <div class="card">
-            <h3>Daily corridors</h3>
-            <ul>
-              <li>East Bay I-880</li>
-              <li>North East Bay I-80 / I-580</li>
-              <li>Hwy 101 / Peninsula</li>
-              <li>Port of Oakland drayage</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>In zone</h3>
-            <ul>
-              <li>$0 travel in zone</li>
-              <li>No bridge-toll line</li>
-              <li>Weekends available</li>
-            </ul>
-          </div>
+      <div class="hero-map">
+        <a href="/areas" aria-label="Explore Northern California service areas"><img src="/assets/img/coverage-map-v2.png" width="1126" height="1200" alt="NorCal CARB Mobile coverage — Oakland hub, Bay Area, Sacramento, Stockton, and San Jose" loading="eager" decoding="async"></a>
+        <div class="route-chips" aria-label="Service corridors">
+          <span>Oakland hub</span><span>East Bay</span><span>San Francisco</span><span>Peninsula</span><span>North Bay</span><span>San Jose</span>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="soft">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>How the Bay is grouped</h2>
-      <p>Coverage is the nine-county Bay Area. Sacramento and Stockton are regular reach from the Oakland hub — they are not Bay Area cities.</p>
+  </section>
+  <section>
+    <div class="wrap prose">
+<h2>The Oakland hub, not a second shop</h2>
+<p>We started in Sacramento. As the book grew — and because of traffic — our other manager and tester is now based at our Oakland hub. There is no public Oakland street address and no second Google Business Profile. We come to your yard, office, or jobsite. We still sit in traffic like everyone else, but the hub puts us closer to clients from Sacramento and Stockton to the North Bay and down to San Jose, so we spend less time driving and more time testing.</p>
+<p>If your trucks sit in Oakland, Hayward, or Richmond most mornings, <a href="/oakland-mobile-carb-test">Oakland mobile CARB</a> is built around that East Bay loop. The write-up below is the full Bay Area picture: every corridor we actually run, with the cities grouped the way the highways work.</p>
+<h2>How the Bay is grouped</h2>
+<p>Coverage is the nine-county Bay Area. Sacramento and Stockton are regular reach from the Oakland hub — they are not Bay Area cities, and they have their own write-ups.</p>
+<p><strong>East Bay I-880.</strong> Oakland, Alameda, San Leandro, San Lorenzo, Ashland, Cherryland, Hayward, Union City, Fremont, Newark, and Castro Valley. These are the industrial yards and warehouse rows along I-880, including Hayward’s Industrial Boulevard corridor. Details: <a href="/clean-truck-check-hayward">East Bay mobile Clean Truck Check in Hayward</a>.</p>
+<p><strong>North East Bay on I-80 and I-580.</strong> Berkeley, Emeryville, Richmond, El Cerrito, and San Pablo. Richmond is on I-80 / I-580, not I-880. We still come to those yards from the same Oakland hub.</p>
+<p><strong>Inland East Bay on I-680, Highway 24, and Highway 4.</strong> Concord, Walnut Creek, Martinez, Pittsburg, Antioch, Brentwood, and San Ramon. Concord is inland East Bay, not an I-880 city. Antioch and Brentwood sit on the Highway 4 side; we have already written field notes for those stops.</p>
+<p><strong>Tri-Valley on I-580.</strong> Livermore, Pleasanton, and Dublin. Livermore is Alameda County / Tri-Valley, not Napa wine country. Book it here (or tell us the yard when you call).</p>
+<p><strong>San Francisco and the Peninsula on Highway 101.</strong> San Francisco, South San Francisco, San Mateo, Redwood City, and Palo Alto. The Highway 101 door is <a href="/carb-test-bay-area">CARB test across the Bay Area</a>. Downtown and Bayshore jobsites are a normal reason to book this unit.</p>
+<p><strong>South Bay.</strong> San Jose, Santa Clara, Milpitas, Sunnyvale, and Mountain View. There is no separate San Jose URL. South Bay yards book from here. The 101 write-up also points San Jose here.</p>
+<p><strong>North Bay.</strong> San Rafael, Novato, Petaluma, Santa Rosa, Vallejo, and Napa. Wine-country and Solano detail lives on <a href="/napa-sonoma-carb-testing">Napa and Sonoma</a> and <a href="/areas-fairfield">Fairfield and I-80</a>.</p>
+<p><strong>Reach from the hub, not Bay chips.</strong> <a href="/sacramento-carb-testing">Sacramento</a> and <a href="/stockton-clean-truck-check">Stockton</a>.</p>
+<h2>Industries we test in the Bay</h2>
+<p>Bay Area trucks do not all do the same work, and they do not all sit in the same kind of yard.</p>
+<p><strong>Port of Oakland drayage.</strong> Trucks that get pulled for inspection or scheduled around the port do not need a trip to a station across a bridge. We prioritize port drayage and submit the test to CARB the same day. Book the yard, the staging lot, or the office — wherever the truck will be still long enough to test.</p>
+<p><strong>Warehouse, cross-dock, and food distribution.</strong> I-880 and the Peninsula are full of warehouse rows and cross-docks. A fleet visit is the normal product: one appointment, every truck on the list, mixed OBD and older OVI units in the same stop when the engine years call for it.</p>
+<p><strong>Construction and jobsite fleets.</strong> Contractor trucks bounce between a Hayward staging lot, an Oakland jobsite, and a fenced Concord yard in the same week. Taking one across a bridge to a test station can burn half a day plus tolls. We test at the staging lot or the jobsite. Read <a href="/blog/jobsite-clean-truck-check-near-me-oakland">Oakland and Bay Area jobsite fleets</a>.</p>
+<p><strong>Municipal, utility, and waste haulers.</strong> City and contractor fleets that already have a parked row of diesels are easier to test where they live than to ferry one-by-one to a shop.</p>
+<p><strong>Movers and regional delivery.</strong> Peninsula and South Bay box trucks and tractors get tested at the warehouse, not after a deadhead to Sacramento.</p>
+<p><strong>Diesel motorhomes and RVs.</strong> Class A, B, and C diesels over 14,000 lbs GVWR that use California public roads are in Clean Truck Check. Recreational, CA-registered motorhomes test once a year; commercial-use motorhomes follow the regular twice-a-year table. We test at the storage yard or residence. See <a href="/motorhome-carb-test">motorhome testing</a>.</p>
+<h2>What the test is</h2>
+<p>Clean Truck Check (heavy-duty inspection and maintenance) applies to most non-gasoline heavy-duty vehicles over 14,000 lbs GVWR on California public roads, including out-of-state trucks that operate here. Zero-emission vehicles, military tactical vehicles, emergency vehicles, historical plates, out-of-state recreational motorhomes, and gasoline vehicles are out.</p>
+<p>The test follows <strong>engine year on the emission control label</strong>, not the cab or chassis year.</p>
+<ul><li><strong>HD-OBD, $75 per vehicle.</strong> A scan of the engine OBD data on a CARB-certified device. Diesel engines model year 2013 and newer, and alternative-fuel engines model year 2018 and newer.</li><li><strong>Mobile OVI, $199 per vehicle.</strong> Shop language for opacity and visual inspection. CARB does not call it “OVI.” For diesel engines model year 2012 and older it is an SAE J1667 smoke opacity snap-acceleration test plus a visual inspection of emissions-control equipment. Alternative-fuel engines 2017 and older are visual only, no opacity. An off-road engine in an on-road heavy-duty vehicle takes opacity plus visual, any year. We never call this an “eye test.”</li><li><strong>Diesel motorhome / RV: $99 OBD / $229 OVI.</strong></li></ul>
+<p>For a fleet of 3 or more trucks, call for fleet rates: <a href="tel:+19168904427">(916) 890-4427</a>.</p>
+<p>Almost all subject vehicles test twice a year. California-registered deadlines follow the DMV registration expiration month and six months later. Agricultural vehicles (CARB’s definition) and CA-registered motorhomes used for recreation or emergency occupancy test once a year. Tests may be submitted up to 90 days before a compliance deadline. Beginning October 2027, OBD-equipped vehicles move to four tests a year; non-commercial motorhomes and agricultural vehicles stay annual. Your VIN’s date in CARB’s Clean Truck Check portal wins over anything written on a website.</p>
+<p>We perform the test and submit it. <strong>CARB issues compliance.</strong> There is no windshield sticker from us, and a passing test is not a promise that every other CARB or DMV issue is cleared. Deadlines and fines come from CARB.</p>
+<h2>How a Bay Area visit works</h2>
+<p>Call <a href="tel:+19168904427">(916) 890-4427</a> or use the <a href="/contact">contact form</a> with the city, the yard or jobsite, the truck count, and engine years if you have them. Not sure which test you need? Run the VIN through our <a href="https://www.carbcleantruckcheck.app" target="_blank" rel="noopener">Clean Truck Check VIN lookup</a>.</p>
+<p>We usually arrive same or next day from the Oakland hub. Weekends are available. In-zone travel on this Bay Area book is $0 — no bridge-toll surcharge line. Every test includes on-site proof and same-day submission to CARB. If a truck needs repairs and a follow-up, the free retest after repairs still applies when you schedule that follow-up with us.</p>
     </div>
-    <div class="grid grid-2">
-      <div class="card">
-        <h3>East Bay I-880</h3>
-        <p>Oakland, Alameda, San Leandro, San Lorenzo, Ashland, Cherryland, Hayward, Union City, Fremont, Newark, and Castro Valley. Industrial yards and warehouse rows along I-880, including Hayward’s Industrial Boulevard corridor. Details: <a href="/clean-truck-check-hayward">East Bay mobile Clean Truck Check in Hayward</a>.</p>
+  </section>
+  <section class="soft">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Published rates</h2>
+        <p>Every test includes same-day submission to CARB.</p>
       </div>
-      <div class="card">
-        <h3>North East Bay on I-80 and I-580</h3>
-        <p>Berkeley, Emeryville, Richmond, El Cerrito, and San Pablo. Richmond is on I-80 / I-580, not I-880. We still come to those yards from the same Oakland hub.</p>
-      </div>
-      <div class="card">
-        <h3>Inland East Bay on I-680, Highway 24, and Highway 4</h3>
-        <p>Concord, Walnut Creek, Martinez, Pittsburg, Antioch, Brentwood, and San Ramon. Concord is inland East Bay, not an I-880 city. Antioch and Brentwood sit on the Highway 4 side; we have already written field notes for those stops.</p>
-      </div>
-      <div class="card">
-        <h3>Tri-Valley on I-580</h3>
-        <p>Livermore, Pleasanton, and Dublin. Livermore is Alameda County / Tri-Valley, not Napa wine country. Book it here (or tell us the yard when you call). It does not belong on a “Napa to Livermore” card.</p>
-      </div>
-      <div class="card">
-        <h3>San Francisco and the Peninsula on Highway 101</h3>
-        <p>San Francisco, South San Francisco, San Mateo, Redwood City, and Palo Alto. The Highway 101 door is <a href="/carb-test-bay-area">CARB test across the Bay Area</a>. Downtown and Bayshore jobsites are a normal reason to book this unit.</p>
-      </div>
-      <div class="card">
-        <h3>South Bay</h3>
-        <p>San Jose, Santa Clara, Milpitas, Sunnyvale, and Mountain View. South Bay yards book here. Highway 101 coverage also lists San Jose.</p>
-      </div>
-      <div class="card">
-        <h3>North Bay</h3>
-        <p>San Rafael, Novato, Petaluma, Santa Rosa, Vallejo, and Napa. Wine-country and Solano detail lives on <a href="/napa-sonoma-carb-testing">Napa and Sonoma</a> and <a href="/areas-fairfield">Fairfield and I-80</a>.</p>
-      </div>
-      <div class="card">
-        <h3>Reach from the hub, not Bay chips</h3>
-        <p><a href="/sacramento-carb-testing">Sacramento</a> and <a href="/stockton-clean-truck-check">Stockton</a>.</p>
-      </div>
-    </div>
-    <div class="route-chips" aria-label="Bay Area corridors" style="margin-top:22px">
-      <span>Oakland hub</span><span>I-880</span><span>I-80 / I-580</span><span>I-680</span><span>Tri-Valley</span><span>San Francisco</span><span>Peninsula</span><span>South Bay</span><span>North Bay</span>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Industries we test in the Bay</h2>
-      <p>Bay Area trucks do not all do the same work, and they do not all sit in the same kind of yard.</p>
-    </div>
-    <div class="grid grid-2">
-      <div class="card">
-        <h3>Port of Oakland drayage</h3>
-        <p>Trucks that get flagged or scheduled around the port do not need a trip to a station across a bridge. We prioritize port drayage and submit the test to CARB the same day. Book the yard, the staging lot, or the office — wherever the truck will be still long enough to test.</p>
-      </div>
-      <div class="card">
-        <h3>Warehouse, cross-dock, and food distribution</h3>
-        <p>I-880 and the Peninsula are full of warehouse rows and cross-docks. A fleet visit is the normal product: one appointment, every truck on the list, mixed OBD and older OVI units in the same stop when the engine years call for it.</p>
-      </div>
-      <div class="card">
-        <h3>Construction and jobsite fleets</h3>
-        <p>Contractor trucks bounce between a Hayward staging lot, an Oakland jobsite, and a fenced Concord yard in the same week. Taking one across a bridge to a test station can burn half a day plus tolls. We test at the staging lot or the jobsite. Read <a href="/blog/jobsite-clean-truck-check-near-me-oakland">Oakland and Bay Area jobsite fleets</a>.</p>
-      </div>
-      <div class="card">
-        <h3>Municipal, utility, waste, movers, and motorhomes</h3>
-        <p>City and contractor fleets that already have a parked row of diesels are easier to test where they live than to ferry one-by-one to a shop. Peninsula and South Bay box trucks and tractors get tested at the warehouse, not after a deadhead to Sacramento. Class A, B, and C diesels over 14,000 lbs GVWR that use California public roads are in Clean Truck Check. Recreational, CA-registered motorhomes test once a year; commercial-use motorhomes follow the regular twice-a-year table. We test at the storage yard or residence. See <a href="/motorhome-carb-test">motorhome testing</a>.</p>
+      <div class="grid grid-3">
+        <div class="card price-card"><h3>HD-OBD Periodic Test</h3><div class="price">$75<small> / vehicle</small></div><p>2013+ diesel &amp; 2018+ alt-fuel vehicles.</p></div>
+        <div class="card price-card feature"><h3>OVI Smoke Opacity Test</h3><div class="price">$199<small> / vehicle</small></div><p>Pre-2013 &amp; non-OBD engines.</p></div>
+        <div class="card price-card"><h3>Motorhome &amp; RV</h3><div class="price">$99<small> OBD</small> / $229<small> OVI</small></div><p>Diesel Class A, B, and C at your location.</p></div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="soft">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>What the test is</h2>
-      <p>Official Clean Truck Check rules only. Engine year on the emission control label, not the cab or chassis year.</p>
-    </div>
-    <p>Clean Truck Check (heavy-duty inspection and maintenance) applies to most non-gasoline heavy-duty vehicles over 14,000 lbs GVWR on California public roads, including out-of-state trucks that operate here. Zero-emission vehicles, military tactical vehicles, emergency vehicles, historical plates, out-of-state recreational motorhomes, and gasoline vehicles are out — we do not tell those owners they must test.</p>
-    <ul>
-      <li><strong>HD-OBD, $75 per vehicle.</strong> A scan of the engine OBD data on a CARB-certified device. Diesel engines model year 2013 and newer, and alternative-fuel engines model year 2018 and newer.</li>
-      <li><strong>Mobile OVI, $199 per vehicle.</strong> Shop language for opacity and visual inspection. CARB does not call it “OVI.” For diesel engines model year 2012 and older it is an SAE J1667 smoke opacity snap-acceleration test plus a visual inspection of emissions-control equipment. Alternative-fuel engines 2017 and older are visual only, no opacity. An off-road engine in an on-road heavy-duty vehicle takes opacity plus visual, any year. We never call this an “eye test.”</li>
-      <li><strong>Diesel motorhome / RV: $99 OBD / $229 OVI.</strong></li>
-    </ul>
-    <p>Almost all subject vehicles test twice a year. California-registered deadlines follow the DMV registration expiration month and six months later. Agricultural vehicles (CARB’s definition) and CA-registered motorhomes used for recreation or emergency occupancy test once a year. Tests may be submitted up to 90 days before a compliance deadline. Beginning October 2027, OBD-equipped vehicles move to four tests a year; non-commercial motorhomes and agricultural vehicles stay annual. Your VIN’s date in CARB’s Clean Truck Check portal wins over anything written on a website.</p>
-    <p>We perform the test and submit it. <strong>CARB issues compliance.</strong> There is no windshield sticker from us, and a passing test is not a promise that every other CARB or DMV issue is cleared. We do not invent due dates or fines.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>How a Bay Area visit works</h2>
-      <p>Three steps. Same prices as the rest of Northern California.</p>
-    </div>
-    <div class="grid grid-3">
-      <div class="step"><div class="num">1</div><h3>Book in minutes</h3><p>Call <a href="tel:+19168904427">(916) 890-4427</a> or use the <a href="/contact">contact form</a> with the city, the yard or jobsite, the truck count, and engine years if you have them. Not sure which test you need? Run the VIN through our <a href="https://www.carbcleantruckcheck.app">Clean Truck Check VIN lookup</a>.</p></div>
-      <div class="step"><div class="num">2</div><h3>We come to you</h3><p>We usually arrive same or next day from the Oakland hub. Weekends are available. In-zone travel on this Bay Area book is $0 — no bridge-toll surcharge line.</p></div>
-      <div class="step"><div class="num">3</div><h3>Pass &amp; paperwork</h3><p>Every test includes on-site proof and same-day submission to CARB. If a truck needs repairs and a follow-up, the free retest after repairs still applies when you schedule that follow-up with us.</p></div>
-    </div>
-  </div>
-</section>
-<section class="soft">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Bay Area pricing</h2>
-      <p>Every test includes same-day submission to CARB and on-site proof of testing. Free retest after repairs when scheduled with us.</p>
-    </div>
-    <div class="grid grid-3">
-      <div class="card price-card">
-        <h3>HD-OBD Periodic Test</h3>
-        <div class="price">$75<small> / vehicle</small></div>
-        <p>2013+ diesel &amp; 2018+ alt-fuel vehicles.</p>
-      </div>
-      <div class="card price-card feature">
-        <h3>OVI Smoke Opacity Test</h3>
-        <div class="price">$199<small> / vehicle</small></div>
-        <p>Pre-2013 &amp; non-OBD engines.</p>
-      </div>
-      <div class="card price-card">
-        <h3>Motorhome &amp; RV</h3>
-        <div class="price">$99<small> OBD</small> / $229<small> OVI</small></div>
-        <p>Diesel Class A, B, and C at your location.</p>
-      </div>
-    </div>
-    <p>Fleet of 3 or more trucks? Call for fleet rates: <a href="tel:+19168904427">(916) 890-4427</a></p>
-    <p class="center" style="margin-top:22px"><a href="/pricing">Full pricing</a> · <a href="/blog/obd-vs-ovi-clean-truck-check-fleets">OBD vs OVI for fleets</a></p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="grid grid-2">
+  </section>
+  <section>
+    <div class="wrap">
       <div class="card">
-        <h2>Local crew, local knowledge</h2>
-        <p>The Oakland-hub unit knows the yards from the Port of Oakland to Hayward, plus airport, warehouse, and cross-dock routes along I-880 — and the Hwy 101 corridor through the Peninsula down toward San Jose.</p>
-        <p>Highway 101 from Novato toward San Jose also has a corridor door at <a href="/carb-test-bay-area">CARB test Bay Area</a>. East Bay I-880 details live on <a href="/clean-truck-check-hayward">Hayward</a>. Nearby East Bay names are listed at <a href="/carb-mobile-test-near-me">CARB mobile test near me</a>.</p>
-        <p>Also: <a href="/pricing">pricing</a> · <a href="/faq">FAQ</a> · <a href="/areas">areas</a> · <a href="/contact">contact</a> · <a href="/carb-obd-test">HD-OBD</a> · <a href="/carb-ovi-test">Mobile OVI</a> · <a href="/motorhome-carb-test">motorhome testing</a>.</p>
-      </div>
-      <div class="card">
-        <h2>Bay Area FAQ</h2>
+        <h2>FAQ</h2>
         <p><strong>Q:</strong> Who does mobile Clean Truck Check in the Bay Area?<br>
-        <strong>A:</strong> NorCal CARB Mobile. Our Bay Area tester is based at our Oakland hub and comes to your yard, office, or jobsite, usually same or next day. OBD tests are $75 and OVI smoke tests are $199 per vehicle. Call (916) 890-4427 to book.</p>
-        <p><strong>Q:</strong> Isn't it far from Sacramento?<br>
-        <strong>A:</strong> Not anymore. We started in Sacramento, and as we grew, and because of traffic, our other manager and tester is now based at our Oakland hub. We still sit in traffic like everyone else, but the Oakland hub puts us closer to clients from Sacramento and Stockton to the North Bay and down to San Jose, so we spend less time driving and more time testing. And better hot dog spots. Call (916) 890-4427 to book.</p>
+<strong>A:</strong> NorCal CARB Mobile. Our Bay Area tester is based at our Oakland hub and comes to your yard, office, or jobsite, usually same or next day. OBD tests are $75 and OVI smoke tests are $199 per vehicle. Call <a href="tel:+19168904427">(916) 890-4427</a> to book.</p>
+        <p><strong>Q:</strong> Isn&#x27;t it far from Sacramento?<br>
+<strong>A:</strong> Not anymore. We started in Sacramento, and as we grew, and because of traffic, our other manager and tester is now based at our Oakland hub. We still sit in traffic like everyone else, but the Oakland hub puts us closer to clients from Sacramento and Stockton to the North Bay and down to San Jose, so we spend less time driving and more time testing. And better hot dog spots. Call <a href="tel:+19168904427">(916) 890-4427</a> to book.</p>
         <p><strong>Q:</strong> How much is a Clean Truck Check in the Bay Area?<br>
-        <strong>A:</strong> $75 per vehicle for an HD-OBD test and $199 per vehicle for an OVI smoke test. Every test includes same-day submission to CARB. Call (916) 890-4427 to book. Fleet of 3 or more trucks? Call for fleet rates: <a href="tel:+19168904427">(916) 890-4427</a></p>
+<strong>A:</strong> $75 per vehicle for an HD-OBD test and $199 per vehicle for an OVI smoke test. Every test includes same-day submission to CARB. Call <a href="tel:+19168904427">(916) 890-4427</a> to book.</p>
         <p><strong>Q:</strong> How fast can you come out?<br>
-        <strong>A:</strong> Usually same or next day from our Oakland hub. Call (916) 890-4427 and we'll give you a time.</p>
-        <p><strong>Q:</strong> My truck got flagged at the Port of Oakland. Can you get me compliant fast?<br>
-        <strong>A:</strong> Yes. We prioritize port drayage and handle same-day CARB submission.</p>
+<strong>A:</strong> Usually same or next day from our Oakland hub. Call <a href="tel:+19168904427">(916) 890-4427</a> and we&#x27;ll give you a time.</p>
+        <p><strong>Q:</strong> My truck was pulled for inspection at the Port of Oakland. Can you get me compliant fast?<br>
+<strong>A:</strong> Yes. We prioritize port drayage and handle same-day CARB submission.</p>
         <p><strong>Q:</strong> Is travel really $0?<br>
-        <strong>A:</strong> In our Bay Area zone — including Oakland, Hayward, Fremont, San Leandro, Richmond, Concord, and the rest of Alameda and Contra Costa Counties — travel is $0. Call (916) 890-4427 if you are unsure.</p>
+<strong>A:</strong> In our Bay Area zone — including Oakland, Hayward, Fremont, San Leandro, Richmond, Concord, and the rest of Alameda and Contra Costa Counties — travel is $0. Call <a href="tel:+19168904427">(916) 890-4427</a> if you are unsure.</p>
         <p><strong>Q:</strong> Weekends?<br>
-        <strong>A:</strong> Yes — weekends available. Free retest after repairs when booked with NorCal CARB Mobile.</p>
+<strong>A:</strong> Yes — weekends available. Free retest after repairs when booked with NorCal CARB Mobile.</p>
       </div>
     </div>
-  </div>
-</section>
-
+  </section>
   <section class="soft" id="map-reviews">
     <div class="wrap">
       <div class="section-head">
@@ -373,45 +287,25 @@
       <p class="muted" style="margin-top:12px;text-align:center"><a href="https://maps.google.com/?cid=16019693078134296096" target="_blank" rel="noopener">★★★★★ Read &amp; leave a Google review</a> · Call <a href="tel:+19168904427">(916) 890-4427</a> · <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
     </div>
   </section>
-
   <section aria-labelledby="related-field-notes">
     <div class="wrap">
+      <h2>More coverage</h2>
+<ul><li><a href="/pricing">Pricing</a></li><li><a href="/faq">FAQ</a></li><li><a href="/areas">Service areas</a></li><li><a href="/contact">Contact</a></li><li><a href="/clean-truck-check-hayward">Hayward / I-880</a></li><li><a href="/carb-test-bay-area">CARB test across the Bay Area</a></li><li><a href="/carb-mobile-test-near-me">East Bay directory</a></li><li><a href="/oakland-mobile-carb-test">Oakland mobile CARB</a></li><li><a href="/areas-fairfield">Fairfield and I-80</a></li><li><a href="/napa-sonoma-carb-testing">Napa and Sonoma</a></li><li><a href="/sacramento-carb-testing">Sacramento</a></li><li><a href="/stockton-clean-truck-check">Stockton</a></li><li><a href="/carb-obd-test">HD-OBD</a></li><li><a href="/carb-ovi-test">Mobile OVI</a></li><li><a href="/motorhome-carb-test">Motorhome testing</a></li></ul>
       <h2 id="related-field-notes">Related field notes</h2>
-      <ul>
-        <li><a href="/blog/obd-vs-ovi-clean-truck-check-fleets">OBD vs OVI for fleets — which Clean Truck Check test</a></li>
-        <li><a href="/blog/bayshore-sf-free-retest-ovi-wager-6500">Free retest peace of mind on Bayshore, then opacity on the spot</a></li>
-      </ul>
+<ul><li><a href="/blog/jobsite-clean-truck-check-near-me-oakland">Oakland and Bay Area jobsite fleets</a></li><li><a href="/blog/bayshore-sf-free-retest-ovi-wager-6500">Free retest peace of mind on Bayshore</a></li><li><a href="/clean-truck-check-blog/oakland-clean-truck-checks-san-leandro">Oakland Clean Truck Checks, San Leandro</a></li><li><a href="/clean-truck-check-blog/oakland-carb-compliance-at-active-job-sites-keeping-east-bay-municipal-utility-district-projects-moving">Oakland CARB compliance at active job sites</a></li><li><a href="/clean-truck-check-blog/clean-truck-check-hayward-union-city-fremont-newark">Clean Truck Check in Hayward, Union City, Fremont, and Newark</a></li><li><a href="/clean-truck-check-blog/san-francisco-clean-truck-check-carb">San Francisco Clean Truck Check</a></li><li><a href="/clean-truck-check-blog/mobile-clean-truck-checks-in-brentwood-and-beyond">Mobile Clean Truck Checks in Brentwood and beyond</a></li><li><a href="/clean-truck-check-blog/carb-j1667-opacity-test-antioch-mobile-clean-truck-check">Smoke opacity test in Antioch</a></li><li><a href="/clean-truck-check-blog/smoke-opacity-test-bay-area-central-valley">Smoke opacity test, Bay Area and Central Valley</a></li><li><a href="/blog/obd-vs-ovi-clean-truck-check-fleets">OBD vs OVI for fleets</a></li></ul>
+    </div>
+  </section>
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Ready to book?</h2>
+      <p>Call or send the yard city and truck count.</p>
+      <div class="hero-cta center" style="justify-content:center">
+        <a class="btn btn-ghost btn-lg" href="/contact">Book a Mobile Test</a>
+        <a class="btn btn-call btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
+      </div>
     </div>
   </section>
 
-  <section aria-labelledby="related-field-notes">
-    <div class="wrap">
-      <h2 id="related-field-notes">Related field notes</h2>
-      <ul>
-        <li><a href="/blog/jobsite-clean-truck-check-near-me-oakland">Oakland and Bay Area jobsite fleets</a></li>
-        <li><a href="/blog/bayshore-sf-free-retest-ovi-wager-6500">Free retest peace of mind on Bayshore</a></li>
-        <li><a href="/clean-truck-check-blog/oakland-clean-truck-checks-san-leandro">Oakland Clean Truck Checks, San Leandro</a></li>
-        <li><a href="/clean-truck-check-blog/oakland-carb-compliance-at-active-job-sites-keeping-east-bay-municipal-utility-district-projects-moving">Oakland CARB compliance at active job sites</a></li>
-        <li><a href="/clean-truck-check-blog/clean-truck-check-hayward-union-city-fremont-newark">Clean Truck Check in Hayward, Union City, Fremont, and Newark</a></li>
-        <li><a href="/clean-truck-check-blog/san-francisco-clean-truck-check-carb">San Francisco Clean Truck Check</a></li>
-        <li><a href="/clean-truck-check-blog/mobile-clean-truck-checks-in-brentwood-and-beyond">Mobile Clean Truck Checks in Brentwood and beyond</a></li>
-        <li><a href="/clean-truck-check-blog/carb-j1667-opacity-test-antioch-mobile-clean-truck-check">Smoke opacity test in Antioch</a></li>
-        <li><a href="/clean-truck-check-blog/smoke-opacity-test-bay-area-central-valley">Smoke opacity test, Bay Area and Central Valley</a></li>
-        <li><a href="/blog/obd-vs-ovi-clean-truck-check-fleets">OBD vs OVI for fleets</a></li>
-      </ul>
-    </div>
-  </section>
-
-<section class="cta-band">
-  <div class="wrap">
-    <h2>Ready to clear your Bay Area fleet?</h2>
-    <p>Send the yard city and truck count. We schedule from the Oakland hub.</p>
-    <div class="hero-cta center" style="justify-content:center">
-      <a class="btn btn-ghost btn-lg" href="/contact">Book a Mobile Test</a>
-      <a class="btn btn-call btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
-    </div>
-  </div>
-</section>
 </main>
 
 <div class="mobile-callbar" aria-label="Call now">
