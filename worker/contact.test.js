@@ -8,7 +8,7 @@
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { handleContact, persistLead, FORM_TO, FORM_FROM, THANKS_MESSAGE } from './contact.js';
+import { handleContact, persistLead, FORM_TO, FORM_TO_FALLBACK, FORM_FROM, THANKS_MESSAGE } from './contact.js';
 import { VERIFIED_EMAIL_ROUTING_DESTINATIONS } from './verified-email-destinations.js';
 
 let failed = 0;
@@ -110,6 +110,27 @@ console.error = (...args) => { logs.push(args); };
   assert(res.status === 502, `both fail should be 502, got ${res.status}`);
   assert(res.body.ok === false, 'both fail should be ok:false');
   assert(/916\) 890-4427/.test(res.body.error), `502 should keep 916-890-4427, got ${res.body.error}`);
+}
+
+{
+  const tos = [];
+  let calls = 0;
+  const res = await jsonRes(await handleContact(jsonRequest(valid), {
+    EMAIL: {
+      async send(message) {
+        calls += 1;
+        tos.push(message.to[0]);
+        if (calls === 1) {
+          const err = new Error('primary rejected');
+          err.code = 4500;
+          throw err;
+        }
+      },
+    },
+  }));
+  assert(res.status === 200 && res.body.ok === true, 'fallback send after primary fail should 200');
+  assert(tos[0] === 'carb@norcalcarbmobile.com', `first send is carb@, got ${tos[0]}`);
+  assert(tos[1] === FORM_TO_FALLBACK, `second send is fallback, got ${tos[1]}`);
 }
 
 {
@@ -246,16 +267,17 @@ console.error = (...args) => { logs.push(args); };
   const allow = VERIFIED_EMAIL_ROUTING_DESTINATIONS;
   assert(Array.isArray(allow) && allow.length > 0, 'verified destination allowlist must be non-empty');
   assert(
-    allow.length === 1 && allow[0] === 'fsu9913@gmail.com',
-    `allowlist must be [fsu9913@gmail.com] only for now, got ${JSON.stringify(allow)}`,
+    allow.includes('carb@norcalcarbmobile.com') && allow.includes('fsu9913@gmail.com'),
+    `allowlist must include carb@ and fsu9913, got ${JSON.stringify(allow)}`,
   );
   assert(!allow.includes('bgillis99@gmail.com'), 'allowlist must not include bgillis99@gmail.com');
   assert(!allow.includes('sales@norcalcarbmobile.com'), 'allowlist must not include sales@');
 
-  for (const addr of FORM_TO) {
-    assert(allow.includes(addr), `FORM_TO address not in verified Email Routing allowlist: ${addr}`);
+  assert(FORM_TO.length === 1 && FORM_TO[0] === 'carb@norcalcarbmobile.com', `FORM_TO must be carb@, got ${JSON.stringify(FORM_TO)}`);
+  assert(FORM_TO_FALLBACK === 'fsu9913@gmail.com', `FORM_TO_FALLBACK must be fsu9913@gmail.com, got ${FORM_TO_FALLBACK}`);
+  for (const addr of [...FORM_TO, FORM_TO_FALLBACK]) {
+    assert(allow.includes(addr), `FORM_TO/fallback not in verified Email Routing allowlist: ${addr}`);
   }
-  assert(FORM_TO.length === allow.length, `FORM_TO length ${FORM_TO.length} must match allowlist ${allow.length}`);
 
   const root = join(dirname(fileURLToPath(import.meta.url)), '..');
   const configs = [
@@ -264,42 +286,44 @@ console.error = (...args) => { logs.push(args); };
     { path: 'wrangler.prod-empty.toml', text: readFileSync(join(root, 'wrangler.prod-empty.toml'), 'utf8') },
   ];
 
-  function bindingDestinations(text, path) {
-    const found = [];
+  function configuredDestinations(text, path) {
+    const bind = [];
+    const formTo = [];
+    const fallback = [];
     const jsonc = path.endsWith('.jsonc') || path.endsWith('.json');
     if (jsonc) {
       const stripped = text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
       const parsed = JSON.parse(stripped);
-      const list = parsed.send_email?.flatMap((b) => b.allowed_destination_addresses || b.destination_address || []) || [];
-      found.push(...list);
-      if (parsed.vars?.FORM_TO) {
-        found.push(...String(parsed.vars.FORM_TO).split(',').map((s) => s.trim()).filter(Boolean));
-      }
+      bind.push(...(parsed.send_email?.flatMap((b) => b.allowed_destination_addresses || b.destination_address || []) || []));
+      if (parsed.vars?.FORM_TO) formTo.push(...String(parsed.vars.FORM_TO).split(',').map((s) => s.trim()).filter(Boolean));
+      if (parsed.vars?.FORM_TO_FALLBACK) fallback.push(...String(parsed.vars.FORM_TO_FALLBACK).split(',').map((s) => s.trim()).filter(Boolean));
     } else {
-      const bind = [...text.matchAll(/allowed_destination_addresses\s*=\s*\[([^\]]*)\]/g)];
-      for (const m of bind) {
-        found.push(...[...m[1].matchAll(/"([^"]+)"/g)].map((x) => x[1]));
-      }
-      const dest = [...text.matchAll(/destination_address\s*=\s*"([^"]+)"/g)];
-      found.push(...dest.map((m) => m[1]));
+      const bindMatch = [...text.matchAll(/allowed_destination_addresses\s*=\s*\[([^\]]*)\]/g)];
+      for (const m of bindMatch) bind.push(...[...m[1].matchAll(/"([^"]+)"/g)].map((x) => x[1]));
+      bind.push(...[...text.matchAll(/destination_address\s*=\s*"([^"]+)"/g)].map((m) => m[1]));
       const formToVar = text.match(/^\s*FORM_TO\s*=\s*"([^"]+)"/m);
-      if (formToVar) found.push(...formToVar[1].split(',').map((s) => s.trim()).filter(Boolean));
+      if (formToVar) formTo.push(...formToVar[1].split(',').map((s) => s.trim()).filter(Boolean));
+      const fallbackVar = text.match(/^\s*FORM_TO_FALLBACK\s*=\s*"([^"]+)"/m);
+      if (fallbackVar) fallback.push(...fallbackVar[1].split(',').map((s) => s.trim()).filter(Boolean));
     }
-    return found;
+    return { bind, formTo, fallback };
   }
 
-  const formSet = [...new Set(FORM_TO)].sort();
   for (const cfg of configs) {
-    const dests = bindingDestinations(cfg.text, cfg.path);
-    assert(dests.length > 0, `${cfg.path} must set a send_email destination or FORM_TO`);
-    for (const addr of dests) {
+    const { bind, formTo, fallback } = configuredDestinations(cfg.text, cfg.path);
+    const all = [...bind, ...formTo, ...fallback];
+    assert(all.length > 0, `${cfg.path} must set a send_email destination or FORM_TO`);
+    for (const addr of all) {
       assert(allow.includes(addr), `${cfg.path} destination not in verified allowlist: ${addr}`);
+      assert(addr !== 'bgillis99@gmail.com' && addr !== 'sales@norcalcarbmobile.com', `${cfg.path} has unverified destination: ${addr}`);
     }
-    const bindSet = [...new Set(dests)].sort();
-    assert(
-      JSON.stringify(bindSet) === JSON.stringify(formSet),
-      `${cfg.path} destinations ${JSON.stringify(bindSet)} disagree with FORM_TO ${JSON.stringify(formSet)}`,
-    );
+    assert(formTo.length === 1 && formTo[0] === 'carb@norcalcarbmobile.com', `${cfg.path} FORM_TO must be carb@, got ${JSON.stringify(formTo)}`);
+    if (fallback.length) {
+      assert(fallback[0] === 'fsu9913@gmail.com', `${cfg.path} FORM_TO_FALLBACK must be fsu9913@gmail.com`);
+    }
+    if (bind.length) {
+      assert(bind.includes('carb@norcalcarbmobile.com') && bind.includes('fsu9913@gmail.com'), `${cfg.path} send_email binding must allow carb@ and fsu9913`);
+    }
   }
 }
 

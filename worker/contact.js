@@ -5,14 +5,18 @@
  * submissions still go out through env.EMAIL. If EMAIL.send throws but KV
  * stored the lead, we still return 200 so the customer is not told it failed.
  *
- * Binding: EMAIL (send_email) with allowed_destination_addresses = FORM_TO.
- * From: website@norcalcarbmobile.com (must be on the norcalcarbmobile.com zone).
- * To: fsu9913@gmail.com — the live verified Email Routing destination.
+ * Binding: EMAIL (send_email) allowed_destination_addresses includes FORM_TO
+ * and FORM_TO_FALLBACK. From: website@norcalcarbmobile.com (zone address).
+ * To: carb@norcalcarbmobile.com, fallback fsu9913@gmail.com.
  */
 
-import { VERIFIED_EMAIL_ROUTING_DESTINATIONS } from './verified-email-destinations.js';
+import {
+  FORM_TO_FALLBACK as FALLBACK_DESTINATION,
+  PRIMARY_FORM_TO,
+} from './verified-email-destinations.js';
 
-export const FORM_TO = [...VERIFIED_EMAIL_ROUTING_DESTINATIONS];
+export const FORM_TO = [PRIMARY_FORM_TO];
+export const FORM_TO_FALLBACK = FALLBACK_DESTINATION;
 export const FORM_FROM = { email: 'website@norcalcarbmobile.com', name: 'NorCal CARB Mobile Website' };
 export const CURRENT_TERMS_VERSION = '2026-07-22';
 export const THANKS_MESSAGE = "Thanks — we'll call you shortly.";
@@ -201,6 +205,14 @@ export async function handleContact(request, env, EmailMessageCtor) {
       emailed = true;
     } catch (err) {
       console.error('contact send failed', err && err.code, err && err.message);
+      try {
+        const fallback = buildMessage(lead);
+        fallback.to = [FORM_TO_FALLBACK];
+        await sendLead(env, fallback, EmailMessageCtor);
+        emailed = true;
+      } catch (err2) {
+        console.error('contact send fallback failed', err2 && err2.code, err2 && err2.message);
+      }
     }
   } else {
     console.error('contact send failed', undefined, 'EMAIL binding missing');
