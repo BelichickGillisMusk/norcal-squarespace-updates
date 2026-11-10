@@ -54,7 +54,7 @@ for (const html of [bayFile, oakland]) {
   assert(!html.includes('$119') && !html.includes('$219'), 'No sibling San Diego dollar strings');
 }
 
-assert(oakland.includes('<title>Oakland Mobile CARB Test | Hayward &amp; Richmond | NorCal CARB Mobile</title>') || oakland.includes('<title>Oakland Mobile CARB Test | Hayward & Richmond | NorCal CARB Mobile</title>'), 'Unique Oakland title');
+assert(oakland.includes('<title>Oakland Mobile CARB Test | Hayward &amp; Richmond | NorCal CARB Mobile</title>'), 'Unique Oakland title');
 assert(oakland.includes(`<link rel="canonical" href="https://norcalcarbmobile.com${OAKLAND_PATH}">`), 'Oakland canonical');
 assert(oakland.includes(VIN_CHECK_URL), 'Oakland links VIN check');
 assert(oakland.includes('Hayward') && oakland.includes('Richmond') && /based in Oakland/i.test(oakland), 'Oakland/Hayward/Richmond copy');
