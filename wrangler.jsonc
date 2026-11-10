@@ -26,14 +26,13 @@
   ],
   // Contact form email: Cloudflare Email Workers (Email Routing is enabled on the zone).
   // Free sending is limited to verified Email Routing destination addresses.
-  // Form leads go to fsu9913@gmail.com (live verified destination on this Worker).
-  // Keep in sync with FORM_TO in worker/contact.js.
+  // Form leads go to carb@norcalcarbmobile.com (verified 2026-11-10).
+  // Fallback: fsu9913@gmail.com. Keep in sync with FORM_TO in worker/contact.js.
   // From is website@norcalcarbmobile.com (must be an address on this zone).
-  // A sales@ switch is a separate change after Ally verifies it.
   "send_email": [
     {
       "name": "EMAIL",
-      "allowed_destination_addresses": ["fsu9913@gmail.com"]
+      "allowed_destination_addresses": ["carb@norcalcarbmobile.com", "fsu9913@gmail.com"]
     }
   ],
   // OPTIONAL — contact-form lead backup (env.LEADS). Do NOT uncomment with a
@@ -44,7 +43,8 @@
   // ],
   // CONTACT_TO is no longer read by the Worker (kept in sync with FORM_TO).
   "vars": {
-    "CONTACT_TO": "fsu9913@gmail.com",
-    "FORM_TO": "fsu9913@gmail.com"
+    "CONTACT_TO": "carb@norcalcarbmobile.com",
+    "FORM_TO": "carb@norcalcarbmobile.com",
+    "FORM_TO_FALLBACK": "fsu9913@gmail.com"
   }
 }

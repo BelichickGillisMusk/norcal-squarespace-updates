@@ -20,14 +20,13 @@ pattern = "www.norcalcarbmobile.com"
 custom_domain = true
 
 # Contact form email: Cloudflare Email Workers send_email binding.
-# Free sending is limited to verified Email Routing destinations. Form leads go to
-# fsu9913@gmail.com (live verified destination on norcal-squarespace-updates-gillis).
-# Keep in sync with FORM_TO in worker/contact.js.
+# Free sending is limited to verified Email Routing destinations.
+# Primary: carb@norcalcarbmobile.com. Fallback: fsu9913@gmail.com.
+# Keep in sync with FORM_TO / FORM_TO_FALLBACK in worker/contact.js.
 # From is website@norcalcarbmobile.com (must be on the norcalcarbmobile.com zone).
-# A sales@ switch is a separate change after Ally verifies it.
 [[send_email]]
 name = "EMAIL"
-allowed_destination_addresses = ["fsu9913@gmail.com"]
+allowed_destination_addresses = ["carb@norcalcarbmobile.com", "fsu9913@gmail.com"]
 
 # OPTIONAL — contact-form lead backup (env.LEADS). Do NOT uncomment with a
 # placeholder id; wrangler deploy will fail until a real namespace id is pasted.
@@ -38,5 +37,6 @@ allowed_destination_addresses = ["fsu9913@gmail.com"]
 
 # CONTACT_TO is no longer read by the Worker (kept in sync with FORM_TO).
 [vars]
-CONTACT_TO = "fsu9913@gmail.com"
-FORM_TO = "fsu9913@gmail.com"
+CONTACT_TO = "carb@norcalcarbmobile.com"
+FORM_TO = "carb@norcalcarbmobile.com"
+FORM_TO_FALLBACK = "fsu9913@gmail.com"

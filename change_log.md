@@ -17,6 +17,7 @@ Draft PR only. Do not merge. Do not `wrangler deploy`. Workers Builds on `main` 
 - “better hot dog spots” line was **not** found in the repo (closest is the blog canary “hotdog contest clipboard” on `/blog/craft-so-good-they-copy-us-hotdog-clipboard`). Not invented on the Bay page.
 - Follow-up: added Bryan’s FAQ “Isn't it far from Sacramento?” (including “And better hot dog spots.”) plus its FAQPage JSON-LD, verbatim from Jennifer’s draft. There was no existing FAQPage on the page, so one block was added to the page `@graph` rather than a second FAQPage.
 - Follow-up: pin `FORM_TO` and the `send_email` binding to live verified destination `fsu9913@gmail.com` (Worker `norcal-squarespace-updates-gillis`). Allowlist lives in `worker/verified-email-destinations.js`. A `sales@` switch is a separate change after Ally verifies it. `LEADS` KV left commented out.
+- Follow-up: Bryan (2026-11-09 11:05 PM PT) — website leads go to `carb@norcalcarbmobile.com` (verified Email Routing dest 2026-11-10). `FORM_TO` is carb@; fallback `fsu9913@gmail.com`. Binding allows both. Do not add bgillis99. `LEADS` still commented out.
 
 ---
 
