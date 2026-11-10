@@ -27,7 +27,7 @@ const BAY_FAQ = [
   },
   {
     q: 'How much is a Clean Truck Check in the Bay Area?',
-    a: `$75 per vehicle for an HD-OBD test and $199 per vehicle for an OVI smoke test. Every test includes same-day submission to CARB. Call ${PUBLIC_PHONE.display} to book.`,
+    a: `$75 per vehicle for an HD-OBD test and $199 per vehicle for an OVI smoke test. Every test includes same-day submission to CARB. Call ${PUBLIC_PHONE.display} to book. Fleet of 3 or more trucks? Call for fleet rates: ${PUBLIC_PHONE.display}`,
   },
   {
     q: 'How fast can you come out?',
@@ -58,7 +58,7 @@ const OAKLAND_FAQ = [
   },
   {
     q: 'Which test do I need — OVI or OBD?',
-    a: `OVI smoke opacity is ${dollar(NORCAL_PRICES.ovi)} (pre-2013 and non-OBD). HD-OBD is ${dollar(NORCAL_PRICES.obd)} (2013+ diesel and 2018+ alt-fuel). Check your VIN at the Clean Truck Check VIN tool, then book.`,
+    a: `OVI smoke opacity is ${dollar(NORCAL_PRICES.ovi)} (pre-2013 and non-OBD). HD-OBD is ${dollar(NORCAL_PRICES.obd)} (2013+ diesel and 2018+ alt-fuel). Check your VIN at the Clean Truck Check VIN tool, then book. Fleet of 3 or more trucks? Call for fleet rates: ${PUBLIC_PHONE.display}`,
   },
   {
     q: 'Can you cover Hayward and Richmond too?',
@@ -373,7 +373,8 @@ ${priceBand({
     heading: 'Oakland pricing',
     intro: 'OVI first for older and non-OBD engines, then HD-OBD. Same NorCal rates. Motorhome stays on the shared card.',
     leadWith: 'ovi',
-    afterHtml: `<p class="center" style="margin-top:22px"><a href="${VIN_CHECK_URL}" rel="noopener">VIN check — which test do I need?</a> · <a href="/pricing">Full pricing</a> · <a href="/blog/obd-vs-ovi-clean-truck-check-fleets">OBD vs OVI for fleets</a></p>`,
+    afterHtml: `<p>Fleet of 3 or more trucks? Call for fleet rates: <a href="${PUBLIC_PHONE.href}">${PUBLIC_PHONE.display}</a></p>
+    <p class="center" style="margin-top:22px"><a href="${VIN_CHECK_URL}" rel="noopener">VIN check — which test do I need?</a> · <a href="/pricing">Full pricing</a> · <a href="/blog/obd-vs-ovi-clean-truck-check-fleets">OBD vs OVI for fleets</a></p>`,
   })}
 
 <section>
