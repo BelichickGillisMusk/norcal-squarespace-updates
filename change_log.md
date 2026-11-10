@@ -4,6 +4,12 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-10 — Motorhome post phone aligned, then deploy
+
+The motorhome dog-show article used `628-999-3912`. `main` locks the public phone to `(916) 890-4427` / `tel:+19168904427`. Updated the article and draft to that number so site-lock passes, then merge deploys.
+
+---
+
 ## 2026-11-04 — Contact form: persist lead before email (PR only)
 
 POST `/api/contact` was returning HTTP 502 on every submit because `env.EMAIL.send` threw (Cloudflare Email Workers). A real customer lead was lost. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges; Workers Builds deploys from main.
@@ -12,6 +18,18 @@ POST `/api/contact` was returning HTTP 502 on every submit because `env.EMAIL.se
 - Deleted stale undeployed `site/functions/api/contact.js`.
 - `send_email` binding stays `allowed_destination_addresses = ["bgillis99@gmail.com"]`; From `website@norcalcarbmobile.com`. Owner must verify the Gmail destination in Email Routing and paste a real KV namespace id (commented placeholder only — no fake id in config).
 - Public phone remains (916) 890-4427.
+
+---
+
+## 2026-10-12 — Motorhome dog-show blog (publish Thu 2026-10-15 9:00 AM PT, PR only)
+
+Draft PR for `/blog/motorhome-clean-truck-check-dog-show-travel-diesels`. **Do not merge.** Merging deploys live. Scheduled for Thursday 2026-10-15, 9:00 AM PT. Do not `wrangler deploy`.
+
+- Post `site/blog/motorhome-clean-truck-check-dog-show-travel-diesels.html`. Article JSON-LD author Vin CA Diesel, publisher NorCal CARB Mobile, telephone `+1-628-999-3912`, `datePublished` 2026-10-15. Motorhome OBD $99 · OVI $229. Phone 628-999-3912 only.
+- Hero `site/assets/img/empty-motorhome-parked.jpg` (empty motorhome, no people). Source: muffinn, Wikimedia Commons / Flickr, CC BY 2.0.
+- Portal: `site/blog.html` and `site/blog/index.html` (card above Construction; same quick list; article count 66 → 67). Sitemap lastmod for `/blog` and this post is 2026-10-15.
+- `norcalgrc.org` club event link kept, with the ShowDogCentral listing beside it.
+- Source draft `blog_drafts/motorhome-clean-truck-check-dog-show-travel-diesels.md`, `publish_date: 2026-10-15`, status scheduled.
 
 ---
 
