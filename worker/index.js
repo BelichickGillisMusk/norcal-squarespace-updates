@@ -21,6 +21,7 @@
 
 import { EmailMessage } from 'cloudflare:email';
 import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
+import { applyBlogShareLayout, isBlogPostPath } from './blog-share.js';
 import { handleContact } from './contact.js';
 
 const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
@@ -445,7 +446,18 @@ export default {
     const ct = assetRes.headers.get('content-type') || '';
     const force404 = canonicalPath(url.pathname) === '/404' || assetRes.status === 404;
     if (!ct.includes('text/html')) return force404 ? notFound(assetRes) : assetRes;
-    const isContact = canonicalPath(url.pathname) === '/contact';
+    const pagePath = canonicalPath(url.pathname);
+    const isContact = pagePath === '/contact';
+    let htmlRes = assetRes;
+    if (isBlogPostPath(pagePath) && assetRes.status === 200) {
+      const canonicalUrl = `https://norcalcarbmobile.com${pagePath}`;
+      const html = applyBlogShareLayout(await assetRes.text(), canonicalUrl);
+      htmlRes = new Response(html, {
+        status: assetRes.status,
+        statusText: assetRes.statusText,
+        headers: assetRes.headers,
+      });
+    }
     const page = new HTMLRewriter()
       .on('head', {
         element(el) {
@@ -469,7 +481,7 @@ export default {
           el.prepend(SERVICE_AREA_HTML, { html: true });
         },
       })
-      .transform(assetRes);
+      .transform(htmlRes);
     return force404 ? notFound(page) : page;
   },
 };
