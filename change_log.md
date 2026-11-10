@@ -15,6 +15,7 @@ Draft PR only. Do not merge. Do not `wrangler deploy`. Workers Builds on `main` 
 - `/bay-area-mobile-carb`: clearer hierarchy (open bar, hero + coverage map, Oakland hub copy, steps, prices unchanged). Primary Book a Mobile Test CTA above the fold and again in the bottom band, both to `/contact`. Same GBP cid as the rest of the site — not a second listing. No hub street address. Public phone (916) 890-4427 only.
 - Contact form now captures name, company, phone, email, city/site, truck count, test type, preferred date. Required: name plus phone or email. Honeypot moved from `company` to hidden `website`. Handler email body + optional KV record include the new fields.
 - “better hot dog spots” line was **not** found in the repo (closest is the blog canary “hotdog contest clipboard” on `/blog/craft-so-good-they-copy-us-hotdog-clipboard`). Not invented on the Bay page.
+- Follow-up: added Bryan’s FAQ “Isn't it far from Sacramento?” (including “And better hot dog spots.”) plus its FAQPage JSON-LD, verbatim from Jennifer’s draft. There was no existing FAQPage on the page, so one block was added to the page `@graph` rather than a second FAQPage.
 
 ---
 
