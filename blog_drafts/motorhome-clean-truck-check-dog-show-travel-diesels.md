@@ -18,7 +18,7 @@ locations:
 testing_oddity: "Our truck testers kept running into big diesel motorhomes that were getting ready for dog-show weekends."
 cool_thing: "Two recent motorhome customers referred each other. Both travel the show circuit."
 tags: ["CARB", "Clean Truck Check", "Motorhome", "RV", "Dog Show", "Turlock", "Woodland", "Lodi", "OBD", "OVI"]
-meta_description: "Motorhome Clean Truck Check in California: who needs it, personal vs commercial use, and mobile testing at your driveway. OBD $99, OVI $229. 628-999-3912."
+meta_description: "Motorhome Clean Truck Check in California: who needs it, personal vs commercial use, and mobile testing at your driveway. OBD $99, OVI $229. (916) 890-4427."
 live_url: "https://norcalcarbmobile.com/blog/motorhome-clean-truck-check-dog-show-travel-diesels"
 ---
 
@@ -91,4 +91,4 @@ Details are on our [motorhome testing page](https://norcalcarbmobile.com/motorho
 - Motorhome OBD test: $99
 - Motorhome OVI (smoke opacity + visual inspection): $229
 
-Heading to a show weekend? Call [628-999-3912](tel:+16289993912) to book a driveway test, or reach us through our [contact page](https://norcalcarbmobile.com/contact).
+Heading to a show weekend? Call [(916) 890-4427](tel:+19168904427) to book a driveway test, or reach us through our [contact page](https://norcalcarbmobile.com/contact).

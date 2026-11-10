@@ -4,6 +4,12 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-10 — Motorhome post phone aligned, then deploy
+
+The motorhome dog-show article used `628-999-3912`. `main` locks the public phone to `(916) 890-4427` / `tel:+19168904427`. Updated the article and draft to that number so site-lock passes, then merge deploys.
+
+---
+
 ## 2026-11-04 — Contact form: persist lead before email (PR only)
 
 POST `/api/contact` was returning HTTP 502 on every submit because `env.EMAIL.send` threw (Cloudflare Email Workers). A real customer lead was lost. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges; Workers Builds deploys from main.
