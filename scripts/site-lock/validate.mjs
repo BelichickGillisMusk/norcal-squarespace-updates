@@ -70,7 +70,89 @@ if (!worker.includes(cfToken) && !homepage.includes(cfToken)) {
   fail(`Cloudflare Web Analytics token missing from homepage HTML: ${cfToken}`);
 }
 
-const publicFiles = walk(join(root, "site")).filter((path) => path.endsWith(".html"));
+const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@norcalcarbmobile";
+const LOCAL_BUSINESS_TYPES = new Set(["LocalBusiness", "AutomotiveBusiness", "AutoRepair"]);
+
+function isLeadsOrCsv(path) {
+  const relative = path.slice(root.length).replaceAll("\\", "/");
+  if (relative.includes("scripts/camila-ops/leads/") || relative.endsWith(".csv")) return true;
+  return false;
+}
+
+function schemaTypes(node) {
+  const value = node?.["@type"];
+  if (!value) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
+function walkJson(node, visit) {
+  if (!node || typeof node !== "object") return;
+  if (Array.isArray(node)) {
+    for (const item of node) walkJson(item, visit);
+    return;
+  }
+  visit(node);
+  for (const value of Object.values(node)) walkJson(value, visit);
+}
+
+function sameAsList(node) {
+  if (node.sameAs == null) return [];
+  return Array.isArray(node.sameAs) ? node.sameAs : [node.sameAs];
+}
+
+function checkYoutubeChannelLock() {
+  const served = walk(join(root, "site")).filter((path) => path.endsWith(".html") && !isLeadsOrCsv(path));
+  served.push(join(root, "worker/index.js"));
+
+  for (const file of served) {
+    const content = readFileSync(file, "utf8");
+    const relative = file.slice(root.length).replaceAll("\\", "/");
+
+    for (const match of content.matchAll(/https?:\/\/(?:www\.)?youtube\.com\/@norcalcarbmobile([^"'<\s]*)/gi)) {
+      if (match[1] && match[1].startsWith("?")) {
+        fail(`YouTube channel lock: query string on ${YOUTUBE_CHANNEL_URL} in ${relative}: ${match[0]}`);
+      }
+    }
+
+    if (relative.endsWith(".html") && /<footer\b/i.test(content)) {
+      const footers = content.match(/<footer\b[\s\S]*?<\/footer>/gi) || [];
+      for (const footer of footers) {
+        if (!footer.includes(`href="${YOUTUBE_CHANNEL_URL}"`) && !footer.includes(`href='${YOUTUBE_CHANNEL_URL}'`)) {
+          fail(`YouTube channel lock: footer in ${relative} is missing ${YOUTUBE_CHANNEL_URL}`);
+        }
+      }
+    }
+
+    if (relative.endsWith(".html")) {
+      for (const block of content.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
+        let data;
+        try {
+          data = JSON.parse(block[1]);
+        } catch {
+          fail(`YouTube channel lock: invalid JSON-LD in ${relative}`);
+          continue;
+        }
+        walkJson(data, (node) => {
+          if (!schemaTypes(node).some((type) => LOCAL_BUSINESS_TYPES.has(type))) return;
+          if (!sameAsList(node).includes(YOUTUBE_CHANNEL_URL)) {
+            fail(`YouTube channel lock: LocalBusiness sameAs in ${relative} is missing ${YOUTUBE_CHANNEL_URL}`);
+          }
+        });
+      }
+    }
+  }
+
+  const worker = text("worker/index.js");
+  const sameAsChunk = worker.match(/sameAs:\s*\[([\s\S]*?)\]/);
+  const workerSameAs = sameAsChunk?.[1] || "";
+  const workerHasChannel =
+    workerSameAs.includes(`'${YOUTUBE_CHANNEL_URL}'`) || workerSameAs.includes(`"${YOUTUBE_CHANNEL_URL}"`);
+  if (!workerHasChannel) {
+    fail(`YouTube channel lock: Worker LocalBusiness sameAs is missing ${YOUTUBE_CHANNEL_URL}`);
+  }
+}
+
+const publicFiles = walk(join(root, "site")).filter((path) => path.endsWith(".html") && !isLeadsOrCsv(path));
 publicFiles.push(join(root, "worker/index.js"));
 for (const file of publicFiles) {
   const content = readFileSync(file, "utf8");
@@ -82,6 +164,8 @@ for (const file of publicFiles) {
     fail(`Legacy phone number or fixed San Diego price found in ${relative}`);
   }
 }
+
+checkYoutubeChannelLock();
 
 const robots = text("site/robots.txt");
 if (!/^User-agent:\s*\*$/m.test(robots) || !/^Allow:\s*\/\s*$/m.test(robots)) {

@@ -147,7 +147,7 @@ function schemaTag(pageUrl) {
           'https://www.facebook.com/carbcleantruckcheck/',
           'https://www.instagram.com/carb.mobiletruckcheck/',
           'https://x.com/carbcleantruck',
-          'https://www.youtube.com/@CARBCLEANTRUCKMOBILE',
+          'https://www.youtube.com/@norcalcarbmobile',
           GOOGLE_REVIEWS_URL
         ]
       },
