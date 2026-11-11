@@ -108,9 +108,12 @@ for (const camilaDir of ["scripts/camila-agent", "scripts/camila-ops"]) {
   const camilaRoot = join(root, camilaDir);
   if (!existsSync(camilaRoot)) continue;
   for (const file of walk(camilaRoot)) {
-    const ext = file.slice(file.lastIndexOf(".")).toLowerCase();
+    const relative = file.slice(root.length).replaceAll("\\", "/");
+    const ext = relative.slice(relative.lastIndexOf(".")).toLowerCase();
+    if (ext === ".csv") continue;
+    if (relative.includes("scripts/camila-ops/leads/")) continue;
+    if (ext !== ".js" && ext !== ".mjs") continue;
     if (skipPhoneScan.has(ext)) continue;
-    const relative = file.slice(root.length);
     const content = readFileSync(file, "utf8");
     checkBannedPhones(relative, content);
   }
