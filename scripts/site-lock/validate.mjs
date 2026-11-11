@@ -99,6 +99,9 @@ for (const file of publicFiles) {
   if (/norcalcabmobile|norcarbmobile|norcalcarbmobil\.com|norcalcarbmoble|norcarcarb|norcalcarbobile|norcalcarbmobile\.con/i.test(content)) {
     fail(`Misspelled norcalcarbmobile.com email/domain found in ${relative}`);
   }
+  if (/support@norcalcarbmobile\.com/i.test(content)) {
+    fail(`Disallowed public address support@norcalcarbmobile.com in ${relative}`);
+  }
 }
 
 for (const camilaDir of ["scripts/camila-agent", "scripts/camila-ops"]) {
