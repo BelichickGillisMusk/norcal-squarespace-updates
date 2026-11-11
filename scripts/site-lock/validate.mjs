@@ -58,7 +58,9 @@ for (const banned of ["San Bernardino", "Moreno Valley", "92553", "Statewide Cle
 }
 if (!homepage.includes("Northern California")) fail("Homepage must say Northern California.");
 if (!homepage.includes("tel:+19168904427")) fail("Homepage call button must be 916-890-4427.");
-if (homepage.includes("628-999-3912")) fail("Homepage still has 628-999-3912.");
+if (homepage.includes("628-999-3912") || /tel:\+?1?628|sms:\+?1?628/.test(homepage)) {
+  fail("Homepage still has 628-999-3912.");
+}
 const cfToken = lock.requiredCfWebAnalyticsToken;
 const cfBeaconSnippet = `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${cfToken}"}'></script>`;
 // Homepage HTML is Worker-injected (run_worker_first). Static site/index.html stays
@@ -78,8 +80,19 @@ for (const file of publicFiles) {
   for (const match of content.matchAll(/href=["'](tel:[^"']+)["']/gi)) {
     if (match[1] !== lock.requiredPhoneHref) fail(`Unapproved telephone link in ${relative}: ${match[1]}`);
   }
-  if (/619-786-4328|\+1-619|415-900-8563|916-890-4277|\$119|\$219/.test(content)) {
+  if (/619-786-4328|\+1-619|415-900-8563|\$119|\$219/.test(content)) {
     fail(`Legacy phone number or fixed San Diego price found in ${relative}`);
+  }
+  // Owner lock: 628 must never appear in customer-facing copy (old 628-999-3912).
+  if (/628[\s.\-()]*999[\s.\-()]*3912|6289993912|\+1[\s.\-]*628[\s.\-]*999[\s.\-]*3912|tel:\+?1?628|sms:\+?1?628|\(628\)/.test(content)) {
+    fail(`Banned 628 phone found in ${relative}`);
+  }
+  // Typo of (916) 890-4427 (missing a 4).
+  if (/916[\s.\-()]*890[\s.\-()]*4277|9168904277|\+1[\s.\-]*916[\s.\-]*890[\s.\-]*4277|\+19168904277/.test(content)) {
+    fail(`Phone typo 916-890-4277 found in ${relative}`);
+  }
+  if (/norcalcabmobile|norcarbmobile|norcalcarbmobil\.com|norcalcarbmoble|norcarcarb|norcalcarbobile|norcalcarbmobile\.con/i.test(content)) {
+    fail(`Misspelled norcalcarbmobile.com email/domain found in ${relative}`);
   }
 }
 
