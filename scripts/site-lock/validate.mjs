@@ -21,11 +21,23 @@ function hash(path) {
 function walk(dir) {
   const output = [];
   for (const name of readdirSync(dir)) {
+    if (name === "node_modules") continue;
     const path = join(dir, name);
     if (statSync(path).isDirectory()) output.push(...walk(path));
     else output.push(path);
   }
   return output;
+}
+
+const banned628 =
+  /628[\s.\-()]*999[\s.\-()]*3912|6289993912|\+1[\s.\-]*628[\s.\-]*999[\s.\-]*3912|tel:\+?1?628|sms:\+?1?628|\(628\)/;
+const banned4277 =
+  /916[\s.\-()]*890[\s.\-()]*4277|9168904277|\+1[\s.\-]*916[\s.\-]*890[\s.\-]*4277|\+19168904277/;
+const skipPhoneScan = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif", ".pdf", ".woff", ".woff2", ".ttf", ".ico", ".zip", ".mp4"]);
+
+function checkBannedPhones(relative, content) {
+  if (banned628.test(content)) fail(`Banned 628 phone found in ${relative}`);
+  if (banned4277.test(content)) fail(`Phone typo 916-890-4277 found in ${relative}`);
 }
 
 for (const [path, expected] of Object.entries(lock.protectedFiles)) {
@@ -83,16 +95,21 @@ for (const file of publicFiles) {
   if (/619-786-4328|\+1-619|415-900-8563|\$119|\$219/.test(content)) {
     fail(`Legacy phone number or fixed San Diego price found in ${relative}`);
   }
-  // Owner lock: 628 must never appear in customer-facing copy (old 628-999-3912).
-  if (/628[\s.\-()]*999[\s.\-()]*3912|6289993912|\+1[\s.\-]*628[\s.\-]*999[\s.\-]*3912|tel:\+?1?628|sms:\+?1?628|\(628\)/.test(content)) {
-    fail(`Banned 628 phone found in ${relative}`);
-  }
-  // Typo of (916) 890-4427 (missing a 4).
-  if (/916[\s.\-()]*890[\s.\-()]*4277|9168904277|\+1[\s.\-]*916[\s.\-]*890[\s.\-]*4277|\+19168904277/.test(content)) {
-    fail(`Phone typo 916-890-4277 found in ${relative}`);
-  }
+  checkBannedPhones(relative, content);
   if (/norcalcabmobile|norcarbmobile|norcalcarbmobil\.com|norcalcarbmoble|norcarcarb|norcalcarbobile|norcalcarbmobile\.con/i.test(content)) {
     fail(`Misspelled norcalcarbmobile.com email/domain found in ${relative}`);
+  }
+}
+
+for (const camilaDir of ["scripts/camila-agent", "scripts/camila-ops"]) {
+  const camilaRoot = join(root, camilaDir);
+  if (!existsSync(camilaRoot)) continue;
+  for (const file of walk(camilaRoot)) {
+    const ext = file.slice(file.lastIndexOf(".")).toLowerCase();
+    if (skipPhoneScan.has(ext)) continue;
+    const relative = file.slice(root.length);
+    const content = readFileSync(file, "utf8");
+    checkBannedPhones(relative, content);
   }
 }
 
