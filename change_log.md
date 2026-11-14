@@ -8,7 +8,7 @@ Agents append timestamped entries below.
 
 Draft PR only. Do not merge. Do not `wrangler deploy`. No new slugs, no redirects.
 
-Applied Jennifer 2026-11-13 AFTER wording on the 13 named live posts plus `/blog` index cards. Elite Rentals card title/excerpt and the Top 5 Reasons card phone line are left on `main` (PR 174 owns those). Image files kept. Photos that still show a business name, phone, or plate are listed on the PR as follow-up. Public phone in rewritten copy is (916) 890-4427.
+Applied Jennifer 2026-11-13 AFTER wording on the 13 named live posts plus `/blog` index cards. Elite Rentals card title/excerpt, Top 5 Reasons card phone, and the Quick list sidebar are left on `main` (PR 174 owns those). Elite post H1/title/og:title/JSON-LD headline aligned to PR 174’s card; Channel Drive and street address stripped from visible/alt/caption/JSON-LD. Image files kept. Photos that still show a business name, phone, or plate are listed on the PR as follow-up. Public phone in rewritten copy is (916) 890-4427.
 
 ---
 
