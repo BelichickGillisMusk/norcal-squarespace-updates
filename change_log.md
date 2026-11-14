@@ -4,6 +4,12 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-14 — Stage DMV registration hold blog post (PR 159)
+
+Stacked on 168. Adds `/blog/dmv-registration-hold-missed-clean-truck-check` (publish 2026-11-14), portal cards, sitemap row. Phone (916) 890-4427. Also corrected the West Sac blog-index card that still showed 628-999-3912.
+
+---
+
 ## 2026-11-10 — Motorhome post phone aligned, then deploy
 
 The motorhome dog-show article used `628-999-3912`. `main` locks the public phone to `(916) 890-4427` / `tel:+19168904427`. Updated the article and draft to that number so site-lock passes, then merge deploys.

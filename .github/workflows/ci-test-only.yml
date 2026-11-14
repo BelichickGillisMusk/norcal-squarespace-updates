@@ -22,6 +22,8 @@ jobs:
           node-version: '22'
       - name: Enforce approved NorCal template
         run: node scripts/site-lock/validate.mjs
+      - name: FAQ JSON-LD matches visible FAQ
+        run: node scripts/blog/faq-jsonld-match.mjs
 
   contact-handler:
     runs-on: ubuntu-latest
