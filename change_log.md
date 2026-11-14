@@ -8,6 +8,14 @@ Agents append timestamped entries below.
 
 The motorhome dog-show article used `628-999-3912`. `main` locks the public phone to `(916) 890-4427` / `tel:+19168904427`. Updated the article and draft to that number so site-lock passes, then merge deploys.
 
+## 2026-11-14 — Jennifer customer-name AFTER wording on staged area landers (PR 169)
+
+Draft PR only. Do not merge. Do not `wrangler deploy`.
+
+Applied Jennifer 2026-11-13 AFTER wording on Stockton (two pages), Lodi, Sacramento, Sacramento Valley foothills, and Bay Area (`/carb-test-bay-area`). Link text anonymized; slugs/hrefs unchanged. Stockton pallet-company truck-door photo not shipped (Photos left as none). Sacramento Elite Rentals stills unhooked (Photos left as none). Editor-note BEFORE lines were not present in these HTML files. EBMUD stays only in href slugs on the Oakland/Bay stack.
+
+---
+
 ## 2026-11-10 — Jennifer SEO package: remaining area landers (draft PR)
 
 Draft PR only. Do not merge. Do not `wrangler deploy`. Stacked on PR 160. **`site/socal.html` not touched** (SoCal prices held).
