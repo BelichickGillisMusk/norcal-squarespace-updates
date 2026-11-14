@@ -4,6 +4,14 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-14 — Jennifer customer-name AFTER wording on 13 live blog posts (draft PR)
+
+Draft PR only. Do not merge. Do not `wrangler deploy`. No new slugs, no redirects.
+
+Applied Jennifer 2026-11-13 AFTER wording on the 13 named live posts plus `/blog` index cards (Elite Rentals card excerpt left for the separate 628 PR). Image files kept. Photos that still show a business name, phone, or plate are listed on the PR as follow-up. Public phone in rewritten copy is (916) 890-4427.
+
+---
+
 ## 2026-11-10 — Motorhome post phone aligned, then deploy
 
 The motorhome dog-show article used `628-999-3912`. `main` locks the public phone to `(916) 890-4427` / `tel:+19168904427`. Updated the article and draft to that number so site-lock passes, then merge deploys.
