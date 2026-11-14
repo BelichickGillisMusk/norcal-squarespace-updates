@@ -1,26 +1,69 @@
 /**
- * Shared blog-post layout: Facebook sharer link + Open Graph fill-ins.
+ * Shared blog-post layout: Facebook / X / Google Business share + Open Graph fill-ins.
  * Applied by the Worker to every /blog/<slug> and /clean-truck-check-blog/<slug>
- * response so posts are not edited one at a time. No Facebook SDK, pixel, or
- * third-party script — a plain sharer.php anchor only.
+ * response so posts are not edited one at a time. No Facebook SDK, X widgets.js,
+ * pixel, or third-party script — plain sharer anchors plus a tiny inline clipboard
+ * helper for Google Business Profile (no public share URL).
  */
 
 export const BRAND_OG_IMAGE =
   'https://norcalcarbmobile.com/assets/img/norcal-carb-mobile-logo-web-512x512.png';
 
+export const GBP_POSTS_URL = 'https://business.google.com/posts';
+
 const SHARE_STYLE = `<style id="ncm-fb-share-style">
-.ncm-fb-share-wrap{margin:12px 0 4px}
+.ncm-share-row,.ncm-fb-share-wrap{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:12px 0 4px}
 .ncm-fb-share{
   display:inline-flex;align-items:center;gap:.45rem;
   min-height:44px;min-width:44px;padding:8px 14px;
   border-radius:8px;border:1.5px solid var(--silver-line,#c5cdd6);
   background:#fff;color:var(--navy,#012241)!important;
   font-family:var(--font-sans,inherit);font-weight:700;font-size:.95rem;
-  text-decoration:none;box-sizing:border-box;line-height:1.2
+  text-decoration:none;box-sizing:border-box;line-height:1.2;cursor:pointer
 }
 .ncm-fb-share:hover{border-color:var(--navy,#012241);background:var(--bg-soft,#f4f7f5)}
 .ncm-fb-share svg{width:20px;height:20px;flex:0 0 20px}
+.ncm-gbp-note{flex-basis:100%;margin:0;font-size:.9rem;color:var(--muted,#5b6b73)}
 </style>`;
+
+const GBP_SCRIPT = `<script>
+(function(){
+  if (window.__ncmGbpShare) return;
+  window.__ncmGbpShare = true;
+  document.addEventListener('click', function(ev){
+    var btn = ev.target.closest ? ev.target.closest('[data-ncm-gbp-share]') : null;
+    if (!btn) return;
+    ev.preventDefault();
+    var text = btn.getAttribute('data-share-text') || '';
+    var row = btn.closest('.ncm-share-row') || btn.parentElement;
+    var note = row && row.querySelector('.ncm-gbp-note');
+    function openGbp(){
+      window.open(${JSON.stringify(GBP_POSTS_URL)}, '_blank','noopener,noreferrer');
+    }
+    function copied(){
+      if (note) { note.hidden = false; note.textContent = 'Copied, paste into your Google post'; }
+      openGbp();
+    }
+    function fallbackCopy(){
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly','');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      copied();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(copied).catch(fallbackCopy);
+    } else {
+      fallbackCopy();
+    }
+  });
+})();
+</script>`;
 
 export function canonicalPath(pathname) {
   if (pathname === '/') return '/';
@@ -40,6 +83,14 @@ export function facebookShareHref(canonicalUrl) {
   return `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(canonicalUrl)}`;
 }
 
+export function xShareHref(canonicalUrl, title) {
+  return `https://x.com/intent/post?url=${encodeURIComponent(canonicalUrl)}&text=${encodeURIComponent(title)}`;
+}
+
+export function gbpShareText(title, canonicalUrl) {
+  return `${title} ${canonicalUrl}`;
+}
+
 function attrEscape(value) {
   return String(value)
     .replace(/&/g, '&amp;')
@@ -47,9 +98,17 @@ function attrEscape(value) {
     .replace(/</g, '&lt;');
 }
 
-export function blogShareButtonHtml(canonicalUrl) {
-  const href = attrEscape(facebookShareHref(canonicalUrl));
-  return `<p class="ncm-fb-share-wrap"><a class="ncm-fb-share" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#1877F2" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.79-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.09 24 18.1 24 12.07z"/></svg>Share on Facebook</a></p>`;
+function decodeEntities(value) {
+  return String(value)
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#x27;/gi, "'")
+    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCharCode(parseInt(n, 16)));
 }
 
 function metaContent(html, key) {
@@ -66,7 +125,18 @@ function metaContent(html, key) {
 
 function titleText(html) {
   const match = html.match(/<title>([^<]*)<\/title>/i);
-  return match ? match[1].trim() : '';
+  return match ? decodeEntities(match[1].trim()) : '';
+}
+
+export function shareTitleFromHtml(html) {
+  const h1 = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
+  if (h1) {
+    const text = decodeEntities(h1[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
+    if (text) return text;
+  }
+  const og = metaContent(html, 'og:title');
+  if (og) return og.replace(/\s+[—–-]\s+NorCal CARB Mobile\s*$/i, '').trim();
+  return titleText(html).replace(/\s+[—–-]\s+NorCal CARB Mobile\s*$/i, '').trim();
 }
 
 function hasMeta(html, key) {
@@ -133,17 +203,34 @@ function injectHead(html, snippet) {
   return snippet + html;
 }
 
+const FB_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#1877F2" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.79-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.09 24 18.1 24 12.07z"/></svg>`;
+const X_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#000" d="M18.9 1.5h3.7l-8.1 9.26L24 22.5h-7.4l-5.8-7.58-6.63 7.58H.45l8.66-9.9L0 1.5h7.59l5.24 6.93L18.9 1.5zm-1.3 18.9h2.04L6.5 3.48H4.3L17.6 20.4z"/></svg>`;
+const GBP_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>`;
+
+export function blogShareButtonHtml(canonicalUrl, title) {
+  const fbHref = attrEscape(facebookShareHref(canonicalUrl));
+  const xHref = attrEscape(xShareHref(canonicalUrl, title));
+  const copyText = attrEscape(gbpShareText(title, canonicalUrl));
+  return `<div class="ncm-share-row ncm-fb-share-wrap" data-ncm-share-row role="group" aria-label="Share this post"><a class="ncm-fb-share" href="${fbHref}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on Facebook">${FB_ICON}Share on Facebook</a><a class="ncm-fb-share" href="${xHref}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on X">${X_ICON}Share on X</a><button type="button" class="ncm-fb-share" data-ncm-gbp-share data-share-text="${copyText}" aria-label="Share this post to Google Business">${GBP_ICON}Share to Google Business</button><p class="ncm-gbp-note" hidden>Copied, paste into your Google post</p></div>${GBP_SCRIPT}`;
+}
+
 function injectShareButton(html, canonicalUrl) {
-  if (html.includes('class="ncm-fb-share"')) return html;
-  const button = blogShareButtonHtml(canonicalUrl);
+  const title = shareTitleFromHtml(html);
+  const row = blogShareButtonHtml(canonicalUrl, title);
+  if (html.includes('data-ncm-share-row')) return html;
+  const replaced = html.replace(
+    /<(?:p|div)\b[^>]*class="[^"]*ncm-fb-share-wrap[^"]*"[^>]*>[\s\S]*?<\/(?:p|div)>/i,
+    () => row,
+  );
+  if (replaced !== html) return replaced;
   const withDate = html.replace(
     /(<h1\b[^>]*>[\s\S]*?<\/h1>)(\s*<p\b[^>]*>[\s\S]*?<\/p>)/i,
-    `$1$2\n      ${button}`,
+    (_, h1, date) => `${h1}${date}\n      ${row}`,
   );
   if (withDate !== html) return withDate;
-  const withH1 = html.replace(/(<h1\b[^>]*>[\s\S]*?<\/h1>)/i, `$1\n      ${button}`);
+  const withH1 = html.replace(/(<h1\b[^>]*>[\s\S]*?<\/h1>)/i, (h1) => `${h1}\n      ${row}`);
   if (withH1 !== html) return withH1;
-  return html.replace(/<main\b[^>]*>/i, (open) => `${open}\n      ${button}`);
+  return html.replace(/<main\b[^>]*>/i, (open) => `${open}\n      ${row}`);
 }
 
 export function applyBlogShareLayout(html, canonicalUrl) {

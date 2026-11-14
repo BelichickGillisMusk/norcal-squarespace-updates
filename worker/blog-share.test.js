@@ -10,9 +10,13 @@ import {
   applyBlogShareLayout,
   auditBlogOg,
   BRAND_OG_IMAGE,
+  GBP_POSTS_URL,
   canonicalPath,
   facebookShareHref,
+  gbpShareText,
   isBlogPostPath,
+  shareTitleFromHtml,
+  xShareHref,
 } from './blog-share.js';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -61,8 +65,30 @@ assert(
 assert(
   facebookShareHref('https://norcalcarbmobile.com/blog/how-mobile-carb-testing-works') ===
     'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnorcalcarbmobile.com%2Fblog%2Fhow-mobile-carb-testing-works',
-  'sharer URL is encoded',
+  'Facebook sharer URL is encoded',
 );
+assert(
+  xShareHref(
+    'https://norcalcarbmobile.com/blog/how-mobile-carb-testing-works',
+    'How Mobile CARB Testing Works',
+  ) ===
+    'https://x.com/intent/post?url=https%3A%2F%2Fnorcalcarbmobile.com%2Fblog%2Fhow-mobile-carb-testing-works&text=How%20Mobile%20CARB%20Testing%20Works',
+  'X intent URL encodes url and text',
+);
+assert(
+  gbpShareText('How Mobile CARB Testing Works', 'https://norcalcarbmobile.com/blog/how-mobile-carb-testing-works') ===
+    'How Mobile CARB Testing Works https://norcalcarbmobile.com/blog/how-mobile-carb-testing-works',
+  'GBP clipboard text is title plus canonical URL',
+);
+
+{
+  const dollarHtml = `<html><head><title>$1,000 Fine</title></head><body><h1>Avoid a $1,000+ Fine</h1><p>Published</p></body></html>`;
+  const dollarOut = applyBlogShareLayout(dollarHtml, 'https://norcalcarbmobile.com/blog/dollar-test');
+  assert(
+    dollarOut.includes('Avoid a $1,000+ Fine https://norcalcarbmobile.com/blog/dollar-test'),
+    'share text must keep $1 in the post title',
+  );
+}
 
 assert(postFiles.length >= 70, `expected 70+ posts, got ${postFiles.length}`);
 
@@ -83,14 +109,33 @@ for (const file of postFiles) {
   assert(isBlogPostPath(pagePath), `${rel} should be a blog post path (${pagePath})`);
 
   const out = applyBlogShareLayout(html, canonicalUrl);
+  const title = shareTitleFromHtml(html);
   const href = facebookShareHref(canonicalUrl);
-  assert(out.includes(href), `${rel} output missing sharer href`);
+  const xHref = xShareHref(canonicalUrl, title).replace(/&/g, '&amp;');
+  const copyText = gbpShareText(title, canonicalUrl)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;');
+  assert(out.includes(href), `${rel} output missing Facebook sharer href`);
+  assert(out.includes(xHref), `${rel} output missing X intent href`);
+  assert(out.includes(copyText), `${rel} output missing GBP clipboard text`);
+  assert(out.includes(GBP_POSTS_URL), `${rel} GBP helper missing business.google.com/posts`);
   assert(
     /aria-label="Share this post on Facebook"/.test(out),
-    `${rel} missing accessible share label`,
+    `${rel} missing Facebook share label`,
   );
+  assert(/aria-label="Share this post on X"/.test(out), `${rel} missing X share label`);
+  assert(
+    /aria-label="Share this post to Google Business"/.test(out),
+    `${rel} missing Google Business share label`,
+  );
+  assert(/data-ncm-gbp-share/.test(out), `${rel} missing GBP button`);
+  assert(/Copied, paste into your Google post/.test(out), `${rel} missing GBP copied note`);
   assert(/target="_blank"/.test(out) && /rel="noopener noreferrer"/.test(out), `${rel} share link missing target/rel`);
-  assert(!/connect\.facebook\.net|fbevents|fbq\(/.test(out), `${rel} must not load Facebook JS`);
+  assert(
+    !/connect\.facebook\.net|fbevents|fbq\(|platform\.twitter\.com|widgets\.js/.test(out),
+    `${rel} must not load Facebook or X third-party JS`,
+  );
 
   const served = auditBlogOg(out);
   assert(served.ogTitle, `${rel} missing og:title after layout`);

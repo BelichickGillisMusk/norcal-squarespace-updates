@@ -220,7 +220,11 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       <p style="margin-bottom:8px"><a href="/blog" style="color:var(--muted);font-size:.9rem">&larr; Back to blog</a></p>
       <h1>{title_esc}</h1>
       <p style="color:var(--muted);font-size:.9rem">Published {date_display} &middot; NorCal CARB Mobile</p>
-      <p class="ncm-fb-share-wrap"><a class="ncm-fb-share" href="{share_href}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on Facebook">Share on Facebook</a></p>
+      <div class="ncm-share-row ncm-fb-share-wrap" role="group" aria-label="Share this post">
+        <a class="ncm-fb-share" href="{share_href}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on Facebook">Share on Facebook</a>
+        <a class="ncm-fb-share" href="{x_href}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on X">Share on X</a>
+        <button type="button" class="ncm-fb-share" data-ncm-gbp-share data-share-text="{gbp_text}" aria-label="Share this post to Google Business">Share to Google Business</button>
+      </div>
     </div>
   </section>
 
@@ -307,11 +311,20 @@ def build_post_page(post):
     share_href = esc(
         "https://www.facebook.com/sharer/sharer.php?u=" + quote(url, safe="")
     )
+    x_href = esc(
+        "https://x.com/intent/post?url="
+        + quote(url, safe="")
+        + "&text="
+        + quote(title_plain, safe="")
+    )
+    gbp_text = esc(f"{title_plain} {url}")
     return PAGE_TEMPLATE.format(
         title_esc=esc(title_plain),
         desc_esc=esc(desc),
         url=url,
         share_href=share_href,
+        x_href=x_href,
+        gbp_text=gbp_text,
         jsonld=jsonld,
         date_display=date.strftime("%B %-d, %Y"),
         content=content,
