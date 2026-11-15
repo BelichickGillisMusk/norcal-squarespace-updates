@@ -4,6 +4,13 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-15 — Homepage: no YouTube payload; CARB-LIFE Short on /videos (replaces closed #163)
+
+Rebased the closed #163 embed change onto current main. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges as bgillis99; Workers Builds deploys from main.
+
+- Removed `figure.field-short` iframe `youtube.com/embed/q8osFPN8jyI` from `site/index.html`. Replaced with a text link to `/videos`.
+- Added `site/videos.html` (canonical `/videos`) with a lazy youtube-nocookie Short embed in a 9:16 `.field-short-frame` (iframe 270×480, CSS `aspect-ratio: 9 / 16`) and a link to `@CARBCLEANTRUCKMOBILE`.
+- Sitemap loc for `/videos`. Site-lock homepage hash refreshed. Contact form / wrangler bindings untouched.
 ## 2026-11-15 — Contact intake + Bay Area lander (replaces closed #158; includes closed #167 outcomes)
 
 Rebased closed PR #158 (FORM_TO `carb@norcalcarbmobile.com`, fallback `fsu9913@gmail.com`, plus the Bay Area lander and expanded contact fields) onto current `main`, then folded in closed #167's distinct native outcomes, send-failure redirect, and Workers Logs observability. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges as bgillis99; Workers Builds deploys from main. Closed #167 itself was not edited or reopened.
