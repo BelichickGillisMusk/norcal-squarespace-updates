@@ -4,6 +4,16 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-15 — Homepage: no YouTube payload; CARB-LIFE Short on /videos (replaces closed #163)
+
+Rebased the closed #163 embed change onto current main. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges as bgillis99; Workers Builds deploys from main.
+
+- Removed `figure.field-short` iframe `youtube.com/embed/q8osFPN8jyI` from `site/index.html`. Replaced with a text link to `/videos`.
+- Added `site/videos.html` (canonical `/videos`) with a lazy youtube-nocookie Short embed in a 9:16 `.field-short-frame` (iframe 270×480, CSS `aspect-ratio: 9 / 16`) and a link to `@CARBCLEANTRUCKMOBILE`.
+- Sitemap loc for `/videos`. Site-lock homepage hash refreshed. Contact form / wrangler bindings untouched.
+
+---
+
 ## 2026-11-10 — Motorhome post phone aligned, then deploy
 
 The motorhome dog-show article used `628-999-3912`. `main` locks the public phone to `(916) 890-4427` / `tel:+19168904427`. Updated the article and draft to that number so site-lock passes, then merge deploys.
