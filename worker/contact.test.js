@@ -8,7 +8,7 @@
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { handleContact, persistLead, FORM_TO, FORM_TO_FALLBACK, FORM_FROM, THANKS_MESSAGE } from './contact.js';
+import { handleContact, persistLead, FORM_TO, FORM_TO_FALLBACK, FORM_FROM, THANKS_MESSAGE, NATIVE_REDIRECT } from './contact.js';
 import { VERIFIED_EMAIL_ROUTING_DESTINATIONS } from './verified-email-destinations.js';
 
 let failed = 0;
@@ -31,9 +31,27 @@ function jsonRequest(body, extraHeaders = {}) {
       accept: 'application/json',
       'user-agent': 'contact-test/1.0',
       'cf-connecting-ip': '203.0.113.9',
+      referer: 'https://norcalcarbmobile.com/contact',
       ...extraHeaders,
     },
     body: JSON.stringify(body),
+  });
+}
+
+function formRequest(body, extraHeaders = {}) {
+  const fd = new FormData();
+  for (const [k, v] of Object.entries(body)) {
+    if (v !== undefined && v !== null) fd.append(k, String(v));
+  }
+  return new Request('https://norcalcarbmobile.com/api/contact', {
+    method: 'POST',
+    headers: {
+      'user-agent': 'contact-test/1.0',
+      'cf-connecting-ip': '203.0.113.9',
+      referer: 'https://norcalcarbmobile.com/bay-area-mobile-carb',
+      ...extraHeaders,
+    },
+    body: fd,
   });
 }
 
@@ -78,7 +96,34 @@ async function jsonRes(res) {
 
 const logs = [];
 const origError = console.error;
+const origLog = console.log;
 console.error = (...args) => { logs.push(args); };
+console.log = (...args) => { logs.push(args); };
+
+function intakeEvents() {
+  const events = [];
+  for (const args of logs) {
+    for (const a of args) {
+      if (typeof a !== 'string' || !a.includes('"event":"contact_intake"')) continue;
+      events.push(JSON.parse(a));
+    }
+  }
+  return events;
+}
+
+function lastIntake() {
+  const events = intakeEvents();
+  return events[events.length - 1];
+}
+
+function assertSafeIntake(ev, msg) {
+  assert(ev && ev.event === 'contact_intake', `${msg}: missing contact_intake log`);
+  const blob = JSON.stringify(ev);
+  assert(!blob.includes('@'), `${msg}: intake log must not include emails, got ${blob}`);
+  assert(!blob.includes(valid.name), `${msg}: intake log must not include names`);
+  assert(!blob.includes(valid.phone), `${msg}: intake log must not include phones`);
+  assert(!/fsu9913|carb@|website@/.test(blob), `${msg}: intake log must not include destination addresses`);
+}
 
 {
   const kv = new Map();
@@ -113,6 +158,7 @@ console.error = (...args) => { logs.push(args); };
 }
 
 {
+  logs.length = 0;
   const tos = [];
   let calls = 0;
   const res = await jsonRes(await handleContact(jsonRequest(valid), {
@@ -129,8 +175,31 @@ console.error = (...args) => { logs.push(args); };
     },
   }));
   assert(res.status === 200 && res.body.ok === true, 'fallback send after primary fail should 200');
+  assert(calls === 2, `fallback path should send twice (primary fail + fallback), got ${calls}`);
   assert(tos[0] === 'carb@norcalcarbmobile.com', `first send is carb@, got ${tos[0]}`);
   assert(tos[1] === FORM_TO_FALLBACK, `second send is fallback, got ${tos[1]}`);
+  const ev = lastIntake();
+  assertSafeIntake(ev, 'json fallback');
+  assert(ev.outcome === 'success' && ev.send_path === 'fallback', `json fallback log, got ${JSON.stringify(ev)}`);
+  assert(ev.referer === '/contact', `json fallback referer, got ${ev.referer}`);
+}
+
+{
+  logs.length = 0;
+  const tos = [];
+  const res = await jsonRes(await handleContact(jsonRequest(valid), {
+    EMAIL: {
+      async send(message) {
+        tos.push(...message.to);
+      },
+    },
+  }));
+  assert(res.status === 200 && res.body.ok === true, 'primary success JSON still 200');
+  assert(tos.length === 1 && tos[0] === 'carb@norcalcarbmobile.com', `success must send only to carb@, got ${JSON.stringify(tos)}`);
+  assert(!tos.includes(FORM_TO_FALLBACK), 'fallback must not fire when primary succeeds');
+  const ev = lastIntake();
+  assertSafeIntake(ev, 'json primary success');
+  assert(ev.outcome === 'success' && ev.send_path === 'primary', `json success log, got ${JSON.stringify(ev)}`);
 }
 
 {
@@ -324,10 +393,104 @@ console.error = (...args) => { logs.push(args); };
     if (bind.length) {
       assert(bind.includes('carb@norcalcarbmobile.com') && bind.includes('fsu9913@gmail.com'), `${cfg.path} send_email binding must allow carb@ and fsu9913`);
     }
+    if (cfg.path.endsWith('.jsonc') || cfg.path.endsWith('.json')) {
+      const stripped = cfg.text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+      const parsed = JSON.parse(stripped);
+      assert(parsed.observability && parsed.observability.enabled === true, `${cfg.path} observability.enabled must be true`);
+      assert(parsed.observability.head_sampling_rate === 1, `${cfg.path} head_sampling_rate must be 1`);
+    } else {
+      assert(/\[observability\]/.test(cfg.text) && /^\s*enabled\s*=\s*true\s*$/m.test(cfg.text), `${cfg.path} must set [observability] enabled = true`);
+      assert(/^\s*head_sampling_rate\s*=\s*1\s*$/m.test(cfg.text), `${cfg.path} must set head_sampling_rate = 1`);
+    }
   }
 }
 
+{
+  logs.length = 0;
+  const tos = [];
+  const res = await handleContact(formRequest(valid), {
+    EMAIL: {
+      async send(message) {
+        tos.push(...message.to);
+      },
+    },
+  });
+  assert(res.status === 303, `native success should 303, got ${res.status}`);
+  assert(res.headers.get('Location') === NATIVE_REDIRECT.success, `native success Location, got ${res.headers.get('Location')}`);
+  assert(tos.length === 1 && tos[0] === 'carb@norcalcarbmobile.com', `native success sends only carb@, got ${JSON.stringify(tos)}`);
+  const ev = lastIntake();
+  assertSafeIntake(ev, 'native success');
+  assert(ev.outcome === 'success', `native success outcome, got ${ev.outcome}`);
+  assert(ev.send_path === 'primary', `native success send_path, got ${ev.send_path}`);
+  assert(ev.referer === '/bay-area-mobile-carb', `native success referer, got ${ev.referer}`);
+}
+
+{
+  logs.length = 0;
+  const res = await handleContact(formRequest({ name: 'A', phone: '1' }), {
+    EMAIL: emailOk(),
+  });
+  assert(res.status === 303, `native validation should 303, got ${res.status}`);
+  assert(res.headers.get('Location') === NATIVE_REDIRECT.error, `native validation Location, got ${res.headers.get('Location')}`);
+  const ev = lastIntake();
+  assertSafeIntake(ev, 'native validation');
+  assert(ev.outcome === 'validation_failed' && ev.send_path === 'none', `native validation log, got ${JSON.stringify(ev)}`);
+}
+
+{
+  logs.length = 0;
+  const res = await handleContact(formRequest(valid), {
+    EMAIL: emailThrow(4500, 'internal error'),
+  });
+  assert(res.status === 303, `native send failure should 303, got ${res.status}`);
+  assert(res.headers.get('Location') === NATIVE_REDIRECT.send_failed, `native send failure Location, got ${res.headers.get('Location')}`);
+  const ev = lastIntake();
+  assertSafeIntake(ev, 'native send failure');
+  assert(ev.outcome === 'send_failed' && ev.send_path === 'none', `native send failure log, got ${JSON.stringify(ev)}`);
+}
+
+{
+  logs.length = 0;
+  let sent = false;
+  const res = await handleContact(formRequest({ ...valid, website: 'bot' }), {
+    EMAIL: { async send() { sent = true; } },
+  });
+  assert(res.status === 303, `native honeypot should 303, got ${res.status}`);
+  assert(res.headers.get('Location') === NATIVE_REDIRECT.honeypot, `native honeypot Location, got ${res.headers.get('Location')}`);
+  assert(sent === false, 'native honeypot must not email');
+  const ev = lastIntake();
+  assertSafeIntake(ev, 'native honeypot');
+  assert(ev.outcome === 'honeypot' && ev.send_path === 'none', `native honeypot log, got ${JSON.stringify(ev)}`);
+  assert(NATIVE_REDIRECT.honeypot.includes('sent=1'), 'honeypot target still looks like success');
+  assert(NATIVE_REDIRECT.honeypot !== NATIVE_REDIRECT.success, 'honeypot target must differ from real success');
+}
+
+{
+  logs.length = 0;
+  const tos = [];
+  let calls = 0;
+  const res = await handleContact(formRequest(valid), {
+    EMAIL: {
+      async send(message) {
+        calls += 1;
+        tos.push(message.to[0]);
+        if (calls === 1) {
+          const err = new Error('primary rejected');
+          err.code = 4500;
+          throw err;
+        }
+      },
+    },
+  });
+  assert(res.status === 303 && res.headers.get('Location') === NATIVE_REDIRECT.success, 'native fallback still redirects as success');
+  assert(calls === 2 && tos[0] === 'carb@norcalcarbmobile.com' && tos[1] === FORM_TO_FALLBACK, 'native fallback only after primary fail');
+  const ev = lastIntake();
+  assertSafeIntake(ev, 'native fallback');
+  assert(ev.outcome === 'success' && ev.send_path === 'fallback', `native fallback log, got ${JSON.stringify(ev)}`);
+}
+
 console.error = origError;
+console.log = origLog;
 
 if (failed) {
   console.error(`\n${failed} failed, ${passed} passed`);

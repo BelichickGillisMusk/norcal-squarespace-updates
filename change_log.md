@@ -4,18 +4,35 @@ Agents append timestamped entries below.
 
 ---
 
-## 2026-11-15 — Contact intake + Bay Area lander (replaces closed #158)
+## 2026-11-15 — Contact intake + Bay Area lander (replaces closed #158; includes closed #167 outcomes)
 
-Rebased closed PR #158 (FORM_TO `carb@norcalcarbmobile.com`, fallback `fsu9913@gmail.com`, plus the Bay Area lander and expanded contact fields) onto current `main`. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges as bgillis99; Workers Builds deploys from main.
+Rebased closed PR #158 (FORM_TO `carb@norcalcarbmobile.com`, fallback `fsu9913@gmail.com`, plus the Bay Area lander and expanded contact fields) onto current `main`, then folded in closed #167's distinct native outcomes, send-failure redirect, and Workers Logs observability. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges as bgillis99; Workers Builds deploys from main. Closed #167 itself was not edited or reopened.
 
-- `FORM_TO` is carb@; send_email allowlist is carb@ and fsu9913@. If the primary send fails, the Worker retries once to the fallback. Do not add bgillis99.
-- `LEADS` KV binding stays commented out (optional backup). No Resend secret — this Worker uses the Cloudflare Email Workers `EMAIL` binding.
+- `FORM_TO` is carb@; send_email allowlist is carb@ and fsu9913@. Fallback fires only after the primary send fails. Do not add bgillis99.
+- Native HTML POSTs 303 to distinct Locations: success `/contact?sent=1`, validation `/contact?error=1`, send failure `/contact?error=send`, honeypot `/contact?sent=1&h=1`. JSON contract unchanged.
+- Structured `contact_intake` console line on every outcome: `outcome`, `referer` path, `send_path` (`primary` / `fallback` / `none`). No names, phones, emails, or form fields.
+- `[observability] enabled = true` and `head_sampling_rate = 1` in wrangler config. `LEADS` KV stays commented out. No Resend secret — this Worker uses the Cloudflare Email Workers `EMAIL` binding.
 - Contact form captures company, city/site, truck count, test type, and preferred date. Public phone (916) 890-4427 only. Prices unchanged: OBD $75, OVI $199, motorhome $99/$229.
-- Local tests after rebase: `worker/contact.test.js` 90 passed; site-lock passed; Bay Area FAQ JSON-LD match passed.
+
+---
+
+## 2026-11-10 — Contact intake: distinct native outcomes + observability (from closed #167)
+
+Folded into the #158 replacement PR. Do not merge from this agent. Do not `wrangler deploy`. No Cloudflare dashboard changes. Workers Builds after owner merge as bgillis99.
+
+- Native HTML POSTs to `/api/contact` now 303 to distinct Locations: success `/contact?sent=1`, validation `/contact?error=1`, send failure `/contact?error=send`, honeypot `/contact?sent=1&h=1` (bot still sees sent=1). JSON contract unchanged.
+- Structured `contact_intake` console line on every outcome: `outcome`, `referer` path, `send_path` (`primary` / `fallback` / `none`). No names, phones, emails, or form fields.
+- Fallback to `fsu9913@gmail.com` only after primary `carb@norcalcarbmobile.com` send fails or throws. Primary success never dual-sends.
+- `[observability] enabled = true` and `head_sampling_rate = 1` in `wrangler.toml`, `wrangler.jsonc`, and `wrangler.prod-empty.toml`. Bindings, routes, and vars unchanged. Phone (916) 890-4427 unchanged.
+
+---
 
 ## 2026-11-10 — Motorhome post phone aligned, then deploy
 
 The motorhome dog-show article used `628-999-3912`. `main` locks the public phone to `(916) 890-4427` / `tel:+19168904427`. Updated the article and draft to that number so site-lock passes, then merge deploys.
+
+---
+
 
 ## 2026-11-10 — Jennifer SEO package: Bay Area long-form body (PR 158 only)
 

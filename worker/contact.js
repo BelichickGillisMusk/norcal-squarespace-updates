@@ -21,6 +21,14 @@ export const FORM_FROM = { email: 'website@norcalcarbmobile.com', name: 'NorCal 
 export const CURRENT_TERMS_VERSION = '2026-07-22';
 export const THANKS_MESSAGE = "Thanks — we'll call you shortly.";
 
+/** Native (non-JSON) HTML form redirects — one Location per outcome. */
+export const NATIVE_REDIRECT = {
+  success: '/contact?sent=1',
+  error: '/contact?error=1',
+  send_failed: '/contact?error=send',
+  honeypot: '/contact?sent=1&h=1',
+};
+
 const HTML_ESC = { '<': '&lt;', '>': '&gt;', '&': '&amp;' };
 
 function esc(s) {
@@ -40,7 +48,32 @@ async function readBody(request) {
   return obj;
 }
 
-export function respond(request, ok, message, status) {
+/** Pathname only — never query string (could contain emails) or form fields. */
+export function refererPath(request) {
+  const raw = request.headers.get('referer') || request.headers.get('referrer') || '';
+  if (!raw) return 'none';
+  try {
+    const path = new URL(raw).pathname || '/';
+    return path;
+  } catch {
+    return 'invalid';
+  }
+}
+
+/**
+ * One structured line for Workers Logs. Fields are outcome, referer path, and
+ * send_path only — never names, phones, emails, or other form contents.
+ */
+export function logContactIntake({ outcome, referer, sendPath }) {
+  console.log(JSON.stringify({
+    event: 'contact_intake',
+    outcome,
+    referer,
+    send_path: sendPath,
+  }));
+}
+
+export function respond(request, ok, message, status, nativeLocation) {
   if (wantsJson(request)) {
     const body = ok
       ? { ok: true, ...(message ? { message } : {}) }
@@ -50,8 +83,18 @@ export function respond(request, ok, message, status) {
       headers: { 'content-type': 'application/json' },
     });
   }
-  const location = ok ? '/contact?sent=1' : '/contact?error=1';
+  const location = nativeLocation
+    || (ok ? NATIVE_REDIRECT.success : NATIVE_REDIRECT.error);
   return new Response(null, { status: 303, headers: { Location: location } });
+}
+
+function finish(request, { ok, message, status, nativeLocation, outcome, sendPath }) {
+  logContactIntake({
+    outcome,
+    referer: refererPath(request),
+    sendPath,
+  });
+  return respond(request, ok, message, status, nativeLocation);
 }
 
 function b64utf8(str) {
@@ -153,26 +196,63 @@ export async function handleContact(request, env, EmailMessageCtor) {
   try {
     data = await readBody(request);
   } catch {
-    return respond(request, false, 'Please try again, or call us at (916) 890-4427.', 400);
+    return finish(request, {
+      ok: false,
+      message: 'Please try again, or call us at (916) 890-4427.',
+      status: 400,
+      nativeLocation: NATIVE_REDIRECT.error,
+      outcome: 'validation_failed',
+      sendPath: 'none',
+    });
   }
 
   // Honeypot — bots fill hidden "website"; humans never see it.
   // "company" is a real field now (fleet / business name).
-  if (data.website) return respond(request, true, THANKS_MESSAGE);
+  // Native redirect still looks like success (sent=1) but the target and log differ.
+  if (data.website) {
+    return finish(request, {
+      ok: true,
+      message: THANKS_MESSAGE,
+      nativeLocation: NATIVE_REDIRECT.honeypot,
+      outcome: 'honeypot',
+      sendPath: 'none',
+    });
+  }
 
   const name = String(data.name || '').trim().slice(0, 200);
   const phone = String(data.phone || '').trim().slice(0, 50);
   const email = String(data.email || '').trim().slice(0, 200);
   if (!name || (!phone && !email)) {
-    return respond(request, false, 'Please include your name and a phone number or email.', 422);
+    return finish(request, {
+      ok: false,
+      message: 'Please include your name and a phone number or email.',
+      status: 422,
+      nativeLocation: NATIVE_REDIRECT.error,
+      outcome: 'validation_failed',
+      sendPath: 'none',
+    });
   }
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return respond(request, false, 'Please enter a valid email address.', 422);
+    return finish(request, {
+      ok: false,
+      message: 'Please enter a valid email address.',
+      status: 422,
+      nativeLocation: NATIVE_REDIRECT.error,
+      outcome: 'validation_failed',
+      sendPath: 'none',
+    });
   }
 
   const termsAccepted = String(data.terms_accepted || '').toLowerCase() === 'yes';
   if (!termsAccepted) {
-    return respond(request, false, 'Please accept the Testing Terms & Customer Rights before sending your request.', 422);
+    return finish(request, {
+      ok: false,
+      message: 'Please accept the Testing Terms & Customer Rights before sending your request.',
+      status: 422,
+      nativeLocation: NATIVE_REDIRECT.error,
+      outcome: 'validation_failed',
+      sendPath: 'none',
+    });
   }
 
   const field = (k, max) => String(data[k] || '').trim().slice(0, max);
@@ -194,35 +274,70 @@ export async function handleContact(request, env, EmailMessageCtor) {
   try {
     stored = await persistLead(env, request, lead, data);
   } catch (err) {
-    console.error('contact persist failed', err && err.code, err && err.message);
+    console.error('contact persist failed', err && err.code);
   }
 
   const canEmail = env.EMAIL && typeof env.EMAIL.send === 'function';
   let emailed = false;
+  let sendPath = 'none';
   if (canEmail) {
     try {
-      await sendLead(env, buildMessage(lead), EmailMessageCtor);
+      const primary = buildMessage(lead);
+      primary.to = [PRIMARY_FORM_TO];
+      await sendLead(env, primary, EmailMessageCtor);
       emailed = true;
+      sendPath = 'primary';
     } catch (err) {
-      console.error('contact send failed', err && err.code, err && err.message);
+      // Code only — never err.message (may include destination addresses).
+      console.error('contact send failed', err && err.code);
       try {
         const fallback = buildMessage(lead);
         fallback.to = [FORM_TO_FALLBACK];
         await sendLead(env, fallback, EmailMessageCtor);
         emailed = true;
+        sendPath = 'fallback';
       } catch (err2) {
-        console.error('contact send fallback failed', err2 && err2.code, err2 && err2.message);
+        console.error('contact send fallback failed', err2 && err2.code);
       }
     }
   } else {
     console.error('contact send failed', undefined, 'EMAIL binding missing');
   }
 
-  if (stored || emailed) {
-    return respond(request, true, THANKS_MESSAGE);
+  if (emailed) {
+    return finish(request, {
+      ok: true,
+      message: THANKS_MESSAGE,
+      nativeLocation: NATIVE_REDIRECT.success,
+      outcome: 'success',
+      sendPath,
+    });
+  }
+  if (stored) {
+    return finish(request, {
+      ok: true,
+      message: THANKS_MESSAGE,
+      nativeLocation: NATIVE_REDIRECT.success,
+      outcome: 'stored',
+      sendPath: 'none',
+    });
   }
   if (!canEmail) {
-    return respond(request, false, 'Please call us directly at (916) 890-4427 to book your test.', 503);
+    return finish(request, {
+      ok: false,
+      message: 'Please call us directly at (916) 890-4427 to book your test.',
+      status: 503,
+      nativeLocation: NATIVE_REDIRECT.send_failed,
+      outcome: 'send_failed',
+      sendPath: 'none',
+    });
   }
-  return respond(request, false, 'We couldn’t send that — please call (916) 890-4427.', 502);
+  return finish(request, {
+    ok: false,
+    message: 'We couldn’t send that — please call (916) 890-4427.',
+    status: 502,
+    nativeLocation: NATIVE_REDIRECT.send_failed,
+    outcome: 'send_failed',
+    sendPath: 'none',
+  });
 }
