@@ -6,12 +6,10 @@
  * Cloudflare Email Workers `send_email` binding (env.EMAIL). No Resend, no API key.
  *
  * Deploy:  push to main (Workers Builds runs wrangler deploy; config in ../wrangler.jsonc)
- * Binding: EMAIL (send_email) with allowed_destination_addresses = FORM_TO.
- * Email Routing on norcalcarbmobile.com only lets the binding send to verified
- * destination addresses (free on all plans). sales@ / carb@ / bryan@ are routed
- * addresses (catch-all forwards to bgillis99@gmail.com), so the form sends to
- * bgillis99@gmail.com directly, the sole lead inbox per Bryan's 10/16 lock. Add an address here AND in the binding's
- * allowed_destination_addresses, and verify it in Email Routing first.
+ * Binding: EMAIL (send_email) allowed_destination_addresses = FORM_TO plus
+ * FORM_TO_FALLBACK. Email Routing only lets the binding send to verified
+ * destinations. Primary lead inbox is carb@norcalcarbmobile.com; fallback is
+ * fsu9913@gmail.com. Do not add bgillis99.
  *
  * Optional KV: env.LEADS. Persist every valid lead before emailing so a send_email
  * failure does not drop the request. Owner must create the namespace and paste

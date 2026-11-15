@@ -155,28 +155,47 @@
 
       <div class="card" id="contact-card">
         <h2 style="margin-top:0" data-i18n="form_title">Request a test</h2>
+        <p class="muted" style="margin-top:0" data-i18n="form_required">Required: name, plus a phone number or email.</p>
         <form id="contact-form" method="POST" action="/api/contact">
-          <div class="field">
-            <label for="name" data-i18n="label_name">Name</label>
-            <input id="name" name="name" type="text" autocomplete="name" required>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="name" data-i18n="label_name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required aria-required="true">
+            </div>
+            <div class="field">
+              <label for="company" data-i18n="label_company">Company</label>
+              <input id="company" name="company" type="text" autocomplete="organization">
+            </div>
+          </div>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="phone" data-i18n="label_phone">Phone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+            </div>
+            <div class="field">
+              <label for="email" data-i18n="label_email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email">
+            </div>
           </div>
           <div class="field">
-            <label for="phone" data-i18n="label_phone">Phone</label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+            <label for="location" data-i18n="label_location">City or site location</label>
+            <input id="location" name="location" type="text" autocomplete="address-level2" data-i18n-placeholder="loc_ph" placeholder="e.g. Oakland yard, Hayward, Peninsula, Napa">
+          </div>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="trucks" data-i18n="label_trucks">How many trucks?</label>
+              <input id="trucks" name="trucks" type="number" min="1" max="999" inputmode="numeric">
+            </div>
+            <div class="field">
+              <label for="preferred_date" data-i18n="label_date">Preferred date</label>
+              <input id="preferred_date" name="preferred_date" type="date">
+            </div>
           </div>
           <div class="field">
-            <label for="location" data-i18n="label_location">Truck or motorhome city/yard</label>
-            <input id="location" name="location" type="text" data-i18n-placeholder="loc_ph" placeholder="e.g. Oakland yard, Hayward, Peninsula, Napa">
-          </div>
-          <div class="field">
-            <label for="trucks" data-i18n="label_trucks">How many trucks?</label>
-            <input id="trucks" name="trucks" type="number" min="1" max="999" inputmode="numeric">
-          </div>
-          <div class="field">
-            <label for="service" data-i18n="label_service">What do you need?</label>
+            <label for="service" data-i18n="label_service">Test type</label>
             <select id="service" name="service">
               <option value="OBD ($75)" data-i18n="opt_obd">OBD test ($75)</option>
-              <option value="Mobile OVI ($199)" data-i18n="opt_ovi">Mobile OVI / smoke test ($199)</option>
+              <option value="Mobile OVI ($199)" data-i18n="opt_ovi">Mobile OVI / smoke opacity ($199)</option>
               <option value="Motorhome OBD ($99)" data-i18n="opt_mh_obd">Motorhome OBD ($99)</option>
               <option value="Motorhome OVI ($229)" data-i18n="opt_mh_ovi">Motorhome OVI / smoke ($229)</option>
               <option value="Multiple / fleet" data-i18n="opt_fleet">Multiple trucks / fleet</option>
@@ -184,12 +203,8 @@
             </select>
           </div>
           <div class="field">
-            <label for="email" data-i18n="label_email">Email (optional)</label>
-            <input id="email" name="email" type="email" autocomplete="email">
-          </div>
-          <div class="field">
             <label for="message" data-i18n="label_details">Details (optional)</label>
-            <textarea id="message" name="message" data-i18n-placeholder="details_ph" placeholder="How many trucks or motorhomes, and when you need us"></textarea>
+            <textarea id="message" name="message" data-i18n-placeholder="details_ph" placeholder="Gate codes, engine years, or anything else we should know"></textarea>
           </div>
           <div class="field terms-box">
             <label for="terms_accepted">
@@ -198,7 +213,7 @@
             </label>
           </div>
           <input type="hidden" name="terms_version" value="2026-07-22">
-          <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button class="btn btn-primary btn-lg" type="submit" data-i18n="send">Send request</button>
           <p id="form-status" class="muted" style="margin:12px 0 0;font-size:.9rem"></p>
         </form>
@@ -255,9 +270,27 @@
 
     var form = document.getElementById('contact-form');
     var status = document.getElementById('form-status');
+    function dictFor() {
+      return (window.NCM_UI && window.NCM_UI.strings[document.documentElement.getAttribute('data-lang') || 'en']) || {};
+    }
+    function syncReachable() {
+      if (!form) return;
+      var phone = form.querySelector('#phone');
+      var email = form.querySelector('#email');
+      if (!phone || !email) return;
+      var hasPhone = !!phone.value.trim();
+      var hasEmail = !!email.value.trim();
+      var msg = dictFor().need_reach || 'Please include a phone number or email.';
+      phone.setCustomValidity(hasPhone || hasEmail ? '' : msg);
+      email.setCustomValidity(hasPhone || hasEmail ? '' : '');
+    }
     if (form && window.fetch) {
+      ['input', 'change', 'blur'].forEach(function (evt) {
+        form.addEventListener(evt, syncReachable, true);
+      });
       form.addEventListener('submit', function (e) {
         e.preventDefault();
+        syncReachable();
         if (!form.reportValidity()) return;
         var btn = form.querySelector('button[type=submit]');
         btn.disabled = true;
