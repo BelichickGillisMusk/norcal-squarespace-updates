@@ -4,6 +4,10 @@
   "name": "norcal-squarespace-updates-gillis",
   "main": "worker/index.js",
   "compatibility_date": "2025-06-01",
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
   "assets": {
     "directory": "./site",
     "binding": "ASSETS",
