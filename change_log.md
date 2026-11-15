@@ -4,9 +4,51 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-15 — Contact intake + Bay Area lander (replaces closed #158)
+
+Rebased closed PR #158 (FORM_TO `carb@norcalcarbmobile.com`, fallback `fsu9913@gmail.com`, plus the Bay Area lander and expanded contact fields) onto current `main`. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges as bgillis99; Workers Builds deploys from main.
+
+- `FORM_TO` is carb@; send_email allowlist is carb@ and fsu9913@. If the primary send fails, the Worker retries once to the fallback. Do not add bgillis99.
+- `LEADS` KV binding stays commented out (optional backup). No Resend secret — this Worker uses the Cloudflare Email Workers `EMAIL` binding.
+- Contact form captures company, city/site, truck count, test type, and preferred date. Public phone (916) 890-4427 only. Prices unchanged: OBD $75, OVI $199, motorhome $99/$229.
+- Local tests after rebase: `worker/contact.test.js` 90 passed; site-lock passed; Bay Area FAQ JSON-LD match passed.
+
 ## 2026-11-10 — Motorhome post phone aligned, then deploy
 
 The motorhome dog-show article used `628-999-3912`. `main` locks the public phone to `(916) 890-4427` / `tel:+19168904427`. Updated the article and draft to that number so site-lock passes, then merge deploys.
+
+## 2026-11-10 — Jennifer SEO package: Bay Area long-form body (PR 158 only)
+
+Draft PR only. Do not merge. Do not `wrangler deploy`. Do not change Cloudflare.
+
+- `/bay-area-mobile-carb`: pasted Jennifer's Nov 10 long-form body (Oakland hub, grouped city lists, industries, official Clean Truck Check rules). Merged all seven FAQs into the existing single FAQPage, hot-dog question word for word. Travel FAQ now names Alameda and Contra Costa Counties without calling Richmond/Concord I-880 cities. Editor-voice “this page / write-up / URL” sentences rewritten as customer copy.
+- Contact/FORM_TO changes already on this branch left alone. No `/oakland-mobile-carb-test` link (that stays on PR 160). No stop photo added (no verified Bayshore still in this repo).
+- Added `scripts/blog/faq-jsonld-match.mjs` so visible FAQ text can be checked against JSON-LD after paste.
+
+---
+
+
+## 2026-11-10 — Bay Area ads-backup answer + FAQ merge (PR only)
+
+Draft PR only. Do not merge. Do not `wrangler deploy`. Jennifer 2026-11-10 6:12 AM PT draft (`DRAFT-bay-area-ads-backup-2026-11-10.md`) replaces her earlier Nov 9 drafts.
+
+- `/bay-area-mobile-carb`: placed Jennifer’s top answer block under the H1, word for word, including same-or-next-day arrival from the Oakland hub, $75 HD-OBD / $199 OVI, and same-day CARB submission.
+- Merged her four FAQs into the existing Bay Area FAQ block and the single FAQPage already in the page `@graph`. Replaced no second FAQPage. Kept the three unique existing FAQs (port flag, $0 travel, weekends) after her four. Visible questions and answers match the JSON-LD word for word, including “And better hot dog spots.”
+- No Oakland street address, LocalBusiness address, or geo added. Public phone (916) 890-4427 only. No owner name in customer copy.
+
+---
+
+
+## 2026-11-10 — Bay Area lander polish + contact form fields (PR only)
+
+Draft PR only. Do not merge. Do not `wrangler deploy`. Workers Builds on `main` after owner merge.
+
+- `/bay-area-mobile-carb`: clearer hierarchy (open bar, hero + coverage map, Oakland hub copy, steps, prices unchanged). Primary Book a Mobile Test CTA above the fold and again in the bottom band, both to `/contact`. Same GBP cid as the rest of the site — not a second listing. No hub street address. Public phone (916) 890-4427 only.
+- Contact form now captures name, company, phone, email, city/site, truck count, test type, preferred date. Required: name plus phone or email. Honeypot moved from `company` to hidden `website`. Handler email body + optional KV record include the new fields.
+- “better hot dog spots” line was **not** found in the repo (closest is the blog canary “hotdog contest clipboard” on `/blog/craft-so-good-they-copy-us-hotdog-clipboard`). Not invented on the Bay page.
+- Follow-up: added Bryan’s FAQ “Isn't it far from Sacramento?” (including “And better hot dog spots.”) plus its FAQPage JSON-LD, verbatim from Jennifer’s draft. There was no existing FAQPage on the page, so one block was added to the page `@graph` rather than a second FAQPage.
+- Follow-up: pin `FORM_TO` and the `send_email` binding to live verified destination `fsu9913@gmail.com` (Worker `norcal-squarespace-updates-gillis`). Allowlist lives in `worker/verified-email-destinations.js`. A `sales@` switch is a separate change after Ally verifies it. `LEADS` KV left commented out.
+- Follow-up: Bryan (2026-11-09 11:05 PM PT) — website leads go to `carb@norcalcarbmobile.com` (verified Email Routing dest 2026-11-10). `FORM_TO` is carb@; fallback `fsu9913@gmail.com`. Binding allows both. Do not add bgillis99. `LEADS` still commented out.
 
 ---
 
@@ -666,3 +708,4 @@ Blog pipeline:
 - Hub blog/index.html + blog.html: 63 articles; cards + quick list
 - sitemap: new + restored /blog URLs
 - Also ships pending: homepage CARB 5-day pass block + FAQ CTC-VIS URL fix (cleantruckcheck.arb.ca.gov)
+- 2026-11-10: Fleet-rates line on Bay Area pricing and HD-OBD FAQ (visible + JSON-LD). No multi-truck discount amount.
