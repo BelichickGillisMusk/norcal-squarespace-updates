@@ -5,12 +5,18 @@
  * submissions still go out through env.EMAIL. If EMAIL.send throws but KV
  * stored the lead, we still return 200 so the customer is not told it failed.
  *
- * Binding: EMAIL (send_email) with allowed_destination_addresses = FORM_TO.
- * From: website@norcalcarbmobile.com (must be on the norcalcarbmobile.com zone).
- * To: bgillis99@gmail.com — must stay a VERIFIED Email Routing destination.
+ * Binding: EMAIL (send_email) allowed_destination_addresses includes FORM_TO
+ * and FORM_TO_FALLBACK. From: website@norcalcarbmobile.com (zone address).
+ * To: carb@norcalcarbmobile.com, fallback fsu9913@gmail.com.
  */
 
-export const FORM_TO = ['bgillis99@gmail.com'];
+import {
+  FORM_TO_FALLBACK as FALLBACK_DESTINATION,
+  PRIMARY_FORM_TO,
+} from './verified-email-destinations.js';
+
+export const FORM_TO = [PRIMARY_FORM_TO];
+export const FORM_TO_FALLBACK = FALLBACK_DESTINATION;
 export const FORM_FROM = { email: 'website@norcalcarbmobile.com', name: 'NorCal CARB Mobile Website' };
 export const CURRENT_TERMS_VERSION = '2026-07-22';
 export const THANKS_MESSAGE = "Thanks — we'll call you shortly.";
@@ -108,11 +114,13 @@ export async function persistLead(env, request, lead, fields) {
 function buildMessage(lead) {
   const rows = [
     ['Name', lead.name],
+    ['Company', lead.company],
     ['Phone', lead.phone],
     ['Email', lead.email],
-    ['City / yard', lead.city],
+    ['City / site', lead.city],
     ['Truck count', lead.trucks],
-    ['Service', lead.service],
+    ['Test type', lead.service],
+    ['Preferred date', lead.preferredDate],
     ['Details', lead.message],
     ['Terms accepted', 'Yes — version ' + lead.termsVersion],
     ['Submitted', lead.submittedAt],
@@ -148,12 +156,19 @@ export async function handleContact(request, env, EmailMessageCtor) {
     return respond(request, false, 'Please try again, or call us at (916) 890-4427.', 400);
   }
 
-  // Honeypot — bots fill "company"; humans never see it.
-  if (data.company) return respond(request, true, THANKS_MESSAGE);
+  // Honeypot — bots fill hidden "website"; humans never see it.
+  // "company" is a real field now (fleet / business name).
+  if (data.website) return respond(request, true, THANKS_MESSAGE);
 
   const name = String(data.name || '').trim().slice(0, 200);
   const phone = String(data.phone || '').trim().slice(0, 50);
-  if (!name || !phone) return respond(request, false, 'Please include your name and a phone number.', 422);
+  const email = String(data.email || '').trim().slice(0, 200);
+  if (!name || (!phone && !email)) {
+    return respond(request, false, 'Please include your name and a phone number or email.', 422);
+  }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return respond(request, false, 'Please enter a valid email address.', 422);
+  }
 
   const termsAccepted = String(data.terms_accepted || '').toLowerCase() === 'yes';
   if (!termsAccepted) {
@@ -164,10 +179,12 @@ export async function handleContact(request, env, EmailMessageCtor) {
   const lead = {
     name,
     phone,
-    email: field('email', 200),
-    city: field('location', 200) || field('city', 200),
+    email,
+    company: field('company', 200),
+    city: field('location', 200) || field('city', 200) || field('site_location', 200),
     trucks: field('trucks', 10),
-    service: field('service', 100),
+    service: field('service', 100) || field('test_type', 100),
+    preferredDate: field('preferred_date', 40) || field('date', 40),
     message: field('message', 5000),
     termsVersion: field('terms_version', 40) || CURRENT_TERMS_VERSION,
     submittedAt: new Date().toISOString(),
@@ -188,6 +205,14 @@ export async function handleContact(request, env, EmailMessageCtor) {
       emailed = true;
     } catch (err) {
       console.error('contact send failed', err && err.code, err && err.message);
+      try {
+        const fallback = buildMessage(lead);
+        fallback.to = [FORM_TO_FALLBACK];
+        await sendLead(env, fallback, EmailMessageCtor);
+        emailed = true;
+      } catch (err2) {
+        console.error('contact send fallback failed', err2 && err2.code, err2 && err2.message);
+      }
     }
   } else {
     console.error('contact send failed', undefined, 'EMAIL binding missing');
