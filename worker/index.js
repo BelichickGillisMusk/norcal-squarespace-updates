@@ -258,6 +258,10 @@ const REDIRECTS = {
   '/service-locations/blog-post-title-four-6x6kf': '/',
   '/anitoch-clean-truck-check': '/bay-area-mobile-carb',
   '/antioch-clean-truck-check': '/bay-area-mobile-carb',
+  // Live 404 as of 2026-11-15 8:32 AM PT (AI Search Visibility). Trailing-slash
+  // form is listed explicitly and also covered by one-slash strip in lookup.
+  '/bay-area-carb-testing': '/bay-area-mobile-carb',
+  '/bay-area-carb-testing/': '/bay-area-mobile-carb',
 
   // → homepage #reviews section (no standalone reviews page yet)
   '/clean-truck-top-review': '/#reviews',
