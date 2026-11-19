@@ -349,7 +349,7 @@ a:focus-visible, .btn:focus-visible, button:focus-visible, input:focus-visible, 
   box-shadow:var(--shadow);
 }
 .coverage-panel-map img { display:block; width:100%; height:auto; max-height:520px; object-fit:cover; border-radius:12px; border:1px solid var(--line); }
-.coverage-panel-copy .eyebrow,.card .eyebrow,.field-short-band .eyebrow {
+.coverage-panel-copy .eyebrow,.card .eyebrow,.field-short-band .eyebrow,.section-head .eyebrow {
   margin:0 0 8px; color:var(--green); font-size:.76rem; font-weight:800;
   letter-spacing:.08em; text-transform:uppercase;
 }
@@ -547,3 +547,35 @@ html[data-theme="dark"] body.contact-page .open-bar {
 .open-bar a { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
 html[data-theme="dark"] body.contact-page .open-bar a { color: #fff; }
 .route-chips a { text-decoration: none; }
+
+/* ---------- Related reading (blog <-> service-area cross-links) ---------- */
+.related-reading { padding: 48px 0; }
+.related-reading .section-head { margin-bottom: 20px; }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.related-card {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 16px 18px;
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg);
+  text-decoration: none !important;
+  transition: border-color .15s ease, box-shadow .15s ease, transform .08s ease;
+}
+.related-card:hover { border-color: var(--green); box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+.related-card .tag {
+  font-size: .7rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--green-deep);
+}
+.related-card .title { color: var(--ink); font-weight: 700; font-size: .95rem; line-height: 1.35; }
+@media (max-width: 860px) { .related-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Contact page: trust photo + accented contact methods (break up the dark band) ---------- */
+.contact-photo {
+  display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover;
+  border-radius: var(--radius-xl); border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+  margin-bottom: 18px;
+}
+.contact-method-accented { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 18px; }
+.contact-method-accented .dot {
+  flex: 0 0 auto; width: 10px; height: 10px; border-radius: 50%; margin-top: 7px;
+  background: var(--green);
+}
+html[data-theme="dark"] body.contact-page .contact-photo { border-color: rgba(255,255,255,.14); }
