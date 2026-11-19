@@ -192,7 +192,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .post-body th, .post-body td {{ border: 1px solid var(--line); padding: .45em .6em; text-align: left; }}
     .post-body th {{ background: rgba(0,0,0,.04); }}
     .post-body .field-short {{ margin: 1.4em auto; }}
-    .post-body .field-short figcaption {{ margin-top: .55em; color: var(--muted); font-size: .9rem; text-align: center; }}
+    .post-body .field-short figcaption, .post-body .post-photo figcaption {{ margin-top: .55em; color: var(--muted); font-size: .9rem; text-align: center; }}
   </style>
 </head>
 <body>
