@@ -188,6 +188,11 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .post-body p, .post-body li {{ white-space: normal; }}
     .post-body h2, .post-body h3, .post-body h4 {{ margin-top: 1.4em; }}
     .post-body blockquote {{ border-left: 4px solid var(--green); margin: 1em 0; padding: .25em 0 .25em 1em; color: var(--muted); }}
+    .post-body table {{ width: 100%; border-collapse: collapse; font-size: .95rem; margin: 1em 0; }}
+    .post-body th, .post-body td {{ border: 1px solid var(--line); padding: .45em .6em; text-align: left; }}
+    .post-body th {{ background: rgba(0,0,0,.04); }}
+    .post-body .field-short {{ margin: 1.4em auto; }}
+    .post-body .field-short figcaption {{ margin-top: .55em; color: var(--muted); font-size: .9rem; text-align: center; }}
   </style>
 </head>
 <body>
@@ -305,9 +310,10 @@ def build_post_page(post):
     date = parse_iso(post["publishedAt"])
     date_modified = parse_iso(post["dateModified"]) if post.get("dateModified") else None
     url = f"{BASE_URL}{post_path(post)}"
+    schema_type = post.get("schemaType") or "Article"
     jsonld_obj = {
         "@context": "https://schema.org",
-        "@type": "Article",
+        "@type": schema_type,
         "headline": headline_plain,
         "description": desc,
         "author": {"@type": "Organization", "name": "NorCal CARB Mobile"},
@@ -317,6 +323,18 @@ def build_post_page(post):
     }
     if date_modified:
         jsonld_obj["dateModified"] = date_modified.strftime("%Y-%m-%d")
+    video = post.get("video") or {}
+    if video.get("embedUrl") and video.get("name"):
+        video_obj = {
+            "@type": "VideoObject",
+            "name": video["name"],
+            "embedUrl": video["embedUrl"],
+        }
+        if video.get("thumbnailUrl"):
+            video_obj["thumbnailUrl"] = video["thumbnailUrl"]
+        if video.get("uploadDate"):
+            video_obj["uploadDate"] = video["uploadDate"]
+        jsonld_obj["video"] = video_obj
     jsonld = json.dumps(jsonld_obj, ensure_ascii=False, indent=2)
     date_display = date.strftime("%B %-d, %Y")
     if date_modified:
