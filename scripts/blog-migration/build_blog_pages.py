@@ -177,6 +177,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <script type="application/ld+json">
   {jsonld}
   </script>
@@ -185,6 +188,11 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .post-body p, .post-body li {{ white-space: normal; }}
     .post-body h2, .post-body h3, .post-body h4 {{ margin-top: 1.4em; }}
     .post-body blockquote {{ border-left: 4px solid var(--green); margin: 1em 0; padding: .25em 0 .25em 1em; color: var(--muted); }}
+    .post-body table {{ width: 100%; border-collapse: collapse; font-size: .95rem; margin: 1em 0; }}
+    .post-body th, .post-body td {{ border: 1px solid var(--line); padding: .45em .6em; text-align: left; }}
+    .post-body th {{ background: rgba(0,0,0,.04); }}
+    .post-body .field-short {{ margin: 1.4em auto; }}
+    .post-body .field-short figcaption {{ margin-top: .55em; color: var(--muted); font-size: .9rem; text-align: center; }}
   </style>
 </head>
 <body>
@@ -193,11 +201,12 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/">
-      <img class="brand-logo" src="/assets/img/norcal-carb-mobile-logo-250th.png" alt="NorCal CARB Mobile" width="56" height="56" loading="eager">
+      <img class="brand-logo" src="/assets/img/ncm-logo.png" alt="NorCal CARB Mobile" width="56" height="56" loading="eager">
     </a>
     <nav class="nav" aria-label="Primary">
       <button class="menu-toggle" aria-label="Menu" onclick="this.closest('.nav').classList.toggle('open')"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
       <a class="navlink" href="/">Home</a>
+      <a class="navlink" href="/about">About</a>
       <a class="navlink" href="/services">Services</a>
       <a class="navlink" href="/pricing">Pricing</a>
       <a class="navlink" href="/areas">Areas</a>
@@ -206,7 +215,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       <a class="navlink" href="/contact">Contact</a>
       <span class="header-cta">
         <a class="btn btn-ghost btn-book" href="/contact">Book a Test</a>
-        <a class="btn btn-call" href="tel:+16289993912">Call (628) 999-3912</a>
+        <a class="btn btn-call" href="tel:+19168904427">Call (916) 890-4427</a>
       </span>
     </nav>
   </div>
@@ -217,7 +226,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <section style="padding:48px 0 0">
     <div class="wrap" style="max-width:760px">
       <p style="margin-bottom:8px"><a href="/blog" style="color:var(--muted);font-size:.9rem">&larr; Back to blog</a></p>
-      <h1>{title_esc}</h1>
+      <h1>{headline_esc}</h1>
       <p style="color:var(--muted);font-size:.9rem">Published {date_display} &middot; NorCal CARB Mobile</p>
     </div>
   </section>
@@ -227,7 +236,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 {content}
 
-      <p style="margin-top:2em"><a class="btn btn-primary" href="/contact">Book a test</a> or call <a href="tel:+16289993912">(628) 999-3912</a> to schedule mobile Clean Truck Check testing.</p>
+      <p style="margin-top:2em"><a class="btn btn-primary" href="/contact">Book a test</a> or call <a href="tel:+19168904427">(916) 890-4427</a> to schedule mobile Clean Truck Check testing.</p>
 
     </div>
   </section>
@@ -238,7 +247,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       <p>Book mobile Clean Truck Check testing anywhere in Northern California.</p>
       <div class="hero-cta center" style="justify-content:center">
         <a class="btn btn-ghost btn-lg" href="/contact">Book a Test</a>
-        <a class="btn btn-ghost btn-lg" href="tel:+16289993912">Call (628) 999-3912</a>
+        <a class="btn btn-ghost btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
       </div>
     </div>
   </section>
@@ -254,7 +263,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       </div>
       <div>
         <h4>Contact</h4>
-        <p><a href="tel:+16289993912">(628) 999-3912</a><br>
+        <p><a href="tel:+19168904427">(916) 890-4427</a><br>
         <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
       </div>
       <div>
@@ -262,9 +271,10 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
         <p class="muted">Sacramento · Stockton · Fairfield · San Jose · Bay Area</p>
       </div>
     </div>
+    <p class="center muted" style="margin:0 0 14px">Owned and operated by NorCal CARB Mobile LLC · CARB tester ID IF530523</p>
     <div class="foot-bottom">
       <span>&copy; 2026 NorCal CARB Mobile LLC</span>
-      <span><a href="/">Home</a> · <a href="/services">Services</a> · <a href="/pricing">Pricing</a> · <a href="/areas">Areas</a> · <a href="/faq">FAQ</a> · <a href="/blog">Blog</a> · <a href="/contact">Contact</a></span>
+      <span><a href="/">Home</a> · <a href="/about">About</a> · <a href="/services">Services</a> · <a href="/pricing">Pricing</a> · <a href="/areas">Areas</a> · <a href="/faq">FAQ</a> · <a href="/blog">Blog</a> · <a href="/contact">Contact</a></span>
     </div>
   </div>
 </footer>
@@ -280,34 +290,62 @@ def post_path(post):
     return f"{prefix}/{post['slug']}"
 
 
+def parse_iso(value):
+    """Parse a manifest ISO timestamp or YYYY-MM-DD date as UTC."""
+    s = value.strip()
+    if len(s) == 10 and s[4] == "-" and s[7] == "-":
+        s = s + "T00:00:00+00:00"
+    else:
+        s = s.replace("Z", "+00:00")
+    return datetime.fromisoformat(s)
+
+
 def build_post_page(post):
     title_plain = plain_text(post["title"])
+    headline_plain = plain_text(post["headline"]) if post.get("headline") else title_plain
     content = clean_content(post["content"])
     body_text = plain_text(content)
     excerpt = plain_text(post.get("excerpt") or "")
     desc = excerpt if 25 <= len(excerpt) <= 160 else truncate(body_text, 155)
-    date = datetime.fromisoformat(post["publishedAt"].replace("Z", "+00:00"))
+    date = parse_iso(post["publishedAt"])
+    date_modified = parse_iso(post["dateModified"]) if post.get("dateModified") else None
     url = f"{BASE_URL}{post_path(post)}"
-    jsonld = json.dumps(
-        {
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": title_plain,
-            "description": desc,
-            "author": {"@type": "Organization", "name": "NorCal CARB Mobile"},
-            "publisher": {"@type": "Organization", "name": "NorCal CARB Mobile"},
-            "datePublished": date.strftime("%Y-%m-%d"),
-            "url": url,
-        },
-        ensure_ascii=False,
-        indent=2,
-    )
+    schema_type = post.get("schemaType") or "Article"
+    jsonld_obj = {
+        "@context": "https://schema.org",
+        "@type": schema_type,
+        "headline": headline_plain,
+        "description": desc,
+        "author": {"@type": "Organization", "name": "NorCal CARB Mobile"},
+        "publisher": {"@type": "Organization", "name": "NorCal CARB Mobile"},
+        "datePublished": date.strftime("%Y-%m-%d"),
+        "url": url,
+    }
+    if date_modified:
+        jsonld_obj["dateModified"] = date_modified.strftime("%Y-%m-%d")
+    video = post.get("video") or {}
+    if video.get("embedUrl") and video.get("name"):
+        video_obj = {
+            "@type": "VideoObject",
+            "name": video["name"],
+            "embedUrl": video["embedUrl"],
+        }
+        if video.get("thumbnailUrl"):
+            video_obj["thumbnailUrl"] = video["thumbnailUrl"]
+        if video.get("uploadDate"):
+            video_obj["uploadDate"] = video["uploadDate"]
+        jsonld_obj["video"] = video_obj
+    jsonld = json.dumps(jsonld_obj, ensure_ascii=False, indent=2)
+    date_display = date.strftime("%B %-d, %Y")
+    if date_modified:
+        date_display = f"{date_display} &middot; Updated {date_modified.strftime('%B %-d, %Y')}"
     return PAGE_TEMPLATE.format(
         title_esc=esc(title_plain),
+        headline_esc=esc(headline_plain),
         desc_esc=esc(desc),
         url=url,
         jsonld=jsonld,
-        date_display=date.strftime("%B %-d, %Y"),
+        date_display=date_display,
         content=content,
     )
 
@@ -343,11 +381,12 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/">
-      <img class="brand-logo" src="/assets/img/norcal-carb-mobile-logo-250th.png" alt="NorCal CARB Mobile" width="56" height="56" loading="eager">
+      <img class="brand-logo" src="/assets/img/ncm-logo.png" alt="NorCal CARB Mobile" width="56" height="56" loading="eager">
     </a>
     <nav class="nav" aria-label="Primary">
       <button class="menu-toggle" aria-label="Menu" onclick="this.closest('.nav').classList.toggle('open')"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
       <a class="navlink" href="/">Home</a>
+      <a class="navlink" href="/about">About</a>
       <a class="navlink" href="/services">Services</a>
       <a class="navlink" href="/pricing">Pricing</a>
       <a class="navlink" href="/areas">Areas</a>
@@ -356,7 +395,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
       <a class="navlink" href="/contact">Contact</a>
       <span class="header-cta">
         <a class="btn btn-ghost btn-book" href="/contact">Book a Test</a>
-        <a class="btn btn-call" href="tel:+16289993912">Call (628) 999-3912</a>
+        <a class="btn btn-call" href="tel:+19168904427">Call (916) 890-4427</a>
       </span>
     </nav>
   </div>
@@ -386,7 +425,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
       <p>Book mobile Clean Truck Check testing anywhere in Northern California. Same-week and Saturday appointments available.</p>
       <div class="hero-cta center" style="justify-content:center">
         <a class="btn btn-ghost btn-lg" href="/contact">Book a Test</a>
-        <a class="btn btn-ghost btn-lg" href="tel:+16289993912">Call (628) 999-3912</a>
+        <a class="btn btn-ghost btn-lg" href="tel:+19168904427">Call (916) 890-4427</a>
       </div>
     </div>
   </section>
@@ -402,7 +441,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
       </div>
       <div>
         <h4>Contact</h4>
-        <p><a href="tel:+16289993912">(628) 999-3912</a><br>
+        <p><a href="tel:+19168904427">(916) 890-4427</a><br>
         <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a></p>
       </div>
       <div>
@@ -410,11 +449,11 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
         <p class="muted">Sacramento · Stockton · Fairfield · San Jose · Bay Area</p>
       </div>
     </div>
-    <p class="center" style="margin-top:0;margin-bottom:8px;color:var(--muted);font-size:.88rem">OBD $75 · OVI $199 · Motorhome $99/$229 · San Diego OBD $119 · OVI $219</p>
+    <p class="center" style="margin-top:0;margin-bottom:8px;color:var(--muted);font-size:.88rem">OBD $75 · OVI $199 · Motorhome $99/$229</p>
     <p class="center" style="margin-top:0;margin-bottom:16px;color:var(--muted);font-size:.82rem;font-style:italic">Pricing is always subject to change due to matters out of our control.</p>
     <div class="foot-bottom">
       <span>&copy; 2026 NorCal CARB Mobile LLC</span>
-      <span><a href="/">Home</a> · <a href="/services">Services</a> · <a href="/pricing">Pricing</a> · <a href="/areas">Areas</a> · <a href="/faq">FAQ</a> · <a href="/blog">Blog</a> · <a href="/contact">Contact</a></span>
+      <span><a href="/">Home</a> · <a href="/about">About</a> · <a href="/services">Services</a> · <a href="/pricing">Pricing</a> · <a href="/areas">Areas</a> · <a href="/faq">FAQ</a> · <a href="/blog">Blog</a> · <a href="/contact">Contact</a></span>
     </div>
   </div>
 </footer>
@@ -436,13 +475,38 @@ STATIC_SITEMAP_PATHS = [
 ]
 
 
-def main():
+def main(argv=None):
+    import argparse
+    import sys
+
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument(
+        "--slug",
+        help=(
+            "Regenerate only this slug's page under site/clean-truck-check-blog/. "
+            "Does not rewrite the blog index, sitemap, other posts, or worker/blog-redirects.js "
+            "(a full run would regenerate those from the stale template/manifest and reintroduce old phones and prices)."
+        ),
+    )
+    args = parser.parse_args(sys.argv[1:] if argv is None else argv)
+
     posts = json.loads(MANIFEST.read_text())
     published = [p for p in posts if p["slug"] not in LEGACY_FALLBACKS]
     generated = [p for p in published if p["source"] != "site"]
 
     for p in published:
         assert SLUG_RE.match(p["slug"]), f"unsafe slug: {p['slug']}"
+
+    if args.slug:
+        matches = [p for p in generated if p["slug"] == args.slug]
+        if not matches:
+            raise SystemExit(f"no generated (source!=site) post with slug {args.slug!r}")
+        LEGACY_DIR.mkdir(exist_ok=True)
+        html = build_post_page(matches[0])
+        out = LEGACY_DIR / f"{args.slug}.html"
+        out.write_text(html)
+        print(f"wrote {out.relative_to(ROOT)}")
+        return
 
     LEGACY_DIR.mkdir(exist_ok=True)
     for p in generated:
