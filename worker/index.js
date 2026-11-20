@@ -224,7 +224,9 @@ const REDIRECTS = {
   '/clean-truck-check-fairfield/': '/areas-fairfield',
   '/service-area-butte-county-clean-truck-check': '/areas#butte',
   '/service-area-san-joaquin-county-mobile-testing': '/areas#san-joaquin',
-  '/san-jose-mobile-carb-testing': '/areas#san-jose',
+  // San Jose city page (Jennifer-approved copy, 2026-11-20). The old Squarespace
+  // page copy is not archived anywhere, so the legacy URL 301s to the new page.
+  '/san-jose-mobile-carb-testing': '/carb-test-near-me-san-jose',
   // Lodi now has its own full corridor page at /clean-truck-check-lodi
   // '/clean-truck-check-lodi': '/areas#lodi',
   '/clean-truck-check-roseville': '/areas#roseville',
