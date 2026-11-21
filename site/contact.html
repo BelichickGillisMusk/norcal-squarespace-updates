@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-lang="en">
+<html lang="en" data-theme="light" data-lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,13 +16,13 @@
   <script>
     (function () {
       try {
-        var t = localStorage.getItem('ncm-theme') === 'light' ? 'light' : 'dark';
+        var t = localStorage.getItem('ncm-theme') === 'dark' ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', t);
         var l = localStorage.getItem('ncm-lang') === 'es' ? 'es' : 'en';
         document.documentElement.lang = l;
         document.documentElement.setAttribute('data-lang', l);
       } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.setAttribute('data-theme', 'light');
       }
     })();
   </script>
@@ -56,8 +56,8 @@
           <button type="button" class="seg-btn" data-set-lang="es" aria-pressed="false">ES</button>
         </div>
         <div class="seg" role="group" data-i18n-aria="theme_label" aria-label="Color mode">
-          <button type="button" class="seg-btn" data-set-theme="dark" data-i18n="theme_dark" aria-pressed="true">Dark</button>
-          <button type="button" class="seg-btn" data-set-theme="light" data-i18n="theme_light" aria-pressed="false">Light</button>
+          <button type="button" class="seg-btn" data-set-theme="dark" data-i18n="theme_dark" aria-pressed="false">Dark</button>
+          <button type="button" class="seg-btn is-active" data-set-theme="light" data-i18n="theme_light" aria-pressed="true">Light</button>
         </div>
       </div>
       <span class="header-cta">
@@ -128,25 +128,31 @@
   <section class="soft" id="request">
     <div class="wrap contact-grid">
       <div>
-        <div class="contact-method">
+        <img class="contact-photo" src="/assets/img/elite-fleet.jpg" width="1600" height="1200" alt="NorCal CARB Mobile tester on site at a fleet yard" loading="lazy" decoding="async">
+        <span class="badge" style="position:static;margin-bottom:16px;display:inline-block">CARB tester ID IF530523</span>
+        <div class="contact-method-accented">
+          <span class="dot" aria-hidden="true"></span>
           <div>
             <strong data-i18n="phone_label">Call or text</strong><br>
             <a href="tel:+19168904427">(916) 890-4427</a>
           </div>
         </div>
-        <div class="contact-method">
+        <div class="contact-method-accented">
+          <span class="dot" aria-hidden="true"></span>
           <div>
             <strong data-i18n="email_label">Email</strong><br>
             <a href="mailto:sales@norcalcarbmobile.com">sales@norcalcarbmobile.com</a>
           </div>
         </div>
-        <div class="contact-method">
+        <div class="contact-method-accented">
+          <span class="dot" aria-hidden="true"></span>
           <div>
             <strong data-i18n="area_label">Service corridor</strong><br>
             <span data-i18n="area_copy">Oakland · Hayward · Peninsula · Napa · Wine Country</span>
           </div>
         </div>
-        <div class="contact-method">
+        <div class="contact-method-accented">
+          <span class="dot" aria-hidden="true"></span>
           <div>
             <strong data-i18n="hours">7 days a week — we come to your yard</strong>
           </div>

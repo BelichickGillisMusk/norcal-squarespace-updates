@@ -164,7 +164,7 @@
   function bootTheme() {
     var saved;
     try { saved = localStorage.getItem(THEME_KEY); } catch (e) { saved = null; }
-    var theme = saved === 'light' ? 'light' : 'dark';
+    var theme = saved === 'dark' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', theme);
     return theme;
   }
@@ -198,7 +198,7 @@
       var key = el.getAttribute('data-i18n-alt');
       if (key && dict[key]) el.setAttribute('alt', dict[key]);
     });
-    syncToggles(lang, document.documentElement.getAttribute('data-theme') || 'dark');
+    syncToggles(lang, document.documentElement.getAttribute('data-theme') || 'light');
   }
 
   function syncToggles(lang, theme) {
