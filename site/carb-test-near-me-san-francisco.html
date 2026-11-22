@@ -17,6 +17,42 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <style>
+    /* Lock-compliant Short poster: local thumb links out to YouTube. */
+    .field-short-frame.yt-short-link { display:block; color:inherit; }
+    .field-short-frame.yt-short-link img {
+      box-sizing:border-box;
+      position:absolute;
+      inset:0;
+      display:block;
+      width:100%;
+      height:100%;
+      max-width:100%;
+      border:0;
+      object-fit:cover;
+    }
+    .yt-short-play {
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:68px;
+      height:68px;
+      border-radius:50%;
+      background:rgba(0,0,0,.55);
+      box-shadow:0 2px 10px rgba(0,0,0,.35);
+      transform:translate(-50%,-50%);
+      pointer-events:none;
+    }
+    .yt-short-play::after {
+      content:"";
+      position:absolute;
+      left:26px;
+      top:20px;
+      border-style:solid;
+      border-width:14px 0 14px 22px;
+      border-color:transparent transparent transparent #fff;
+    }
+  </style>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -180,7 +216,14 @@
   <div class="wrap">
     <div class="card">
       <h2>Meet Foggy Fran the Tester</h2>
-      <p>Foggy Fran the Tester is our cartoon mascot for San Francisco. Fran is a made-up character, not a real person and not a member of our crew. Fran just wrapped an HD-OBD test: $75 per truck for 2013+ diesel and 2018+ alt-fuel engines. Fran knows every street-cleaning sign on the block. The real Clean Truck Check is done by NorCal CARB Mobile at your yard. Call <a href="tel:+19168904427">(916) 890-4427</a> to book.</p>
+      <p>Foggy Fran the Tester is our cartoon mascot for San Francisco. Fran is a made-up character, not a real person and not a member of our crew. Fran just wrapped an HD-OBD test: $75 per truck for 2013+ diesel and 2018+ alt-fuel engines. Fran knows every street-cleaning sign on the block. Fran works her test stops around her standing date with Karl the Fog, who rolls in most afternoons. The real Clean Truck Check is done by NorCal CARB Mobile at your yard. Call <a href="tel:+19168904427">(916) 890-4427</a> to book.</p>
+      <figure class="field-short" style="max-width:360px;width:min(100%,360px);margin:20px auto 0;text-align:center">
+        <a class="field-short-frame yt-short-link" href="https://www.youtube.com/shorts/jwDNZYyxQw0" target="_blank" rel="noopener">
+          <img src="https://i.ytimg.com/vi/jwDNZYyxQw0/oardefault.jpg" alt="Foggy Fran meets Karl the Fog" width="1080" height="1920" loading="lazy">
+          <span class="yt-short-play" aria-hidden="true"></span>
+        </a>
+        <figcaption class="muted" style="margin-top:8px">Foggy Fran meets Karl the Fog</figcaption>
+      </figure>
     </div>
   </div>
 </section>
