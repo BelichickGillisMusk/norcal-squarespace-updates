@@ -37,8 +37,9 @@
   "video": {
     "@type": "VideoObject",
     "name": "2013+ Gets a Scan. 2012 & Older Gets Smoked. | CARB BUSTERS",
-    "embedUrl": "https://www.youtube-nocookie.com/embed/Bw2duYyfyOo",
-    "thumbnailUrl": "https://i.ytimg.com/vi/Bw2duYyfyOo/hqdefault.jpg"
+    "thumbnailUrl": "https://i.ytimg.com/vi/Bw2duYyfyOo/oardefault.jpg",
+    "uploadDate": "2026-11-12T08:38:58-08:00",
+    "contentUrl": "https://www.youtube.com/shorts/Bw2duYyfyOo"
   }
 }
   </script>
@@ -52,6 +53,40 @@
     .post-body th { background: rgba(0,0,0,.04); }
     .post-body .field-short { margin: 1.4em auto; }
     .post-body .field-short figcaption { margin-top: .55em; color: var(--muted); font-size: .9rem; text-align: center; }
+    /* Lock-compliant Short poster: local thumb links out to YouTube. */
+    .field-short-frame.yt-short-link { display:block; color:inherit; }
+    .field-short-frame.yt-short-link img {
+      box-sizing:border-box;
+      position:absolute;
+      inset:0;
+      display:block;
+      width:100%;
+      height:100%;
+      max-width:100%;
+      border:0;
+      object-fit:cover;
+    }
+    .yt-short-play {
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:68px;
+      height:68px;
+      border-radius:50%;
+      background:rgba(0,0,0,.55);
+      box-shadow:0 2px 10px rgba(0,0,0,.35);
+      transform:translate(-50%,-50%);
+      pointer-events:none;
+    }
+    .yt-short-play::after {
+      content:"";
+      position:absolute;
+      left:26px;
+      top:20px;
+      border-style:solid;
+      border-width:14px 0 14px 22px;
+      border-color:transparent transparent transparent #fff;
+    }
   </style>
 </head>
 <body>
@@ -94,18 +129,12 @@
     <div class="wrap post-body" style="max-width:760px">
 
 <p><strong>Need a smoke opacity test or an OBD scan? Call or text <a href="tel:+19168904427">(916) 890-4427</a>.</strong> OVI is $199, OBD is $75 per truck, and motorhomes are $99/$229. Fleet of 3 or more trucks? Call for fleet rates: <a href="tel:+19168904427">(916) 890-4427</a>.</p>
-<figure class="field-short">
-  <div class="field-short-frame">
-    <iframe
-      src="https://www.youtube-nocookie.com/embed/Bw2duYyfyOo"
-      width="270" height="480"
-      title="2013+ Gets a Scan. 2012 &amp; Older Gets Smoked. | CARB BUSTERS"
-      loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen></iframe>
-  </div>
-  <figcaption>CARB BUSTERS: 2013 and newer gets a scan. 2012 and older gets smoked.</figcaption>
+<figure class="field-short" style="max-width:360px;width:min(100%,360px);margin:1.4em auto;text-align:center">
+  <a class="field-short-frame yt-short-link" href="https://www.youtube.com/shorts/Bw2duYyfyOo" target="_blank" rel="noopener">
+    <img src="https://i.ytimg.com/vi/Bw2duYyfyOo/oardefault.jpg" alt="2013+ Gets a Scan. 2012 &amp; Older Gets Smoked. | CARB BUSTERS" width="720" height="1280" loading="lazy">
+    <span class="yt-short-play" aria-hidden="true"></span>
+  </a>
+  <figcaption>CARB BUSTERS: 2013 and newer gets a scan. 2012 and older gets smoked. · <a href="/blog/meet-the-norcal-carb-mobile-tester-crew">Meet the whole tester crew</a></figcaption>
 </figure>
 <h2>The short version</h2>
 <p>Under the Clean Truck Check, not every truck gets smoked.</p>

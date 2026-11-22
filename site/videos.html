@@ -17,6 +17,52 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <style>
+    /* Lock-compliant Short poster: local thumb links out to YouTube. */
+    .field-short-frame.yt-short-link { display:block; color:inherit; }
+    .field-short-frame.yt-short-link img {
+      box-sizing:border-box;
+      position:absolute;
+      inset:0;
+      display:block;
+      width:100%;
+      height:100%;
+      max-width:100%;
+      border:0;
+      object-fit:cover;
+    }
+    .yt-short-play {
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:68px;
+      height:68px;
+      border-radius:50%;
+      background:rgba(0,0,0,.55);
+      box-shadow:0 2px 10px rgba(0,0,0,.35);
+      transform:translate(-50%,-50%);
+      pointer-events:none;
+    }
+    .yt-short-play::after {
+      content:"";
+      position:absolute;
+      left:26px;
+      top:20px;
+      border-style:solid;
+      border-width:14px 0 14px 22px;
+      border-color:transparent transparent transparent #fff;
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "CARB-LIFE — See NorCal CARB Mobile in the field",
+      "thumbnailUrl": "https://i.ytimg.com/vi/q8osFPN8jyI/oardefault.jpg",
+      "uploadDate": "2026-09-05T02:42:02-07:00",
+      "contentUrl": "https://www.youtube.com/shorts/q8osFPN8jyI"
+    }
+  </script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -60,21 +106,15 @@
       <div class="section-head">
         <p class="eyebrow">CARB-LIFE</p>
         <h2 id="carb-life-heading">See us in the field</h2>
-        <p>A short from a NorCal yard. The homepage does not load this player.</p>
+        <p>A short from a NorCal yard. The homepage does not load this video.</p>
         <p><a href="https://www.youtube.com/@CARBCLEANTRUCKMOBILE" target="_blank" rel="noopener">YouTube channel @CARBCLEANTRUCKMOBILE</a></p>
       </div>
-      <figure class="field-short">
-        <div class="field-short-frame">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/q8osFPN8jyI"
-            width="270"
-            height="480"
-            title="CARB-LIFE — See NorCal CARB Mobile in the field"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen></iframe>
-        </div>
+      <figure class="field-short" style="max-width:360px;width:min(100%,360px);margin:0 auto;text-align:center">
+        <a class="field-short-frame yt-short-link" href="https://www.youtube.com/shorts/q8osFPN8jyI" target="_blank" rel="noopener">
+          <img src="https://i.ytimg.com/vi/q8osFPN8jyI/oardefault.jpg" alt="CARB-LIFE — See NorCal CARB Mobile in the field" width="1080" height="1080" loading="lazy">
+          <span class="yt-short-play" aria-hidden="true"></span>
+        </a>
+        <figcaption class="muted" style="margin-top:8px">CARB-LIFE — See NorCal CARB Mobile in the field · <a href="/blog/meet-the-norcal-carb-mobile-tester-crew">Meet the whole tester crew</a></figcaption>
       </figure>
     </div>
   </section>
