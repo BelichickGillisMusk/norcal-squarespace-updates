@@ -44,7 +44,7 @@ assert(!videos.includes('<iframe'), 'videos page must not contain an iframe');
 assert(!videos.includes('youtube-nocookie.com/embed') && !videos.includes('youtube.com/embed'), 'videos page must not embed a YouTube player');
 assert(videos.includes('https://www.youtube.com/@CARBCLEANTRUCKMOBILE'), 'videos page links the YouTube channel');
 assert(videos.includes('loading="lazy"'), 'videos poster image is lazy-loaded');
-assert(videos.includes('href="/blog/meet-the-norcal-carb-mobile-tester-crew"'), 'videos page links the tester crew');
+assert(videos.includes('href="/meet-the-testers"'), 'videos page links the tester crew');
 assert(sitemap.includes('https://norcalcarbmobile.com/videos'), 'sitemap lists /videos');
 
 if (failed) {
