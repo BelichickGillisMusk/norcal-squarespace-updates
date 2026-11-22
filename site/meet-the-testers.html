@@ -22,6 +22,42 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <style>
+    /* Lock-compliant Short poster: local thumb links out to YouTube. */
+    .field-short-frame.yt-short-link { display:block; color:inherit; }
+    .field-short-frame.yt-short-link img {
+      box-sizing:border-box;
+      position:absolute;
+      inset:0;
+      display:block;
+      width:100%;
+      height:100%;
+      max-width:100%;
+      border:0;
+      object-fit:cover;
+    }
+    .yt-short-play {
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:68px;
+      height:68px;
+      border-radius:50%;
+      background:rgba(0,0,0,.55);
+      box-shadow:0 2px 10px rgba(0,0,0,.35);
+      transform:translate(-50%,-50%);
+      pointer-events:none;
+    }
+    .yt-short-play::after {
+      content:"";
+      position:absolute;
+      left:26px;
+      top:20px;
+      border-style:solid;
+      border-width:14px 0 14px 22px;
+      border-color:transparent transparent transparent #fff;
+    }
+  </style>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -146,7 +182,10 @@
       <p>Cheerful road-tripper who plans around the late-afternoon I-205 rush.</p>
       <p>Tracy plans a late test around the Altamont wind, which often picks up on summer afternoons as cool Bay air pours east through the pass toward the Valley.</p>
       <figure class="field-short" style="max-width:180px;width:min(100%,180px);margin:12px 0 0;text-align:left">
-        <div class="field-short-frame" role="img" aria-label="Cartoon mascot Tracy the Tester, NorCal CARB Mobile. Video thumbnail will link out to YouTube when the Short is published."></div>
+        <a class="field-short-frame yt-short-link" href="https://www.youtube.com/shorts/1UW-ata-600" target="_blank" rel="noopener">
+          <img src="https://i.ytimg.com/vi/1UW-ata-600/oardefault.jpg" alt="Cartoon mascot Tracy the Tester, NorCal CARB Mobile" width="1080" height="1920" loading="lazy">
+          <span class="yt-short-play" aria-hidden="true"></span>
+        </a>
         <figcaption class="muted" style="margin-top:8px">Video: thumbnail links out to YouTube</figcaption>
       </figure>
     </article>
@@ -190,7 +229,10 @@
       <p>Cool, unhurried city planner who always knows where the legal parking is.</p>
       <p>Fran works her test stops around her standing date with Karl the Fog, who rolls in most afternoons.</p>
       <figure class="field-short" style="max-width:180px;width:min(100%,180px);margin:12px 0 0;text-align:left">
-        <div class="field-short-frame" role="img" aria-label="Cartoon mascot Foggy Fran the Tester, NorCal CARB Mobile. Video thumbnail will link out to YouTube when the Short is published."></div>
+        <a class="field-short-frame yt-short-link" href="https://www.youtube.com/shorts/jwDNZYyxQw0" target="_blank" rel="noopener">
+          <img src="https://i.ytimg.com/vi/jwDNZYyxQw0/oardefault.jpg" alt="Cartoon mascot Foggy Fran the Tester, NorCal CARB Mobile" width="1080" height="1920" loading="lazy">
+          <span class="yt-short-play" aria-hidden="true"></span>
+        </a>
         <figcaption class="muted" style="margin-top:8px">Video: thumbnail links out to YouTube</figcaption>
       </figure>
     </article>
@@ -311,7 +353,10 @@
       <p>Black-clad veteran tester with a Class A CDL and a decade on East Bay yards; when the family money ran out, she went to work and found she liked the job.</p>
       <p>Margot times a late yard stop to catch the Campanile carillon at 6 p.m., the evening concert from the campus clock tower.</p>
       <figure class="field-short" style="max-width:180px;width:min(100%,180px);margin:12px 0 0;text-align:left">
-        <div class="field-short-frame" role="img" aria-label="Cartoon mascot Moody Margot the Tester, NorCal CARB Mobile. Video thumbnail will link out to YouTube when the Short is published."></div>
+        <a class="field-short-frame yt-short-link" href="https://www.youtube.com/shorts/mWy3Lw2QC8g" target="_blank" rel="noopener">
+          <img src="https://i.ytimg.com/vi/mWy3Lw2QC8g/oardefault.jpg" alt="Cartoon mascot Moody Margot the Tester, NorCal CARB Mobile" width="1080" height="1920" loading="lazy">
+          <span class="yt-short-play" aria-hidden="true"></span>
+        </a>
         <figcaption class="muted" style="margin-top:8px">Video: thumbnail links out to YouTube</figcaption>
       </figure>
     </article>
@@ -322,7 +367,10 @@
       <p>Friendly, big-hearted tester with a Class A CDL and fifteen years on East Bay yards; the beer-belly nickname comes from barbecue and tailgate food, never from a drink in the cab.</p>
       <p>Brian still calls San Leandro the Cherry City, a nod to the 1909 festival that celebrated a bumper cherry crop.</p>
       <figure class="field-short" style="max-width:180px;width:min(100%,180px);margin:12px 0 0;text-align:left">
-        <div class="field-short-frame" role="img" aria-label="Cartoon mascot Beer Belly Brian the Tester, NorCal CARB Mobile. Video thumbnail will link out to YouTube when the Short is published."></div>
+        <a class="field-short-frame yt-short-link" href="https://www.youtube.com/shorts/oEDeWN_4468" target="_blank" rel="noopener">
+          <img src="https://i.ytimg.com/vi/oEDeWN_4468/oardefault.jpg" alt="Cartoon mascot Beer Belly Brian the Tester, NorCal CARB Mobile" width="1080" height="1920" loading="lazy">
+          <span class="yt-short-play" aria-hidden="true"></span>
+        </a>
         <figcaption class="muted" style="margin-top:8px">Video: thumbnail links out to YouTube</figcaption>
       </figure>
     </article>
