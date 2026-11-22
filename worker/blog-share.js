@@ -38,10 +38,10 @@ export function decodeEntities(s) {
     .replace(/&lsquo;|&#8216;/g, '\u2018')
     .replace(/&ldquo;|&#8220;/g, '\u201c')
     .replace(/&rdquo;|&#8221;/g, '\u201d')
-    .replace(/"/g, '"')
-    .replace(/&#39;|'/g, "'")
-    .replace(/</g, '<')
-    .replace(/>/g, '>')
+    .replace(/&(?:quot);/g, '"')
+    .replace(/&#39;|&(?:apos);/g, "'")
+    .replace(/&(?:lt);/g, '<')
+    .replace(/&(?:gt);/g, '>')
     .replace(/&(?:amp);/g, '&');
 }
 
