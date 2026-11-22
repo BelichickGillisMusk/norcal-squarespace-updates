@@ -129,6 +129,9 @@ for (const file of postFiles) {
     /aria-label="Share this post to Google Business"/.test(out),
     `${rel} missing Google Business share label`,
   );
+  assert(/data-ncm-native-share/.test(out), `${rel} missing Android-style Share button`);
+  assert(/navigator\.share/.test(out), `${rel} missing Web Share API helper`);
+  assert(out.includes(`data-share-url="${canonicalUrl}"`), `${rel} native share missing canonical URL`);
   assert(/data-ncm-gbp-share/.test(out), `${rel} missing GBP button`);
   assert(/Copied, paste into your Google post/.test(out), `${rel} missing GBP copied note`);
   assert(/target="_blank"/.test(out) && /rel="noopener noreferrer"/.test(out), `${rel} share link missing target/rel`);

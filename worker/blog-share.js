@@ -23,14 +23,29 @@ const SHARE_STYLE = `<style id="ncm-fb-share-style">
 }
 .ncm-fb-share:hover{border-color:var(--navy,#012241);background:var(--bg-soft,#f4f7f5)}
 .ncm-fb-share svg{width:20px;height:20px;flex:0 0 20px}
+.ncm-fb-share-native{display:none;background:var(--navy,#012241);color:#fff!important;border-color:var(--navy,#012241)}
+.ncm-fb-share-native:hover{background:var(--navy-mid,#0a3a5c);color:#fff!important}
+html.ncm-can-share .ncm-fb-share-native{display:inline-flex;flex:1 1 12rem;justify-content:center}
+html.ncm-can-share [data-ncm-share-web]{display:none}
 .ncm-gbp-note{flex-basis:100%;margin:0;font-size:.9rem;color:var(--muted,#5b6b73)}
 </style>`;
 
-const GBP_SCRIPT = `<script>
+const SHARE_SCRIPT = `<script>
 (function(){
-  if (window.__ncmGbpShare) return;
-  window.__ncmGbpShare = true;
+  if (window.__ncmShare) return;
+  window.__ncmShare = true;
+  if (navigator.share) document.documentElement.classList.add('ncm-can-share');
   document.addEventListener('click', function(ev){
+    var nativeBtn = ev.target.closest ? ev.target.closest('[data-ncm-native-share]') : null;
+    if (nativeBtn && navigator.share) {
+      ev.preventDefault();
+      navigator.share({
+        title: nativeBtn.getAttribute('data-share-title') || document.title,
+        text: nativeBtn.getAttribute('data-share-title') || '',
+        url: nativeBtn.getAttribute('data-share-url') || window.location.href
+      }).catch(function(){});
+      return;
+    }
     var btn = ev.target.closest ? ev.target.closest('[data-ncm-gbp-share]') : null;
     if (!btn) return;
     ev.preventDefault();
@@ -203,6 +218,7 @@ function injectHead(html, snippet) {
   return snippet + html;
 }
 
+const SHARE_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a3.05 3.05 0 0 0 0-1.4l7.02-4.11A2.99 2.99 0 1 0 15 5a2.9 2.9 0 0 0 .04.49L8.03 9.6a3 3 0 1 0 0 4.8l7.02 4.11c-.03.16-.05.32-.05.49A3 3 0 1 0 18 16.08z"/></svg>`;
 const FB_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#1877F2" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.79-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.09 24 18.1 24 12.07z"/></svg>`;
 const X_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#000" d="M18.9 1.5h3.7l-8.1 9.26L24 22.5h-7.4l-5.8-7.58-6.63 7.58H.45l8.66-9.9L0 1.5h7.59l5.24 6.93L18.9 1.5zm-1.3 18.9h2.04L6.5 3.48H4.3L17.6 20.4z"/></svg>`;
 const GBP_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#4285F4" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>`;
@@ -211,7 +227,9 @@ export function blogShareButtonHtml(canonicalUrl, title) {
   const fbHref = attrEscape(facebookShareHref(canonicalUrl));
   const xHref = attrEscape(xShareHref(canonicalUrl, title));
   const copyText = attrEscape(gbpShareText(title, canonicalUrl));
-  return `<div class="ncm-share-row ncm-fb-share-wrap" data-ncm-share-row role="group" aria-label="Share this post"><a class="ncm-fb-share" href="${fbHref}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on Facebook">${FB_ICON}Share on Facebook</a><a class="ncm-fb-share" href="${xHref}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on X">${X_ICON}Share on X</a><button type="button" class="ncm-fb-share" data-ncm-gbp-share data-share-text="${copyText}" aria-label="Share this post to Google Business">${GBP_ICON}Share to Google Business</button><p class="ncm-gbp-note" hidden>Copied, paste into your Google post</p></div>${GBP_SCRIPT}`;
+  const titleAttr = attrEscape(title);
+  const urlAttr = attrEscape(canonicalUrl);
+  return `<div class="ncm-share-row ncm-fb-share-wrap" data-ncm-share-row role="group" aria-label="Share this post"><button type="button" class="ncm-fb-share ncm-fb-share-native" data-ncm-native-share data-share-title="${titleAttr}" data-share-url="${urlAttr}" aria-label="Share this post">${SHARE_ICON}Share</button><a class="ncm-fb-share" data-ncm-share-web href="${fbHref}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on Facebook">${FB_ICON}Share on Facebook</a><a class="ncm-fb-share" data-ncm-share-web href="${xHref}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on X">${X_ICON}Share on X</a><button type="button" class="ncm-fb-share" data-ncm-gbp-share data-share-text="${copyText}" aria-label="Share this post to Google Business">${GBP_ICON}Share to Google Business</button><p class="ncm-gbp-note" hidden>Copied, paste into your Google post</p></div>${SHARE_SCRIPT}`;
 }
 
 function injectShareButton(html, canonicalUrl) {

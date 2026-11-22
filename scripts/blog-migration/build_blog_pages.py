@@ -221,8 +221,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       <h1>{title_esc}</h1>
       <p style="color:var(--muted);font-size:.9rem">Published {date_display} &middot; NorCal CARB Mobile</p>
       <div class="ncm-share-row ncm-fb-share-wrap" role="group" aria-label="Share this post">
-        <a class="ncm-fb-share" href="{share_href}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on Facebook">Share on Facebook</a>
-        <a class="ncm-fb-share" href="{x_href}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on X">Share on X</a>
+        <button type="button" class="ncm-fb-share ncm-fb-share-native" data-ncm-native-share data-share-title="{title_esc}" data-share-url="{url}">Share</button>
+        <a class="ncm-fb-share" data-ncm-share-web href="{share_href}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on Facebook">Share on Facebook</a>
+        <a class="ncm-fb-share" data-ncm-share-web href="{x_href}" target="_blank" rel="noopener noreferrer" aria-label="Share this post on X">Share on X</a>
         <button type="button" class="ncm-fb-share" data-ncm-gbp-share data-share-text="{gbp_text}" aria-label="Share this post to Google Business">Share to Google Business</button>
       </div>
     </div>
