@@ -20,6 +20,7 @@
 import { EmailMessage } from 'cloudflare:email';
 import { LEGACY_BLOG_SLUGS, LEGACY_BLOG_FALLBACKS } from './blog-redirects.js';
 import { handleContact } from './contact.js';
+import { applyBlogShare, isBlogPostPath } from './blog-share.js';
 
 const GOOGLE_REVIEWS_URL = 'https://maps.google.com/?cid=16019693078134296096';
 
@@ -40,6 +41,13 @@ const BRANDING_TAGS = `
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="${OG_IMAGE_URL}">
 <meta name="twitter:image:alt" content="NorCal CARB Mobile logo">
+`;
+
+/** Branding tags for blog posts: same icons; og:image/twitter tags come per post from blog-share.js. */
+const POST_ICON_TAGS = `
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 `;
 
 /** City links for the live footer and the contact page. Phone numbers stay put. */
@@ -448,15 +456,27 @@ export default {
     // Everything else → static assets; inject branding, schema, and CF Web Analytics.
     // /404 is a real file, so html_handling would answer it with 200. Force 404.
     // Unknown paths already come back as 404 via not_found_handling=404-page.
-    const assetRes = await env.ASSETS.fetch(request);
+    let assetRes = await env.ASSETS.fetch(request);
     const ct = assetRes.headers.get('content-type') || '';
     const force404 = canonicalPath(url.pathname) === '/404' || assetRes.status === 404;
     if (!ct.includes('text/html')) return force404 ? notFound(assetRes) : assetRes;
     const isContact = canonicalPath(url.pathname) === '/contact';
+    // Blog posts: share row (Facebook, X, LinkedIn, text, copy link) + per-post og:image.
+    let headTags = BRANDING_TAGS;
+    if (!force404 && assetRes.status === 200 && isBlogPostPath(canonicalPath(url.pathname))) {
+      const post = applyBlogShare(
+        await assetRes.text(),
+        `https://norcalcarbmobile.com${canonicalPath(url.pathname)}`,
+      );
+      if (post.applied) headTags = POST_ICON_TAGS + post.headTags;
+      const headers = new Headers(assetRes.headers);
+      headers.delete('content-length');
+      assetRes = new Response(post.html, { status: assetRes.status, headers });
+    }
     const page = new HTMLRewriter()
       .on('head', {
         element(el) {
-          el.append(BRANDING_TAGS, { html: true });
+          el.append(headTags, { html: true });
           el.append(schemaTag(url.toString()), { html: true });
           if (isContact) el.append(CONTACT_EDIT_CSS, { html: true });
         },
