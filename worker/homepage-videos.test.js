@@ -1,5 +1,5 @@
 /**
- * Homepage must not load YouTube. Field Short lives on /videos.
+ * Homepage must not load YouTube. Field Short lives on /videos as a clickable poster that links out.
  * Plain node, no test framework.
  *
  * Run: node worker/homepage-videos.test.js
@@ -37,12 +37,14 @@ assert(existsSync(videosPath), '/videos page file exists at site/videos.html');
 const videos = readFileSync(videosPath, 'utf8');
 assert(videos.includes('rel="canonical" href="https://norcalcarbmobile.com/videos"'), 'videos page has self canonical');
 assert(
-  videos.includes('youtube-nocookie.com/embed/q8osFPN8jyI') || videos.includes('youtube.com/embed/q8osFPN8jyI'),
-  'videos page contains the q8osFPN8jyI embed',
+  videos.includes('https://www.youtube.com/shorts/q8osFPN8jyI'),
+  'videos page links out to the q8osFPN8jyI Short',
 );
-assert(videos.includes('<iframe'), 'videos page contains an iframe embed');
+assert(!videos.includes('<iframe'), 'videos page must not contain an iframe');
+assert(!videos.includes('youtube-nocookie.com/embed') && !videos.includes('youtube.com/embed'), 'videos page must not embed a YouTube player');
 assert(videos.includes('https://www.youtube.com/@CARBCLEANTRUCKMOBILE'), 'videos page links the YouTube channel');
-assert(videos.includes('loading="lazy"'), 'videos embed is lazy-loaded');
+assert(videos.includes('loading="lazy"'), 'videos poster image is lazy-loaded');
+assert(videos.includes('href="/blog/meet-the-norcal-carb-mobile-tester-crew"'), 'videos page links the tester crew');
 assert(sitemap.includes('https://norcalcarbmobile.com/videos'), 'sitemap lists /videos');
 
 if (failed) {
