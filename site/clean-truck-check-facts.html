@@ -160,19 +160,13 @@
         <p>YouTube Shorts for these facts publish on <a href="https://www.youtube.com/@CARBCLEANTRUCKMOBILE" target="_blank" rel="noopener">@CARBCLEANTRUCKMOBILE</a>. This slot stays empty until E01 and later are actually live.</p>
       </div>
       <!--
-        YouTube Shorts playlist embed for E01 and later.
-        Leave the iframe without a src until a real playlist or video id exists.
-        Do not insert a placeholder video id. Skip VideoObject until this embed is real.
+        YouTube Shorts playlist slot for E01 and later.
+        Do not insert a placeholder video id, iframe, or player.
+        When a real Short or playlist exists, use a clickable thumbnail that links out to YouTube.
       -->
       <figure class="shorts-slot" style="margin:0;max-width:420px">
-        <iframe
-          title="YouTube Shorts playlist — Clean Truck Check facts E01 and later"
-          data-shorts-slot="E01+"
-          style="display:block;width:100%;aspect-ratio:9/16;border:1px solid var(--line);border-radius:16px;background:var(--navy)"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen></iframe>
-        <figcaption style="color:var(--muted);margin-top:10px">Empty embed slot for the Shorts playlist. E01 and later go here when they go live.</figcaption>
+        <div data-shorts-slot="E01+" style="display:block;width:100%;aspect-ratio:9/16;border:1px solid var(--line);border-radius:16px;background:var(--navy)" aria-hidden="true"></div>
+        <figcaption style="color:var(--muted);margin-top:10px">Empty slot for the Shorts playlist. E01 and later go here when they go live. · <a href="/blog/meet-the-norcal-carb-mobile-tester-crew">Meet the whole tester crew</a></figcaption>
       </figure>
     </div>
   </section>
