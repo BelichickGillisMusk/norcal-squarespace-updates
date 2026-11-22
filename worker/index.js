@@ -227,6 +227,9 @@ const REDIRECTS = {
   // San Jose city page (Jennifer-approved copy, 2026-11-20). The old Squarespace
   // page copy is not archived anywhere, so the legacy URL 301s to the new page.
   '/san-jose-mobile-carb-testing': '/carb-test-near-me-san-jose',
+  // Oakland city page (Jennifer-approved copy, 2026-11-21). The old draft slug was
+  // never published (404 live), so it 301s to the new page.
+  '/oakland-mobile-carb-test': '/carb-test-near-me-oakland',
   // Lodi now has its own full corridor page at /clean-truck-check-lodi
   // '/clean-truck-check-lodi': '/areas#lodi',
   '/clean-truck-check-roseville': '/areas#roseville',
