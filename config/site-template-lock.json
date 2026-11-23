@@ -1,15 +1,15 @@
 {
-  "version": "2026-11-15.1",
+  "version": "2026-11-23.1",
   "owner": "NorCal CARB Mobile LLC",
   "requiredPhoneDisplay": "(916) 890-4427",
   "requiredPhoneSchema": "+1-916-890-4427",
   "requiredPhoneHref": "tel:+19168904427",
   "protectedFiles": {
-    "site/index.html": "3525bf05e6352a6b0bd5eda674cbc055d35ae29cf620bb87aac3fb821113d22f",
+    "site/index.html": "5b7389d3dea2f53d911560949992fd1c672f2b2d9a2214ebe66690ecfc872379",
     "site/assets/styles.css": "45d829d71bdc1713cd3f229d35483649c2b628fa192be866cff0c3311605c64a",
-    "site/assets/img/ncm-logo.png": "31977ac93ff9aebd5cb6b42a8101eec8d53aac4cea1952afb264b7de01c0b69b",
+    "site/assets/img/ncm-logo.png": "67b19146a70efddfcba3391409aa2fc05515679e14d843724e0e6bf48d182f58",
     "site/assets/img/norcal-carb-mobile-logo-250th.png": "774fb7772bfacb03a6410a2acc21772d4dd40f016edb9769d0c89e51f42f04b2",
-    "site/assets/img/coverage-map-v2.png": "0cad54e2baad77fad0ab55a10d807cffa94c907d1dd93992a392f44bd00c455d"
+    "site/assets/img/coverage-map-v2.png": "bd2272a49738b0abbd4897173a41d3b414aeeadf614870b4898493a8b5749218"
   },
   "requiredColors": {
     "--navy": "#012241",

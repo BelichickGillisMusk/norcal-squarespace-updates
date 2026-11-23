@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-23 — Homepage image compression + West Sac photo restore (PR only)
+
+**PR only — DO NOT MERGE from this agent. Do not wrangler deploy.** Owner GO on this PR also approves the new site-template lock hashes (version `2026-11-23.1`). Workers Builds deploys from main after owner merge.
+
+- Restored `site/assets/img/west-sacramento-yard-truck-cropped.jpg` from commit `864ae04` (188,736 bytes). West Sacramento lander comment is PHOTO READY; the photo section stays commented until a separate OK to show it.
+- Compressed locked assets: `ncm-logo.png` 1,078,023 → 35,095 bytes (288×288); `coverage-map-v2.png` 1,925,153 → 527,725 bytes (1000×1066). Added `coverage-map-v2.webp` 156,442 bytes. Filenames unchanged.
+- Homepage map line only: wrapped the existing eager `<img>` in `<picture>` with a WebP source. Slugs, hrefs, canonicals, copy, prices, and phone (916) 890-4427 unchanged.
+- `config/site-template-lock.json` version `2026-11-23.1`; refreshed sha256 for `site/index.html`, `site/assets/img/ncm-logo.png`, and `site/assets/img/coverage-map-v2.png`.
+
+---
+
 ## 2026-11-15 — Homepage: no YouTube payload; CARB-LIFE Short on /videos (replaces closed #163)
 
 Rebased the closed #163 embed change onto current main. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges as bgillis99; Workers Builds deploys from main.
