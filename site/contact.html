@@ -27,6 +27,16 @@
     })();
   </script>
   <script src="/assets/js/theme-i18n.js" defer></script>
+  <!-- Google tag (gtag.js) for Google Ads AW-18285811780 — /contact only. Conversion events (call click, form success) live in /assets/js/ads-conversion.js. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18285811780"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'AW-18285811780');
+  </script>
+  <script src="/assets/js/ads-conversion.js?v=20261123b" defer></script>
 </head>
 <body class="contact-page">
 <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
@@ -300,6 +310,9 @@
           .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
           .then(function (res) {
             if (res.ok) {
+              // Google Ads form conversion: only on an OK response, never for the honeypot.
+              var hp = form.querySelector('[name=website]');
+              if (res.j && res.j.ok === true && !(hp && hp.value) && window.NCM_ADS) window.NCM_ADS.formConversion();
               form.reset();
               var b = document.getElementById('sent-banner');
               if (b) { b.hidden = false; b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
