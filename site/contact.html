@@ -27,6 +27,8 @@
     })();
   </script>
   <script src="/assets/js/theme-i18n.js" defer></script>
+  <!-- Google Ads conversion tag (/contact only). IDs/labels live in /assets/js/ads-conversion.js CONFIG block; placeholders send nothing. -->
+  <script src="/assets/js/ads-conversion.js?v=20261123" defer></script>
 </head>
 <body class="contact-page">
 <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
@@ -300,6 +302,9 @@
           .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
           .then(function (res) {
             if (res.ok) {
+              // Google Ads form conversion: only on an OK response, never for the honeypot.
+              var hp = form.querySelector('[name=website]');
+              if (res.j && res.j.ok === true && !(hp && hp.value) && window.NCM_ADS) window.NCM_ADS.formConversion();
               form.reset();
               var b = document.getElementById('sent-banner');
               if (b) { b.hidden = false; b.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
