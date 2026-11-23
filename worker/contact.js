@@ -39,12 +39,19 @@ function wantsJson(request) {
   return (request.headers.get('accept') || '').includes('application/json');
 }
 
+/** Text fields may arrive as File/Blob in some multipart parsers (filename or Content-Type on the part). */
+async function formFieldValue(v) {
+  if (typeof v === 'string') return v;
+  if (v && typeof v.text === 'function') return await v.text();
+  return '';
+}
+
 async function readBody(request) {
   const type = request.headers.get('content-type') || '';
   if (type.includes('application/json')) return await request.json();
   const form = await request.formData();
   const obj = {};
-  for (const [k, v] of form.entries()) obj[k] = typeof v === 'string' ? v : '';
+  for (const [k, v] of form.entries()) obj[k] = await formFieldValue(v);
   return obj;
 }
 
@@ -243,7 +250,9 @@ export async function handleContact(request, env, EmailMessageCtor) {
     });
   }
 
-  const termsAccepted = String(data.terms_accepted || '').toLowerCase() === 'yes';
+  // Trim: name/email are trimmed, but a trailing CR/LF from multipart parsing
+  // would otherwise 422 a real checkbox value of "yes".
+  const termsAccepted = String(data.terms_accepted || '').trim().toLowerCase() === 'yes';
   if (!termsAccepted) {
     return finish(request, {
       ok: false,

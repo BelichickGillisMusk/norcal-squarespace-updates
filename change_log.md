@@ -4,6 +4,14 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-19 — Contact form: accept multipart terms_accepted=yes (422 fix)
+
+Live `/contact` JS posts `FormData` (multipart) with `Accept: application/json` and checkbox `terms_accepted=yes`. An internal proof POST on Nov 19, 8:35:51 AM PT returned HTTP 422 "Please accept the Testing Terms & Customer Rights…". **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges as fsu9913-gif after GO; Workers Builds deploys from main. Same-day live proof after merge. No DNS, slug, or href changes.
+
+- `readBody` now reads File/Blob multipart parts via `.text()` instead of dropping them to an empty string (`typeof v === 'string' ? v : ''`).
+- Terms check trims before comparing to `yes` (name and email were already trimmed; a trailing CR/LF would 422 a real checkbox value).
+- Tests cover live-JS multipart, urlencoded, and JSON with `terms_accepted=yes`, asserting HTTP 200 and `EMAIL.send` to `carb@norcalcarbmobile.com`. Also covers trailing CRLF, File/Blob parts, and the missing-terms 422.
+
 ## 2026-11-15 — Homepage: no YouTube payload; CARB-LIFE Short on /videos (replaces closed #163)
 
 Rebased the closed #163 embed change onto current main. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges as bgillis99; Workers Builds deploys from main.

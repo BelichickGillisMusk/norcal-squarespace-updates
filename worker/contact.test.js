@@ -55,6 +55,34 @@ function formRequest(body, extraHeaders = {}) {
   });
 }
 
+/** Matches live /contact JS: fetch(form.action, { headers: { Accept: 'application/json' }, body: new FormData(form) }). */
+function liveJsFormRequest(body, extraHeaders = {}) {
+  return formRequest(body, {
+    accept: 'application/json',
+    referer: 'https://norcalcarbmobile.com/contact',
+    ...extraHeaders,
+  });
+}
+
+function urlencodedRequest(body, extraHeaders = {}) {
+  const params = new URLSearchParams();
+  for (const [k, v] of Object.entries(body)) {
+    if (v !== undefined && v !== null) params.append(k, String(v));
+  }
+  return new Request('https://norcalcarbmobile.com/api/contact', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      accept: 'application/json',
+      'user-agent': 'contact-test/1.0',
+      'cf-connecting-ip': '203.0.113.9',
+      referer: 'https://norcalcarbmobile.com/contact',
+      ...extraHeaders,
+    },
+    body: params.toString(),
+  });
+}
+
 const valid = {
   name: 'Test Driver',
   phone: '916 835-5127',
@@ -124,6 +152,28 @@ function assertSafeIntake(ev, msg) {
   assert(!blob.includes(valid.phone), `${msg}: intake log must not include phones`);
   assert(!/fsu9913|carb@|website@/.test(blob), `${msg}: intake log must not include destination addresses`);
 }
+
+async function assertCarbJsonSuccess(request, label) {
+  logs.length = 0;
+  const tos = [];
+  const res = await jsonRes(await handleContact(request, {
+    EMAIL: {
+      async send(message) {
+        tos.push(...message.to);
+      },
+    },
+  }));
+  assert(res.status === 200, `${label} should be HTTP 200, got ${res.status} ${JSON.stringify(res.body)}`);
+  assert(res.body.ok === true, `${label} should be ok:true, got ${JSON.stringify(res.body)}`);
+  assert(
+    tos.length === 1 && tos[0] === 'carb@norcalcarbmobile.com',
+    `${label} must invoke EMAIL.send only to carb@norcalcarbmobile.com, got ${JSON.stringify(tos)}`,
+  );
+  const ev = lastIntake();
+  assertSafeIntake(ev, label);
+  assert(ev.outcome === 'success' && ev.send_path === 'primary', `${label} intake, got ${JSON.stringify(ev)}`);
+}
+
 
 {
   const kv = new Map();
@@ -487,6 +537,77 @@ function assertSafeIntake(ev, msg) {
   const ev = lastIntake();
   assertSafeIntake(ev, 'native fallback');
   assert(ev.outcome === 'success' && ev.send_path === 'fallback', `native fallback log, got ${JSON.stringify(ev)}`);
+}
+
+
+{
+  const liveBody = {
+    ...valid,
+    terms_accepted: 'yes',
+    terms_version: '2026-07-22',
+    website: '',
+  };
+  await assertCarbJsonSuccess(
+    liveJsFormRequest(liveBody),
+    'live JS multipart FormData + Accept application/json + terms_accepted=yes',
+  );
+}
+
+{
+  await assertCarbJsonSuccess(
+    urlencodedRequest({ ...valid, terms_accepted: 'yes', terms_version: '2026-07-22' }),
+    'urlencoded + Accept application/json + terms_accepted=yes',
+  );
+}
+
+{
+  await assertCarbJsonSuccess(
+    jsonRequest({ ...valid, terms_accepted: 'yes', terms_version: '2026-07-22' }),
+    'JSON + Accept application/json + terms_accepted=yes',
+  );
+}
+
+{
+  await assertCarbJsonSuccess(
+    liveJsFormRequest({ ...valid, terms_accepted: 'yes\r\n' }),
+    'multipart terms_accepted=yes with trailing CRLF (must trim)',
+  );
+}
+
+{
+  const fd = new FormData();
+  for (const [k, v] of Object.entries({ ...valid, terms_version: '2026-07-22' })) {
+    if (k === 'terms_accepted') {
+      fd.append(k, new Blob(['yes'], { type: 'text/plain' }), k);
+    } else if (v !== undefined && v !== null) {
+      fd.append(k, String(v));
+    }
+  }
+  const request = new Request('https://norcalcarbmobile.com/api/contact', {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'user-agent': 'contact-test/1.0',
+      'cf-connecting-ip': '203.0.113.9',
+      referer: 'https://norcalcarbmobile.com/contact',
+    },
+    body: fd,
+  });
+  await assertCarbJsonSuccess(request, 'multipart terms_accepted as File/Blob yes');
+}
+
+{
+  logs.length = 0;
+  const res = await jsonRes(await handleContact(liveJsFormRequest({
+    name: valid.name,
+    phone: valid.phone,
+    email: valid.email,
+  }), { EMAIL: emailOk() }));
+  assert(res.status === 422, `missing terms_accepted should 422, got ${res.status}`);
+  assert(
+    res.body.error === 'Please accept the Testing Terms & Customer Rights before sending your request.',
+    `missing terms error, got ${JSON.stringify(res.body)}`,
+  );
 }
 
 console.error = origError;
