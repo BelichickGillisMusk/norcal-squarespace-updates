@@ -46,12 +46,22 @@ function run({ search = '', config, gpc = false, dnt = null, store = {} } = {}) 
 
 const REAL = { AW_ID: 'AW-123456789', PHONE_LABEL: 'abcPhone', FORM_LABEL: 'xyzForm' };
 
-// Shipped file has placeholders and sends nothing.
-assert(/AW_ID: 'AW-XXXXXXXXXX'/.test(src), 'shipped AW_ID is the placeholder');
-assert(/PHONE_LABEL: 'PHONE_LABEL'/.test(src) && /FORM_LABEL: 'FORM_LABEL'/.test(src), 'shipped labels are placeholders');
+// Shipped file has the real Ads ID and labels (Vince, Nov 23 2026).
+assert(/AW_ID: 'AW-18285811780'/.test(src), 'shipped AW_ID is AW-18285811780');
+assert(/PHONE_LABEL: '8AfgCJy4lb4dEMSwrY9E'/.test(src), 'shipped phone label');
+assert(/FORM_LABEL: '5SH8CJm4lb4dEMSwrY9E'/.test(src), 'shipped form label');
 {
-  const r = run({ search: '?sent=1' });
-  assert(r.scripts.length === 0, 'placeholder: gtag.js not loaded');
+  const r = run({});
+  assert(r.conversions().length === 0, 'shipped: no conversion on page load');
+  r.click('tel:+19168904427');
+  assert(r.conversions().length === 1 && r.conversions()[0][2].send_to === 'AW-18285811780/8AfgCJy4lb4dEMSwrY9E', 'shipped: tel click sends call conversion');
+  r.window.NCM_ADS.formConversion();
+  assert(r.conversions()[1][2].send_to === 'AW-18285811780/5SH8CJm4lb4dEMSwrY9E', 'shipped: form conversion label');
+}
+// Placeholder ID sends nothing.
+{
+  const r = run({ search: '?sent=1', config: { AW_ID: 'AW-XXXXXXXXXX', PHONE_LABEL: 'PHONE_LABEL', FORM_LABEL: 'FORM_LABEL' } });
+  r.click('tel:+19168904427');
   assert(r.window.dataLayer === undefined, 'placeholder: no dataLayer');
   assert(r.window.NCM_ADS.enabled === false && r.window.NCM_ADS.formConversion() === false, 'placeholder: formConversion is a no-op');
 }
@@ -65,9 +75,7 @@ assert(/PHONE_LABEL: 'PHONE_LABEL'/.test(src) && /FORM_LABEL: 'FORM_LABEL'/.test
 // Real config.
 {
   const r = run({ config: REAL });
-  assert(r.scripts.length === 1 && r.scripts[0].src === 'https://www.googletagmanager.com/gtag/js?id=AW-123456789', 'gtag.js loader injected for AW id');
-  const cfg = r.window.dataLayer.map((a) => Array.from(a)).find((a) => a[0] === 'config');
-  assert(cfg && cfg[1] === 'AW-123456789', 'gtag config for AW id');
+  assert(r.scripts.length === 0, 'events file does not inject a second loader');
   assert(r.conversions().length === 0, 'no conversion on plain page load');
   r.click('tel:+19168904427');
   const c = r.conversions();
@@ -92,17 +100,24 @@ assert(/PHONE_LABEL: 'PHONE_LABEL'/.test(src) && /FORM_LABEL: 'FORM_LABEL'/.test
   }
 }
 // Opt-out signals.
-assert(run({ config: REAL, gpc: true }).scripts.length === 0, 'Global Privacy Control disables tag');
-assert(run({ config: REAL, dnt: '1' }).scripts.length === 0, 'Do Not Track disables tag');
+for (const opt of [{ gpc: true }, { dnt: '1' }]) {
+  const r = run({ config: REAL, ...opt });
+  r.click('tel:+19168904427');
+  assert(r.window.NCM_ADS.enabled === false && r.conversions().length === 0, `opt-out ${JSON.stringify(opt)} sends no conversion events`);
+}
 
 // contact.html wiring.
-assert(contact.includes('<script src="/assets/js/ads-conversion.js?v=20261123" defer></script>'), 'contact.html loads ads-conversion.js');
+assert(contact.includes('<script src="/assets/js/ads-conversion.js?v=20261123b" defer></script>'), 'contact.html loads ads-conversion.js');
+assert(contact.includes('<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18285811780"></script>'), 'contact.html has standard gtag.js loader for AW-18285811780');
+assert(contact.includes("gtag('config', 'AW-18285811780');"), 'contact.html has gtag config');
+const headEnd = contact.indexOf('</head>');
+assert(!/gtag\('event'/.test(contact.slice(0, headEnd)), 'no conversion event fires from inline head (never on page load)');
 const okIdx = contact.indexOf('if (res.ok) {');
 const convIdx = contact.indexOf('window.NCM_ADS.formConversion()');
 const elseIdx = contact.indexOf('} else {', okIdx);
 assert(okIdx > 0 && convIdx > okIdx && convIdx < elseIdx, 'form conversion is inside the res.ok success branch only');
 assert(/res\.j\.ok === true/.test(contact) && /name=website/.test(contact), 'form conversion requires ok:true JSON and empty honeypot');
-assert(!/googletagmanager|AW-\d/.test(contact), 'no hard-coded tag or id in contact.html');
+assert(!/8AfgCJy4lb4dEMSwrY9E|5SH8CJm4lb4dEMSwrY9E/.test(contact), 'conversion labels live only in ads-conversion.js');
 
 console.log(`ads-conversion: ${passed} passed, ${failed} failed`);
 if (failed) process.exit(1);

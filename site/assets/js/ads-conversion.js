@@ -1,24 +1,25 @@
 /*
- * Google Ads conversion tag — NorCal CARB Mobile (Ads account 521-027-0247).
+ * Google Ads conversion events — NorCal CARB Mobile (Ads account 521-027-0247).
  *
- * Loaded on /contact only (see <script> tag in site/contact.html).
+ * Loaded on /contact only. The standard Google tag (gtag.js loader + config for
+ * AW-18285811780) is inline in the <head> of site/contact.html, per the Ads snippet.
+ * This file only sends the two conversion events.
  *
  * ============================ CONFIG — EDIT HERE ============================
- * Replace the three placeholders below with the real values from Google Ads
- * (Goals > Conversions > the action > Tag setup > "Use Google tag").
- *   AW_ID       -> "AW-123456789"            (the Google tag / conversion ID)
- *   PHONE_LABEL -> label for the tel:+19168904427 click conversion
- *   FORM_LABEL  -> label for the successful /api/contact submit conversion
- * While any value is still a placeholder, nothing is loaded and nothing is sent.
+ *   AW_ID       -> Google tag / conversion ID (must match the inline tag in contact.html)
+ *   PHONE_LABEL -> "Website call click - contact page" (tel:+19168904427 click only)
+ *   FORM_LABEL  -> "Contact form submit" (successful /api/contact submit only)
+ * If a value is ever reset to a placeholder (AW-XXXXXXXXXX / PHONE_LABEL /
+ * FORM_LABEL), that conversion is skipped and nothing is sent.
  * ===========================================================================
  */
 (function (w, d) {
   'use strict';
 
   var NCM_ADS_CONFIG = {
-    AW_ID: 'AW-XXXXXXXXXX',
-    PHONE_LABEL: 'PHONE_LABEL',
-    FORM_LABEL: 'FORM_LABEL'
+    AW_ID: 'AW-18285811780',
+    PHONE_LABEL: '8AfgCJy4lb4dEMSwrY9E',
+    FORM_LABEL: '5SH8CJm4lb4dEMSwrY9E'
   };
   // ========================= END CONFIG =====================================
 
@@ -44,29 +45,17 @@
   function noop() { return false; }
 
   if (!enabled) {
-    // Placeholders still in place (or visitor opted out): no gtag.js, no events.
+    // Placeholder ID (or visitor opted out via GPC/DNT): no conversion events.
     w.NCM_ADS = { enabled: false, reason: optedOut ? 'opted_out' : 'placeholder', phoneConversion: noop, formConversion: noop };
     return;
   }
 
+  // The inline Google tag in <head> defines dataLayer/gtag and loads gtag.js.
+  // Fall back to a dataLayer shim so events still queue if this runs first.
   w.dataLayer = w.dataLayer || [];
-  function gtag() { w.dataLayer.push(arguments); }
-  w.gtag = w.gtag || gtag;
-
-  // No ad personalization; conversion measurement only. No user data is ever sent.
-  gtag('consent', 'default', {
-    ad_storage: 'granted',
-    analytics_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied'
-  });
-  gtag('js', new Date());
-  gtag('config', cfg.AW_ID, { allow_enhanced_conversions: false });
-
-  var s = d.createElement('script');
-  s.async = true;
-  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(cfg.AW_ID);
-  (d.head || d.documentElement).appendChild(s);
+  if (typeof w.gtag !== 'function') {
+    w.gtag = function () { w.dataLayer.push(arguments); };
+  }
 
   function send(label) {
     // Only send_to — never names, phones, emails, or form contents.

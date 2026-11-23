@@ -27,8 +27,16 @@
     })();
   </script>
   <script src="/assets/js/theme-i18n.js" defer></script>
-  <!-- Google Ads conversion tag (/contact only). IDs/labels live in /assets/js/ads-conversion.js CONFIG block; placeholders send nothing. -->
-  <script src="/assets/js/ads-conversion.js?v=20261123" defer></script>
+  <!-- Google tag (gtag.js) for Google Ads AW-18285811780 — /contact only. Conversion events (call click, form success) live in /assets/js/ads-conversion.js. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18285811780"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { ad_user_data: 'denied', ad_personalization: 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'AW-18285811780');
+  </script>
+  <script src="/assets/js/ads-conversion.js?v=20261123b" defer></script>
 </head>
 <body class="contact-page">
 <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
