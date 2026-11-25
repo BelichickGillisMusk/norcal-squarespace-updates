@@ -4,6 +4,17 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-25 — DRAFT: /hat product page for COMPLIANT. by NCM black trucker ($30 · Free shipping)
+
+**PR only — do not merge from this agent. Do not wrangler deploy.** Preview only. Going live waits on Ally after Bryan's GO.
+
+- New page `site/hat.html` at `/hat`: COMPLIANT. by NCM Black Trucker Hat, visible price **$30 · Free shipping**, Product JSON-LD Offer (price 30, USD, InStock, free US shipping, 4–8 day transit).
+- Fairway product JPGs could not be pushed through the GitHub file connector (text-only; no clean binary/base64 path). On-page gallery uses SVG placeholders in `site/assets/img/hat/`. og:image uses the existing site logo. Real photos remain on the box at `/workspace/design/norcal/2026-11-25-compliant-trucker-merchant/merchant/` and can be added in a follow-up.
+- Buy button `#hat-buy` stays **disabled** while `STRIPE_HAT_CHECKOUT_URL` is empty. Worker enables it only when that env var is a non-empty `https` URL. No Stripe product, price, or Payment Link was created.
+- Creating the $30 Stripe Payment Link (and then setting `STRIPE_HAT_CHECKOUT_URL`) is a **separate step that needs Bryan's GO**.
+- Homepage, `styles.css`, and other locked templates were not changed. `/shop` 404 and the homepage Shop link to the external chatgpt.site shop are unchanged (separate work).
+- No returns-policy page: terms were not set.
+
 ## 2026-11-15 — Homepage: no YouTube payload; CARB-LIFE Short on /videos (replaces closed #163)
 
 Rebased the closed #163 embed change onto current main. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges as bgillis99; Workers Builds deploys from main.
