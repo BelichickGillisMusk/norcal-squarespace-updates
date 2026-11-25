@@ -419,6 +419,20 @@ function notFound(res) {
   return new Response(res.body, { status: 404, statusText: 'Not Found', headers });
 }
 
+
+/** https Payment Link only. Empty / missing / non-https keeps the /hat Buy button disabled. */
+function hatCheckoutUrl(env) {
+  const raw = String((env && env.STRIPE_HAT_CHECKOUT_URL) || '').trim();
+  if (!raw) return '';
+  try {
+    const parsed = new URL(raw);
+    if (parsed.protocol !== 'https:') return '';
+    return raw;
+  } catch {
+    return '';
+  }
+}
+
 const ALIAS_DOMAINS = ['mobileovitest.com', 'www.mobileovitest.com'];
 
 export default {
@@ -494,6 +508,21 @@ export default {
       .on('body.contact-page #request', {
         element(el) {
           el.prepend(SERVICE_AREA_HTML, { html: true });
+        },
+      })
+      .on('a#hat-buy', {
+        element(el) {
+          const href = hatCheckoutUrl(env);
+          if (href) {
+            el.setAttribute('href', href);
+            el.setAttribute('rel', 'noopener');
+            el.removeAttribute('aria-disabled');
+            el.removeAttribute('tabindex');
+          } else {
+            el.setAttribute('aria-disabled', 'true');
+            el.setAttribute('tabindex', '-1');
+            el.removeAttribute('href');
+          }
         },
       })
       .transform(assetRes);
