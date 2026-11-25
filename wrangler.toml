@@ -44,3 +44,6 @@ allowed_destination_addresses = ["carb@norcalcarbmobile.com", "fsu9913@gmail.com
 CONTACT_TO = "carb@norcalcarbmobile.com"
 FORM_TO = "carb@norcalcarbmobile.com"
 FORM_TO_FALLBACK = "fsu9913@gmail.com"
+# Empty until Bryan GOs a $30 Stripe Payment Link. Do not put a live
+# checkout URL here. The /hat Buy button stays disabled while this is blank.
+STRIPE_HAT_CHECKOUT_URL = ""
