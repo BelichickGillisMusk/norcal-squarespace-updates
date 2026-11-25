@@ -4,6 +4,13 @@ Agents append timestamped entries below.
 
 ---
 
+## 2026-11-25 — DRAFT: remove dead homepage Shop nav (chatgpt.site and /shop 404)
+
+**PR only — do not merge from this agent. Do not wrangler deploy.** Preview only.
+
+- Removed the homepage header and footer "Shop" links that pointed at `https://ncm-apparel.fsu9913.chatgpt.site/shop.html`. `/shop` on norcalcarbmobile.com 404s, and `/hat` is not live yet, so the links were removed rather than pointed at `/hat` (that would be another 404 until the hat PR is live).
+- Refreshed the `site/index.html` checksum in `config/site-template-lock.json` so site-lock validate passes. `styles.css` and other locked assets are unchanged.
+
 ## 2026-11-15 — Homepage: no YouTube payload; CARB-LIFE Short on /videos (replaces closed #163)
 
 Rebased the closed #163 embed change onto current main. **PR only — do not merge from this agent. Do not wrangler deploy.** Owner merges as bgillis99; Workers Builds deploys from main.
