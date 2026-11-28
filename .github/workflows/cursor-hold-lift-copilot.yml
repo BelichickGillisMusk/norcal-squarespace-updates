@@ -1,0 +1,156 @@
+# HOLD lift → Copilot review. Never deploys. Blocks merge when the PR
+# would overwrite files that already moved on main (recent live updates).
+name: Cursor HOLD lift to Copilot (no post)
+
+on:
+  pull_request_target:
+    types: [ready_for_review, synchronize, opened, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: cursor-hold-lift-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  copilot-before-post:
+    if: >-
+      github.event.pull_request.draft == false &&
+      startsWith(github.event.pull_request.head.ref, 'cursor/')
+    runs-on: ubuntu-latest
+    name: Freshness check + Copilot review
+    steps:
+      - name: Checkout PR head (diff only; do not run PR scripts)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Fetch base branch
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: |
+          set -euo pipefail
+          git fetch origin "$BASE_REF" --depth=0
+
+      - name: Find files that would undo recent main updates
+        id: overlap
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          BASE="origin/${BASE_REF}"
+          MERGE_BASE="$(git merge-base "$BASE" "$HEAD_SHA")"
+          PR_FILES="$(git diff --name-only "$MERGE_BASE" "$HEAD_SHA" | sort -u)"
+          MAIN_FILES="$(git diff --name-only "$MERGE_BASE" "$BASE" | sort -u)"
+          OVERLAP="$(comm -12 <(printf '%s\n' "$PR_FILES") <(printf '%s\n' "$MAIN_FILES") | sed '/^$/d' || true)"
+          BEHIND="$(git rev-list --count "${HEAD_SHA}..${BASE}")"
+          echo "merge_base=$MERGE_BASE" >> "$GITHUB_OUTPUT"
+          echo "behind=$BEHIND" >> "$GITHUB_OUTPUT"
+          if [ -n "$OVERLAP" ]; then
+            echo "has_overlap=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "overlap<<OVERLAP_EOF"
+              printf '%s\n' "$OVERLAP"
+              echo "OVERLAP_EOF"
+            } >> "$GITHUB_OUTPUT"
+            echo "::error::PR overlaps files already updated on ${BASE_REF}. Rebase onto current main before merge/post."
+            printf '%s\n' "$OVERLAP"
+          else
+            echo "has_overlap=false" >> "$GITHUB_OUTPUT"
+            echo "No overlapping files with ${BASE_REF} since ${MERGE_BASE}."
+          fi
+          echo "Commits behind ${BASE_REF}: ${BEHIND}"
+
+      - name: Comment Copilot gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+          HAS_OVERLAP: ${{ steps.overlap.outputs.has_overlap }}
+          OVERLAP: ${{ steps.overlap.outputs.overlap }}
+          BEHIND: ${{ steps.overlap.outputs.behind }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          import json, os, urllib.request
+
+          marker = "<!-- cursor-hold-lift-copilot -->"
+          repo = os.environ["GH_REPO"]
+          pr = os.environ["PR"]
+          token = os.environ["GH_TOKEN"]
+          head = os.environ["HEAD_REF"]
+          behind = os.environ.get("BEHIND") or "0"
+          overlap = (os.environ.get("OVERLAP") or "").strip()
+          has = os.environ.get("HAS_OVERLAP") == "true"
+
+          if has:
+              body = (
+                  f"{marker}\n"
+                  "**HOLD lift received — Copilot gate (no post).**\n\n"
+                  f"Branch `{head}` is **not safe to merge yet**. These files also changed "
+                  f"on `main` after the branch point (`{behind}` commit(s) behind). "
+                  "Merging now can undo recent updates:\n\n"
+                  f"```\n{overlap}\n```\n\n"
+                  "**Next:** rebase onto current `main`, keep the newer live/main bits, "
+                  "then Copilot reviews again. Cursor must not merge. Do not run Deploy / Squarespace publish.\n"
+              )
+          else:
+              body = (
+                  f"{marker}\n"
+                  "**HOLD lift received — routed to Copilot before post.**\n\n"
+                  f"Branch `{head}` does **not** overlap files that moved on `main` "
+                  f"(`{behind}` commit(s) behind, no shared paths). Cursor edits can merge **after Copilot review**.\n\n"
+                  "Still blocked: Cursor merge click, `wrangler deploy`, and **Deploy NorCal CARB Mobile** until Bryan types `GO`.\n"
+              )
+
+          def api(method, url, payload=None):
+              data = None if payload is None else json.dumps(payload).encode()
+              req = urllib.request.Request(
+                  url,
+                  data=data,
+                  method=method,
+                  headers={
+                      "Accept": "application/vnd.github+json",
+                      "Authorization": f"Bearer {token}",
+                      "X-GitHub-Api-Version": "2022-11-28",
+                      "User-Agent": "cursor-hold-lift-copilot",
+                  },
+              )
+              with urllib.request.urlopen(req) as resp:
+                  return json.load(resp)
+
+          comments = api("GET", f"https://api.github.com/repos/{repo}/issues/{pr}/comments?per_page=100")
+          existing = [c for c in comments if marker in (c.get("body") or "")]
+          if existing:
+              api("PATCH", existing[-1]["url"], {"body": body})
+          else:
+              api("POST", f"https://api.github.com/repos/{repo}/issues/{pr}/comments", {"body": body})
+          print("Gate comment upserted.")
+          PY
+
+      - name: Request Copilot pull request review
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          if gh api -X POST "repos/${GH_REPO}/pulls/${PR}/requested_reviewers" \
+            -f 'reviewers[]=copilot-pull-request-reviewer'; then
+            echo "Requested Copilot review."
+          else
+            echo "Copilot reviewer request skipped; posting fallback ping."
+            gh api -X POST "repos/${GH_REPO}/issues/${PR}/comments" \
+              -f body="Copilot: HOLD was lifted. Review this Cursor PR against current \`main\` before merge. Do not post or deploy. Flag anything that would undo recent updates." \
+              >/dev/null || true
+          fi
+
+      - name: Fail if merge would undo recent updates
+        if: steps.overlap.outputs.has_overlap == 'true'
+        run: exit 1

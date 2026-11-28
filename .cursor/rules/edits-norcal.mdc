@@ -1,21 +1,25 @@
 ---
-description: NorCal site edits and merges go through Grok EDITS, not Cursor
+description: Cursor may lift HOLD; Copilot reviews before merge/post
 alwaysApply: true
 ---
 
-# EDITS — NorCal site (do not merge)
+# EDITS — NorCal site (Cursor does not merge or post)
 
-Bryan asks Grok with the word **EDITS**. Cursor is not the merge desk for the money sites.
+Cursor can write the branch. Bryan can **lift HOLD** (mark the PR ready). After that it goes to **Copilot**, not live.
+
+Flow: Cursor edits → HOLD → lift HOLD → Copilot freshness review (rebase if `main` moved) → merge → Bryan `GO` deploy.
 
 ## Do not
 
-- Merge or push `norcal-squarespace-updates` main
+- Merge or push `norcal-squarespace-updates` main from Cursor
 - `wrangler deploy` or `deploy-content.mjs --go` for norcalcarbmobile.com, mobileovitest.com, or mobilecarbsmoketest.com
 - Change 916-890-4427 or 628-999-3912 on a live site
 - Open Phone or FaceTime, or dial any number
+- Merge a `cursor/*` PR that overlaps files already updated on `main` (that undoes recent updates)
 
 ## Do
 
 Write a five-line card and stop: Site, Change, Stays, Phone, Ship.
 
-The Book, Gumption, and AR stay on this Cursor seat. Site edits do not.
+The Book, Gumption, and AR stay on this Cursor seat. Site **post** does not.
+
