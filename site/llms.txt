@@ -26,6 +26,27 @@
 ## Service areas
 Sacramento, Stockton, Bay Area (Oakland, Hayward, San Jose corridor), Central Valley, Napa/Sonoma, Butte County, and surrounding NorCal yards.
 
+## City pages
+Live city and town landers, curl-verified HTTP 200 on Nov 26, 2026 from the public sitemap:
+- https://norcalcarbmobile.com/carb-test-near-me
+- https://norcalcarbmobile.com/carb-test-near-me-west-sacramento
+- https://norcalcarbmobile.com/carb-test-near-me-rancho-cordova
+- https://norcalcarbmobile.com/carb-test-near-me-san-jose
+- https://norcalcarbmobile.com/carb-test-near-me-redwood-city
+- https://norcalcarbmobile.com/carb-test-near-me-san-francisco
+- https://norcalcarbmobile.com/carb-test-near-me-oakland
+- https://norcalcarbmobile.com/carb-test-near-me-tracy
+- https://norcalcarbmobile.com/clean-truck-check-hayward
+- https://norcalcarbmobile.com/clean-truck-check-lodi
+- https://norcalcarbmobile.com/carb-test-stockton
+- https://norcalcarbmobile.com/carb-test-bay-area
+- https://norcalcarbmobile.com/carb-mobile-test-near-me
+- https://norcalcarbmobile.com/areas-fairfield
+- https://norcalcarbmobile.com/butte-county-carb-testing
+- https://norcalcarbmobile.com/napa-sonoma-carb-testing
+- https://norcalcarbmobile.com/central-valley-sierra-carb-testing
+- https://norcalcarbmobile.com/sacramento-valley-foothills-carb-testing
+
 ## Blog (start here for AI grounding)
 - https://norcalcarbmobile.com/blog/how-mobile-carb-testing-works
 - https://norcalcarbmobile.com/blog/2026-carb-testing-deadlines
