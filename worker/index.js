@@ -59,7 +59,6 @@ const SERVICE_AREA_HTML = `
   <a href="/areas-fairfield">Fairfield</a> ·
   <a href="/bay-area-mobile-carb">San Jose</a> ·
   <a href="/bay-area-mobile-carb">Bay Area</a> ·
-  <a href="/socal">Moreno Valley</a> ·
   <a href="/butte-county-carb-testing">Chico</a> ·
   <a href="/napa-sonoma-carb-testing">Calistoga</a> ·
   <a href="/napa-sonoma-carb-testing">Santa Rosa</a> ·
