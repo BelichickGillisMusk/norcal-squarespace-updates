@@ -7,7 +7,8 @@
 1. **Edit in a branch / PR** (or even on `main` for docs/scripts).
 2. GitHub runs **CI Test Only (no deploy)** + **NorCal Site Lock**.
 3. Green check = code is OK. **Live site is unchanged.**
-4. When you actually want the site updated:  
+4. **Cursor `cursor/*` PRs:** stay **HOLD / draft** until Bryan lifts HOLD (Ready for review). That routes to Copilot first. Workflow **Cursor HOLD lift to Copilot (no post)** fails if the PR would overwrite files that already moved on `main`. Copilot review ≠ deploy.
+5. When you actually want the site updated:  
    **Actions → Deploy NorCal CARB Mobile → Run workflow**  
    - `bryan_go` = `GO`  
    - `confirm_worker` = `norcalcarbmobile-prod` (empty Bryan account — preferred)  
